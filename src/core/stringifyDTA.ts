@@ -1,6 +1,8 @@
-import { DTADocument } from '../dta-parser'
+import { DTADocument } from '../@types/DTADocument'
 
-/** Internal function to generate the tracks' count. */
+/**
+ * Internal function to generate the tracks' count.
+ */
 const trackOperator = (track: number, add: number): string => {
     let returnString = ''
     const iterator = Array(add).fill(0)
@@ -17,27 +19,24 @@ const trackOperator = (track: number, add: number): string => {
     return returnString
 }
 
-/** Internal function to generate the DTA file content. */
+/**
+ * Internal function to generate the DTA file content (MAGMA).
+ */
 const dtaOutputStringGenerator = (value: DTADocument): string => {
     let output = ''
     let track = 0
-    output += `(\n\t'${
-        value.rawContent.songname
-    }'\n\t(\n\t\t'name'\n\t\t"${value.getData(
-        'name'
-    )}"\n\t)\n\t(\n\t\t'artist'\n\t\t"${value.getData(
-        'artist'
-    )}"\n\t)\n\t('master' ${
-        value.rawContent.master ? 1 : 0
-    })\n\t(\n\t\t'song'\n\t\t(\n\t\t\t'name'\n\t\t\t"songs/${
-        value.rawContent.songname
-    }/${
-        value.rawContent.songname
-    }"\n\t\t)\n\t\t(\n\t\t\t'tracks_count'\n\t\t\t(${
-        value.rawContent.tracks_count.at(-1) === 0
+    output += `(\n\t'${value.rawContent.songname
+        }'\n\t(\n\t\t'name'\n\t\t"${value.get(
+            'name'
+        )}"\n\t)\n\t(\n\t\t'artist'\n\t\t"${value.get(
+            'artist'
+        )}"\n\t)\n\t('master' ${value.rawContent.master ? 1 : 0
+        })\n\t(\n\t\t'song'\n\t\t(\n\t\t\t'name'\n\t\t\t"songs/${value.rawContent.songname
+        }/${value.rawContent.songname
+        }"\n\t\t)\n\t\t(\n\t\t\t'tracks_count'\n\t\t\t(${value.rawContent.tracks_count.at(-1) === 0
             ? value.rawContent.tracks_count.slice(0, -1).join(' ')
             : value.rawContent.tracks_count.join(' ')
-    })\n\t\t)\n\t\t(\n\t\t\t'tracks'\n\t\t\t(\n\t\t\t`
+        })\n\t\t)\n\t\t(\n\t\t\t'tracks'\n\t\t\t(\n\t\t\t`
     if (value.rawContent.tracks_count[0]) {
         output += `\t(\t\n\t\t\t\t\t'drum'\n\t\t\t\t\t(`
         output += trackOperator(track, value.rawContent.tracks_count[0])
@@ -98,23 +97,16 @@ const dtaOutputStringGenerator = (value: DTADocument): string => {
         output += `-1 `
         return
     })
-    output += `\n\t\t)\n\t\t('vocal_parts' ${
-        value.rawContent.vocal_parts
-    })\n\t\t(\n\t\t\t'drum_solo'\n\t\t\t(\n\t\t\t\t'seqs'\n\t\t\t\t('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')\n\t\t\t)\n\t\t)\n\t\t(\n\t\t\t'drum_freestyle'\n\t\t\t(\n\t\t\t\t'seqs'\n\t\t\t\t('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')\n\t\t\t)\n\t\t)\n\t\t(mute_volume ${
-        value.rawContent.mute_volume
-    })\n\t\t(mute_volume_vocals ${
-        value.rawContent.mute_volume_vocals
-    })\n\t\t(hopo_threshold ${
-        value.rawContent.hopo_threshold
-    })\n\t)\n\t('song_scroll_speed' ${
-        value.rawContent.song_scroll_speed
-    })\n\t(\n\t\t'bank'\n\t\t"${value.rawContent.bank}"\n\t)\n\t(drum_bank ${
-        value.rawContent.drum_bank
-    })\n\t('anim_tempo' ${value.rawContent.anim_tempo})\n\t('song_length' ${
-        value.rawContent.song_length
-    })\n\t('preview' ${value.rawContent.preview.join(
-        ' '
-    )})\n\t(\n\t\t'rank'\n\t\t`
+    output += `\n\t\t)\n\t\t('vocal_parts' ${value.rawContent.vocal_parts
+        })\n\t\t(\n\t\t\t'drum_solo'\n\t\t\t(\n\t\t\t\t'seqs'\n\t\t\t\t('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')\n\t\t\t)\n\t\t)\n\t\t(\n\t\t\t'drum_freestyle'\n\t\t\t(\n\t\t\t\t'seqs'\n\t\t\t\t('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')\n\t\t\t)\n\t\t)\n\t\t(mute_volume ${value.rawContent.mute_volume
+        })\n\t\t(mute_volume_vocals ${value.rawContent.mute_volume_vocals
+        })\n\t\t(hopo_threshold ${value.rawContent.hopo_threshold
+        })\n\t)\n\t('song_scroll_speed' ${value.rawContent.song_scroll_speed
+        })\n\t(\n\t\t'bank'\n\t\t"${value.rawContent.bank}"\n\t)\n\t(drum_bank ${value.rawContent.drum_bank
+        })\n\t('anim_tempo' ${value.rawContent.anim_tempo})\n\t('song_length' ${value.rawContent.song_length
+        })\n\t('preview' ${value.rawContent.preview.join(
+            ' '
+        )})\n\t(\n\t\t'rank'\n\t\t`
     if (value.rawContent.rank_drum) {
         output += `('drum' ${value.rawContent.rank_drum})\n\t\t`
     } else {
@@ -151,13 +143,10 @@ const dtaOutputStringGenerator = (value: DTADocument): string => {
     if (value.rawContent.rank_real_bass) {
         output += `('real_bass' ${value.rawContent.rank_real_bass})\n\t\t`
     }
-    output += `('band' ${value.rawContent.rank_band})\n\t)\n\t('genre' '${
-        value.rawContent.genre
-    }')\n\t('vocal_gender' '${value.rawContent.vocal_gender}')\n\t('version' ${
-        value.rawContent.version
-    })\n\t('format' ${value.rawContent.format})\n\t('album_art' ${
-        value.rawContent.album_art ? 1 : 0
-    })\n\t('year_released' ${value.rawContent.year_released})\n\t`
+    output += `('band' ${value.rawContent.rank_band})\n\t)\n\t('genre' '${value.rawContent.genre
+        }')\n\t('vocal_gender' '${value.rawContent.vocal_gender}')\n\t('version' ${value.rawContent.version
+        })\n\t('format' ${value.rawContent.format})\n\t('album_art' ${value.rawContent.album_art ? 1 : 0
+        })\n\t('year_released' ${value.rawContent.year_released})\n\t`
     if (value.rawContent.year_recorded) {
         output += `('year_recorded' ${value.rawContent.year_recorded})`
     }
@@ -165,13 +154,11 @@ const dtaOutputStringGenerator = (value: DTADocument): string => {
     if (value.rawContent.solo && Array.isArray(value.rawContent.solo)) {
         output += `(solo (${value.rawContent.solo.join(' ')}))\n\t`
     }
-    output += `('tuning_offset_cents' ${
-        value.rawContent.tuning_offset_cents
-    })\n\t('guide_pitch_volume' ${value.rawContent.guide_pitch_volume.toFixed(
-        2
-    )})\n\t('game_origin' '${value.rawContent.game_origin}')\n\t('encoding' '${
-        value.rawContent.encoding
-    }')\n`
+    output += `('tuning_offset_cents' ${value.rawContent.tuning_offset_cents
+        })\n\t('guide_pitch_volume' ${value.rawContent.guide_pitch_volume.toFixed(
+            2
+        )})\n\t('game_origin' '${value.rawContent.game_origin}')\n\t('encoding' '${value.rawContent.encoding
+        }')\n`
     if (value.rawContent.album_name) {
         output += `\t(\n\t\t'album_name'\n\t\t"${value.rawContent.album_name}"\n\t)\n`
     }
@@ -204,45 +191,37 @@ const dtaOutputStringGenerator = (value: DTADocument): string => {
         )}))\n`
     }
     if (value.customContent) {
-        output += `\n;DO NOT EDIT THE FOLLOWING LINES MANUALLY\n;Created using Magma: C3 Roks Edition v3.3.5\n;Song authored by ${
-            value.customContent.author ? value.customContent.author : '???'
-        }\n;Song=${value.getData('name')}\n;Language(s)=${
-            value.customContent.languages
+        output += `\n;DO NOT EDIT THE FOLLOWING LINES MANUALLY\n;Created using Magma: C3 Roks Edition v3.3.5\n;Song authored by ${value.customContent.author ? value.customContent.author : '???'
+            }\n;Song=${value.get('name')}\n;Language(s)=${value.customContent.languages
                 ? value.customContent.languages.join(',')
                 : 'English'
-        },\n;Karaoke=${value.customContent.karaoke ? 1 : 0}\n;Multitrack=${
-            value.customContent.multitrack ? 1 : 0
-        }\n;Convert=${value.customContent.convert ? 1 : 0}\n;2xBass=${
-            value.customContent.doubleKick ? 1 : 0
-        }\n;RhythmKeys=${
-            value.customContent.rhythmOnKeys ? 1 : 0
-        }\n;RhythmBass=${value.customContent.rhythmOnBass ? 1 : 0}\n;CATemh=${
-            value.customContent.CATemh ? 1 : 0
-        }\n;ExpertOnly=${value.customContent.expertOnly ? 1 : 0}\n`
+            },\n;Karaoke=${value.customContent.karaoke ? 1 : 0}\n;Multitrack=${value.customContent.multitrack ? 1 : 0
+            }\n;Convert=${value.customContent.convert ? 1 : 0}\n;2xBass=${value.customContent.doubleKick ? 1 : 0
+            }\n;RhythmKeys=${value.customContent.rhythmOnKeys ? 1 : 0
+            }\n;RhythmBass=${value.customContent.rhythmOnBass ? 1 : 0}\n;CATemh=${value.customContent.CATemh ? 1 : 0
+            }\n;ExpertOnly=${value.customContent.expertOnly ? 1 : 0}\n`
     }
 
     output += `)\n`
 
     return output
 }
+
 /**
- * Converts a ``DTADocument`` info a DTA file content, formatted as `string`.
- * @param content An `Object`, representing a parsed song.
+ * Stringify a `DTADocument[]` back to .dta file contents.
  * @returns A DTA file content.
  * @since v0.1.2
  */
-const generateDTAFile = (content: DTADocument | DTADocument[]): string => {
+export const stringifyDTA = (
+    /**
+     * An `Object`, representing a parsed song.
+     */
+    content: DTADocument[]
+): string => {
     let output = ''
-    if (Array.isArray(content)) {
-        content.forEach((value) => {
-            output += dtaOutputStringGenerator(value)
-        })
+    content.forEach((value) => {
+        output += dtaOutputStringGenerator(value)
+    })
 
-        return output.replace(/\t/g, '   ')
-    }
-
-    output += dtaOutputStringGenerator(content)
     return output.replace(/\t/g, '   ')
 }
-
-export default generateDTAFile

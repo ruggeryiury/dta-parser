@@ -1,11 +1,11 @@
 /**
- * Splits songs metadata from a DTA file.
- * @param fileContent DTA file content as `string`.
- * @returns An `Array` with splitted song's as ``string``.
+ * Splits all songs metadata from a .dta pack file.
+ * @param dtaFileContents The .dta file contents.
+ * @returns An `Array` with all songs from the pack splited.
  * @since v0.1.0
  */
-const depackDTA = (fileContent: string): string[] => {
-    const lineSplit = fileContent.split('\r\n')
+export const depackDTA = (dtaFileContents: string): string[] => {
+    const lineSplit = dtaFileContents.split('\r\n')
     let newContent = ''
     const depackedArray: string[] = []
 
@@ -24,5 +24,3 @@ const depackDTA = (fileContent: string): string[] => {
 
     return depackedArray
 }
-
-export default depackDTA

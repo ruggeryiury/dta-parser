@@ -5,7 +5,7 @@ const TerserPlugin = require("terser-webpack-plugin")
 /** @type {import('webpack').Configuration[]} */
 module.exports = [
     {
-        entry: "./src/dta-parser.ts",
+        entry: "./src/index.ts",
         output: {
             filename: "dta-parser.umd.js",
             path: path.resolve(__dirname, "dist"),
@@ -41,18 +41,14 @@ module.exports = [
             ]
         },
         resolve: {
-            extensions: ['*', '.js', '.jsx', '.tsx', '.ts'],
-            alias: {
-                'dta-parser': path.resolve(__dirname, 'src/dta-parser.ts'),
-                'dta-parser/utils': path.resolve(__dirname, 'src/dta-parser-utils.ts')
-            }
+            extensions: ['*', '.js', '.jsx', '.tsx', '.ts']
         },
         plugins: [
             // new BundleAnalyzerPlugin()
         ]
     },
     {
-        entry: "./src/dta-parser.ts",
+        entry: "./src/index.ts",
         output: {
             filename: "dta-parser.cjs.js",
             path: path.resolve(__dirname, "dist"),
@@ -89,18 +85,14 @@ module.exports = [
             ]
         },
         resolve: {
-            extensions: ['*', '.js', '.jsx', '.tsx', '.ts'],
-            alias: {
-                'dta-parser': path.resolve(__dirname, 'src/dta-parser.ts'),
-                'dta-parser/utils': path.resolve(__dirname, 'src/dta-parser-utils.ts')
-            }
+            extensions: ['*', '.js', '.jsx', '.tsx', '.ts']
         },
         plugins: [
             // new BundleAnalyzerPlugin()
         ]
     },
     {
-        entry: "./src/dta-parser.ts",
+        entry: "./src/index.ts",
         output: {
             filename: "dta-parser.mjs",
             path: path.resolve(__dirname, "dist"),

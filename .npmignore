@@ -1,3 +1,4 @@
+dta-parser-*/
 node_modules/
 src/
 .eslintrc.js
@@ -7,3 +8,4 @@ tsconfig.json
 webpack.config.js
 yarn*
 *.tgz
+src_v*

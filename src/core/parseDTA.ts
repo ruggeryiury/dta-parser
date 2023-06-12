@@ -1,15 +1,17 @@
-import { DTADocument } from '../@types/parseDTA'
-import generateNewDTA from '../utils/newDTA'
+import { DTADocument } from '../@types/DTADocument'
+import { generateDTA } from '../utils'
 
 /**
- * Internal main function to parse DTA files.
- * @param fileContent The DTA file content
+ * Parses a .dta file contents into a `DTADocument`.
+ * @param dtaFileContents The .dta file contents.
+ * @returns A `DTADocument`, that represents a parsed .dta file into an `Object`.
+ * @since v0.1.0
  */
-const parseDTA = (fileContent: string) => {
-    const dtaContent: DTADocument = generateNewDTA()
+export const parseDTA = (dtaFileContents: string): DTADocument => {
+    const dtaContent = generateDTA()
 
     // Split dta file by lines
-    const splitLines = fileContent.split('\r\n')
+    const splitLines = dtaFileContents.split('\r\n')
 
     // This will be a new, formatted dta file string removing
     // empty lines and parsing the song's id, track title, artist,

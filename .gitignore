@@ -1,5 +1,6 @@
+dta-parser-*/
 node_modules/
 dist/
 src/debug/
 *.tgz
-src-*
+src_v*
