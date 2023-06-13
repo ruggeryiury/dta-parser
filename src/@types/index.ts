@@ -1,3 +1,6 @@
+import { stringifyDTA } from '../core'
+import { sortDTA } from '../utils'
+
 export interface DTAParserOptions {
     /** Changes the sorting of the songs. Valid values are:
      *
@@ -20,3 +23,11 @@ export interface DTAParserOptions {
 }
 
 export type SortByOptionsTypes = 'name' | 'artist' | 'artistSet' | 'songId'
+
+/**
+ * asds
+ */
+export interface DTAArrayMethods {
+    stringify: typeof stringifyDTA
+    sort: typeof sortDTA
+}

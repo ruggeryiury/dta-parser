@@ -2,7 +2,7 @@
 	"name": "dta-parser",
 	"version": "0.1.3",
 	"private": true,
-	"description": "A Rock Band .dta file parser",
+	"description": "A Rock Band song metadata file parser written in TypeScript",
 	"main": "dist/dta-parser.cjs.js",
 	"umd:main": "dist/dta-parser.umd.js",
 	"module": "dist/dta-parser.mjs",

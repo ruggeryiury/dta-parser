@@ -1,4 +1,9 @@
-import { DTADocument } from '../@types/DTADocument'
+import {
+    DTADocument,
+    DTAGenreTypes,
+    DTASoloFlagsTypes,
+    DTASubGenreTypes,
+} from '../@types/DTADocument'
 import { generateDTA } from '../utils'
 
 /**
@@ -17,8 +22,7 @@ export const parseDTA = (dtaFileContents: string): DTADocument => {
     // empty lines and parsing the song's id, track title, artist,
     // and album name.
 
-    // eslint-disable-next-line prefer-const
-    let newLines: string[] = []
+    const newLines: string[] = []
 
     // A simple operator for the splitLines array map.
 
@@ -39,8 +43,7 @@ export const parseDTA = (dtaFileContents: string): DTADocument => {
      *
      * `7` *bank*
      */
-    // eslint-disable-next-line prefer-const
-    let register = [false, false, false, false, false, false, false, false]
+    const register = [false, false, false, false, false, false, false, false]
     let operator = ''
 
     splitLines.map((value) => {
@@ -102,7 +105,10 @@ export const parseDTA = (dtaFileContents: string): DTADocument => {
             }
             if (operator === 'bank') {
                 register[7] = true
-                dtaContent.rawContent.bank = newValue.slice(1, -1)
+                dtaContent.rawContent.bank = newValue.slice(
+                    1,
+                    -1
+                ) as typeof dtaContent.rawContent.bank
                 operator = ''
                 return
             }
@@ -168,7 +174,9 @@ export const parseDTA = (dtaFileContents: string): DTADocument => {
             dtaContent.rawContent.master = true
         }
         if (splitLines[0] === 'vocal_parts') {
-            dtaContent.rawContent.vocal_parts = Number(splitLines[1])
+            dtaContent.rawContent.vocal_parts = Number(
+                splitLines[1]
+            ) as typeof dtaContent.rawContent.vocal_parts
         }
         if (splitLines[0] === 'mute_volume') {
             dtaContent.rawContent.mute_volume = Number(splitLines[1])
@@ -180,10 +188,13 @@ export const parseDTA = (dtaFileContents: string): DTADocument => {
             dtaContent.rawContent.hopo_threshold = Number(splitLines[1])
         }
         if (splitLines[0] === 'drum_bank') {
-            dtaContent.rawContent.drum_bank = splitLines[1]
+            dtaContent.rawContent.drum_bank =
+                splitLines[1] as typeof dtaContent.rawContent.drum_bank
         }
         if (splitLines[0] === 'anim_tempo') {
-            dtaContent.rawContent.anim_tempo = Number(splitLines[1])
+            dtaContent.rawContent.anim_tempo = Number(
+                splitLines[1]
+            ) as typeof dtaContent.rawContent.anim_tempo
         }
         if (splitLines[0] === 'song_length') {
             dtaContent.rawContent.song_length = Number(splitLines[1])
@@ -199,11 +210,11 @@ export const parseDTA = (dtaFileContents: string): DTADocument => {
                 if (!dtaContent.rawContent.solo) {
                     dtaContent.rawContent.solo = []
                 }
-                dtaContent.rawContent.solo.push(value)
+                dtaContent.rawContent.solo.push(value as DTASoloFlagsTypes)
             })
         }
         if (splitLines[0] === 'genre') {
-            dtaContent.rawContent.genre = splitLines[1]
+            dtaContent.rawContent.genre = splitLines[1] as keyof DTAGenreTypes
         }
         if (splitLines[0] === 'vocal_gender') {
             dtaContent.rawContent.vocal_gender =
@@ -230,7 +241,8 @@ export const parseDTA = (dtaFileContents: string): DTADocument => {
             ) as typeof dtaContent.rawContent.rating
         }
         if (splitLines[0] === 'sub_genre') {
-            dtaContent.rawContent.sub_genre = splitLines[1]
+            dtaContent.rawContent.sub_genre =
+                splitLines[1] as keyof DTASubGenreTypes
         }
         if (splitLines[0] === 'song_id') {
             dtaContent.rawContent.song_id = splitLines[1]

@@ -1,6 +1,6 @@
-import { DTAParserOptions } from './@types'
+import { DTAArrayMethods, DTAParserOptions } from './@types'
 import { DTADocument } from './@types/DTADocument'
-import { depackDTA, parseDTA } from './core'
+import { depackDTA, parseDTA, stringifyDTA } from './core'
 import { sortDTA } from './utils'
 
 /**
@@ -35,6 +35,13 @@ const DTAParser = (
     return parsedSongs
 }
 
-export { DTADocument }
+/**
+ * Methods for `DTADocument[]`.
+ */
+export const DTAArray: DTAArrayMethods = {
+    stringify: stringifyDTA,
+    sort: sortDTA,
+}
 
+export { DTADocument }
 export default DTAParser

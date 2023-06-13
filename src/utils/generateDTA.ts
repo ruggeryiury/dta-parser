@@ -1,17 +1,6 @@
-import {
-    DTADocument,
-    DTAGenreTypes,
-    DTASubGenreTypes,
-    DTAGetDataGenreOptions,
-    DTAGetDataNamingOptions,
-} from '../@types/DTADocument'
 import { cloneDeep } from 'lodash'
-import {
-    leadingArticle2Trailing,
-    omitLeadingArticle,
-} from '../functions/leadingArticle'
-import { genreLocale, subGenreLocale } from '../locale'
-import { stringifyDTA } from '../core'
+import { DTADocument } from '../@types/DTADocument'
+import { stringifyDTA, getDTA } from '../core'
 
 const dtaDefault: DTADocument = {
     rawContent: {
@@ -53,61 +42,7 @@ const dtaDefault: DTADocument = {
         return stringifyDTA([this])
     },
     get(data, options) {
-        let nameOptions: DTAGetDataNamingOptions | undefined
-        let genreOptions: DTAGetDataGenreOptions | undefined
-
-        switch (data) {
-            case 'songname':
-                return this.rawContent.songname
-            case 'name':
-                nameOptions = options as DTAGetDataNamingOptions | undefined
-                if (nameOptions && nameOptions.leadingArticle) {
-                    switch (nameOptions.leadingArticle) {
-                        case 'omit':
-                            return omitLeadingArticle(this.rawContent.name)
-                        case 'trailing':
-                            return leadingArticle2Trailing(this.rawContent.name)
-                        default:
-                            return this.rawContent.name
-                    }
-                }
-
-                return this.rawContent.name
-            case 'artist':
-                nameOptions = options as DTAGetDataNamingOptions | undefined
-                if (nameOptions && nameOptions.leadingArticle) {
-                    switch (nameOptions.leadingArticle) {
-                        case 'omit':
-                            return omitLeadingArticle(this.rawContent.artist)
-                        case 'trailing':
-                            return leadingArticle2Trailing(
-                                this.rawContent.artist
-                            )
-                        default:
-                            return this.rawContent.artist
-                    }
-                }
-
-                return this.rawContent.artist
-            case 'genre':
-                genreOptions = options as DTAGetDataGenreOptions | undefined
-                if (genreOptions && genreOptions.raw) {
-                    return this.rawContent.genre
-                }
-
-                return genreLocale(this.rawContent.genre as keyof DTAGenreTypes)
-            case 'sub_genre':
-                genreOptions = options as DTAGetDataGenreOptions | undefined
-                if (genreOptions && genreOptions.raw) {
-                    return this.rawContent.sub_genre
-                }
-
-                return subGenreLocale(
-                    this.rawContent.sub_genre as keyof DTASubGenreTypes
-                )
-            default:
-                throw new Error('')
-        }
+        return getDTA(this, data, options)
     },
 }
 
