@@ -3,13 +3,226 @@
 </div>
 
 <div align=center>
-<img  src='https://xesque.rocketseat.dev/platform/tech/javascript.svg'  width='24px' title='JavaScript'/>  <img  src='https://xesque.rocketseat.dev/platform/tech/typescript.svg'  width='24px' title='TypeScript'/>
+<img src='https://xesque.rocketseat.dev/platform/tech/javascript.svg' width='24px' title='JavaScript'/> 
+<img src='https://xesque.rocketseat.dev/platform/tech/typescript.svg' width='24px' title='TypeScript'/>
 </div>
 
+  
+
 <div align=center>
-<img src='https://img.shields.io/github/last-commit/ruggeryiury/dta-parser?color=%23DDD&style=for-the-badge' />
-<img src='https://img.shields.io/github/repo-size/ruggeryiury/dta-parser?style=for-the-badge' />
-<img src='https://img.shields.io/github/issues/ruggeryiury/dta-parser?style=for-the-badge' />
-<img src='https://img.shields.io/github/package-json/v/ruggeryiury/dta-parser?style=for-the-badge' />
-<img src='https://img.shields.io/github/license/ruggeryiury/dta-parser?style=for-the-badge' />
+<img src='https://img.shields.io/github/last-commit/ruggeryiury/dta-parser?color=%23DDD&style=for-the-badge' /> <img src='https://img.shields.io/github/repo-size/ruggeryiury/dta-parser?style=for-the-badge' /> <img src='https://img.shields.io/github/issues/ruggeryiury/dta-parser?style=for-the-badge' /> <img src='https://img.shields.io/github/package-json/v/ruggeryiury/dta-parser?style=for-the-badge' /> <img src='https://img.shields.io/github/license/ruggeryiury/dta-parser?style=for-the-badge' />
 </div>
+
+  
+
+# 💠 Table of Contents
+- [Usage](#-usage)
+    - [Parsing a DTA file]()
+    - [Sorting all songs when parsing]()
+    - [Getting any value from a song]()
+    - [Getting C3 MAGMA-generated values]()
+    - [Updating values from a song]()
+    - [Exporting a song individually, or as a pack]()
+
+- [API]()
+    - [`DTAParser()`]()
+    - [`DTADocument`]()
+        - [`.rawContent`]()
+        - [`.customContent`]()
+        - [`.get()`]()
+        - [`.stringify()`]()
+        - [`.update()`]()
+    - [`DTAArray`]()
+        - [`.sort()`]()
+        - [`.stringify()`]()
+
+# Usage
+
+## Parsing a DTA file
+Just import the desired .dta file, when use `DTAParser()` to parse it. It will return an `Array` of each song included on the .dta file as a `DTADocument` type.
+
+```ts
+import DTAParser from 'dta-parser'
+import fs from 'fs'
+
+// Read a .dta file contents.
+const dtaFileContents = fs.readFileSync(
+    '/path/to/dta-file.dta',
+    { encoding: 'utf-8' }
+)
+
+// Use "DTAParser()", passing the .dta file contents
+// as first argument.
+const parsedDTAs = DTAParser(dtaFileContents)
+
+console.log(parsedDTAs)
+// => Array of DTAs parsed from given file.
+```
+
+## Sorting all songs when parsing
+Pass an `Object` as second argument on `DTAParser`, then assign "sortBy" to a sort type.
+
+There's a few options for this one: `name`, `artist`, `song_id`, and others.
+
+```ts
+import DTAParser from 'dta-parser'
+import fs from 'fs'
+
+// Read a .dta file contents.
+const dtaFileContents = fs.readFileSync(
+    '/path/to/dta-file.dta',
+    { encoding: 'utf-8' }
+)
+
+// Use "DTAParser()", passing the .dta file contents
+// as first argument, and the sorting options 
+// as second.
+const parsedDTAs = DTAParser(dtaFileContents, { sortBy: 'artist' })
+
+console.log(parsedDTAs)
+// => Array of DTAs parsed from given file, now sorted.
+```
+
+## Getting any value from a song
+There's two methods to get a value from a song
+- Using the `.rawContent`: All values are stored on the `DTADocument` inside `.rawContent`, there you have all possible values from a song.
+
+    _Note: a_
+
+```ts
+import DTAParser from 'dta-parser'
+import fs from 'fs'
+
+// Read a .dta file contents.
+const dtaFileContents = fs.readFileSync(
+    '/path/to/dta-file.dta',
+    { encoding: 'utf-8' }
+)
+
+// Use "DTAParser()".
+const parsedDTAs = DTAParser(dtaFileContents)
+
+// Select any song.
+const song = parsedDTAs[0]
+
+// Get the song's title.
+const songName = song.rawContent.name
+
+// Get the song's artist/band.
+const songArtist = song.rawContent.artist
+
+// Use .rawContent to access anything from the song.
+console.log(`"${songName}", by ${songArtist}.`)
+// => "The Song Name", by The Song Artist.
+```
+
+- Using `DTADocument.get()` Method: Most of the values inside a .dta file can be processed using the `.get()` method. By using it, you can control many aspects from the desired value, with each one of them having different kinds of settings.
+
+```ts
+import DTAParser from 'dta-parser'
+import fs from 'fs'
+
+// Read a .dta file contents.
+const dtaFileContents = fs.readFileSync(
+    '/path/to/dta-file.dta',
+    { encoding: 'utf-8' }
+)
+
+// Use "DTAParser()".
+const parsedDTAs = DTAParser(dtaFileContents)
+
+// Select any song.
+const song = parsedDTAs[0]
+
+// Get the song's title.
+const songName = song.get('name')
+
+// Get the song's artist, but if the artist's name starts with
+// an article ("The", "A", "An"), the article will go to the
+// end of the string, separated by a comma.
+const songArtist = song.get('artist', { leadingArticle: 'trailing' })
+
+console.log(`"${songName}", by ${songArtist}`)
+// => "The Song Name", by Song Artist, The
+```
+
+## Getting C3 MAGMA-generated values
+
+Some additional information is generated by C3 MAGMA and it's placed as comments inside the DTA file, like if the song has multitrack stems, If the song's lower difficulties were charted or auto-generated with CAT, language of the song, etc.
+
+These informations are accessed through `.customContents`:
+
+```ts
+import DTAParser from 'dta-parser'
+import fs from 'fs'
+
+// Read a .dta file contents.
+const dtaFileContents = fs.readFileSync(
+    '/path/to/dta-file.dta',
+    { encoding: 'utf-8' }
+)
+
+// Use "DTAParser()".
+const parsedDTAs = DTAParser(dtaFileContents)
+
+// Select any song.
+const song = parsedDTAs[0]
+
+// Access it's custom contents.
+const hasAutoGenDiffs = song.customContents.CATemh
+
+if (hasAutoGenDiffs) {
+    // Do anything.
+}
+```
+
+## Updating values from a song
+
+
+
+## Exporting a song individually, or as a pack
+You can stringify a single `DTADocument` or an `Array` for `DTADocument` back to a formatted .dta file contents.
+
+- For single songs, use the `DTADocument.export()`:
+```ts
+import DTAParser from 'dta-parser'
+import fs from 'fs'
+
+// Read a .dta file contents.
+const dtaFileContents = fs.readFileSync(
+    '/path/to/dta-file.dta',
+    { encoding: 'utf-8' }
+)
+
+// Use "DTAParser()".
+const parsedDTAs = DTAParser(dtaFileContents)
+
+// Select any song (or use "0" to access the first one if you parsed a
+// single song .dta file).
+const song = parsedDTAs[0]
+
+// A stringified version of the song.
+const newDTAFileContents = song.stringify()
+```
+
+- For packs, you can use `DTAArray` functions:
+```ts
+// Updated import
+import DTAParser, { DTAArray } from '../index'
+import fs from 'fs'
+
+// Read a .dta file contents.
+const dtaFileContents = fs.readFileSync(
+    '/path/to/dta-file.dta',
+    { encoding: 'utf-8' }
+)
+
+// Use "DTAParser()".
+const parsedDTAs = DTAParser(dtaFileContents)
+
+// Process DTAs...
+
+// A stringified version of the whole pack.
+const newDTAFileContents = DTAArray.stringify(parsedDTAs)
+```
+

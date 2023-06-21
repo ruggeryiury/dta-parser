@@ -1,21 +1,20 @@
-import { DTAArrayMethods, DTAParserOptions } from './@types'
 import { DTADocument } from './@types/DTADocument'
-import { depackDTA, parseDTA, stringifyDTA } from './core'
-import { sortDTA } from './utils'
+import { DTAParserOptions } from './@types/DTAParser'
+import { depackDTA, parseDTA, sortDTA, stringifyDTA } from './core'
 
 /**
  * Parses a .dta file.
- * @returns An `Array` of `DTADocuments`, that represents a parsed .dta file into an `Object`.
+ * @returns An `Array` of single-multiple `DTADocument` object, that represents a parsed song from the .dta file.
  * @since v1.1.0
  */
 const DTAParser = (
     /**
-     * The DTA file content.
+     * The .dta file contents.
      * - - - -
      */
     dtaFileContents: string,
     /**
-     * Customized options for the parser.
+     * Options to customize the parsing process.
      * - - - -
      */
     options?: DTAParserOptions
@@ -28,7 +27,7 @@ const DTAParser = (
         parsedSongs.push(song)
     })
 
-    if (options && options.sortBy) {
+    if (options?.sortBy) {
         return sortDTA(parsedSongs, options.sortBy)
     }
 
@@ -38,9 +37,9 @@ const DTAParser = (
 /**
  * Methods for `DTADocument[]`.
  */
-export const DTAArray: DTAArrayMethods = {
-    stringify: stringifyDTA,
+export const DTAArray = {
     sort: sortDTA,
+    stringify: stringifyDTA,
 }
 
 export { DTADocument }

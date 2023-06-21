@@ -1,5 +1,4 @@
-import { stringifyDTA } from '../core'
-import { sortDTA } from '../utils'
+export type SortByOptionsTypes = 'name' | 'artist' | 'artist_set' | 'song_id'
 
 export interface DTAParserOptions {
     /** Changes the sorting of the songs. Valid values are:
@@ -20,14 +19,4 @@ export interface DTAParserOptions {
      * * `song_id` => Sorts by the songs' ID.
      */
     sortBy?: SortByOptionsTypes
-}
-
-export type SortByOptionsTypes = 'name' | 'artist' | 'artistSet' | 'songId'
-
-/**
- * asds
- */
-export interface DTAArrayMethods {
-    stringify: typeof stringifyDTA
-    sort: typeof sortDTA
 }

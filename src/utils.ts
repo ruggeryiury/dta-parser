@@ -1,2 +1,1 @@
-export * from './utils/generateDTA'
-export * from './utils/sortDTA'
+export * from './utils/leadingArticle'
