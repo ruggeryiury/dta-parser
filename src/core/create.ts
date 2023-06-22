@@ -33,8 +33,8 @@ const dtaDefault: DTADocument = {
     get(value, options) {
         return getDTA(this, value, options)
     },
-    stringify() {
-        return stringifyDTA([this])
+    stringify(type) {
+        return stringifyDTA([this], type)
     },
 }
 

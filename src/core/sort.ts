@@ -1,10 +1,7 @@
 import { DTADocument } from '../@types/DTADocument'
 import { SortByOptionsTypes } from '../@types/DTAParser'
 
-export const sortDTA = (
-    songs: DTADocument[],
-    sortBy: SortByOptionsTypes
-): DTADocument[] => {
+export const sortDTA = (songs: DTADocument[], sortBy: SortByOptionsTypes): DTADocument[] => {
     if (sortBy === 'name') {
         return songs.sort((a, b) => {
             if (

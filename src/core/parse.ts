@@ -35,6 +35,7 @@ export const parseDTA = (
         stillName,
         gotArtist,
         stillArtist,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         gotSongname,
         tracksStarted,
         processedTrack,
@@ -48,15 +49,12 @@ export const parseDTA = (
     const parsed = createDTA()
     const split = dtaFileContents.split(/[;(]/).map((value) => value.trim())
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     split.map((value, i) => {
         const clean = value.replaceAll("'", '').trim()
         const [key, ...content] = value.split(' ')
         const keyFilter = key.replaceAll("'", '')
-        const newValue = content
-            .join(' ')
-            .replaceAll(')', '')
-            .replaceAll("'", '')
-            .trim()
+        const newValue = content.join(' ').replaceAll(')', '').replaceAll("'", '').trim()
 
         // console.log(key, content)
         // console.log(i, clean)
@@ -86,8 +84,7 @@ export const parseDTA = (
 
             stillName = true
             const afterQuote = nameStr.split('"').filter((value) => value)
-            if (afterQuote.length === 1)
-                parsed.content.name = `${afterQuote.join(' ')} (`
+            if (afterQuote.length === 1) parsed.content.name = `${afterQuote.join(' ')} (`
             else parsed.content.name = `${afterQuote.join(' ')}(`
             return
         }
@@ -127,8 +124,7 @@ export const parseDTA = (
 
             stillArtist = true
             const afterQuote = nameStr.split('"').filter((value) => value)
-            if (afterQuote.length === 1)
-                parsed.content.artist = `${afterQuote.join(' ')} (`
+            if (afterQuote.length === 1) parsed.content.artist = `${afterQuote.join(' ')} (`
             else parsed.content.artist = `${afterQuote.join(' ')}(`
             return
         }
@@ -237,16 +233,11 @@ export const parseDTA = (
         }
         if (processedTrack) {
             const count = value.replaceAll(')', '').trim().split(' ').length
-            if (processedTrack === 'drum')
-                parsed.content.tracks_count[0] = count
-            else if (processedTrack === 'bass')
-                parsed.content.tracks_count[1] = count
-            else if (processedTrack === 'guitar')
-                parsed.content.tracks_count[2] = count
-            else if (processedTrack === 'vocals')
-                parsed.content.tracks_count[3] = count
-            else if (processedTrack === 'keys')
-                parsed.content.tracks_count[4] = count
+            if (processedTrack === 'drum') parsed.content.tracks_count[0] = count
+            else if (processedTrack === 'bass') parsed.content.tracks_count[1] = count
+            else if (processedTrack === 'guitar') parsed.content.tracks_count[2] = count
+            else if (processedTrack === 'vocals') parsed.content.tracks_count[3] = count
+            else if (processedTrack === 'keys') parsed.content.tracks_count[4] = count
             tracksStarted = true
             processedTrack = ''
             return
@@ -294,16 +285,13 @@ export const parseDTA = (
                 parsed.content.real_guitar_tuning =
                     numbers as typeof parsed.content.real_guitar_tuning
             else if (processedAudio === 'real_bass_tuning')
-                parsed.content.real_bass_tuning =
-                    numbers as typeof parsed.content.real_bass_tuning
+                parsed.content.real_bass_tuning = numbers as typeof parsed.content.real_bass_tuning
             processedAudio = ''
             return
         }
 
         if (keyFilter === 'vocal_parts') {
-            parsed.content.vocal_parts = Number(
-                newValue
-            ) as typeof parsed.content.vocal_parts
+            parsed.content.vocal_parts = Number(newValue) as typeof parsed.content.vocal_parts
             return
         }
 
@@ -334,15 +322,11 @@ export const parseDTA = (
         }
 
         if (keyFilter === 'bank') {
-            parsed.content.bank = newValue.replaceAll(
-                '"',
-                ''
-            ) as typeof parsed.content.bank
+            parsed.content.bank = newValue.replaceAll('"', '') as typeof parsed.content.bank
         }
 
         if (keyFilter === 'drum_bank') {
-            parsed.content.drum_bank =
-                newValue as typeof parsed.content.drum_bank
+            parsed.content.drum_bank = newValue as typeof parsed.content.drum_bank
             return
         }
 
@@ -365,8 +349,7 @@ export const parseDTA = (
         }
 
         if (keyFilter === 'band_fail_cue') {
-            parsed.content.band_fail_cue =
-                newValue as typeof parsed.content.band_fail_cue
+            parsed.content.band_fail_cue = newValue as typeof parsed.content.band_fail_cue
             return
         }
 
@@ -428,8 +411,7 @@ export const parseDTA = (
         }
 
         if (keyFilter === 'vocal_gender') {
-            parsed.content.vocal_gender =
-                newValue as typeof parsed.content.vocal_gender
+            parsed.content.vocal_gender = newValue as typeof parsed.content.vocal_gender
             return
         }
 
@@ -466,15 +448,12 @@ export const parseDTA = (
         }
 
         if (keyFilter === 'rating') {
-            parsed.content.rating = Number(
-                newValue
-            ) as typeof parsed.content.rating
+            parsed.content.rating = Number(newValue) as typeof parsed.content.rating
             return
         }
 
         if (keyFilter === 'sub_genre') {
-            parsed.content.sub_genre =
-                newValue as typeof parsed.content.sub_genre
+            parsed.content.sub_genre = newValue as typeof parsed.content.sub_genre
             return
         }
 
@@ -484,9 +463,7 @@ export const parseDTA = (
         }
 
         if (soloStarted) {
-            const soloFlags = value
-                .replaceAll(')', '')
-                .split(' ') as typeof parsed.content.solo
+            const soloFlags = value.replaceAll(')', '').split(' ') as typeof parsed.content.solo
             soloFlags &&
                 soloFlags.forEach((flag) => {
                     if (!parsed.content.solo) parsed.content.solo = []
@@ -534,8 +511,7 @@ export const parseDTA = (
 
             stillAlbumName = true
             const afterQuote = nameStr.split('"').filter((value) => value)
-            if (afterQuote.length === 1)
-                parsed.content.album_name = `${afterQuote.join(' ')} (`
+            if (afterQuote.length === 1) parsed.content.album_name = `${afterQuote.join(' ')} (`
             else parsed.content.album_name = afterQuote.join(' ') + '('
             return
         }
@@ -571,16 +547,12 @@ export const parseDTA = (
         }
 
         if (keyFilter === 'song_tonality') {
-            parsed.content.song_tonality = Number(
-                newValue
-            ) as typeof parsed.content.song_tonality
+            parsed.content.song_tonality = Number(newValue) as typeof parsed.content.song_tonality
             return
         }
 
         if (keyFilter === 'song_key') {
-            parsed.content.song_key = Number(
-                newValue
-            ) as typeof parsed.content.song_key
+            parsed.content.song_key = Number(newValue) as typeof parsed.content.song_key
             return
         }
 
@@ -613,16 +585,12 @@ export const parseDTA = (
                 parsed.custom.languages = []
             }
             langs.forEach((lang) => {
-                parsed.custom &&
-                    parsed.custom.languages &&
-                    parsed.custom.languages.push(lang)
+                parsed.custom && parsed.custom.languages && parsed.custom.languages.push(lang)
             })
         }
 
         if (value.includes('Karaoke=')) {
-            const proof = Boolean(
-                Number(value.split('=')[1].replaceAll(')', '').trim())
-            )
+            const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
             if (!parsed.custom) {
                 parsed.custom = {}
             }
@@ -635,9 +603,7 @@ export const parseDTA = (
         }
 
         if (value.includes('Multitrack=')) {
-            const proof = Boolean(
-                Number(value.split('=')[1].replaceAll(')', '').trim())
-            )
+            const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
             if (!parsed.custom) {
                 parsed.custom = {}
             }
@@ -650,9 +616,7 @@ export const parseDTA = (
         }
 
         if (value.includes('Convert=')) {
-            const proof = Boolean(
-                Number(value.split('=')[1].replaceAll(')', '').trim())
-            )
+            const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
             if (!parsed.custom) {
                 parsed.custom = {}
             }
@@ -665,9 +629,7 @@ export const parseDTA = (
         }
 
         if (value.includes('2xBass=')) {
-            const proof = Boolean(
-                Number(value.split('=')[1].replaceAll(')', '').trim())
-            )
+            const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
             if (!parsed.custom) {
                 parsed.custom = {}
             }
@@ -680,9 +642,7 @@ export const parseDTA = (
         }
 
         if (value.includes('RhythmKeys=')) {
-            const proof = Boolean(
-                Number(value.split('=')[1].replaceAll(')', '').trim())
-            )
+            const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
             if (!parsed.custom) {
                 parsed.custom = {}
             }
@@ -695,9 +655,7 @@ export const parseDTA = (
         }
 
         if (value.includes('RhythmBass=')) {
-            const proof = Boolean(
-                Number(value.split('=')[1].replaceAll(')', '').trim())
-            )
+            const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
             if (!parsed.custom) {
                 parsed.custom = {}
             }
@@ -710,9 +668,7 @@ export const parseDTA = (
         }
 
         if (value.includes('CATemh=')) {
-            const proof = Boolean(
-                Number(value.split('=')[1].replaceAll(')', '').trim())
-            )
+            const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
             if (!parsed.custom) {
                 parsed.custom = {}
             }
@@ -725,9 +681,7 @@ export const parseDTA = (
         }
 
         if (value.includes('ExpertOnly=')) {
-            const proof = Boolean(
-                Number(value.split('=')[1].replaceAll(')', '').trim())
-            )
+            const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
             if (!parsed.custom) {
                 parsed.custom = {}
             }

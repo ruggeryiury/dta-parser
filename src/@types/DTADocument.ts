@@ -1,9 +1,6 @@
+import { DTAStringifyTypes } from '../core'
 import { SongGenreTypes, SongSubGenreTypes, SongBankTypes, SongDrumBankTypes } from '../locale'
-import {
-    GetDataReturnValues,
-    GetDataValueOptions,
-    GetDataValueTypes,
-} from './core/get'
+import { GetDataReturnValues, GetDataValueOptions, GetDataValueTypes } from './core/get'
 
 /**
  * Interface for a parsed song `Object`.
@@ -18,7 +15,7 @@ export interface DTADocumentMethods {
         value: V,
         options?: O
     ): GetDataReturnValues<V, O>
-    stringify(): string
+    stringify(type?: DTAStringifyTypes): string
 }
 
 export interface DTAContentDocument {
@@ -39,24 +36,15 @@ export interface DTAContentDocument {
     drum_bank: SongDrumBankTypes
     anim_tempo: 16 | 32 | 64
     band_fail_cue?:
-    | 'band_fail_rock.cue'
-    | 'band_fail_vintage.cue'
-    | 'band_fail_heavy.cue'
-    | 'band_fail_electro.cue'
-    | 'band_fail_rock_keys.cue'
-    | 'band_fail_vintage_keys.cue'
-    | 'band_fail_heavy_keys.cue'
-    | 'band_fail_electro_keys.cue'
-    song_scroll_speed?:
-    | 1700
-    | 1850
-    | 2000
-    | 2150
-    | 2300
-    | 2450
-    | 2600
-    | 2750
-    | 3000
+        | 'band_fail_rock.cue'
+        | 'band_fail_vintage.cue'
+        | 'band_fail_heavy.cue'
+        | 'band_fail_electro.cue'
+        | 'band_fail_rock_keys.cue'
+        | 'band_fail_vintage_keys.cue'
+        | 'band_fail_heavy_keys.cue'
+        | 'band_fail_electro_keys.cue'
+    song_scroll_speed?: 1700 | 1850 | 2000 | 2150 | 2300 | 2450 | 2600 | 2750 | 3000
     preview: [number, number]
     song_length: number
     rank_band: number

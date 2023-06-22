@@ -1,29 +1,20 @@
 export type GetDataValueTypes = 'name' | 'artist' | 'vocal_parts' | 'bank' | 'drum_bank'
 
-export type GetDataValueOptions<V extends GetDataValueTypes> =
-    V extends | 'name' | 'artist'
+export type GetDataValueOptions<V extends GetDataValueTypes> = V extends 'name' | 'artist'
     ? GetDataNamingOptions
-
     : V extends 'vocal_parts' | 'bank' | 'drum_bank'
     ? GetDataRawOptions
-
     : never
 
-export type GetDataReturnValues<
-    V extends GetDataValueTypes,
-    O extends GetDataValueOptions<V>
-> =
+export type GetDataReturnValues<V extends GetDataValueTypes, O extends GetDataValueOptions<V>> =
     // String
     V extends 'name' | 'artist' | 'bank' | 'drum_bank'
-    ? string
-
-    : V extends 'vocal_parts'
-    ? O extends { raw: true }
-    ? number
-    : string
-
-    
-    : never
+        ? string
+        : V extends 'vocal_parts'
+        ? O extends { raw: true }
+            ? number
+            : string
+        : never
 
 export interface GetDataNamingOptions {
     /** You can specify how the leading article will be
