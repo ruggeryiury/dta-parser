@@ -1,6 +1,5 @@
 /**
  * Removes the leading article from a string, if any.
- * @since v0.1.1
  */
 export const omitLeadingArticle = (text: string): string => {
     const articles = ['a', 'an', 'the']
@@ -16,7 +15,6 @@ export const omitLeadingArticle = (text: string): string => {
 
 /**
  * Puts the leading article at the end to the string, separated with a comma, if any.
- * @since v0.1.1
  */
 export const leadingArticle2Trailing = (text: string): string => {
     const articles = ['a', 'an', 'the']

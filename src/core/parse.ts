@@ -3,15 +3,13 @@ import { createDTA } from './create'
 
 /**
  * Parses a .dta file contents into a `DTADocument`.
- * @returns A `DTADocument`, that represents a parsed .dta file into an `Object`.
- * @since v0.1.0
+ * @returns A song parsed as a `DTADocument` object.
  */
 export const parseDTA = (
     /**
-     * The .dta file contents.
-     * - - - -
+     * The song contents taken from a .dta file.
      */
-    dtaFileContents: string
+    songContent: string
 ): DTADocument => {
     const operators = {
         gotID: false,
@@ -47,7 +45,7 @@ export const parseDTA = (
         stillAlbumName,
     } = operators
     const parsed = createDTA()
-    const split = dtaFileContents.split(/[;(]/).map((value) => value.trim())
+    const split = songContent.split(/[;(]/).map((value) => value.trim())
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     split.map((value, i) => {
@@ -281,11 +279,8 @@ export const parseDTA = (
                     diffTracksCount += count
                 })
                 parsed.content.tracks_count[5] = tracksCount - diffTracksCount
-            } else if (processedAudio === 'real_guitar_tuning')
-                parsed.content.real_guitar_tuning =
-                    numbers as typeof parsed.content.real_guitar_tuning
-            else if (processedAudio === 'real_bass_tuning')
-                parsed.content.real_bass_tuning = numbers as typeof parsed.content.real_bass_tuning
+            } else if (processedAudio === 'real_guitar_tuning') parsed.content.real_guitar_tuning = numbers as typeof parsed.content.real_guitar_tuning
+            else if (processedAudio === 'real_bass_tuning') parsed.content.real_bass_tuning = numbers as typeof parsed.content.real_bass_tuning
             processedAudio = ''
             return
         }
@@ -315,9 +310,7 @@ export const parseDTA = (
 
         if (keyFilter === 'song_scroll_speed') {
             if (Number(newValue) === 2300) return
-            parsed.content.song_scroll_speed = Number(
-                newValue
-            ) as typeof parsed.content.song_scroll_speed
+            parsed.content.song_scroll_speed = Number(newValue) as typeof parsed.content.song_scroll_speed
             return
         }
 
@@ -491,7 +484,7 @@ export const parseDTA = (
         }
 
         if (keyFilter === 'encoding') {
-            parsed.content.encoding = newValue
+            parsed.content.encoding = newValue as typeof parsed.content.encoding
             return
         }
 
@@ -540,9 +533,7 @@ export const parseDTA = (
         }
 
         if (keyFilter === 'vocal_tonic_note') {
-            parsed.content.vocal_tonic_note = Number(
-                newValue
-            ) as typeof parsed.content.vocal_tonic_note
+            parsed.content.vocal_tonic_note = Number(newValue) as typeof parsed.content.vocal_tonic_note
             return
         }
 

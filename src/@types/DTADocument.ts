@@ -1,9 +1,10 @@
-import { DTAStringifyTypes } from '../core'
-import { SongGenreTypes, SongSubGenreTypes, SongBankTypes, SongDrumBankTypes } from '../locale'
-import { GetDataReturnValues, GetDataValueOptions, GetDataValueTypes } from './core/get'
+import { UpdateDataOptions } from '../core'
+import { GetDataReturnValues, GetDataValueOptions, GetDataValueTypes } from '../core/get'
+import { StringifyDataOptions } from '../core/stringify'
+import { VocalPartsTypes, BankTypes, DrumBankTypes, AnimTempoTypes, BandFailCueTypes, SongScrollSpeedTypes, GenreTypes, RatingTypes, SubGenreTypes, VocalGenderTypes } from '../locale/core'
 
 /**
- * Interface for a parsed song `Object`.
+ * A parsed song object.
  */
 export interface DTADocument extends DTADocumentMethods {
     content: DTAContentDocument
@@ -11,11 +12,18 @@ export interface DTADocument extends DTADocumentMethods {
 }
 
 export interface DTADocumentMethods {
-    get<V extends GetDataValueTypes, O extends GetDataValueOptions<V>>(
-        value: V,
-        options?: O
-    ): GetDataReturnValues<V, O>
-    stringify(type?: DTAStringifyTypes): string
+    /**
+     * Gets and processes any value from the .dta file.
+     */
+    get<V extends GetDataValueTypes, O extends GetDataValueOptions<V>>(value: V, options?: O): GetDataReturnValues<V, O>
+    /**
+     * Converts a `DTADocument` to a .dta file content string.
+     */
+    stringify(options?: StringifyDataOptions): string
+    /**
+     * Updates any value from a `DTADocument`.
+     */
+    update(options?: UpdateDataOptions): DTADocument
 }
 
 export interface DTAContentDocument {
@@ -28,23 +36,15 @@ export interface DTAContentDocument {
     tracks_count: number[]
     pans: number[]
     vols: number[]
-    vocal_parts: 0 | 1 | 2 | 3
+    vocal_parts: VocalPartsTypes
     mute_volume?: number
     mute_volume_vocals?: number
     hopo_threshold?: number
-    bank: SongBankTypes
-    drum_bank: SongDrumBankTypes
-    anim_tempo: 16 | 32 | 64
-    band_fail_cue?:
-        | 'band_fail_rock.cue'
-        | 'band_fail_vintage.cue'
-        | 'band_fail_heavy.cue'
-        | 'band_fail_electro.cue'
-        | 'band_fail_rock_keys.cue'
-        | 'band_fail_vintage_keys.cue'
-        | 'band_fail_heavy_keys.cue'
-        | 'band_fail_electro_keys.cue'
-    song_scroll_speed?: 1700 | 1850 | 2000 | 2150 | 2300 | 2450 | 2600 | 2750 | 3000
+    bank: BankTypes
+    drum_bank: DrumBankTypes
+    anim_tempo: AnimTempoTypes
+    band_fail_cue?: BandFailCueTypes
+    song_scroll_speed?: SongScrollSpeedTypes
     preview: [number, number]
     song_length: number
     rank_band: number
@@ -59,14 +59,14 @@ export interface DTAContentDocument {
     solo?: ('drum' | 'bass' | 'guitar' | 'keys' | 'vocal_percussion')[]
     tuning_offset_cents?: number
     guide_pitch_volume?: number
-    encoding?: 'latin1' | 'utf8' | string
+    encoding?: 'latin1' | 'utf8'
     format?: 10 | number
     version?: 30 | number
     game_origin: 'rb3_dlc' | 'ugc_plus' | string
-    rating: 1 | 2 | 3 | 4
-    genre: SongGenreTypes
-    sub_genre?: SongSubGenreTypes
-    vocal_gender: 'male' | 'female'
+    rating: RatingTypes
+    genre: GenreTypes
+    sub_genre?: SubGenreTypes
+    vocal_gender: VocalGenderTypes
     year_released: number
     year_recorded?: number
     album_art: boolean

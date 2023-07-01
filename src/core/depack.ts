@@ -1,12 +1,10 @@
 /**
- * Splits all songs metadata from a .dta pack file.
- * @returns An `Array` with all songs from the pack splited.
- * @since v0.1.0
+ * Separates all songs from a .dta file.
+ * @returns An `Array` with each song content.
  */
 export const depackDTA = (
     /**
      * The .dta file contents.
-     * - - - -
      */
     dtaFileContents: string
 ): string[] => {

@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash'
 import { DTADocument } from '../@types/DTADocument'
-import { stringifyDTA } from '../core'
+import { UpdateDataOptions, stringifyDTA, updateDTA } from '../core'
 import { getDTA } from './get'
 
 const dtaDefault: DTADocument = {
@@ -33,9 +33,23 @@ const dtaDefault: DTADocument = {
     get(value, options) {
         return getDTA(this, value, options)
     },
-    stringify(type) {
-        return stringifyDTA([this], type)
+    stringify(options) {
+        return stringifyDTA([this], options)
+    },
+    update(options) {
+        return updateDTA(this, options)
     },
 }
 
-export const createDTA = () => cloneDeep(dtaDefault)
+/**
+ * Creates a new memory instance of a `DTADocument` object.
+ */
+export const createDTA = (options?: UpdateDataOptions) => {
+    const newDTAInstance = cloneDeep(dtaDefault)
+
+    if (options) {
+        newDTAInstance.update(options)
+    }
+
+    return newDTAInstance
+}

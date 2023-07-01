@@ -4,18 +4,15 @@ import { depackDTA, parseDTA, sortDTA, stringifyDTA } from './core'
 
 /**
  * Parses a .dta file.
- * @returns An `Array` of single-multiple `DTADocument` object, that represents a parsed song from the .dta file.
- * @since v1.1.0
+ * @returns An `Array` with all songs parsed separately.
  */
 const DTAParser = (
     /**
      * The .dta file contents.
-     * - - - -
      */
     dtaFileContents: string,
     /**
-     * Options to customize the parsing process.
-     * - - - -
+     * Customize options for the parsing process.
      */
     options?: DTAParserOptions
 ): DTADocument[] => {
@@ -34,12 +31,9 @@ const DTAParser = (
     return parsedSongs
 }
 
-/**
- * Methods for `DTADocument[]`.
- */
 export const DTAArray = {
-    sort: sortDTA,
-    stringify: stringifyDTA,
+  sort: sortDTA,
+  stringify: stringifyDTA,
 }
 
 export { DTADocument }

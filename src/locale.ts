@@ -1,5 +1,0 @@
-export * from './locale/bank'
-export * from './locale/drum_bank'
-export * from './locale/genre'
-export * from './locale/sub_genre'
-export * from './locale/vocal_parts'
