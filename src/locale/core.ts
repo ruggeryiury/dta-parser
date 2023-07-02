@@ -19,7 +19,15 @@ export const bandFailCue = {
 }
 
 export type BandFailCueTypes = keyof typeof bandFailCue
-export type BandFailCueValues = 'Rock' | 'Vintage' | 'Heavy' | 'Electro' | 'Rock (Keys)' | 'Vintage (Keys)' | 'Heavy (Keys)' | 'Electro (Keys)'
+export type BandFailCueValues =
+    | 'Rock'
+    | 'Vintage'
+    | 'Heavy'
+    | 'Electro'
+    | 'Rock (Keys)'
+    | 'Vintage (Keys)'
+    | 'Heavy (Keys)'
+    | 'Electro (Keys)'
 
 export const bank = {
     'sfx/tambourine_bank.milo': 'Tambourine',
@@ -29,7 +37,11 @@ export const bank = {
 }
 
 export type BankTypes = keyof typeof bank
-export type BankValues = 'Tambourine' | 'Cowbell' | 'Hand Clap' | 'Cowbell (Alternate)'
+export type BankValues =
+    | 'Tambourine'
+    | 'Cowbell'
+    | 'Hand Clap'
+    | 'Cowbell (Alternate)'
 
 export const drumBank = {
     'sfx/kit01_bank.milo': 'Hard Rock Kit',
@@ -40,7 +52,12 @@ export const drumBank = {
 }
 
 export type DrumBankTypes = keyof typeof drumBank
-export type DrumBankValues = 'Hard Rock Kit' | 'Arena Kit' | 'Vintage Kit' | 'Trashy Kit' | 'Electronic Kit'
+export type DrumBankValues =
+    | 'Hard Rock Kit'
+    | 'Arena Kit'
+    | 'Vintage Kit'
+    | 'Trashy Kit'
+    | 'Electronic Kit'
 
 export const genre = {
     alternative: 'Alternative',
@@ -75,7 +92,36 @@ export const genre = {
 }
 
 export type GenreTypes = keyof typeof genre
-export type GenreValues = 'Alternative' | 'Blues' | 'Classical' | 'Classic Rock' | 'Country' | 'Emo' | 'Fusion' | 'Glam' | 'Grunge' | 'Hip-Hop/Rap' | 'Indie Rock' | 'Inspirational' | 'Jazz' | 'J-Rock' | 'Latin' | 'Metal' | 'New Wave' | 'Novelty' | 'Nu-Metal' | 'Pop/Dance/Electronic' | 'Pop-Rock' | 'Prog' | 'Punk' | 'R&B/Soul/Funk' | 'Reggae/Ska' | 'Rock' | 'Southern Rock' | 'World' | 'Other'
+export type GenreValues =
+    | 'Alternative'
+    | 'Blues'
+    | 'Classical'
+    | 'Classic Rock'
+    | 'Country'
+    | 'Emo'
+    | 'Fusion'
+    | 'Glam'
+    | 'Grunge'
+    | 'Hip-Hop/Rap'
+    | 'Indie Rock'
+    | 'Inspirational'
+    | 'Jazz'
+    | 'J-Rock'
+    | 'Latin'
+    | 'Metal'
+    | 'New Wave'
+    | 'Novelty'
+    | 'Nu-Metal'
+    | 'Pop/Dance/Electronic'
+    | 'Pop-Rock'
+    | 'Prog'
+    | 'Punk'
+    | 'R&B/Soul/Funk'
+    | 'Reggae/Ska'
+    | 'Rock'
+    | 'Southern Rock'
+    | 'World'
+    | 'Other'
 
 export const rating = {
     1: 'Family Friendly',
@@ -85,7 +131,11 @@ export const rating = {
 }
 
 export type RatingTypes = keyof typeof rating
-export type RatingValues = 'Family Friendly' | 'Supervision Recommended' | 'Mature Content' | 'No Rating'
+export type RatingValues =
+    | 'Family Friendly'
+    | 'Supervision Recommended'
+    | 'Mature Content'
+    | 'No Rating'
 
 export const songScrollSpeed = {
     1700: 'Crazy',
@@ -100,7 +150,16 @@ export const songScrollSpeed = {
 }
 
 export type SongScrollSpeedTypes = keyof typeof songScrollSpeed
-export type SongScrollSpeedValues = 'Crazy' | 'Faster' | 'Fast' | 'Medium Fast' | 'Normal' | 'Medium Slow' | 'Slow' | 'Slower' | 'Comatose'
+export type SongScrollSpeedValues =
+    | 'Crazy'
+    | 'Faster'
+    | 'Fast'
+    | 'Medium Fast'
+    | 'Normal'
+    | 'Medium Slow'
+    | 'Slow'
+    | 'Slower'
+    | 'Comatose'
 
 export const subGenre = {
     subgenre_alternative: 'Alternative',
@@ -204,7 +263,105 @@ export const subGenre = {
 }
 
 export type SubGenreTypes = keyof typeof subGenre
-export type SubGenreValues = 'Alternative' | 'College' | 'Other' | 'Acoustic' | 'Chicago' | 'Classic' | 'Contemporary' | 'Country' | 'Delta' | 'Electric' | 'Classical' | 'Classic Rock' | 'Bluegrass' | 'Honky Tonk' | 'Outlaw' | 'Traditional Folk' | 'Emo' | 'Fusion' | 'Glam' | 'Goth' | 'Grunge' | 'Alternative Rap' | 'Gangsta' | 'Hardcore Rap' | 'Hip Hop' | 'Old School Hip Hop' | 'Rap' | 'Trip Hop' | 'Underground Rap' | 'Indie Rock' | 'Lo-fi' | 'Math Rock' | 'Noise' | 'Post Rock' | 'Shoegazing' | 'Inspirational' | 'Acid Jazz' | 'Experimental' | 'Ragtime' | 'Smooth' | 'J-Rock' | 'Latin' | 'Black' | 'Core' | 'Death' | 'Hair' | 'Industrial' | 'Metal' | 'Power' | 'Prog' | 'Speed' | 'Thrash' | 'Dark Wave' | 'Electroclash' | 'New Wave' | 'Synthpop' | 'Novelty' | 'Nu-Metal' | 'Ambient' | 'Breakbeat' | 'Chiptune' | 'Dance' | 'Downtempo' | 'Dub' | 'Drum and Bass' | 'Electronica' | 'Garage' | 'Hardcore Dance' | 'House' | 'Techno' | 'Trance' | 'Pop' | 'Soft Rock' | 'Teen' | 'Prog Rock' | 'Dance Punk' | 'Hardcore' | 'Disco' | 'Funk' | 'Motown' | 'Rhythm and Blues' | 'Soul' | 'Reggae' | 'Ska' | 'Arena' | 'Blues' | 'Folk Rock' | 'Hard Rock' | 'Psychedelic' | 'Rock' | 'Rockabilly' | 'Rock and Roll' | 'Surf' | 'Southern Rock' | 'World' | 'A capella' | 'Contemporary Folk' | 'Oldies'
+export type SubGenreValues =
+    | 'Alternative'
+    | 'College'
+    | 'Other'
+    | 'Acoustic'
+    | 'Chicago'
+    | 'Classic'
+    | 'Contemporary'
+    | 'Country'
+    | 'Delta'
+    | 'Electric'
+    | 'Classical'
+    | 'Classic Rock'
+    | 'Bluegrass'
+    | 'Honky Tonk'
+    | 'Outlaw'
+    | 'Traditional Folk'
+    | 'Emo'
+    | 'Fusion'
+    | 'Glam'
+    | 'Goth'
+    | 'Grunge'
+    | 'Alternative Rap'
+    | 'Gangsta'
+    | 'Hardcore Rap'
+    | 'Hip Hop'
+    | 'Old School Hip Hop'
+    | 'Rap'
+    | 'Trip Hop'
+    | 'Underground Rap'
+    | 'Indie Rock'
+    | 'Lo-fi'
+    | 'Math Rock'
+    | 'Noise'
+    | 'Post Rock'
+    | 'Shoegazing'
+    | 'Inspirational'
+    | 'Acid Jazz'
+    | 'Experimental'
+    | 'Ragtime'
+    | 'Smooth'
+    | 'J-Rock'
+    | 'Latin'
+    | 'Black'
+    | 'Core'
+    | 'Death'
+    | 'Hair'
+    | 'Industrial'
+    | 'Metal'
+    | 'Power'
+    | 'Prog'
+    | 'Speed'
+    | 'Thrash'
+    | 'Dark Wave'
+    | 'Electroclash'
+    | 'New Wave'
+    | 'Synthpop'
+    | 'Novelty'
+    | 'Nu-Metal'
+    | 'Ambient'
+    | 'Breakbeat'
+    | 'Chiptune'
+    | 'Dance'
+    | 'Downtempo'
+    | 'Dub'
+    | 'Drum and Bass'
+    | 'Electronica'
+    | 'Garage'
+    | 'Hardcore Dance'
+    | 'House'
+    | 'Techno'
+    | 'Trance'
+    | 'Pop'
+    | 'Soft Rock'
+    | 'Teen'
+    | 'Prog Rock'
+    | 'Dance Punk'
+    | 'Hardcore'
+    | 'Disco'
+    | 'Funk'
+    | 'Motown'
+    | 'Rhythm and Blues'
+    | 'Soul'
+    | 'Reggae'
+    | 'Ska'
+    | 'Arena'
+    | 'Blues'
+    | 'Folk Rock'
+    | 'Hard Rock'
+    | 'Psychedelic'
+    | 'Rock'
+    | 'Rockabilly'
+    | 'Rock and Roll'
+    | 'Surf'
+    | 'Southern Rock'
+    | 'World'
+    | 'A capella'
+    | 'Contemporary Folk'
+    | 'Oldies'
 
 export const vocalGender = {
     male: 'Male',
@@ -222,19 +379,47 @@ export const vocalParts = {
 }
 
 export type VocalPartsTypes = keyof typeof vocalParts
-export type VocalPartsValues = 'No Vocals' | 'Solo Vocals' | '2-Part Harmonies' | '3-Part Harmonies'
+export type VocalPartsValues =
+    | 'No Vocals'
+    | 'Solo Vocals'
+    | '2-Part Harmonies'
+    | '3-Part Harmonies'
+
+export const rank = {
+    0: 'No Part',
+    1: 'Warmup',
+    2: 'Apprentice',
+    3: 'Solid',
+    4: 'Moderate',
+    5: 'Challenging',
+    6: 'Nightmare',
+    7: 'Impossible',
+}
+
+export type RankNumberTypes = keyof typeof rank
 
 const localeCore = {
-    anim_tempo: (v: AnimTempoTypes) => (animTempo[v] ? animTempo[v] : 'Unknown'),
-    band_fail_cue: (v: BandFailCueTypes) => (bandFailCue[v] ? bandFailCue[v] : 'Unknown'),
-    bank: (v: BankTypes) => (bank[v] ? bank[v] : 'Unknown'),
-    drum_bank: (v: DrumBankTypes) => (drumBank[v] ? drumBank[v] : 'Unknown'),
-    genre: (v: GenreTypes) => (genre[v] ? genre[v] : 'Unknown'),
-    rating: (v: RatingTypes) => (rating[v] ? rating[v] : 'Unknown'),
-    song_scroll_speed: (v: SongScrollSpeedTypes) => (songScrollSpeed[v] ? songScrollSpeed[v] : 'Unknown'),
-    sub_genre: (v: SubGenreTypes) => (subGenre[v] ? subGenre[v] : 'Unknown'),
-    vocal_gender: (v: VocalGenderTypes) => (vocalGender[v] ? vocalGender[v] : 'Unknown'),
-    vocal_parts: (v: VocalPartsTypes) => (vocalParts[v] ? vocalParts[v] : 'Unknown'),
+    anim_tempo: (v?: AnimTempoTypes) =>
+        v && animTempo[v] ? animTempo[v] : 'Medium',
+    band_fail_cue: (v?: BandFailCueTypes) =>
+        v && bandFailCue[v] ? bandFailCue[v] : 'Not Specified',
+    bank: (v?: BankTypes) => (v && bank[v] ? bank[v] : 'Tambourine'),
+    drum_bank: (v?: DrumBankTypes) =>
+        v && drumBank[v] ? drumBank[v] : 'Hard Rock Kit',
+    genre: (v?: GenreTypes) => (v && genre[v] ? genre[v] : 'Unknown'),
+    rating: (v?: RatingTypes) => (v && rating[v] ? rating[v] : 'No Rating'),
+    song_scroll_speed: (v?: SongScrollSpeedTypes) =>
+        v && songScrollSpeed[v] ? songScrollSpeed[v] : 'Normal',
+    sub_genre: (v?: SubGenreTypes) =>
+        v && subGenre[v] ? subGenre[v] : 'Unknown',
+    vocal_gender: (v?: VocalGenderTypes) =>
+        v && vocalGender[v] ? vocalGender[v] : 'Male',
+    vocal_parts: (v?: VocalPartsTypes) =>
+        v && vocalParts[v] ? vocalParts[v] : 'Unknown',
+    rank: (rankCalc: number) => {
+        const newRankCalc = (rankCalc + 1) as RankNumberTypes
+        return rank[newRankCalc]
+    },
 }
 
 export default localeCore

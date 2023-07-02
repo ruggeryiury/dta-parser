@@ -1,7 +1,22 @@
 import { UpdateDataOptions } from '../core'
-import { GetDataReturnValues, GetDataValueOptions, GetDataValueTypes } from '../core/get'
+import {
+    GetDataReturnValues,
+    GetDataValueOptions,
+    GetDataValueTypes,
+} from '../core/get'
 import { StringifyDataOptions } from '../core/stringify'
-import { VocalPartsTypes, BankTypes, DrumBankTypes, AnimTempoTypes, BandFailCueTypes, SongScrollSpeedTypes, GenreTypes, RatingTypes, SubGenreTypes, VocalGenderTypes } from '../locale/core'
+import {
+    VocalPartsTypes,
+    BankTypes,
+    DrumBankTypes,
+    AnimTempoTypes,
+    BandFailCueTypes,
+    SongScrollSpeedTypes,
+    GenreTypes,
+    RatingTypes,
+    SubGenreTypes,
+    VocalGenderTypes,
+} from '../locale/core'
 
 /**
  * A parsed song object.
@@ -15,7 +30,10 @@ export interface DTADocumentMethods {
     /**
      * Gets and processes any value from the .dta file.
      */
-    get<V extends GetDataValueTypes, O extends GetDataValueOptions<V>>(value: V, options?: O): GetDataReturnValues<V, O>
+    get<V extends GetDataValueTypes, O extends GetDataValueOptions<V>>(
+        value: V,
+        options?: O
+    ): GetDataReturnValues<V, O>
     /**
      * Converts a `DTADocument` to a .dta file content string.
      */
@@ -56,7 +74,7 @@ export interface DTAContentDocument {
     rank_real_bass?: number
     rank_real_guitar?: number
     rank_real_keys?: number
-    solo?: ('drum' | 'bass' | 'guitar' | 'keys' | 'vocal_percussion')[]
+    solo?: SoloFlags[]
     tuning_offset_cents?: number
     guide_pitch_volume?: number
     encoding?: 'latin1' | 'utf8'
@@ -101,3 +119,5 @@ export interface DTACustomSongAttributes {
     /** Tells if the song only has Expert difficulty charted. */
     expertOnly?: boolean
 }
+
+export type SoloFlags = 'drum' | 'bass' | 'guitar' | 'keys' | 'vocal_percussion'

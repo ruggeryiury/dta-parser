@@ -1,6 +1,6 @@
 import { DTADocument } from './@types/DTADocument'
 import { DTAParserOptions } from './@types/DTAParser'
-import { depackDTA, parseDTA, sortDTA, stringifyDTA } from './core'
+import { depackDTA, parseDTA, sortDTA, stringifyDTA, createDTA } from './core'
 
 /**
  * Parses a .dta file.
@@ -32,9 +32,9 @@ const DTAParser = (
 }
 
 export const DTAArray = {
-  sort: sortDTA,
-  stringify: stringifyDTA,
+    sort: sortDTA,
+    stringify: stringifyDTA,
 }
 
-export { DTADocument }
+export { DTADocument, createDTA }
 export default DTAParser

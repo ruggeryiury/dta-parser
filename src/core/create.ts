@@ -1,7 +1,13 @@
 import { cloneDeep } from 'lodash'
 import { DTADocument } from '../@types/DTADocument'
-import { UpdateDataOptions, stringifyDTA, updateDTA } from '../core'
+import {
+    TrackUpdateOptions,
+    UpdateDataOptions,
+    stringifyDTA,
+    updateDTA,
+} from '../core'
 import { getDTA } from './get'
+import { VocalPartsValues } from '../locale/core'
 
 const dtaDefault: DTADocument = {
     content: {
@@ -41,13 +47,25 @@ const dtaDefault: DTADocument = {
     },
 }
 
+export interface CreateDataRequired extends UpdateDataOptions {
+    id: string
+    name: string
+    artist: string
+    song_id: string | number
+    songname: string
+    tracks: TrackUpdateOptions
+    vocal_parts: VocalPartsValues
+    preview: string | number
+    song_length: string | number
+}
+
 /**
  * Creates a new memory instance of a `DTADocument` object.
  */
-export const createDTA = (options?: UpdateDataOptions) => {
+export const createDTA = (options: CreateDataRequired | null) => {
     const newDTAInstance = cloneDeep(dtaDefault)
 
-    if (options) {
+    if (options !== null) {
         newDTAInstance.update(options)
     }
 
