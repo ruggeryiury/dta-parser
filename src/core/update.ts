@@ -8,7 +8,11 @@ import {
     SongScrollSpeedValues,
     VocalPartsValues,
 } from '../locale/core'
-import { getKeyFromValue, timeStringToMilliseconds } from '../utils'
+import {
+    dtaRankCalc,
+    getKeyFromValue,
+    timeStringToMilliseconds,
+} from '../utils'
 
 export interface UpdateDataOptions {
     id?: string
@@ -30,6 +34,14 @@ export interface UpdateDataOptions {
     preview?: string | number
     song_length?: string | number
     rank_band?: BankRankingsOptions
+    rank_drum?: InstrumentRankingsOptions
+    rank_bass?: InstrumentRankingsOptions
+    rank_guitar?: InstrumentRankingsOptions
+    rank_vocals?: InstrumentRankingsOptions
+    rank_keys?: InstrumentRankingsOptions
+    rank_real_guitar?: InstrumentRankingsOptions
+    rank_real_bass?: InstrumentRankingsOptions
+    rank_real_keys?: InstrumentRankingsOptions
     game_origin?: string
     rating?: RatingValues
 }
@@ -82,26 +94,56 @@ const pansGenerator = (
     }
 }
 
-export const updateDTA = (dta: DTADocument, update?: UpdateDataOptions) => {
-    if (update?.id) dta.content.id = update.id
+export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
+    const {
+        id,
+        name,
+        artist,
+        master,
+        song_id,
+        songname,
+        tracks,
+        vocal_parts,
+        mute_volume,
+        mute_volume_vocals,
+        hopo_threshold,
+        bank,
+        drum_bank,
+        anim_tempo,
+        band_fail_cue,
+        song_scroll_speed,
+        preview,
+        song_length,
+        rank_band,
+        rank_drum,
+        rank_bass,
+        rank_guitar,
+        rank_vocals,
+        rank_keys,
+        rank_real_guitar,
+        rank_real_bass,
+        rank_real_keys,
+    } = update
 
-    if (update?.name) dta.content.name = update.name
+    if (id) dta.content.id = id
 
-    if (update?.artist) dta.content.artist = update.artist
+    if (name) dta.content.name = name
 
-    if (update?.master !== undefined) dta.content.master = update.master
+    if (artist) dta.content.artist = artist
 
-    if (update?.song_id !== undefined) dta.content.song_id = update.song_id
+    if (master !== undefined) dta.content.master = master
 
-    if (update?.songname) dta.content.songname = update.songname
+    if (song_id !== undefined) dta.content.song_id = song_id
 
-    if (update?.tracks) {
+    if (songname) dta.content.songname = songname
+
+    if (tracks) {
         dta.content.tracks_count = []
         dta.content.pans = []
         dta.content.vols = []
 
         const { drum, bass, guitar, vocals, keys, backing, hasCrowdChannels } =
-            update.tracks
+            tracks
 
         const drumT = drum ? pansGenerator(drum).length : 0
         const bassT = bass ? pansGenerator(bass).length : 0
@@ -161,55 +203,64 @@ export const updateDTA = (dta: DTADocument, update?: UpdateDataOptions) => {
         }
     }
 
-    if (update?.vocal_parts)
-        dta.content.vocal_parts = getKeyFromValue.vocal_parts(
-            update.vocal_parts
-        )
+    if (vocal_parts)
+        dta.content.vocal_parts = getKeyFromValue.vocal_parts(vocal_parts)
 
-    if (update?.mute_volume) dta.content.mute_volume = update.mute_volume
+    if (mute_volume) dta.content.mute_volume = mute_volume
 
-    if (update?.mute_volume_vocals)
-        dta.content.mute_volume_vocals = update.mute_volume_vocals
+    if (mute_volume_vocals) dta.content.mute_volume_vocals = mute_volume_vocals
 
-    if (update?.hopo_threshold)
-        dta.content.hopo_threshold = update.hopo_threshold
+    if (hopo_threshold) dta.content.hopo_threshold = hopo_threshold
 
-    if (update?.bank) dta.content.bank = getKeyFromValue.bank(update.bank)
+    if (bank) dta.content.bank = getKeyFromValue.bank(bank)
 
-    if (update?.drum_bank)
-        dta.content.drum_bank = getKeyFromValue.drum_bank(update.drum_bank)
+    if (drum_bank) dta.content.drum_bank = getKeyFromValue.drum_bank(drum_bank)
 
-    if (update?.anim_tempo)
-        dta.content.anim_tempo = getKeyFromValue.anim_tempo(update.anim_tempo)
+    if (anim_tempo)
+        dta.content.anim_tempo = getKeyFromValue.anim_tempo(anim_tempo)
 
-    if (update?.band_fail_cue)
-        dta.content.band_fail_cue = getKeyFromValue.band_fail_cue(
-            update.band_fail_cue
-        )
+    if (band_fail_cue)
+        dta.content.band_fail_cue = getKeyFromValue.band_fail_cue(band_fail_cue)
 
-    if (update?.song_scroll_speed)
-        dta.content.song_scroll_speed = getKeyFromValue.song_scroll_speed(
-            update.song_scroll_speed
-        )
+    if (song_scroll_speed)
+        dta.content.song_scroll_speed =
+            getKeyFromValue.song_scroll_speed(song_scroll_speed)
 
-    if (update?.preview) {
-        if (typeof update.preview === 'string') {
-            const time = timeStringToMilliseconds(update.preview)
+    if (preview) {
+        if (typeof preview === 'string') {
+            const time = timeStringToMilliseconds(preview)
             dta.content.preview = [time, time + 30000]
         } else {
-            // if (typeof update.preview === 'number')
-            dta.content.preview = [update.preview, update.preview + 30000]
+            // if (typeof preview === 'number')
+            dta.content.preview = [preview, preview + 30000]
         }
     }
-    if (update?.song_length) {
-        if (typeof update.song_length === 'string') {
-            const time = timeStringToMilliseconds(update.song_length)
+    if (song_length) {
+        if (typeof song_length === 'string') {
+            const time = timeStringToMilliseconds(song_length)
             dta.content.song_length = time
         } else {
-            // if (typeof update.song_length === 'number')
-            dta.content.song_length = update.song_length
+            // if (typeof song_length === 'number')
+            dta.content.song_length = song_length
         }
     }
+    if (rank_band) dta.content.rank_band = dtaRankCalc('band', rank_band)
+    if (rank_drum) dta.content.rank_drum = dtaRankCalc('drum', rank_drum)
+    if (rank_bass) dta.content.rank_bass = dtaRankCalc('bass', rank_bass)
+    if (rank_guitar)
+        dta.content.rank_guitar = dtaRankCalc('guitar', rank_guitar)
+    if (rank_vocals)
+        dta.content.rank_vocals = dtaRankCalc('vocals', rank_vocals)
+    if (rank_keys) dta.content.rank_keys = dtaRankCalc('keys', rank_keys)
+    if (rank_real_guitar)
+        dta.content.rank_real_guitar = dtaRankCalc(
+            'real_guitar',
+            rank_real_guitar
+        )
+    if (rank_real_bass)
+        dta.content.rank_real_bass = dtaRankCalc('real_bass', rank_real_bass)
+    if (rank_real_keys)
+        dta.content.rank_real_keys = dtaRankCalc('real_keys', rank_real_keys)
 
     return dta
 }

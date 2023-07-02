@@ -1,3 +1,5 @@
+import { InstrumentRankingsOptions } from '../core'
+
 const ranksMap = {
     drum: [124, 151, 178, 242, 345, 448],
     bass: [135, 181, 228, 293, 364, 436],
@@ -12,7 +14,7 @@ const ranksMap = {
 
 export type RankTypes = keyof typeof ranksMap
 
-export const rankCalc = (type: RankTypes, rank: number | undefined): number => {
+export const rankCalc = (type: RankTypes, rank?: number): number => {
     let parseRankReturn = -1
 
     if (rank === undefined || rank === 0) {
@@ -22,10 +24,25 @@ export const rankCalc = (type: RankTypes, rank: number | undefined): number => {
     parseRankReturn++
 
     ranksMap[type].forEach((value) => {
-        if (rank >= value) {
-            parseRankReturn++
-        }
+        if (rank >= value) parseRankReturn++
     })
 
     return parseRankReturn
+}
+
+export const dtaRankCalc = (
+    type: RankTypes,
+    rank: InstrumentRankingsOptions
+): number => {
+    if (rank === 'No Part') return 0
+    else if (rank === 'Warmup') return 1
+    else if (rank === 'Apprentice') return ranksMap[type][0]
+    else if (rank === 'Solid') return ranksMap[type][1]
+    else if (rank === 'Moderate') return ranksMap[type][2]
+    else if (rank === 'Challenging') return ranksMap[type][3]
+    else if (rank === 'Nightmare') return ranksMap[type][4]
+    else {
+        // if (rank === 'Impossible')
+        return ranksMap[type][5]
+    }
 }

@@ -396,29 +396,36 @@ export const rank = {
     7: 'Impossible',
 }
 
+export const rankGraphic = {
+    0: 'NO PART',
+    1: '⚫⚫⚫⚫⚫',
+    2: '⚪⚫⚫⚫⚫',
+    3: '⚪⚪⚫⚫⚫',
+    4: '⚪⚪⚪⚫⚫',
+    5: '⚪⚪⚪⚪⚫',
+    6: '⚪⚪⚪⚪⚪',
+    7: '👿👿👿👿👿',
+}
+
 export type RankNumberTypes = keyof typeof rank
 
 const localeCore = {
-    anim_tempo: (v?: AnimTempoTypes) =>
-        v && animTempo[v] ? animTempo[v] : 'Medium',
+    anim_tempo: (v: AnimTempoTypes) => animTempo[v],
     band_fail_cue: (v?: BandFailCueTypes) =>
         v && bandFailCue[v] ? bandFailCue[v] : 'Not Specified',
-    bank: (v?: BankTypes) => (v && bank[v] ? bank[v] : 'Tambourine'),
-    drum_bank: (v?: DrumBankTypes) =>
-        v && drumBank[v] ? drumBank[v] : 'Hard Rock Kit',
-    genre: (v?: GenreTypes) => (v && genre[v] ? genre[v] : 'Unknown'),
-    rating: (v?: RatingTypes) => (v && rating[v] ? rating[v] : 'No Rating'),
-    song_scroll_speed: (v?: SongScrollSpeedTypes) =>
-        v && songScrollSpeed[v] ? songScrollSpeed[v] : 'Normal',
+    bank: (v: BankTypes) => bank[v],
+    drum_bank: (v: DrumBankTypes) => drumBank[v],
+    genre: (v: GenreTypes) => genre[v],
+    rating: (v: RatingTypes) => rating[v],
+    song_scroll_speed: (v: SongScrollSpeedTypes) => songScrollSpeed[v],
     sub_genre: (v?: SubGenreTypes) =>
         v && subGenre[v] ? subGenre[v] : 'Unknown',
-    vocal_gender: (v?: VocalGenderTypes) =>
-        v && vocalGender[v] ? vocalGender[v] : 'Male',
-    vocal_parts: (v?: VocalPartsTypes) =>
-        v && vocalParts[v] ? vocalParts[v] : 'Unknown',
-    rank: (rankCalc: number) => {
+    vocal_gender: (v: VocalGenderTypes) => vocalGender[v],
+    vocal_parts: (v: VocalPartsTypes) => vocalParts[v],
+    rank: (rankCalc: number, type?: 'default' | 'graphical') => {
         const newRankCalc = (rankCalc + 1) as RankNumberTypes
-        return rank[newRankCalc]
+        if (type === undefined || type === 'default') return rank[newRankCalc]
+        else return rankGraphic[newRankCalc]
     },
 }
 

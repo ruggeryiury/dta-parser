@@ -1,9 +1,5 @@
 import { UpdateDataOptions } from '../core'
-import {
-    GetDataReturnValues,
-    GetDataValueOptions,
-    GetDataValueTypes,
-} from '../core/get'
+import { GetDataValueOptions, GetDataValueTypes, getDTA } from '../core/get'
 import { StringifyDataOptions } from '../core/stringify'
 import {
     VocalPartsTypes,
@@ -33,7 +29,7 @@ export interface DTADocumentMethods {
     get<V extends GetDataValueTypes, O extends GetDataValueOptions<V>>(
         value: V,
         options?: O
-    ): GetDataReturnValues<V, O>
+    ): ReturnType<typeof getDTA>
     /**
      * Converts a `DTADocument` to a .dta file content string.
      */
@@ -41,7 +37,7 @@ export interface DTADocumentMethods {
     /**
      * Updates any value from a `DTADocument`.
      */
-    update(options?: UpdateDataOptions): DTADocument
+    update(options: UpdateDataOptions): DTADocument
 }
 
 export interface DTAContentDocument {
@@ -62,7 +58,7 @@ export interface DTAContentDocument {
     drum_bank: DrumBankTypes
     anim_tempo: AnimTempoTypes
     band_fail_cue?: BandFailCueTypes
-    song_scroll_speed?: SongScrollSpeedTypes
+    song_scroll_speed: SongScrollSpeedTypes
     preview: [number, number]
     song_length: number
     rank_band: number

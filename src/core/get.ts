@@ -1,4 +1,8 @@
-import { DTAContentDocument, DTADocument } from '../@types/DTADocument'
+import {
+    DTAContentDocument,
+    DTADocument,
+    DTACustomSongAttributes,
+} from '../@types/DTADocument'
 import {
     RankTypes,
     leadingArticle2Trailing,
@@ -8,25 +12,8 @@ import {
 } from '../utils'
 import Locale from '../locale/core'
 
-export type GetDataValueTypes =
-    | 'name'
-    | 'artist'
-    | 'vocal_parts'
-    | 'bank'
-    | 'drum_bank'
-    | 'anim_tempo'
-    | 'band_fail_cue'
-    | 'song_scroll_speed'
-    | 'song_length'
-    | 'rank_band'
-    | 'rank_drum'
-    | 'rank_bass'
-    | 'rank_guitar'
-    | 'rank_vocals'
-    | 'rank_keys'
-    | 'rank_real_keys'
-    | 'rank_real_guitar'
-    | 'rank_real_bass'
+export type GetDataValueTypes = keyof DTAContentDocument &
+    keyof DTACustomSongAttributes
 
 export type GetDataValueOptions<V extends GetDataValueTypes> = V extends
     | 'name'
@@ -39,6 +26,8 @@ export type GetDataValueOptions<V extends GetDataValueTypes> = V extends
           | 'anim_tempo'
           | 'band_fail_cue'
           | 'song_scroll_speed'
+          | 'rating'
+          | 'genre'
     ? GetDataRawOptions
     : V extends 'song_length'
     ? GetDataTimeOptions
@@ -54,36 +43,6 @@ export type GetDataValueOptions<V extends GetDataValueTypes> = V extends
           | 'rank_real_bass'
     ? GetDataRankingOptions
     : never
-
-export type GetDataReturnValues<
-    V extends GetDataValueTypes,
-    O extends GetDataValueOptions<V>
-> =
-    // String
-    V extends 'name' | 'artist' | 'bank' | 'drum_bank'
-        ? string
-        : V extends 'vocal_parts' | 'song_scroll_speed'
-        ? O extends { raw: true }
-            ? number
-            : string
-        : V extends 'song_length'
-        ? O extends { inMilliseconds: true }
-            ? number
-            : string
-        : V extends
-              | 'rank_band'
-              | 'rank_drum'
-              | 'rank_bass'
-              | 'rank_guitar'
-              | 'rank_vocals'
-              | 'rank_keys'
-              | 'rank_real_keys'
-              | 'rank_real_guitar'
-              | 'rank_real_bass'
-        ? O extends { type: undefined | 'number' | 'raw' }
-            ? number
-            : string
-        : never
 
 export interface GetDataNamingOptions {
     /** You can specify how the leading article will be
@@ -130,7 +89,7 @@ export interface GetDataTimeOptions {
 }
 
 export interface GetDataRankingOptions {
-    type?: 'number' | 'verbosed' | 'raw'
+    type?: 'number' | 'verbosed' | 'raw' | 'graphical'
 }
 
 export const getDTA = <
@@ -140,93 +99,57 @@ export const getDTA = <
     dta: DTADocument,
     value: V,
     options?: O
-): GetDataReturnValues<V, O> => {
+) => {
     if (value === 'name' || value === 'artist') {
-        const opts = options as GetDataNamingOptions | undefined
+        let leadingArticle: GetDataNamingOptions['leadingArticle']
+        if (options)
+            leadingArticle = (options as GetDataNamingOptions).leadingArticle
 
-        if (!opts || (opts && opts.leadingArticle === 'emit')) {
-            return dta.content[
-                value as keyof DTAContentDocument
-            ] as GetDataReturnValues<V, O>
-        } else if (opts && opts.leadingArticle === 'omit') {
-            return omitLeadingArticle(
-                dta.content[value as keyof DTAContentDocument] as string
-            ) as GetDataReturnValues<V, O>
+        if (leadingArticle === undefined || leadingArticle === 'emit')
+            return dta.content[value]
+        else if (leadingArticle === 'omit')
+            return omitLeadingArticle(dta.content[value] as string)
+        else return leadingArticle2Trailing(dta.content[value] as string)
+    } else if (
+        value === 'vocal_parts' ||
+        value === 'bank' ||
+        value === 'drum_bank' ||
+        value === 'anim_tempo' ||
+        value === 'band_fail_cue' ||
+        value === 'song_scroll_speed' ||
+        value === 'rating' ||
+        value === 'genre'
+    ) {
+        let raw: GetDataRawOptions['raw']
+        if (options) raw = (options as GetDataRawOptions).raw
+
+        if (raw !== undefined || raw) return dta.content[value]
+        else {
+            if (value === 'vocal_parts')
+                return Locale.vocal_parts(dta.content['vocal_parts'])
+            else if (value === 'bank') return Locale.bank(dta.content['bank'])
+            else if (value === 'drum_bank')
+                return Locale.drum_bank(dta.content['drum_bank'])
+            else if (value === 'anim_tempo')
+                return Locale.anim_tempo(dta.content['anim_tempo'])
+            else if (value === 'band_fail_cue')
+                return Locale.band_fail_cue(dta.content['band_fail_cue'])
+            else if (value === 'rating')
+                return Locale.rating(dta.content['rating'])
+            else if (value === 'genre')
+                return Locale.genre(dta.content['genre'])
+            else
+                return Locale.song_scroll_speed(
+                    dta.content['song_scroll_speed']
+                )
         }
-
-        // (opts && opts.leadingArticle === 'trailing')
-        return leadingArticle2Trailing(
-            dta.content[value as keyof DTAContentDocument] as string
-        ) as GetDataReturnValues<V, O>
-    } else if (value === 'vocal_parts') {
-        const opts = options as GetDataRawOptions | undefined
-
-        if (!opts || (opts && !opts.raw)) {
-            return Locale.vocal_parts(
-                dta.content.vocal_parts
-            ) as GetDataReturnValues<V, O>
-        }
-
-        // (opts && opts.raw)
-        return dta.content.vocal_parts as GetDataReturnValues<V, O>
-    } else if (value === 'bank') {
-        const opts = options as GetDataRawOptions | undefined
-
-        if (!opts || (opts && !opts.raw)) {
-            return Locale.bank(dta.content.bank) as GetDataReturnValues<V, O>
-        }
-
-        return dta.content.bank as GetDataReturnValues<V, O>
-    } else if (value === 'drum_bank') {
-        const opts = options as GetDataRawOptions | undefined
-
-        if (!opts || (opts && !opts.raw)) {
-            return Locale.drum_bank(
-                dta.content.drum_bank
-            ) as GetDataReturnValues<V, O>
-        }
-
-        return dta.content.drum_bank as GetDataReturnValues<V, O>
-    } else if (value === 'anim_tempo') {
-        const opts = options as GetDataRawOptions | undefined
-
-        if (!opts || (opts && !opts.raw)) {
-            return Locale.anim_tempo(
-                dta.content.anim_tempo
-            ) as GetDataReturnValues<V, O>
-        }
-
-        return dta.content.anim_tempo as GetDataReturnValues<V, O>
-    } else if (value === 'band_fail_cue') {
-        const opts = options as GetDataRawOptions | undefined
-
-        if (!opts || (opts && !opts.raw)) {
-            return Locale.band_fail_cue(
-                dta.content.band_fail_cue
-            ) as GetDataReturnValues<V, O>
-        }
-
-        return dta.content.band_fail_cue as GetDataReturnValues<V, O>
-    } else if (value === 'song_scroll_speed') {
-        const opts = options as GetDataRawOptions | undefined
-
-        if (!opts || (opts && !opts.raw)) {
-            return Locale.song_scroll_speed(
-                dta.content.song_scroll_speed
-            ) as GetDataReturnValues<V, O>
-        }
-
-        return dta.content.song_scroll_speed as GetDataReturnValues<V, O>
     } else if (value === 'song_length') {
-        const opts = options as GetDataTimeOptions | undefined
+        let inMilliseconds: GetDataTimeOptions['inMilliseconds']
+        if (options)
+            inMilliseconds = (options as GetDataTimeOptions).inMilliseconds
 
-        if (!opts || (opts && !opts.inMilliseconds)) {
-            return millisecondsToTimeString(
-                dta.content.song_length
-            ) as GetDataReturnValues<V, O>
-        }
-
-        return dta.content.song_length as GetDataReturnValues<V, O>
+        if (inMilliseconds === true) return dta.content[value]
+        else return millisecondsToTimeString(dta.content.song_length)
     } else if (
         value === 'rank_band' ||
         value === 'rank_drum' ||
@@ -238,48 +161,39 @@ export const getDTA = <
         value === 'rank_real_guitar' ||
         value === 'rank_real_bass'
     ) {
-        const opts = options as GetDataRankingOptions | undefined
-        let type: RankTypes
-        let raw: number | undefined
+        let returnType: GetDataRankingOptions['type']
+        if (options) returnType = (options as GetDataRankingOptions).type
+        let operators: [RankTypes, number | undefined] = [
+            'band',
+            dta.content.rank_band,
+        ]
 
-        if (value === 'rank_band') {
-            type = 'band'
-            raw = dta.content.rank_band
-        } else if (value === 'rank_drum') {
-            type = 'drum'
-            raw = dta.content.rank_drum
-        } else if (value === 'rank_bass') {
-            type = 'bass'
-            raw = dta.content.rank_bass
-        } else if (value === 'rank_guitar') {
-            type = 'guitar'
-            raw = dta.content.rank_guitar
-        } else if (value === 'rank_vocals') {
-            type = 'vocals'
-            raw = dta.content.rank_vocals
-        } else if (value === 'rank_keys') {
-            type = 'keys'
-            raw = dta.content.rank_keys
-        } else if (value === 'rank_real_guitar') {
-            type = 'real_guitar'
-            raw = dta.content.rank_real_guitar
-        } else if (value === 'rank_real_bass') {
-            type = 'real_bass'
-            raw = dta.content.rank_real_bass
-        } else {
-            type = 'real_keys'
-            raw = dta.content.rank_real_keys
+        if (value === 'rank_drum') operators = ['drum', dta.content.rank_drum]
+        else if (value === 'rank_bass')
+            operators = ['bass', dta.content.rank_bass]
+        else if (value === 'rank_guitar')
+            operators = ['guitar', dta.content.rank_guitar]
+        else if (value === 'rank_vocals')
+            operators = ['vocals', dta.content.rank_vocals]
+        else if (value === 'rank_keys')
+            operators = ['keys', dta.content.rank_keys]
+        else if (value === 'rank_real_guitar')
+            operators = ['real_guitar', dta.content.rank_real_guitar]
+        else if (value === 'rank_real_bass')
+            operators = ['real_bass', dta.content.rank_real_bass]
+        else if (value === 'rank_real_keys')
+            operators = ['real_keys', dta.content.rank_real_keys]
+        else {
+            // Continue
         }
-        const rank = rankCalc(type, raw)
 
-        if (!opts || !opts?.type || opts?.type === 'number') {
-            return rank as GetDataReturnValues<V, O>
-        } else if (opts?.type === 'verbosed') {
-            return Locale.rank(rank) as GetDataReturnValues<V, O>
-        } else {
-            return raw as GetDataReturnValues<V, O>
-        }
-    } else {
-        return '' as GetDataReturnValues<V, O>
-    }
+        const rank = rankCalc(operators[0], operators[1])
+        console.log(rank)
+
+        if (returnType === 'number') return rank
+        else if (returnType === 'raw') return operators[1]
+        else if (returnType === 'graphical')
+            return Locale.rank(rank, 'graphical')
+        else return Locale.rank(rank)
+    } else return dta.content[value]
 }
