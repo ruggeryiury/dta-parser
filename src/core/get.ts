@@ -10,38 +10,111 @@ import {
     omitLeadingArticle,
     rankCalc,
 } from '../utils'
-import Locale from '../locale/core'
+import Locale, { AnimTempoValues, BandFailCueValues, BankValues, DrumBankValues, GenreValues, RatingValues, SongScrollSpeedValues, VocalPartsValues } from '../locale/core'
+import { BandRankingsOptions, InstrumentRankingsOptions } from '../core'
 
-export type GetDataValueTypes = keyof DTAContentDocument &
-    keyof DTACustomSongAttributes
-
+export type GetDataValueTypes = keyof Omit<DTAContentDocument, 'tracks_count' | 'pans' | 'vols' | 'preview'> | keyof DTACustomSongAttributes
 export type GetDataValueOptions<V extends GetDataValueTypes> = V extends
     | 'name'
     | 'artist'
     ? GetDataNamingOptions
     : V extends
-          | 'vocal_parts'
-          | 'bank'
-          | 'drum_bank'
-          | 'anim_tempo'
-          | 'band_fail_cue'
-          | 'song_scroll_speed'
-          | 'rating'
-          | 'genre'
+    | 'vocal_parts'
+    | 'bank'
+    | 'drum_bank'
+    | 'anim_tempo'
+    | 'band_fail_cue'
+    | 'song_scroll_speed'
+    | 'rating'
+    | 'genre'
+    | 'mute_volume'
+    | 'mute_volume_vocals'
     ? GetDataRawOptions
     : V extends 'song_length'
     ? GetDataTimeOptions
     : V extends
-          | 'rank_band'
-          | 'rank_drum'
-          | 'rank_bass'
-          | 'rank_guitar'
-          | 'rank_vocals'
-          | 'rank_keys'
-          | 'rank_real_keys'
-          | 'rank_real_guitar'
-          | 'rank_real_bass'
+    | 'rank_band'
+    | 'rank_drum'
+    | 'rank_bass'
+    | 'rank_guitar'
+    | 'rank_vocals'
+    | 'rank_keys'
+    | 'rank_real_keys'
+    | 'rank_real_guitar'
+    | 'rank_real_bass'
     ? GetDataRankingOptions
+    : never
+
+export type GetDataValueReturn<
+    V extends GetDataValueTypes,
+    O extends GetDataValueOptions<V>
+> = V extends 'vocal_parts'
+    ? O extends { raw: true }
+    ? DTAContentDocument[V]
+    : VocalPartsValues
+
+    : V extends 'bank'
+    ? O extends { raw: true }
+    ? DTAContentDocument[V]
+    : BankValues
+
+    : V extends 'drum_bank'
+    ? O extends { raw: true }
+    ? DTAContentDocument[V]
+    : DrumBankValues
+
+    : V extends 'anim_tempo'
+    ? O extends { raw: true }
+    ? DTAContentDocument[V]
+    : AnimTempoValues
+
+    : V extends 'band_fail_cue'
+    ? O extends { raw: true }
+    ? DTAContentDocument[V]
+    : BandFailCueValues
+
+    : V extends 'rating'
+    ? O extends { raw: true }
+    ? DTAContentDocument[V]
+    : RatingValues
+
+    : V extends 'genre'
+    ? O extends { raw: true }
+    ? DTAContentDocument[V]
+    : GenreValues
+
+    : V extends 'song_scroll_speed'
+    ? O extends { raw: true }
+    ? DTAContentDocument[V]
+    : SongScrollSpeedValues
+
+    : V extends 'mute_volume' | 'mute_volume_vocals'
+    ? O extends { raw: true }
+    ? number
+    : string
+
+    : V extends 'rank_band'
+    ? O extends {type: 'number'} | {type: 'raw'}
+    ? number
+    : O extends {type: 'graphical'}
+    ? string
+    : BandRankingsOptions
+
+    : V extends 'rank_drum' | 'rank_bass' | 'rank_guitar' | 'rank_vocals' | 'rank_keys' | 'rank_real_guitar' | 'rank_real_bass' | 'rank_real_keys'
+    ? O extends {type: 'number'} | {type: 'raw'}
+    ? number
+    : O extends {type: 'graphical'}
+    ? string
+    : InstrumentRankingsOptions
+
+
+    : V extends 'hopo_threshold'
+    ? number
+
+    : V extends keyof DTACustomSongAttributes
+    ? DTACustomSongAttributes[V]
+    : V extends keyof DTAContentDocument
+    ? DTAContentDocument[V]
     : never
 
 export interface GetDataNamingOptions {
@@ -99,19 +172,21 @@ export const getDTA = <
     dta: DTADocument,
     value: V,
     options?: O
-) => {
+): GetDataValueReturn<V, O> => {
     if (value === 'name' || value === 'artist') {
         let leadingArticle: GetDataNamingOptions['leadingArticle']
         if (options)
             leadingArticle = (options as GetDataNamingOptions).leadingArticle
 
         if (leadingArticle === undefined || leadingArticle === 'emit')
-            return dta.content[value]
+            return dta.content[value as keyof DTAContentDocument] as GetDataValueReturn<V, O>
         else if (leadingArticle === 'omit')
-            return omitLeadingArticle(dta.content[value] as string)
-        else return leadingArticle2Trailing(dta.content[value] as string)
+            return omitLeadingArticle(dta.content[value as keyof DTAContentDocument] as string) as GetDataValueReturn<V, O>
+        else return leadingArticle2Trailing(dta.content[value as keyof DTAContentDocument] as string) as GetDataValueReturn<V, O>
     } else if (
         value === 'vocal_parts' ||
+        value === 'mute_volume' ||
+        value === 'mute_volume_vocals' ||
         value === 'bank' ||
         value === 'drum_bank' ||
         value === 'anim_tempo' ||
@@ -123,33 +198,41 @@ export const getDTA = <
         let raw: GetDataRawOptions['raw']
         if (options) raw = (options as GetDataRawOptions).raw
 
-        if (raw !== undefined || raw) return dta.content[value]
+        if (raw !== undefined || raw) return dta.content[value as keyof DTAContentDocument] as GetDataValueReturn<V, O>
         else {
             if (value === 'vocal_parts')
-                return Locale.vocal_parts(dta.content['vocal_parts'])
-            else if (value === 'bank') return Locale.bank(dta.content['bank'])
+                return Locale.vocal_parts(dta.content.vocal_parts) as GetDataValueReturn<V, O>
+            else if (value === 'mute_volume')
+                return `${dta.content.mute_volume === undefined ? '-96' : dta.content.mute_volume}dB` as GetDataValueReturn<V, O>
+            else if (value === 'mute_volume_vocals')
+                return `${dta.content.mute_volume_vocals === undefined ? '-12' : dta.content.mute_volume_vocals}` as GetDataValueReturn<V, O>
+            else if (value === 'bank') return Locale.bank(dta.content.bank) as GetDataValueReturn<V, O>
             else if (value === 'drum_bank')
-                return Locale.drum_bank(dta.content['drum_bank'])
+                return Locale.drum_bank(dta.content.drum_bank) as GetDataValueReturn<V, O>
             else if (value === 'anim_tempo')
-                return Locale.anim_tempo(dta.content['anim_tempo'])
+                return Locale.anim_tempo(dta.content.anim_tempo) as GetDataValueReturn<V, O>
             else if (value === 'band_fail_cue')
-                return Locale.band_fail_cue(dta.content['band_fail_cue'])
+                return Locale.band_fail_cue(dta.content.band_fail_cue) as GetDataValueReturn<V, O>
             else if (value === 'rating')
-                return Locale.rating(dta.content['rating'])
+                return Locale.rating(dta.content.rating) as GetDataValueReturn<V, O>
             else if (value === 'genre')
-                return Locale.genre(dta.content['genre'])
+                return Locale.genre(dta.content.genre) as GetDataValueReturn<V, O>
             else
                 return Locale.song_scroll_speed(
-                    dta.content['song_scroll_speed']
-                )
+                    dta.content.song_scroll_speed
+                ) as GetDataValueReturn<V, O>
         }
-    } else if (value === 'song_length') {
+    }
+    else if (value === 'hopo_threshold') {
+        return dta.content.hopo_threshold === undefined ? 170 as GetDataValueReturn<V, O> : dta.content.hopo_threshold as GetDataValueReturn<V, O>
+    }
+    else if (value === 'song_length') {
         let inMilliseconds: GetDataTimeOptions['inMilliseconds']
         if (options)
             inMilliseconds = (options as GetDataTimeOptions).inMilliseconds
 
-        if (inMilliseconds === true) return dta.content[value]
-        else return millisecondsToTimeString(dta.content.song_length)
+        if (inMilliseconds === true) return dta.content[value as keyof DTAContentDocument] as GetDataValueReturn<V, O>
+        else return millisecondsToTimeString(dta.content.song_length) as GetDataValueReturn<V, O>
     } else if (
         value === 'rank_band' ||
         value === 'rank_drum' ||
@@ -190,10 +273,10 @@ export const getDTA = <
         const rank = rankCalc(operators[0], operators[1])
         console.log(rank)
 
-        if (returnType === 'number') return rank
-        else if (returnType === 'raw') return operators[1]
+        if (returnType === 'number') return rank as GetDataValueReturn<V, O>
+        else if (returnType === 'raw') return operators[1] as GetDataValueReturn<V, O>
         else if (returnType === 'graphical')
-            return Locale.rank(rank, 'graphical')
-        else return Locale.rank(rank)
-    } else return dta.content[value]
+            return Locale.rank(rank, 'graphical') as GetDataValueReturn<V, O>
+        else return Locale.rank(rank) as GetDataValueReturn<V, O>
+    } else return dta.content[value as keyof DTAContentDocument] as GetDataValueReturn<V, O>
 }

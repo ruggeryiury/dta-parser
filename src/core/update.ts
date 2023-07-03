@@ -33,7 +33,7 @@ export interface UpdateDataOptions {
     song_scroll_speed?: SongScrollSpeedValues
     preview?: string | number
     song_length?: string | number
-    rank_band?: BankRankingsOptions
+    rank_band?: BandRankingsOptions
     rank_drum?: InstrumentRankingsOptions
     rank_bass?: InstrumentRankingsOptions
     rank_guitar?: InstrumentRankingsOptions
@@ -46,9 +46,9 @@ export interface UpdateDataOptions {
     rating?: RatingValues
 }
 
-export type InstrumentRankingsOptions = BankRankingsOptions | 'No Part'
+export type InstrumentRankingsOptions = BandRankingsOptions | 'No Part'
 
-export type BankRankingsOptions =
+export type BandRankingsOptions =
     | 'Warmup'
     | 'Apprentice'
     | 'Solid'

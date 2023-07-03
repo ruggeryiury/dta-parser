@@ -1,5 +1,6 @@
 import { DTADocument } from '../@types/DTADocument'
 import { SortByOptionsTypes } from '../@types/DTAParser'
+import { omitLeadingArticle } from '../utils'
 
 /**
  * Sorts a `DTADocument` array.
@@ -18,13 +19,13 @@ export const sortDTA = (
     if (sortBy === 'name') {
         return songs.sort((a, b) => {
             if (
-                a.get('name', { leadingArticle: 'omit' }) >
-                b.get('name', { leadingArticle: 'omit' })
+                omitLeadingArticle(a.content.name) >
+                omitLeadingArticle(b.content.name)
             )
                 return 1
             if (
-                a.get('name', { leadingArticle: 'omit' }) <
-                b.get('name', { leadingArticle: 'omit' })
+                omitLeadingArticle(a.content.name) <
+                omitLeadingArticle(b.content.name)
             )
                 return -1
             return 0
@@ -32,13 +33,13 @@ export const sortDTA = (
     } else if (sortBy === 'artist') {
         return songs.sort((a, b) => {
             if (
-                a.get('artist', { leadingArticle: 'omit' }) >
-                b.get('artist', { leadingArticle: 'omit' })
+                omitLeadingArticle(a.content.artist) >
+                omitLeadingArticle(b.content.artist)
             )
                 return 1
             if (
-                a.get('artist', { leadingArticle: 'omit' }) <
-                b.get('artist', { leadingArticle: 'omit' })
+                omitLeadingArticle(a.content.artist) <
+                omitLeadingArticle(b.content.artist)
             )
                 return -1
             return 0
@@ -46,13 +47,13 @@ export const sortDTA = (
     } else if (sortBy === 'artist_set') {
         return songs.sort((a, b) => {
             if (
-                a.get('artist', { leadingArticle: 'omit' }) >
-                b.get('artist', { leadingArticle: 'omit' })
+                omitLeadingArticle(a.content.artist) >
+                omitLeadingArticle(b.content.artist)
             )
                 return 1
             if (
-                a.get('artist', { leadingArticle: 'omit' }) <
-                b.get('artist', { leadingArticle: 'omit' })
+                omitLeadingArticle(a.content.artist) <
+                omitLeadingArticle(b.content.artist)
             )
                 return -1
             if (a.content.year_released > b.content.year_released) return 1

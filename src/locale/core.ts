@@ -28,6 +28,7 @@ export type BandFailCueValues =
     | 'Vintage (Keys)'
     | 'Heavy (Keys)'
     | 'Electro (Keys)'
+    | 'Not Specified'
 
 export const bank = {
     'sfx/tambourine_bank.milo': 'Tambourine',
@@ -362,6 +363,7 @@ export type SubGenreValues =
     | 'A capella'
     | 'Contemporary Folk'
     | 'Oldies'
+    | 'Unknown'
 
 export const vocalGender = {
     male: 'Male',

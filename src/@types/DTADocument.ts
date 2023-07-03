@@ -1,5 +1,5 @@
 import { UpdateDataOptions } from '../core'
-import { GetDataValueOptions, GetDataValueTypes, getDTA } from '../core/get'
+import { GetDataValueOptions, GetDataValueReturn, GetDataValueTypes, getDTA } from '../core/get'
 import { StringifyDataOptions } from '../core/stringify'
 import {
     VocalPartsTypes,
@@ -29,7 +29,7 @@ export interface DTADocumentMethods {
     get<V extends GetDataValueTypes, O extends GetDataValueOptions<V>>(
         value: V,
         options?: O
-    ): ReturnType<typeof getDTA>
+    ): GetDataValueReturn<V, O>
     /**
      * Converts a `DTADocument` to a .dta file content string.
      */
