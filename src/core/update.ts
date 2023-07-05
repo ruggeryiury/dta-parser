@@ -76,6 +76,12 @@ export interface TrackUpdateOptions {
     hasCrowdChannels?: boolean
 }
 
+/**
+ * Generates an array of pan values based on the provided track count.
+ * - - - -
+ * @param {DrumTracksTypes | InstrumentTracksTypes} count The type of tracks.
+ * @returns {number[]} An array of pan values based on the track count.
+ */
 const pansGenerator = (
     count: DrumTracksTypes | InstrumentTracksTypes
 ): number[] => {
@@ -94,6 +100,11 @@ const pansGenerator = (
     }
 }
 
+/**
+ * Updates a song with the provided update options.
+ * @param {DTADocument} dta  The DTADocument to update.
+ * @param {UpdateDataOptions} update The options for updating the DTADocument.
+ */
 export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
     const {
         id,

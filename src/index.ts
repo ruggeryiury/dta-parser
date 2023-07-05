@@ -3,17 +3,16 @@ import { DTAParserOptions } from './@types/DTAParser'
 import { depackDTA, parseDTA, sortDTA, stringifyDTA, createDTA } from './core'
 
 /**
- * Parses a .dta file.
- * @returns An `Array` with all songs parsed separately.
+ * Parses a .dta file content.
+ * - - - -
+ * @param {string} dtaFileContents The .dta file contents.
+ * @param {DTAParserOptions | undefined} options `OPTIONAL` Customize options for the parsing process.
+ * @returns {DTADocument[]} An array with all songs parsed separately (if the DTA file is a song pack).
+ *
+ * @see [`interface` DTADocument](@types/DTADocument.ts).
  */
 const DTAParser = (
-    /**
-     * The .dta file contents.
-     */
     dtaFileContents: string,
-    /**
-     * Customize options for the parsing process.
-     */
     options?: DTAParserOptions
 ): DTADocument[] => {
     const depackedSongs = depackDTA(dtaFileContents)
@@ -36,5 +35,8 @@ export const DTAArray = {
     stringify: stringifyDTA,
 }
 
-export { DTADocument, createDTA }
+export const DTATools = {
+    create: createDTA,
+}
+export { DTADocument }
 export default DTAParser

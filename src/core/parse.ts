@@ -3,14 +3,11 @@ import { createDTA } from './create'
 
 /**
  * Parses a .dta file contents into a `DTADocument`.
- * @returns A song parsed as a `DTADocument` object.
+ * - - - -
+ * @param {string} songContent The song contents taken from a .dta file.
+ * @returns {DTADocument} A song parsed as a `DTADocument` object.
  */
-export const parseDTA = (
-    /**
-     * The song contents taken from a .dta file.
-     */
-    songContent: string
-): DTADocument => {
+export const parseDTA = (songContent: string): DTADocument => {
     const operators = {
         gotID: false,
         gotName: false,

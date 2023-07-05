@@ -4,16 +4,13 @@ import { omitLeadingArticle } from '../utils'
 
 /**
  * Sorts a `DTADocument` array.
- * @returns A sorted array of `DTADocument`.
+ * - - - -
+ * @param {DTADocument[]} songs An array with parsed songs.
+ * @param {SortByOptionsTypes} sortBy The sorting type.
+ * @returns {DTADocument[]} A sorted array of `DTADocument`.
  */
 export const sortDTA = (
-    /**
-     * An `Array` with parsed songs.
-     */
     songs: DTADocument[],
-    /**
-     * The sorting type.
-     */
     sortBy: SortByOptionsTypes
 ): DTADocument[] => {
     if (sortBy === 'name') {

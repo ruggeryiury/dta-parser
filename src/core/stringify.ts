@@ -1,9 +1,10 @@
 import { DTADocument } from '../@types/DTADocument'
 
 export interface StringifyDataOptions {
-    type?: 'default' | 'rb3'
+    type?: 'default' | 'rb3' | 'rb3_dlc'
     guitarCores?: boolean
     placeCustomAttributes?: boolean
+    newLineOnArrays?: boolean
 }
 
 const trackCountIterator = (trackCount: number, add: number): string => {
@@ -27,8 +28,14 @@ const stringifyDTADocumentC3 = (
     const guitarTrackEnds = guitarTrackStarts + value.content.tracks_count[2]
     output += `(\n`
     output += `\t'${value.content.id}'\n`
-    output += `\t(\n\t\t'name'\n\t\t"${value.content.name}"\n\t)\n`
-    output += `\t(\n\t\t'artist'\n\t\t"${value.content.artist}"\n\t)\n`
+    output += `\t(\n\t\t'name'\n\t\t"${value.content.name.replaceAll(
+        '"',
+        '\\q'
+    )}"\n\t)\n`
+    output += `\t(\n\t\t'artist'\n\t\t"${value.content.artist.replaceAll(
+        '"',
+        '\\q'
+    )}"\n\t)\n`
     output += `\t('master' ${value.content.master ? '1' : '0'})\n`
     output += `\t(\n\t\t'song'\n\t\t(\n\t\t\t'name'\n\t\t\t"songs/${value.content.songname}/${value.content.songname}"\n\t\t)\n`
     output += `\t\t(\n\t\t\t'tracks_count'\n\t\t\t(${value.content.tracks_count.join(
@@ -99,9 +106,24 @@ const stringifyDTADocumentC3 = (
         return
     })
     output += `)\n\t\t)\n`
+    if (value.content.tracks_count[6]) {
+        const crowdCount =
+            value.content.tracks_count[0] +
+            value.content.tracks_count[1] +
+            value.content.tracks_count[2] +
+            value.content.tracks_count[3] +
+            value.content.tracks_count[4] +
+            value.content.tracks_count[5]
+        output += `\t\t('crowd_channels' ${trackCountIterator(
+            crowdCount,
+            2
+        )})\n`
+    }
     output += `\t\t('vocal_parts' ${value.content.vocal_parts})\n`
+
     output += `\t\t(\n\t\t\t'drum_solo'\n\t\t\t(\n\t\t\t\t'seqs'\n\t\t\t\t('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')\n\t\t\t)\n\t\t)\n`
     output += `\t\t(\n\t\t\t'drum_freestyle'\n\t\t\t(\n\t\t\t\t'seqs'\n\t\t\t\t('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')\n\t\t\t)\n\t\t)\n`
+
     output += `\t\t(mute_volume ${
         value.content.mute_volume ? value.content.mute_volume : '-96'
     })\n`
@@ -188,9 +210,12 @@ const stringifyDTADocumentC3 = (
     output += `\t('game_origin' '${value.content.game_origin}')\n`
     output += `\t('encoding' '${
         value.content.encoding ? value.content.encoding : 'latin1'
-    })`
+    }')\n`
     if (value.content.album_name) {
-        output += `\t(\n\t\t'album_name'\n\t\t"${value.content.album_name}"\n\t)\n`
+        output += `\t(\n\t\t'album_name'\n\t\t"${value.content.album_name.replaceAll(
+            '"',
+            '\\q'
+        )}"\n\t)\n`
     }
     if (value.content.album_track_number) {
         output += `\t('album_track_number' ${value.content.album_track_number})\n`
@@ -253,13 +278,13 @@ const stringifyDTADocumentRb3 = (
     const guitarTrackEnds = guitarTrackStarts + value.content.tracks_count[2]
 
     output += `(${value.content.id}\n`
-    output += `\t(name "${value.content.name}")\n`
-    output += `\t(artist "${value.content.artist}")\n`
+    output += `\t(name "${value.content.name.replaceAll('"', '\\q')}")\n`
+    output += `\t(artist "${value.content.artist.replaceAll('"', '\\q')}")\n`
     output += `\t(master ${value.content.master ? 'TRUE' : 'FALSE'})\n`
     output += `\t(song_id ${value.content.song_id})\n`
     output += `\t(song\n`
     output += `\t\t(name "songs/${value.content.songname}/${value.content.songname}")\n`
-    output += `\t\t(tracks (`
+    output += `\t\t(tracks${options?.type === 'rb3' ? ' (' : '\n\t\t\t('}`
 
     const drumTrack = value.content.tracks_count[0]
     const bassTrack = value.content.tracks_count[1]
@@ -267,116 +292,354 @@ const stringifyDTADocumentRb3 = (
     const vocalsTrack = value.content.tracks_count[3]
     const keysTrack = value.content.tracks_count[4]
 
-    if (drumTrack) {
-        output += `${!firstTrackDone ? '' : '\n\t\t\t\t'}(drum ${
-            drumTrack > 1 ? '(' : ''
-        }${trackCountIterator(trackCount, value.content.tracks_count[0])}${
-            drumTrack > 1 ? ')' : ''
-        })`
-        trackCount += value.content.tracks_count[0]
-        firstTrackDone = true
+    if (options?.type === 'rb3_dlc') {
+        if (drumTrack) {
+            output += `${
+                !firstTrackDone ? '' : '\n\t\t\t '
+            }(drum (${trackCountIterator(
+                trackCount,
+                value.content.tracks_count[0]
+            )}))`
+            trackCount += value.content.tracks_count[0]
+            firstTrackDone = true
+        }
+        if (bassTrack) {
+            output += `${
+                !firstTrackDone ? '' : '\n\t\t\t '
+            }(bass (${trackCountIterator(
+                trackCount,
+                value.content.tracks_count[1]
+            )}))`
+            trackCount += value.content.tracks_count[1]
+            firstTrackDone = true
+        }
+        if (guitarTrack) {
+            output += `${
+                !firstTrackDone ? '' : '\n\t\t\t '
+            }(guitar (${trackCountIterator(
+                trackCount,
+                value.content.tracks_count[2]
+            )}))`
+            trackCount += value.content.tracks_count[2]
+            firstTrackDone = true
+        }
+        if (vocalsTrack) {
+            output += `${
+                !firstTrackDone ? '' : '\n\t\t\t '
+            }(vocals (${trackCountIterator(
+                trackCount,
+                value.content.tracks_count[3]
+            )}))`
+            trackCount += value.content.tracks_count[3]
+            firstTrackDone = true
+        }
+        if (keysTrack) {
+            output += `${
+                !firstTrackDone ? '' : '\n\t\t\t '
+            }(keys (${trackCountIterator(
+                trackCount,
+                value.content.tracks_count[4]
+            )}))`
+            trackCount += value.content.tracks_count[4]
+            firstTrackDone = true
+        }
+
+        output += `\n\t\t\t)\n\t\t)\n`
+    } else {
+        if (drumTrack) {
+            output += `${!firstTrackDone ? '' : '\n\t\t\t\t'}(drum ${
+                drumTrack > 1 ? '(' : ''
+            }${trackCountIterator(trackCount, value.content.tracks_count[0])}${
+                drumTrack > 1 ? ')' : ''
+            })`
+            trackCount += value.content.tracks_count[0]
+            firstTrackDone = true
+        }
+        if (bassTrack) {
+            output += `${!firstTrackDone ? '' : '\n\t\t\t\t'}(bass ${
+                bassTrack > 1 ? '(' : ''
+            }${trackCountIterator(trackCount, value.content.tracks_count[1])}${
+                bassTrack > 1 ? ')' : ''
+            })`
+            trackCount += value.content.tracks_count[1]
+            firstTrackDone = true
+        }
+        if (guitarTrack) {
+            output += `${!firstTrackDone ? '' : '\n\t\t\t\t'}(guitar ${
+                guitarTrack > 1 ? '(' : ''
+            }${trackCountIterator(trackCount, value.content.tracks_count[2])}${
+                guitarTrack > 1 ? ')' : ''
+            })`
+            trackCount += value.content.tracks_count[2]
+            firstTrackDone = true
+        }
+        if (vocalsTrack) {
+            output += `${!firstTrackDone ? '' : '\n\t\t\t\t'}(vocals ${
+                vocalsTrack > 1 ? '(' : ''
+            }${trackCountIterator(trackCount, value.content.tracks_count[3])}${
+                vocalsTrack > 1 ? ')' : ''
+            })`
+            trackCount += value.content.tracks_count[3]
+            firstTrackDone = true
+        }
+        if (keysTrack) {
+            output += `${!firstTrackDone ? '' : '\n\t\t\t\t'}(keys ${
+                keysTrack > 1 ? '(' : ''
+            }${trackCountIterator(trackCount, value.content.tracks_count[4])}${
+                keysTrack > 1 ? ')' : ''
+            })`
+            trackCount += value.content.tracks_count[4]
+            firstTrackDone = true
+        }
+        output += `))\n`
     }
-    if (bassTrack) {
-        output += `${!firstTrackDone ? '' : '\n\t\t\t\t'}(bass ${
-            bassTrack > 1 ? '(' : ''
-        }${trackCountIterator(trackCount, value.content.tracks_count[1])}${
-            bassTrack > 1 ? ')' : ''
-        })`
-        trackCount += value.content.tracks_count[1]
-        firstTrackDone = true
-    }
-    if (guitarTrack) {
-        output += `${!firstTrackDone ? '' : '\n\t\t\t\t'}(guitar ${
-            guitarTrack > 1 ? '(' : ''
-        }${trackCountIterator(trackCount, value.content.tracks_count[2])}${
-            guitarTrack > 1 ? ')' : ''
-        })`
-        trackCount += value.content.tracks_count[2]
-        firstTrackDone = true
-    }
-    if (vocalsTrack) {
-        output += `${!firstTrackDone ? '' : '\n\t\t\t\t'}(vocals ${
-            vocalsTrack > 1 ? '(' : ''
-        }${trackCountIterator(trackCount, value.content.tracks_count[3])}${
-            vocalsTrack > 1 ? ')' : ''
-        })`
-        trackCount += value.content.tracks_count[3]
-        firstTrackDone = true
-    }
-    if (keysTrack) {
-        output += `${!firstTrackDone ? '' : '\n\t\t\t\t'}(keys ${
-            keysTrack > 1 ? '(' : ''
-        }${trackCountIterator(trackCount, value.content.tracks_count[4])}${
-            keysTrack > 1 ? ')' : ''
-        })`
-        trackCount += value.content.tracks_count[4]
-        firstTrackDone = true
-    }
-    output += `))\n`
     output += `\t\t(vocal_parts ${value.content.vocal_parts})\n`
     output += `\t\t(pans (`
     value.content.pans.forEach((pans, i) => {
-        if (i === 0) {
-            output += `${pans.toFixed(2)}`
-            return
-        } else if (i === value.content.pans.length - 1) {
-            output += `\n\t\t\t\t${pans.toFixed(2)}))\n`
-            return
+        if (options?.type === 'rb3') {
+            if (i === 0) output += `${pans.toFixed(2)}`
+            else if (i === value.content.pans.length - 1)
+                output += `${
+                    options?.newLineOnArrays === undefined ||
+                    options?.newLineOnArrays === true
+                        ? '\n\t\t\t\t'
+                        : ' '
+                }${pans.toFixed(2)}))\n`
+            else
+                output += `${
+                    options?.newLineOnArrays === undefined ||
+                    options?.newLineOnArrays === true
+                        ? '\n\t\t\t\t'
+                        : ' '
+                }${pans.toFixed(2)}`
+        } else {
+            if (i === 0) output += `${pans.toFixed(1)}`
+            else if (i === value.content.pans.length - 1)
+                output += `${
+                    options?.newLineOnArrays === true ? '\n\t\t\t\t' : ' '
+                }${pans.toFixed(1)}))\n`
+            else
+                output += `${
+                    options?.newLineOnArrays === true ? '\n\t\t\t\t' : ' '
+                }${pans.toFixed(1)}`
         }
-
-        output += `\n\t\t\t\t${pans.toFixed(2)}`
     })
     output += `\t\t(vols (`
     value.content.vols.forEach((vols, i) => {
-        if (i === 0) {
-            output += `${vols.toFixed(2)}`
-            return
-        } else if (i === value.content.vols.length - 1) {
-            output += `\n\t\t\t\t${vols.toFixed(2)}))\n`
-            return
+        if (options?.type === 'rb3') {
+            if (i === 0) output += `${vols.toFixed(2)}`
+            else if (i === value.content.vols.length - 1)
+                output += `${
+                    options?.newLineOnArrays === undefined ||
+                    options?.newLineOnArrays === true
+                        ? '\n\t\t\t\t'
+                        : ' '
+                }${vols.toFixed(2)}))\n`
+            else
+                output += `${
+                    options?.newLineOnArrays === undefined ||
+                    options?.newLineOnArrays === true
+                        ? '\n\t\t\t\t'
+                        : ' '
+                }${vols.toFixed(2)}`
+        } else {
+            if (i === 0) output += `${vols.toFixed(1)}`
+            else if (i === value.content.vols.length - 1)
+                output += `${
+                    options?.newLineOnArrays === true ? '\n\t\t\t\t' : ' '
+                }${vols.toFixed(1)}))\n`
+            else
+                output += `${
+                    options?.newLineOnArrays === true ? '\n\t\t\t\t' : ' '
+                }${vols.toFixed(1)}`
         }
-
-        output += `\n\t\t\t\t${vols.toFixed(2)}`
     })
     output += `\t\t(cores (`
     value.content.vols.forEach((vols, i) => {
-        if (i === 0) {
-            if (options?.guitarCores === undefined || options?.guitarCores) {
-                output += `${
-                    i <= guitarTrackStarts || i > guitarTrackEnds ? '-1' : '1'
-                }`
+        if (options?.type === 'rb3') {
+            if (i === 0) {
+                if (
+                    options?.guitarCores === undefined ||
+                    options?.guitarCores
+                ) {
+                    output += `${
+                        i <= guitarTrackStarts || i > guitarTrackEnds
+                            ? '-1'
+                            : '1'
+                    }`
+                    return
+                }
+                output += `-1`
                 return
-            }
-            output += `-1`
-            return
-        } else if (i === value.content.vols.length - 1) {
-            if (options?.guitarCores === undefined || options?.guitarCores) {
-                output += `\n\t\t\t\t${
+            } else if (i === value.content.vols.length - 1) {
+                if (
+                    options?.guitarCores === undefined ||
+                    options?.guitarCores
+                ) {
+                    output += `${
+                        options?.newLineOnArrays === undefined ||
+                        options?.newLineOnArrays === true
+                            ? '\n\t\t\t\t'
+                            : ' '
+                    }${
+                        i <= guitarTrackStarts || i > guitarTrackEnds
+                            ? '-1'
+                            : '1'
+                    }))\n`
+                    return
+                }
+                output += `${
+                    options?.newLineOnArrays === undefined ||
+                    options?.newLineOnArrays === true
+                        ? '\n\t\t\t\t'
+                        : ' '
+                }${
                     i <= guitarTrackStarts || i > guitarTrackEnds ? '-1' : '1'
                 }))\n`
                 return
             }
-            output += `\n\t\t\t\t${
-                i <= guitarTrackStarts || i > guitarTrackEnds ? '-1' : '1'
-            }))\n`
-            return
-        }
-        if (options?.guitarCores === undefined || options?.guitarCores) {
-            output += `\n\t\t\t\t${
-                i <= guitarTrackStarts || i > guitarTrackEnds ? '-1' : '1'
-            }`
-            return
-        }
+            if (options?.guitarCores === undefined || options?.guitarCores) {
+                output += `${
+                    options?.newLineOnArrays === undefined ||
+                    options?.newLineOnArrays === true
+                        ? '\n\t\t\t\t'
+                        : ' '
+                }${i <= guitarTrackStarts || i > guitarTrackEnds ? '-1' : '1'}`
+                return
+            }
 
-        output += `\n\t\t\t\t-1`
-        return
+            output += `${
+                options?.newLineOnArrays === undefined ||
+                options?.newLineOnArrays === true
+                    ? '\n\t\t\t\t'
+                    : ' '
+            }-1`
+            return
+        } else {
+            if (i === 0) {
+                if (
+                    options?.guitarCores === undefined ||
+                    options?.guitarCores
+                ) {
+                    output += `${
+                        i <= guitarTrackStarts || i > guitarTrackEnds
+                            ? '-1'
+                            : '1'
+                    }`
+                    return
+                }
+                output += `-1`
+                return
+            } else if (i === value.content.vols.length - 1) {
+                if (
+                    options?.guitarCores === undefined ||
+                    options?.guitarCores
+                ) {
+                    output += `${
+                        options?.newLineOnArrays === true ? '\n\t\t\t\t' : ' '
+                    }${
+                        i <= guitarTrackStarts || i > guitarTrackEnds
+                            ? '-1'
+                            : '1'
+                    }))\n`
+                    return
+                }
+                output += `${
+                    options?.newLineOnArrays === true ? '\n\t\t\t\t' : ' '
+                }${
+                    i <= guitarTrackStarts || i > guitarTrackEnds ? '-1' : '1'
+                }))\n`
+                return
+            }
+            if (options?.guitarCores === undefined || options?.guitarCores) {
+                output += `${
+                    options?.newLineOnArrays === true ? '\n\t\t\t\t' : ' '
+                }${i <= guitarTrackStarts || i > guitarTrackEnds ? '-1' : '1'}`
+                return
+            }
+
+            output += `${
+                options?.newLineOnArrays === true ? '\n\t\t\t\t' : ' '
+            }-1`
+            return
+        }
     })
-    output += `\t\t(drum_solo (seqs (kick.cue\n\t\t\t\t\tsnare.cue\n\t\t\t\t\ttom1.cue\n\t\t\t\t\ttom2.cue\n\t\t\t\t\tcrash.cue)))\n\t\t(drum_freestyle (seqs (kick.cue\n\t\t\t\t\tsnare.cue\n\t\t\t\t\that.cue\n\t\t\t\t\tride.cue\n\t\t\t\t\tcrash.cue)))`
+    if (value.content.tracks_count[6]) {
+        const crowdCount =
+            value.content.tracks_count[0] +
+            value.content.tracks_count[1] +
+            value.content.tracks_count[2] +
+            value.content.tracks_count[3] +
+            value.content.tracks_count[4] +
+            value.content.tracks_count[5]
+        output += `\t\t(crowd_channels ${trackCountIterator(crowdCount, 2)})\n`
+    }
+    if (options?.type === 'rb3')
+        output += `\t\t(drum_solo (seqs (kick.cue${
+            options?.newLineOnArrays === undefined ||
+            options?.newLineOnArrays === true
+                ? '\n\t\t\t\t\t'
+                : ' '
+        }snare.cue${
+            options?.newLineOnArrays === undefined ||
+            options?.newLineOnArrays === true
+                ? '\n\t\t\t\t\t'
+                : ' '
+        }tom1.cue${
+            options?.newLineOnArrays === undefined ||
+            options?.newLineOnArrays === true
+                ? '\n\t\t\t\t\t'
+                : ' '
+        }tom2.cue${
+            options?.newLineOnArrays === undefined ||
+            options?.newLineOnArrays === true
+                ? '\n\t\t\t\t\t'
+                : ' '
+        }crash.cue)))\n\t\t(drum_freestyle (seqs (kick.cue${
+            options?.newLineOnArrays === undefined ||
+            options?.newLineOnArrays === true
+                ? '\n\t\t\t\t\t'
+                : ' '
+        }snare.cue${
+            options?.newLineOnArrays === undefined ||
+            options?.newLineOnArrays === true
+                ? '\n\t\t\t\t\t'
+                : ' '
+        }hat.cue${
+            options?.newLineOnArrays === undefined ||
+            options?.newLineOnArrays === true
+                ? '\n\t\t\t\t\t'
+                : ' '
+        }ride.cue${
+            options?.newLineOnArrays === undefined ||
+            options?.newLineOnArrays === true
+                ? '\n\t\t\t\t\t'
+                : ' '
+        }crash.cue)))`
+    else
+        output += `\t\t(drum_solo\n\t\t\t(seqs (kick.cue${
+            options?.newLineOnArrays === true ? '\n\t\t\t\t\t' : ' '
+        }snare.cue${
+            options?.newLineOnArrays === true ? '\n\t\t\t\t\t' : ' '
+        }tom1.cue${
+            options?.newLineOnArrays === true ? '\n\t\t\t\t\t' : ' '
+        }tom2.cue${
+            options?.newLineOnArrays === true ? '\n\t\t\t\t\t' : ' '
+        }crash.cue))\n\t\t)\n\t\t(drum_freestyle\n\t\t\t(seqs (kick.cue${
+            options?.newLineOnArrays === true ? '\n\t\t\t\t\t' : ' '
+        }snare.cue${
+            options?.newLineOnArrays === true ? '\n\t\t\t\t\t' : ' '
+        }hat.cue${
+            options?.newLineOnArrays === true ? '\n\t\t\t\t\t' : ' '
+        }ride.cue${
+            options?.newLineOnArrays === true ? '\n\t\t\t\t\t' : ' '
+        }crash.cue))\n\t\t)`
+
     if (value.content.hopo_threshold) {
         output += `\n\t\t(hopo_threshold ${value.content.hopo_threshold})`
     }
 
-    output += `)\n`
+    output += `${options?.type === 'rb3' ? `)\n` : `\n\t)\n`}`
     output += `\t(bank ${value.content.bank})\n`
     output += `\t(drum_bank ${value.content.drum_bank})\n`
     if (value.content.anim_tempo === 16) {
@@ -396,7 +659,26 @@ const stringifyDTADocumentRb3 = (
             ? value.content.song_scroll_speed
             : '2300'
     })\n`
-    output += `\t(preview\n\t\t${value.content.preview[0]}\n\t\t${value.content.preview[1]})\n`
+
+    if (options?.type === 'rb3')
+        output += `\t(preview${
+            options?.newLineOnArrays === undefined ||
+            options?.newLineOnArrays === true
+                ? '\n\t\t'
+                : ' '
+        }${value.content.preview[0]}${
+            options?.newLineOnArrays === undefined ||
+            options?.newLineOnArrays === true
+                ? '\n\t\t'
+                : ' '
+        }${value.content.preview[1]})\n`
+    else
+        output += `\t(preview${
+            options?.newLineOnArrays === true ? '\n\t\t' : ' '
+        }${value.content.preview[0]}${
+            options?.newLineOnArrays === true ? '\n\t\t' : ' '
+        }${value.content.preview[1]})\n`
+
     output += `\t(song_length ${value.content.song_length})\n`
     output += `\t(rank\n`
 
@@ -439,6 +721,12 @@ const stringifyDTADocumentRb3 = (
         value.content.version ? value.content.version : '30'
     })\n`
     output += `\t(game_origin ${value.content.game_origin})\n`
+    if (
+        value.content.encoding !== undefined &&
+        value.content.encoding !== 'latin1'
+    ) {
+        output += `\t(encoding ${value.content.encoding})\n`
+    }
     output += `\t(rating ${value.content.rating})\n`
     output += `\t(genre ${value.content.genre})\n`
     if (value.content.sub_genre) {
@@ -452,7 +740,10 @@ const stringifyDTADocumentRb3 = (
     output += `\t(album_art ${value.content.album_art ? 'TRUE' : 'FALSE'})\n`
 
     if (value.content.album_name) {
-        output += `\t(album_name "${value.content.album_name}")\n`
+        output += `\t(album_name "${value.content.album_name.replaceAll(
+            '"',
+            '\\q'
+        )}")\n`
     }
     if (value.content.album_track_number) {
         output += `\t(album_track_number ${value.content.album_track_number})\n`
@@ -466,48 +757,101 @@ const stringifyDTADocumentRb3 = (
     if (value.content.song_key !== undefined) {
         output += `\t(song_key ${value.content.song_key})\n`
     }
-    if (
-        value.content.encoding !== undefined &&
-        value.content.encoding !== 'latin1'
-    ) {
-        output += `\t(encoding ${value.content.encoding})\n`
-    }
 
-    if (value.content.real_guitar_tuning) {
-        output += `\t(real_guitar_tuning (`
-        value.content.real_guitar_tuning.forEach((tuning, i) => {
-            if (i === 0) {
-                output += `${tuning}\n`
-                return
-            } else if (
-                value.content.real_guitar_tuning &&
-                i === value.content.real_guitar_tuning.length - 1
-            ) {
-                output += `\t\t\t${tuning}))${
-                    value.content.real_bass_tuning ? '\n' : ''
-                }`
-                return
-            }
-            output += `\t\t\t${tuning}\n`
-        })
-    }
-    if (value.content.real_bass_tuning) {
-        output += `\t(real_bass_tuning (`
-        value.content.real_bass_tuning.forEach((tuning, i) => {
-            if (i === 0) {
-                output += `${tuning}\n`
-                return
-            } else if (
-                value.content.real_bass_tuning &&
-                i === value.content.real_bass_tuning.length - 1
-            ) {
-                output += `\t\t\t${tuning}))${
-                    options?.placeCustomAttributes ? '\n' : ''
-                }`
-                return
-            }
-            output += `\t\t\t${tuning}\n`
-        })
+    if (options?.type === 'rb3') {
+        if (value.content.real_guitar_tuning) {
+            output += `\t(real_guitar_tuning (`
+            value.content.real_guitar_tuning.forEach((tuning, i) => {
+                if (i === 0) {
+                    output += `${tuning}`
+                    return
+                } else if (
+                    value.content.real_guitar_tuning &&
+                    i === value.content.real_guitar_tuning.length - 1
+                ) {
+                    output += `${
+                        options?.newLineOnArrays === undefined ||
+                        options?.newLineOnArrays === true
+                            ? '\n\t\t\t'
+                            : ' '
+                    }${tuning}))${value.content.real_bass_tuning ? '\n' : ''}`
+                    return
+                }
+                output += `${
+                    options?.newLineOnArrays === undefined ||
+                    options?.newLineOnArrays === true
+                        ? '\n\t\t\t'
+                        : ' '
+                }${tuning}`
+            })
+        }
+        if (value.content.real_bass_tuning) {
+            output += `\t(real_bass_tuning (`
+            value.content.real_bass_tuning.forEach((tuning, i) => {
+                if (i === 0) {
+                    output += `${tuning}`
+                    return
+                } else if (
+                    value.content.real_bass_tuning &&
+                    i === value.content.real_bass_tuning.length - 1
+                ) {
+                    output += `${
+                        options?.newLineOnArrays === undefined ||
+                        options?.newLineOnArrays === true
+                            ? '\n\t\t\t'
+                            : ' '
+                    }${tuning}))${options?.placeCustomAttributes ? '\n' : ''}`
+                    return
+                }
+                output += `${
+                    options?.newLineOnArrays === undefined ||
+                    options?.newLineOnArrays === true
+                        ? '\n\t\t\t'
+                        : ' '
+                }${tuning}`
+            })
+        }
+    } else {
+        if (value.content.real_guitar_tuning) {
+            output += `\t(real_guitar_tuning (`
+            value.content.real_guitar_tuning.forEach((tuning, i) => {
+                if (i === 0) {
+                    output += `${tuning}`
+                    return
+                } else if (
+                    value.content.real_guitar_tuning &&
+                    i === value.content.real_guitar_tuning.length - 1
+                ) {
+                    output += `${
+                        options?.newLineOnArrays === true ? '\n\t\t\t' : ' '
+                    }${tuning}))${value.content.real_bass_tuning ? '\n' : ''}`
+                    return
+                }
+                output += `${
+                    options?.newLineOnArrays === true ? '\n\t\t\t' : ' '
+                }${tuning}`
+            })
+        }
+        if (value.content.real_bass_tuning) {
+            output += `\t(real_bass_tuning (`
+            value.content.real_bass_tuning.forEach((tuning, i) => {
+                if (i === 0) {
+                    output += `${tuning}`
+                    return
+                } else if (
+                    value.content.real_bass_tuning &&
+                    i === value.content.real_bass_tuning.length - 1
+                ) {
+                    output += `${
+                        options?.newLineOnArrays === true ? '\n\t\t\t' : ' '
+                    }${tuning}))${options?.placeCustomAttributes ? '\n' : ''}`
+                    return
+                }
+                output += `${
+                    options?.newLineOnArrays === true ? '\n\t\t\t' : ' '
+                }${tuning}`
+            })
+        }
     }
     if (options?.placeCustomAttributes && value.custom) {
         output += `\n;DO NOT EDIT THE FOLLOWING LINES MANUALLY\n;Created using Magma: C3 Roks Edition v3.3.5\n;Song authored by ${
@@ -529,10 +873,17 @@ const stringifyDTADocumentRb3 = (
         }\n`
     }
 
-    output += `)\n`
+    output += `${options?.type === 'rb3_dlc' ? '\n' : ''})\n`
     return output
 }
 
+/**
+ * Converts an array of parsed songs back to .dta file content string.
+ * - - - -
+ * @param {DTADocument[]} songs An array of parsed songs.
+ * @param {StringifyDataOptions} options `OPTIONAL` Options for stringification.
+ * @returns {string} The string representation of a .dta file.
+ */
 export const stringifyDTA = (
     songs: DTADocument[],
     options?: StringifyDataOptions
@@ -540,17 +891,24 @@ export const stringifyDTA = (
     let output = ''
 
     songs.forEach((value) => {
-        if (options?.type === 'rb3') {
+        if (options?.type === 'rb3')
             output += stringifyDTADocumentRb3(value, options)
-            return
-        } else {
+        else if (options?.type === 'rb3_dlc')
+            output += stringifyDTADocumentRb3(value, options).replace(
+                /\t/g,
+                '   '
+            )
+        else
             output += stringifyDTADocumentC3(value, options).replace(
                 /\t/g,
                 '   '
             )
-            return
-        }
     })
 
-    return output
+    return (
+        output
+            .split('\n')
+            .filter((line) => line)
+            .join('\n') + '\n'
+    )
 }

@@ -1,13 +1,10 @@
 /**
  * Separates all songs from a .dta file.
- * @returns An `Array` with each song content.
+ * - - - -
+ * @param {string} dtaFileContents The .dta file contents.
+ * @returns {string[]} An array with each song content separated to be parsed individually.
  */
-export const depackDTA = (
-    /**
-     * The .dta file contents.
-     */
-    dtaFileContents: string
-): string[] => {
+export const depackDTA = (dtaFileContents: string): string[] => {
     const joinLines = dtaFileContents.replaceAll('\r\n', '').trim()
     const removeSpaces = joinLines.replace(/\s+/g, ' ').trim()
     const operators = {

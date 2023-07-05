@@ -1,3 +1,6 @@
+import { DTAContentDocument } from '../@types/DTADocument'
+import { InstrumentRankingsOptions } from '../core'
+
 export const animTempo = {
     16: 'Slow',
     32: 'Medium',
@@ -410,24 +413,120 @@ export const rankGraphic = {
 }
 
 export type RankNumberTypes = keyof typeof rank
+export type RankLocaleTypes = 'default' | 'graphical'
+export type RankLocaleReturnType<T extends RankLocaleTypes> = T extends
+    | undefined
+    | 'default'
+    ? InstrumentRankingsOptions
+    : string
+
+const songKeyMajor = [
+    'C',
+    'D♭',
+    'D',
+    'E♭',
+    'E',
+    'F',
+    'F♯',
+    'G',
+    'A♭',
+    'A',
+    'A♭',
+    'B',
+]
+const songKeyMinor = [
+    'C',
+    'C♯',
+    'D',
+    'D♯',
+    'E',
+    'F',
+    'F♯',
+    'G',
+    'G♯',
+    'A',
+    'A♯',
+    'B',
+]
+
+export type SongKeyMajorValues =
+    | 'C Major'
+    | 'D♭ Major'
+    | 'D Major'
+    | 'E♭ Major'
+    | 'E Major'
+    | 'F Major'
+    | 'F♯ Major'
+    | 'G Major'
+    | 'A♭ Major'
+    | 'A Major'
+    | 'A♭ Major'
+    | 'B Major'
+
+export type SongKeyMinorValues =
+    | 'C Minor'
+    | 'C♯ Minor'
+    | 'D Minor'
+    | 'D♯ Minor'
+    | 'E Minor'
+    | 'F Minor'
+    | 'F♯ Minor'
+    | 'G Minor'
+    | 'G♯ Minor'
+    | 'A Minor'
+    | 'A♯ Minor'
+    | 'B Minor'
+
+export type SongKeyLocaleReturnType<
+    K extends NonNullable<DTAContentDocument['vocal_tonic_note']> | -1,
+    T extends NonNullable<DTAContentDocument['song_tonality']> | -1
+> = K extends -1
+    ? 'Not Specified'
+    : T extends 0
+    ? SongKeyMajorValues
+    : SongKeyMinorValues
 
 const localeCore = {
-    anim_tempo: (v: AnimTempoTypes) => animTempo[v],
-    band_fail_cue: (v?: BandFailCueTypes) =>
-        v && bandFailCue[v] ? bandFailCue[v] : 'Not Specified',
-    bank: (v: BankTypes) => bank[v],
-    drum_bank: (v: DrumBankTypes) => drumBank[v],
-    genre: (v: GenreTypes) => genre[v],
-    rating: (v: RatingTypes) => rating[v],
-    song_scroll_speed: (v: SongScrollSpeedTypes) => songScrollSpeed[v],
-    sub_genre: (v?: SubGenreTypes) =>
-        v && subGenre[v] ? subGenre[v] : 'Unknown',
-    vocal_gender: (v: VocalGenderTypes) => vocalGender[v],
-    vocal_parts: (v: VocalPartsTypes) => vocalParts[v],
-    rank: (rankCalc: number, type?: 'default' | 'graphical') => {
+    anim_tempo: (v: AnimTempoTypes): AnimTempoValues =>
+        animTempo[v] as AnimTempoValues,
+    band_fail_cue: (v?: BandFailCueTypes): BandFailCueValues =>
+        (v && bandFailCue[v]
+            ? bandFailCue[v]
+            : 'Not Specified') as BandFailCueValues,
+    bank: (v: BankTypes): BankValues => bank[v] as BankValues,
+    drum_bank: (v: DrumBankTypes): DrumBankValues =>
+        drumBank[v] as DrumBankValues,
+    genre: (v: GenreTypes): GenreValues => genre[v] as GenreValues,
+    rating: (v: RatingTypes): RatingValues => rating[v] as RatingValues,
+    song_scroll_speed: (v: SongScrollSpeedTypes): SongScrollSpeedValues =>
+        songScrollSpeed[v] as SongScrollSpeedValues,
+    sub_genre: (v?: SubGenreTypes): SubGenreValues =>
+        (v && subGenre[v] ? subGenre[v] : 'Unknown') as SubGenreValues,
+    vocal_gender: (v: VocalGenderTypes): VocalGenderValues =>
+        vocalGender[v] as VocalGenderValues,
+    vocal_parts: (v: VocalPartsTypes): VocalPartsValues =>
+        vocalParts[v] as VocalPartsValues,
+    rank: <T extends RankLocaleTypes>(
+        rankCalc: number,
+        type?: T
+    ): RankLocaleReturnType<T> => {
         const newRankCalc = (rankCalc + 1) as RankNumberTypes
-        if (type === undefined || type === 'default') return rank[newRankCalc]
-        else return rankGraphic[newRankCalc]
+        if (type === undefined || type === 'default')
+            return rank[newRankCalc] as RankLocaleReturnType<T>
+        else return rankGraphic[newRankCalc] as RankLocaleReturnType<T>
+    },
+    song_key: <
+        K extends NonNullable<DTAContentDocument['vocal_tonic_note']> | -1,
+        T extends NonNullable<DTAContentDocument['song_tonality']> | -1
+    >(
+        key: K,
+        tonality: T
+    ): SongKeyLocaleReturnType<K, T> => {
+        if (key === -1) return 'Not Specified' as SongKeyLocaleReturnType<K, T>
+        else if (tonality === 0 || tonality === -1)
+            return `${songKeyMajor[key]} Major` as SongKeyLocaleReturnType<K, T>
+        else
+            return `${songKeyMinor[key]} Minor` as SongKeyLocaleReturnType<K, T>
     },
 }
 
