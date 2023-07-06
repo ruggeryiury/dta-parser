@@ -1,5 +1,8 @@
 /**
  * Removes the leading article from a string, if any.
+ * - - - -
+ * @param {string} text The text you want to be processed.
+ * @returns {string} The text processed.
  */
 export const omitLeadingArticle = (text: string): string => {
     const articles = ['a', 'an', 'the']
@@ -15,6 +18,9 @@ export const omitLeadingArticle = (text: string): string => {
 
 /**
  * Puts the leading article at the end to the string, separated with a comma, if any.
+ * - - - -
+ * @param {string} text The text you want to be processed.
+ * @returns {string} The text processed.
  */
 export const leadingArticle2Trailing = (text: string): string => {
     const articles = ['a', 'an', 'the']

@@ -7,6 +7,13 @@ export interface StringifyDataOptions {
     newLineOnArrays?: boolean
 }
 
+/**
+ * Generates a string representing a series of track counts incremented by a specified value.
+ * - - - -
+ * @param {number} trackCount - The starting track count.
+ * @param {number} add - The value to increment the track count by.
+ * @returns {string} A string representing the series of track counts.
+ */
 const trackCountIterator = (trackCount: number, add: number): string => {
     let returnString = ''
     const iterator = Array(add).fill(0)
@@ -17,6 +24,14 @@ const trackCountIterator = (trackCount: number, add: number): string => {
     })
     return returnString
 }
+
+/**
+ * Specific stringify method for MAGMA C3-generated .dta file contents.
+ * - - - -
+ * @param {DTADocument} value The parsed song you want to be stringified.
+ * @param {StringifyDataOptions | undefined} options `OPTIONAL` Customize options for the stringifying process.
+ * @returns {string} A stringified version of the song.
+ */
 const stringifyDTADocumentC3 = (
     value: DTADocument,
     options?: StringifyDataOptions
@@ -266,6 +281,13 @@ const stringifyDTADocumentC3 = (
     return output
 }
 
+/**
+ * Specific stringify method for Non-MAGMA C3 .dta file contents.
+ * - - - -
+ * @param {DTADocument} value The parsed song you want to be stringified.
+ * @param {StringifyDataOptions | undefined} options `OPTIONAL` Customize options for the stringifying process.
+ * @returns {string} A stringified version of the song.
+ */
 const stringifyDTADocumentRb3 = (
     value: DTADocument,
     options?: StringifyDataOptions
@@ -881,7 +903,7 @@ const stringifyDTADocumentRb3 = (
  * Converts an array of parsed songs back to .dta file content string.
  * - - - -
  * @param {DTADocument[]} songs An array of parsed songs.
- * @param {StringifyDataOptions} options `OPTIONAL` Options for stringification.
+ * @param {StringifyDataOptions} options `OPTIONAL` Customize options for the stringifying process.
  * @returns {string} The string representation of a .dta file.
  */
 export const stringifyDTA = (

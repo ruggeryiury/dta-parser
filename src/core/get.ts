@@ -43,7 +43,7 @@ export type GetDataValueTypes =
           | 'vocal_tonic_note'
           | 'song_tonality'
       >
-    | keyof DTACustomSongAttributes
+    | keyof Omit<DTACustomSongAttributes, 'languages'>
 export type GetDataValueOptions<V extends GetDataValueTypes> = V extends
     | 'name'
     | 'artist'
@@ -386,7 +386,21 @@ export const getDTA = <
                 ? dta.content.song_tonality
                 : -1
         return Locale.song_key(key, tonality) as GetDataValueReturn<V, O>
-    } else
+    } else if (
+        value === 'author' ||
+        value === 'karaoke' ||
+        value === 'multitrack' ||
+        value === 'doubleKick' ||
+        value === 'convert' ||
+        value === 'rhythmOnBass' ||
+        value === 'rhythmOnKeys' ||
+        value === 'CATemh' ||
+        value === 'expertOnly'
+    )
+        return dta.custom?.[
+            value as keyof DTACustomSongAttributes
+        ] as GetDataValueReturn<V, O>
+    else
         return dta.content[
             value as keyof DTAContentDocument
         ] as GetDataValueReturn<V, O>

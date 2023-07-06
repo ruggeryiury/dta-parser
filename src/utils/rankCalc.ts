@@ -1,4 +1,4 @@
-import { InstrumentRankingsOptions } from '../core'
+import { BandRankingNumberOptions, InstrumentRankingsOptions } from '../core'
 
 const ranksMap = {
     drum: [124, 151, 178, 242, 345, 448],
@@ -14,6 +14,16 @@ const ranksMap = {
 
 export type RankTypes = keyof typeof ranksMap
 
+/**
+ * Calculates the ranking from a desired instrument part
+ * to a more understandeable, commonly-used ranking number system.
+ *
+ * The results can be from `-1` (meaning "No Part") to `6` (meaning "Impossible").
+ * - - - -
+ * @param {RankTypes} type The instrument part you want to be calculated.
+ * @param {number | undefined} rank `OPTIONAL` The rank number from the DTA file.
+ * @returns {number} The calculated instrument rank.
+ */
 export const rankCalc = (type: RankTypes, rank?: number): number => {
     let parseRankReturn = -1
 
@@ -30,19 +40,29 @@ export const rankCalc = (type: RankTypes, rank?: number): number => {
     return parseRankReturn
 }
 
+/**
+ * Returns a DTA file-compatible ranking system number based on the given options.
+ * - - - -
+ * @param {RankTypes} type The instrument part you want to be processed to.
+ * @param {InstrumentRankingsOptions} rank A string that indicates the ranking you want for the instrument part.
+ * @returns {number} A DTA file-compatible ranking system number.
+ */
 export const dtaRankCalc = (
     type: RankTypes,
-    rank: InstrumentRankingsOptions
+    rank: InstrumentRankingsOptions | BandRankingNumberOptions
 ): number => {
-    if (rank === 'No Part') return 0
-    else if (rank === 'Warmup') return 1
-    else if (rank === 'Apprentice') return ranksMap[type][0]
-    else if (rank === 'Solid') return ranksMap[type][1]
-    else if (rank === 'Moderate') return ranksMap[type][2]
-    else if (rank === 'Challenging') return ranksMap[type][3]
-    else if (rank === 'Nightmare') return ranksMap[type][4]
+    if (rank === 'No Part' || rank === -1) return 0
+    else if (rank === 'Warmup' || rank === 0) return 1
+    else if (rank === 'Apprentice' || rank === 1) return ranksMap[type][0]
+    else if (rank === 'Solid' || rank === 2) return ranksMap[type][1]
+    else if (rank === 'Moderate' || rank === 3) return ranksMap[type][2]
+    else if (rank === 'Challenging' || rank === 4) return ranksMap[type][3]
+    else if (rank === 'Nightmare' || rank === 5) return ranksMap[type][4]
     else {
-        // if (rank === 'Impossible')
+        // if (rank === 'Impossible' || rank === 6)
         return ranksMap[type][5]
     }
 }
+
+export const bandRankCalc = (count: number, quantity: number) =>
+    Number((count / quantity).toFixed())

@@ -1,3 +1,9 @@
+/**
+ * Converts formatted `HH:MM:SS` time string to milliseconds, as number.
+ * - - - -
+ * @param {string} timeString The time string you want to be calculated.
+ * @returns {number} The calculated time as number.
+ */
 export const timeStringToMilliseconds = (timeString: string): number => {
     const timeParts = timeString.split(':').map(Number)
 

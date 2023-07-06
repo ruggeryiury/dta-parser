@@ -1,3 +1,9 @@
+/**
+ * Converts milliseconds to formatted `HH:MM:SS` time string.
+ * - - - -
+ * @param {number} milliseconds Quantity of milliseconds.
+ * @returns {string} The formatted time string.
+ */
 export const millisecondsToTimeString = (milliseconds: number): string => {
     const totalSeconds = Math.floor(milliseconds / 1000)
     const hours = Math.floor(totalSeconds / 3600)

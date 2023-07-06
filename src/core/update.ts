@@ -4,11 +4,16 @@ import {
     BandFailCueValues,
     BankValues,
     DrumBankValues,
+    GenreValues,
     RatingValues,
     SongScrollSpeedValues,
+    SubGenreValues,
+    VocalGenderValues,
     VocalPartsValues,
 } from '../locale/core'
 import {
+    RankTypes,
+    bandRankCalc,
     dtaRankCalc,
     getKeyFromValue,
     timeStringToMilliseconds,
@@ -22,7 +27,6 @@ export interface UpdateDataOptions {
     song_id?: string | number
     songname?: string
     tracks?: TrackUpdateOptions
-    vocal_parts?: VocalPartsValues
     mute_volume?: number
     mute_volume_vocals?: number
     hopo_threshold?: number
@@ -34,16 +38,36 @@ export interface UpdateDataOptions {
     preview?: string | number
     song_length?: string | number
     rank_band?: BandRankingsOptions
-    rank_drum?: InstrumentRankingsOptions
-    rank_bass?: InstrumentRankingsOptions
-    rank_guitar?: InstrumentRankingsOptions
-    rank_vocals?: InstrumentRankingsOptions
-    rank_keys?: InstrumentRankingsOptions
-    rank_real_guitar?: InstrumentRankingsOptions
-    rank_real_bass?: InstrumentRankingsOptions
-    rank_real_keys?: InstrumentRankingsOptions
     game_origin?: string
     rating?: RatingValues
+    genre?:
+        | GenreUpdateOptions<'Alternative'>
+        | GenreUpdateOptions<'Blues'>
+        | GenreUpdateOptions<'Classical'>
+        | GenreUpdateOptions<'Classic Rock'>
+        | GenreUpdateOptions<'Emo'>
+        | GenreUpdateOptions<'Fusion'>
+        | GenreUpdateOptions<'Glam'>
+        | GenreUpdateOptions<'Hip-Hop/Rap'>
+        | GenreUpdateOptions<'Indie Rock'>
+        | GenreUpdateOptions<'Inspirational'>
+        | GenreUpdateOptions<'Jazz'>
+        | GenreUpdateOptions<'J-Rock'>
+        | GenreUpdateOptions<'Latin'>
+        | GenreUpdateOptions<'Metal'>
+        | GenreUpdateOptions<'New Wave'>
+        | GenreUpdateOptions<'Novelty'>
+        | GenreUpdateOptions<'Nu-Metal'>
+        | GenreUpdateOptions<'Other'>
+        | GenreUpdateOptions<'Pop/Dance/Electronic'>
+        | GenreUpdateOptions<'Pop-Rock'>
+        | GenreUpdateOptions<'Prog'>
+        | GenreUpdateOptions<'Punk'>
+        | GenreUpdateOptions<'R&B/Soul/Funk'>
+        | GenreUpdateOptions<'Reggae/Ska'>
+        | GenreUpdateOptions<'Rock'>
+        | GenreUpdateOptions<'Southern Rock'>
+        | GenreUpdateOptions<'World'>
 }
 
 export type InstrumentRankingsOptions = BandRankingsOptions | 'No Part'
@@ -57,6 +81,8 @@ export type BandRankingsOptions =
     | 'Nightmare'
     | 'Impossible'
 
+export type BandRankingNumberOptions = -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6
+
 export type DrumTracksTypes =
     | 'Stereo Else'
     | 'Mono Kick + Stereo Else'
@@ -67,14 +93,175 @@ export type DrumTracksTypes =
 export type InstrumentTracksTypes = 'Mono' | 'Stereo'
 
 export interface TrackUpdateOptions {
-    drum?: DrumTracksTypes
-    bass?: InstrumentTracksTypes
-    guitar?: InstrumentTracksTypes
-    vocals?: InstrumentTracksTypes
-    keys?: InstrumentTracksTypes
+    drum?: InstrumentTracksUpdateOptions<'drum'>
+    bass?: PROInstrumentTracksUpdateOptions<'bass'>
+    guitar?: PROInstrumentTracksUpdateOptions<'guitar'>
+    vocals?: VocalTracksUpdateOptions
+    keys?: PROInstrumentTracksUpdateOptions<'keys'>
     backing: InstrumentTracksTypes
     hasCrowdChannels?: boolean
 }
+
+export interface InstrumentTracksUpdateOptions<
+    I extends Exclude<RankTypes, 'real_guitar' | 'real_bass' | 'real_keys'>
+> {
+    rank: BandRankingsOptions | Exclude<BandRankingNumberOptions, -1>
+    channels: I extends 'drum' ? DrumTracksTypes : InstrumentTracksTypes
+}
+
+export interface VocalTracksUpdateOptions
+    extends InstrumentTracksUpdateOptions<'vocals'> {
+    vocal_parts: Exclude<VocalPartsValues, 'No Vocals'> | 1 | 2 | 3
+}
+
+export interface PROInstrumentTracksUpdateOptions<
+    I extends 'guitar' | 'bass' | 'keys'
+> extends InstrumentTracksUpdateOptions<I> {
+    real_rank?: InstrumentRankingsOptions | BandRankingNumberOptions
+}
+
+export interface GenreUpdateOptions<G extends GenreValues> {
+    genre: G
+    sub_genre: SubGenreUpdateValues<G>
+}
+
+export type SubGenreUpdateValues<G extends GenreValues> = G extends
+    | 'Classical'
+    | 'Classic Rock'
+    | 'Emo'
+    | 'Fusion'
+    | 'Grunge'
+    | 'Inspirational'
+    | 'J-Rock'
+    | 'Latin'
+    | 'Novelty'
+    | 'Nu-Metal'
+    | 'Southern Rock'
+    | 'World'
+    ? G
+    : G extends 'Alternative'
+    ? 'Alternative' | 'College' | 'Other'
+    : G extends 'Blues'
+    ?
+          | 'Acoustic'
+          | 'Chicago'
+          | 'Classic'
+          | 'Contemporary'
+          | 'Country'
+          | 'Delta'
+          | 'Electric'
+          | 'Other'
+    : G extends 'Country'
+    ?
+          | 'Alternative'
+          | 'Bluegrass'
+          | 'Contemporary'
+          | 'Honky Tonk'
+          | 'Outlaw'
+          | 'Traditional Folk'
+          | 'Other'
+    : G extends 'Glam'
+    ? 'Glam' | 'Goth' | 'Other'
+    : G extends 'Hip-Hop/Rap'
+    ?
+          | 'Alternative Rap'
+          | 'Gangsta'
+          | 'Hardcore Rap'
+          | 'Hip Hop'
+          | 'Old School Hip Hop'
+          | 'Rap'
+          | 'Trip Hop'
+          | 'Underground Rap'
+          | 'Other'
+    : G extends 'Indie Rock'
+    ?
+          | 'Indie Rock'
+          | 'Lo-fi'
+          | 'Math Rock'
+          | 'Noise'
+          | 'Post Rock'
+          | 'Shoegazing'
+          | 'Other'
+    : G extends 'Jazz'
+    ?
+          | 'Acid Jazz'
+          | 'Contemporary'
+          | 'Experimental'
+          | 'Ragtime'
+          | 'Smooth'
+          | 'Other'
+    : G extends 'Metal'
+    ?
+          | 'Alternative'
+          | 'Black'
+          | 'Core'
+          | 'Death'
+          | 'Hair'
+          | 'Industrial'
+          | 'Metal'
+          | 'Power'
+          | 'Prog'
+          | 'Speed'
+          | 'Thrash'
+          | 'Other'
+    : G extends 'New Wave'
+    ? 'Dark Wave' | 'Electroclash' | 'New Wave' | 'Synthpop' | 'Other'
+    : G extends 'Pop/Dance/Electronic'
+    ?
+          | 'Ambient'
+          | 'Breakbeat'
+          | 'Chiptune'
+          | 'Dance'
+          | 'Downtempo'
+          | 'Dub'
+          | 'Drum and Bass'
+          | 'Electronica'
+          | 'Garage'
+          | 'Hardcore Dance'
+          | 'House'
+          | 'Industrial'
+          | 'Techno'
+          | 'Trance'
+          | 'Other'
+    : G extends 'Pop-Rock'
+    ? 'Contemporary' | 'Pop' | 'Soft Rock' | 'Teen' | 'Other'
+    : G extends 'Prog'
+    ? 'Prog Rock'
+    : G extends 'Punk'
+    ?
+          | 'Alternative'
+          | 'Classic'
+          | 'Dance Punk'
+          | 'Garage'
+          | 'Hardcore'
+          | 'Pop'
+          | 'Other'
+    : G extends 'R&B/Soul/Funk'
+    ? 'Disco' | 'Funk' | 'Motown' | 'Rhythm and Blues' | 'Soul' | 'Other'
+    : G extends 'Reggae/Ska'
+    ? 'Reggae' | 'Ska' | 'Other'
+    : G extends 'Rock'
+    ?
+          | 'Arena'
+          | 'Blues'
+          | 'Folk Rock'
+          | 'Garage'
+          | 'Hard Rock'
+          | 'Psychedelic'
+          | 'Rock'
+          | 'Rockabilly'
+          | 'Rock and Roll'
+          | 'Surf'
+          | 'Other'
+    : G extends 'Other'
+    ?
+          | 'A capella'
+          | 'Acoustic'
+          | 'Contemporary Folk'
+          | 'Experimental'
+          | 'Oldies'
+          | 'Other'
+    : never
 
 /**
  * Generates an array of pan values based on the provided track count.
@@ -103,7 +290,7 @@ const pansGenerator = (
 /**
  * Updates a song with the provided update options.
  * @param {DTADocument} dta  The DTADocument to update.
- * @param {UpdateDataOptions} update The options for updating the DTADocument.
+ * @param {UpdateDataOptions} update The options for updating process.
  */
 export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
     const {
@@ -114,7 +301,6 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
         song_id,
         songname,
         tracks,
-        vocal_parts,
         mute_volume,
         mute_volume_vocals,
         hopo_threshold,
@@ -126,14 +312,9 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
         preview,
         song_length,
         rank_band,
-        rank_drum,
-        rank_bass,
-        rank_guitar,
-        rank_vocals,
-        rank_keys,
-        rank_real_guitar,
-        rank_real_bass,
-        rank_real_keys,
+        game_origin,
+        rating,
+        genre,
     } = update
 
     if (id) dta.content.id = id
@@ -152,16 +333,36 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
         dta.content.tracks_count = []
         dta.content.pans = []
         dta.content.vols = []
+        dta.content.vocal_parts = 0
+        dta.content.rank_band = 0
+        dta.content.rank_drum = 0
+        dta.content.rank_bass = 0
+        dta.content.rank_guitar = 0
+        dta.content.rank_vocals = 0
+        dta.content.rank_keys = 0
+        dta.content.rank_real_guitar = 0
+        dta.content.rank_real_bass = 0
+        dta.content.rank_real_keys = 0
+        let instrumentCount = 0
 
-        const { drum, bass, guitar, vocals, keys, backing, hasCrowdChannels } =
-            tracks
-
-        const drumT = drum ? pansGenerator(drum).length : 0
-        const bassT = bass ? pansGenerator(bass).length : 0
-        const guitarT = guitar ? pansGenerator(guitar).length : 0
-        const vocalsT = vocals ? pansGenerator(vocals).length : 0
-        const keysT = keys ? pansGenerator(keys).length : 0
-        const backingT = backing ? pansGenerator(backing).length : 0
+        const drumT = tracks.drum
+            ? pansGenerator(tracks.drum.channels).length
+            : 0
+        const bassT = tracks.bass
+            ? pansGenerator(tracks.bass.channels).length
+            : 0
+        const guitarT = tracks.guitar
+            ? pansGenerator(tracks.guitar.channels).length
+            : 0
+        const vocalsT = tracks.vocals
+            ? pansGenerator(tracks.vocals.channels).length
+            : 0
+        const keysT = tracks.keys
+            ? pansGenerator(tracks.keys.channels).length
+            : 0
+        const backingT = tracks.backing
+            ? pansGenerator(tracks.backing).length
+            : 0
 
         dta.content.tracks_count.push(
             drumT,
@@ -172,50 +373,110 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
             backingT
         )
 
-        drum &&
-            pansGenerator(drum).forEach((pan) => {
+        let drumR: number = 0,
+            bassR: number = 0,
+            guitarR: number = 0,
+            vocalsR: number = 0,
+            keysR: number = 0,
+            real_guitarR: number = 0,
+            real_bassR: number = 0,
+            real_keysR: number = 0
+
+        if (tracks.drum) {
+            instrumentCount++
+
+            drumR = dtaRankCalc('drum', tracks.drum.rank)
+            dta.content.rank_drum = drumR
+
+            pansGenerator(tracks.drum.channels).forEach((pan) => {
                 dta.content.pans.push(pan)
                 dta.content.vols.push(0)
             })
+        }
 
-        bass &&
-            pansGenerator(bass).forEach((pan) => {
+        if (tracks.bass) {
+            instrumentCount++
+
+            bassR = dtaRankCalc('bass', tracks.bass.rank)
+            real_bassR = dtaRankCalc(
+                'real_bass',
+                tracks.bass.real_rank !== undefined ? tracks.bass.real_rank : -1
+            )
+            dta.content.rank_bass = bassR
+            dta.content.rank_real_bass = real_bassR
+
+            pansGenerator(tracks.bass.channels).forEach((pan) => {
                 dta.content.pans.push(pan)
                 dta.content.vols.push(0)
             })
+        }
 
-        guitar &&
-            pansGenerator(guitar).forEach((pan) => {
+        if (tracks.guitar) {
+            instrumentCount++
+
+            guitarR = dtaRankCalc('guitar', tracks.guitar.rank)
+            real_guitarR = dtaRankCalc(
+                'real_guitar',
+                tracks.guitar.real_rank !== undefined
+                    ? tracks.guitar.real_rank
+                    : -1
+            )
+            dta.content.rank_guitar = guitarR
+            dta.content.rank_real_guitar = real_guitarR
+
+            pansGenerator(tracks.guitar.channels).forEach((pan) => {
                 dta.content.pans.push(pan)
                 dta.content.vols.push(0)
             })
+        }
 
-        vocals &&
-            pansGenerator(vocals).forEach((pan) => {
+        if (tracks.vocals) {
+            instrumentCount++
+
+            vocalsR = dtaRankCalc('guitar', tracks.vocals.rank)
+            dta.content.rank_vocals = vocalsR
+
+            pansGenerator(tracks.vocals.channels).forEach((pan) => {
                 dta.content.pans.push(pan)
                 dta.content.vols.push(0)
             })
+        }
 
-        keys &&
-            pansGenerator(keys).forEach((pan) => {
+        if (tracks.keys) {
+            instrumentCount++
+
+            keysR = dtaRankCalc('guitar', tracks.keys.rank)
+            real_keysR = dtaRankCalc(
+                'real_keys',
+                tracks.keys.real_rank !== undefined ? tracks.keys.real_rank : -1
+            )
+            dta.content.rank_keys = keysR
+            dta.content.rank_real_keys = real_keysR
+
+            pansGenerator(tracks.keys.channels).forEach((pan) => {
                 dta.content.pans.push(pan)
                 dta.content.vols.push(0)
             })
+        }
 
-        pansGenerator(backing).forEach((pan) => {
+        pansGenerator(tracks.backing).forEach((pan) => {
             dta.content.pans.push(pan)
             dta.content.vols.push(0)
         })
 
-        if (hasCrowdChannels !== undefined && hasCrowdChannels) {
+        if (tracks.hasCrowdChannels !== undefined && tracks.hasCrowdChannels) {
             dta.content.tracks_count.push(2)
             dta.content.pans.push(-2.5, 2.5)
             dta.content.vols.push(0, 0)
         }
-    }
 
-    if (vocal_parts)
-        dta.content.vocal_parts = getKeyFromValue.vocal_parts(vocal_parts)
+        if (rank_band) dta.content.rank_band = dtaRankCalc('band', rank_band)
+        else
+            dta.content.rank_band = bandRankCalc(
+                guitarR + bassR + drumR + keysR + vocalsR,
+                instrumentCount
+            )
+    }
 
     if (mute_volume) dta.content.mute_volume = mute_volume
 
@@ -246,6 +507,7 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
             dta.content.preview = [preview, preview + 30000]
         }
     }
+
     if (song_length) {
         if (typeof song_length === 'string') {
             const time = timeStringToMilliseconds(song_length)
@@ -255,23 +517,15 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
             dta.content.song_length = song_length
         }
     }
-    if (rank_band) dta.content.rank_band = dtaRankCalc('band', rank_band)
-    if (rank_drum) dta.content.rank_drum = dtaRankCalc('drum', rank_drum)
-    if (rank_bass) dta.content.rank_bass = dtaRankCalc('bass', rank_bass)
-    if (rank_guitar)
-        dta.content.rank_guitar = dtaRankCalc('guitar', rank_guitar)
-    if (rank_vocals)
-        dta.content.rank_vocals = dtaRankCalc('vocals', rank_vocals)
-    if (rank_keys) dta.content.rank_keys = dtaRankCalc('keys', rank_keys)
-    if (rank_real_guitar)
-        dta.content.rank_real_guitar = dtaRankCalc(
-            'real_guitar',
-            rank_real_guitar
-        )
-    if (rank_real_bass)
-        dta.content.rank_real_bass = dtaRankCalc('real_bass', rank_real_bass)
-    if (rank_real_keys)
-        dta.content.rank_real_keys = dtaRankCalc('real_keys', rank_real_keys)
+
+    if (game_origin) dta.content.game_origin = game_origin
+
+    if (rating) dta.content.rating = getKeyFromValue.rating(rating)
+
+    if (genre) {
+        dta.content.genre = getKeyFromValue.genre(genre.genre)
+        dta.content.sub_genre = getKeyFromValue.sub_genre(genre.sub_genre)
+    }
 
     return dta
 }
