@@ -6,13 +6,14 @@ import {
     DrumBankValues,
     GenreValues,
     RatingValues,
+    SongKeyMajorValues,
+    SongKeyMinorValues,
     SongScrollSpeedValues,
-    SubGenreValues,
+    TrainerKeyOverrideValues,
     VocalGenderValues,
     VocalPartsValues,
 } from '../locale/core'
 import {
-    RankTypes,
     bandRankCalc,
     dtaRankCalc,
     getKeyFromValue,
@@ -41,33 +42,46 @@ export interface UpdateDataOptions {
     game_origin?: string
     rating?: RatingValues
     genre?:
-        | GenreUpdateOptions<'Alternative'>
-        | GenreUpdateOptions<'Blues'>
-        | GenreUpdateOptions<'Classical'>
-        | GenreUpdateOptions<'Classic Rock'>
-        | GenreUpdateOptions<'Emo'>
-        | GenreUpdateOptions<'Fusion'>
-        | GenreUpdateOptions<'Glam'>
-        | GenreUpdateOptions<'Hip-Hop/Rap'>
-        | GenreUpdateOptions<'Indie Rock'>
-        | GenreUpdateOptions<'Inspirational'>
-        | GenreUpdateOptions<'Jazz'>
-        | GenreUpdateOptions<'J-Rock'>
-        | GenreUpdateOptions<'Latin'>
-        | GenreUpdateOptions<'Metal'>
-        | GenreUpdateOptions<'New Wave'>
-        | GenreUpdateOptions<'Novelty'>
-        | GenreUpdateOptions<'Nu-Metal'>
-        | GenreUpdateOptions<'Other'>
-        | GenreUpdateOptions<'Pop/Dance/Electronic'>
-        | GenreUpdateOptions<'Pop-Rock'>
-        | GenreUpdateOptions<'Prog'>
-        | GenreUpdateOptions<'Punk'>
-        | GenreUpdateOptions<'R&B/Soul/Funk'>
-        | GenreUpdateOptions<'Reggae/Ska'>
-        | GenreUpdateOptions<'Rock'>
-        | GenreUpdateOptions<'Southern Rock'>
-        | GenreUpdateOptions<'World'>
+    | GenreUpdateOptions<'Alternative'>
+    | GenreUpdateOptions<'Blues'>
+    | GenreUpdateOptions<'Classical'>
+    | GenreUpdateOptions<'Classic Rock'>
+    | GenreUpdateOptions<'Emo'>
+    | GenreUpdateOptions<'Fusion'>
+    | GenreUpdateOptions<'Glam'>
+    | GenreUpdateOptions<'Hip-Hop/Rap'>
+    | GenreUpdateOptions<'Indie Rock'>
+    | GenreUpdateOptions<'Inspirational'>
+    | GenreUpdateOptions<'Jazz'>
+    | GenreUpdateOptions<'J-Rock'>
+    | GenreUpdateOptions<'Latin'>
+    | GenreUpdateOptions<'Metal'>
+    | GenreUpdateOptions<'New Wave'>
+    | GenreUpdateOptions<'Novelty'>
+    | GenreUpdateOptions<'Nu-Metal'>
+    | GenreUpdateOptions<'Other'>
+    | GenreUpdateOptions<'Pop/Dance/Electronic'>
+    | GenreUpdateOptions<'Pop-Rock'>
+    | GenreUpdateOptions<'Prog'>
+    | GenreUpdateOptions<'Punk'>
+    | GenreUpdateOptions<'R&B/Soul/Funk'>
+    | GenreUpdateOptions<'Reggae/Ska'>
+    | GenreUpdateOptions<'Rock'>
+    | GenreUpdateOptions<'Southern Rock'>
+    | GenreUpdateOptions<'World'>
+    year_released?: number
+    year_recorded?: number
+    album?: AlbumUpdateOptions
+    key_signature?: SongKeyUpdateOptions
+    author?: string
+    karaoke?: boolean
+    multitrack?: boolean
+    doubleKick?: boolean
+    convert?: boolean
+    rhythmOnKeys?: boolean
+    rhythmOnBass?: boolean
+    CATemh?: boolean
+    expertOnly?: boolean
 }
 
 export type InstrumentRankingsOptions = BandRankingsOptions | 'No Part'
@@ -84,45 +98,74 @@ export type BandRankingsOptions =
 export type BandRankingNumberOptions = -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6
 
 export type DrumTracksTypes =
+    | 2
     | 'Stereo Else'
+    | 3
     | 'Mono Kick + Stereo Else'
+    | 4
     | 'Mono Kick + Mono Snare + Stereo Else'
+    | 5
     | 'Mono Kick + Stereo Snare + Stereo Else'
+    | 6
     | 'Stereo Kick + Stereo Snare + Stereo Else'
 
-export type InstrumentTracksTypes = 'Mono' | 'Stereo'
+export type InstrumentTracksTypes = 'Mono' | 'Stereo' | 1 | 2
 
 export interface TrackUpdateOptions {
-    drum?: InstrumentTracksUpdateOptions<'drum'>
-    bass?: PROInstrumentTracksUpdateOptions<'bass'>
-    guitar?: PROInstrumentTracksUpdateOptions<'guitar'>
-    vocals?: VocalTracksUpdateOptions
-    keys?: PROInstrumentTracksUpdateOptions<'keys'>
+    drum?: DrumUpdateOptions
+    bass?: BassUpdateOptions
+    guitar?: GuitarUpdateOptions
+    vocals?: VocalsUpdateOptions
+    keys?: KeysUpdateOptions
     backing: InstrumentTracksTypes
     hasCrowdChannels?: boolean
 }
 
-export interface InstrumentTracksUpdateOptions<
-    I extends Exclude<RankTypes, 'real_guitar' | 'real_bass' | 'real_keys'>
-> {
+export interface InstrumentPartRequiredUpdateOptions {
+    channels?: InstrumentTracksTypes
     rank: BandRankingsOptions | Exclude<BandRankingNumberOptions, -1>
-    channels: I extends 'drum' ? DrumTracksTypes : InstrumentTracksTypes
+    hasSolo?: boolean
 }
 
-export interface VocalTracksUpdateOptions
-    extends InstrumentTracksUpdateOptions<'vocals'> {
-    vocal_parts: Exclude<VocalPartsValues, 'No Vocals'> | 1 | 2 | 3
+export interface DrumUpdateOptions
+    extends Omit<InstrumentPartRequiredUpdateOptions, 'channels'> {
+    channels?: DrumTracksTypes
 }
 
-export interface PROInstrumentTracksUpdateOptions<
-    I extends 'guitar' | 'bass' | 'keys'
-> extends InstrumentTracksUpdateOptions<I> {
+export interface GuitarUpdateOptions
+    extends InstrumentPartRequiredUpdateOptions {
+    real_rank?: InstrumentRankingsOptions | BandRankingNumberOptions
+    tuning?: [number, number, number, number, number, number]
+}
+
+export interface BassUpdateOptions extends InstrumentPartRequiredUpdateOptions {
+    real_rank?: InstrumentRankingsOptions | BandRankingNumberOptions
+    tuning?: [number, number, number, number]
+}
+export interface VocalsUpdateOptions
+    extends InstrumentPartRequiredUpdateOptions {
+    vocal_parts?: Exclude<VocalPartsValues, 'No Vocals'> | 1 | 2 | 3
+    vocal_gender?: VocalGenderValues
+}
+
+export interface KeysUpdateOptions extends InstrumentPartRequiredUpdateOptions {
     real_rank?: InstrumentRankingsOptions | BandRankingNumberOptions
 }
 
 export interface GenreUpdateOptions<G extends GenreValues> {
     genre: G
     sub_genre: SubGenreUpdateValues<G>
+}
+
+export interface AlbumUpdateOptions {
+    hasArt: boolean
+    name: string
+    track_number: number
+}
+
+export interface SongKeyUpdateOptions {
+    key: SongKeyMajorValues | SongKeyMinorValues
+    trainer_key_override?: TrainerKeyOverrideValues
 }
 
 export type SubGenreUpdateValues<G extends GenreValues> = G extends
@@ -143,124 +186,124 @@ export type SubGenreUpdateValues<G extends GenreValues> = G extends
     ? 'Alternative' | 'College' | 'Other'
     : G extends 'Blues'
     ?
-          | 'Acoustic'
-          | 'Chicago'
-          | 'Classic'
-          | 'Contemporary'
-          | 'Country'
-          | 'Delta'
-          | 'Electric'
-          | 'Other'
+    | 'Acoustic'
+    | 'Chicago'
+    | 'Classic'
+    | 'Contemporary'
+    | 'Country'
+    | 'Delta'
+    | 'Electric'
+    | 'Other'
     : G extends 'Country'
     ?
-          | 'Alternative'
-          | 'Bluegrass'
-          | 'Contemporary'
-          | 'Honky Tonk'
-          | 'Outlaw'
-          | 'Traditional Folk'
-          | 'Other'
+    | 'Alternative'
+    | 'Bluegrass'
+    | 'Contemporary'
+    | 'Honky Tonk'
+    | 'Outlaw'
+    | 'Traditional Folk'
+    | 'Other'
     : G extends 'Glam'
     ? 'Glam' | 'Goth' | 'Other'
     : G extends 'Hip-Hop/Rap'
     ?
-          | 'Alternative Rap'
-          | 'Gangsta'
-          | 'Hardcore Rap'
-          | 'Hip Hop'
-          | 'Old School Hip Hop'
-          | 'Rap'
-          | 'Trip Hop'
-          | 'Underground Rap'
-          | 'Other'
+    | 'Alternative Rap'
+    | 'Gangsta'
+    | 'Hardcore Rap'
+    | 'Hip Hop'
+    | 'Old School Hip Hop'
+    | 'Rap'
+    | 'Trip Hop'
+    | 'Underground Rap'
+    | 'Other'
     : G extends 'Indie Rock'
     ?
-          | 'Indie Rock'
-          | 'Lo-fi'
-          | 'Math Rock'
-          | 'Noise'
-          | 'Post Rock'
-          | 'Shoegazing'
-          | 'Other'
+    | 'Indie Rock'
+    | 'Lo-fi'
+    | 'Math Rock'
+    | 'Noise'
+    | 'Post Rock'
+    | 'Shoegazing'
+    | 'Other'
     : G extends 'Jazz'
     ?
-          | 'Acid Jazz'
-          | 'Contemporary'
-          | 'Experimental'
-          | 'Ragtime'
-          | 'Smooth'
-          | 'Other'
+    | 'Acid Jazz'
+    | 'Contemporary'
+    | 'Experimental'
+    | 'Ragtime'
+    | 'Smooth'
+    | 'Other'
     : G extends 'Metal'
     ?
-          | 'Alternative'
-          | 'Black'
-          | 'Core'
-          | 'Death'
-          | 'Hair'
-          | 'Industrial'
-          | 'Metal'
-          | 'Power'
-          | 'Prog'
-          | 'Speed'
-          | 'Thrash'
-          | 'Other'
+    | 'Alternative'
+    | 'Black'
+    | 'Core'
+    | 'Death'
+    | 'Hair'
+    | 'Industrial'
+    | 'Metal'
+    | 'Power'
+    | 'Prog'
+    | 'Speed'
+    | 'Thrash'
+    | 'Other'
     : G extends 'New Wave'
     ? 'Dark Wave' | 'Electroclash' | 'New Wave' | 'Synthpop' | 'Other'
     : G extends 'Pop/Dance/Electronic'
     ?
-          | 'Ambient'
-          | 'Breakbeat'
-          | 'Chiptune'
-          | 'Dance'
-          | 'Downtempo'
-          | 'Dub'
-          | 'Drum and Bass'
-          | 'Electronica'
-          | 'Garage'
-          | 'Hardcore Dance'
-          | 'House'
-          | 'Industrial'
-          | 'Techno'
-          | 'Trance'
-          | 'Other'
+    | 'Ambient'
+    | 'Breakbeat'
+    | 'Chiptune'
+    | 'Dance'
+    | 'Downtempo'
+    | 'Dub'
+    | 'Drum and Bass'
+    | 'Electronica'
+    | 'Garage'
+    | 'Hardcore Dance'
+    | 'House'
+    | 'Industrial'
+    | 'Techno'
+    | 'Trance'
+    | 'Other'
     : G extends 'Pop-Rock'
     ? 'Contemporary' | 'Pop' | 'Soft Rock' | 'Teen' | 'Other'
     : G extends 'Prog'
     ? 'Prog Rock'
     : G extends 'Punk'
     ?
-          | 'Alternative'
-          | 'Classic'
-          | 'Dance Punk'
-          | 'Garage'
-          | 'Hardcore'
-          | 'Pop'
-          | 'Other'
+    | 'Alternative'
+    | 'Classic'
+    | 'Dance Punk'
+    | 'Garage'
+    | 'Hardcore'
+    | 'Pop'
+    | 'Other'
     : G extends 'R&B/Soul/Funk'
     ? 'Disco' | 'Funk' | 'Motown' | 'Rhythm and Blues' | 'Soul' | 'Other'
     : G extends 'Reggae/Ska'
     ? 'Reggae' | 'Ska' | 'Other'
     : G extends 'Rock'
     ?
-          | 'Arena'
-          | 'Blues'
-          | 'Folk Rock'
-          | 'Garage'
-          | 'Hard Rock'
-          | 'Psychedelic'
-          | 'Rock'
-          | 'Rockabilly'
-          | 'Rock and Roll'
-          | 'Surf'
-          | 'Other'
+    | 'Arena'
+    | 'Blues'
+    | 'Folk Rock'
+    | 'Garage'
+    | 'Hard Rock'
+    | 'Psychedelic'
+    | 'Rock'
+    | 'Rockabilly'
+    | 'Rock and Roll'
+    | 'Surf'
+    | 'Other'
     : G extends 'Other'
     ?
-          | 'A capella'
-          | 'Acoustic'
-          | 'Contemporary Folk'
-          | 'Experimental'
-          | 'Oldies'
-          | 'Other'
+    | 'A capella'
+    | 'Acoustic'
+    | 'Contemporary Folk'
+    | 'Experimental'
+    | 'Oldies'
+    | 'Other'
     : never
 
 /**
@@ -272,15 +315,21 @@ export type SubGenreUpdateValues<G extends GenreValues> = G extends
 const pansGenerator = (
     count: DrumTracksTypes | InstrumentTracksTypes
 ): number[] => {
-    if (count === 'Mono') {
+    if (count === 'Mono' || count === 1) {
         return [0]
-    } else if (count === 'Stereo' || count === 'Stereo Else') {
+    } else if (count === 'Stereo' || count === 'Stereo Else' || count === 2) {
         return [-1, 1]
-    } else if (count === 'Mono Kick + Stereo Else') {
+    } else if (count === 'Mono Kick + Stereo Else' || count === 3) {
         return [0, -1, 1]
-    } else if (count === 'Mono Kick + Mono Snare + Stereo Else') {
-        return [-1, 1, -1, 1]
-    } else if (count === 'Mono Kick + Stereo Snare + Stereo Else') {
+    } else if (
+        count === 'Mono Kick + Mono Snare + Stereo Else' ||
+        count === 4
+    ) {
+        return [0, 0, -1, 1]
+    } else if (
+        count === 'Mono Kick + Stereo Snare + Stereo Else' ||
+        count === 5
+    ) {
         return [0, -1, 1, -1, 1]
     } else {
         return [-1, 1, -1, 1, -1, 1]
@@ -315,6 +364,19 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
         game_origin,
         rating,
         genre,
+        year_released,
+        year_recorded,
+        album,
+        key_signature,
+        author,
+        karaoke,
+        multitrack,
+        doubleKick,
+        convert,
+        rhythmOnKeys,
+        rhythmOnBass,
+        CATemh,
+        expertOnly,
     } = update
 
     if (id) dta.content.id = id
@@ -343,22 +405,43 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
         dta.content.rank_real_guitar = 0
         dta.content.rank_real_bass = 0
         dta.content.rank_real_keys = 0
+        dta.content.vocal_gender = 'male'
         let instrumentCount = 0
 
         const drumT = tracks.drum
-            ? pansGenerator(tracks.drum.channels).length
+            ? pansGenerator(
+                tracks.drum.channels === undefined
+                    ? 'Stereo Else'
+                    : tracks.drum.channels
+            ).length
             : 0
         const bassT = tracks.bass
-            ? pansGenerator(tracks.bass.channels).length
+            ? pansGenerator(
+                tracks.bass.channels === undefined
+                    ? 'Stereo'
+                    : tracks.bass.channels
+            ).length
             : 0
         const guitarT = tracks.guitar
-            ? pansGenerator(tracks.guitar.channels).length
+            ? pansGenerator(
+                tracks.guitar.channels === undefined
+                    ? 'Stereo'
+                    : tracks.guitar.channels
+            ).length
             : 0
         const vocalsT = tracks.vocals
-            ? pansGenerator(tracks.vocals.channels).length
+            ? pansGenerator(
+                tracks.vocals.channels === undefined
+                    ? 'Stereo'
+                    : tracks.vocals.channels
+            ).length
             : 0
         const keysT = tracks.keys
-            ? pansGenerator(tracks.keys.channels).length
+            ? pansGenerator(
+                tracks.keys.channels === undefined
+                    ? 'Stereo'
+                    : tracks.keys.channels
+            ).length
             : 0
         const backingT = tracks.backing
             ? pansGenerator(tracks.backing).length
@@ -373,14 +456,14 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
             backingT
         )
 
-        let drumR: number = 0,
-            bassR: number = 0,
-            guitarR: number = 0,
-            vocalsR: number = 0,
-            keysR: number = 0,
-            real_guitarR: number = 0,
-            real_bassR: number = 0,
-            real_keysR: number = 0
+        let drumR = 0,
+            bassR = 0,
+            guitarR = 0,
+            vocalsR = 0,
+            keysR = 0,
+            real_guitarR = 0,
+            real_bassR = 0,
+            real_keysR = 0
 
         if (tracks.drum) {
             instrumentCount++
@@ -388,10 +471,19 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
             drumR = dtaRankCalc('drum', tracks.drum.rank)
             dta.content.rank_drum = drumR
 
-            pansGenerator(tracks.drum.channels).forEach((pan) => {
+            pansGenerator(
+                tracks.drum.channels === undefined
+                    ? 'Stereo Else'
+                    : tracks.drum.channels
+            ).forEach((pan) => {
                 dta.content.pans.push(pan)
                 dta.content.vols.push(0)
             })
+
+            if (tracks.drum.hasSolo !== undefined && tracks.drum.hasSolo) {
+                if (!dta.content.solo) dta.content.solo = []
+                dta.content.solo.push('drum')
+            }
         }
 
         if (tracks.bass) {
@@ -405,10 +497,25 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
             dta.content.rank_bass = bassR
             dta.content.rank_real_bass = real_bassR
 
-            pansGenerator(tracks.bass.channels).forEach((pan) => {
+            if (real_bassR > 0) {
+                if (tracks.bass.tuning !== undefined) {
+                    dta.content.real_bass_tuning = tracks.bass.tuning
+                } else dta.content.real_bass_tuning = [0, 0, 0, 0]
+            }
+
+            pansGenerator(
+                tracks.bass.channels === undefined
+                    ? 'Stereo'
+                    : tracks.bass.channels
+            ).forEach((pan) => {
                 dta.content.pans.push(pan)
                 dta.content.vols.push(0)
             })
+
+            if (tracks.bass.hasSolo !== undefined && tracks.bass.hasSolo) {
+                if (!dta.content.solo) dta.content.solo = []
+                dta.content.solo.push('bass')
+            }
         }
 
         if (tracks.guitar) {
@@ -424,10 +531,25 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
             dta.content.rank_guitar = guitarR
             dta.content.rank_real_guitar = real_guitarR
 
-            pansGenerator(tracks.guitar.channels).forEach((pan) => {
+            if (real_guitarR > 0) {
+                if (tracks.guitar.tuning !== undefined) {
+                    dta.content.real_guitar_tuning = tracks.guitar.tuning
+                } else dta.content.real_guitar_tuning = [0, 0, 0, 0, 0, 0]
+            }
+
+            pansGenerator(
+                tracks.guitar.channels === undefined
+                    ? 'Stereo'
+                    : tracks.guitar.channels
+            ).forEach((pan) => {
                 dta.content.pans.push(pan)
                 dta.content.vols.push(0)
             })
+
+            if (tracks.guitar.hasSolo !== undefined && tracks.guitar.hasSolo) {
+                if (!dta.content.solo) dta.content.solo = []
+                dta.content.solo.push('guitar')
+            }
         }
 
         if (tracks.vocals) {
@@ -436,10 +558,36 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
             vocalsR = dtaRankCalc('guitar', tracks.vocals.rank)
             dta.content.rank_vocals = vocalsR
 
-            pansGenerator(tracks.vocals.channels).forEach((pan) => {
+            if (tracks.vocals.vocal_parts !== undefined) {
+                dta.content.vocal_parts = getKeyFromValue.vocal_parts(
+                    tracks.vocals.vocal_parts === 1
+                        ? 'Solo Vocals'
+                        : tracks.vocals.vocal_parts === 2
+                            ? '2-Part Harmonies'
+                            : tracks.vocals.vocal_parts === 3
+                                ? '3-Part Harmonies'
+                                : tracks.vocals.vocal_parts
+                )
+            } else dta.content.vocal_parts = 1
+
+            pansGenerator(
+                tracks.vocals.channels === undefined
+                    ? 'Stereo'
+                    : tracks.vocals.channels
+            ).forEach((pan) => {
                 dta.content.pans.push(pan)
                 dta.content.vols.push(0)
             })
+
+            if (tracks.vocals.hasSolo !== undefined && tracks.vocals.hasSolo) {
+                if (!dta.content.solo) dta.content.solo = []
+                dta.content.solo.push('vocal_percussion')
+            }
+
+            if (tracks.vocals.vocal_gender)
+                dta.content.vocal_gender = getKeyFromValue.vocal_gender(
+                    tracks.vocals.vocal_gender
+                )
         }
 
         if (tracks.keys) {
@@ -453,7 +601,11 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
             dta.content.rank_keys = keysR
             dta.content.rank_real_keys = real_keysR
 
-            pansGenerator(tracks.keys.channels).forEach((pan) => {
+            pansGenerator(
+                tracks.keys.channels === undefined
+                    ? 'Stereo'
+                    : tracks.keys.channels
+            ).forEach((pan) => {
                 dta.content.pans.push(pan)
                 dta.content.vols.push(0)
             })
@@ -527,5 +679,180 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
         dta.content.sub_genre = getKeyFromValue.sub_genre(genre.sub_genre)
     }
 
+    if (year_released) dta.content.year_released = year_released
+    if (year_recorded) dta.content.year_recorded = year_recorded
+
+    if (album) {
+        dta.content.album_art = album.hasArt
+        dta.content.album_name = album.name
+        dta.content.album_track_number = album.track_number
+    }
+
+    if (key_signature) {
+        delete dta.content.vocal_tonic_note
+        delete dta.content.song_tonality
+        delete dta.content.song_key
+
+        if (key_signature.key === 'C Major') {
+            dta.content.vocal_tonic_note = 0
+            dta.content.song_tonality = 0
+        } else if (key_signature.key === 'D♭ Major') {
+            dta.content.vocal_tonic_note = 1
+            dta.content.song_tonality = 0
+        } else if (key_signature.key === 'D Major') {
+            dta.content.vocal_tonic_note = 2
+            dta.content.song_tonality = 0
+        } else if (key_signature.key === 'E♭ Major') {
+            dta.content.vocal_tonic_note = 3
+            dta.content.song_tonality = 0
+        } else if (key_signature.key === 'E Major') {
+            dta.content.vocal_tonic_note = 4
+            dta.content.song_tonality = 0
+        } else if (key_signature.key === 'F Major') {
+            dta.content.vocal_tonic_note = 5
+            dta.content.song_tonality = 0
+        } else if (key_signature.key === 'F♯ Major') {
+            dta.content.vocal_tonic_note = 6
+            dta.content.song_tonality = 0
+        } else if (key_signature.key === 'G Major') {
+            dta.content.vocal_tonic_note = 7
+            dta.content.song_tonality = 0
+        } else if (key_signature.key === 'A♭ Major') {
+            dta.content.vocal_tonic_note = 8
+            dta.content.song_tonality = 0
+        } else if (key_signature.key === 'A Major') {
+            dta.content.vocal_tonic_note = 9
+            dta.content.song_tonality = 0
+        } else if (key_signature.key === 'B♭ Major') {
+            dta.content.vocal_tonic_note = 10
+            dta.content.song_tonality = 0
+        } else if (key_signature.key === 'B Major') {
+            dta.content.vocal_tonic_note = 11
+            dta.content.song_tonality = 0
+        } else if (key_signature.key === 'C Minor') {
+            dta.content.vocal_tonic_note = 0
+            dta.content.song_tonality = 1
+        } else if (key_signature.key === 'C♯ Minor') {
+            dta.content.vocal_tonic_note = 1
+            dta.content.song_tonality = 1
+        } else if (key_signature.key === 'D Minor') {
+            dta.content.vocal_tonic_note = 2
+            dta.content.song_tonality = 1
+        } else if (key_signature.key === 'D♯ Minor') {
+            dta.content.vocal_tonic_note = 3
+            dta.content.song_tonality = 1
+        } else if (key_signature.key === 'E Minor') {
+            dta.content.vocal_tonic_note = 4
+            dta.content.song_tonality = 1
+        } else if (key_signature.key === 'F Minor') {
+            dta.content.vocal_tonic_note = 5
+            dta.content.song_tonality = 1
+        } else if (key_signature.key === 'F♯ Minor') {
+            dta.content.vocal_tonic_note = 6
+            dta.content.song_tonality = 1
+        } else if (key_signature.key === 'G Minor') {
+            dta.content.vocal_tonic_note = 7
+            dta.content.song_tonality = 1
+        } else if (key_signature.key === 'G♯ Minor') {
+            dta.content.vocal_tonic_note = 8
+            dta.content.song_tonality = 1
+        } else if (key_signature.key === 'A Minor') {
+            dta.content.vocal_tonic_note = 9
+            dta.content.song_tonality = 1
+        } else if (key_signature.key === 'A♯ Minor') {
+            dta.content.vocal_tonic_note = 10
+            dta.content.song_tonality = 1
+        } else {
+            // if (key_signature.key === 'B Minor')
+
+            dta.content.vocal_tonic_note = 11
+            dta.content.song_tonality = 0
+        }
+
+        if (key_signature.trainer_key_override) {
+            if (key_signature.trainer_key_override === 'C')
+                dta.content.song_key = 0
+            if (key_signature.trainer_key_override === 'C♯/D♭')
+                dta.content.song_key = 1
+            if (key_signature.trainer_key_override === 'D')
+                dta.content.song_key = 2
+            if (key_signature.trainer_key_override === 'D♯/E♭')
+                dta.content.song_key = 3
+            if (key_signature.trainer_key_override === 'E')
+                dta.content.song_key = 4
+            if (key_signature.trainer_key_override === 'F')
+                dta.content.song_key = 5
+            if (key_signature.trainer_key_override === 'F♯/G♭')
+                dta.content.song_key = 6
+            if (key_signature.trainer_key_override === 'G')
+                dta.content.song_key = 7
+            if (key_signature.trainer_key_override === 'G♯/A♭')
+                dta.content.song_key = 8
+            if (key_signature.trainer_key_override === 'A')
+                dta.content.song_key = 9
+            if (key_signature.trainer_key_override === 'A♯/A♭')
+                dta.content.song_key = 10
+            if (key_signature.trainer_key_override === 'B')
+                dta.content.song_key = 11
+        }
+    }
+
+    
+    if (author) {
+        if (!dta.custom) dta.custom = {}
+
+        dta.custom.author = author
+    }
+
+    if (karaoke !== undefined) {
+        if (!dta.custom) dta.custom = {}
+
+        dta.custom.karaoke = karaoke
+    }
+
+    if (multitrack !== undefined) {
+        if (!dta.custom) dta.custom = {}
+
+        dta.custom.multitrack = multitrack
+    }
+
+    if (doubleKick !== undefined) {
+        if (!dta.custom) dta.custom = {}
+
+        dta.custom.doubleKick = doubleKick
+    }
+
+    if (convert !== undefined) {
+        if (!dta.custom) dta.custom = {}
+
+        dta.custom.convert = convert
+    }
+
+    if (rhythmOnBass !== undefined) {
+        if (!dta.custom) dta.custom = {}
+
+        dta.custom.rhythmOnBass = rhythmOnBass
+    }
+
+    if (rhythmOnKeys !== undefined) {
+        if (!dta.custom) dta.custom = {}
+
+        dta.custom.rhythmOnKeys = rhythmOnKeys
+    }
+
+    if (CATemh !== undefined) {
+        if (!dta.custom) dta.custom = {}
+
+        dta.custom.CATemh = CATemh
+    }
+
+    if (expertOnly !== undefined) {
+        if (!dta.custom) dta.custom = {}
+
+        dta.custom.expertOnly = expertOnly
+    }
+
+    // new things here, if any.
+    
     return dta
 }

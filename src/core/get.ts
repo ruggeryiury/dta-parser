@@ -5,6 +5,8 @@ import {
 } from '../@types/DTADocument'
 import {
     RankTypes,
+    SpotifyAlbumSearchDocument,
+    getAlbumArt,
     leadingArticle2Trailing,
     millisecondsToTimeString,
     omitLeadingArticle,
@@ -39,7 +41,7 @@ export type GetDataValueTypes =
           | 'format'
           | 'version'
           | 'game_origin'
-          | 'album_art'
+        //   | 'album_art'
           | 'vocal_tonic_note'
           | 'song_tonality'
       >
@@ -150,6 +152,8 @@ export type GetDataValueReturn<
     ? number
     : V extends 'song_key'
     ? SongKeyMajorValues | SongKeyMinorValues | 'Not Specified'
+    : V extends 'album_art'
+    ? Promise<SpotifyAlbumSearchDocument | undefined>
     : V extends keyof DTACustomSongAttributes
     ? DTACustomSongAttributes[V]
     : V extends keyof DTAContentDocument
@@ -179,6 +183,11 @@ export interface GetDataNamingOptions {
      * @default 'emit'
      */
     leadingArticle?: 'emit' | 'omit' | 'trailing'
+    /**
+     * If `true`, the string will come quoted.
+     * @default false
+     */
+    quoted?: boolean
 }
 
 export interface GetDataRawOptions {
@@ -214,21 +223,31 @@ export const getDTA = <
 ): GetDataValueReturn<V, O> => {
     if (value === 'name' || value === 'artist' || value === 'album_name') {
         let leadingArticle: GetDataNamingOptions['leadingArticle']
-        if (options)
+        let quoted: GetDataNamingOptions['quoted']
+        let returnValue = ''
+        if (options) {
             leadingArticle = (options as GetDataNamingOptions).leadingArticle
+            quoted = (options as GetDataNamingOptions).quoted
+        }
 
         if (leadingArticle === undefined || leadingArticle === 'emit')
-            return dta.content[
+            returnValue = dta.content[
                 value as keyof DTAContentDocument
-            ] as GetDataValueReturn<V, O>
+            ] as string
         else if (leadingArticle === 'omit')
-            return omitLeadingArticle(
+            returnValue = omitLeadingArticle(
                 dta.content[value as keyof DTAContentDocument] as string
-            ) as GetDataValueReturn<V, O>
+            )
         else
-            return leadingArticle2Trailing(
+            returnValue = leadingArticle2Trailing(
                 dta.content[value as keyof DTAContentDocument] as string
-            ) as GetDataValueReturn<V, O>
+            )
+
+        if (quoted !== undefined || quoted === true) {
+            returnValue = `"${returnValue}"`
+        }
+
+        return returnValue as GetDataValueReturn<V, O>
     } else if (
         value === 'vocal_parts' ||
         value === 'mute_volume' ||
@@ -400,6 +419,8 @@ export const getDTA = <
         return dta.custom?.[
             value as keyof DTACustomSongAttributes
         ] as GetDataValueReturn<V, O>
+    else if (value === 'album_art')
+        return getAlbumArt(dta) as GetDataValueReturn<V, O>
     else
         return dta.content[
             value as keyof DTAContentDocument

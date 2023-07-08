@@ -779,6 +779,9 @@ const stringifyDTADocumentRb3 = (
     if (value.content.song_key !== undefined) {
         output += `\t(song_key ${value.content.song_key})\n`
     }
+    if (value.content.tuning_offset_cents !== undefined) {
+        output += `\t(tuning_offset_cents ${value.content.tuning_offset_cents})\n`
+    }
 
     if (options?.type === 'rb3') {
         if (value.content.real_guitar_tuning) {
@@ -875,8 +878,8 @@ const stringifyDTADocumentRb3 = (
             })
         }
     }
-    if (options?.placeCustomAttributes && value.custom) {
-        output += `\n;DO NOT EDIT THE FOLLOWING LINES MANUALLY\n;Created using Magma: C3 Roks Edition v3.3.5\n;Song authored by ${
+    if ((options?.placeCustomAttributes !== undefined && options?.placeCustomAttributes) && value.custom) {
+        output += `\n \n;DO NOT EDIT THE FOLLOWING LINES MANUALLY\n;Created using Magma: C3 Roks Edition v3.3.5\n;Song authored by ${
             value.custom.author ? value.custom.author : 'Unknown Charter'
         }\n;Song=${value.content.name}\n;Language(s)=${
             value.custom.languages

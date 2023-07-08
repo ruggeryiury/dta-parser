@@ -64,5 +64,5 @@ export const dtaRankCalc = (
     }
 }
 
-export const bandRankCalc = (count: number, quantity: number) =>
+export const bandRankCalc = (count: number, quantity: number): number =>
     Number((count / quantity).toFixed())

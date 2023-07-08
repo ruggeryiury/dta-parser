@@ -286,7 +286,13 @@ export const parseDTA = (songContent: string): DTADocument => {
                 parsed.content.tracks_count.forEach((count) => {
                     diffTracksCount += count
                 })
-                parsed.content.tracks_count[5] = tracksCount - diffTracksCount
+                if (tracksCount - diffTracksCount > 2) {
+                    parsed.content.tracks_count[5] =
+                        tracksCount - diffTracksCount - 2
+                } else {
+                    parsed.content.tracks_count[5] =
+                        tracksCount - diffTracksCount
+                }
             } else if (processedAudio === 'real_guitar_tuning')
                 parsed.content.real_guitar_tuning =
                     numbers as typeof parsed.content.real_guitar_tuning

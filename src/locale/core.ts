@@ -449,6 +449,20 @@ const songKeyMinor = [
     'B',
 ]
 
+export type TrainerKeyOverrideValues =
+    | 'C'
+    | 'C♯/D♭'
+    | 'D'
+    | 'D♯/E♭'
+    | 'E'
+    | 'F'
+    | 'F♯/G♭'
+    | 'G'
+    | 'G♯/A♭'
+    | 'A'
+    | 'A♯/A♭'
+    | 'B'
+
 export type SongKeyMajorValues =
     | 'C Major'
     | 'D♭ Major'
@@ -460,7 +474,7 @@ export type SongKeyMajorValues =
     | 'G Major'
     | 'A♭ Major'
     | 'A Major'
-    | 'A♭ Major'
+    | 'B♭ Major'
     | 'B Major'
 
 export type SongKeyMinorValues =

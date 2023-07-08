@@ -7,7 +7,7 @@ import {
     updateDTA,
 } from '../core'
 import { getDTA } from './get'
-import { VocalPartsValues } from '../locale/core'
+import { AnimTempoValues, RatingValues } from '../locale/core'
 
 const dtaDefault: DTADocument = {
     content: {
@@ -54,9 +54,12 @@ export interface CreateDataRequired extends UpdateDataOptions {
     song_id: string | number
     songname: string
     tracks: TrackUpdateOptions
-    vocal_parts: VocalPartsValues
+    anim_tempo: AnimTempoValues
     preview: string | number
     song_length: string | number
+    rating: RatingValues
+    genre: Exclude<UpdateDataOptions['genre'], undefined>
+    year_released: number
 }
 
 /**

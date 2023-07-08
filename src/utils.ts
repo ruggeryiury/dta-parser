@@ -1,3 +1,4 @@
+export * from './utils/getAlbumArt'
 export * from './utils/getKeyFromValue'
 export * from './utils/leadingArticle'
 export * from './utils/millisecondsToTimeString'
