@@ -63,12 +63,15 @@ export interface CreateDataRequired extends UpdateDataOptions {
 }
 
 /**
- * Creates a new memory instance of a `DTADocument` object.
+ * Creates a new parsed song object.
+ * @param {CreateDataRequired} options `OPTIONAL` Options for the `DTADocument` creation process.
+ * If `null`, It will be created using a all-default, all-blank options.
+ * @returns {DTADocument} A new parsed song object.
  */
-export const createDTA = (options: CreateDataRequired | null) => {
+export const createDTA = (options?: CreateDataRequired): DTADocument => {
     const newDTAInstance = cloneDeep(dtaDefault)
 
-    if (options !== null) {
+    if (options) {
         newDTAInstance.update(options)
     }
 

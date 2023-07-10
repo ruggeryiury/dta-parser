@@ -878,7 +878,11 @@ const stringifyDTADocumentRb3 = (
             })
         }
     }
-    if ((options?.placeCustomAttributes !== undefined && options?.placeCustomAttributes) && value.custom) {
+    if (
+        options?.placeCustomAttributes !== undefined &&
+        options?.placeCustomAttributes &&
+        value.custom
+    ) {
         output += `\n \n;DO NOT EDIT THE FOLLOWING LINES MANUALLY\n;Created using Magma: C3 Roks Edition v3.3.5\n;Song authored by ${
             value.custom.author ? value.custom.author : 'Unknown Charter'
         }\n;Song=${value.content.name}\n;Language(s)=${
@@ -903,11 +907,11 @@ const stringifyDTADocumentRb3 = (
 }
 
 /**
- * Converts an array of parsed songs back to .dta file content string.
+ * Converts an array of parsed song objects back to `.dta` file content string.
  * - - - -
- * @param {DTADocument[]} songs An array of parsed songs.
- * @param {StringifyDataOptions} options `OPTIONAL` Customize options for the stringifying process.
- * @returns {string} The string representation of a .dta file.
+ * @param {DTADocument[]} songs An array of parsed song objects.
+ * @param {StringifyDataOptions} options `OPTIONAL` Customization options for the stringifying process.
+ * @returns {string} e string representation of this parsed song object as a `.dta` file.
  */
 export const stringifyDTA = (
     songs: DTADocument[],

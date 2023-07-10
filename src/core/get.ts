@@ -41,7 +41,6 @@ export type GetDataValueTypes =
           | 'format'
           | 'version'
           | 'game_origin'
-        //   | 'album_art'
           | 'vocal_tonic_note'
           | 'song_tonality'
       >
@@ -79,6 +78,8 @@ export type GetDataValueOptions<V extends GetDataValueTypes> = V extends
           | 'rank_real_guitar'
           | 'rank_real_bass'
     ? GetDataRankingOptions
+    : V extends 'album_art'
+    ? GetDataAlbumArtOptions
     : never
 
 export type GetDataValueReturn<
@@ -210,9 +211,38 @@ export interface GetDataTimeOptions {
 }
 
 export interface GetDataRankingOptions {
+    /**
+     * Specifies the processing of the instrument rank.
+     * - - - -
+     * - `number` => from `-1` (No Part) to `6` (Impossible).
+     * - - - -
+     * - `verbosed` => from `No Part` (No Part) to `Impossible` (Impossible).
+     * - - - -
+     * - `raw` => The raw number from the .dta file.
+     * - - - -
+     * - `graphical` => Return an emoji representation of the rank.
+     *
+     * @default 'number'
+     */
     type?: 'number' | 'verbosed' | 'raw' | 'graphical'
 }
 
+export interface GetDataAlbumArtOptions {
+    /**
+     * Specifies the size of the album art.
+     * @default 'medium'
+     */
+    size?: 'large' | 'medium' | 'small'
+}
+
+/**
+ * Retrieves a specific value from the parsed song object.
+ * - - - -
+ * @param {DTADocument} dta The parsed song object from which you want to retrieve information.
+ * @param {V extends GetDataValueTypes} value The specific information you want to retrieve.
+ * @param {O extends GetDataValueOptions<V>} options `OPTIONAL` Customization options for the retrieval process.
+ * @returns {GetDataValueReturn<V, O>} The requested specific information.
+ */
 export const getDTA = <
     V extends GetDataValueTypes,
     O extends GetDataValueOptions<V>
@@ -419,9 +449,12 @@ export const getDTA = <
         return dta.custom?.[
             value as keyof DTACustomSongAttributes
         ] as GetDataValueReturn<V, O>
-    else if (value === 'album_art')
-        return getAlbumArt(dta) as GetDataValueReturn<V, O>
-    else
+    else if (value === 'album_art') {
+        return getAlbumArt(
+            dta,
+            options as GetDataAlbumArtOptions
+        ) as GetDataValueReturn<V, O>
+    } else
         return dta.content[
             value as keyof DTAContentDocument
         ] as GetDataValueReturn<V, O>

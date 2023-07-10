@@ -36,15 +36,26 @@ export interface DTADocument extends DTADocumentMethods {
 
 export interface DTADocumentMethods {
     /**
-     * Gets and processes a value from this song.
+     * Retrieves a specific value from this parsed song object.
+     * - - - -
+     * @param {V extends GetDataValueTypes} value The specific information you want to retrieve.
+     * @param {O extends GetDataValueOptions<V>} options `OPTIONAL` Customization options for the retrieval process.
+     * @returns {GetDataValueReturn<V, O>} The requested specific information.
      */
     get<V extends GetDataValueTypes, O extends GetDataValueOptions<V>>(
         value: V,
         options?: O
     ): GetDataValueReturn<V, O>
+    /**
+     * Converts this parsed song object back to `.dta` file content string.
+     * - - - -
+     * @param {StringifyDataOptions} options `OPTIONAL` Customization options for the stringifying process.
+     * @returns {string} The string representation of this parsed song object as a `.dta` file.
+     */
     stringify(options?: StringifyDataOptions): string
     /**
-     * Updates any value from this song.
+     * Updates this song with the provided update options.
+     * @param {UpdateDataOptions} update The options for the parsed song updating process.
      */
     update(options: UpdateDataOptions): DTADocument
 }

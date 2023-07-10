@@ -42,33 +42,33 @@ export interface UpdateDataOptions {
     game_origin?: string
     rating?: RatingValues
     genre?:
-    | GenreUpdateOptions<'Alternative'>
-    | GenreUpdateOptions<'Blues'>
-    | GenreUpdateOptions<'Classical'>
-    | GenreUpdateOptions<'Classic Rock'>
-    | GenreUpdateOptions<'Emo'>
-    | GenreUpdateOptions<'Fusion'>
-    | GenreUpdateOptions<'Glam'>
-    | GenreUpdateOptions<'Hip-Hop/Rap'>
-    | GenreUpdateOptions<'Indie Rock'>
-    | GenreUpdateOptions<'Inspirational'>
-    | GenreUpdateOptions<'Jazz'>
-    | GenreUpdateOptions<'J-Rock'>
-    | GenreUpdateOptions<'Latin'>
-    | GenreUpdateOptions<'Metal'>
-    | GenreUpdateOptions<'New Wave'>
-    | GenreUpdateOptions<'Novelty'>
-    | GenreUpdateOptions<'Nu-Metal'>
-    | GenreUpdateOptions<'Other'>
-    | GenreUpdateOptions<'Pop/Dance/Electronic'>
-    | GenreUpdateOptions<'Pop-Rock'>
-    | GenreUpdateOptions<'Prog'>
-    | GenreUpdateOptions<'Punk'>
-    | GenreUpdateOptions<'R&B/Soul/Funk'>
-    | GenreUpdateOptions<'Reggae/Ska'>
-    | GenreUpdateOptions<'Rock'>
-    | GenreUpdateOptions<'Southern Rock'>
-    | GenreUpdateOptions<'World'>
+        | GenreUpdateOptions<'Alternative'>
+        | GenreUpdateOptions<'Blues'>
+        | GenreUpdateOptions<'Classical'>
+        | GenreUpdateOptions<'Classic Rock'>
+        | GenreUpdateOptions<'Emo'>
+        | GenreUpdateOptions<'Fusion'>
+        | GenreUpdateOptions<'Glam'>
+        | GenreUpdateOptions<'Hip-Hop/Rap'>
+        | GenreUpdateOptions<'Indie Rock'>
+        | GenreUpdateOptions<'Inspirational'>
+        | GenreUpdateOptions<'Jazz'>
+        | GenreUpdateOptions<'J-Rock'>
+        | GenreUpdateOptions<'Latin'>
+        | GenreUpdateOptions<'Metal'>
+        | GenreUpdateOptions<'New Wave'>
+        | GenreUpdateOptions<'Novelty'>
+        | GenreUpdateOptions<'Nu-Metal'>
+        | GenreUpdateOptions<'Other'>
+        | GenreUpdateOptions<'Pop/Dance/Electronic'>
+        | GenreUpdateOptions<'Pop-Rock'>
+        | GenreUpdateOptions<'Prog'>
+        | GenreUpdateOptions<'Punk'>
+        | GenreUpdateOptions<'R&B/Soul/Funk'>
+        | GenreUpdateOptions<'Reggae/Ska'>
+        | GenreUpdateOptions<'Rock'>
+        | GenreUpdateOptions<'Southern Rock'>
+        | GenreUpdateOptions<'World'>
     year_released?: number
     year_recorded?: number
     album?: AlbumUpdateOptions
@@ -186,124 +186,124 @@ export type SubGenreUpdateValues<G extends GenreValues> = G extends
     ? 'Alternative' | 'College' | 'Other'
     : G extends 'Blues'
     ?
-    | 'Acoustic'
-    | 'Chicago'
-    | 'Classic'
-    | 'Contemporary'
-    | 'Country'
-    | 'Delta'
-    | 'Electric'
-    | 'Other'
+          | 'Acoustic'
+          | 'Chicago'
+          | 'Classic'
+          | 'Contemporary'
+          | 'Country'
+          | 'Delta'
+          | 'Electric'
+          | 'Other'
     : G extends 'Country'
     ?
-    | 'Alternative'
-    | 'Bluegrass'
-    | 'Contemporary'
-    | 'Honky Tonk'
-    | 'Outlaw'
-    | 'Traditional Folk'
-    | 'Other'
+          | 'Alternative'
+          | 'Bluegrass'
+          | 'Contemporary'
+          | 'Honky Tonk'
+          | 'Outlaw'
+          | 'Traditional Folk'
+          | 'Other'
     : G extends 'Glam'
     ? 'Glam' | 'Goth' | 'Other'
     : G extends 'Hip-Hop/Rap'
     ?
-    | 'Alternative Rap'
-    | 'Gangsta'
-    | 'Hardcore Rap'
-    | 'Hip Hop'
-    | 'Old School Hip Hop'
-    | 'Rap'
-    | 'Trip Hop'
-    | 'Underground Rap'
-    | 'Other'
+          | 'Alternative Rap'
+          | 'Gangsta'
+          | 'Hardcore Rap'
+          | 'Hip Hop'
+          | 'Old School Hip Hop'
+          | 'Rap'
+          | 'Trip Hop'
+          | 'Underground Rap'
+          | 'Other'
     : G extends 'Indie Rock'
     ?
-    | 'Indie Rock'
-    | 'Lo-fi'
-    | 'Math Rock'
-    | 'Noise'
-    | 'Post Rock'
-    | 'Shoegazing'
-    | 'Other'
+          | 'Indie Rock'
+          | 'Lo-fi'
+          | 'Math Rock'
+          | 'Noise'
+          | 'Post Rock'
+          | 'Shoegazing'
+          | 'Other'
     : G extends 'Jazz'
     ?
-    | 'Acid Jazz'
-    | 'Contemporary'
-    | 'Experimental'
-    | 'Ragtime'
-    | 'Smooth'
-    | 'Other'
+          | 'Acid Jazz'
+          | 'Contemporary'
+          | 'Experimental'
+          | 'Ragtime'
+          | 'Smooth'
+          | 'Other'
     : G extends 'Metal'
     ?
-    | 'Alternative'
-    | 'Black'
-    | 'Core'
-    | 'Death'
-    | 'Hair'
-    | 'Industrial'
-    | 'Metal'
-    | 'Power'
-    | 'Prog'
-    | 'Speed'
-    | 'Thrash'
-    | 'Other'
+          | 'Alternative'
+          | 'Black'
+          | 'Core'
+          | 'Death'
+          | 'Hair'
+          | 'Industrial'
+          | 'Metal'
+          | 'Power'
+          | 'Prog'
+          | 'Speed'
+          | 'Thrash'
+          | 'Other'
     : G extends 'New Wave'
     ? 'Dark Wave' | 'Electroclash' | 'New Wave' | 'Synthpop' | 'Other'
     : G extends 'Pop/Dance/Electronic'
     ?
-    | 'Ambient'
-    | 'Breakbeat'
-    | 'Chiptune'
-    | 'Dance'
-    | 'Downtempo'
-    | 'Dub'
-    | 'Drum and Bass'
-    | 'Electronica'
-    | 'Garage'
-    | 'Hardcore Dance'
-    | 'House'
-    | 'Industrial'
-    | 'Techno'
-    | 'Trance'
-    | 'Other'
+          | 'Ambient'
+          | 'Breakbeat'
+          | 'Chiptune'
+          | 'Dance'
+          | 'Downtempo'
+          | 'Dub'
+          | 'Drum and Bass'
+          | 'Electronica'
+          | 'Garage'
+          | 'Hardcore Dance'
+          | 'House'
+          | 'Industrial'
+          | 'Techno'
+          | 'Trance'
+          | 'Other'
     : G extends 'Pop-Rock'
     ? 'Contemporary' | 'Pop' | 'Soft Rock' | 'Teen' | 'Other'
     : G extends 'Prog'
     ? 'Prog Rock'
     : G extends 'Punk'
     ?
-    | 'Alternative'
-    | 'Classic'
-    | 'Dance Punk'
-    | 'Garage'
-    | 'Hardcore'
-    | 'Pop'
-    | 'Other'
+          | 'Alternative'
+          | 'Classic'
+          | 'Dance Punk'
+          | 'Garage'
+          | 'Hardcore'
+          | 'Pop'
+          | 'Other'
     : G extends 'R&B/Soul/Funk'
     ? 'Disco' | 'Funk' | 'Motown' | 'Rhythm and Blues' | 'Soul' | 'Other'
     : G extends 'Reggae/Ska'
     ? 'Reggae' | 'Ska' | 'Other'
     : G extends 'Rock'
     ?
-    | 'Arena'
-    | 'Blues'
-    | 'Folk Rock'
-    | 'Garage'
-    | 'Hard Rock'
-    | 'Psychedelic'
-    | 'Rock'
-    | 'Rockabilly'
-    | 'Rock and Roll'
-    | 'Surf'
-    | 'Other'
+          | 'Arena'
+          | 'Blues'
+          | 'Folk Rock'
+          | 'Garage'
+          | 'Hard Rock'
+          | 'Psychedelic'
+          | 'Rock'
+          | 'Rockabilly'
+          | 'Rock and Roll'
+          | 'Surf'
+          | 'Other'
     : G extends 'Other'
     ?
-    | 'A capella'
-    | 'Acoustic'
-    | 'Contemporary Folk'
-    | 'Experimental'
-    | 'Oldies'
-    | 'Other'
+          | 'A capella'
+          | 'Acoustic'
+          | 'Contemporary Folk'
+          | 'Experimental'
+          | 'Oldies'
+          | 'Other'
     : never
 
 /**
@@ -339,7 +339,7 @@ const pansGenerator = (
 /**
  * Updates a song with the provided update options.
  * @param {DTADocument} dta  The DTADocument to update.
- * @param {UpdateDataOptions} update The options for updating process.
+ * @param {UpdateDataOptions} update The options for the parsed song updating process.
  */
 export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
     const {
@@ -410,38 +410,38 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
 
         const drumT = tracks.drum
             ? pansGenerator(
-                tracks.drum.channels === undefined
-                    ? 'Stereo Else'
-                    : tracks.drum.channels
-            ).length
+                  tracks.drum.channels === undefined
+                      ? 'Stereo Else'
+                      : tracks.drum.channels
+              ).length
             : 0
         const bassT = tracks.bass
             ? pansGenerator(
-                tracks.bass.channels === undefined
-                    ? 'Stereo'
-                    : tracks.bass.channels
-            ).length
+                  tracks.bass.channels === undefined
+                      ? 'Stereo'
+                      : tracks.bass.channels
+              ).length
             : 0
         const guitarT = tracks.guitar
             ? pansGenerator(
-                tracks.guitar.channels === undefined
-                    ? 'Stereo'
-                    : tracks.guitar.channels
-            ).length
+                  tracks.guitar.channels === undefined
+                      ? 'Stereo'
+                      : tracks.guitar.channels
+              ).length
             : 0
         const vocalsT = tracks.vocals
             ? pansGenerator(
-                tracks.vocals.channels === undefined
-                    ? 'Stereo'
-                    : tracks.vocals.channels
-            ).length
+                  tracks.vocals.channels === undefined
+                      ? 'Stereo'
+                      : tracks.vocals.channels
+              ).length
             : 0
         const keysT = tracks.keys
             ? pansGenerator(
-                tracks.keys.channels === undefined
-                    ? 'Stereo'
-                    : tracks.keys.channels
-            ).length
+                  tracks.keys.channels === undefined
+                      ? 'Stereo'
+                      : tracks.keys.channels
+              ).length
             : 0
         const backingT = tracks.backing
             ? pansGenerator(tracks.backing).length
@@ -563,10 +563,10 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
                     tracks.vocals.vocal_parts === 1
                         ? 'Solo Vocals'
                         : tracks.vocals.vocal_parts === 2
-                            ? '2-Part Harmonies'
-                            : tracks.vocals.vocal_parts === 3
-                                ? '3-Part Harmonies'
-                                : tracks.vocals.vocal_parts
+                        ? '2-Part Harmonies'
+                        : tracks.vocals.vocal_parts === 3
+                        ? '3-Part Harmonies'
+                        : tracks.vocals.vocal_parts
                 )
             } else dta.content.vocal_parts = 1
 
@@ -797,7 +797,6 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
         }
     }
 
-    
     if (author) {
         if (!dta.custom) dta.custom = {}
 
@@ -853,6 +852,6 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
     }
 
     // new things here, if any.
-    
+
     return dta
 }

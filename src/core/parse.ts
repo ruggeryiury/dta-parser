@@ -41,7 +41,7 @@ export const parseDTA = (songContent: string): DTADocument => {
         gotAlbumName,
         stillAlbumName,
     } = operators
-    const parsed = createDTA(null)
+    const parsed = createDTA()
     const split = songContent.split(/[;(]/).map((value) => value.trim())
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
