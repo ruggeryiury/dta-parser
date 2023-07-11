@@ -14,9 +14,9 @@ module.exports = [
             globalObject: 'this'
         },
         mode: 'production',
-        optimization: {
-            usedExports: true
-        },
+        // optimization: {
+        //     usedExports: true
+        // },
         module: {
             rules: [
                 {
@@ -56,9 +56,9 @@ module.exports = [
             libraryTarget: 'commonjs2'
         },
         mode: 'production',
-        optimization: {
-            usedExports: true
-        },
+        // optimization: {
+        //     usedExports: true
+        // },
         module: {
             rules: [
                 {
