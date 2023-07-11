@@ -72,5 +72,5 @@ interface DTAToolsModule {
 export const DTATools: DTAToolsModule = {
     create: createDTA,
 }
-export { DTADocument }
+export type { DTADocument } from './@types/DTADocument'
 export default DTAParser

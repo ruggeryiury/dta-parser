@@ -5,10 +5,10 @@ export const animTempo = {
     16: 'Slow',
     32: 'Medium',
     64: 'Fast',
-}
+} as const
 
 export type AnimTempoTypes = keyof typeof animTempo
-export type AnimTempoValues = 'Slow' | 'Medium' | 'Fast'
+export type AnimTempoValues = (typeof animTempo)[AnimTempoTypes]
 
 export const bandFailCue = {
     'band_fail_rock.cue': 'Rock',
@@ -19,18 +19,11 @@ export const bandFailCue = {
     'band_fail_vintage_keys.cue': 'Vintage (Keys)',
     'band_fail_heavy_keys.cue': 'Heavy (Keys)',
     'band_fail_electro_keys.cue': 'Electro (Keys)',
-}
+} as const
 
 export type BandFailCueTypes = keyof typeof bandFailCue
 export type BandFailCueValues =
-    | 'Rock'
-    | 'Vintage'
-    | 'Heavy'
-    | 'Electro'
-    | 'Rock (Keys)'
-    | 'Vintage (Keys)'
-    | 'Heavy (Keys)'
-    | 'Electro (Keys)'
+    | (typeof bandFailCue)[BandFailCueTypes]
     | 'Not Specified'
 
 export const bank = {
@@ -38,14 +31,10 @@ export const bank = {
     'sfx/cowbell_bank.milo': 'Cowbell',
     'sfx/handclap_bank.milo': 'Hand Clap',
     'sfx/cowbell3_bank.milo': 'Cowbell (Alternate)',
-}
+} as const
 
 export type BankTypes = keyof typeof bank
-export type BankValues =
-    | 'Tambourine'
-    | 'Cowbell'
-    | 'Hand Clap'
-    | 'Cowbell (Alternate)'
+export type BankValues = (typeof bank)[BankTypes]
 
 export const drumBank = {
     'sfx/kit01_bank.milo': 'Hard Rock Kit',
@@ -53,15 +42,10 @@ export const drumBank = {
     'sfx/kit03_bank.milo': 'Vintage Kit',
     'sfx/kit04_bank.milo': 'Trashy Kit',
     'sfx/kit05_bank.milo': 'Electronic Kit',
-}
+} as const
 
 export type DrumBankTypes = keyof typeof drumBank
-export type DrumBankValues =
-    | 'Hard Rock Kit'
-    | 'Arena Kit'
-    | 'Vintage Kit'
-    | 'Trashy Kit'
-    | 'Electronic Kit'
+export type DrumBankValues = (typeof drumBank)[DrumBankTypes]
 
 export const genre = {
     alternative: 'Alternative',
@@ -93,53 +77,20 @@ export const genre = {
     southernrock: 'Southern Rock',
     world: 'World',
     other: 'Other',
-}
+} as const
 
 export type GenreTypes = keyof typeof genre
-export type GenreValues =
-    | 'Alternative'
-    | 'Blues'
-    | 'Classical'
-    | 'Classic Rock'
-    | 'Country'
-    | 'Emo'
-    | 'Fusion'
-    | 'Glam'
-    | 'Grunge'
-    | 'Hip-Hop/Rap'
-    | 'Indie Rock'
-    | 'Inspirational'
-    | 'Jazz'
-    | 'J-Rock'
-    | 'Latin'
-    | 'Metal'
-    | 'New Wave'
-    | 'Novelty'
-    | 'Nu-Metal'
-    | 'Pop/Dance/Electronic'
-    | 'Pop-Rock'
-    | 'Prog'
-    | 'Punk'
-    | 'R&B/Soul/Funk'
-    | 'Reggae/Ska'
-    | 'Rock'
-    | 'Southern Rock'
-    | 'World'
-    | 'Other'
+export type GenreValues = (typeof genre)[GenreTypes]
 
 export const rating = {
     1: 'Family Friendly',
     2: 'Supervision Recommended',
     3: 'Mature Content',
     4: 'No Rating',
-}
+} as const
 
 export type RatingTypes = keyof typeof rating
-export type RatingValues =
-    | 'Family Friendly'
-    | 'Supervision Recommended'
-    | 'Mature Content'
-    | 'No Rating'
+export type RatingValues = (typeof rating)[RatingTypes]
 
 export const songScrollSpeed = {
     1700: 'Crazy',
@@ -151,19 +102,11 @@ export const songScrollSpeed = {
     2600: 'Slow',
     2750: 'Slower',
     3000: 'Comatose',
-}
+} as const
 
 export type SongScrollSpeedTypes = keyof typeof songScrollSpeed
 export type SongScrollSpeedValues =
-    | 'Crazy'
-    | 'Faster'
-    | 'Fast'
-    | 'Medium Fast'
-    | 'Normal'
-    | 'Medium Slow'
-    | 'Slow'
-    | 'Slower'
-    | 'Comatose'
+    (typeof songScrollSpeed)[SongScrollSpeedTypes]
 
 export const subGenre = {
     subgenre_alternative: 'Alternative',
@@ -264,131 +207,28 @@ export const subGenre = {
     subgenre_acapella: 'A capella',
     subgenre_contemporaryfolk: 'Contemporary Folk',
     subgenre_oldies: 'Oldies',
-}
+} as const
 
 export type SubGenreTypes = keyof typeof subGenre
-export type SubGenreValues =
-    | 'Alternative'
-    | 'College'
-    | 'Other'
-    | 'Acoustic'
-    | 'Chicago'
-    | 'Classic'
-    | 'Contemporary'
-    | 'Country'
-    | 'Delta'
-    | 'Electric'
-    | 'Classical'
-    | 'Classic Rock'
-    | 'Bluegrass'
-    | 'Honky Tonk'
-    | 'Outlaw'
-    | 'Traditional Folk'
-    | 'Emo'
-    | 'Fusion'
-    | 'Glam'
-    | 'Goth'
-    | 'Grunge'
-    | 'Alternative Rap'
-    | 'Gangsta'
-    | 'Hardcore Rap'
-    | 'Hip Hop'
-    | 'Old School Hip Hop'
-    | 'Rap'
-    | 'Trip Hop'
-    | 'Underground Rap'
-    | 'Indie Rock'
-    | 'Lo-fi'
-    | 'Math Rock'
-    | 'Noise'
-    | 'Post Rock'
-    | 'Shoegazing'
-    | 'Inspirational'
-    | 'Acid Jazz'
-    | 'Experimental'
-    | 'Ragtime'
-    | 'Smooth'
-    | 'J-Rock'
-    | 'Latin'
-    | 'Black'
-    | 'Core'
-    | 'Death'
-    | 'Hair'
-    | 'Industrial'
-    | 'Metal'
-    | 'Power'
-    | 'Prog'
-    | 'Speed'
-    | 'Thrash'
-    | 'Dark Wave'
-    | 'Electroclash'
-    | 'New Wave'
-    | 'Synthpop'
-    | 'Novelty'
-    | 'Nu-Metal'
-    | 'Ambient'
-    | 'Breakbeat'
-    | 'Chiptune'
-    | 'Dance'
-    | 'Downtempo'
-    | 'Dub'
-    | 'Drum and Bass'
-    | 'Electronica'
-    | 'Garage'
-    | 'Hardcore Dance'
-    | 'House'
-    | 'Techno'
-    | 'Trance'
-    | 'Pop'
-    | 'Soft Rock'
-    | 'Teen'
-    | 'Prog Rock'
-    | 'Dance Punk'
-    | 'Hardcore'
-    | 'Disco'
-    | 'Funk'
-    | 'Motown'
-    | 'Rhythm and Blues'
-    | 'Soul'
-    | 'Reggae'
-    | 'Ska'
-    | 'Arena'
-    | 'Blues'
-    | 'Folk Rock'
-    | 'Hard Rock'
-    | 'Psychedelic'
-    | 'Rock'
-    | 'Rockabilly'
-    | 'Rock and Roll'
-    | 'Surf'
-    | 'Southern Rock'
-    | 'World'
-    | 'A capella'
-    | 'Contemporary Folk'
-    | 'Oldies'
-    | 'Unknown'
+export type SubGenreValues = (typeof subGenre)[SubGenreTypes] | 'Unknown'
 
 export const vocalGender = {
     male: 'Male',
     female: 'Female',
-}
+} as const
 
 export type VocalGenderTypes = keyof typeof vocalGender
-export type VocalGenderValues = 'Male' | 'Female'
+export type VocalGenderValues = (typeof vocalGender)[VocalGenderTypes]
 
 export const vocalParts = {
     0: 'No Vocals',
     1: 'Solo Vocals',
     2: '2-Part Harmonies',
     3: '3-Part Harmonies',
-}
+} as const
 
 export type VocalPartsTypes = keyof typeof vocalParts
-export type VocalPartsValues =
-    | 'No Vocals'
-    | 'Solo Vocals'
-    | '2-Part Harmonies'
-    | '3-Part Harmonies'
+export type VocalPartsValues = (typeof vocalParts)[VocalPartsTypes]
 
 export const rank = {
     0: 'No Part',
@@ -399,7 +239,7 @@ export const rank = {
     5: 'Challenging',
     6: 'Nightmare',
     7: 'Impossible',
-}
+} as const
 
 export const rankGraphic = {
     0: 'NO PART',
@@ -410,7 +250,7 @@ export const rankGraphic = {
     5: '⚪⚪⚪⚪⚫',
     6: '⚪⚪⚪⚪⚪',
     7: '👿👿👿👿👿',
-}
+} as const
 
 export type RankNumberTypes = keyof typeof rank
 export type RankLocaleTypes = 'default' | 'graphical'

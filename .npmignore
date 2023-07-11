@@ -1,6 +1,8 @@
-dta-parser-*/
 node_modules/
 src/
+src_*/
+images/
+.npmignore
 .eslintrc.js
 .gitignore
 .prettierrc.js
@@ -8,4 +10,3 @@ tsconfig.json
 webpack.config.js
 yarn*
 *.tgz
-src_v*
