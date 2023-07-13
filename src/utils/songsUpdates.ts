@@ -1,0 +1,167 @@
+import { depackDTA } from '../core'
+import fs from 'fs'
+import path from 'path'
+
+interface SongsUpdatesObject {
+    [key: string]: {
+        song_length?: number
+        format?: number
+        version?: number
+        game_origin?: string
+        vocal_tonic_note?: number
+        song_tonality?: number
+        song_id?: number
+        rating?: number
+        year_released?: number
+        year_recorded?: number
+        album_name?: string
+        album_track_number?: number
+        album_art?: boolean
+        encoding?: string
+        alternate_path?: boolean
+        extra_authoring?: string[]
+        solo?: string[]
+        artist?: string
+        vocal_parts?: number
+        hopo_threshold?: number
+        vols?: number[]
+        preview?: [number, number]
+    }
+}
+
+/**
+ * Generates a JSON file from Rock Band 3 Deluxe's `songs_updates` DTA file.
+ *
+ * `WARNING`: This function won't work on browser environments since it uses the `fs` module from Node.
+ * @returns {SongsUpdatesObject} An object with parsed songs updates.
+ */
+const generateJSONfromUpdates = (): SongsUpdatesObject => {
+    const returnObject: SongsUpdatesObject = {}
+    let namesIndex: number
+
+    const updateFileContents = fs.readFileSync(
+        path.resolve(__dirname, '../database/songs_updates.dta'),
+        { encoding: 'utf-8' }
+    )
+
+    const eachSongRegistry = depackDTA(updateFileContents)
+
+    eachSongRegistry.forEach((song) => {
+        const [, songnameRaw, ...content] = song.split('(')
+        const songname = songnameRaw.trim()
+        if (!returnObject[songname]) returnObject[songname] = {}
+        const values = content.map((value) => value.trim())
+        const names = song.match(/"(.*?)"/g) as RegExpMatchArray
+
+        namesIndex = 0
+
+        let processing = ''
+        values.forEach((single) => {
+            if (!processing) {
+                const [keyName, ...keyValue] = single.split(' ')
+                const processedValue = keyValue
+                    .join(' ')
+                    .replaceAll(')', '')
+                    .trim()
+
+                if (keyName === 'song_length')
+                    returnObject[songname].song_length = Number(processedValue)
+                else if (keyName === 'format')
+                    returnObject[songname].format = Number(processedValue)
+                else if (keyName === 'version')
+                    returnObject[songname].version = Number(processedValue)
+                else if (keyName === 'game_origin')
+                    returnObject[songname].game_origin = processedValue
+                else if (keyName === 'vocal_tonic_note')
+                    returnObject[songname].vocal_tonic_note =
+                        Number(processedValue)
+                else if (keyName === 'song_tonality')
+                    returnObject[songname].song_tonality =
+                        Number(processedValue)
+                else if (keyName === 'song_id')
+                    returnObject[songname].song_id = Number(processedValue)
+                else if (keyName === 'rating')
+                    returnObject[songname].rating = Number(processedValue)
+                else if (keyName === 'vocal_parts')
+                    returnObject[songname].vocal_parts = Number(processedValue)
+                else if (keyName === 'hopo_threshold')
+                    returnObject[songname].hopo_threshold =
+                        Number(processedValue)
+                else if (keyName === 'preview') {
+                    const previews = processedValue
+                        .split(' ')
+                        .map((values) => Number(values))
+                    returnObject[songname].preview = previews as [
+                        number,
+                        number
+                    ]
+                } else if (keyName === 'year_released')
+                    returnObject[songname].year_released =
+                        Number(processedValue)
+                else if (keyName === 'year_recorded')
+                    returnObject[songname].year_recorded =
+                        Number(processedValue)
+                else if (keyName === 'album_track_number')
+                    returnObject[songname].album_track_number =
+                        Number(processedValue)
+                else if (keyName === 'encoding')
+                    returnObject[songname].encoding = processedValue
+                else if (keyName === 'alternate_path') {
+                    if (processedValue.toLowerCase() === 'true')
+                        returnObject[songname].alternate_path = true
+                    else returnObject[songname].alternate_path = false
+                } else if (keyName === 'album_art') {
+                    if (processedValue.toLowerCase() === 'true')
+                        returnObject[songname].album_art = true
+                    else returnObject[songname].album_art = false
+                } else if (keyName === 'extra_authoring') {
+                    const extras = keyValue.map((value) =>
+                        value.replaceAll(')', '')
+                    )
+                    if (!returnObject[songname].extra_authoring)
+                        returnObject[songname].extra_authoring = []
+                    extras.forEach((extra) =>
+                        returnObject[songname].extra_authoring?.push(
+                            extra.replaceAll(')', '')
+                        )
+                    )
+                } else if (keyName === 'artist') {
+                    returnObject[songname].artist = names[
+                        namesIndex
+                    ].replaceAll('"', '')
+                    namesIndex++
+                } else if (keyName === 'album_name') {
+                    returnObject[songname].album_name = names[
+                        namesIndex
+                    ].replaceAll('"', '')
+                    namesIndex++
+                } else if (keyName === 'solo') processing = 'solo'
+                else if (keyName === 'vols') processing = 'vols'
+            } else {
+                if (processing === 'solo') {
+                    const flags = single.replaceAll(')', '').split(' ')
+                    returnObject[songname].solo = flags
+                }
+                if (processing === 'vols') {
+                    const flags = single
+                        .replaceAll(')', '')
+                        .split(' ')
+                        .map((value) => Number(value))
+                    returnObject[songname].vols = flags
+                }
+                processing = ''
+            }
+        })
+    })
+
+    const allSongsNames = Object.keys(returnObject)
+
+    allSongsNames.forEach((song) => {
+        if (returnObject[song].extra_authoring) {
+            const newExtras = new Set(returnObject[song].extra_authoring)
+            returnObject[song].extra_authoring = Array.from(newExtras)
+        }
+    })
+
+    return returnObject
+}

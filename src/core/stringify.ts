@@ -254,6 +254,16 @@ const stringifyDTADocumentC3 = (
             ' '
         )}))\n`
     }
+    if (value.content.alternate_path) {
+        output += `\t(alternate_path ${
+            value.content.alternate_path ? '1' : '0'
+        })\n`
+    }
+    if (value.content.extra_authoring) {
+        output += `\t(extra_authoring (${value.content.extra_authoring.join(
+            ' '
+        )}))\n`
+    }
     if (
         (options?.placeCustomAttributes === undefined ||
             options?.placeCustomAttributes === true) &&
@@ -781,6 +791,16 @@ const stringifyDTADocumentRb3 = (
     }
     if (value.content.tuning_offset_cents !== undefined) {
         output += `\t(tuning_offset_cents ${value.content.tuning_offset_cents})\n`
+    }
+    if (value.content.alternate_path) {
+        output += `\t(alternate_path ${
+            value.content.alternate_path ? 'TRUE' : 'FALSE'
+        })\n`
+    }
+    if (value.content.extra_authoring) {
+        output += `\t(extra_authoring (${value.content.extra_authoring.join(
+            ' '
+        )}))\n`
     }
 
     if (options?.type === 'rb3') {

@@ -1,6 +1,11 @@
 dta-parser-*/
 node_modules/
 dist/
-src/debug/
+lib/
+module/
+src/tests/
+src/database/
 *.tgz
 src_v*
+*.json
+*.txt

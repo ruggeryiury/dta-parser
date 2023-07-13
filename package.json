@@ -1,37 +1,32 @@
 {
 	"name": "@ruggeryiury/dta-parser",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"private": false,
 	"description": "A Rock Band song metadata file parser written in TypeScript",
-	"main": "dist/dta-parser.cjs.js",
-	"umd:main": "dist/dta-parser.umd.js",
-	"module": "dist/dta-parser.mjs",
-	"types": "dist/index.d.ts",
+	"main": "lib/index.js",
+	"module": "module/index.js",
+	"types": "lib/index.d.ts",
 	"author": "Ruggery Iury Corrêa <ruggeryiury@gmail.com> (https://ruggeryiury.github.io/my-linktree/)",
 	"license": "MIT",
-	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/"
-	},
-	"repository": {
-		"url": "git@github.com:ruggeryiury/dta-parser.git"
-	},
 	"keywords": [
 		"parser",
 		"rock-band",
 		"dta"
 	],
 	"scripts": {
-		"build": "yarn run clean && yarn run build:types && npx webpack",
-		"build:types": "yarn clean && tsc -p tsconfig.json",
-		"clean": "rimraf dist build",
-		"format": "prettier --write \"src/**/*.{js,ts,tsx}",
+		"build": "yarn clean && yarn build:commonjs && yarn build:esmodule && webpack",
+		"build:commonjs": "tsc",
+		"build:esmodule": "tsc -m es6 --outDir module",
+		"clean": "rimraf dist lib module dist",
+		"format": "prettier --write src/**/*.{js,ts,tsx}",
 		"lint": "eslint src",
-		"test": "nodemon ./src/debug/test.ts"
+		"test": "nodemon ./src/tests/test.ts"
 	},
 	"exports": {
 		".": {
-			"require": "./dist/dta-parser.cjs.js",
-			"import": "./dist/dta-parser.mjs"
+			"require": "./lib/index.js",
+			"import": "./module/index.js",
+			"umd": "./dist/dta-parser.js"
 		}
 	},
 	"dependencies": {

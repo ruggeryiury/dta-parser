@@ -1,6 +1,7 @@
 import { DTADocument } from './@types/DTADocument'
 import { DTAParserOptions } from './@types/DTAParser'
 import { depackDTA, parseDTA, sortDTA, stringifyDTA, createDTA } from './core'
+import { applyUpdates } from './utils'
 
 /**
  * Parses a .dta file content.
@@ -17,11 +18,15 @@ const DTAParser = (
 ): DTADocument[] => {
     const depackedSongs = depackDTA(dtaFileContents)
 
-    const parsedSongs: DTADocument[] = []
+    let parsedSongs: DTADocument[] = []
     depackedSongs.map((value) => {
         const song = parseDTA(value)
         parsedSongs.push(song)
     })
+
+    if (options?.applyUpdates) {
+        parsedSongs = applyUpdates(parsedSongs)
+    }
 
     if (options?.sortBy) {
         return sortDTA(parsedSongs, options.sortBy)

@@ -182,8 +182,10 @@ export const parseDTA = (songContent: string): DTADocument => {
 
         if (tracksStarted) {
             if (keyFilter === 'drum') {
-                if (content.length > 0) {
-                    parsed.content.tracks_count[0] = content.length
+                if (content.filter((val) => val !== ')').length > 0) {
+                    parsed.content.tracks_count[0] = content.filter(
+                        (val) => val !== ')'
+                    ).length
                     return
                 } else {
                     processedTrack = 'drum'
@@ -191,8 +193,10 @@ export const parseDTA = (songContent: string): DTADocument => {
                     return
                 }
             } else if (keyFilter === 'bass') {
-                if (content.length > 0) {
-                    parsed.content.tracks_count[1] = content.length
+                if (content.filter((val) => val !== ')').length > 0) {
+                    parsed.content.tracks_count[1] = content.filter(
+                        (val) => val !== ')'
+                    ).length
                     return
                 } else {
                     processedTrack = 'bass'
@@ -200,8 +204,10 @@ export const parseDTA = (songContent: string): DTADocument => {
                     return
                 }
             } else if (keyFilter === 'guitar') {
-                if (content.length > 0) {
-                    parsed.content.tracks_count[2] = content.length
+                if (content.filter((val) => val !== ')').length > 0) {
+                    parsed.content.tracks_count[2] = content.filter(
+                        (val) => val !== ')'
+                    ).length
                     return
                 } else {
                     processedTrack = 'guitar'
@@ -209,8 +215,10 @@ export const parseDTA = (songContent: string): DTADocument => {
                     return
                 }
             } else if (keyFilter === 'vocals') {
-                if (content.length > 0) {
-                    parsed.content.tracks_count[3] = content.length
+                if (content.filter((val) => val !== ')').length > 0) {
+                    parsed.content.tracks_count[3] = content.filter(
+                        (val) => val !== ')'
+                    ).length
                     return
                 } else {
                     processedTrack = 'vocals'
@@ -218,8 +226,10 @@ export const parseDTA = (songContent: string): DTADocument => {
                     return
                 }
             } else if (keyFilter === 'keys') {
-                if (content.length > 0) {
-                    parsed.content.tracks_count[4] = content.length
+                if (content.filter((val) => val !== ')').length > 0) {
+                    parsed.content.tracks_count[4] = content.filter(
+                        (val) => val !== ')'
+                    ).length
                     return
                 } else {
                     processedTrack = 'keys'

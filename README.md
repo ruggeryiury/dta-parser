@@ -16,12 +16,14 @@
   
 
 # 💠 Table of Contents
-- [Usage](#-usage)
+- [Usage](#usage)
     - [Parsing a DTA file](#parsing-a-dta-file)
     - [Sorting all songs when parsing](#sorting-all-songs-when-parsing)
     - [Getting any value from a song](#getting-any-value-from-a-song)
     - [Updating values from a song](#updating-values-from-a-song)
     - [Exporting a song individually, or as a pack](#exporting-a-song-individually-or-as-a-pack)
+- [Known Issues](#known-issues)
+- [Changelog](https://github.com/ruggeryiury/dta-parser/blob/master/CHANGELOG.md)
 
 # Usage
 
@@ -172,3 +174,6 @@ const parsedDTAs = DTAParser(dtaFileContents)
 const newDTAFileContents = DTAArray.stringify(parsedDTAs)
 ```
 
+# Known Issues
+
+- The parser only works for **individual songs/songs pack** DTA files. Any other kind of DTA file will not be parsed.

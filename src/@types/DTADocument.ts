@@ -111,6 +111,8 @@ export interface DTAContentDocument {
     song_key?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
     real_guitar_tuning?: [number, number, number, number, number, number]
     real_bass_tuning?: [number, number, number, number]
+    extra_authoring?: string[]
+    alternate_path?: boolean
 }
 
 export interface DTACustomSongAttributes {

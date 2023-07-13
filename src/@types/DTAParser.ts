@@ -14,4 +14,10 @@ export interface DTAParserOptions {
      * * `song_id` => Sorts by the songs' ID.
      */
     sortBy?: SortByOptionsTypes
+    /**
+     * If you're parsing a DTA file from official pre-RB3 songs, the parser will
+     * try to seek additional information from the updates.
+     * @default false
+     */
+    applyUpdates?: boolean
 }

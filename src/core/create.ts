@@ -14,7 +14,7 @@ const dtaDefault: DTADocument = {
         id: '',
         name: '',
         artist: '',
-        master: true,
+        master: false,
         song_id: 0,
         songname: '',
         tracks_count: [0, 0, 0, 0, 0, 0],
