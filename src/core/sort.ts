@@ -72,6 +72,12 @@ export const sortDTA = (
 
             return 0
         })
+    } else if (sortBy === 'id') {
+        return songs.sort((a, b) => {
+            if (a.content.id > b.content.id) return 1
+            if (a.content.id < b.content.id) return -1
+            return 0
+        })
     } else {
         // (sortBy === 'song_id')
         return songs.sort((a, b) => {

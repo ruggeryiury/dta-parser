@@ -10,3 +10,4 @@ tsconfig.json
 webpack.config.js
 yarn*
 *.tgz
+*.txt

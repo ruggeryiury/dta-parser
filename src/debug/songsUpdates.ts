@@ -2,33 +2,35 @@ import { depackDTA } from '../core'
 import fs from 'fs'
 import path from 'path'
 
-interface SongsUpdatesObject {
-    [key: string]: {
-        song_length?: number
-        format?: number
-        version?: number
-        game_origin?: string
-        vocal_tonic_note?: number
-        song_tonality?: number
-        song_id?: number
-        rating?: number
-        year_released?: number
-        year_recorded?: number
-        album_name?: string
-        album_track_number?: number
-        album_art?: boolean
-        encoding?: string
-        alternate_path?: boolean
-        extra_authoring?: string[]
-        solo?: string[]
-        artist?: string
-        vocal_parts?: number
-        hopo_threshold?: number
-        vols?: number[]
-        preview?: [number, number]
-    }
+type SongsUpdatesObject = {
+    [key: string]: SongsUpdatesKeys
 }
 
+interface SongsUpdatesKeys {
+    song_length?: number
+    format?: number
+    version?: number
+    game_origin?: string
+    vocal_tonic_note?: number
+    song_tonality?: number
+    song_id?: number
+    rating?: number
+    year_released?: number
+    year_recorded?: number
+    album_name?: string
+    album_track_number?: number
+    album_art?: boolean
+    encoding?: string
+    alternate_path?: boolean
+    extra_authoring?: string[]
+    solo?: string[]
+    artist?: string
+    vocal_parts?: number
+    hopo_threshold?: number
+    vols?: number[]
+    preview?: [number, number]
+    genre?: string
+}
 /**
  * Generates a JSON file from Rock Band 3 Deluxe's `songs_updates` DTA file.
  *
@@ -72,6 +74,8 @@ const generateJSONfromUpdates = (): SongsUpdatesObject => {
                     returnObject[songname].version = Number(processedValue)
                 else if (keyName === 'game_origin')
                     returnObject[songname].game_origin = processedValue
+                else if (keyName === 'genre')
+                    returnObject[songname].genre = processedValue
                 else if (keyName === 'vocal_tonic_note')
                     returnObject[songname].vocal_tonic_note =
                         Number(processedValue)
@@ -161,7 +165,126 @@ const generateJSONfromUpdates = (): SongsUpdatesObject => {
             const newExtras = new Set(returnObject[song].extra_authoring)
             returnObject[song].extra_authoring = Array.from(newExtras)
         }
+        if (
+            returnObject[song].vocal_tonic_note &&
+            !returnObject[song].song_tonality
+        )
+            returnObject[song].song_tonality = 0
     })
 
     return returnObject
+}
+
+/**
+ * Regnerates the songs updates DTA file from Rock Band 3 Deluxe.
+ *
+ * `WARNING`: This function won't work on browser environments since it uses the `fs` module from Node.
+ */
+export const regenerateSongsUpdates = () => {
+    let newSongsUpdates = ''
+    const allSongsUpdates = generateJSONfromUpdates()
+
+    const allSongsNames = Object.keys(allSongsUpdates).sort((a, b) => {
+        if (a.toLowerCase() > b.toLowerCase()) return 1
+        else if (a.toLowerCase() < b.toLowerCase()) return -1
+        return 0
+    })
+
+    allSongsNames.forEach((songname) => {
+        let placedSong = false
+        const allKeys = Object.keys(allSongsUpdates[songname])
+
+        const desiredSongKeys: ('vocal_parts' | 'vols' | 'hopo_threshold')[] = [
+            'vocal_parts',
+            'vols',
+            'hopo_threshold',
+        ]
+        const filteredObject = Object.fromEntries(
+            Object.entries(allSongsUpdates[songname]).filter(([key]) =>
+                desiredSongKeys.includes(
+                    key as (typeof desiredSongKeys)[number]
+                )
+            )
+        ) as Pick<SongsUpdatesKeys, (typeof desiredSongKeys)[number]>
+
+        newSongsUpdates += `(${songname}`
+
+        allKeys.forEach((keys) => {
+            if (
+                keys === 'vocal_parts' ||
+                keys === 'vols' ||
+                keys === 'hopo_threshold'
+            ) {
+                if (!placedSong) {
+                    const songLength = Object.keys(filteredObject).length
+                    newSongsUpdates += `\n\t(song${songLength > 1 ? '' : ' '}`
+                    if (filteredObject.vocal_parts !== undefined) {
+                        newSongsUpdates += `${
+                            songLength > 1 ? '\n\t\t' : ''
+                        }(vocal_parts ${filteredObject.vocal_parts})`
+                    }
+                    if (filteredObject.vols !== undefined) {
+                        newSongsUpdates += `${
+                            songLength > 1 ? '\n\t\t' : ''
+                        }(vols ${filteredObject.vols
+                            .map((vol) => vol.toFixed(1))
+                            .join(' ')})`
+                    }
+                    if (filteredObject.hopo_threshold !== undefined) {
+                        newSongsUpdates += `${
+                            songLength > 1 ? '\n\t\t' : ''
+                        }(hopo_threshold ${filteredObject.hopo_threshold})`
+                    }
+                    newSongsUpdates += `)`
+                    placedSong = true
+                }
+            } else if (keys === 'artist' || keys === 'album_name') {
+                newSongsUpdates += `\n\t(${keys} "${(
+                    allSongsUpdates[songname][
+                        keys as keyof SongsUpdatesObject[typeof songname]
+                    ] as string
+                ).replaceAll('"', '\\q')}")`
+            } else if (keys === 'extra_authoring') {
+                newSongsUpdates += `\n\t(${keys} ${(
+                    allSongsUpdates[songname][
+                        keys as keyof SongsUpdatesObject[typeof songname]
+                    ] as []
+                ).join(' ')})`
+            } else if (keys === 'solo') {
+                newSongsUpdates += `\n\t(${keys} (${(
+                    allSongsUpdates[songname][
+                        keys as keyof SongsUpdatesObject[typeof songname]
+                    ] as []
+                ).join(' ')}))`
+            } else if (keys === 'preview') {
+                newSongsUpdates += `\n\t(${keys} ${(
+                    allSongsUpdates[songname][
+                        keys as keyof SongsUpdatesObject[typeof songname]
+                    ] as []
+                ).join(' ')})`
+            } else if (keys === 'album_art' || keys === 'alternate_path') {
+                newSongsUpdates += `\n\t(${keys} ${
+                    (allSongsUpdates[songname][
+                        keys as keyof SongsUpdatesObject[typeof songname]
+                    ] as boolean)
+                        ? 'TRUE'
+                        : 'FALSE'
+                })`
+            } else {
+                newSongsUpdates += `\n\t(${keys} ${
+                    allSongsUpdates[songname][
+                        keys as keyof SongsUpdatesObject[typeof songname]
+                    ] as string
+                })`
+            }
+        })
+
+        newSongsUpdates += ')\n'
+    })
+
+    fs.writeFileSync(
+        path.resolve(__dirname, '../database/new_updates.dta'),
+        newSongsUpdates,
+        { encoding: 'utf-8' }
+    )
 }

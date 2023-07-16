@@ -44,8 +44,7 @@ export const parseDTA = (songContent: string): DTADocument => {
     const parsed = createDTA()
     const split = songContent.split(/[;(]/).map((value) => value.trim())
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    split.map((value, i) => {
+    split.map((value) => {
         const clean = value.replaceAll("'", '').trim()
         const [key, ...content] = value.split(' ')
         const keyFilter = key.replaceAll("'", '')

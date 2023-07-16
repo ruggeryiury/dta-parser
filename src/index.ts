@@ -1,6 +1,7 @@
 import { DTADocument } from './@types/DTADocument'
 import { DTAParserOptions } from './@types/DTAParser'
 import { depackDTA, parseDTA, sortDTA, stringifyDTA, createDTA } from './core'
+import { getSongByID } from './tools'
 import { applyUpdates } from './utils'
 
 /**
@@ -24,12 +25,47 @@ const DTAParser = (
         parsedSongs.push(song)
     })
 
-    if (options?.applyUpdates) {
-        parsedSongs = applyUpdates(parsedSongs)
+    if (options?.harmonixSongs) {
+        parsedSongs = applyUpdates(parsedSongs).map((song) => {
+            if (!song.custom)
+                song.custom = {
+                    author: 'Harmonix',
+                    multitrack: true,
+                }
+            return song
+        })
+    }
+
+    if (options?.update) {
+        const ids = Object.keys(options.update)
+
+        ids.forEach((id) => {
+            const selectedSong = getSongByID(parsedSongs, id)
+            const updateObject = options.update?.[id]
+
+            if (selectedSong !== undefined && updateObject) {
+                selectedSong.update(updateObject)
+            }
+        })
+    }
+
+    if (options?.updateAll) {
+        const updateAll = options.updateAll
+        parsedSongs = parsedSongs.map((song) => {
+            if (updateAll.author) {
+                if (!song.custom)
+                    song.custom = {
+                        author: updateAll.author,
+                    }
+                song.custom.author = updateAll.author
+            }
+            return song
+        })
     }
 
     if (options?.sortBy) {
-        return sortDTA(parsedSongs, options.sortBy)
+        const sortByOption = options.sortBy
+        parsedSongs = sortDTA(parsedSongs, sortByOption)
     }
 
     return parsedSongs
@@ -52,6 +88,15 @@ interface DTAArrayModule {
      * @returns {string} e string representation of this parsed song object as a `.dta` file.
      */
     stringify: typeof stringifyDTA
+    /**
+     * Returns a parsed song object inside an `DTADocument` array based on its unique string ID.
+     * Returns `undefined` if the song's not found.
+     *
+     * @param {DTADocument[]} songs An array on parsed songs you want to find the song from.
+     * @param {string} id: The unique string ID of the song.
+     * @returns {DTADocument | undefined} The index of the song inside the `DTADocument` array.
+     */
+    getSongByID: typeof getSongByID
 }
 /**
  * Module with functions to handle arrays of parsed song objects.
@@ -59,6 +104,7 @@ interface DTAArrayModule {
 export const DTAArray: DTAArrayModule = {
     sort: sortDTA,
     stringify: stringifyDTA,
+    getSongByID: getSongByID,
 }
 
 interface DTAToolsModule {
