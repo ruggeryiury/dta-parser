@@ -43,7 +43,10 @@ const dtaDefault: DTADocument = {
         return stringifyDTA([this], options)
     },
     update(options) {
-        return updateDTA(this, options)
+        updateDTA(this, options)
+    },
+    json() {
+        return this.content
     },
 }
 

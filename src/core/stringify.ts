@@ -1,10 +1,49 @@
 import { DTADocument } from '../@types/DTADocument'
 
 export interface StringifyDataOptions {
+    /**
+     * Specify the generated type of the DTA.
+     * @default 'default'
+     */
     type?: 'default' | 'rb3' | 'rb3_dlc'
+    /**
+     * By setting this to `true`, it places 1 to the
+     * guitar audio channels on `cores`.
+     *
+     * @default false
+     */
     guitarCores?: boolean
+    /**
+     * Places C3 MAGMA-generated information as DTA comments.
+     * @default true if type === 'default'
+     * @default false if type === 'rb3' | 'rb3_dlc'
+     */
     placeCustomAttributes?: boolean
-    newLineOnArrays?: boolean
+    /**
+     * Changes some properties to generate DTA file for Wii systems.
+     */
+    wiiMode?: {
+        /**
+         * The generation of the pack you want to build.
+         */
+        gen:
+            | 'sZAE'
+            | 'sZBE'
+            | 'sZCE'
+            | 'sZDE'
+            | 'sZEE'
+            | 'sZFE'
+            | 'sZGE'
+            | 'sZHE'
+            | 'sZJE'
+            | 'sZKE'
+        /**
+         * The slot of the pack you want to build.
+         *
+         * **Odd, positive numbers only**.
+         */
+        slot: number
+    }
 }
 
 /**
@@ -52,7 +91,17 @@ const stringifyDTADocumentC3 = (
         '\\q'
     )}"\n\t)\n`
     output += `\t('master' ${value.content.master ? '1' : '0'})\n`
-    output += `\t(\n\t\t'song'\n\t\t(\n\t\t\t'name'\n\t\t\t"songs/${value.content.songname}/${value.content.songname}"\n\t\t)\n`
+    output += `\t(\n\t\t'song'\n\t\t(\n\t\t\t'name'\n\t\t\t"`
+    if (options?.wiiMode)
+        output += `dlc/${options.wiiMode.gen}/${options.wiiMode.slot
+            .toString()
+            .padStart(3, '0')}/content/songs/${value.content.songname}/${
+            value.content.songname
+        }`
+    else output += `songs/${value.content.songname}/${value.content.songname}`
+
+    output += `"\n\t\t)\n`
+
     output += `\t\t(\n\t\t\t'tracks_count'\n\t\t\t(${value.content.tracks_count.join(
         ' '
     )})\n\t\t)\n`
@@ -265,26 +314,25 @@ const stringifyDTADocumentC3 = (
         )}))\n`
     }
     if (
-        (options?.placeCustomAttributes === undefined ||
-            options?.placeCustomAttributes === true) &&
-        value.custom
+        options?.placeCustomAttributes === undefined ||
+        options?.placeCustomAttributes === true
     ) {
         output += `\n;DO NOT EDIT THE FOLLOWING LINES MANUALLY\n;Created using Magma: C3 Roks Edition v3.3.5\n;Song authored by ${
-            value.custom.author ? value.custom.author : 'Unknown Charter'
+            value.content.author ? value.content.author : 'Unknown Charter'
         }\n;Song=${value.content.name}\n;Language(s)=${
-            value.custom.languages
-                ? value.custom.languages.length === 1
-                    ? `${value.custom.languages.join(',')},`
-                    : value.custom.languages.join(',')
+            value.content.languages
+                ? value.content.languages.length === 1
+                    ? `${value.content.languages.join(',')},`
+                    : value.content.languages.join(',')
                 : 'English,'
-        }\n;Karaoke=${value.custom.karaoke ? 1 : 0}\n;Multitrack=${
-            value.custom.multitrack ? 1 : 0
-        }\n;Convert=${value.custom.convert ? 1 : 0}\n;2xBass=${
-            value.custom.doubleKick ? 1 : 0
-        }\n;RhythmKeys=${value.custom.rhythmOnKeys ? 1 : 0}\n;RhythmBass=${
-            value.custom.rhythmOnBass ? 1 : 0
-        }\n;CATemh=${value.custom.CATemh ? 1 : 0}\n;ExpertOnly=${
-            value.custom.expertOnly ? 1 : 0
+        }\n;Karaoke=${value.content.karaoke ? 1 : 0}\n;Multitrack=${
+            value.content.multitrack ? 1 : 0
+        }\n;Convert=${value.content.convert ? 1 : 0}\n;2xBass=${
+            value.content.doubleKick ? 1 : 0
+        }\n;RhythmKeys=${value.content.rhythmOnKeys ? 1 : 0}\n;RhythmBass=${
+            value.content.rhythmOnBass ? 1 : 0
+        }\n;CATemh=${value.content.CATemh ? 1 : 0}\n;ExpertOnly=${
+            value.content.expertOnly ? 1 : 0
         }\n`
     }
     output += `)\n`
@@ -308,6 +356,15 @@ const stringifyDTADocumentRb3 = (
     const guitarTrackStarts =
         value.content.tracks_count[0] + value.content.tracks_count[1] - 1
     const guitarTrackEnds = guitarTrackStarts + value.content.tracks_count[2]
+    let instrumentCount = 0
+    let hasOnlyOneInstrument = false
+
+    value.content.tracks_count.forEach((track, i) => {
+        if (i < 5 && track !== 0) instrumentCount++
+    })
+
+    if (instrumentCount > 1) hasOnlyOneInstrument = false
+    else hasOnlyOneInstrument = true
 
     output += `(${value.content.id}\n`
     output += `\t(name "${value.content.name.replaceAll('"', '\\q')}")\n`
@@ -315,8 +372,16 @@ const stringifyDTADocumentRb3 = (
     output += `\t(master ${value.content.master ? 'TRUE' : 'FALSE'})\n`
     output += `\t(song_id ${value.content.song_id})\n`
     output += `\t(song\n`
-    output += `\t\t(name "songs/${value.content.songname}/${value.content.songname}")\n`
-    output += `\t\t(tracks${options?.type === 'rb3' ? ' (' : '\n\t\t\t('}`
+    output += `\t\t(name "`
+    if (options?.wiiMode)
+        output += `dlc/${options.wiiMode.gen}/${options.wiiMode.slot
+            .toString()
+            .padStart(3, '0')}/content/songs/${value.content.songname}/${
+            value.content.songname
+        }`
+    else output += `songs/${value.content.songname}/${value.content.songname}`
+    output += `")\n`
+    output += `\t\t(tracks${options?.type === 'rb3' ? ' (' : `\n\t\t\t(`}`
 
     const drumTrack = value.content.tracks_count[0]
     const bassTrack = value.content.tracks_count[1]
@@ -376,14 +441,25 @@ const stringifyDTADocumentRb3 = (
             firstTrackDone = true
         }
 
-        output += `\n\t\t\t)\n\t\t)\n`
+        output += hasOnlyOneInstrument ? `)\n\t\t)\n` : `\n\t\t\t)\n\t\t)\n`
     } else {
         if (drumTrack) {
             output += `${!firstTrackDone ? '' : '\n\t\t\t\t'}(drum ${
                 drumTrack > 1 ? '(' : ''
-            }${trackCountIterator(trackCount, value.content.tracks_count[0])}${
-                drumTrack > 1 ? ')' : ''
-            })`
+            }`
+            if (drumTrack > 2) {
+                const drummix = `${trackCountIterator(
+                    trackCount,
+                    value.content.tracks_count[0]
+                )}`.replaceAll(' ', '\n\t\t\t\t\t\t')
+
+                output += drummix
+            } else
+                output += `${trackCountIterator(
+                    trackCount,
+                    value.content.tracks_count[0]
+                )}`
+            output += `${drumTrack > 1 ? ')' : ''})`
             trackCount += value.content.tracks_count[0]
             firstTrackDone = true
         }
@@ -431,29 +507,13 @@ const stringifyDTADocumentRb3 = (
         if (options?.type === 'rb3') {
             if (i === 0) output += `${pans.toFixed(2)}`
             else if (i === value.content.pans.length - 1)
-                output += `${
-                    options?.newLineOnArrays === undefined ||
-                    options?.newLineOnArrays === true
-                        ? '\n\t\t\t\t'
-                        : ' '
-                }${pans.toFixed(2)}))\n`
-            else
-                output += `${
-                    options?.newLineOnArrays === undefined ||
-                    options?.newLineOnArrays === true
-                        ? '\n\t\t\t\t'
-                        : ' '
-                }${pans.toFixed(2)}`
+                output += `${'\n\t\t\t\t'}${pans.toFixed(2)}))\n`
+            else output += `${'\n\t\t\t\t'}${pans.toFixed(2)}`
         } else {
             if (i === 0) output += `${pans.toFixed(1)}`
             else if (i === value.content.pans.length - 1)
-                output += `${
-                    options?.newLineOnArrays === true ? '\n\t\t\t\t' : ' '
-                }${pans.toFixed(1)}))\n`
-            else
-                output += `${
-                    options?.newLineOnArrays === true ? '\n\t\t\t\t' : ' '
-                }${pans.toFixed(1)}`
+                output += `${' '}${pans.toFixed(1)}))\n`
+            else output += `${' '}${pans.toFixed(1)}`
         }
     })
     output += `\t\t(vols (`
@@ -461,29 +521,13 @@ const stringifyDTADocumentRb3 = (
         if (options?.type === 'rb3') {
             if (i === 0) output += `${vols.toFixed(2)}`
             else if (i === value.content.vols.length - 1)
-                output += `${
-                    options?.newLineOnArrays === undefined ||
-                    options?.newLineOnArrays === true
-                        ? '\n\t\t\t\t'
-                        : ' '
-                }${vols.toFixed(2)}))\n`
-            else
-                output += `${
-                    options?.newLineOnArrays === undefined ||
-                    options?.newLineOnArrays === true
-                        ? '\n\t\t\t\t'
-                        : ' '
-                }${vols.toFixed(2)}`
+                output += `${'\n\t\t\t\t'}${vols.toFixed(2)}))\n`
+            else output += `${'\n\t\t\t\t'}${vols.toFixed(2)}`
         } else {
             if (i === 0) output += `${vols.toFixed(1)}`
             else if (i === value.content.vols.length - 1)
-                output += `${
-                    options?.newLineOnArrays === true ? '\n\t\t\t\t' : ' '
-                }${vols.toFixed(1)}))\n`
-            else
-                output += `${
-                    options?.newLineOnArrays === true ? '\n\t\t\t\t' : ' '
-                }${vols.toFixed(1)}`
+                output += `${' '}${vols.toFixed(1)}))\n`
+            else output += `${' '}${vols.toFixed(1)}`
         }
     })
     output += `\t\t(cores (`
@@ -508,44 +552,26 @@ const stringifyDTADocumentRb3 = (
                     options?.guitarCores === undefined ||
                     options?.guitarCores
                 ) {
-                    output += `${
-                        options?.newLineOnArrays === undefined ||
-                        options?.newLineOnArrays === true
-                            ? '\n\t\t\t\t'
-                            : ' '
-                    }${
+                    output += `${'\n\t\t\t\t'}${
                         i <= guitarTrackStarts || i > guitarTrackEnds
                             ? '-1'
                             : '1'
                     }))\n`
                     return
                 }
-                output += `${
-                    options?.newLineOnArrays === undefined ||
-                    options?.newLineOnArrays === true
-                        ? '\n\t\t\t\t'
-                        : ' '
-                }${
+                output += `${'\n\t\t\t\t'}${
                     i <= guitarTrackStarts || i > guitarTrackEnds ? '-1' : '1'
                 }))\n`
                 return
             }
             if (options?.guitarCores === undefined || options?.guitarCores) {
-                output += `${
-                    options?.newLineOnArrays === undefined ||
-                    options?.newLineOnArrays === true
-                        ? '\n\t\t\t\t'
-                        : ' '
-                }${i <= guitarTrackStarts || i > guitarTrackEnds ? '-1' : '1'}`
+                output += `${'\n\t\t\t\t'}${
+                    i <= guitarTrackStarts || i > guitarTrackEnds ? '-1' : '1'
+                }`
                 return
             }
 
-            output += `${
-                options?.newLineOnArrays === undefined ||
-                options?.newLineOnArrays === true
-                    ? '\n\t\t\t\t'
-                    : ' '
-            }-1`
+            output += `${'\n\t\t\t\t'}-1`
             return
         } else {
             if (i === 0) {
@@ -567,32 +593,26 @@ const stringifyDTADocumentRb3 = (
                     options?.guitarCores === undefined ||
                     options?.guitarCores
                 ) {
-                    output += `${
-                        options?.newLineOnArrays === true ? '\n\t\t\t\t' : ' '
-                    }${
+                    output += `${' '}${
                         i <= guitarTrackStarts || i > guitarTrackEnds
                             ? '-1'
                             : '1'
                     }))\n`
                     return
                 }
-                output += `${
-                    options?.newLineOnArrays === true ? '\n\t\t\t\t' : ' '
-                }${
+                output += `${' '}${
                     i <= guitarTrackStarts || i > guitarTrackEnds ? '-1' : '1'
                 }))\n`
                 return
             }
             if (options?.guitarCores === undefined || options?.guitarCores) {
-                output += `${
-                    options?.newLineOnArrays === true ? '\n\t\t\t\t' : ' '
-                }${i <= guitarTrackStarts || i > guitarTrackEnds ? '-1' : '1'}`
+                output += `${' '}${
+                    i <= guitarTrackStarts || i > guitarTrackEnds ? '-1' : '1'
+                }`
                 return
             }
 
-            output += `${
-                options?.newLineOnArrays === true ? '\n\t\t\t\t' : ' '
-            }-1`
+            output += `${' '}-1`
             return
         }
     })
@@ -607,65 +627,9 @@ const stringifyDTADocumentRb3 = (
         output += `\t\t(crowd_channels ${trackCountIterator(crowdCount, 2)})\n`
     }
     if (options?.type === 'rb3')
-        output += `\t\t(drum_solo (seqs (kick.cue${
-            options?.newLineOnArrays === undefined ||
-            options?.newLineOnArrays === true
-                ? '\n\t\t\t\t\t'
-                : ' '
-        }snare.cue${
-            options?.newLineOnArrays === undefined ||
-            options?.newLineOnArrays === true
-                ? '\n\t\t\t\t\t'
-                : ' '
-        }tom1.cue${
-            options?.newLineOnArrays === undefined ||
-            options?.newLineOnArrays === true
-                ? '\n\t\t\t\t\t'
-                : ' '
-        }tom2.cue${
-            options?.newLineOnArrays === undefined ||
-            options?.newLineOnArrays === true
-                ? '\n\t\t\t\t\t'
-                : ' '
-        }crash.cue)))\n\t\t(drum_freestyle (seqs (kick.cue${
-            options?.newLineOnArrays === undefined ||
-            options?.newLineOnArrays === true
-                ? '\n\t\t\t\t\t'
-                : ' '
-        }snare.cue${
-            options?.newLineOnArrays === undefined ||
-            options?.newLineOnArrays === true
-                ? '\n\t\t\t\t\t'
-                : ' '
-        }hat.cue${
-            options?.newLineOnArrays === undefined ||
-            options?.newLineOnArrays === true
-                ? '\n\t\t\t\t\t'
-                : ' '
-        }ride.cue${
-            options?.newLineOnArrays === undefined ||
-            options?.newLineOnArrays === true
-                ? '\n\t\t\t\t\t'
-                : ' '
-        }crash.cue)))`
+        output += `\t\t(drum_solo (seqs (kick.cue${'\n\t\t\t\t\t'}snare.cue${'\n\t\t\t\t\t'}tom1.cue${'\n\t\t\t\t\t'}tom2.cue${'\n\t\t\t\t\t'}crash.cue)))\n\t\t(drum_freestyle (seqs (kick.cue${'\n\t\t\t\t\t'}snare.cue${'\n\t\t\t\t\t'}hat.cue${'\n\t\t\t\t\t'}ride.cue${'\n\t\t\t\t\t'}crash.cue)))`
     else
-        output += `\t\t(drum_solo\n\t\t\t(seqs (kick.cue${
-            options?.newLineOnArrays === true ? '\n\t\t\t\t\t' : ' '
-        }snare.cue${
-            options?.newLineOnArrays === true ? '\n\t\t\t\t\t' : ' '
-        }tom1.cue${
-            options?.newLineOnArrays === true ? '\n\t\t\t\t\t' : ' '
-        }tom2.cue${
-            options?.newLineOnArrays === true ? '\n\t\t\t\t\t' : ' '
-        }crash.cue))\n\t\t)\n\t\t(drum_freestyle\n\t\t\t(seqs (kick.cue${
-            options?.newLineOnArrays === true ? '\n\t\t\t\t\t' : ' '
-        }snare.cue${
-            options?.newLineOnArrays === true ? '\n\t\t\t\t\t' : ' '
-        }hat.cue${
-            options?.newLineOnArrays === true ? '\n\t\t\t\t\t' : ' '
-        }ride.cue${
-            options?.newLineOnArrays === true ? '\n\t\t\t\t\t' : ' '
-        }crash.cue))\n\t\t)`
+        output += `\t\t(drum_solo\n\t\t\t(seqs (kick.cue${' '}snare.cue${' '}tom1.cue${' '}tom2.cue${' '}crash.cue))\n\t\t)\n\t\t(drum_freestyle\n\t\t\t(seqs (kick.cue${' '}snare.cue${' '}hat.cue${' '}ride.cue${' '}crash.cue))\n\t\t)`
 
     if (value.content.hopo_threshold) {
         output += `\n\t\t(hopo_threshold ${value.content.hopo_threshold})`
@@ -693,23 +657,13 @@ const stringifyDTADocumentRb3 = (
     })\n`
 
     if (options?.type === 'rb3')
-        output += `\t(preview${
-            options?.newLineOnArrays === undefined ||
-            options?.newLineOnArrays === true
-                ? '\n\t\t'
-                : ' '
-        }${value.content.preview[0]}${
-            options?.newLineOnArrays === undefined ||
-            options?.newLineOnArrays === true
-                ? '\n\t\t'
-                : ' '
-        }${value.content.preview[1]})\n`
+        output += `\t(preview${'\n\t\t'}${value.content.preview[0]}${'\n\t\t'}${
+            value.content.preview[1]
+        })\n`
     else
-        output += `\t(preview${
-            options?.newLineOnArrays === true ? '\n\t\t' : ' '
-        }${value.content.preview[0]}${
-            options?.newLineOnArrays === true ? '\n\t\t' : ' '
-        }${value.content.preview[1]})\n`
+        output += `\t(preview${' '}${value.content.preview[0]}${' '}${
+            value.content.preview[1]
+        })\n`
 
     output += `\t(song_length ${value.content.song_length})\n`
     output += `\t(rank\n`
@@ -814,20 +768,12 @@ const stringifyDTADocumentRb3 = (
                     value.content.real_guitar_tuning &&
                     i === value.content.real_guitar_tuning.length - 1
                 ) {
-                    output += `${
-                        options?.newLineOnArrays === undefined ||
-                        options?.newLineOnArrays === true
-                            ? '\n\t\t\t'
-                            : ' '
-                    }${tuning}))${value.content.real_bass_tuning ? '\n' : ''}`
+                    output += `${'\n\t\t\t'}${tuning}))${
+                        value.content.real_bass_tuning ? '\n' : ''
+                    }`
                     return
                 }
-                output += `${
-                    options?.newLineOnArrays === undefined ||
-                    options?.newLineOnArrays === true
-                        ? '\n\t\t\t'
-                        : ' '
-                }${tuning}`
+                output += `${'\n\t\t\t'}${tuning}`
             })
         }
         if (value.content.real_bass_tuning) {
@@ -840,20 +786,12 @@ const stringifyDTADocumentRb3 = (
                     value.content.real_bass_tuning &&
                     i === value.content.real_bass_tuning.length - 1
                 ) {
-                    output += `${
-                        options?.newLineOnArrays === undefined ||
-                        options?.newLineOnArrays === true
-                            ? '\n\t\t\t'
-                            : ' '
-                    }${tuning}))${options?.placeCustomAttributes ? '\n' : ''}`
+                    output += `${'\n\t\t\t'}${tuning}))${
+                        options?.placeCustomAttributes ? '\n' : ''
+                    }`
                     return
                 }
-                output += `${
-                    options?.newLineOnArrays === undefined ||
-                    options?.newLineOnArrays === true
-                        ? '\n\t\t\t'
-                        : ' '
-                }${tuning}`
+                output += `${'\n\t\t\t'}${tuning}`
             })
         }
     } else {
@@ -867,14 +805,12 @@ const stringifyDTADocumentRb3 = (
                     value.content.real_guitar_tuning &&
                     i === value.content.real_guitar_tuning.length - 1
                 ) {
-                    output += `${
-                        options?.newLineOnArrays === true ? '\n\t\t\t' : ' '
-                    }${tuning}))${value.content.real_bass_tuning ? '\n' : ''}`
+                    output += `${' '}${tuning}))${
+                        value.content.real_bass_tuning ? '\n' : ''
+                    }`
                     return
                 }
-                output += `${
-                    options?.newLineOnArrays === true ? '\n\t\t\t' : ' '
-                }${tuning}`
+                output += `${' '}${tuning}`
             })
         }
         if (value.content.real_bass_tuning) {
@@ -887,38 +823,35 @@ const stringifyDTADocumentRb3 = (
                     value.content.real_bass_tuning &&
                     i === value.content.real_bass_tuning.length - 1
                 ) {
-                    output += `${
-                        options?.newLineOnArrays === true ? '\n\t\t\t' : ' '
-                    }${tuning}))${options?.placeCustomAttributes ? '\n' : ''}`
+                    output += `${' '}${tuning}))${
+                        options?.placeCustomAttributes ? '\n' : ''
+                    }`
                     return
                 }
-                output += `${
-                    options?.newLineOnArrays === true ? '\n\t\t\t' : ' '
-                }${tuning}`
+                output += `${' '}${tuning}`
             })
         }
     }
     if (
         options?.placeCustomAttributes !== undefined &&
-        options?.placeCustomAttributes &&
-        value.custom
+        options?.placeCustomAttributes
     ) {
         output += `\n \n;DO NOT EDIT THE FOLLOWING LINES MANUALLY\n;Created using Magma: C3 Roks Edition v3.3.5\n;Song authored by ${
-            value.custom.author ? value.custom.author : 'Unknown Charter'
+            value.content.author ? value.content.author : 'Unknown Charter'
         }\n;Song=${value.content.name}\n;Language(s)=${
-            value.custom.languages
-                ? value.custom.languages.length === 1
-                    ? `${value.custom.languages.join(',')},`
-                    : value.custom.languages.join(',')
+            value.content.languages
+                ? value.content.languages.length === 1
+                    ? `${value.content.languages.join(',')},`
+                    : value.content.languages.join(',')
                 : 'English,'
-        }\n;Karaoke=${value.custom.karaoke ? 1 : 0}\n;Multitrack=${
-            value.custom.multitrack ? 1 : 0
-        }\n;Convert=${value.custom.convert ? 1 : 0}\n;2xBass=${
-            value.custom.doubleKick ? 1 : 0
-        }\n;RhythmKeys=${value.custom.rhythmOnKeys ? 1 : 0}\n;RhythmBass=${
-            value.custom.rhythmOnBass ? 1 : 0
-        }\n;CATemh=${value.custom.CATemh ? 1 : 0}\n;ExpertOnly=${
-            value.custom.expertOnly ? 1 : 0
+        }\n;Karaoke=${value.content.karaoke ? 1 : 0}\n;Multitrack=${
+            value.content.multitrack ? 1 : 0
+        }\n;Convert=${value.content.convert ? 1 : 0}\n;2xBass=${
+            value.content.doubleKick ? 1 : 0
+        }\n;RhythmKeys=${value.content.rhythmOnKeys ? 1 : 0}\n;RhythmBass=${
+            value.content.rhythmOnBass ? 1 : 0
+        }\n;CATemh=${value.content.CATemh ? 1 : 0}\n;ExpertOnly=${
+            value.content.expertOnly ? 1 : 0
         }\n`
     }
 

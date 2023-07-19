@@ -103,7 +103,7 @@ export const parseDTA = (songContent: string): DTADocument => {
                 }
             }
 
-            parsed.content.name += value + '('
+            parsed.content.name += value + ' ('
             return
         }
 
@@ -143,7 +143,7 @@ export const parseDTA = (songContent: string): DTADocument => {
                     return
                 }
             }
-            parsed.content.artist += value + '('
+            parsed.content.artist += value + ' ('
             return
         }
 
@@ -608,26 +608,18 @@ export const parseDTA = (songContent: string): DTADocument => {
 
         if (value.includes('Song authored by')) {
             const [, , , ...authorArray] = value.split(' ')
-            if (!parsed.custom) {
-                parsed.custom = {}
-            }
 
-            parsed.custom.author = authorArray.join(' ').trim()
+            parsed.content.author = authorArray.join(' ').trim()
             return
         }
 
         if (value.includes('s)=')) {
             const [, ...langs] = value.split(/[=,]/).filter((value) => value)
-            if (!parsed.custom) {
-                parsed.custom = {}
-            }
-            if (!parsed.custom.languages) {
-                parsed.custom.languages = []
+            if (!parsed.content.languages) {
+                parsed.content.languages = []
             }
             langs.forEach((lang) => {
-                parsed.custom &&
-                    parsed.custom.languages &&
-                    parsed.custom.languages.push(lang)
+                parsed.content.languages?.push(lang)
             })
         }
 
@@ -635,12 +627,9 @@ export const parseDTA = (songContent: string): DTADocument => {
             const proof = Boolean(
                 Number(value.split('=')[1].replaceAll(')', '').trim())
             )
-            if (!parsed.custom) {
-                parsed.custom = {}
-            }
 
             if (proof) {
-                parsed.custom.karaoke = proof
+                parsed.content.karaoke = proof
             }
 
             return
@@ -650,12 +639,9 @@ export const parseDTA = (songContent: string): DTADocument => {
             const proof = Boolean(
                 Number(value.split('=')[1].replaceAll(')', '').trim())
             )
-            if (!parsed.custom) {
-                parsed.custom = {}
-            }
 
             if (proof) {
-                parsed.custom.karaoke = proof
+                parsed.content.multitrack = proof
             }
 
             return
@@ -665,12 +651,9 @@ export const parseDTA = (songContent: string): DTADocument => {
             const proof = Boolean(
                 Number(value.split('=')[1].replaceAll(')', '').trim())
             )
-            if (!parsed.custom) {
-                parsed.custom = {}
-            }
 
             if (proof) {
-                parsed.custom.convert = proof
+                parsed.content.convert = proof
             }
 
             return
@@ -680,12 +663,9 @@ export const parseDTA = (songContent: string): DTADocument => {
             const proof = Boolean(
                 Number(value.split('=')[1].replaceAll(')', '').trim())
             )
-            if (!parsed.custom) {
-                parsed.custom = {}
-            }
 
             if (proof) {
-                parsed.custom.doubleKick = proof
+                parsed.content.doubleKick = proof
             }
 
             return
@@ -695,12 +675,9 @@ export const parseDTA = (songContent: string): DTADocument => {
             const proof = Boolean(
                 Number(value.split('=')[1].replaceAll(')', '').trim())
             )
-            if (!parsed.custom) {
-                parsed.custom = {}
-            }
 
             if (proof) {
-                parsed.custom.rhythmOnKeys = proof
+                parsed.content.rhythmOnKeys = proof
             }
 
             return
@@ -710,12 +687,9 @@ export const parseDTA = (songContent: string): DTADocument => {
             const proof = Boolean(
                 Number(value.split('=')[1].replaceAll(')', '').trim())
             )
-            if (!parsed.custom) {
-                parsed.custom = {}
-            }
 
             if (proof) {
-                parsed.custom.rhythmOnBass = proof
+                parsed.content.rhythmOnBass = proof
             }
 
             return
@@ -725,12 +699,9 @@ export const parseDTA = (songContent: string): DTADocument => {
             const proof = Boolean(
                 Number(value.split('=')[1].replaceAll(')', '').trim())
             )
-            if (!parsed.custom) {
-                parsed.custom = {}
-            }
 
             if (proof) {
-                parsed.custom.CATemh = proof
+                parsed.content.CATemh = proof
             }
 
             return
@@ -740,12 +711,9 @@ export const parseDTA = (songContent: string): DTADocument => {
             const proof = Boolean(
                 Number(value.split('=')[1].replaceAll(')', '').trim())
             )
-            if (!parsed.custom) {
-                parsed.custom = {}
-            }
 
             if (proof) {
-                parsed.custom.expertOnly = proof
+                parsed.content.expertOnly = proof
             }
 
             return

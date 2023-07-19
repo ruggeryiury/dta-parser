@@ -84,18 +84,23 @@ export interface UpdateDataOptions {
     expertOnly?: boolean
 }
 
-export type InstrumentRankingsOptions = BandRankingsOptions | 'No Part'
+export type InstrumentRankingsOptions = BandRankingsOptions | -1 | 'No Part'
 
 export type BandRankingsOptions =
+    | 0
     | 'Warmup'
+    | 1
     | 'Apprentice'
+    | 2
     | 'Solid'
+    | 3
     | 'Moderate'
+    | 4
     | 'Challenging'
+    | 5
     | 'Nightmare'
+    | 6
     | 'Impossible'
-
-export type BandRankingNumberOptions = -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6
 
 export type DrumTracksTypes =
     | 2
@@ -123,7 +128,7 @@ export interface TrackUpdateOptions {
 
 export interface InstrumentPartRequiredUpdateOptions {
     channels?: InstrumentTracksTypes
-    rank: BandRankingsOptions | Exclude<BandRankingNumberOptions, -1>
+    rank: BandRankingsOptions
     hasSolo?: boolean
 }
 
@@ -134,12 +139,12 @@ export interface DrumUpdateOptions
 
 export interface GuitarUpdateOptions
     extends InstrumentPartRequiredUpdateOptions {
-    real_rank?: InstrumentRankingsOptions | BandRankingNumberOptions
+    real_rank?: BandRankingsOptions
     tuning?: [number, number, number, number, number, number]
 }
 
 export interface BassUpdateOptions extends InstrumentPartRequiredUpdateOptions {
-    real_rank?: InstrumentRankingsOptions | BandRankingNumberOptions
+    real_rank?: BandRankingsOptions
     tuning?: [number, number, number, number]
 }
 export interface VocalsUpdateOptions
@@ -149,7 +154,7 @@ export interface VocalsUpdateOptions
 }
 
 export interface KeysUpdateOptions extends InstrumentPartRequiredUpdateOptions {
-    real_rank?: InstrumentRankingsOptions | BandRankingNumberOptions
+    real_rank?: BandRankingsOptions
 }
 
 export interface GenreUpdateOptions<G extends GenreValues> {
@@ -797,61 +802,23 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
         }
     }
 
-    if (author) {
-        if (!dta.custom) dta.custom = {}
+    if (author) dta.content.author = author
 
-        dta.custom.author = author
-    }
+    if (karaoke !== undefined) dta.content.karaoke = karaoke
 
-    if (karaoke !== undefined) {
-        if (!dta.custom) dta.custom = {}
+    if (multitrack !== undefined) dta.content.multitrack = multitrack
 
-        dta.custom.karaoke = karaoke
-    }
+    if (doubleKick !== undefined) dta.content.doubleKick = doubleKick
 
-    if (multitrack !== undefined) {
-        if (!dta.custom) dta.custom = {}
+    if (convert !== undefined) dta.content.convert = convert
 
-        dta.custom.multitrack = multitrack
-    }
+    if (rhythmOnBass !== undefined) dta.content.rhythmOnBass = rhythmOnBass
 
-    if (doubleKick !== undefined) {
-        if (!dta.custom) dta.custom = {}
+    if (rhythmOnKeys !== undefined) dta.content.rhythmOnKeys = rhythmOnKeys
 
-        dta.custom.doubleKick = doubleKick
-    }
+    if (CATemh !== undefined) dta.content.CATemh = CATemh
 
-    if (convert !== undefined) {
-        if (!dta.custom) dta.custom = {}
-
-        dta.custom.convert = convert
-    }
-
-    if (rhythmOnBass !== undefined) {
-        if (!dta.custom) dta.custom = {}
-
-        dta.custom.rhythmOnBass = rhythmOnBass
-    }
-
-    if (rhythmOnKeys !== undefined) {
-        if (!dta.custom) dta.custom = {}
-
-        dta.custom.rhythmOnKeys = rhythmOnKeys
-    }
-
-    if (CATemh !== undefined) {
-        if (!dta.custom) dta.custom = {}
-
-        dta.custom.CATemh = CATemh
-    }
-
-    if (expertOnly !== undefined) {
-        if (!dta.custom) dta.custom = {}
-
-        dta.custom.expertOnly = expertOnly
-    }
-
-    // new things here, if any.
+    if (expertOnly !== undefined) dta.content.expertOnly = expertOnly
 
     return dta
 }

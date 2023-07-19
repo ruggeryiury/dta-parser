@@ -32,6 +32,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         game_origin: 'rb1_dlc',
         extra_authoring: ['greenday', 'disc_update'],
         vocal_tonic_note: 5,
+        song_tonality: 0,
     },
     '21stcentdigiboy': {
         song_id: 1005604,
@@ -509,6 +510,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         solo: ['vocal_percussion'],
         format: 10,
         extra_authoring: ['disc_update'],
+        genre: 'indierock',
         vocal_tonic_note: 2,
         song_tonality: 0,
     },
@@ -596,6 +598,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         vocal_tonic_note: 11,
         vocal_parts: 2,
         extra_authoring: ['disc_update'],
+        song_tonality: 0,
     },
     babaoriley: {
         song_id: 1005171,
@@ -613,6 +616,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         game_origin: 'rb1_dlc',
         rating: 2,
+        genre: 'metal',
         extra_authoring: ['disc_update'],
         vocal_parts: 3,
     },
@@ -777,6 +781,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         album_name: 'Elect The Dead',
         album_track_number: 11,
         vocal_parts: 3,
+        name: "Beethoven's Cunt",
     },
     beetlebum: {
         song_id: 1005112,
@@ -866,6 +871,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         rating: 2,
         extra_authoring: ['pearljam', 'disc_update'],
         vocal_tonic_note: 4,
+        song_tonality: 0,
     },
     blackened: {
         song_id: 1005014,
@@ -910,6 +916,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         album_name: 'Superunknown',
         album_track_number: 7,
         vocal_parts: 3,
+        genre: 'grunge',
         vocal_tonic_note: 7,
         song_tonality: 0,
     },
@@ -986,6 +993,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         album_name: 'A Single Drop of Red',
         album_track_number: 3,
         extra_authoring: ['disc_update'],
+        genre: 'metal',
         vocal_tonic_note: 2,
         song_tonality: 1,
     },
@@ -1128,6 +1136,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         album_track_number: 6,
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'popdanceelectronic',
         vocal_tonic_note: 0,
         song_tonality: 1,
     },
@@ -1218,6 +1227,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         rating: 2,
         extra_authoring: ['pearljam', 'disc_update'],
         vocal_tonic_note: 8,
+        song_tonality: 0,
     },
     buddyholly: {
         song_id: 1005026,
@@ -1260,6 +1270,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         rating: 2,
         vocal_tonic_note: 1,
         extra_authoring: ['disc_update'],
+        song_tonality: 0,
     },
     burn: {
         song_id: 1005177,
@@ -1400,6 +1411,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'popdanceelectronic',
     },
     cantletgo: {
         song_id: 49,
@@ -1524,6 +1536,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         album_track_number: 1,
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'alternative',
         vocal_tonic_note: 6,
         song_tonality: 0,
     },
@@ -1662,6 +1675,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         extra_authoring: ['greenday', 'disc_update'],
         vocal_tonic_note: 2,
+        song_tonality: 0,
     },
     christmasisthetime: {
         song_id: 1005383,
@@ -1691,6 +1705,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         game_origin: 'rb1_dlc',
         extra_authoring: ['disc_update'],
         vocal_parts: 3,
+        genre: 'hiphoprap',
     },
     closer: {
         song_id: 1005338,
@@ -2052,6 +2067,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         album_name: 'Stadium Arcadium',
         album_track_number: 1,
         vocal_parts: 3,
+        genre: 'alternative',
         vocal_tonic_note: 9,
         song_tonality: 0,
     },
@@ -2160,6 +2176,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         rating: 2,
         extra_authoring: ['pearljam', 'disc_update'],
         vocal_tonic_note: 6,
+        song_tonality: 0,
     },
     deluxe: {
         extra_authoring: ['disc_update'],
@@ -2367,6 +2384,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         year_released: 1967,
         year_recorded: 1992,
+        genre: 'rbsoulfunk',
     },
     dointhatrag: {
         song_id: 1005416,
@@ -2655,6 +2673,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         game_origin: 'rb1_dlc',
         extra_authoring: ['greenday', 'disc_update'],
         vocal_tonic_note: 5,
+        song_tonality: 0,
     },
     eatmealivelive: {
         song_length: 245454,
@@ -2687,6 +2706,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         album_name: 'Electric Version',
         album_track_number: 1,
         vocal_parts: 3,
+        genre: 'indierock',
         vocal_tonic_note: 4,
         song_tonality: 0,
     },
@@ -2832,6 +2852,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         rating: 1,
         extra_authoring: ['pearljam', 'disc_update'],
         vocal_tonic_note: 2,
+        song_tonality: 0,
     },
     eventhelosers: {
         song_length: 218181,
@@ -2866,6 +2887,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'rock',
         vocal_tonic_note: 2,
         song_tonality: 0,
     },
@@ -2982,6 +3004,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         game_origin: 'rb1_dlc',
         extra_authoring: ['disc_update'],
         vocal_parts: 3,
+        genre: 'hiphoprap',
     },
     feelingthis: {
         song_length: 179545,
@@ -3113,6 +3136,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'popdanceelectronic',
     },
     forceofnature: {
         song_length: 244545,
@@ -3213,6 +3237,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'rock',
         vocal_tonic_note: 5,
         song_tonality: 0,
     },
@@ -3263,6 +3288,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         rating: 1,
         extra_authoring: ['pearljam', 'disc_update'],
         vocal_tonic_note: 9,
+        song_tonality: 0,
     },
     gasoline: {
         song_length: 280909,
@@ -3309,6 +3335,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         game_origin: 'rb1_dlc',
         vocal_parts: 2,
         extra_authoring: ['disc_update'],
+        genre: 'popdanceelectronic',
     },
     getup: {
         song_id: 1005469,
@@ -3316,6 +3343,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         game_origin: 'rb1_dlc',
         rating: 2,
+        genre: 'rbsoulfunk',
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
     },
@@ -3334,6 +3362,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'popdanceelectronic',
         album_art: true,
         vocal_tonic_note: 11,
         song_tonality: 1,
@@ -3395,6 +3424,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         vocal_parts: 2,
         extra_authoring: ['disc_update'],
+        genre: 'punk',
         vocal_tonic_note: 3,
         song_tonality: 0,
     },
@@ -3524,6 +3554,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         game_origin: 'rb1_dlc',
         extra_authoring: ['pearljam', 'disc_update'],
         vocal_tonic_note: 11,
+        song_tonality: 0,
     },
     goodmorningblackfriday: {
         song_id: 1005215,
@@ -3577,6 +3608,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         game_origin: 'rb1_dlc',
         extra_authoring: ['pearljam', 'disc_update'],
         vocal_tonic_note: 9,
+        song_tonality: 0,
     },
     gougeaway: {
         song_id: 1005136,
@@ -3603,6 +3635,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         album_name: 'Songs for the Deaf',
         album_track_number: 8,
         vocal_parts: 3,
+        genre: 'alternative',
         vocal_tonic_note: 4,
         song_tonality: 0,
     },
@@ -3647,6 +3680,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         vocal_tonic_note: 4,
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        song_tonality: 0,
     },
     grinderlive: {
         solo: ['drum', 'guitar'],
@@ -3742,6 +3776,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         game_origin: 'rb1_dlc',
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'hiphoprap',
     },
     handmedownworld: {
         song_id: 1005636,
@@ -3887,6 +3922,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         extra_authoring: ['disc_update'],
         vocal_tonic_note: 3,
         vocal_parts: 3,
+        song_tonality: 0,
     },
     heavyduty: {
         song_length: 299545,
@@ -4221,6 +4257,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     hungrylikethewolf: {
         extra_authoring: ['disc_update'],
         vocal_parts: 2,
+        genre: 'new_wave',
         vocal_tonic_note: 4,
         song_tonality: 0,
     },
@@ -4445,6 +4482,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         album_track_number: 16,
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'indierock',
         vocal_tonic_note: 11,
         song_tonality: 0,
     },
@@ -4543,6 +4581,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         album_track_number: 1,
         vocal_parts: 2,
         extra_authoring: ['disc_update'],
+        genre: 'numetal',
         vocal_tonic_note: 2,
         song_tonality: 1,
     },
@@ -4555,6 +4594,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         version: 1,
         game_origin: 'rb1',
         rating: 2,
+        genre: 'grunge',
         year_released: 1991,
         alternate_path: true,
         extra_authoring: ['disc_update'],
@@ -4732,6 +4772,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         album_track_number: 2,
         vocal_parts: 2,
         extra_authoring: ['disc_update'],
+        genre: 'alternative',
         vocal_tonic_note: 7,
         song_tonality: 0,
     },
@@ -4793,6 +4834,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         year_released: 1968,
         year_recorded: 1992,
+        genre: 'rbsoulfunk',
     },
     iwannabeyourman: {
         song_id: 1005320,
@@ -4868,6 +4910,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         vocal_tonic_note: 4,
         vocal_parts: 2,
         extra_authoring: ['disc_update'],
+        song_tonality: 0,
     },
     janesays: {
         song_id: 1005530,
@@ -4889,6 +4932,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         rating: 2,
         extra_authoring: ['pearljam', 'disc_update'],
         vocal_tonic_note: 9,
+        song_tonality: 0,
     },
     jesuschristpose: {
         song_id: 1005347,
@@ -4912,6 +4956,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         game_origin: 'rb1_dlc',
         extra_authoring: ['pearljam', 'disc_update'],
         vocal_tonic_note: 9,
+        song_tonality: 0,
     },
     jokerandthe: {
         song_id: 1005003,
@@ -5076,6 +5121,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         game_origin: 'rb1_dlc',
         extra_authoring: ['greenday', 'disc_update'],
         vocal_tonic_note: 11,
+        song_tonality: 0,
     },
     koolthing: {
         song_id: 1005102,
@@ -5106,6 +5152,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'rbsoulfunk',
         vocal_tonic_note: 2,
         song_tonality: 0,
     },
@@ -5157,6 +5204,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         extra_authoring: ['greenday', 'disc_update'],
         vocal_tonic_note: 11,
+        song_tonality: 0,
     },
     lastonetodie: {
         song_length: 145909,
@@ -5203,6 +5251,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         album_art: true,
         album_name: 'There is Nothing Left to Lose',
         album_track_number: 3,
+        genre: 'alternative',
         vocal_tonic_note: 11,
         song_tonality: 0,
     },
@@ -5231,6 +5280,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         game_origin: 'rb1_dlc',
         extra_authoring: ['disc_update'],
         vocal_parts: 2,
+        genre: 'popdanceelectronic',
     },
     letitallhangout: {
         format: 10,
@@ -5377,6 +5427,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         extra_authoring: ['disc_update'],
         vocal_tonic_note: 9,
+        song_tonality: 0,
     },
     lithiumlive: {
         song_length: 271363,
@@ -5387,6 +5438,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         extra_authoring: ['disc_update'],
     },
     littlegirl: {
+        name: '¿Viva la Gloria? (Little Girl)',
         format: 10,
         encoding: 'latin1',
     },
@@ -5450,6 +5502,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         rating: 2,
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'hiphoprap',
     },
     livingaftermidnightlive: {
         solo: ['guitar'],
@@ -5560,6 +5613,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     lump: {
         extra_authoring: ['disc_update'],
         vocal_parts: 3,
+        genre: 'grunge',
         vocal_tonic_note: 2,
         song_tonality: 0,
     },
@@ -5606,6 +5660,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         album_track_number: 4,
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'punk',
         vocal_tonic_note: 2,
         song_tonality: 0,
     },
@@ -5676,10 +5731,12 @@ export const songsUpdates: SongsUpdatesDocument = {
         album_art: true,
         album_name: 'Fever to Tell',
         album_track_number: 9,
+        genre: 'indierock',
         vocal_tonic_note: 7,
         song_tonality: 0,
     },
     marchofthepigs: {
+        name: 'March of the Pigs',
         song_id: 1005055,
         song_length: 181818,
         format: 10,
@@ -5690,7 +5747,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         alternate_path: true,
         extra_authoring: ['disc_update'],
         album_art: true,
-        album_name: 'March of the Pigs',
+        album_name: 'The Downward Spiral',
         album_track_number: 4,
         vocal_parts: 2,
     },
@@ -5804,6 +5861,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         extra_authoring: ['disc_update'],
     },
     messageinabottle: {
+        name: 'Message in a Bottle',
         song_id: 1005084,
         song_length: 289545,
         solo: ['guitar', 'vocal_percussion'],
@@ -5815,7 +5873,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         alternate_path: true,
         extra_authoring: ['disc_update'],
         album_art: true,
-        album_name: 'Message in a Bottle',
+        album_name: 'Reggatta de Blanc',
         album_track_number: 1,
         vocal_parts: 3,
     },
@@ -5868,6 +5926,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         game_origin: 'rb1_dlc',
         extra_authoring: ['disc_update'],
         vocal_parts: 3,
+        genre: 'popdanceelectronic',
     },
     missmurder: {
         song_length: 214545,
@@ -5993,6 +6052,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         extra_authoring: ['disc_update'],
     },
     morethanafeeling: {
+        name: 'More Than a Feeling',
         song_id: 1005077,
         song_length: 313636,
         solo: ['guitar', 'vocal_percussion'],
@@ -6004,7 +6064,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         alternate_path: true,
         extra_authoring: ['disc_update'],
         album_art: true,
-        album_name: 'More Than a Feeling',
+        album_name: 'Boston',
         album_track_number: 1,
         vocal_parts: 3,
     },
@@ -6216,6 +6276,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     myownworstenemy: {
         extra_authoring: ['disc_update'],
         vocal_parts: 2,
+        genre: 'alternative',
         vocal_tonic_note: 4,
         song_tonality: 0,
     },
@@ -6414,6 +6475,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         album_name: 'Adrenaline',
         album_track_number: 9,
         vocal_parts: 3,
+        genre: 'rock',
         vocal_tonic_note: 4,
         song_tonality: 1,
     },
@@ -6525,6 +6587,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         rating: 1,
         extra_authoring: ['pearljam', 'disc_update'],
         vocal_tonic_note: 6,
+        song_tonality: 0,
     },
     oceansize: {
         song_id: 1005536,
@@ -6608,6 +6671,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     onewayoranother: {
         extra_authoring: ['disc_update'],
         vocal_parts: 3,
+        genre: 'new_wave',
         vocal_tonic_note: 9,
         song_tonality: 0,
     },
@@ -6870,6 +6934,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         game_origin: 'rb1_dlc',
         rating: 1,
+        genre: 'rbsoulfunk',
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
     },
@@ -7265,6 +7330,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         game_origin: 'rb1_dlc',
         extra_authoring: ['disc_update'],
         vocal_parts: 3,
+        genre: 'hiphoprap',
     },
     reinventingyourexit: {
         song_id: 1005603,
@@ -7549,6 +7615,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         game_origin: 'rb1_dlc',
         rating: 2,
+        genre: 'metal',
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
     },
@@ -7615,6 +7682,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     roundandround: {
         extra_authoring: ['disc_update'],
         vocal_parts: 3,
+        genre: 'glam',
         vocal_tonic_note: 7,
         song_tonality: 0,
     },
@@ -7744,6 +7812,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         album_name: 'Ill Communication',
         album_track_number: 6,
         vocal_parts: 3,
+        genre: 'hiphoprap',
         vocal_tonic_note: 8,
         song_tonality: 0,
     },
@@ -7806,6 +7875,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         game_origin: 'rb1_dlc',
         rating: 2,
+        genre: 'metal',
         extra_authoring: ['disc_update'],
         vocal_parts: 3,
     },
@@ -7864,6 +7934,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         game_origin: 'rb1_dlc',
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'popdanceelectronic',
     },
     scraped: {
         song_id: 1005511,
@@ -8116,6 +8187,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         game_origin: 'rb1_dlc',
         rating: 1,
+        genre: 'rbsoulfunk',
         extra_authoring: ['disc_update'],
         vocal_parts: 3,
     },
@@ -8166,6 +8238,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         song_length: 399545,
         solo: ['guitar', 'vocal_percussion'],
         format: 10,
+        genre: 'metal',
         extra_authoring: ['disc_update'],
         vocal_tonic_note: 4,
         song_tonality: 0,
@@ -8600,6 +8673,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         game_origin: 'rb1_dlc',
         extra_authoring: ['pearljam', 'disc_update'],
         vocal_tonic_note: 8,
+        song_tonality: 0,
     },
     spiderwebs: {
         song_id: 1005367,
@@ -8639,6 +8713,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         album_art: true,
         album_name: 'Hi-Five My Remix',
         vocal_parts: 3,
+        genre: 'popdanceelectronic',
     },
     standingintheshower: {
         song_id: 1005533,
@@ -8965,6 +9040,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         game_origin: 'rb1_dlc',
         extra_authoring: ['pearljam', 'disc_update'],
         vocal_tonic_note: 11,
+        song_tonality: 0,
     },
     supersoniclive: {
         song_length: 284545,
@@ -9339,6 +9415,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     },
     thedopeshow: {
         format: 10,
+        genre: 'glam',
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
     },
@@ -9374,6 +9451,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'glam',
         vocal_tonic_note: 6,
         song_tonality: 1,
     },
@@ -9384,6 +9462,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         game_origin: 'rb1_dlc',
         extra_authoring: ['pearljam', 'disc_update'],
         vocal_tonic_note: 2,
+        song_tonality: 0,
     },
     theflood: {
         song_id: 1005605,
@@ -9698,6 +9777,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         vocal_parts: 3,
     },
     thisaintascene: {
+        name: "This Ain't a Scene, It's an Arms Race",
         song_id: 1005098,
         song_length: 214090,
         format: 10,
@@ -9707,7 +9787,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         year_released: 2007,
         alternate_path: true,
         album_art: true,
-        album_name: "This Ain't a Scene, It's an Arms Race",
+        album_name: 'Infinity on High',
         album_track_number: 3,
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
@@ -9953,6 +10033,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         album_name: 'Timmy & The Lords of the Underworld',
         album_track_number: 1,
         vocal_parts: 3,
+        genre: 'novelty',
         vocal_tonic_note: 3,
         song_tonality: 1,
     },
@@ -10287,6 +10368,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         game_origin: 'rb1_dlc',
         extra_authoring: ['pearljam', 'disc_update'],
         vocal_tonic_note: 5,
+        song_tonality: 0,
     },
     uparoundthebend: {
         solo: ['guitar'],
@@ -10410,10 +10492,12 @@ export const songsUpdates: SongsUpdatesDocument = {
         extra_authoring: ['disc_update'],
     },
     vivalagloria: {
+        name: '¡Viva la Gloria!',
         format: 10,
         extra_authoring: ['greenday', 'disc_update'],
         vocal_tonic_note: 4,
         encoding: 'latin1',
+        song_tonality: 0,
     },
     volcano: {
         song_id: 1005122,
@@ -10531,6 +10615,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         format: 10,
         game_origin: 'rb1_dlc',
         rating: 2,
+        genre: 'metal',
         extra_authoring: ['disc_update'],
         vocal_parts: 3,
     },
@@ -10628,6 +10713,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         extra_authoring: ['disc_update'],
     },
     wecarealot: {
+        name: 'We Care a Lot',
         song_id: 1005048,
         song_length: 247727,
         format: 10,
@@ -10638,7 +10724,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         alternate_path: true,
         extra_authoring: ['disc_update'],
         album_art: true,
-        album_name: 'We Care a Lot',
+        album_name: 'Introduce Yourself',
         album_track_number: 6,
         vocal_parts: 3,
     },
@@ -10648,6 +10734,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         extra_authoring: ['disc_update'],
         vocal_tonic_note: 1,
         vocal_parts: 2,
+        song_tonality: 0,
     },
     wegotthebeat: {
         extra_authoring: ['disc_update'],
@@ -10765,6 +10852,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     wheredyougo: {
         extra_authoring: ['disc_update'],
         vocal_parts: 3,
+        genre: 'reggaeska',
         vocal_tonic_note: 9,
         song_tonality: 0,
     },
@@ -10879,6 +10967,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         rating: 1,
         extra_authoring: ['pearljam', 'disc_update'],
         vocal_tonic_note: 4,
+        song_tonality: 0,
     },
     wilsonlive: {
         song_id: 1005576,
@@ -11052,6 +11141,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         extra_authoring: ['disc_update'],
     },
     youdonthavetobeoldlive: {
+        name: "You Don't Have To Be Old To Be Wise (Live)",
         solo: ['guitar'],
         format: 10,
         year_released: 1980,
@@ -11134,6 +11224,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     },
     yououghtaknow: {
         extra_authoring: ['disc_update'],
+        genre: 'alternative',
         vocal_tonic_note: 6,
         song_tonality: 0,
     },
@@ -13839,7 +13930,8 @@ export const songsUpdates: SongsUpdatesDocument = {
         game_origin: 'ugc1',
     },
     UGC_5004678: {
-        artist: 'Esto ya lo Toqué Mañana',
+        name: 'Esto ya lo Toqué Mañana',
+        artist: 'Octavio Suñé',
         game_origin: 'ugc1',
     },
     UGC_5004686: {
@@ -14244,13 +14336,15 @@ export const songsUpdates: SongsUpdatesDocument = {
     },
     UGC_5005131: {
         game_origin: 'ugc1',
-        artist: 'La Fórmula',
+        name: 'La Fórmula',
+        artist: 'Sintonía Retro',
     },
     UGC_5005132: {
         game_origin: 'ugc1',
     },
     UGC_5005133: {
-        artist: 'Caíamos',
+        name: 'Caíamos',
+        artist: 'Octavio Suñé',
         game_origin: 'ugc1',
     },
     UGC_5005136: {
@@ -14279,6 +14373,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     },
     UGC_5005148: {
         game_origin: 'ugc1',
+        name: 'Plátanos Con Sangre',
     },
     UGC_5005149: {
         game_origin: 'ugc1',
@@ -18607,6 +18702,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     alexchilton: {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'punk',
         vocal_tonic_note: 9,
         song_tonality: 0,
     },
@@ -18650,12 +18746,14 @@ export const songsUpdates: SongsUpdatesDocument = {
     girlsnotgrey: {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'emo',
         vocal_tonic_note: 8,
         song_tonality: 0,
     },
     hellothere: {
         vocal_parts: 2,
         extra_authoring: ['disc_update'],
+        genre: 'poprock',
         vocal_tonic_note: 9,
         song_tonality: 0,
     },
@@ -18694,6 +18792,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     nineintheafternoon: {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'emo',
         vocal_tonic_note: 10,
         song_tonality: 0,
     },
@@ -18737,6 +18836,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     sowhatchawant: {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'hiphoprap',
         vocal_tonic_note: 4,
         song_tonality: 0,
     },
@@ -18761,6 +18861,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     '7things': {
         vocal_parts: 2,
         extra_authoring: ['disc_update'],
+        genre: 'popdanceelectronic',
     },
     adioslepido: {
         vocal_parts: 3,
@@ -18811,6 +18912,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     badromance: {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'popdanceelectronic',
     },
     bandontherunlive: {
         vocal_parts: 3,
@@ -18823,6 +18925,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     beautiful: {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'hiphoprap',
     },
     bigempty: {
         vocal_parts: 2,
@@ -18848,6 +18951,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
         alternate_path: true,
+        genre: 'reggaeska',
         year_released: 1983,
         album_name: 'Confrontation',
         album_track_number: 2,
@@ -18888,6 +18992,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
         alternate_path: true,
+        genre: 'reggaeska',
         year_released: 1980,
         album_name: 'Uprising',
         album_track_number: 8,
@@ -18931,6 +19036,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     dropitlikeitshot: {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'hiphoprap',
     },
     emptywalls: {
         vocal_parts: 3,
@@ -18940,6 +19046,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
         alternate_path: true,
+        genre: 'reggaeska',
         year_released: 1977,
         album_name: 'Exodus',
         album_track_number: 5,
@@ -18947,6 +19054,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     fafafafafa: {
         vocal_parts: 2,
         extra_authoring: ['disc_update'],
+        genre: 'rbsoulfunk',
     },
     fancy: {
         vocal_parts: 3,
@@ -19064,6 +19172,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
         alternate_path: true,
+        genre: 'reggaeska',
         year_released: 1973,
         album_name: "Burnin'",
         album_track_number: 3,
@@ -19072,6 +19181,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
         alternate_path: true,
+        genre: 'reggaeska',
         year_released: 1978,
         album_name: 'Kaya',
         album_track_number: 3,
@@ -19099,6 +19209,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
         alternate_path: true,
+        genre: 'reggaeska',
         year_released: 1977,
         album_name: 'Exodus',
         album_track_number: 6,
@@ -19121,6 +19232,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     justdance: {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'popdanceelectronic',
     },
     lacamisanegra: {
         vocal_parts: 3,
@@ -19129,6 +19241,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     letforeverbe: {
         vocal_parts: 2,
         extra_authoring: ['disc_update'],
+        genre: 'popdanceelectronic',
     },
     listentothemusic: {
         vocal_parts: 3,
@@ -19240,6 +19353,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
         alternate_path: true,
+        genre: 'reggaeska',
         year_released: 1974,
         year_recorded: 1975,
         album_name: 'Live!',
@@ -19253,6 +19367,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
         alternate_path: true,
+        genre: 'reggaeska',
         year_released: 1977,
         album_name: 'Exodus',
         album_track_number: 10,
@@ -19284,6 +19399,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     pokerface: {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'popdanceelectronic',
     },
     pokerfacecartman: {
         vocal_parts: 3,
@@ -19319,6 +19435,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     ridininmychevy: {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'hiphoprap',
     },
     rocknrollqueen: {
         vocal_parts: 3,
@@ -19336,6 +19453,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
         alternate_path: true,
+        genre: 'reggaeska',
         year_released: 1978,
         album_name: 'Kaya',
         album_track_number: 5,
@@ -19355,6 +19473,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     seeyouagain: {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'popdanceelectronic',
     },
     seizetheday: {
         vocal_parts: 3,
@@ -19363,6 +19482,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     sensualseduction: {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'hiphoprap',
     },
     sinsofmyyouth: {
         vocal_parts: 3,
@@ -19375,6 +19495,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     snoopsupsideyahead: {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'hiphoprap',
     },
     stand: {
         vocal_parts: 3,
@@ -19391,6 +19512,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     startallover: {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'popdanceelectronic',
     },
     stigmata: {
         vocal_parts: 2,
@@ -19400,6 +19522,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
         alternate_path: true,
+        genre: 'reggaeska',
         year_released: 1973,
         album_name: 'Catch a Fire',
         album_track_number: 6,
@@ -19427,10 +19550,12 @@ export const songsUpdates: SongsUpdatesDocument = {
     thashiznit: {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'hiphoprap',
     },
     thatsthahomie: {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
+        genre: 'hiphoprap',
     },
     theanimal: {
         vocal_parts: 3,
@@ -19478,6 +19603,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
         alternate_path: true,
+        genre: 'reggaeska',
         year_released: 1977,
         album_name: 'Exodus',
         album_track_number: 9,
@@ -19506,6 +19632,7 @@ export const songsUpdates: SongsUpdatesDocument = {
         vocal_parts: 3,
         extra_authoring: ['disc_update'],
         alternate_path: true,
+        genre: 'reggaeska',
         year_released: 1977,
         album_name: 'Exodus',
         album_track_number: 7,
@@ -19584,7 +19711,8 @@ export const songsUpdates: SongsUpdatesDocument = {
         extra_authoring: ['disc_update'],
     },
     peutetreuneangine: {
-        artist: 'Peut-Être une Angine',
+        name: 'Peut-Être une Angine',
+        artist: 'Anaïs',
         game_origin: 'rb3dlc',
     },
     shepherdoffire: {
@@ -19601,37 +19729,55 @@ export const songsUpdates: SongsUpdatesDocument = {
     },
     redemptionsong: {
         alternate_path: true,
+        genre: 'reggaeska',
         year_released: 1980,
         album_name: 'Uprising',
         album_track_number: 10,
     },
     letthereberock: {
+        genre: 'classicrock',
         vocal_tonic_note: 4,
         song_tonality: 1,
     },
     giveitaway2: {
+        name: 'Give It Away (RB3 version)',
         game_origin: 'rb_blitz',
     },
     spoonman2: {
+        name: 'Spoonman (RB3 version)',
         game_origin: 'rb_blitz',
     },
-    recession: {},
-    imsickyall: {},
-    loveman: {},
+    recession: {
+        genre: 'popdanceelectronic',
+    },
+    imsickyall: {
+        genre: 'rbsoulfunk',
+    },
+    loveman: {
+        genre: 'rbsoulfunk',
+    },
     superbad: {
+        genre: 'rbsoulfunk',
         game_origin: 'rb3dlc',
     },
     santeria: {
+        genre: 'reggaeska',
         game_origin: 'rb3dlc',
     },
     whatigot: {
+        genre: 'reggaeska',
         game_origin: 'rb3dlc',
     },
     wrongway: {
+        genre: 'reggaeska',
         game_origin: 'rb3dlc',
     },
-    originofspades: {},
-    whoami: {},
+    originofspades: {
+        genre: 'hiphoprap',
+    },
+    whoami: {
+        genre: 'hiphoprap',
+    },
     '20thcenturyboy': {
         year_released: 1973,
         year_recorded: 1994,

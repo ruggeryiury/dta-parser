@@ -26,12 +26,6 @@ export interface DTADocument extends DTADocumentMethods {
      * An object containing all parsed information about the song.
      */
     content: DTAContentDocument
-    /**
-     * An object containing all custom-related information about the song.
-     * This is used to re-create a fully MAGMA C3-generated .dta file using
-     * `.stringify()` method.
-     */
-    custom?: DTACustomSongAttributes
 }
 
 export interface DTADocumentMethods {
@@ -55,21 +49,56 @@ export interface DTADocumentMethods {
     stringify(options?: StringifyDataOptions): string
     /**
      * Updates this song with the provided update options.
-     * @param {UpdateDataOptions} update The options for the parsed song updating process.
+     * @param {UpdateDataOptions} options The options for the parsed song updating process.
      */
-    update(options: UpdateDataOptions): DTADocument
+    update(options: UpdateDataOptions): void
+    /**
+     * Returns all values of the song as an object
+     * @returns An object with the values of the song.
+     */
+    json(): DTAContentDocument
 }
 
 export interface DTAContentDocument {
+    /**
+     * Unique string ID of the song.
+     */
     id: string
+    /**
+     * The song's title.
+     */
     name: string
+    /**
+     * The song's artist/band.
+     */
     artist: string
+    /**
+     * Tells if the song is a master recording.
+     */
     master: boolean
+    /**
+     * The numerical, unique number ID of the song. Might be a string ID as well.
+     */
     song_id: number | string
+    /**
+     * The file name used inside the song's CON file structure.
+     */
     songname: string
+    /**
+     * An array with the tracks count of all instruments, backing, and crowd channels.
+     */
     tracks_count: number[]
+    /**
+     * Tracks panning information of all audio channels.
+     */
     pans: number[]
+    /**
+     * Volume information of all audio channels.
+     */
     vols: number[]
+    /**
+     * The quantity of vocal parts of the song.
+     */
     vocal_parts: VocalPartsTypes
     mute_volume?: number
     mute_volume_vocals?: number
@@ -111,11 +140,9 @@ export interface DTAContentDocument {
     song_key?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
     real_guitar_tuning?: [number, number, number, number, number, number]
     real_bass_tuning?: [number, number, number, number]
-    extra_authoring?: string[]
+    extra_authoring?: ExtraAuthoringFlags[]
     alternate_path?: boolean
-}
 
-export interface DTACustomSongAttributes {
     /**
      * The author of the song.
      */
@@ -159,3 +186,5 @@ export interface DTACustomSongAttributes {
 }
 
 export type SoloFlags = 'drum' | 'bass' | 'guitar' | 'keys' | 'vocal_percussion'
+
+export type ExtraAuthoringFlags = 'disc_update' | 'pearljam' | 'greenday'

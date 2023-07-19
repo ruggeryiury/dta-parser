@@ -1,13 +1,10 @@
-import {
-    DTAContentDocument,
-    DTADocument,
-    DTACustomSongAttributes,
-} from '../@types/DTADocument'
+import { DTAContentDocument, DTADocument } from '../@types/DTADocument'
 import {
     RankTypes,
     SpotifyAlbumSearchDocument,
     getAlbumArt,
     leadingArticle2Trailing,
+    millisecondsToSeconds,
     millisecondsToTimeString,
     omitLeadingArticle,
     rankCalc,
@@ -28,23 +25,22 @@ import Locale, {
 } from '../locale/core'
 import { BandRankingsOptions, InstrumentRankingsOptions } from '../core'
 
-export type GetDataValueTypes =
-    | keyof Omit<
-          DTAContentDocument,
-          | 'tracks_count'
-          | 'pans'
-          | 'vols'
-          | 'preview'
-          | 'solo'
-          | 'guide_pitch_volume'
-          | 'encoding'
-          | 'format'
-          | 'version'
-          | 'game_origin'
-          | 'vocal_tonic_note'
-          | 'song_tonality'
-      >
-    | keyof Omit<DTACustomSongAttributes, 'languages'>
+export type GetDataValueTypes = keyof Omit<
+    DTAContentDocument,
+    | 'tracks_count'
+    | 'pans'
+    | 'vols'
+    | 'preview'
+    | 'solo'
+    | 'guide_pitch_volume'
+    | 'encoding'
+    | 'format'
+    | 'version'
+    | 'game_origin'
+    | 'vocal_tonic_note'
+    | 'song_tonality'
+    | 'languages'
+>
 export type GetDataValueOptions<V extends GetDataValueTypes> = V extends
     | 'name'
     | 'artist'
@@ -155,8 +151,6 @@ export type GetDataValueReturn<
     ? SongKeyMajorValues | SongKeyMinorValues | 'Not Specified'
     : V extends 'album_art'
     ? Promise<SpotifyAlbumSearchDocument | undefined>
-    : V extends keyof DTACustomSongAttributes
-    ? DTACustomSongAttributes[V]
     : V extends keyof DTAContentDocument
     ? DTAContentDocument[V]
     : never
@@ -203,11 +197,10 @@ export interface GetDataRawOptions {
 
 export interface GetDataTimeOptions {
     /**
-     * Returns as milliseconds rather than a formatted
-     * time string.
-     * @default false
+     * Specify the format of the song length.
+     * @default 'formatted'
      */
-    inMilliseconds?: boolean
+    format?: 'milliseconds' | 'seconds' | 'formatted'
 }
 
 export interface GetDataRankingOptions {
@@ -365,18 +358,22 @@ export const getDTA = <
             ? (170 as GetDataValueReturn<V, O>)
             : (dta.content.hopo_threshold as GetDataValueReturn<V, O>)
     } else if (value === 'song_length') {
-        let inMilliseconds: GetDataTimeOptions['inMilliseconds']
-        if (options)
-            inMilliseconds = (options as GetDataTimeOptions).inMilliseconds
-
-        if (inMilliseconds === true)
-            return dta.content[
-                value as keyof DTAContentDocument
-            ] as GetDataValueReturn<V, O>
-        else
+        if (
+            (options as GetDataTimeOptions).format === undefined ||
+            (options as GetDataTimeOptions).format === 'formatted'
+        )
             return millisecondsToTimeString(
                 dta.content.song_length
             ) as GetDataValueReturn<V, O>
+        else if ((options as GetDataTimeOptions).format === 'milliseconds')
+            return dta.content.song_length as GetDataValueReturn<V, O>
+        else {
+            // if ((options as GetDataTimeOptions).format === 'seconds')
+
+            return millisecondsToSeconds(
+                dta.content.song_length
+            ) as GetDataValueReturn<V, O>
+        }
     } else if (
         value === 'rank_band' ||
         value === 'rank_drum' ||
@@ -435,21 +432,7 @@ export const getDTA = <
                 ? dta.content.song_tonality
                 : -1
         return Locale.song_key(key, tonality) as GetDataValueReturn<V, O>
-    } else if (
-        value === 'author' ||
-        value === 'karaoke' ||
-        value === 'multitrack' ||
-        value === 'doubleKick' ||
-        value === 'convert' ||
-        value === 'rhythmOnBass' ||
-        value === 'rhythmOnKeys' ||
-        value === 'CATemh' ||
-        value === 'expertOnly'
-    )
-        return dta.custom?.[
-            value as keyof DTACustomSongAttributes
-        ] as GetDataValueReturn<V, O>
-    else if (value === 'album_art') {
+    } else if (value === 'album_art') {
         return getAlbumArt(
             dta,
             options as GetDataAlbumArtOptions
@@ -458,4 +441,51 @@ export const getDTA = <
         return dta.content[
             value as keyof DTAContentDocument
         ] as GetDataValueReturn<V, O>
+}
+
+/**
+ * Returns a parsed song object inside an `DTADocument` array based on its unique string ID.
+ * Returns `undefined` if the song's not found.
+ *
+ * @param {DTADocument[]} songs An array on parsed songs you want to find the song from.
+ * @param {string} id The unique string ID of the song.
+ * @param {RT} get `OPTIONAL` The type of the returned value from the function.
+ * @returns {DTADocument | undefined} The index of the song inside the `DTADocument` array.
+ */
+export const getSongByID = (
+    songs: DTADocument[],
+    id: string
+): DTADocument | undefined => {
+    let returnValue: DTADocument | undefined = undefined
+    songs.some((song) => {
+        if (song.get('id') === id) {
+            returnValue = song
+            return true
+        }
+    })
+
+    return returnValue
+}
+
+/**
+ * Returns the index of a song inside an `DTADocument` array based on its unique string ID.
+ * Returns `undefined` if the song's not found.
+ *
+ * @param {DTADocument[]} songs An array on parsed songs you want to find the song from.
+ * @param {string} id: The unique string ID of the song.
+ * @returns {number | undefined} The index of the song inside the `DTADocument` array.
+ */
+export const getSongIndexByID = (
+    songs: DTADocument[],
+    id: string
+): number | undefined => {
+    let returnValue: number | undefined = undefined
+    songs.some((song, index) => {
+        if (song.get('id') === id) {
+            returnValue = index
+            return true
+        }
+    })
+
+    return returnValue
 }

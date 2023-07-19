@@ -63,8 +63,8 @@ export const getAlbumArt = async (
 
     const apiEndpoint = 'https://api.spotify.com/v1'
     const authEndpoint = 'https://accounts.spotify.com/api/token'
-    const clientId = '3f974573800a4ff5b325de9795b8e603'
-    const clientSecret = 'ff188d2860ff44baa57acc79c121a3b9'
+    const clientId = '6cfb201730dd4d0093eef69a96623fe9'
+    const clientSecret = '796f9f01577f4104891dbda684d25463'
 
     const queryParams = `?q=${encodeURIComponent(query)}&type=album&limit=1`
 

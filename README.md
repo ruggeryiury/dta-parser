@@ -43,8 +43,7 @@ const dtaFileContents = fs.readFileSync(
 // Use "DTAParser()", passing the .dta file contents
 // as first argument.
 const parsedDTAs = DTAParser(dtaFileContents)
-
-console.log(parsedDTAs) // => Array of parsed songs from the .dta file.
+...
 ```
 
 ## Sorting all songs when parsing
@@ -65,66 +64,37 @@ const dtaFileContents = fs.readFileSync(
 // Use "DTAParser()", passing the .dta file contents
 // as first argument, and the sorting options 
 // as second inside an object.
-const parsedDTAs = DTAParser(dtaFileContents, { sortBy: 'song_id' })
-
-console.log(parsedDTAs) // => Array of parsed songs, sorted by song's ID.
+const parsedDTAs = DTAParser(dtaFileContents,
+    { sortBy: 'song_id' }
+)
+...
 ```
 
 ## Getting any value from a song
-There's two methods to access information from a song:
-- Accessing through `content`: All song information are stored on the parsed song object on `content`.
+Using the `.get()` method: Most of the information from a song can be processed using the `.get()` method. By using it, you can control many aspects from the desired value, with each one of them having different kinds of settings.
 
 ```ts
-import DTAParser from 'dta-parser'
-import fs from 'fs'
-
-// Read a .dta file contents.
-const dtaFileContents = fs.readFileSync(
-    '/path/to/dta-file.dta',
-    { encoding: 'utf-8' }
-)
-
+...
 // Use "DTAParser()".
 const parsedDTAs = DTAParser(dtaFileContents)
 
-// Select any song.
-const song = parsedDTAs[0]
-
-// Access the song's title.
-const songName = song.content.name
-
-// Access the song's artist/band.
-const songArtist = song.content.artist
-
-// Use .rawContent to access anything from the song.
-console.log(`"${songName}", by ${songArtist}.`) // => "Song Title", by Song Artist.
-```
-
-- Using the `.get()` method: Most of the information from a song can be processed using the `.get()` method. By using it, you can control many aspects from the desired value, with each one of them having different kinds of settings.
-
-```ts
-import DTAParser from 'dta-parser'
-import fs from 'fs'
-
-// Read a .dta file contents.
-const dtaFileContents = fs.readFileSync(
-    '/path/to/dta-file.dta',
-    { encoding: 'utf-8' }
+// Select any song from the array. You can use the
+// ``DTAArray`` module to get a song from an array
+// based on its unique string ID.
+const song = DTAArray.getSongByID(parsedDTAs, 
+    'yoursong_str_id'
 )
 
-// Use "DTAParser()".
-const parsedDTAs = DTAParser(dtaFileContents)
-
-// Select any song.
-const song = parsedDTAs[0]
-
-// Get the song's title.
-const songName = song.get('name')
+// Get the song's title, with the leading article at
+// the end of the string, separated with a comma.
+const songName = song.get('name',
+    { leadingArticle: 'trailing' }
+)
 
 // Get the song's artist.
 const songArtist = song.get('artist')
 
-console.log(`"${songName}", by ${songArtist}`) // => "Song Title", by Song Artist
+const songInfo = `"${songName}", by ${songArtist}`
 ```
 
 ## Updating values from a song
@@ -134,20 +104,14 @@ You can stringify a single `DTADocument` or an `Array` for `DTADocument` back to
 
 - For single songs, use the `DTADocument.export()`:
 ```ts
-import DTAParser from 'dta-parser'
-import fs from 'fs'
-
-// Read a .dta file contents.
-const dtaFileContents = fs.readFileSync(
-    '/path/to/dta-file.dta',
-    { encoding: 'utf-8' }
-)
-
+...
 // Use "DTAParser()".
 const parsedDTAs = DTAParser(dtaFileContents)
 
 // Select any song.
-const song = parsedDTAs[0]
+const song = DTAArray.getSongByID(parsedDTAs,
+    'yoursong_str_id'
+)
 
 // A stringified version of the song.
 const newDTAFileContents = song.stringify()
@@ -169,6 +133,7 @@ const dtaFileContents = fs.readFileSync(
 const parsedDTAs = DTAParser(dtaFileContents)
 
 // Process songs...
+...
 
 // A stringified version of the whole pack.
 const newDTAFileContents = DTAArray.stringify(parsedDTAs)

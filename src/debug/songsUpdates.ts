@@ -24,6 +24,7 @@ interface SongsUpdatesKeys {
     alternate_path?: boolean
     extra_authoring?: string[]
     solo?: string[]
+    name?: string
     artist?: string
     vocal_parts?: number
     hopo_threshold?: number
@@ -129,6 +130,12 @@ const generateJSONfromUpdates = (): SongsUpdatesObject => {
                             extra.replaceAll(')', '')
                         )
                     )
+                } else if (keyName === 'name') {
+                    returnObject[songname].name = names[namesIndex].replaceAll(
+                        '"',
+                        ''
+                    )
+                    namesIndex++
                 } else if (keyName === 'artist') {
                     returnObject[songname].artist = names[
                         namesIndex
@@ -184,6 +191,12 @@ export const regenerateSongsUpdates = () => {
     let newSongsUpdates = ''
     const allSongsUpdates = generateJSONfromUpdates()
 
+    fs.writeFileSync(
+        path.resolve(__dirname, '../database/new_updates.json'),
+        JSON.stringify(allSongsUpdates, null, 4),
+        { encoding: 'utf-8' }
+    )
+
     const allSongsNames = Object.keys(allSongsUpdates).sort((a, b) => {
         if (a.toLowerCase() > b.toLowerCase()) return 1
         else if (a.toLowerCase() < b.toLowerCase()) return -1
@@ -238,7 +251,11 @@ export const regenerateSongsUpdates = () => {
                     newSongsUpdates += `)`
                     placedSong = true
                 }
-            } else if (keys === 'artist' || keys === 'album_name') {
+            } else if (
+                keys === 'artist' ||
+                keys === 'album_name' ||
+                keys === 'name'
+            ) {
                 newSongsUpdates += `\n\t(${keys} "${(
                     allSongsUpdates[songname][
                         keys as keyof SongsUpdatesObject[typeof songname]

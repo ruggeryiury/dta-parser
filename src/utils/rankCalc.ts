@@ -1,4 +1,4 @@
-import { BandRankingNumberOptions, InstrumentRankingsOptions } from '../core'
+import { InstrumentRankingsOptions } from '../core'
 
 const ranksMap = {
     drum: [124, 151, 178, 242, 345, 448],
@@ -49,7 +49,7 @@ export const rankCalc = (type: RankTypes, rank?: number): number => {
  */
 export const dtaRankCalc = (
     type: RankTypes,
-    rank: InstrumentRankingsOptions | BandRankingNumberOptions
+    rank: InstrumentRankingsOptions
 ): number => {
     if (rank === 'No Part' || rank === -1) return 0
     else if (rank === 'Warmup' || rank === 0) return 1
@@ -64,5 +64,13 @@ export const dtaRankCalc = (
     }
 }
 
+/**
+ * Calculates a generic band ranking number based on the sum of the
+ * ranking of all playable instruments divided by the quantity of playable instruments.
+ * - - - -
+ * @param {number} count The sum of the ranking of all playable instruments.
+ * @param {number} quantity The quantity of playable instruments.
+ * @returns {number} A generic band ranking number.
+ */
 export const bandRankCalc = (count: number, quantity: number): number =>
     Number((count / quantity).toFixed())
