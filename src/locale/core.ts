@@ -22,9 +22,7 @@ export const bandFailCue = {
 } as const
 
 export type BandFailCueTypes = keyof typeof bandFailCue
-export type BandFailCueValues =
-    | (typeof bandFailCue)[BandFailCueTypes]
-    | 'Not Specified'
+export type BandFailCueValues = (typeof bandFailCue)[BandFailCueTypes] | 'Not Specified'
 
 export const bank = {
     'sfx/tambourine_bank.milo': 'Tambourine',
@@ -105,8 +103,7 @@ export const songScrollSpeed = {
 } as const
 
 export type SongScrollSpeedTypes = keyof typeof songScrollSpeed
-export type SongScrollSpeedValues =
-    (typeof songScrollSpeed)[SongScrollSpeedTypes]
+export type SongScrollSpeedValues = (typeof songScrollSpeed)[SongScrollSpeedTypes]
 
 export const subGenre = {
     subgenre_alternative: 'Alternative',
@@ -254,54 +251,12 @@ export const rankGraphic = {
 
 export type RankNumberTypes = keyof typeof rank
 export type RankLocaleTypes = 'default' | 'graphical'
-export type RankLocaleReturnType<T extends RankLocaleTypes> = T extends
-    | undefined
-    | 'default'
-    ? InstrumentRankingsOptions
-    : string
+export type RankLocaleReturnType<T extends RankLocaleTypes> = T extends undefined | 'default' ? InstrumentRankingsOptions : string
 
-const songKeyMajor = [
-    'C',
-    'D♭',
-    'D',
-    'E♭',
-    'E',
-    'F',
-    'F♯',
-    'G',
-    'A♭',
-    'A',
-    'A♭',
-    'B',
-]
-const songKeyMinor = [
-    'C',
-    'C♯',
-    'D',
-    'D♯',
-    'E',
-    'F',
-    'F♯',
-    'G',
-    'G♯',
-    'A',
-    'A♯',
-    'B',
-]
+const songKeyMajor = ['C', 'D♭', 'D', 'E♭', 'E', 'F', 'F♯', 'G', 'A♭', 'A', 'A♭', 'B']
+const songKeyMinor = ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B']
 
-export type TrainerKeyOverrideValues =
-    | 'C'
-    | 'C♯/D♭'
-    | 'D'
-    | 'D♯/E♭'
-    | 'E'
-    | 'F'
-    | 'F♯/G♭'
-    | 'G'
-    | 'G♯/A♭'
-    | 'A'
-    | 'A♯/A♭'
-    | 'B'
+export type TrainerKeyOverrideValues = 'C' | 'C♯/D♭' | 'D' | 'D♯/E♭' | 'E' | 'F' | 'F♯/G♭' | 'G' | 'G♯/A♭' | 'A' | 'A♯/A♭' | 'B'
 
 export type SongKeyMajorValues =
     | 'C Major'
@@ -334,53 +289,31 @@ export type SongKeyMinorValues =
 export type SongKeyLocaleReturnType<
     K extends NonNullable<DTAContentDocument['vocal_tonic_note']> | -1,
     T extends NonNullable<DTAContentDocument['song_tonality']> | -1
-> = K extends -1
-    ? 'Not Specified'
-    : T extends 0
-    ? SongKeyMajorValues
-    : SongKeyMinorValues
+> = K extends -1 ? 'Not Specified' : T extends 0 ? SongKeyMajorValues : SongKeyMinorValues
 
 const localeCore = {
-    anim_tempo: (v: AnimTempoTypes): AnimTempoValues =>
-        animTempo[v] as AnimTempoValues,
-    band_fail_cue: (v?: BandFailCueTypes): BandFailCueValues =>
-        (v && bandFailCue[v]
-            ? bandFailCue[v]
-            : 'Not Specified') as BandFailCueValues,
+    anim_tempo: (v: AnimTempoTypes): AnimTempoValues => animTempo[v] as AnimTempoValues,
+    band_fail_cue: (v?: BandFailCueTypes): BandFailCueValues => (v && bandFailCue[v] ? bandFailCue[v] : 'Not Specified') as BandFailCueValues,
     bank: (v: BankTypes): BankValues => bank[v] as BankValues,
-    drum_bank: (v: DrumBankTypes): DrumBankValues =>
-        drumBank[v] as DrumBankValues,
+    drum_bank: (v: DrumBankTypes): DrumBankValues => drumBank[v] as DrumBankValues,
     genre: (v: GenreTypes): GenreValues => genre[v] as GenreValues,
     rating: (v: RatingTypes): RatingValues => rating[v] as RatingValues,
-    song_scroll_speed: (v: SongScrollSpeedTypes): SongScrollSpeedValues =>
-        songScrollSpeed[v] as SongScrollSpeedValues,
-    sub_genre: (v?: SubGenreTypes): SubGenreValues =>
-        (v && subGenre[v] ? subGenre[v] : 'Unknown') as SubGenreValues,
-    vocal_gender: (v: VocalGenderTypes): VocalGenderValues =>
-        vocalGender[v] as VocalGenderValues,
-    vocal_parts: (v: VocalPartsTypes): VocalPartsValues =>
-        vocalParts[v] as VocalPartsValues,
-    rank: <T extends RankLocaleTypes>(
-        rankCalc: number,
-        type?: T
-    ): RankLocaleReturnType<T> => {
+    song_scroll_speed: (v: SongScrollSpeedTypes): SongScrollSpeedValues => songScrollSpeed[v] as SongScrollSpeedValues,
+    sub_genre: (v?: SubGenreTypes): SubGenreValues => (v && subGenre[v] ? subGenre[v] : 'Unknown') as SubGenreValues,
+    vocal_gender: (v: VocalGenderTypes): VocalGenderValues => vocalGender[v] as VocalGenderValues,
+    vocal_parts: (v: VocalPartsTypes): VocalPartsValues => vocalParts[v] as VocalPartsValues,
+    rank: <T extends RankLocaleTypes>(rankCalc: number, type?: T): RankLocaleReturnType<T> => {
         const newRankCalc = (rankCalc + 1) as RankNumberTypes
-        if (type === undefined || type === 'default')
-            return rank[newRankCalc] as RankLocaleReturnType<T>
+        if (type === undefined || type === 'default') return rank[newRankCalc] as RankLocaleReturnType<T>
         else return rankGraphic[newRankCalc] as RankLocaleReturnType<T>
     },
-    song_key: <
-        K extends NonNullable<DTAContentDocument['vocal_tonic_note']> | -1,
-        T extends NonNullable<DTAContentDocument['song_tonality']> | -1
-    >(
+    song_key: <K extends NonNullable<DTAContentDocument['vocal_tonic_note']> | -1, T extends NonNullable<DTAContentDocument['song_tonality']> | -1>(
         key: K,
         tonality: T
     ): SongKeyLocaleReturnType<K, T> => {
         if (key === -1) return 'Not Specified' as SongKeyLocaleReturnType<K, T>
-        else if (tonality === 0 || tonality === -1)
-            return `${songKeyMajor[key]} Major` as SongKeyLocaleReturnType<K, T>
-        else
-            return `${songKeyMinor[key]} Minor` as SongKeyLocaleReturnType<K, T>
+        else if (tonality === 0 || tonality === -1) return `${songKeyMajor[key]} Major` as SongKeyLocaleReturnType<K, T>
+        else return `${songKeyMinor[key]} Minor` as SongKeyLocaleReturnType<K, T>
     },
 }
 

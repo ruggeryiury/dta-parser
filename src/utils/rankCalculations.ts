@@ -21,10 +21,10 @@ export type RankTypes = keyof typeof ranksMap
  * The results can be from `-1` (meaning "No Part") to `6` (meaning "Impossible").
  * - - - -
  * @param {RankTypes} type The instrument part you want to be calculated.
- * @param {number | undefined} rank `OPTIONAL` The rank number from the DTA file.
+ * @param {number | undefined} rank `OPTIONAL` The rank number from the `.dta` file.
  * @returns {number} The calculated instrument rank.
  */
-export const rankCalc = (type: RankTypes, rank?: number): number => {
+export const rankCalculator = (type: RankTypes, rank?: number): number => {
     let parseRankReturn = -1
 
     if (rank === undefined || rank === 0) {
@@ -41,16 +41,13 @@ export const rankCalc = (type: RankTypes, rank?: number): number => {
 }
 
 /**
- * Returns a DTA file-compatible ranking system number based on the given options.
+ * Returns a `.dta` file-compatible ranking system number based on the given options.
  * - - - -
  * @param {RankTypes} type The instrument part you want to be processed to.
  * @param {InstrumentRankingsOptions} rank A string that indicates the ranking you want for the instrument part.
- * @returns {number} A DTA file-compatible ranking system number.
+ * @returns {number} A `.dta` file-compatible ranking system number.
  */
-export const dtaRankCalc = (
-    type: RankTypes,
-    rank: InstrumentRankingsOptions
-): number => {
+export const dtaRankCalculator = (type: RankTypes, rank: InstrumentRankingsOptions): number => {
     if (rank === 'No Part' || rank === -1) return 0
     else if (rank === 'Warmup' || rank === 0) return 1
     else if (rank === 'Apprentice' || rank === 1) return ranksMap[type][0]
@@ -72,5 +69,4 @@ export const dtaRankCalc = (
  * @param {number} quantity The quantity of playable instruments.
  * @returns {number} A generic band ranking number.
  */
-export const bandRankCalc = (count: number, quantity: number): number =>
-    Number((count / quantity).toFixed())
+export const bandRankCalculator = (count: number, quantity: number): number => Number((count / quantity).toFixed())

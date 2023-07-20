@@ -1,6 +1,6 @@
 import { DTADocument } from '../@types/DTADocument'
 import { DTAArray } from '../index'
-import { GenreValues, VocalPartsTypes, VocalPartsValues } from '../locale/core'
+import { GenreValues, VocalPartsValues } from '../locale/core'
 
 export type FilterSortedByTypes = 'Song Name' | 'Artist'
 
@@ -34,31 +34,62 @@ export type FilterSongNameTypes =
     | 'Z'
 
 export type FilterType<SB extends FilterSortedByTypes> = SB extends 'Song Name'
-    ? FilterSongNameTypes
+    ? FilterSongNameTypes | FilterSongNameTypes[]
     : SB extends 'Artist'
-    ? string
+    ? string | string[]
     : never
 
-export interface ApplyFilterOptions {
-    genres?: GenreValues | GenreValues[]
-    keysSupport?: boolean
-    numberOfVocalParts?: VocalPartsValues | VocalPartsValues[]
-    proGuitarBassSupport?: boolean
-}
-export interface FilterOptions<
-    SB extends FilterSortedByTypes,
-    V extends FilterType<SB>
-> extends ApplyFilterOptions {
+export interface FilterOptions<SB extends FilterSortedByTypes, V extends FilterType<SB>> extends ApplyFilterOptions {
+    /**
+     * Specific filtering options.
+     */
     options?: {
+        /**
+         * The filtering method.
+         */
         sortedBy: SB
+        /**
+         * The value of the method you want to search.
+         */
         value: V
     }
 }
 
-export const filterDTAArray = <
-    SB extends FilterSortedByTypes,
-    V extends FilterType<SB>
->(
+export interface ApplyFilterOptions {
+    /**
+     * Only songs with the specified genres will be returned.
+     *
+     * It can be either a string, or an array of strings.
+     */
+    genres?: GenreValues | GenreValues[]
+    /**
+     * Returns only songs with charted Keys.
+     */
+    keysSupport?: boolean
+    /**
+     * Only songs with the specified quantity of vocal parts will be returned.
+     *
+     * It can be either a string, or an array of strings.
+     */
+    numberOfVocalParts?: VocalPartsValues | VocalPartsValues[]
+    /**
+     * Returns only songs with charted PRO Guitar or PRO Bass.
+     */
+    proGuitarBassSupport?: boolean
+    /**
+     * Returns only songs with charted Keys.
+     */
+    hasMultitracks?: boolean
+}
+
+/**
+ * Filters an array of parsed songs based on the giving filtering options.
+ * - - - -
+ * @param {DTADocument[]} songs An array of parsed songs.
+ * @param {FilterOptions<SB, V>} filters The filtering options.
+ * @returns {DTADocument[]} A filtered array of parsed songs.
+ */
+export const filterDTA = <SB extends FilterSortedByTypes, V extends FilterType<SB>>(
     songs: DTADocument[],
     filters: FilterOptions<SB, V>
 ): DTADocument[] => {
@@ -67,21 +98,31 @@ export const filterDTAArray = <
     if (filters.options) {
         returnValue = returnValue.filter((song) => {
             if (filters.options?.sortedBy === 'Song Name') {
-                if (filters.options?.value === '123') {
-                    if (/^[^a-zA-Z]/.test(song.get('name'))) return song
-                } else {
-                    if (
-                        song.get('name').slice(0, 1).toLowerCase() ===
-                        filters.options?.value.toLowerCase()
-                    )
+                if (Array.isArray(filters.options.value)) {
+                    let proof = false
+
+                    filters.options.value.forEach((name) => {
+                        if (name === '123' && /^[^a-zA-Z]/.test(song.get('name'))) proof = true
+                        else if (song.get('name', { leadingArticle: 'omit' }).slice(0, 1).toLowerCase() === name.toLowerCase()) proof = true
+                    })
+
+                    if (proof) return song
+                } else if (typeof filters.options.value === 'string') {
+                    if (filters.options?.value === '123' && /^[^a-zA-Z]/.test(song.get('name'))) return song
+                    else if (song.get('name', { leadingArticle: 'omit' }).slice(0, 1).toLowerCase() === filters.options?.value.toLowerCase())
                         return song
                 }
             } else if (filters.options?.sortedBy === 'Artist') {
-                if (
-                    song.content.artist.toLowerCase() ===
-                    filters.options?.value.toLowerCase()
-                ) {
-                    return song
+                if (Array.isArray(filters.options.value)) {
+                    let proof = false
+
+                    filters.options.value.forEach((artist) => {
+                        if (song.content.artist.toLowerCase() === artist.toLowerCase()) proof = true
+                    })
+
+                    if (proof) return song
+                } else if (typeof filters.options.value === 'string') {
+                    if (song.content.artist.toLowerCase() === filters.options?.value.toLowerCase()) return song
                 }
             }
         })
@@ -92,65 +133,42 @@ export const filterDTAArray = <
     return applyFilters(returnValue, filters)
 }
 
-export const applyFilters = (
-    songs: DTADocument[],
-    filters: ApplyFilterOptions
-) => {
-    let returnValue = songs
-
+export const applyFilters = (songs: DTADocument[], filters: ApplyFilterOptions) => {
     if (filters.genres) {
-        returnValue = returnValue.filter((song) => {
-            if (Array.isArray(filters.genres)) {
-                if (filters.genres.includes(song.get('genre'))) return song
-            } else {
-                if (filters.genres === song.get('genre')) return song
-            }
+        songs = songs.filter((song) => {
+            if (Array.isArray(filters.genres) && filters.genres.includes(song.get('genre'))) return song
+            else if (typeof filters.genres === 'string' && filters.genres === song.get('genre')) return song
         })
     }
 
-    if (filters.keysSupport === true)
-        returnValue = returnValue.filter(
-            (song) => song.content.tracks_count[4] !== 0
-        )
-    else if (filters.keysSupport === false)
-        returnValue = returnValue.filter(
-            (song) => song.content.tracks_count[4] === 0
-        )
+    if (filters.keysSupport) {
+        songs = songs.filter((song) => {
+            if (song.content.tracks_count[4] !== 0) return song
+        })
+    }
 
     if (filters.numberOfVocalParts) {
-        returnValue = returnValue.filter((song) => {
-            if (Array.isArray(filters.numberOfVocalParts)) {
-                if (
-                    filters.numberOfVocalParts.includes(song.get('vocal_parts'))
-                )
-                    return song
-            } else {
-                if (filters.numberOfVocalParts === song.get('vocal_parts'))
-                    return song
-            }
+        songs = songs.filter((song) => {
+            if (Array.isArray(filters.numberOfVocalParts) && filters.numberOfVocalParts.includes(song.get('vocal_parts'))) return song
+            else if (typeof filters.numberOfVocalParts === 'string' && filters.numberOfVocalParts === song.get('vocal_parts')) return song
         })
     }
 
-    if (filters.proGuitarBassSupport === true)
-        returnValue = returnValue.filter((song) => {
-            if (
-                (song.content.rank_real_guitar !== undefined &&
-                    song.content.rank_real_guitar !== 0) ||
-                (song.content.rank_real_bass !== undefined &&
-                    song.content.rank_real_bass !== 0)
-            )
-                return song
-        })
-    else if (filters.proGuitarBassSupport === false)
-        returnValue = returnValue.filter((song) => {
-            if (
-                (song.content.rank_real_guitar === undefined ||
-                    song.content.rank_real_guitar === 0) &&
-                (song.content.rank_real_bass === undefined ||
-                    song.content.rank_real_bass === 0)
-            )
-                return song
-        })
+    if (filters.proGuitarBassSupport) {
+        songs = songs.filter((song) => {
+            const hasPROGuitar = song.content.rank_real_guitar && song.content.rank_real_guitar !== 0 ? true : false
+            const hasPROBass = song.content.rank_real_bass && song.content.rank_real_bass !== 0 ? true : false
 
-    return returnValue
+            if (hasPROGuitar || hasPROBass) return song
+        })
+    }
+
+    if (filters.hasMultitracks) {
+        songs = songs.filter((song) => {
+            const hasMultitrack = song.content.multitrack ? true : false
+
+            if (hasMultitrack) return song
+        })
+    }
+    return songs
 }

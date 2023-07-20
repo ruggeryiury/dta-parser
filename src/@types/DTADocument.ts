@@ -1,9 +1,5 @@
 import { UpdateDataOptions } from '../core'
-import {
-    GetDataValueOptions,
-    GetDataValueReturn,
-    GetDataValueTypes,
-} from '../core/get'
+import { GetDataValueOptions, GetDataValueReturn, GetDataValueTypes } from '../core/get'
 import { StringifyDataOptions } from '../core/stringify'
 import {
     VocalPartsTypes,
@@ -30,31 +26,30 @@ export interface DTADocument extends DTADocumentMethods {
 
 export interface DTADocumentMethods {
     /**
-     * Retrieves a specific value from this parsed song object.
+     * Retrieves a specific value from the song.
      * - - - -
      * @param {V extends GetDataValueTypes} value The specific information you want to retrieve.
      * @param {O extends GetDataValueOptions<V>} options `OPTIONAL` Customization options for the retrieval process.
      * @returns {GetDataValueReturn<V, O>} The requested specific information.
      */
-    get<V extends GetDataValueTypes, O extends GetDataValueOptions<V>>(
-        value: V,
-        options?: O
-    ): GetDataValueReturn<V, O>
+    get<V extends GetDataValueTypes, O extends GetDataValueOptions<V>>(value: V, options?: O): GetDataValueReturn<V, O>
     /**
-     * Converts this parsed song object back to `.dta` file content string.
+     * Converts this song back to `.dta` file contents string.
      * - - - -
      * @param {StringifyDataOptions} options `OPTIONAL` Customization options for the stringifying process.
-     * @returns {string} The string representation of this parsed song object as a `.dta` file.
+     * @returns {string} The string representation of this song as a `.dta` file contents string.
      */
     stringify(options?: StringifyDataOptions): string
     /**
      * Updates this song with the provided update options.
-     * @param {UpdateDataOptions} options The options for the parsed song updating process.
+     * - - - -
+     * @param {UpdateDataOptions} options The options for the song updating process.
      */
     update(options: UpdateDataOptions): void
     /**
-     * Returns all values of the song as an object
-     * @returns An object with the values of the song.
+     * Returns a JSON object representation of a parsed song.
+     * - - - -
+     * @returns A JSON object representation of a parsed song.
      */
     json(): DTAContentDocument
 }
@@ -105,19 +100,52 @@ export interface DTAContentDocument {
     hopo_threshold?: number
     bank: BankTypes
     drum_bank: DrumBankTypes
+    /**
+     * The song animation's speed.
+     */
     anim_tempo: AnimTempoTypes
     band_fail_cue?: BandFailCueTypes
     song_scroll_speed: SongScrollSpeedTypes
     preview: [number, number]
+    /**
+     * The length of the song, in milliseconds.
+     */
     song_length: number
+    /**
+     * The song's band ranking number.
+     */
     rank_band: number
+    /**
+     * The song's drums ranking number.
+     */
     rank_drum?: number
+    /**
+     * The song's bass ranking number.
+     */
     rank_bass?: number
+    /**
+     * The song's guitar ranking number.
+     */
     rank_guitar?: number
+    /**
+     * The song's vocals ranking number.
+     */
     rank_vocals?: number
+    /**
+     * The song's keys ranking number.
+     */
     rank_keys?: number
+    /**
+     * The song's PRO Bass ranking number.
+     */
     rank_real_bass?: number
+    /**
+     * The song's PRO Guitar ranking number.
+     */
     rank_real_guitar?: number
+    /**
+     * The song's PRO Keys ranking number.
+     */
     rank_real_keys?: number
     solo?: SoloFlags[]
     tuning_offset_cents?: number
@@ -126,22 +154,56 @@ export interface DTAContentDocument {
     format?: number
     version?: number
     game_origin: string
+    /**
+     * The song's rating.
+     */
     rating: RatingTypes
+    /**
+     * The song's genre.
+     */
     genre: GenreTypes
+    /**
+     * The song's sub-genre.
+     */
     sub_genre?: SubGenreTypes
+    /**
+     * The gender of the lead vocalist.
+     */
     vocal_gender: VocalGenderTypes
+    /**
+     * The song's release year.
+     */
     year_released: number
     year_recorded?: number
     album_art: boolean
+    /**
+     * The name of the song's album.
+     */
     album_name: string
+    /**
+     * The song's track number on the song's album.
+     */
     album_track_number?: number
     vocal_tonic_note?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
     song_tonality?: 0 | 1
     song_key?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
+    /**
+     * An array with the tuning of all 6 strings of the PRO Guitar part.
+     */
     real_guitar_tuning?: [number, number, number, number, number, number]
+    /**
+     * An array with the tuning of all 4 strings of the PRO Bass part.
+     */
     real_bass_tuning?: [number, number, number, number]
     extra_authoring?: ExtraAuthoringFlags[]
     alternate_path?: boolean
+
+    context?: number
+    /**
+     * The name of the song's pack.
+     */
+    pack_name?: string
+    base_points?: number
 
     /**
      * The author of the song.

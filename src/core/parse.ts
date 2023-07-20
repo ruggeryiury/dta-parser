@@ -2,60 +2,94 @@ import { DTADocument } from '../@types/DTADocument'
 import { createDTA } from './create'
 
 /**
- * Parses a .dta file contents into a `DTADocument`.
+ * Parses a `.dta` file contents into a `DTADocument`.
  * - - - -
- * @param {string} songContent The song contents taken from a .dta file.
+ * @param {string} songContent The song contents taken from a `.dta` file.
  * @returns {DTADocument} A song parsed as a `DTADocument` object.
  */
 export const parseDTA = (songContent: string): DTADocument => {
     const operators = {
+        namingIndex: 0,
+        hasName: -1,
+        hasArtist: -1,
+        hasAlbumName: -1,
+        hasPackName: -1,
         gotID: false,
-        gotName: false,
-        stillName: false,
-        gotArtist: false,
-        stillArtist: false,
-        gotSongname: false,
         tracksStarted: false,
         processedTrack: '',
         processedAudio: '',
         rankStarted: false,
         rankFinished: false,
         soloStarted: false,
-        gotAlbumName: false,
-        stillAlbumName: false,
     }
+
     let {
+        namingIndex,
+        hasName,
+        hasArtist,
+        hasAlbumName,
+        hasPackName,
         gotID,
-        gotName,
-        stillName,
-        gotArtist,
-        stillArtist,
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        gotSongname,
         tracksStarted,
         processedTrack,
         processedAudio,
         rankStarted,
         rankFinished,
         soloStarted,
-        gotAlbumName,
-        stillAlbumName,
     } = operators
+
     const parsed = createDTA()
     const split = songContent.split(/[;(]/).map((value) => value.trim())
 
-    split.map((value) => {
+    split.forEach((value) => {
+        const [key, ...content] = value.split(' ')
+        const keyFilter = key.replaceAll("'", '')
+
+        if (
+            keyFilter === 'name' &&
+            !(content.join(' ').startsWith('songs/') || content.join(' ').startsWith('"songs/') || content.join(' ').startsWith("'songs/"))
+        ) {
+            hasName = namingIndex
+            namingIndex++
+        }
+
+        if (keyFilter === 'artist') {
+            hasArtist = namingIndex
+            namingIndex++
+        }
+
+        if (keyFilter === 'album_name') {
+            hasAlbumName = namingIndex
+            namingIndex++
+        }
+
+        if (keyFilter === 'pack_name') {
+            hasPackName = namingIndex
+            namingIndex++
+        }
+    })
+
+    const names = Array.from(songContent.match(/"(.*?)"/g) as RegExpMatchArray)
+        .map((name) => name.slice(1, -1))
+        .filter((name) => {
+            if (!(name.startsWith('songs/') || name.endsWith('.mid') || name.startsWith('sfx/') || name.endsWith('.milo'))) return name
+        })
+
+    names.forEach((name, i) => {
+        if (i === hasName) parsed.content.name = name.replaceAll('\\q', '"')
+        else if (i === hasArtist) parsed.content.artist = name.replaceAll('\\q', '"')
+        else if (i === hasAlbumName) parsed.content.album_name = name.replaceAll('\\q', '"')
+        else if (i === hasPackName) parsed.content.pack_name = name.replaceAll('\\q', '"')
+    })
+
+    split.forEach((value) => {
         const clean = value.replaceAll("'", '').trim()
         const [key, ...content] = value.split(' ')
         const keyFilter = key.replaceAll("'", '')
-        const newValue = content
-            .join(' ')
-            .replaceAll(')', '')
-            .replaceAll("'", '')
-            .trim()
+        const newValue = content.join(' ').replaceAll(')', '').replaceAll("'", '').trim()
 
         // console.log(key, content)
-        // console.log(i, clean)
+        // console.log(clean, newValue)
 
         if (!gotID) {
             if (clean) {
@@ -63,87 +97,6 @@ export const parseDTA = (songContent: string): DTADocument => {
                 gotID = true
                 return
             }
-            return
-        }
-
-        if (keyFilter === 'name' && !gotName) {
-            const nameStr = content.join(' ').trim()
-            const nameCompletes = nameStr.charAt(nameStr.length - 1) === ')'
-
-            if (nameCompletes) {
-                const match = nameStr.match(/"([^"]*)"/)
-                if (match && match.length > 1) {
-                    const newName = match[1].replaceAll('\\q', '"')
-                    parsed.content.name = newName
-                    gotName = true
-                    return
-                }
-            }
-
-            stillName = true
-            const afterQuote = nameStr.split('"').filter((value) => value)
-            if (afterQuote.length === 1)
-                parsed.content.name = `${afterQuote.join(' ')} (`
-            else parsed.content.name = `${afterQuote.join(' ')}(`
-            return
-        }
-
-        if (!gotName && stillName) {
-            const nameCompletes = value.charAt(value.length - 1) === ')'
-
-            if (nameCompletes) {
-                const quoteIndex = value.indexOf('"')
-
-                if (quoteIndex !== -1) {
-                    const newName = value.substring(0, quoteIndex)
-                    parsed.content.name += newName
-                    gotName = true
-                    stillName = false
-                    return
-                }
-            }
-
-            parsed.content.name += value + ' ('
-            return
-        }
-
-        if (keyFilter === 'artist' && !gotArtist) {
-            const nameStr = content.join(' ').trim()
-            const nameCompletes = nameStr.charAt(nameStr.length - 1) === ')'
-
-            if (nameCompletes) {
-                const match = nameStr.match(/"([^"]*)"/)
-                if (match && match.length > 1) {
-                    const newName = match[1].replaceAll('\\q', '"')
-                    parsed.content.artist = newName
-                    gotArtist = true
-                    return
-                }
-            }
-
-            stillArtist = true
-            const afterQuote = nameStr.split('"').filter((value) => value)
-            if (afterQuote.length === 1)
-                parsed.content.artist = `${afterQuote.join(' ')} (`
-            else parsed.content.artist = `${afterQuote.join(' ')}(`
-            return
-        }
-
-        if (!gotArtist && stillArtist) {
-            const nameCompletes = value.charAt(value.length - 1) === ')'
-
-            if (nameCompletes) {
-                const quoteIndex = value.indexOf('"')
-
-                if (quoteIndex !== -1) {
-                    const newName = value.substring(0, quoteIndex)
-                    parsed.content.artist += newName
-                    gotArtist = true
-                    stillArtist = false
-                    return
-                }
-            }
-            parsed.content.artist += value + ' ('
             return
         }
 
@@ -157,6 +110,11 @@ export const parseDTA = (songContent: string): DTADocument => {
             return
         }
 
+        if (keyFilter === 'context') {
+            parsed.content.context = Number(newValue)
+            return
+        }
+
         if (keyFilter === 'song_id') {
             if (!Number.isNaN(Number(newValue))) {
                 parsed.content.song_id = Number(newValue)
@@ -167,10 +125,11 @@ export const parseDTA = (songContent: string): DTADocument => {
             return
         }
 
-        if (keyFilter === 'name' && gotName) {
-            gotSongname = true
-            const songname = content.join(' ').split('/')[1]
-            parsed.content.songname = songname
+        if (
+            keyFilter === 'name' &&
+            (content.join(' ').startsWith('songs/') || content.join(' ').startsWith('"songs/') || content.join(' ').startsWith("'songs/"))
+        ) {
+            parsed.content.songname = newValue.replaceAll('"', '').split('/')[1]
             return
         }
 
@@ -182,9 +141,7 @@ export const parseDTA = (songContent: string): DTADocument => {
         if (tracksStarted) {
             if (keyFilter === 'drum') {
                 if (content.filter((val) => val !== ')').length > 0) {
-                    parsed.content.tracks_count[0] = content.filter(
-                        (val) => val !== ')'
-                    ).length
+                    parsed.content.tracks_count[0] = content.filter((val) => val !== ')').length
                     return
                 } else {
                     processedTrack = 'drum'
@@ -193,9 +150,7 @@ export const parseDTA = (songContent: string): DTADocument => {
                 }
             } else if (keyFilter === 'bass') {
                 if (content.filter((val) => val !== ')').length > 0) {
-                    parsed.content.tracks_count[1] = content.filter(
-                        (val) => val !== ')'
-                    ).length
+                    parsed.content.tracks_count[1] = content.filter((val) => val !== ')').length
                     return
                 } else {
                     processedTrack = 'bass'
@@ -204,9 +159,7 @@ export const parseDTA = (songContent: string): DTADocument => {
                 }
             } else if (keyFilter === 'guitar') {
                 if (content.filter((val) => val !== ')').length > 0) {
-                    parsed.content.tracks_count[2] = content.filter(
-                        (val) => val !== ')'
-                    ).length
+                    parsed.content.tracks_count[2] = content.filter((val) => val !== ')').length
                     return
                 } else {
                     processedTrack = 'guitar'
@@ -215,9 +168,7 @@ export const parseDTA = (songContent: string): DTADocument => {
                 }
             } else if (keyFilter === 'vocals') {
                 if (content.filter((val) => val !== ')').length > 0) {
-                    parsed.content.tracks_count[3] = content.filter(
-                        (val) => val !== ')'
-                    ).length
+                    parsed.content.tracks_count[3] = content.filter((val) => val !== ')').length
                     return
                 } else {
                     processedTrack = 'vocals'
@@ -226,9 +177,7 @@ export const parseDTA = (songContent: string): DTADocument => {
                 }
             } else if (keyFilter === 'keys') {
                 if (content.filter((val) => val !== ')').length > 0) {
-                    parsed.content.tracks_count[4] = content.filter(
-                        (val) => val !== ')'
-                    ).length
+                    parsed.content.tracks_count[4] = content.filter((val) => val !== ')').length
                     return
                 } else {
                     processedTrack = 'keys'
@@ -243,16 +192,11 @@ export const parseDTA = (songContent: string): DTADocument => {
         }
         if (processedTrack) {
             const count = value.replaceAll(')', '').trim().split(' ').length
-            if (processedTrack === 'drum')
-                parsed.content.tracks_count[0] = count
-            else if (processedTrack === 'bass')
-                parsed.content.tracks_count[1] = count
-            else if (processedTrack === 'guitar')
-                parsed.content.tracks_count[2] = count
-            else if (processedTrack === 'vocals')
-                parsed.content.tracks_count[3] = count
-            else if (processedTrack === 'keys')
-                parsed.content.tracks_count[4] = count
+            if (processedTrack === 'drum') parsed.content.tracks_count[0] = count
+            else if (processedTrack === 'bass') parsed.content.tracks_count[1] = count
+            else if (processedTrack === 'guitar') parsed.content.tracks_count[2] = count
+            else if (processedTrack === 'vocals') parsed.content.tracks_count[3] = count
+            else if (processedTrack === 'keys') parsed.content.tracks_count[4] = count
             tracksStarted = true
             processedTrack = ''
             return
@@ -296,26 +240,19 @@ export const parseDTA = (songContent: string): DTADocument => {
                     diffTracksCount += count
                 })
                 if (tracksCount - diffTracksCount > 2) {
-                    parsed.content.tracks_count[5] =
-                        tracksCount - diffTracksCount - 2
+                    parsed.content.tracks_count[5] = tracksCount - diffTracksCount - 2
                 } else {
-                    parsed.content.tracks_count[5] =
-                        tracksCount - diffTracksCount
+                    parsed.content.tracks_count[5] = tracksCount - diffTracksCount
                 }
             } else if (processedAudio === 'real_guitar_tuning')
-                parsed.content.real_guitar_tuning =
-                    numbers as typeof parsed.content.real_guitar_tuning
-            else if (processedAudio === 'real_bass_tuning')
-                parsed.content.real_bass_tuning =
-                    numbers as typeof parsed.content.real_bass_tuning
+                parsed.content.real_guitar_tuning = numbers as typeof parsed.content.real_guitar_tuning
+            else if (processedAudio === 'real_bass_tuning') parsed.content.real_bass_tuning = numbers as typeof parsed.content.real_bass_tuning
             processedAudio = ''
             return
         }
 
         if (keyFilter === 'vocal_parts') {
-            parsed.content.vocal_parts = Number(
-                newValue
-            ) as typeof parsed.content.vocal_parts
+            parsed.content.vocal_parts = Number(newValue) as typeof parsed.content.vocal_parts
             return
         }
 
@@ -339,22 +276,16 @@ export const parseDTA = (songContent: string): DTADocument => {
 
         if (keyFilter === 'song_scroll_speed') {
             if (Number(newValue) === 2300) return
-            parsed.content.song_scroll_speed = Number(
-                newValue
-            ) as typeof parsed.content.song_scroll_speed
+            parsed.content.song_scroll_speed = Number(newValue) as typeof parsed.content.song_scroll_speed
             return
         }
 
         if (keyFilter === 'bank') {
-            parsed.content.bank = newValue.replaceAll(
-                '"',
-                ''
-            ) as typeof parsed.content.bank
+            parsed.content.bank = newValue.replaceAll('"', '') as typeof parsed.content.bank
         }
 
         if (keyFilter === 'drum_bank') {
-            parsed.content.drum_bank =
-                newValue as typeof parsed.content.drum_bank
+            parsed.content.drum_bank = newValue.replaceAll('"', '') as typeof parsed.content.drum_bank
             return
         }
 
@@ -377,8 +308,7 @@ export const parseDTA = (songContent: string): DTADocument => {
         }
 
         if (keyFilter === 'band_fail_cue') {
-            parsed.content.band_fail_cue =
-                newValue as typeof parsed.content.band_fail_cue
+            parsed.content.band_fail_cue = newValue.replaceAll('"', '') as typeof parsed.content.band_fail_cue
             return
         }
 
@@ -440,8 +370,7 @@ export const parseDTA = (songContent: string): DTADocument => {
         }
 
         if (keyFilter === 'vocal_gender') {
-            parsed.content.vocal_gender =
-                newValue as typeof parsed.content.vocal_gender
+            parsed.content.vocal_gender = newValue as typeof parsed.content.vocal_gender
             return
         }
 
@@ -478,15 +407,12 @@ export const parseDTA = (songContent: string): DTADocument => {
         }
 
         if (keyFilter === 'rating') {
-            parsed.content.rating = Number(
-                newValue
-            ) as typeof parsed.content.rating
+            parsed.content.rating = Number(newValue) as typeof parsed.content.rating
             return
         }
 
         if (keyFilter === 'sub_genre') {
-            parsed.content.sub_genre =
-                newValue as typeof parsed.content.sub_genre
+            parsed.content.sub_genre = newValue as typeof parsed.content.sub_genre
             return
         }
 
@@ -496,9 +422,7 @@ export const parseDTA = (songContent: string): DTADocument => {
         }
 
         if (soloStarted) {
-            const soloFlags = value
-                .replaceAll(')', '')
-                .split(' ') as typeof parsed.content.solo
+            const soloFlags = value.replaceAll(')', '').replaceAll("'", '').split(' ') as typeof parsed.content.solo
             soloFlags &&
                 soloFlags.forEach((flag) => {
                     if (!parsed.content.solo) parsed.content.solo = []
@@ -530,69 +454,28 @@ export const parseDTA = (songContent: string): DTADocument => {
             return
         }
 
-        if (keyFilter === 'album_name' && !gotAlbumName) {
-            const nameStr = content.join(' ').trim()
-            const nameCompletes = nameStr.charAt(nameStr.length - 1) === ')'
-
-            if (nameCompletes) {
-                const match = nameStr.match(/"([^"]*)"/)
-                if (match && match.length > 1) {
-                    const newName = match[1].replaceAll('\\q', '"')
-                    parsed.content.album_name = newName
-                    gotAlbumName = true
-                    return
-                }
-            }
-
-            stillAlbumName = true
-            const afterQuote = nameStr.split('"').filter((value) => value)
-            if (afterQuote.length === 1)
-                parsed.content.album_name = `${afterQuote.join(' ')} (`
-            else parsed.content.album_name = afterQuote.join(' ') + '('
-            return
-        }
-
-        if (!gotAlbumName && stillAlbumName) {
-            const nameCompletes = value.charAt(value.length - 1) === ')'
-
-            if (nameCompletes) {
-                const quoteIndex = value.indexOf('"')
-
-                if (quoteIndex !== -1) {
-                    const newName = value.substring(0, quoteIndex)
-                    parsed.content.album_name += newName
-                    gotAlbumName = true
-                    stillAlbumName = false
-                    return
-                }
-            }
-            parsed.content.album_name += value + ' ('
-            return
-        }
-
         if (keyFilter === 'album_track_number') {
             parsed.content.album_track_number = Number(newValue)
             return
         }
 
         if (keyFilter === 'vocal_tonic_note') {
-            parsed.content.vocal_tonic_note = Number(
-                newValue
-            ) as typeof parsed.content.vocal_tonic_note
+            parsed.content.vocal_tonic_note = Number(newValue) as typeof parsed.content.vocal_tonic_note
             return
         }
 
         if (keyFilter === 'song_tonality') {
-            parsed.content.song_tonality = Number(
-                newValue
-            ) as typeof parsed.content.song_tonality
+            parsed.content.song_tonality = Number(newValue) as typeof parsed.content.song_tonality
             return
         }
 
         if (keyFilter === 'song_key') {
-            parsed.content.song_key = Number(
-                newValue
-            ) as typeof parsed.content.song_key
+            parsed.content.song_key = Number(newValue) as typeof parsed.content.song_key
+            return
+        }
+
+        if (keyFilter === 'base_points') {
+            parsed.content.base_points = Number(newValue)
             return
         }
 
@@ -624,9 +507,7 @@ export const parseDTA = (songContent: string): DTADocument => {
         }
 
         if (value.includes('Karaoke=')) {
-            const proof = Boolean(
-                Number(value.split('=')[1].replaceAll(')', '').trim())
-            )
+            const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
 
             if (proof) {
                 parsed.content.karaoke = proof
@@ -636,9 +517,7 @@ export const parseDTA = (songContent: string): DTADocument => {
         }
 
         if (value.includes('Multitrack=')) {
-            const proof = Boolean(
-                Number(value.split('=')[1].replaceAll(')', '').trim())
-            )
+            const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
 
             if (proof) {
                 parsed.content.multitrack = proof
@@ -648,9 +527,7 @@ export const parseDTA = (songContent: string): DTADocument => {
         }
 
         if (value.includes('Convert=')) {
-            const proof = Boolean(
-                Number(value.split('=')[1].replaceAll(')', '').trim())
-            )
+            const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
 
             if (proof) {
                 parsed.content.convert = proof
@@ -660,9 +537,7 @@ export const parseDTA = (songContent: string): DTADocument => {
         }
 
         if (value.includes('2xBass=')) {
-            const proof = Boolean(
-                Number(value.split('=')[1].replaceAll(')', '').trim())
-            )
+            const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
 
             if (proof) {
                 parsed.content.doubleKick = proof
@@ -672,9 +547,7 @@ export const parseDTA = (songContent: string): DTADocument => {
         }
 
         if (value.includes('RhythmKeys=')) {
-            const proof = Boolean(
-                Number(value.split('=')[1].replaceAll(')', '').trim())
-            )
+            const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
 
             if (proof) {
                 parsed.content.rhythmOnKeys = proof
@@ -684,9 +557,7 @@ export const parseDTA = (songContent: string): DTADocument => {
         }
 
         if (value.includes('RhythmBass=')) {
-            const proof = Boolean(
-                Number(value.split('=')[1].replaceAll(')', '').trim())
-            )
+            const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
 
             if (proof) {
                 parsed.content.rhythmOnBass = proof
@@ -696,9 +567,7 @@ export const parseDTA = (songContent: string): DTADocument => {
         }
 
         if (value.includes('CATemh=')) {
-            const proof = Boolean(
-                Number(value.split('=')[1].replaceAll(')', '').trim())
-            )
+            const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
 
             if (proof) {
                 parsed.content.CATemh = proof
@@ -708,9 +577,7 @@ export const parseDTA = (songContent: string): DTADocument => {
         }
 
         if (value.includes('ExpertOnly=')) {
-            const proof = Boolean(
-                Number(value.split('=')[1].replaceAll(')', '').trim())
-            )
+            const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
 
             if (proof) {
                 parsed.content.expertOnly = proof

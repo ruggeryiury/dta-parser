@@ -17,7 +17,7 @@
 
 # 💠 Table of Contents
 - [Usage](#usage)
-    - [Parsing a DTA file](#parsing-a-dta-file)
+    - [Parsing a `.dta` File](#parsing-a-dta-file)
     - [Sorting all songs when parsing](#sorting-all-songs-when-parsing)
     - [Getting any value from a song](#getting-any-value-from-a-song)
     - [Updating values from a song](#updating-values-from-a-song)
@@ -27,7 +27,7 @@
 
 # Usage
 
-## Parsing a DTA file
+## Parsing a `.dta` File
 Just read the contents of a .dta file, when use `DTAParser()` to parse it. It will return an array of each song included on the .dta file parsed as a `DTADocument` type.
 
 ```ts
@@ -141,4 +141,4 @@ const newDTAFileContents = DTAArray.stringify(parsedDTAs)
 
 # Known Issues
 
-- The parser only works for **individual songs/songs pack** DTA files. Any other kind of DTA file will not be parsed.
+- The parser only works for **individual songs/songs pack** `.dta` files.

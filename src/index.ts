@@ -14,10 +14,7 @@ import DTATools from './tools'
  *
  * @see [`interface` DTADocument](@types/DTADocument.ts).
  */
-const DTAParser = (
-    dtaFileContents: string,
-    options?: DTAParserOptions
-): DTADocument[] => {
+const DTAParser = (dtaFileContents: string, options?: DTAParserOptions): DTADocument[] => {
     const depackedSongs = depackDTA(dtaFileContents)
 
     let parsedSongs: DTADocument[] = []
@@ -33,10 +30,11 @@ const DTAParser = (
                 song.content = {
                     ...song.content,
                     ...songsUpdates[songname as keyof typeof songsUpdates],
-                    author: 'Harmonix',
-                    multitrack: true,
                 }
             }
+
+            song.content.author = 'Harmonix'
+            song.content.multitrack = true
             return song
         })
 

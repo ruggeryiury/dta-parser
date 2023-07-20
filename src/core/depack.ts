@@ -1,7 +1,7 @@
 /**
- * Separates all songs from a .dta file.
+ * Separates all songs from a `.dta` file.
  * - - - -
- * @param {string} dtaFileContents The .dta file contents.
+ * @param {string} dtaFileContents The `.dta` file contents.
  * @returns {string[]} An array with each song content separated to be parsed individually.
  */
 export const depackDTA = (dtaFileContents: string): string[] => {

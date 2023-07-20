@@ -1,11 +1,6 @@
 import { cloneDeep } from 'lodash'
 import { DTADocument } from '../@types/DTADocument'
-import {
-    TrackUpdateOptions,
-    UpdateDataOptions,
-    stringifyDTA,
-    updateDTA,
-} from '../core'
+import { DTAtoJSON, TrackUpdateOptions, UpdateDataOptions, stringifyDTA, updateDTA } from '../core'
 import { getDTA } from './get'
 import { AnimTempoValues, RatingValues } from '../locale/core'
 
@@ -46,7 +41,7 @@ const dtaDefault: DTADocument = {
         updateDTA(this, options)
     },
     json() {
-        return this.content
+        return DTAtoJSON(this)
     },
 }
 

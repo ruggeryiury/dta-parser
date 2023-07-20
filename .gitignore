@@ -4,7 +4,6 @@ dist/
 lib/
 module/
 src/tests/
-src/database/
 *.tgz
 src_v*
 *.json

@@ -1,11 +1,6 @@
 import { UpdateDataOptions } from '../core'
 
-export type SortByOptionsTypes =
-    | 'id'
-    | 'name'
-    | 'artist'
-    | 'artist_set'
-    | 'song_id'
+export type SortByOptionsTypes = 'id' | 'name' | 'artist' | 'artist_set' | 'song_id'
 
 export interface DTAParserOptions {
     /** Changes the sorting of the songs. Valid values are:
@@ -26,7 +21,7 @@ export interface DTAParserOptions {
     /**
      * Set this to `true` only if you're parsing official Harmonix songs DTAs.
      *
-     * If you're parsing a DTA file from official pre-RB3 songs, the parser will
+     * If you're parsing a `.dta` file from official pre-RB3 songs, the parser will
      * try to seek additional information from the updates.
      *
      * Also, It'll put Harmonix as author and the multitracks value to `true` on all songs.
@@ -34,10 +29,13 @@ export interface DTAParserOptions {
      */
     harmonixSongs?: boolean
     /**
-     * Applies direct values updates for any song parsed based on the song's unique string ID.
+     * Applies direct values updates on any song inside the `.dta` file based on the song's unique string ID.
      */
     update?: {
         [id: string]: UpdateDataOptions
     }
-    updateAll?: Pick<UpdateDataOptions, 'author'>
+    /**
+     * Applies direct values updates on all songs inside the `.dta` file.
+     */
+    updateAll?: Pick<UpdateDataOptions, 'author' | 'multitrack' | 'pack_name'>
 }

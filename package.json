@@ -17,7 +17,7 @@
 		"build": "yarn clean && yarn build:commonjs && yarn build:esmodule && webpack",
 		"build:commonjs": "tsc",
 		"build:esmodule": "tsc -m es6 --outDir module",
-		"clean": "rimraf dist lib module dist",
+		"clean": "rimraf dist lib module",
 		"format": "prettier --write src/**/*.{js,ts,tsx}",
 		"lint": "eslint src",
 		"test": "nodemon ./src/tests/test.ts"

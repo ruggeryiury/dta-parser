@@ -47,64 +47,18 @@ export interface GetKeyFromValueObject {
 /**
  * Functions used on the `DTADocument.update()` method.
  *
- * It resolves many values accepted from the update method to actual values used on the DTA file.
+ * It resolves many values accepted from the update method to actual values used on the `.dta` file.
  */
 export const getKeyFromValue: GetKeyFromValueObject = {
-    anim_tempo: (v) =>
-        Number(
-            Object.keys(animTempo).find(
-                (key) => animTempo[Number(key) as AnimTempoTypes] === v
-            )
-        ) as AnimTempoTypes,
-    band_fail_cue: (v) =>
-        String(
-            Object.keys(bandFailCue).find(
-                (key) => bandFailCue[key as BandFailCueTypes] === v
-            )
-        ) as BandFailCueTypes,
-    bank: (v) =>
-        String(
-            Object.keys(bank).find((key) => bank[key as BankTypes] === v)
-        ) as BankTypes,
-    drum_bank: (v) =>
-        String(
-            Object.keys(drumBank).find(
-                (key) => drumBank[key as DrumBankTypes] === v
-            )
-        ) as DrumBankTypes,
-    genre: (v) =>
-        String(
-            Object.keys(genre).find((key) => genre[key as GenreTypes] === v)
-        ) as GenreTypes,
-    rating: (v) =>
-        Number(
-            Object.keys(rating).find(
-                (key) => rating[Number(key) as RatingTypes] === v
-            )
-        ) as RatingTypes,
+    anim_tempo: (v) => Number(Object.keys(animTempo).find((key) => animTempo[Number(key) as AnimTempoTypes] === v)) as AnimTempoTypes,
+    band_fail_cue: (v) => String(Object.keys(bandFailCue).find((key) => bandFailCue[key as BandFailCueTypes] === v)) as BandFailCueTypes,
+    bank: (v) => String(Object.keys(bank).find((key) => bank[key as BankTypes] === v)) as BankTypes,
+    drum_bank: (v) => String(Object.keys(drumBank).find((key) => drumBank[key as DrumBankTypes] === v)) as DrumBankTypes,
+    genre: (v) => String(Object.keys(genre).find((key) => genre[key as GenreTypes] === v)) as GenreTypes,
+    rating: (v) => Number(Object.keys(rating).find((key) => rating[Number(key) as RatingTypes] === v)) as RatingTypes,
     song_scroll_speed: (v) =>
-        Number(
-            Object.keys(songScrollSpeed).find(
-                (key) =>
-                    songScrollSpeed[Number(key) as SongScrollSpeedTypes] === v
-            )
-        ) as SongScrollSpeedTypes,
-    sub_genre: (v) =>
-        String(
-            Object.keys(subGenre).find(
-                (key) => subGenre[key as SubGenreTypes] === v
-            )
-        ) as SubGenreTypes,
-    vocal_gender: (v) =>
-        String(
-            Object.keys(vocalGender).find(
-                (key) => vocalGender[key as VocalGenderTypes] === v
-            )
-        ) as VocalGenderTypes,
-    vocal_parts: (v) =>
-        Number(
-            Object.keys(vocalParts).find(
-                (key) => vocalParts[Number(key) as VocalPartsTypes] === v
-            )
-        ) as VocalPartsTypes,
+        Number(Object.keys(songScrollSpeed).find((key) => songScrollSpeed[Number(key) as SongScrollSpeedTypes] === v)) as SongScrollSpeedTypes,
+    sub_genre: (v) => String(Object.keys(subGenre).find((key) => subGenre[key as SubGenreTypes] === v)) as SubGenreTypes,
+    vocal_gender: (v) => String(Object.keys(vocalGender).find((key) => vocalGender[key as VocalGenderTypes] === v)) as VocalGenderTypes,
+    vocal_parts: (v) => Number(Object.keys(vocalParts).find((key) => vocalParts[Number(key) as VocalPartsTypes] === v)) as VocalPartsTypes,
 }
