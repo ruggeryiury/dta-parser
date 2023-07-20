@@ -1,6 +1,5 @@
 node_modules/
 src/
-src/tests/
 src_*/
 images/
 .npmignore

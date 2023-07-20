@@ -4,8 +4,8 @@ dist/
 lib/
 module/
 src/tests/
+src_*/
 *.tgz
-src_v*
 *.json
 *.txt
 TO-DO.md
