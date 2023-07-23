@@ -1,11 +1,13 @@
-dta-parser-*/
-node_modules/
 dist/
 lib/
 module/
-src/tests/
+node_modules/
 src_*/
+src/test/
+REFACTORING.md
+TO-DO.md
 *.tgz
 *.json
+!backend.tsconfig.json
 *.txt
-TO-DO.md
+*.env

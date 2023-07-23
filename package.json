@@ -15,12 +15,12 @@
 	],
 	"scripts": {
 		"build": "yarn clean && yarn build:commonjs && yarn build:esmodule && webpack",
-		"build:commonjs": "tsc",
-		"build:esmodule": "tsc -m es6 --outDir module",
+		"build:commonjs": "tsc --project ./backend.tsconfig.json",
+		"build:esmodule": "tsc --project ./backend.tsconfig.json -module es6 --outDir module",
 		"clean": "rimraf dist lib module",
 		"format": "prettier --write src/**/*.{js,ts,tsx}",
 		"lint": "eslint src",
-		"test": "nodemon ./src/tests/test.ts"
+		"start": "nodemon ./backend/scripts/index.ts"
 	},
 	"exports": {
 		".": {
@@ -46,6 +46,7 @@
 		"@typescript-eslint/eslint-plugin": "^5.59.9",
 		"@typescript-eslint/parser": "^5.59.9",
 		"babel-loader": "^9.1.2",
+		"dotenv": "^16.3.1",
 		"eslint": "^8.42.0",
 		"nodemon": "^2.0.22",
 		"prettier": "^2.8.8",

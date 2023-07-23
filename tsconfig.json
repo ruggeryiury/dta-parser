@@ -98,10 +98,9 @@
     },
     "include": [
         "src/**/*.ts",
-        "src/**/*.js"
+        "backend/**/*.ts"
     ],
     "exclude": [
-        "node_modules/",
-        // "src/debug"
+        "node_modules/"
     ]
 }

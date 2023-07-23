@@ -1,5 +1,5 @@
 <div align=center>
-<img src='./images/header.webp' alt='Header'>
+<img src='https://raw.githubusercontent.com/ruggeryiury/dta-parser/master/images/header.webp' alt='Header'>
 </div>
 
 <div align=center>
@@ -16,14 +16,14 @@
   
 
 # 💠 Table of Contents
+- [💠 Table of Contents](#-table-of-contents)
 - [Usage](#usage)
-    - [Parsing a `.dta` File](#parsing-a-dta-file)
-    - [Sorting all songs when parsing](#sorting-all-songs-when-parsing)
-    - [Getting any value from a song](#getting-any-value-from-a-song)
-    - [Updating values from a song](#updating-values-from-a-song)
-    - [Exporting a song individually, or as a pack](#exporting-a-song-individually-or-as-a-pack)
+  - [Parsing a `.dta` File](#parsing-a-dta-file)
+  - [Sorting all songs when parsing](#sorting-all-songs-when-parsing)
+  - [Getting any value from a song](#getting-any-value-from-a-song)
+  - [Updating values from a song](#updating-values-from-a-song)
+  - [Exporting a song individually, or as a pack](#exporting-a-song-individually-or-as-a-pack)
 - [Known Issues](#known-issues)
-- [Changelog](https://github.com/ruggeryiury/dta-parser/blob/master/CHANGELOG.md)
 
 # Usage
 

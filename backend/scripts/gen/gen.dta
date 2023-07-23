@@ -1,0 +1,1607 @@
+(7748paintwar
+	(name "Paint War")
+	(artist "Dream Avenue")
+	(master TRUE)
+	(song_id 1774800001)
+	(song
+		(name "songs/7748paintwar/7748paintwar")
+		(tracks
+			((drum (0 1))
+			 (bass (2 3))
+			 (guitar (4 5))
+			 (keys (6 7)))
+		)
+		(pans (-1.0 1.0 -1.0 1.0 -1.0 1.0 -1.0 1.0 -1.0 1.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 -1 1 1 -1 -1 -1 -1))
+		(vocal_parts 0)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoMedium)
+	(song_scroll_speed 2300)
+	(preview 42914 72914)
+	(song_length 119205)
+	(rank
+		(drum 151)
+		(guitar 176)
+		(bass 1)
+		(vocals 0)
+		(keys 211)
+		(real_keys 211)
+		(real_guitar 208)
+		(real_bass 1)
+		(band 215)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 1)
+	(genre popdanceelectronic)
+	(sub_genre subgenre_chiptune)
+	(vocal_gender male)
+	(year_released 2018)
+	(album_art TRUE)
+	(album_name "Our Shared Universes")
+	(album_track_number 4)
+	(vocal_tonic_note 9)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Paint War
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(7748southparktheme
+	(name "South Park Theme")
+	(artist "Primus")
+	(master TRUE)
+	(song_id 1774800002)
+	(song
+		(name "songs/7748southparktheme/7748southparktheme")
+		(tracks
+			((drum (0 1))
+			 (bass (2))
+			 (guitar (3))
+			 (vocals (4)))
+		)
+		(pans (-1.0 1.0 0.0 0.0 0.0 -1.0 1.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 1 -1 -1 -1))
+		(vocal_parts 3)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoMedium)
+	(song_scroll_speed 2300)
+	(preview 4864 34864)
+	(song_length 36318)
+	(rank
+		(drum 178)
+		(guitar 267)
+		(bass 181)
+		(vocals 1)
+		(keys 0)
+		(real_keys 0)
+		(real_guitar 325)
+		(real_bass 208)
+		(band 243)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 3)
+	(genre alternative)
+	(sub_genre subgenre_alternative)
+	(vocal_gender male)
+	(year_released 1998)
+	(album_art TRUE)
+	(album_name "Chef Aid: The South Park Album")
+	(album_track_number 1)
+	(vocal_tonic_note 3)
+	(song_tonality 1)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=South Park Theme
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(7748hideandseek
+	(name "Hide and Seek")
+	(artist "Imogen Heap")
+	(master TRUE)
+	(song_id 1774800003)
+	(song
+		(name "songs/7748hideandseek/7748hideandseek")
+		(tracks
+			((vocals (0)))
+		)
+		(pans (0.0 -1.0 1.0))
+		(vols (0.0 0.0 0.0))
+		(cores (-1 -1 -1))
+		(vocal_parts 2)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoMedium)
+	(song_scroll_speed 2300)
+	(preview 142990 172990)
+	(song_length 272649)
+	(rank
+		(drum 0)
+		(guitar 0)
+		(bass 0)
+		(vocals 279)
+		(keys 0)
+		(real_keys 0)
+		(real_guitar 0)
+		(real_bass 0)
+		(band 267)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 2)
+	(genre popdanceelectronic)
+	(sub_genre subgenre_other)
+	(vocal_gender female)
+	(year_released 2005)
+	(album_art TRUE)
+	(album_name "Speak for Yourself")
+	(album_track_number 5)
+	(vocal_tonic_note 9)
+	(song_tonality 0)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Hide and Seek
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(7748cravoecanela
+	(name "Cravo e Canela")
+	(artist "Clube da Esquina")
+	(master TRUE)
+	(song_id 1774800004)
+	(song
+		(name "songs/7748cravoecanela/7748cravoecanela")
+		(tracks
+			((drum (0 1))
+			 (bass (2))
+			 (guitar (3))
+			 (vocals (4))
+			 (keys (5)))
+		)
+		(pans (-1.0 1.0 0.0 0.0 0.0 0.0 -1.0 1.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 1 -1 -1 -1 -1))
+		(vocal_parts 2)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoMedium)
+	(song_scroll_speed 2300)
+	(preview 32426 62426)
+	(song_length 145042)
+	(solo (keys))
+	(rank
+		(drum 178)
+		(guitar 267)
+		(bass 181)
+		(vocals 218)
+		(keys 211)
+		(real_keys 269)
+		(real_guitar 0)
+		(real_bass 0)
+		(band 243)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 1)
+	(genre latin)
+	(sub_genre subgenre_latin)
+	(vocal_gender male)
+	(year_released 1972)
+	(album_art TRUE)
+	(album_name "Clube da Esquina")
+	(album_track_number 6)
+	(vocal_tonic_note 7)
+	(song_tonality 0)
+	(encoding utf8)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Cravo e Canela
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(7748deadwomb
+	(name "Dead Womb")
+	(artist "Death From Above 1979")
+	(master TRUE)
+	(song_id 1774800005)
+	(song
+		(name "songs/7748deadwomb/7748deadwomb")
+		(tracks
+			((drum (0 1))
+			 (bass (2 3))
+			 (vocals (4)))
+		)
+		(pans (-1.0 1.0 -1.0 1.0 0.0 -1.0 1.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 -1 -1 -1 -1))
+		(vocal_parts 2)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+		(hopo_threshold 250)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoFast)
+	(song_scroll_speed 2300)
+	(preview 21254 51254)
+	(song_length 109098)
+	(solo (bass vocal_percussion))
+	(rank
+		(drum 448)
+		(guitar 0)
+		(bass 364)
+		(vocals 1)
+		(keys 0)
+		(real_keys 0)
+		(real_guitar 0)
+		(real_bass 384)
+		(band 345)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 3)
+	(genre punk)
+	(sub_genre subgenre_dancepunk)
+	(vocal_gender male)
+	(year_released 2002)
+	(album_art TRUE)
+	(album_name "Heads Up")
+	(album_track_number 1)
+	(vocal_tonic_note 0)
+	(song_tonality 1)
+	(real_bass_tuning (0 0 0 0))
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Dead Womb
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(7748minuet
+	(name "Minuet")
+	(artist "From First to Last")
+	(master TRUE)
+	(song_id 1774800006)
+	(song
+		(name "songs/7748minuet/7748minuet")
+		(tracks
+			((guitar (0 1)))
+		)
+		(pans (-1.0 1.0 -1.0 1.0))
+		(vols (0.0 0.0 0.0 0.0))
+		(cores (1 1 -1 -1))
+		(vocal_parts 0)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoMedium)
+	(song_scroll_speed 2300)
+	(preview 17303 47303)
+	(song_length 67301)
+	(rank
+		(drum 0)
+		(guitar 176)
+		(bass 0)
+		(vocals 0)
+		(keys 0)
+		(real_keys 0)
+		(real_guitar 208)
+		(real_bass 0)
+		(band 215)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 1)
+	(genre other)
+	(sub_genre subgenre_acoustic)
+	(vocal_gender male)
+	(year_released 2004)
+	(album_art TRUE)
+	(album_name "Dear Diary, My Teen Angst Has a Body Count")
+	(album_track_number 10)
+	(vocal_tonic_note 2)
+	(song_tonality 1)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Minuet
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(7748spacecadet
+	(name "3D Pinball Space Cadet: Level 1")
+	(artist "Matt Ridgeway")
+	(master TRUE)
+	(song_id 1774800012)
+	(song
+		(name "songs/7748spacecadet/7748spacecadet")
+		(tracks
+			((drum (0 1 2 3))
+			 (bass (4))
+			 (guitar (5 6))
+			 (keys (7 8)))
+		)
+		(pans (0.0 0.0 -1.0 1.0 0.0 -1.0 1.0 -1.0 1.0 -1.0 1.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 -1 -1 1 1 -1 -1 -1 -1))
+		(vocal_parts 0)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoMedium)
+	(song_scroll_speed 2300)
+	(preview 25785 55785)
+	(song_length 65454)
+	(rank
+		(drum 178)
+		(guitar 409)
+		(bass 228)
+		(vocals 0)
+		(keys 443)
+		(real_keys 443)
+		(real_guitar 442)
+		(real_bass 325)
+		(band 345)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 1)
+	(genre fusion)
+	(sub_genre subgenre_fusion)
+	(vocal_gender male)
+	(year_released 1995)
+	(album_art TRUE)
+	(vocal_tonic_note 8)
+	(song_tonality 1)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(pack_name "Windows .mid Pack 02")
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=3D Pinball Space Cadet: Level 1
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(7748spacecadet2x
+	(name "3D Pinball Space Cadet: Level 1 (2x Bass Pedal)")
+	(artist "Matt Ridgeway")
+	(master TRUE)
+	(song_id 1774800013)
+	(song
+		(name "songs/7748spacecadet2x/7748spacecadet2x")
+		(tracks
+			((drum (0 1 2 3))
+			 (bass (4))
+			 (guitar (5 6))
+			 (keys (7 8)))
+		)
+		(pans (0.0 0.0 -1.0 1.0 0.0 -1.0 1.0 -1.0 1.0 -1.0 1.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 -1 -1 1 1 -1 -1 -1 -1))
+		(vocal_parts 0)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoMedium)
+	(song_scroll_speed 2300)
+	(preview 25785 55785)
+	(song_length 65454)
+	(rank
+		(drum 242)
+		(guitar 409)
+		(bass 228)
+		(vocals 0)
+		(keys 443)
+		(real_keys 443)
+		(real_guitar 442)
+		(real_bass 325)
+		(band 345)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 1)
+	(genre fusion)
+	(sub_genre subgenre_fusion)
+	(vocal_gender male)
+	(year_released 1995)
+	(album_art TRUE)
+	(vocal_tonic_note 8)
+	(song_tonality 1)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(pack_name "Windows .mid Pack 02")
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=3D Pinball Space Cadet: Level 1 (2x Bass Pedal)
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=1
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(7748breakingintocars
+	(name "Breaking Into Cars")
+	(artist "The Raveonettes")
+	(master TRUE)
+	(song_id 1774800014)
+	(song
+		(name "songs/7748breakingintocars/7748breakingintocars")
+		(tracks
+			((drum (0 1))
+			 (bass (2))
+			 (guitar (3))
+			 (vocals (4)))
+		)
+		(pans (-1.0 1.0 0.0 0.0 0.0 -1.0 1.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 1 -1 -1 -1))
+		(vocal_parts 2)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoMedium)
+	(song_scroll_speed 2300)
+	(preview 39500 69500)
+	(song_length 194425)
+	(solo (guitar vocal_percussion))
+	(rank
+		(drum 1)
+		(guitar 139)
+		(bass 135)
+		(vocals 132)
+		(keys 0)
+		(real_keys 0)
+		(real_guitar 150)
+		(real_bass 150)
+		(band 165)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 2)
+	(genre indierock)
+	(sub_genre subgenre_indierock)
+	(vocal_gender male)
+	(year_released 2009)
+	(album_art TRUE)
+	(album_name "In and Out of Control")
+	(album_track_number 9)
+	(vocal_tonic_note 1)
+	(song_tonality 1)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Breaking Into Cars
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(7748demon
+	(name "Demon")
+	(artist "Bear In Heaven")
+	(master TRUE)
+	(song_id 1774800016)
+	(song
+		(name "songs/7748demon/7748demon")
+		(tracks
+			((drum (0 1))
+			 (bass (2))
+			 (vocals (3))
+			 (keys (4)))
+		)
+		(pans (-1.0 1.0 0.0 0.0 0.0 -1.0 1.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 -1 -1 -1 -1))
+		(vocal_parts 3)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoMedium)
+	(song_scroll_speed 2300)
+	(preview 31000 61000)
+	(song_length 300000)
+	(solo (vocal_percussion))
+	(rank
+		(drum 345)
+		(guitar 0)
+		(bass 1)
+		(vocals 132)
+		(keys 443)
+		(real_keys 327)
+		(real_guitar 0)
+		(real_bass 1)
+		(band 243)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 3)
+	(genre indierock)
+	(sub_genre subgenre_indierock)
+	(vocal_gender male)
+	(year_released 2014)
+	(album_art TRUE)
+	(album_name "Time Is Over One Day Old")
+	(album_track_number 7)
+	(vocal_tonic_note 5)
+	(song_tonality 1)
+	(real_bass_tuning (0 0 0 0))
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Demon
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(7748cuttingmyfingersoff
+	(name "Cutting My Fingers Off")
+	(artist "Turnover")
+	(master TRUE)
+	(song_id 1774800017)
+	(song
+		(name "songs/7748cuttingmyfingersoff/7748cuttingmyfingersoff")
+		(tracks
+			((drum (0 1))
+			 (bass (2))
+			 (guitar (3))
+			 (vocals (4)))
+		)
+		(pans (-1.0 1.0 0.0 0.0 0.0 -1.0 1.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 1 -1 -1 -1))
+		(vocal_parts 1)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoMedium)
+	(song_scroll_speed 2300)
+	(preview 47917 77917)
+	(song_length 184968)
+	(solo (guitar vocal_percussion))
+	(rank
+		(drum 124)
+		(guitar 176)
+		(bass 1)
+		(vocals 132)
+		(keys 0)
+		(real_keys 0)
+		(real_guitar 208)
+		(real_bass 1)
+		(band 165)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 2)
+	(genre indierock)
+	(sub_genre subgenre_indierock)
+	(vocal_gender male)
+	(year_released 2015)
+	(album_art TRUE)
+	(album_name "Peripheral Vision")
+	(album_track_number 1)
+	(vocal_tonic_note 0)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Cutting My Fingers Off
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(7748thefightisover
+	(name "The Fight Is Over")
+	(artist "The Blasting Company")
+	(master TRUE)
+	(song_id 1774800018)
+	(song
+		(name "songs/7748thefightisover/7748thefightisover")
+		(tracks
+			((drum (0 1))
+			 (bass (2))
+			 (guitar (3))
+			 (vocals (4)))
+		)
+		(pans (-1.0 1.0 0.0 0.0 0.0 -1.0 1.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 1 -1 -1 -1))
+		(vocal_parts 3)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoMedium)
+	(song_scroll_speed 2300)
+	(preview 21991 51991)
+	(song_length 87583)
+	(solo (guitar))
+	(rank
+		(drum 1)
+		(guitar 176)
+		(bass 1)
+		(vocals 132)
+		(keys 0)
+		(real_keys 0)
+		(real_guitar 208)
+		(real_bass 1)
+		(band 1)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 1)
+	(genre glam)
+	(sub_genre subgenre_glam)
+	(vocal_gender male)
+	(year_released 2017)
+	(album_art TRUE)
+	(album_name "Over The Garden Wall")
+	(album_track_number 25)
+	(vocal_tonic_note 0)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=The Fight Is Over
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(7748congratulations
+	(name "Congratulations")
+	(artist "MGMT")
+	(master TRUE)
+	(song_id 1774800020)
+	(song
+		(name "songs/7748congratulations/7748congratulations")
+		(tracks
+			((drum (0 1))
+			 (bass (2))
+			 (guitar (3))
+			 (vocals (4))
+			 (keys (5)))
+		)
+		(pans (-1.0 1.0 0.0 0.0 0.0 0.0 -1.0 1.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 1 -1 -1 -1 -1))
+		(vocal_parts 1)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoMedium)
+	(song_scroll_speed 2300)
+	(preview 79298 109298)
+	(song_length 236430)
+	(solo (keys vocal_percussion))
+	(rank
+		(drum 1)
+		(guitar 176)
+		(bass 1)
+		(vocals 132)
+		(keys 443)
+		(real_keys 443)
+		(real_guitar 150)
+		(real_bass 1)
+		(band 165)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 2)
+	(genre rock)
+	(sub_genre subgenre_psychadelic)
+	(vocal_gender male)
+	(year_released 2010)
+	(album_art TRUE)
+	(album_name "Congratulations")
+	(album_track_number 9)
+	(vocal_tonic_note 7)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Congratulations
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(7748lightsinthesky
+	(name "Lights In the Sky")
+	(artist "Nine Inch Nails")
+	(master TRUE)
+	(song_id 1774800021)
+	(song
+		(name "songs/7748lightsinthesky/7748lightsinthesky")
+		(tracks
+			((vocals (0 1))
+			 (keys (2 3)))
+		)
+		(pans (-1.0 1.0 -1.0 1.0 -1.0 1.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 -1 -1 -1))
+		(vocal_parts 1)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoSlow)
+	(song_scroll_speed 2000)
+	(preview 74181 104181)
+	(song_length 222647)
+	(rank
+		(drum 0)
+		(guitar 0)
+		(bass 0)
+		(vocals 1)
+		(keys 1)
+		(real_keys 153)
+		(real_guitar 0)
+		(real_bass 0)
+		(band 1)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 1)
+	(genre rock)
+	(sub_genre subgenre_rock)
+	(vocal_gender male)
+	(year_released 2008)
+	(album_art TRUE)
+	(album_name "The Slip")
+	(album_track_number 7)
+	(vocal_tonic_note 5)
+	(song_tonality 1)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Lights In the Sky
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(7748mothernature
+	(name "Mother Nature")
+	(artist "Dream Avenue")
+	(master TRUE)
+	(song_id 1774800022)
+	(song
+		(name "songs/7748mothernature/7748mothernature")
+		(tracks
+			((drum (0 1))
+			 (bass (2 3))
+			 (guitar (4 5))
+			 (keys (6 7)))
+		)
+		(pans (-1.0 1.0 -1.0 1.0 -1.0 1.0 -1.0 1.0 -1.0 1.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 -1 1 1 -1 -1 -1 -1))
+		(vocal_parts 0)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoMedium)
+	(song_scroll_speed 2300)
+	(preview 28413 58413)
+	(song_length 85239)
+	(rank
+		(drum 151)
+		(guitar 139)
+		(bass 1)
+		(vocals 0)
+		(keys 385)
+		(real_keys 385)
+		(real_guitar 150)
+		(real_bass 150)
+		(band 215)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 1)
+	(genre popdanceelectronic)
+	(sub_genre subgenre_chiptune)
+	(vocal_gender male)
+	(year_released 2018)
+	(album_art TRUE)
+	(album_name "Our Shared Universes")
+	(album_track_number 1)
+	(vocal_tonic_note 4)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Mother Nature
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(7748theradiant
+	(name "The Radiant (Chart-A-Thon 2019 Mix)")
+	(artist "Dream Avenue")
+	(master TRUE)
+	(song_id 1774800024)
+	(song
+		(name "songs/7748theradiant/7748theradiant")
+		(tracks
+			((drum (0 1))
+			 (bass (2 3))
+			 (guitar (4 5))
+			 (keys (6 7)))
+		)
+		(pans (-1.0 1.0 -1.0 1.0 -1.0 1.0 -1.0 1.0 -1.0 1.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 -1 1 1 -1 -1 -1 -1))
+		(vocal_parts 0)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoFast)
+	(song_scroll_speed 2300)
+	(preview 14667 44667)
+	(song_length 249333)
+	(rank
+		(drum 242)
+		(guitar 221)
+		(bass 293)
+		(vocals 0)
+		(keys 385)
+		(real_keys 385)
+		(real_guitar 325)
+		(real_bass 325)
+		(band 292)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 1)
+	(genre popdanceelectronic)
+	(sub_genre subgenre_chiptune)
+	(vocal_gender male)
+	(year_released 2014)
+	(year_recorded 2019)
+	(album_art TRUE)
+	(album_name "Moonstone")
+	(album_track_number 3)
+	(vocal_tonic_note 0)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=The Radiant (Chart-A-Thon 2019 Mix)
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(7748beinfriends
+	(name "Bein' Friends")
+	(artist "Keiichi Suzuki & Hirokazu Tanaka")
+	(master TRUE)
+	(song_id 1774800030)
+	(song
+		(name "songs/7748beinfriends/7748beinfriends")
+		(tracks
+			((drum (0 1 2 3))
+			 (bass (4))
+			 (guitar (5))
+			 (keys (6)))
+		)
+		(pans (0.0 0.0 -1.0 1.0 0.0 -0.2 0.2 0.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 -1 -1 1 -1 -1))
+		(vocal_parts 0)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoMedium)
+	(song_scroll_speed 2300)
+	(preview 3734 33734)
+	(song_length 102679)
+	(rank
+		(drum 178)
+		(guitar 221)
+		(bass 181)
+		(vocals 0)
+		(keys 211)
+		(real_keys 211)
+		(real_guitar 325)
+		(real_bass 267)
+		(band 243)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 1)
+	(genre popdanceelectronic)
+	(sub_genre subgenre_chiptune)
+	(vocal_gender male)
+	(year_released 1989)
+	(album_art TRUE)
+	(album_name "MOTHER (Original Soundtrack)")
+	(album_track_number 21)
+	(vocal_tonic_note 5)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(pack_name "MOTHER Soundtrack Pack 01")
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Bein' Friends
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(7748hippiebattle
+	(name "Battle Theme 2 (Hippie Battle)")
+	(artist "Keiichi Suzuki & Hirokazu Tanaka")
+	(master TRUE)
+	(song_id 1774800031)
+	(song
+		(name "songs/7748hippiebattle/7748hippiebattle")
+		(tracks
+			((drum (0 1 2 3))
+			 (bass (4))
+			 (guitar (5)))
+		)
+		(pans (0.0 0.0 -1.0 1.0 0.0 0.0 -1.0 1.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 -1 -1 1 -1 -1))
+		(vocal_parts 0)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(drum_bank sfx/kit03_bank.milo)
+	(anim_tempo kTempoFast)
+	(song_scroll_speed 2300)
+	(preview 36000 66000)
+	(song_length 71333)
+	(rank
+		(drum 151)
+		(guitar 221)
+		(bass 228)
+		(vocals 0)
+		(keys 0)
+		(real_keys 0)
+		(real_guitar 267)
+		(real_bass 267)
+		(band 215)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 1)
+	(genre popdanceelectronic)
+	(sub_genre subgenre_chiptune)
+	(vocal_gender male)
+	(year_released 1989)
+	(album_art TRUE)
+	(album_name "MOTHER (Original Soundtrack)")
+	(album_track_number 7)
+	(vocal_tonic_note 9)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(pack_name "MOTHER Soundtrack Pack 01")
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Battle Theme 2 (Hippie Battle)
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(7748motherearth
+	(name "Mother Earth")
+	(artist "Keiichi Suzuki & Hirokazu Tanaka")
+	(master TRUE)
+	(song_id 1774800033)
+	(song
+		(name "songs/7748motherearth/7748motherearth")
+		(tracks
+			((drum (0 1))
+			 (bass (2))
+			 (guitar (3))
+			 (keys (4)))
+		)
+		(pans (-1.0 1.0 0.0 -0.2 0.2 0.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 1 -1 -1))
+		(vocal_parts 0)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoSlow)
+	(song_scroll_speed 2300)
+	(preview 18668 48668)
+	(song_length 119477)
+	(rank
+		(drum 1)
+		(guitar 176)
+		(bass 135)
+		(vocals 0)
+		(keys 1)
+		(real_keys 1)
+		(real_guitar 208)
+		(real_bass 150)
+		(band 1)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 1)
+	(genre popdanceelectronic)
+	(sub_genre subgenre_chiptune)
+	(vocal_gender male)
+	(year_released 1989)
+	(album_art TRUE)
+	(album_name "MOTHER (Original Soundtrack)")
+	(album_track_number 1)
+	(vocal_tonic_note 7)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(pack_name "MOTHER Soundtrack Pack 01")
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Mother Earth
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(7748pollyanna
+	(name "Pollyanna (I Believe in You)")
+	(artist "Keiichi Suzuki & Hirokazu Tanaka")
+	(master TRUE)
+	(song_id 1774800034)
+	(song
+		(name "songs/7748pollyanna/7748pollyanna")
+		(tracks
+			((drum (0 1 2 3))
+			 (bass (4))
+			 (guitar (5))
+			 (keys (6)))
+		)
+		(pans (0.0 0.0 -1.0 1.0 0.0 -0.2 0.2 0.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 -1 -1 1 -1 -1))
+		(vocal_parts 0)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(drum_bank sfx/kit03_bank.milo)
+	(anim_tempo kTempoMedium)
+	(song_scroll_speed 2300)
+	(preview 4267 34267)
+	(song_length 121610)
+	(rank
+		(drum 124)
+		(guitar 221)
+		(bass 181)
+		(vocals 0)
+		(keys 211)
+		(real_keys 211)
+		(real_guitar 267)
+		(real_bass 150)
+		(band 215)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 1)
+	(genre popdanceelectronic)
+	(sub_genre subgenre_chiptune)
+	(vocal_gender male)
+	(year_released 1989)
+	(album_art TRUE)
+	(album_name "MOTHER (Original Soundtrack)")
+	(album_track_number 4)
+	(vocal_tonic_note 2)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (-2 0 0 0))
+	(pack_name "MOTHER Soundtrack Pack 01")
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Pollyanna (I Believe in You)
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(7748twinkle
+	(name "Twinkle Elementary School")
+	(artist "Keiichi Suzuki & Hirokazu Tanaka")
+	(master TRUE)
+	(song_id 1774800035)
+	(song
+		(name "songs/7748twinkle/7748twinkle")
+		(tracks
+			((drum (0 1 2 3))
+			 (bass (4))
+			 (guitar (5))
+			 (keys (6)))
+		)
+		(pans (0.0 0.0 -1.0 1.0 0.0 0.2 -0.2 0.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 -1 -1 1 -1 -1))
+		(vocal_parts 0)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoMedium)
+	(song_scroll_speed 2300)
+	(preview 3200 33200)
+	(song_length 126408)
+	(rank
+		(drum 124)
+		(guitar 139)
+		(bass 181)
+		(vocals 0)
+		(keys 269)
+		(real_keys 269)
+		(real_guitar 150)
+		(real_bass 208)
+		(band 243)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 1)
+	(genre popdanceelectronic)
+	(sub_genre subgenre_chiptune)
+	(vocal_gender male)
+	(year_released 1989)
+	(album_art TRUE)
+	(album_name "MOTHER (Original Soundtrack)")
+	(album_track_number 19)
+	(vocal_tonic_note 9)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(pack_name "MOTHER Soundtrack Pack 01")
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Twinkle Elementary School
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(7748tetodevidro
+	(name "Teto de Vidro")
+	(artist "Pitty")
+	(master TRUE)
+	(song_id 1774800036)
+	(song
+		(name "songs/7748tetodevidro/7748tetodevidro")
+		(tracks
+			((drum (0 1))
+			 (bass (2 3))
+			 (guitar (4 5))
+			 (vocals (6 7)))
+		)
+		(pans (-1.0 1.0 -1.0 1.0 -1.0 1.0 -1.0 1.0 -1.0 1.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 -1 1 1 -1 -1 -1 -1))
+		(vocal_parts 1)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoMedium)
+	(song_scroll_speed 2300)
+	(preview 39735 69735)
+	(song_length 215036)
+	(rank
+		(drum 151)
+		(guitar 176)
+		(bass 135)
+		(vocals 175)
+		(keys 0)
+		(real_keys 0)
+		(real_guitar 0)
+		(real_bass 0)
+		(band 215)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 1)
+	(genre rock)
+	(sub_genre subgenre_rock)
+	(vocal_gender female)
+	(year_released 2005)
+	(album_art TRUE)
+	(album_name "Admirável Chip Novo")
+	(album_track_number 1)
+	(vocal_tonic_note 1)
+	(song_tonality 1)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Teto de Vidro
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(7748burnished
+	(name "Burnished")
+	(artist "White Denim")
+	(master FALSE)
+	(song_id 1774800037)
+	(song
+		(name "songs/7748burnished/7748burnished")
+		(tracks
+			((drum (0 1))
+			 (bass (2 3))
+			 (guitar (4 5))
+			 (vocals (6 7)))
+		)
+		(pans (-1.0 1.0 -1.0 1.0 -1.0 1.0 -1.0 1.0 -1.0 1.0))
+		(vols (0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0))
+		(cores (-1 -1 -1 -1 1 1 -1 -1 -1 -1))
+		(vocal_parts 2)
+		(drum_solo
+			(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))
+		)
+		(drum_freestyle
+			(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))
+		)
+	)
+	(bank sfx/tambourine_bank.milo)
+	(anim_tempo kTempoMedium)
+	(song_scroll_speed 2300)
+	(preview 62000 92000)
+	(song_length 156000)
+	(solo (guitar))
+	(rank
+		(drum 242)
+		(guitar 267)
+		(bass 228)
+		(vocals 176)
+		(keys 0)
+		(real_keys 0)
+		(real_guitar 323)
+		(real_bass 267)
+		(band 228)
+	)
+	(format 10)
+	(version 30)
+	(game_origin ugc_plus)
+	(rating 1)
+	(genre indierock)
+	(sub_genre subgenre_indierock)
+	(vocal_gender male)
+	(year_released 2011)
+	(album_art TRUE)
+	(album_name "D")
+	(album_track_number 2)
+	(vocal_tonic_note 2)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Burnished
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
