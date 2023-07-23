@@ -4,7 +4,7 @@ node_modules/
 src/
 src_*/
 .eslintrc.js
-backend.tsconfig.json
+prod.tsconfig.json
 .gitignore
 .npmignore
 .prettierrc.js

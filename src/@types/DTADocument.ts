@@ -1,4 +1,20 @@
-import { AnimTempoTypes, BandFailCueTypes, BankTypes, DrumBankTypes, GenreTypes, GetDataValueOptions, GetDataValueReturn, GetDataValueTypes, RatingTypes, SongScrollSpeedTypes, StringifyDataOptions, SubGenreTypes, UpdateDataOptions, VocalGenderTypes, VocalPartsTypes } from '../exports'
+import {
+    AnimTempoTypes,
+    BandFailCueTypes,
+    BankTypes,
+    DrumBankTypes,
+    GenreTypes,
+    GetDataValueOptions,
+    GetDataValueReturn,
+    GetDataValueTypes,
+    RatingTypes,
+    SongScrollSpeedTypes,
+    StringifyDataOptions,
+    SubGenreTypes,
+    UpdateDataOptions,
+    VocalGenderTypes,
+    VocalPartsTypes,
+} from '../exports'
 
 /**
  * A parsed song object.
@@ -18,7 +34,10 @@ export interface DTADocumentMethods {
      * @param {O extends GetDataValueOptions<V>} options `OPTIONAL` Customization options for the retrieval process.
      * @returns {GetDataValueReturn<V, O>} The requested specific information.
      */
-    get<V extends GetDataValueTypes, O extends GetDataValueOptions<V>>(value: V, options?: O): GetDataValueReturn<V, O>
+    get<V extends GetDataValueTypes, O extends GetDataValueOptions<V>>(
+        value: V,
+        options?: O
+    ): GetDataValueReturn<V, O>
     /**
      * Converts an array of parsed song objects back to `.dta` file contents string.
      * - - - -

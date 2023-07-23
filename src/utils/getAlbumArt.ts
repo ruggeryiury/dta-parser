@@ -50,10 +50,16 @@ export interface SpotifyAlbumSearchDocument {
  * @param {GetDataAlbumArtOptions} options Customize options for the album art fetching process.
  * @returns {Promise<string | undefined>} The URL of the album's art as `string`, `undefined` if no album art available.
  */
-export const getAlbumArt = async (dta: DTADocument, options: GetDataAlbumArtOptions): Promise<string | undefined> => {
+export const getAlbumArt = async (
+    dta: DTADocument,
+    options: GetDataAlbumArtOptions
+): Promise<string | undefined> => {
     if (!dta.content.album_name) return undefined
 
-    const query = `${dta.content.artist.replaceAll('&', 'and')} ${dta.content.album_name.replaceAll('&', 'and')}`
+    const query = `${dta.content.artist.replaceAll(
+        '&',
+        'and'
+    )} ${dta.content.album_name.replaceAll('&', 'and')}`
 
     const apiEndpoint = 'https://api.spotify.com/v1'
     const authEndpoint = 'https://accounts.spotify.com/api/token'

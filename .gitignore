@@ -8,6 +8,6 @@ REFACTORING.md
 TO-DO.md
 *.tgz
 *.json
-!backend.tsconfig.json
+!prod.tsconfig.json
 *.txt
 *.env

@@ -9,7 +9,10 @@ import { DTADocument } from '../@types/DTADocument'
  * @param {RT} get `OPTIONAL` The type of the returned value from the function.
  * @returns {DTADocument | undefined} The index of the song inside the `DTADocument` array.
  */
-export const getSongByID = (songs: DTADocument[], id: string): DTADocument | undefined => {
+export const getSongByID = (
+    songs: DTADocument[],
+    id: string
+): DTADocument | undefined => {
     let returnValue: DTADocument | undefined
     songs.some((song) => {
         if (song.get('id') === id) {

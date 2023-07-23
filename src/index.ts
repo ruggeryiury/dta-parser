@@ -1,5 +1,13 @@
 import { DTADocument } from './@types/DTADocument'
-import { depackDTA, parseDTA, sortDTA, getSongByID, UpdateDataOptions, SortByOptionsTypes, songsUpdates } from './exports'
+import {
+    depackDTA,
+    parseDTA,
+    sortDTA,
+    getSongByID,
+    UpdateDataOptions,
+    SortByOptionsTypes,
+    songsUpdates,
+} from './exports'
 import DTAArray from './core/DTAArray'
 import DTATools from './core/DTATools'
 
@@ -38,7 +46,10 @@ export interface DTAParserOptions {
  *
  * @see [`interface` DTADocument](@types/DTADocument.ts).
  */
-const DTAParser = (dtaFileContents: string, options: DTAParserOptions = {}): DTADocument[] => {
+const DTAParser = (
+    dtaFileContents: string,
+    options: DTAParserOptions = {}
+): DTADocument[] => {
     const { harmonixSongs, sortBy, update, updateAll } = options
 
     const depackedSongs = depackDTA(dtaFileContents)
@@ -51,7 +62,8 @@ const DTAParser = (dtaFileContents: string, options: DTAParserOptions = {}): DTA
     if (harmonixSongs) {
         const updatedSongs = parsedSongs.map((song) => {
             const songname = song.content.id
-            const songUpdates = songsUpdates[songname as keyof typeof songsUpdates]
+            const songUpdates =
+                songsUpdates[songname as keyof typeof songsUpdates]
             if (songUpdates) {
                 song.content = {
                     ...song.content,

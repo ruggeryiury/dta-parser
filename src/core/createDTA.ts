@@ -1,6 +1,13 @@
 import { cloneDeep } from 'lodash'
 import { DTADocument } from '../@types/DTADocument'
-import { DTAtoJSON, TrackUpdateOptions, UpdateDataOptions, getDTA, stringifyDTA, updateDTA } from '../exports'
+import {
+    DTAtoJSON,
+    TrackUpdateOptions,
+    UpdateDataOptions,
+    getDTA,
+    stringifyDTA,
+    updateDTA,
+} from '../exports'
 
 const dtaDefault: DTADocument = {
     content: {
@@ -65,26 +72,26 @@ export interface CreateDataRequired extends UpdateDataOptions {
     songname: string
     /**
      * An object specifying the whole song's instruments and audio channels structure.
-     * 
+     *
      * Here, you specify the channels, ranking, and solo of all instruments. On `vocals`, you also specify the gender and
      * the quantity of vocal parts. You specify if the song has crowd channels as well.
-     * 
+     *
      * By placing a valid `tracks` options, it will override the whole song's structure.
      */
     tracks: TrackUpdateOptions
     /**
      * The start of the preview (the end of the preview is automatically calculated). It can be either a number, or a string.
-     * 
+     *
      * If it's a number, you must place the length of the song in milliseconds.
-     * 
+     *
      * You can also place a formatted time string (for example: `'2:30'`)
      */
     preview: string | number
     /**
      * The length of the song. It can be either a number, or a string.
-     * 
+     *
      * If it's a number, you must place the length of the song in milliseconds.
-     * 
+     *
      * You can also place a formatted time string (for example: `'2:30'`)
      */
     song_length: string | number

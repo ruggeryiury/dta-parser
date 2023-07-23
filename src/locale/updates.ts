@@ -5702,7 +5702,8 @@ export const songsUpdates: SongsUpdatesDocument = {
         year_released: 2003,
         alternate_path: true,
         album_art: true,
-        album_name: 'Never trust a guy who after having been a punk, is now playing electro',
+        album_name:
+            'Never trust a guy who after having been a punk, is now playing electro',
         album_track_number: 2,
         vocal_parts: 2,
         extra_authoring: ['disc_update'],
@@ -6036,7 +6037,8 @@ export const songsUpdates: SongsUpdatesDocument = {
         alternate_path: true,
         extra_authoring: ['disc_update'],
         album_art: true,
-        album_name: 'The Rise and Fall of Ziggy Stardust and the Spiders from Mars',
+        album_name:
+            'The Rise and Fall of Ziggy Stardust and the Spiders from Mars',
         album_track_number: 3,
         vocal_parts: 3,
     },
@@ -8916,7 +8918,8 @@ export const songsUpdates: SongsUpdatesDocument = {
         alternate_path: true,
         extra_authoring: ['disc_update'],
         album_art: true,
-        album_name: 'The Rise and Fall of Ziggy Stardust and the Spiders From Mars',
+        album_name:
+            'The Rise and Fall of Ziggy Stardust and the Spiders From Mars',
         album_track_number: 10,
         vocal_parts: 3,
         vocal_tonic_note: 9,
@@ -10762,7 +10765,8 @@ export const songsUpdates: SongsUpdatesDocument = {
         alternate_path: true,
         extra_authoring: ['disc_update'],
         album_art: true,
-        album_name: "Good Apollo, I'm Burning Star IV, Volume One: From Fear Through the Eyes of Madness",
+        album_name:
+            "Good Apollo, I'm Burning Star IV, Volume One: From Fear Through the Eyes of Madness",
         album_track_number: 11,
         vocal_parts: 3,
         vocal_tonic_note: 2,
@@ -19791,7 +19795,8 @@ export const songsUpdates: SongsUpdatesDocument = {
     },
     thepoweroflove: {
         year_released: 1985,
-        album_name: 'Back to the Future: Music from the Motion Picture Soundtrack',
+        album_name:
+            'Back to the Future: Music from the Motion Picture Soundtrack',
         album_track_number: 1,
     },
     eyeofthetiger: {
