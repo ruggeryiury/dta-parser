@@ -295,9 +295,7 @@ export const getDTA = <
         else {
             if (value === 'vocal_parts')
                 return Locale.vocal_parts(
-                    dta.content.vocal_parts === undefined
-                        ? 0
-                        : dta.content.vocal_parts
+                    dta.content.vocal_parts
                 ) as GetDataValueReturn<V, O>
             else if (value === 'mute_volume')
                 return `${

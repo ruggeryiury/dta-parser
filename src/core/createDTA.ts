@@ -20,6 +20,7 @@ const dtaDefault: DTADocument = {
         tracks_count: [0, 0, 0, 0, 0, 0],
         pans: [],
         vols: [],
+        vocal_parts: 0,
         bank: 'sfx/tambourine_bank.milo',
         drum_bank: 'sfx/kit01_bank.milo',
         anim_tempo: 32,
@@ -62,6 +63,10 @@ export interface CreateDataRequired extends UpdateDataOptions {
      * The song's artist/band.
      */
     artist: string
+    /**
+     * Tells if the song is a master recording.
+     */
+    master: boolean
     /**
      * The numerical, unique number ID of the song. Might be a string ID as well.
      */

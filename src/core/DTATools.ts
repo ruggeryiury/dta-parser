@@ -1,6 +1,6 @@
 import { checkDrumMix } from '../utils/checkDrumMix'
 import { createDTA } from './createDTA'
-import { JSONContenttoDTA } from './DTAtoJSON'
+import { JSONtoDTA } from './JSONtoDTA'
 
 interface DTAToolsModule {
     /**
@@ -27,7 +27,7 @@ interface DTAToolsModule {
      * @param {string} jsonFileContents The JSON file contents as string.
      * @returns {DTADocument} A new `DTADocument` instance in memory.
      */
-    readJSON: typeof JSONContenttoDTA
+    readJSON: typeof JSONtoDTA
 }
 
 /**
@@ -36,7 +36,7 @@ interface DTAToolsModule {
 const DTATools: DTAToolsModule = {
     create: createDTA,
     checkDrumMix,
-    readJSON: JSONContenttoDTA,
+    readJSON: JSONtoDTA,
 }
 
 export default DTATools

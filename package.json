@@ -16,9 +16,9 @@
 	"scripts": {
 		"build": "yarn clean && yarn build:commonjs && yarn build:esmodule && webpack",
 		"build:commonjs": "tsc --project ./prod.tsconfig.json",
-		"build:esmodule": "tsc --project ./prod.tsconfig.json -module es6 --outDir module",
+		"build:esmodule": "tsc --project ./prod.tsconfig.json --module es6 --outDir module",
 		"clean": "rimraf dist lib module",
-		"format": "prettier --write src/**/*.{js,ts,tsx}",
+		"format": "prettier --write src/**/*.{js,ts,tsx} backend/**/*.{js,ts,tsx}",
 		"lint": "eslint src",
 		"start": "nodemon ./backend/scripts/index.ts"
 	},

@@ -102,7 +102,7 @@ export interface DTAContentDocument {
     /**
      * The quantity of vocal parts of the song.
      */
-    vocal_parts?: VocalPartsTypes
+    vocal_parts: VocalPartsTypes
     mute_volume?: number
     mute_volume_vocals?: number
     hopo_threshold?: number

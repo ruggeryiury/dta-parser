@@ -48,8 +48,12 @@ export interface DTAParserOptions {
  */
 const DTAParser = (
     dtaFileContents: string,
-    options: DTAParserOptions = {}
+    options?: DTAParserOptions
 ): DTADocument[] => {
+    if (!options) {
+        options = {} as DTAParserOptions
+    }
+
     const { harmonixSongs, sortBy, update, updateAll } = options
 
     const depackedSongs = depackDTA(dtaFileContents)

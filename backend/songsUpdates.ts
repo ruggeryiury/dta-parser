@@ -2,7 +2,12 @@ import fs from 'fs'
 import path from 'path'
 import DTANode from './DTANode'
 import DTAParser, { DTADocument, DTAParserOptions } from '../src'
-import { SongKeyUpdateOptions, depackDTA, genTabs, getSongByID } from '../src/exports'
+import {
+    SongKeyUpdateOptions,
+    depackDTA,
+    genTabs,
+    getSongByID,
+} from '../src/exports'
 
 type SongsUpdatesObject = {
     [key: string]: SongsUpdatesKeys
@@ -240,18 +245,21 @@ export const generateSongsUpdates = (): void => {
                     const songLength = Object.keys(filteredObject).length
                     newSongsUpdates += `\n\t(song${songLength > 1 ? '' : ' '}`
                     if (filteredObject.vocal_parts !== undefined) {
-                        newSongsUpdates += `${songLength > 1 ? '\n\t\t' : ''
-                            }(vocal_parts ${filteredObject.vocal_parts})`
+                        newSongsUpdates += `${
+                            songLength > 1 ? '\n\t\t' : ''
+                        }(vocal_parts ${filteredObject.vocal_parts})`
                     }
                     if (filteredObject.vols !== undefined) {
-                        newSongsUpdates += `${songLength > 1 ? '\n\t\t' : ''
-                            }(vols ${filteredObject.vols
-                                .map((vol) => vol.toFixed(1))
-                                .join(' ')})`
+                        newSongsUpdates += `${
+                            songLength > 1 ? '\n\t\t' : ''
+                        }(vols ${filteredObject.vols
+                            .map((vol) => vol.toFixed(1))
+                            .join(' ')})`
                     }
                     if (filteredObject.hopo_threshold !== undefined) {
-                        newSongsUpdates += `${songLength > 1 ? '\n\t\t' : ''
-                            }(hopo_threshold ${filteredObject.hopo_threshold})`
+                        newSongsUpdates += `${
+                            songLength > 1 ? '\n\t\t' : ''
+                        }(hopo_threshold ${filteredObject.hopo_threshold})`
                     }
                     newSongsUpdates += `)`
                     placedSong = true
@@ -263,39 +271,41 @@ export const generateSongsUpdates = (): void => {
             ) {
                 newSongsUpdates += `\n\t(${keys} "${(
                     allSongsUpdates[songname][
-                    keys as keyof SongsUpdatesObject[typeof songname]
+                        keys as keyof SongsUpdatesObject[typeof songname]
                     ] as string
                 ).replaceAll('"', '\\q')}")`
             } else if (keys === 'extra_authoring') {
                 newSongsUpdates += `\n\t(${keys} ${(
                     allSongsUpdates[songname][
-                    keys as keyof SongsUpdatesObject[typeof songname]
+                        keys as keyof SongsUpdatesObject[typeof songname]
                     ] as []
                 ).join(' ')})`
             } else if (keys === 'solo') {
                 newSongsUpdates += `\n\t(${keys} (${(
                     allSongsUpdates[songname][
-                    keys as keyof SongsUpdatesObject[typeof songname]
+                        keys as keyof SongsUpdatesObject[typeof songname]
                     ] as []
                 ).join(' ')}))`
             } else if (keys === 'preview') {
                 newSongsUpdates += `\n\t(${keys} ${(
                     allSongsUpdates[songname][
-                    keys as keyof SongsUpdatesObject[typeof songname]
+                        keys as keyof SongsUpdatesObject[typeof songname]
                     ] as []
                 ).join(' ')})`
             } else if (keys === 'album_art' || keys === 'alternate_path') {
-                newSongsUpdates += `\n\t(${keys} ${(allSongsUpdates[songname][
-                    keys as keyof SongsUpdatesObject[typeof songname]
-                ] as boolean)
-                    ? 'TRUE'
-                    : 'FALSE'
-                    })`
+                newSongsUpdates += `\n\t(${keys} ${
+                    (allSongsUpdates[songname][
+                        keys as keyof SongsUpdatesObject[typeof songname]
+                    ] as boolean)
+                        ? 'TRUE'
+                        : 'FALSE'
+                })`
             } else {
-                newSongsUpdates += `\n\t(${keys} ${allSongsUpdates[songname][
-                    keys as keyof SongsUpdatesObject[typeof songname]
-                ] as string
-                    })`
+                newSongsUpdates += `\n\t(${keys} ${
+                    allSongsUpdates[songname][
+                        keys as keyof SongsUpdatesObject[typeof songname]
+                    ] as string
+                })`
             }
         })
 
@@ -309,18 +319,44 @@ export const generateSongsUpdates = (): void => {
     )
 }
 
-type SimplifiedVocalTonicNoteTypes = 'C' | 'Cm' | 'Db' | 'C#m' | 'D' | 'Dm' | 'Eb' | 'D#m' | 'E' | 'Em' | 'F' | 'Fm' | 'F#' | 'F#m' | 'G' | 'Gm' | 'Ab' | 'G#m' | 'A' | 'Am' | 'Bb' | 'A#m' | 'B' | 'Bm'
+type SimplifiedVocalTonicNoteTypes =
+    | 'C'
+    | 'Cm'
+    | 'Db'
+    | 'C#m'
+    | 'D'
+    | 'Dm'
+    | 'Eb'
+    | 'D#m'
+    | 'E'
+    | 'Em'
+    | 'F'
+    | 'Fm'
+    | 'F#'
+    | 'F#m'
+    | 'G'
+    | 'Gm'
+    | 'Ab'
+    | 'G#m'
+    | 'A'
+    | 'Am'
+    | 'Bb'
+    | 'A#m'
+    | 'B'
+    | 'Bm'
 
 type KeySignatureDataObject = {
     [key in SimplifiedVocalTonicNoteTypes]: {
-        note: number,
+        note: number
         tonality: number
         name: SongKeyUpdateOptions['key']
     }
 }
 
 interface VocalTonicNotePatchObject {
-    [key: string]: SimplifiedVocalTonicNoteTypes | SimplifiedVocalTonicNoteTypes[]
+    [key: string]:
+        | SimplifiedVocalTonicNoteTypes
+        | SimplifiedVocalTonicNoteTypes[]
 }
 
 /**
@@ -333,33 +369,32 @@ interface VocalTonicNotePatchObject {
 export const generateVocalTonicNotePatch = async (
     placeSongsInfo?: boolean
 ): Promise<DTAParserOptions['update']> => {
-
     const keySignatureData: KeySignatureDataObject = {
-        'A': { note: 9, tonality: 0, name: "A Major" },
-        'Am': { note: 9, tonality: 1, name: "A Minor" },
-        'Bb': { note: 10, tonality: 0, name: "B♭ Major" },
-        'A#m': { note: 10, tonality: 1, name: "A♯ Minor" },
-        'B': { note: 11, tonality: 0, name: "B Major" },
-        'Bm': { note: 11, tonality: 1, name: "B Minor" },
-        'C': { note: 0, tonality: 0, name: "C Major" },
-        'Cm': { note: 0, tonality: 1, name: "C Minor" },
-        'Db': { note: 1, tonality: 0, name: "D♭ Major" },
-        'C#m': { note: 1, tonality: 1, name: "C♯ Minor" },
-        'D': { note: 2, tonality: 0, name: "D Major" },
-        'Dm': { note: 2, tonality: 1, name: "D Minor" },
-        'Eb': { note: 3, tonality: 0, name: "E♭ Major" },
-        'D#m': { note: 3, tonality: 1, name: "D♯ Minor" },
-        'E': { note: 4, tonality: 0, name: "E Major" },
-        'Em': { note: 4, tonality: 1, name: "E Minor" },
-        'F': { note: 5, tonality: 0, name: "F Major" },
-        'Fm': { note: 5, tonality: 1, name: "F Minor" },
-        'F#': { note: 6, tonality: 0, name: "F♯ Major" },
-        'F#m': { note: 6, tonality: 1, name: "F♯ Minor" },
-        'G': { note: 7, tonality: 0, name: "G Major" },
-        'Gm': { note: 7, tonality: 1, name: "G Minor" },
-        'Ab': { note: 8, tonality: 0, name: "A♭ Major" },
-        'G#m': { note: 8, tonality: 1, name: "G♯ Minor" },
-    };
+        A: { note: 9, tonality: 0, name: 'A Major' },
+        Am: { note: 9, tonality: 1, name: 'A Minor' },
+        Bb: { note: 10, tonality: 0, name: 'B♭ Major' },
+        'A#m': { note: 10, tonality: 1, name: 'A♯ Minor' },
+        B: { note: 11, tonality: 0, name: 'B Major' },
+        Bm: { note: 11, tonality: 1, name: 'B Minor' },
+        C: { note: 0, tonality: 0, name: 'C Major' },
+        Cm: { note: 0, tonality: 1, name: 'C Minor' },
+        Db: { note: 1, tonality: 0, name: 'D♭ Major' },
+        'C#m': { note: 1, tonality: 1, name: 'C♯ Minor' },
+        D: { note: 2, tonality: 0, name: 'D Major' },
+        Dm: { note: 2, tonality: 1, name: 'D Minor' },
+        Eb: { note: 3, tonality: 0, name: 'E♭ Major' },
+        'D#m': { note: 3, tonality: 1, name: 'D♯ Minor' },
+        E: { note: 4, tonality: 0, name: 'E Major' },
+        Em: { note: 4, tonality: 1, name: 'E Minor' },
+        F: { note: 5, tonality: 0, name: 'F Major' },
+        Fm: { note: 5, tonality: 1, name: 'F Minor' },
+        'F#': { note: 6, tonality: 0, name: 'F♯ Major' },
+        'F#m': { note: 6, tonality: 1, name: 'F♯ Minor' },
+        G: { note: 7, tonality: 0, name: 'G Major' },
+        Gm: { note: 7, tonality: 1, name: 'G Minor' },
+        Ab: { note: 8, tonality: 0, name: 'A♭ Major' },
+        'G#m': { note: 8, tonality: 1, name: 'G♯ Minor' },
+    }
     const contents = await DTANode.read(process.env.CUSTOM_DTAS || 'never')
 
     const allSongs = DTAParser(contents)
@@ -396,7 +431,7 @@ export const generateVocalTonicNotePatch = async (
         BreakFree: 'Gm',
         problem: 'G#m',
         SheepQueen_DNA: 'C#m',
-        TheLazySong_PVH: 'B'
+        TheLazySong_PVH: 'B',
     }
 
     let newDTA = ''
@@ -412,24 +447,32 @@ export const generateVocalTonicNotePatch = async (
         const content = (getSongByID(allSongs, song) as DTADocument).content
 
         if (placeSongsInfo)
-            newDTA += `;${content.name}${genTabs(0)};Charted by ${content.author as string
-                }\n`
+            newDTA += `;${content.name}${genTabs(0)};Charted by ${
+                content.author as string
+            }\n`
 
         newDTA += `(${song}${genTabs()}`
 
         const key_signature = patch[song]
 
         if (key_signature && typeof key_signature === 'string') {
-            const { name, note, tonality } = keySignatureData[key_signature as keyof typeof keySignatureData]
+            const { name, note, tonality } =
+                keySignatureData[key_signature as keyof typeof keySignatureData]
 
             newDTA += `(vocal_tonic_note ${note})${genTabs()}(song_tonality ${tonality})`
             newUpdate[song] = { key_signature: { key: name } }
         }
 
-        newDTA += `)${placeSongsInfo ? `${genTabs(0)}${genTabs(0)}` : `${genTabs(0)}`}`
+        newDTA += `)${
+            placeSongsInfo ? `${genTabs(0)}${genTabs(0)}` : `${genTabs(0)}`
+        }`
     })
 
-    await fs.promises.writeFile(process.env.VOCAL_TONIC_NOTE_UPDATES || '', newDTA, 'utf-8')
+    await fs.promises.writeFile(
+        process.env.VOCAL_TONIC_NOTE_UPDATES || '',
+        newDTA,
+        'utf-8'
+    )
 
     return newUpdate
 }
