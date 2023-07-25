@@ -1,27 +1,26 @@
-const path = require("path")
+const path = require('path')
 const webpack = require('webpack')
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 // const TerserPlugin = require("terser-webpack-plugin")
-
 
 /** @type {import('webpack').Configuration[]} */
 module.exports = [
     {
         entry: {
-            'dta-parser': "./src/index.ts"
+            'dta-parser': './src/index.ts',
         },
         output: {
-            filename: "dta-parser.js",
-            path: path.resolve(__dirname, "dist"),
+            filename: 'dta-parser.js',
+            path: path.resolve(__dirname, 'dist'),
             library: 'DTAParser',
             libraryTarget: 'umd',
             umdNamedDefine: true,
-            globalObject: 'this'
+            globalObject: 'this',
         },
         devtool: 'source-map',
         mode: 'production',
         optimization: {
-            usedExports: true
+            usedExports: true,
         },
         module: {
             rules: [
@@ -32,25 +31,22 @@ module.exports = [
                     use: {
                         loader: 'babel-loader',
                         options: {
-                            presets: [
-                                '@babel/env',
-                                "@babel/typescript"
-                            ],
+                            presets: ['@babel/env', '@babel/typescript'],
                             plugins: [
-                                "@babel/proposal-class-properties",
-                                "@babel/proposal-object-rest-spread",
-                                "@babel/transform-modules-umd"
-                            ]
-                        }
-                    }
-                }
-            ]
+                                '@babel/proposal-class-properties',
+                                '@babel/proposal-object-rest-spread',
+                                '@babel/transform-modules-umd',
+                            ],
+                        },
+                    },
+                },
+            ],
         },
         resolve: {
-            extensions: ['*', '.js', '.jsx', '.tsx', '.ts']
+            extensions: ['*', '.js', '.jsx', '.tsx', '.ts'],
         },
         plugins: [
             // new BundleAnalyzerPlugin()
-        ]
+        ],
     },
 ]

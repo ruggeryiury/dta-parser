@@ -1,11 +1,7 @@
 {
     "compilerOptions": {
         "target": "ES5",
-        "lib": [
-            "DOM",
-            "ES2015",
-            "ES2021"
-        ],
+        "lib": ["DOM", "ES2015", "ES2021"],
         "module": "CommonJS",
         "moduleResolution": "Node",
         "allowJs": true,
@@ -16,10 +12,6 @@
         "forceConsistentCasingInFileNames": true,
         "strict": true
     },
-    "include": [
-        "src/**/*.ts"
-    ],
-    "exclude": [
-        "node_modules/"
-    ]
+    "include": ["src/**/*.ts"],
+    "exclude": ["node_modules/"]
 }

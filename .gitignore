@@ -1,4 +1,4 @@
-backend/scripts/*
+backend/scripts/
 dist/
 lib/
 module/

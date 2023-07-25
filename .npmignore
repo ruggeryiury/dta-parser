@@ -2,7 +2,6 @@ backend/
 images/
 node_modules/
 src/
-src_*/
 .eslintrc.js
 prod.tsconfig.json
 .gitignore

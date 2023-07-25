@@ -63,15 +63,18 @@ export const getAlbumArt = async (
 
     const apiEndpoint = 'https://api.spotify.com/v1'
     const authEndpoint = 'https://accounts.spotify.com/api/token'
-    const clientId = '6cfb201730dd4d0093eef69a96623fe9'
-    const clientSecret = '796f9f01577f4104891dbda684d25463'
 
     const queryParams = `?q=${encodeURIComponent(query)}&type=album&limit=1`
 
     const searchUrl = `${apiEndpoint}/search${queryParams}`
-    const authString = `${clientId}:${clientSecret}`
+    const authString = `6cfb201730dd4d0093eef69a96623fe9:796f9f01577f4104891dbda684d25463`
 
-    const authorization = Buffer.from(authString).toString('base64')
+    let authorization: string
+
+    if (typeof btoa !== undefined) authorization = btoa(authString)
+    else if (Buffer) authorization = Buffer.from(authString).toString('base64')
+    else throw new Error('No suitable environment found')
+
     const authToken = await fetch(authEndpoint, {
         method: 'post',
         body: 'grant_type=client_credentials',

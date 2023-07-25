@@ -2,7 +2,7 @@ import { DTADocument } from '../@types/DTADocument'
 import { DTAArray } from '../index'
 import { GenreValues, VocalPartsValues } from '../locale/main'
 
-export type FilterSortedByTypes = 'Song Name' | 'Artist'
+export type FilterSortedByTypes = 'name' | 'artist'
 
 export type FilterSongNameTypes =
     | '123'
@@ -33,9 +33,9 @@ export type FilterSongNameTypes =
     | 'Y'
     | 'Z'
 
-export type FilterType<SB extends FilterSortedByTypes> = SB extends 'Song Name'
+export type FilterType<SB extends FilterSortedByTypes> = SB extends 'name'
     ? FilterSongNameTypes | FilterSongNameTypes[]
-    : SB extends 'Artist'
+    : SB extends 'artist'
     ? string | string[]
     : never
 
@@ -103,7 +103,7 @@ export const filterDTA = <
 
     if (filters.options) {
         returnValue = returnValue.filter((song) => {
-            if (filters.options?.sortedBy === 'Song Name') {
+            if (filters.options?.sortedBy === 'name') {
                 if (Array.isArray(filters.options.value)) {
                     let proof = false
 
@@ -138,7 +138,7 @@ export const filterDTA = <
                     )
                         return song
                 }
-            } else if (filters.options?.sortedBy === 'Artist') {
+            } else if (filters.options?.sortedBy === 'artist') {
                 if (Array.isArray(filters.options.value)) {
                     let proof = false
 
