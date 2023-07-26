@@ -8,7 +8,7 @@ import path from 'path'
  * @param {string} pathStr The path of the `.dta` files directory of `.dta` file.
  * @returns {Promise<string>} All `.dta` file contents merged as string.
  */
-const readDTA = async (pathStr: string): Promise<string> => {
+export const readDTA = async (pathStr: string): Promise<string> => {
     let newFileContents = ''
 
     if (fs.existsSync(pathStr) && fs.lstatSync(pathStr).isDirectory()) {
@@ -41,24 +41,3 @@ const readDTA = async (pathStr: string): Promise<string> => {
 
     return newFileContents
 }
-
-interface DTANodeModule {
-    /**
-     * Asynchronously reads a directory and joins all `.dta` files inside a directory and returns their contents. If
-     * the path is a direct `.dta` file, it will return the contents of this file
-     * - - - -
-     * @param {string} pathStr The path of the `.dta` files directory of `.dta` file.
-     * @returns {Promise<string>} All `.dta` file contents merged as string.
-     */
-    read: typeof readDTA
-}
-/**
- * Utility module for Node.js operations.
- *
- * `WARNING`: This whole module won't work on browser environments.
- */
-const DTANode: DTANodeModule = {
-    read: readDTA,
-}
-
-export default DTANode

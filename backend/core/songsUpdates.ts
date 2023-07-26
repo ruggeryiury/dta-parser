@@ -1,13 +1,11 @@
 import fs from 'fs'
 import path from 'path'
 import DTANode from './DTANode'
-import DTAParser, { DTADocument, DTAParserOptions } from '../src'
-import {
-    SongKeyUpdateOptions,
-    depackDTA,
-    genTabs,
-    getSongByID,
-} from '../src/exports'
+import DTAParser, { DTADocument, DTAParserOptions } from '../../src'
+import { depackDTA } from '../../src/core/depackDTA'
+import { getSongByID } from '../../src/core/getSongByID'
+import { SongKeyUpdateOptions } from '../../src/core/updateDTA'
+import { genTabs } from '../../src/utils/genTabs'
 
 type SongsUpdatesObject = {
     [key: string]: SongsUpdatesKeys
@@ -456,8 +454,7 @@ export const generateVocalTonicNotePatch = async (
         const key_signature = patch[song]
 
         if (key_signature && typeof key_signature === 'string') {
-            const { name, note, tonality } =
-                keySignatureData[key_signature as keyof typeof keySignatureData]
+            const { name, note, tonality } = keySignatureData[key_signature]
 
             newDTA += `(vocal_tonic_note ${note})${genTabs()}(song_tonality ${tonality})`
             newUpdate[song] = { key_signature: { key: name } }

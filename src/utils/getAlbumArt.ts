@@ -1,5 +1,5 @@
 import { DTADocument } from '../@types/DTADocument'
-import { GetDataAlbumArtOptions } from '../exports'
+import { GetDataAlbumArtOptions } from '../core/getDTA'
 
 export interface SpotifyAuthTokenRes {
     access_token: string

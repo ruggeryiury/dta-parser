@@ -1,23 +1,25 @@
 import { DTADocument } from '../@types/DTADocument'
 import {
-    AnimTempoValues,
-    BandFailCueValues,
     BankValues,
     DrumBankValues,
-    GenreValues,
+    AnimTempoValues,
+    BandFailCueValues,
+    SongScrollSpeedValues,
     RatingValues,
+    VocalPartsValues,
+    VocalGenderValues,
+    GenreValues,
     SongKeyMajorValues,
     SongKeyMinorValues,
-    SongScrollSpeedValues,
     TrainerKeyOverrideValues,
-    VocalGenderValues,
-    VocalPartsValues,
-    bandRankCalculator,
+} from '../locale/main'
+import { getKeyFromValue } from '../utils/getKeyFromValue'
+import { pansArrayGenerator } from '../utils/pansArrayGenerator'
+import {
     dtaRankCalculator,
-    getKeyFromValue,
-    pansArrayGenerator,
-    timeStringToMilliseconds,
-} from '../exports'
+    bandRankCalculator,
+} from '../utils/rankCalculations'
+import { timeStringToMilliseconds } from '../utils/timeUtils'
 
 export interface UpdateDataOptions {
     id?: string

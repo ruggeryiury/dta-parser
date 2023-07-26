@@ -1,5 +1,5 @@
 import { DTADocument } from '../@types/DTADocument'
-import { omitLeadingArticle } from '../exports'
+import { omitLeadingArticle } from '../utils/nameUtils'
 
 export type SortByOptionsTypes =
     | 'id'

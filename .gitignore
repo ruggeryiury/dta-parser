@@ -3,6 +3,7 @@ dist/
 lib/
 module/
 node_modules/
+out/
 src_*/
 src/test/
 REFACTORING.md

@@ -1,5 +1,5 @@
 import { DTAContentDocument } from '../@types/DTADocument'
-import { InstrumentRankingsOptions } from '../exports'
+import { InstrumentRankingsOptions } from '../core/updateDTA'
 
 export const animTempo = {
     16: 'Slow',

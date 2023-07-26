@@ -1,20 +1,22 @@
 import {
-    AnimTempoTypes,
-    BandFailCueTypes,
-    BankTypes,
-    DrumBankTypes,
-    GenreTypes,
+    GetDataValueTypes,
     GetDataValueOptions,
     GetDataValueReturn,
-    GetDataValueTypes,
-    RatingTypes,
-    SongScrollSpeedTypes,
-    StringifyDataOptions,
-    SubGenreTypes,
-    UpdateDataOptions,
-    VocalGenderTypes,
+} from '../core/getDTA'
+import { StringifyDataOptions } from '../core/stringifyDTA'
+import { UpdateDataOptions } from '../core/updateDTA'
+import {
     VocalPartsTypes,
-} from '../exports'
+    BankTypes,
+    DrumBankTypes,
+    AnimTempoTypes,
+    BandFailCueTypes,
+    SongScrollSpeedTypes,
+    RatingTypes,
+    GenreTypes,
+    SubGenreTypes,
+    VocalGenderTypes,
+} from '../locale/main'
 
 /**
  * A parsed song object.

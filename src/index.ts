@@ -1,13 +1,10 @@
 import { DTADocument } from './@types/DTADocument'
-import {
-    depackDTA,
-    parseDTA,
-    sortDTA,
-    getSongByID,
-    UpdateDataOptions,
-    SortByOptionsTypes,
-    songsUpdates,
-} from './exports'
+import { depackDTA } from './core/depackDTA'
+import { getSongByID } from './core/getSongByID'
+import { parseDTA } from './core/parseDTA'
+import { SortByOptionsTypes, sortDTA } from './core/sortDTA'
+import { UpdateDataOptions } from './core/updateDTA'
+import { songsUpdates } from './locale/updates'
 import DTAArray from './core/DTAArray'
 import DTATools from './core/DTATools'
 

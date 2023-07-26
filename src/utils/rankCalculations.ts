@@ -1,4 +1,4 @@
-import { InstrumentRankingsOptions } from '../exports'
+import { InstrumentRankingsOptions } from '../core/updateDTA'
 
 const ranksMap = {
     drum: [124, 151, 178, 242, 345, 448],

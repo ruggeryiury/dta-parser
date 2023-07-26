@@ -1,29 +1,27 @@
 import { DTAContentDocument, DTADocument } from '../@types/DTADocument'
 import {
-    AnimTempoValues,
-    BandFailCueValues,
-    BandRankingsOptions,
+    VocalPartsValues,
     BankValues,
     DrumBankValues,
-    GenreValues,
-    InstrumentRankingsOptions,
-    Locale,
-    RankTypes,
+    AnimTempoValues,
+    BandFailCueValues,
     RatingValues,
-    SongKeyMajorValues,
-    SongKeyMinorValues,
-    SongScrollSpeedValues,
-    SpotifyAlbumSearchDocument,
+    GenreValues,
     SubGenreValues,
     VocalGenderValues,
-    VocalPartsValues,
-    getAlbumArt,
-    leadingArticle2Trailing,
-    millisecondsToSeconds,
+    SongScrollSpeedValues,
+    SongKeyMajorValues,
+    SongKeyMinorValues,
+    Locale,
+} from '../locale/main'
+import { SpotifyAlbumSearchDocument, getAlbumArt } from '../utils/getAlbumArt'
+import { omitLeadingArticle, leadingArticle2Trailing } from '../utils/nameUtils'
+import { RankTypes, rankCalculator } from '../utils/rankCalculations'
+import {
     millisecondsToTimeString,
-    omitLeadingArticle,
-    rankCalculator,
-} from '../exports'
+    millisecondsToSeconds,
+} from '../utils/timeUtils'
+import { BandRankingsOptions, InstrumentRankingsOptions } from './updateDTA'
 
 export type GetDataValueTypes = keyof Omit<
     DTAContentDocument,

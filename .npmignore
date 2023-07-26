@@ -1,6 +1,7 @@
 backend/
 images/
 node_modules/
+out/
 src/
 .eslintrc.js
 prod.tsconfig.json

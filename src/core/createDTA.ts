@@ -1,13 +1,9 @@
 import { cloneDeep } from 'lodash'
 import { DTADocument } from '../@types/DTADocument'
-import {
-    DTAtoJSON,
-    TrackUpdateOptions,
-    UpdateDataOptions,
-    getDTA,
-    stringifyDTA,
-    updateDTA,
-} from '../exports'
+import { DTAtoJSON } from './DTAtoJSON'
+import { getDTA } from './getDTA'
+import { stringifyDTA } from './stringifyDTA'
+import { updateDTA, UpdateDataOptions, TrackUpdateOptions } from './updateDTA'
 
 const dtaDefault: DTADocument = {
     content: {
