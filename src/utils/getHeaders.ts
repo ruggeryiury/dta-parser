@@ -1,5 +1,5 @@
 import { DTADocument } from '../@types/DTADocument'
-import { FilterSortedByTypes, FilterSongNameTypes } from './filterDTA'
+import { FilterSortedByTypes, FilterSongNameTypes } from '../core/filterDTA'
 
 export type FilterHeadersTypes = FilterSortedByTypes
 

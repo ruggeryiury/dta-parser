@@ -19,9 +19,10 @@
         "build:esmodule": "tsc --project ./prod.tsconfig.json --module es6 --outDir module",
         "clean": "rimraf dist lib module",
         "lint": "eslint src",
+        "lint:backend": "eslint backend",
         "package:create": "yarn build && yarn pack",
-        "start": "nodemon ./backend/scripts/index.ts",
-        "format": "prettier --write ./*.{json,js,md} src/**/*.{js,ts,tsx} backend/**/*.{js,ts,tsx} "
+        "start": "nodemon ./backend/index.ts",
+        "format": "prettier --write ."
     },
     "exports": {
         ".": {

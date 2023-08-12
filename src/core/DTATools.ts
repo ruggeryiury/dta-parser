@@ -1,6 +1,6 @@
 import { checkDrumMix } from '../utils/checkDrumMix'
 import { createDTA } from './createDTA'
-import { JSONtoDTA } from './JSONtoDTA'
+import { JSONtoDTA } from '../utils/JSONtoDTA'
 
 interface DTAToolsModule {
     create: typeof createDTA

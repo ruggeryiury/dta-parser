@@ -1,15 +1,15 @@
-import { readDTA } from './readDTA'
+import { readDTA, readDTASync } from '../utils/readDTA'
 
 interface DTANodeModule {
-    read: typeof readDTA
+    readDTA: typeof readDTA
+    readDTASync: typeof readDTASync
 }
 /**
- * Utility module for Node.js operations.
- *
- * `WARNING`: This whole module won't work on browser environments.
+ * Utility module for Node environment operations.
  */
 const DTANode: DTANodeModule = {
-    read: readDTA,
+    readDTA,
+    readDTASync,
 }
 
 export default DTANode

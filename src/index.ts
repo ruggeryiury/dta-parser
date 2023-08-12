@@ -1,6 +1,6 @@
 import { DTADocument } from './@types/DTADocument'
 import { depackDTA } from './core/depackDTA'
-import { getSongByID } from './core/getSongByID'
+import { getSongByID } from './utils/getSongByID'
 import { parseDTA } from './core/parseDTA'
 import { SortByOptionsTypes, sortDTA } from './core/sortDTA'
 import { UpdateDataOptions } from './core/updateDTA'

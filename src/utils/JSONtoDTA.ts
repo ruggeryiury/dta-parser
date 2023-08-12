@@ -1,5 +1,5 @@
 import { DTAContentDocument, DTADocument } from '../@types/DTADocument'
-import { createDTA } from './createDTA'
+import { createDTA } from '../core/createDTA'
 
 /**
  * Returns a new instance of `DTADocument` from JSON file contents.

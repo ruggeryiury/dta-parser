@@ -3,7 +3,7 @@ import path from 'path'
 import DTANode from './DTANode'
 import DTAParser, { DTADocument, DTAParserOptions } from '../../src'
 import { depackDTA } from '../../src/core/depackDTA'
-import { getSongByID } from '../../src/core/getSongByID'
+import { getSongByID } from '../../src/utils/getSongByID'
 import { SongKeyUpdateOptions } from '../../src/core/updateDTA'
 import { genTabs } from '../../src/utils/genTabs'
 
@@ -370,8 +370,8 @@ export const generateVocalTonicNotePatch = async (
     const keySignatureData: KeySignatureDataObject = {
         A: { note: 9, tonality: 0, name: 'A Major' },
         Am: { note: 9, tonality: 1, name: 'A Minor' },
-        Bb: { note: 10, tonality: 0, name: 'B♭ Major' },
         'A#m': { note: 10, tonality: 1, name: 'A♯ Minor' },
+        Bb: { note: 10, tonality: 0, name: 'B♭ Major' },
         B: { note: 11, tonality: 0, name: 'B Major' },
         Bm: { note: 11, tonality: 1, name: 'B Minor' },
         C: { note: 0, tonality: 0, name: 'C Major' },
@@ -393,7 +393,7 @@ export const generateVocalTonicNotePatch = async (
         Ab: { note: 8, tonality: 0, name: 'A♭ Major' },
         'G#m': { note: 8, tonality: 1, name: 'G♯ Minor' },
     }
-    const contents = await DTANode.read(process.env.CUSTOM_DTAS || 'never')
+    const contents = await DTANode.readDTA(process.env.CUSTOM_DTAS || 'never')
 
     const allSongs = DTAParser(contents)
 

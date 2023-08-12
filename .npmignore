@@ -3,6 +3,7 @@ images/
 node_modules/
 out/
 src/
+testing/
 .eslintrc.js
 prod.tsconfig.json
 .gitignore
