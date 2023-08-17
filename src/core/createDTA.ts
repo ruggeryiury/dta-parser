@@ -1,4 +1,4 @@
-import { cloneDeep } from 'lodash'
+import cloneDeep from 'lodash/cloneDeep'
 import { DTADocument } from '../@types/DTADocument'
 import { DTAtoJSON } from '../utils/DTAtoJSON'
 import { getDTA } from './getDTA'

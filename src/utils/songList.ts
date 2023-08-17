@@ -13,7 +13,7 @@ export const genArraySongList = (
 ): string[] => {
     const allSongs: string[] = []
 
-    songs.forEach((song, index) => {
+    songs.forEach((song) => {
         allSongs.push(song.content.id)
     })
 

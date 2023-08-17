@@ -1,14 +1,13 @@
 backend/
 images/
 node_modules/
-out/
-src/
 testing/
 .eslintrc.js
-prod.tsconfig.json
 .gitignore
 .npmignore
+.prettierignore
 .prettierrc.js
+prod.tsconfig.json
 REFACTORING.md
 TO-DO.md
 tsconfig.json

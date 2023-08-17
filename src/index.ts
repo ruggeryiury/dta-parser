@@ -4,24 +4,12 @@ import { getSongByID } from './utils/getSongByID'
 import { parseDTA } from './core/parseDTA'
 import { SortByOptionsTypes, sortDTA } from './core/sortDTA'
 import { UpdateDataOptions } from './core/updateDTA'
-import { songsUpdates } from './locale/updates'
-import DTAArray from './core/DTAArray'
-import DTATools from './core/DTATools'
-
+import DTAArray from './DTAArray'
+import DTATools from './DTATools'
 export interface DTAParserOptions {
     /** Changes the sorting of the songs.
      */
     sortBy?: SortByOptionsTypes
-    /**
-     * Set this to `true` only if you're parsing official Harmonix songs DTAs.
-     *
-     * If you're parsing a `.dta` file from official pre-RB3 songs, the parser will
-     * try to seek additional information from the updates.
-     *
-     * Also, It'll put Harmonix as author and the multitracks value to `true` on all songs.
-     * @default false
-     */
-    harmonixSongs?: boolean
     /**
      * Applies direct values updates on any song inside the `.dta` file based on the song's unique string ID.
      */
@@ -41,7 +29,7 @@ export interface DTAParserOptions {
  * @param {DTAParserOptions} options `OPTIONAL` Customizing options for the parsing process.
  * @returns {DTADocument[]} An array of parsed song objects.
  *
- * @see [`interface` DTADocument](@types/DTADocument.ts).
+ * @see [`DTADocument`](@types/DTADocument.ts) interface.
  */
 const DTAParser = (
     dtaFileContents: string,
@@ -51,7 +39,7 @@ const DTAParser = (
         options = {} as DTAParserOptions
     }
 
-    const { harmonixSongs, sortBy, update, updateAll } = options
+    const { sortBy, update, updateAll } = options
 
     const depackedSongs = depackDTA(dtaFileContents)
 
@@ -59,25 +47,6 @@ const DTAParser = (
         const song = parseDTA(value)
         return song
     })
-
-    if (harmonixSongs) {
-        const updatedSongs = parsedSongs.map((song) => {
-            const songname = song.content.id
-            const songUpdates =
-                songsUpdates[songname as keyof typeof songsUpdates]
-            if (songUpdates) {
-                song.content = {
-                    ...song.content,
-                    ...songUpdates,
-                    author: 'Harmonix',
-                    multitrack: true,
-                }
-            }
-            return song
-        })
-
-        parsedSongs = updatedSongs
-    }
 
     if (update) {
         const updateKeys = Object.keys(update)
@@ -114,6 +83,11 @@ const DTAParser = (
     return parsedSongs
 }
 
-export type { DTADocument } from './@types/DTADocument'
+export type {
+    DTADocument,
+    DTAContentDocument,
+    ExtraDTADocument,
+    ExtraDTAContentDocument,
+} from './@types/DTADocument'
 export { DTAArray, DTATools }
 export default DTAParser

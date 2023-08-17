@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const BundleAnalyzerPlugin =
+    require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 // const TerserPlugin = require("terser-webpack-plugin")
 
 /** @type {import('webpack').Configuration[]} */
@@ -12,9 +13,12 @@ module.exports = [
         output: {
             filename: 'dta-parser.js',
             path: path.resolve(__dirname, 'dist'),
-            library: 'DTAParser',
-            libraryTarget: 'umd',
-            umdNamedDefine: true,
+            library: {
+                name: 'DTAParser',
+                type: 'var',
+                export: 'default',
+                umdNamedDefine: true,
+            },
             globalObject: 'this',
         },
         devtool: 'source-map',
@@ -36,6 +40,10 @@ module.exports = [
                                 '@babel/proposal-class-properties',
                                 '@babel/proposal-object-rest-spread',
                                 '@babel/transform-modules-umd',
+                                [
+                                    'polyfill-corejs3',
+                                    { method: 'usage-global', version: '3.20' },
+                                ],
                             ],
                         },
                     },
@@ -43,10 +51,8 @@ module.exports = [
             ],
         },
         resolve: {
-            extensions: ['*', '.js', '.jsx', '.tsx', '.ts'],
+            extensions: ['.*', '.js', '.jsx', '.tsx', '.ts'],
         },
-        plugins: [
-            // new BundleAnalyzerPlugin()
-        ],
+        // plugins: [new BundleAnalyzerPlugin()],
     },
 ]

@@ -1,6 +1,9 @@
 node_modules/
 testing/
 backend/
+dist/
+lib/
+module/
 
 *.tgz
 REFACTORING.md

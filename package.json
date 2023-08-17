@@ -1,6 +1,6 @@
 {
     "name": "dta-parser",
-    "version": "1.2.0",
+    "version": "1.2.12",
     "private": false,
     "description": "A Rock Band song metadata file parser written in TypeScript",
     "main": "lib/index.js",
@@ -15,20 +15,21 @@
     ],
     "scripts": {
         "build": "yarn clean && yarn build:commonjs && yarn build:esmodule && webpack",
+        "tgz": "yarn clean && yarn build:commonjs && yarn build:esmodule && yarn pack",
         "build:commonjs": "tsc --project ./prod.tsconfig.json",
         "build:esmodule": "tsc --project ./prod.tsconfig.json --module es6 --outDir module",
         "clean": "rimraf dist lib module",
         "lint": "eslint src",
         "lint:backend": "eslint backend",
         "package:create": "yarn build && yarn pack",
-        "start": "nodemon ./backend/index.ts",
+        "start": "nodemon ./testing/index.ts",
         "format": "prettier --write ."
     },
     "exports": {
         ".": {
             "require": "./lib/index.js",
             "import": "./module/index.js",
-            "umd": "./dist/dta-parser.js"
+            "default": "./lib/index.js"
         }
     },
     "dependencies": {
@@ -44,10 +45,11 @@
         "@types/lodash": "^4.14.195",
         "@types/node": "^20.2.5",
         "@types/prettier": "^2.7.3",
-        "@types/spotify-api": "^0.0.22",
         "@typescript-eslint/eslint-plugin": "^5.59.9",
         "@typescript-eslint/parser": "^5.59.9",
         "babel-loader": "^9.1.2",
+        "babel-plugin-polyfill-corejs3": "^0.8.3",
+        "core-js": "^3.32.0",
         "dotenv": "^16.3.1",
         "eslint": "^8.42.0",
         "nodemon": "^2.0.22",

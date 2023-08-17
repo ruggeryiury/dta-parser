@@ -1,6 +1,6 @@
 import { DTADocument } from '../@types/DTADocument'
-import DTAArray from '../core/DTAArray'
-import { SortByOptionsTypes } from '../core/sortDTA'
+import { SortByOptionsTypes, sortDTA } from '../core/sortDTA'
+import { genArraySongList } from './songList'
 
 /**
  * Updates a parsed songs array with contents of another parsed songs array.
@@ -22,8 +22,8 @@ export const updateSongArray = (
     update: DTADocument[],
     sortArray?: SortByOptionsTypes
 ): DTADocument[] => {
-    const oldSongsIDs = DTAArray.songList(oldSongs)
-    const updateIDs = DTAArray.songList(update)
+    // const oldSongsIDs = DTAArray.songList(oldSongs)
+    const updateIDs = genArraySongList(update)
 
     const newSongs: DTADocument[] = []
 
@@ -34,6 +34,6 @@ export const updateSongArray = (
     update.forEach((song) => newSongs.push(song))
 
     if (sortArray) {
-        return DTAArray.sort(newSongs, sortArray)
+        return sortDTA(newSongs, sortArray)
     } else return newSongs
 }

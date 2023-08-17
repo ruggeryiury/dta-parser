@@ -1,13 +1,13 @@
 import { DTADocument } from '../@types/DTADocument'
 import { FilterSortedByTypes, FilterSongNameTypes } from '../core/filterDTA'
+import { omitLeadingArticle } from './nameUtils'
 
-export type FilterHeadersTypes = FilterSortedByTypes
-
-export type FilterHeadersReturn<H extends FilterHeadersTypes> = H extends 'name'
-    ? FilterSongNameTypes[]
-    : H extends 'artist'
-    ? string[]
-    : never
+export type FilterHeadersReturn<H extends FilterSortedByTypes> =
+    H extends 'name'
+        ? FilterSongNameTypes[]
+        : H extends 'artist'
+        ? string[]
+        : never
 
 /**
  * Returns all possible values from a parsed
@@ -17,7 +17,7 @@ export type FilterHeadersReturn<H extends FilterHeadersTypes> = H extends 'name'
  * @param {FilterHeadersTypes} type The type of the value you want to get values from.
  * @returns {string[]} An array with strings representing the available values of the parsed songs array based on the given type option.
  */
-export const getHeaders = <H extends FilterHeadersTypes>(
+export const getHeaders = <H extends FilterSortedByTypes>(
     songs: DTADocument[],
     type: H
 ): FilterHeadersReturn<H> => {
@@ -37,7 +37,7 @@ export const getHeaders = <H extends FilterHeadersTypes>(
             if (/^[^a-zA-Z]/.test(char) && !has123) {
                 allFirstChar.push('123')
                 has123 = true
-            } else {
+            } else if (/^[a-zA-Z]/.test(char)) {
                 allFirstChar.push(char)
             }
         })
@@ -52,12 +52,18 @@ export const getHeaders = <H extends FilterHeadersTypes>(
         returnArray = Array.from(
             new Set(
                 songs
-                    .map((song) =>
-                        song.get('artist', { leadingArticle: 'omit' })
-                    )
+                    .map((song) => song.get('artist'))
                     .sort((a, b) => {
-                        if (a.toLowerCase() > b.toLowerCase()) return 1
-                        else if (a.toLowerCase() < b.toLowerCase()) return -1
+                        if (
+                            omitLeadingArticle(a.toLowerCase()) >
+                            omitLeadingArticle(b.toLowerCase())
+                        )
+                            return 1
+                        else if (
+                            omitLeadingArticle(a.toLowerCase()) <
+                            omitLeadingArticle(b.toLowerCase())
+                        )
+                            return -1
                         return 0
                     })
             )

@@ -14,7 +14,7 @@ import {
     SongKeyMinorValues,
     Locale,
 } from '../locale/main'
-import { SpotifyAlbumSearchDocument, getAlbumArt } from '../utils/getAlbumArt'
+import { SpotifyAuthTokenRes, getAlbumArt } from '../utils/getAlbumArt'
 import { omitLeadingArticle, leadingArticle2Trailing } from '../utils/nameUtils'
 import { RankTypes, rankCalculator } from '../utils/rankCalculations'
 import {
@@ -148,7 +148,7 @@ export type GetDataValueReturn<
     : V extends 'song_key'
     ? SongKeyMajorValues | SongKeyMinorValues | 'Not Specified'
     : V extends 'album_art'
-    ? Promise<SpotifyAlbumSearchDocument | undefined>
+    ? ReturnType<typeof getAlbumArt>
     : V extends keyof DTAContentDocument
     ? DTAContentDocument[V]
     : never
@@ -224,6 +224,7 @@ export interface GetDataAlbumArtOptions {
      * @default 'medium'
      */
     size?: 'large' | 'medium' | 'small'
+    token?: string
 }
 
 /**

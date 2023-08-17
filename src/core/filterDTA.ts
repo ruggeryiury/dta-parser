@@ -1,6 +1,6 @@
 import { DTADocument } from '../@types/DTADocument'
-import { DTAArray } from '../index'
 import { GenreValues, VocalPartsValues } from '../locale/main'
+import { sortDTA } from './sortDTA'
 
 export type FilterSortedByTypes = 'name' | 'artist'
 
@@ -99,7 +99,7 @@ export const filterDTA = <
     songs: DTADocument[],
     filters: FilterOptions<SB, V>
 ): DTADocument[] => {
-    let returnValue = DTAArray.sort(songs, 'name')
+    let returnValue = sortDTA(songs, 'name')
 
     if (filters.options) {
         returnValue = returnValue.filter((song) => {

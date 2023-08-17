@@ -1,12 +1,12 @@
 import { DTADocument } from '../@types/DTADocument'
 import { omitLeadingArticle } from '../utils/nameUtils'
+import { FilterSortedByTypes } from './filterDTA'
 
 export type SortByOptionsTypes =
     | 'id'
-    | 'name'
-    | 'artist'
     | 'artist_set'
     | 'song_id'
+    | FilterSortedByTypes
 /**
  * Sorts an array of parsed song objects.
  * - - - -

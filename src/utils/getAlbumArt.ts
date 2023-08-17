@@ -44,6 +44,30 @@ export interface SpotifyAlbumSearchDocument {
 }
 
 /**
+ * Returns a new Spotify authorization token API.
+ * @returns {Promise<SpotifyAuthTokenRes>} The response of the Spotify authorization token API.
+ */
+export const generateSpotifyToken = async (): Promise<SpotifyAuthTokenRes> => {
+    const authString = `6cfb201730dd4d0093eef69a96623fe9:796f9f01577f4104891dbda684d25463`
+
+    let authorization: string
+
+    if (typeof btoa !== undefined) authorization = btoa(authString)
+    else if (Buffer) authorization = Buffer.from(authString).toString('base64')
+    else throw new Error('No suitable environment found')
+
+    return await fetch('https://accounts.spotify.com/api/token', {
+        method: 'post',
+        body: 'grant_type=client_credentials',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Authorization: `Basic ${authorization}`,
+        },
+    })
+        .then<SpotifyAuthTokenRes>((res) => res.json())
+}
+
+/**
  * Fetches a song's album art URL through Spotify API.
  * - - - -
  * @param {DTADocument} dta The parsed song you want to parse the album's art to.
@@ -62,11 +86,10 @@ export const getAlbumArt = async (
     )} ${dta.content.album_name.replaceAll('&', 'and')}`
 
     const apiEndpoint = 'https://api.spotify.com/v1'
-    const authEndpoint = 'https://accounts.spotify.com/api/token'
-
     const queryParams = `?q=${encodeURIComponent(query)}&type=album&limit=1`
-
     const searchUrl = `${apiEndpoint}/search${queryParams}`
+    
+    const authEndpoint = 'https://accounts.spotify.com/api/token'
     const authString = `6cfb201730dd4d0093eef69a96623fe9:796f9f01577f4104891dbda684d25463`
 
     let authorization: string

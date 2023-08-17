@@ -10,7 +10,7 @@ import { DTADocument } from '../@types/DTADocument'
  * drum part or compatible drum mixing.
  */
 export const checkDrumMix = (song: DTADocument): string | undefined => {
-    let drumMix: ReturnType<typeof checkDrumMix> = ''
+    let drumMix: ReturnType<typeof checkDrumMix>
     const drumChannels = song.content.tracks_count[0]
 
     if (drumChannels === 2) drumMix = 'drums0'
@@ -18,7 +18,6 @@ export const checkDrumMix = (song: DTADocument): string | undefined => {
     else if (drumChannels === 4) drumMix = 'drums1'
     else if (drumChannels === 5) drumMix = 'drums2'
     else if (drumChannels === 6) drumMix = 'drums3'
-    else drumMix = undefined
 
     return drumMix
 }

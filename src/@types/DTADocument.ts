@@ -270,3 +270,15 @@ export interface DTAContentDocument {
 export type SoloFlags = 'drum' | 'bass' | 'guitar' | 'keys' | 'vocal_percussion'
 
 export type ExtraAuthoringFlags = 'disc_update' | 'pearljam' | 'greenday'
+
+/**
+ * Generic type for custom `DTADocument` type.
+ */
+export type ExtraDTADocument<EX extends object> = DTADocumentMethods & {
+    content: DTAContentDocument & EX
+}
+
+/**
+ * Generic type for custom `DTAContentDocument` type.
+ */
+export type ExtraDTAContentDocument<EX extends object> = DTAContentDocument & EX
