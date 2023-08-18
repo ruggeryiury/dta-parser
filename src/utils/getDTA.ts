@@ -13,8 +13,8 @@ import {
     SongKeyMajorValues,
     SongKeyMinorValues,
     Locale,
-} from '../locale/main'
-import { SpotifyAuthTokenRes, getAlbumArt } from '../utils/getAlbumArt'
+} from './locale'
+import { getAlbumArt } from '../utils/getAlbumArt'
 import { omitLeadingArticle, leadingArticle2Trailing } from '../utils/nameUtils'
 import { RankTypes, rankCalculator } from '../utils/rankCalculations'
 import {

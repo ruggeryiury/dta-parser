@@ -29,7 +29,7 @@ import {
     subGenre,
     vocalGender,
     vocalParts,
-} from '../locale/main'
+} from './locale'
 
 export interface GetKeyFromValueObject {
     anim_tempo: (v: AnimTempoValues) => AnimTempoTypes

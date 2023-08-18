@@ -1,12 +1,12 @@
-import { filterDTA } from './core/filterDTA'
-import { getHeaders } from './utils/getHeaders'
-import { getSongByID } from './utils/getSongByID'
-import { sortDTA } from './core/sortDTA'
-import { stringifyDTA } from './core/stringifyDTA'
-import { genArraySongList } from './utils/songList'
-import { updateSongArray } from './utils/updateSongArray'
-import { DTAArraytoJSONArray } from './utils/DTAtoJSON'
-import { JSONtoDTA } from './utils/JSONtoDTA'
+import { filterDTA } from '../utils/filterDTA'
+import { getHeaders } from '../utils/getHeaders'
+import { getSongByID } from '../utils/getSongByID'
+import { sortDTA } from '../utils/sortDTA'
+import { stringifyDTA } from '../utils/stringifyDTA'
+import { genArraySongList } from '../utils/songList'
+import { updateSongArray } from '../utils/updateSongArray'
+import { DTAArraytoJSONArray } from '../utils/DTAtoJSON'
+import { JSONtoDTA } from '../utils/JSONtoDTA'
 
 interface DTAArrayModule {
     filter: typeof filterDTA

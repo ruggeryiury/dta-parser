@@ -1,5 +1,5 @@
 import { DTADocument } from '../@types/DTADocument'
-import { FilterSortedByTypes, FilterSongNameTypes } from '../core/filterDTA'
+import { FilterSortedByTypes, FilterSongNameTypes } from '../utils/filterDTA'
 import { omitLeadingArticle } from './nameUtils'
 
 export type FilterHeadersReturn<H extends FilterSortedByTypes> =

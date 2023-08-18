@@ -1,6 +1,6 @@
 import { DTAContentDocument, DTADocument } from '../@types/DTADocument'
-import { createDTA } from '../core/createDTA'
-import { SortByOptionsTypes, sortDTA } from '../core/sortDTA'
+import { createDTA } from './createDTA'
+import { SortByOptionsTypes, sortDTA } from '../utils/sortDTA'
 
 /**
  * Returns an array of `DTADocument` objects from a JSON representation of a parsed song contents.

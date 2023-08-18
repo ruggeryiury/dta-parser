@@ -1,5 +1,5 @@
 import { DTAContentDocument, DTADocument } from '../@types/DTADocument'
-import { SortByOptionsTypes, sortDTA } from '../core/sortDTA'
+import { SortByOptionsTypes, sortDTA } from '../utils/sortDTA'
 
 /**
  * Returns a JSON object representation of a parsed song.

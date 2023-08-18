@@ -2,9 +2,9 @@ import {
     GetDataValueTypes,
     GetDataValueOptions,
     GetDataValueReturn,
-} from '../core/getDTA'
-import { StringifyDataOptions } from '../core/stringifyDTA'
-import { UpdateDataOptions } from '../core/updateDTA'
+} from '../utils/getDTA'
+import { StringifyDataOptions } from '../utils/stringifyDTA'
+import { UpdateDataOptions } from '../utils/updateDTA'
 import {
     VocalPartsTypes,
     BankTypes,
@@ -16,7 +16,7 @@ import {
     GenreTypes,
     SubGenreTypes,
     VocalGenderTypes,
-} from '../locale/main'
+} from '../utils/locale'
 
 /**
  * A parsed song object.
@@ -274,11 +274,11 @@ export type ExtraAuthoringFlags = 'disc_update' | 'pearljam' | 'greenday'
 /**
  * Generic type for custom `DTADocument` type.
  */
-export type ExtraDTADocument<EX extends object> = DTADocumentMethods & {
-    content: DTAContentDocument & EX
+export interface CustomDTADocument<T> extends DTADocument {
+    content: DTAContentDocument & T
+    json: () => DTAContentDocument & T
 }
-
 /**
  * Generic type for custom `DTAContentDocument` type.
  */
-export type ExtraDTAContentDocument<EX extends object> = DTAContentDocument & EX
+export type CustomDTAContentDocument<T> = DTAContentDocument & T

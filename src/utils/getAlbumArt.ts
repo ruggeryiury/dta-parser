@@ -1,5 +1,5 @@
 import { DTADocument } from '../@types/DTADocument'
-import { GetDataAlbumArtOptions } from '../core/getDTA'
+import { GetDataAlbumArtOptions } from '../utils/getDTA'
 
 export interface SpotifyAuthTokenRes {
     access_token: string
@@ -63,8 +63,7 @@ export const generateSpotifyToken = async (): Promise<SpotifyAuthTokenRes> => {
             'Content-Type': 'application/x-www-form-urlencoded',
             Authorization: `Basic ${authorization}`,
         },
-    })
-        .then<SpotifyAuthTokenRes>((res) => res.json())
+    }).then<SpotifyAuthTokenRes>((res) => res.json())
 }
 
 /**
@@ -88,7 +87,7 @@ export const getAlbumArt = async (
     const apiEndpoint = 'https://api.spotify.com/v1'
     const queryParams = `?q=${encodeURIComponent(query)}&type=album&limit=1`
     const searchUrl = `${apiEndpoint}/search${queryParams}`
-    
+
     const authEndpoint = 'https://accounts.spotify.com/api/token'
     const authString = `6cfb201730dd4d0093eef69a96623fe9:796f9f01577f4104891dbda684d25463`
 

@@ -12,7 +12,7 @@ import {
     SongKeyMajorValues,
     SongKeyMinorValues,
     TrainerKeyOverrideValues,
-} from '../locale/main'
+} from './locale'
 import { getKeyFromValue } from '../utils/getKeyFromValue'
 import { pansArrayGenerator } from '../utils/pansArrayGenerator'
 import {

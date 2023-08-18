@@ -1,6 +1,6 @@
 import cloneDeep from 'lodash/cloneDeep'
 import { DTADocument } from '../@types/DTADocument'
-import { DTAtoJSON } from '../utils/DTAtoJSON'
+import { DTAtoJSON } from './DTAtoJSON'
 import { getDTA } from './getDTA'
 import { stringifyDTA } from './stringifyDTA'
 import { updateDTA, UpdateDataOptions, TrackUpdateOptions } from './updateDTA'

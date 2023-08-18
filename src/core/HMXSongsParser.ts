@@ -1,9 +1,9 @@
-import { DTAContentDocument, DTADocument } from './@types/DTADocument'
-import { depackDTA } from './core/depackDTA'
-import { getSongByID } from './utils/getSongByID'
-import { parseDTA } from './core/parseDTA'
-import { SortByOptionsTypes, sortDTA } from './core/sortDTA'
-import { UpdateDataOptions } from './core/updateDTA'
+import { DTAContentDocument, DTADocument } from '../@types/DTADocument'
+import { depackDTA } from '../utils/depackDTA'
+import { getSongByID } from '../utils/getSongByID'
+import { parseDTA } from '../utils/parseDTA'
+import { SortByOptionsTypes, sortDTA } from '../utils/sortDTA'
+import { UpdateDataOptions } from '../utils/updateDTA'
 
 interface SongsUpdatesDocument {
     [key: string]: Partial<DTAContentDocument> | undefined

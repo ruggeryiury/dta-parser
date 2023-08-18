@@ -1,5 +1,5 @@
 import { DTADocument } from '../@types/DTADocument'
-import { GenreValues, VocalPartsValues } from '../locale/main'
+import { GenreValues, VocalPartsValues } from './locale'
 import { sortDTA } from './sortDTA'
 
 export type FilterSortedByTypes = 'name' | 'artist'

@@ -1,5 +1,5 @@
 import { DTADocument } from '../@types/DTADocument'
-import { SortByOptionsTypes, sortDTA } from '../core/sortDTA'
+import { SortByOptionsTypes, sortDTA } from '../utils/sortDTA'
 import { genArraySongList } from './songList'
 
 /**
