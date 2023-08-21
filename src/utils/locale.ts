@@ -1,5 +1,8 @@
 import { DTAContentDocument } from '../@types/DTADocument'
-import { InstrumentRankingsOptions } from './updateDTA'
+import {
+    InstrumentRankingsVerbosedOptions,
+    RankLocaleOnlyNumberTypes,
+} from './updateDTA'
 
 export const animTempo = {
     16: 'Slow',
@@ -252,12 +255,11 @@ export const rankGraphic = {
     7: '👿👿👿👿👿',
 } as const
 
-export type RankNumberTypes = keyof typeof rank
 export type RankLocaleTypes = 'default' | 'graphical'
 export type RankLocaleReturnType<T extends RankLocaleTypes> = T extends
     | undefined
     | 'default'
-    ? InstrumentRankingsOptions
+    ? InstrumentRankingsVerbosedOptions
     : string
 
 const songKeyMajor = [
@@ -364,10 +366,14 @@ export const Locale = {
         rankCalc: number,
         type?: T
     ): RankLocaleReturnType<T> => {
-        const newRankCalc = (rankCalc + 1) as RankNumberTypes
         if (type === undefined || type === 'default')
-            return rank[newRankCalc] as RankLocaleReturnType<T>
-        else return rankGraphic[newRankCalc] as RankLocaleReturnType<T>
+            return rank[
+                (rankCalc + 1) as RankLocaleOnlyNumberTypes
+            ] as RankLocaleReturnType<T>
+        else
+            return rankGraphic[
+                (rankCalc + 1) as RankLocaleOnlyNumberTypes
+            ] as RankLocaleReturnType<T>
     },
     song_key: <
         K extends NonNullable<DTAContentDocument['vocal_tonic_note']> | -1,

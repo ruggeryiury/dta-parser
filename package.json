@@ -1,6 +1,6 @@
 {
     "name": "dta-parser",
-    "version": "1.2.13",
+    "version": "1.2.16",
     "private": false,
     "description": "A Rock Band song metadata file parser written in TypeScript",
     "main": "lib/index.js",
@@ -19,7 +19,7 @@
         "build:commonjs": "tsc --project ./prod.tsconfig.json",
         "build:esmodule": "tsc --project ./prod.tsconfig.json --module es6 --outDir module",
         "clean": "rimraf dist lib module",
-        "lint": "eslint src",
+        "lint": "eslint src/**/*.{ts,js}",
         "lint:backend": "eslint backend",
         "package:create": "yarn build && yarn pack",
         "start": "nodemon ./testing/index.ts",

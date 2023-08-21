@@ -12,6 +12,7 @@ import {
     SongKeyMajorValues,
     SongKeyMinorValues,
     TrainerKeyOverrideValues,
+    rank,
 } from './locale'
 import { getKeyFromValue } from '../utils/getKeyFromValue'
 import { pansArrayGenerator } from '../utils/pansArrayGenerator'
@@ -39,7 +40,7 @@ export interface UpdateDataOptions {
     song_scroll_speed?: SongScrollSpeedValues
     preview?: string | number
     song_length?: string | number
-    rank_band?: BandRankingsOptions
+    rank_band?: BandRankingsVerbosedOptions | BandRankingsNumberOptions
     game_origin?: string
     rating?: RatingValues
     genre?:
@@ -86,23 +87,19 @@ export interface UpdateDataOptions {
     expertOnly?: boolean
 }
 
-export type InstrumentRankingsOptions = BandRankingsOptions | -1 | 'No Part'
+export type RankLocaleOnlyNumberTypes = keyof typeof rank
+export type InstrumentRankingsNumberOptions = -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6
+export type InstrumentRankingsVerbosedOptions =
+    (typeof rank)[RankLocaleOnlyNumberTypes]
 
-export type BandRankingsOptions =
-    | 0
-    | 'Warmup'
-    | 1
-    | 'Apprentice'
-    | 2
-    | 'Solid'
-    | 3
-    | 'Moderate'
-    | 4
-    | 'Challenging'
-    | 5
-    | 'Nightmare'
-    | 6
-    | 'Impossible'
+export type BandRankingsNumberOptions = Exclude<
+    InstrumentRankingsNumberOptions,
+    -1
+>
+export type BandRankingsVerbosedOptions = Exclude<
+    InstrumentRankingsVerbosedOptions,
+    'No Part'
+>
 
 export type DrumTracksTypes =
     | 2
@@ -157,7 +154,7 @@ export interface InstrumentPartRequiredUpdateOptions {
     /**
      * The ranking of the instrument.
      */
-    rank: BandRankingsOptions
+    rank: BandRankingsVerbosedOptions | BandRankingsNumberOptions
     /**
      * Set to `true` if the instrument has solo sessions.
      */
@@ -177,7 +174,7 @@ export interface GuitarUpdateOptions
     /**
      * The ranking of the PRO Guitar part.
      */
-    real_rank?: BandRankingsOptions
+    real_rank?: BandRankingsVerbosedOptions | BandRankingsNumberOptions
     /**
      * An array with the tuning of all 6 strings of the PRO Guitar part.
      */
@@ -188,7 +185,7 @@ export interface BassUpdateOptions extends InstrumentPartRequiredUpdateOptions {
     /**
      * The ranking of the PRO Bass part.
      */
-    real_rank?: BandRankingsOptions
+    real_rank?: BandRankingsVerbosedOptions | BandRankingsNumberOptions
     /**
      * An array with the tuning of all 4 strings of the PRO Bass part.
      */
@@ -210,7 +207,7 @@ export interface KeysUpdateOptions extends InstrumentPartRequiredUpdateOptions {
     /**
      * The ranking of the PRO Keys part.
      */
-    real_rank?: BandRankingsOptions
+    real_rank?: BandRankingsVerbosedOptions | BandRankingsNumberOptions
 }
 
 export interface GenreUpdateOptions<G extends GenreValues> {

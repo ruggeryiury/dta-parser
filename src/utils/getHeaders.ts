@@ -14,7 +14,7 @@ export type FilterHeadersReturn<H extends FilterSortedByTypes> =
  * songs array based on the given type option.
  * - - - -
  * @param {DTADocument[]} songs An array of parsed songs.
- * @param {FilterHeadersTypes} type The type of the value you want to get values from.
+ * @param {H} type The type of the value you want to get values from.
  * @returns {string[]} An array with strings representing the available values of the parsed songs array based on the given type option.
  */
 export const getHeaders = <H extends FilterSortedByTypes>(
@@ -29,7 +29,7 @@ export const getHeaders = <H extends FilterSortedByTypes>(
 
         const charSet = new Set(
             songs.map((song) =>
-                song.get('name', { leadingArticle: 'omit' }).slice(0, 1)
+                song.get('name', { leadingArticle: 'omit' }).toLowerCase().slice(0, 1)
             )
         )
 
@@ -47,12 +47,13 @@ export const getHeaders = <H extends FilterSortedByTypes>(
             else if (a.toLowerCase() < b.toLowerCase()) return -1
             return 0
         }) as FilterHeadersReturn<H>
-    } else {
+    }
+    else {
         // if (type === 'artist')
         returnArray = Array.from(
             new Set(
                 songs
-                    .map((song) => song.get('artist'))
+                    .map((song) => song.get('artist').toLowerCase())
                     .sort((a, b) => {
                         if (
                             omitLeadingArticle(a.toLowerCase()) >

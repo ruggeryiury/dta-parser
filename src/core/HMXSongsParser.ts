@@ -21686,7 +21686,7 @@ export const songsUpdates: SongsUpdatesDocument = {
     },
 }
 
-export interface DTAParserOptions {
+interface HMXParserOptions {
     /** Changes the sorting of the songs.
      */
     sortBy?: SortByOptionsTypes
@@ -21713,10 +21713,10 @@ export interface DTAParserOptions {
  */
 const HMXSongsParser = (
     dtaFileContents: string,
-    options?: DTAParserOptions
+    options?: HMXParserOptions
 ): DTADocument[] => {
     if (!options) {
-        options = {} as DTAParserOptions
+        options = {} as HMXParserOptions
     }
 
     const { sortBy, update, updateAll } = options

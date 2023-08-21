@@ -21,7 +21,12 @@ import {
     millisecondsToTimeString,
     millisecondsToSeconds,
 } from '../utils/timeUtils'
-import { BandRankingsOptions, InstrumentRankingsOptions } from './updateDTA'
+import {
+    BandRankingsNumberOptions,
+    BandRankingsVerbosedOptions,
+    InstrumentRankingsNumberOptions,
+    InstrumentRankingsVerbosedOptions,
+} from './updateDTA'
 
 export type GetDataValueTypes = keyof Omit<
     DTAContentDocument,
@@ -124,11 +129,13 @@ export type GetDataValueReturn<
         ? number
         : string
     : V extends 'rank_band'
-    ? O extends { type: 'number' } | { type: 'raw' }
+    ? O extends { type: 'number' }
+        ? BandRankingsNumberOptions
+        : O extends { type: 'raw' }
         ? number
         : O extends { type: 'graphical' }
         ? string
-        : BandRankingsOptions
+        : BandRankingsVerbosedOptions
     : V extends
           | 'rank_drum'
           | 'rank_bass'
@@ -138,11 +145,13 @@ export type GetDataValueReturn<
           | 'rank_real_guitar'
           | 'rank_real_bass'
           | 'rank_real_keys'
-    ? O extends { type: 'number' } | { type: 'raw' }
+    ? O extends { type: 'number' }
+        ? InstrumentRankingsNumberOptions
+        : O extends { type: 'raw' }
         ? number
         : O extends { type: 'graphical' }
         ? string
-        : InstrumentRankingsOptions
+        : InstrumentRankingsVerbosedOptions
     : V extends 'hopo_threshold'
     ? number
     : V extends 'song_key'

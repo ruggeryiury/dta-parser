@@ -37,6 +37,8 @@ export type FilterType<SB extends FilterSortedByTypes> = SB extends 'name'
     ? FilterSongNameTypes | FilterSongNameTypes[]
     : SB extends 'artist'
     ? string | string[]
+    : SB extends 'artistFull'
+    ? unknown
     : never
 
 export interface FilterOptions<

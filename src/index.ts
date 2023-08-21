@@ -13,7 +13,7 @@ interface DTAParserOptions {
      * rather than a `DTADocument` object. Default is `false`.
      */
     asJSON?: boolean
-    /** 
+    /**
      * Changes the sorting of the songs.
      */
     sortBy?: SortByOptionsTypes
@@ -29,8 +29,9 @@ interface DTAParserOptions {
     updateAll?: Pick<UpdateDataOptions, 'author' | 'multitrack' | 'pack_name'>
 }
 
-type DTAParserReturnType<O extends DTAParserOptions> =
-    | O extends { asJSON: true }
+type DTAParserReturnType<O extends DTAParserOptions> = O extends {
+    asJSON: true
+}
     ? DTAContentDocument[]
     : DTADocument[]
 
@@ -39,14 +40,14 @@ type DTAParserReturnType<O extends DTAParserOptions> =
  * - - - -
  * @param {string} dtaFileContents The .dta file contents.
  * @param {DTAParserOptions} options `OPTIONAL` Customizing options for the parsing process.
- * @returns {DTADocument[]} An array of parsed song objects.
+ * @returns {DTAParserReturnType<T, O>} An array of parsed song objects.
  *
  * @see [`DTADocument`](@types/DTADocument.ts) interface.
  */
 const DTAParser = <O extends DTAParserOptions>(
-        dtaFileContents: string,
-        options?: O
-    ): DTAParserReturnType<O> => {
+    dtaFileContents: string,
+    options?: O
+): DTAParserReturnType<O> => {
     if (!options) {
         options = {} as O
     }
@@ -93,7 +94,7 @@ const DTAParser = <O extends DTAParserOptions>(
     }
 
     if (asJSON) {
-        const JSONSongs = parsedSongs.map(song => song.json())
+        const JSONSongs = parsedSongs.map((song) => song.json())
         return JSONSongs as DTAParserReturnType<O>
     }
 

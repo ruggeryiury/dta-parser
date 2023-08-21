@@ -1,4 +1,7 @@
-import { InstrumentRankingsOptions } from '../utils/updateDTA'
+import {
+    InstrumentRankingsNumberOptions,
+    InstrumentRankingsVerbosedOptions,
+} from '../utils/updateDTA'
 
 const ranksMap = {
     drum: [124, 151, 178, 242, 345, 448],
@@ -49,7 +52,7 @@ export const rankCalculator = (type: RankTypes, rank?: number): number => {
  */
 export const dtaRankCalculator = (
     type: RankTypes,
-    rank: InstrumentRankingsOptions
+    rank: InstrumentRankingsNumberOptions | InstrumentRankingsVerbosedOptions
 ): number => {
     if (rank === 'No Part' || rank === -1) return 0
     else if (rank === 'Warmup' || rank === 0) return 1

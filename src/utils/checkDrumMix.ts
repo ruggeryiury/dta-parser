@@ -1,5 +1,12 @@
 import { DTADocument } from '../@types/DTADocument'
 
+type CheckDrumMixReturnType =
+    | 'drums0'
+    | 'drums1'
+    | 'drums2'
+    | 'drums3'
+    | 'drums4'
+    | undefined
 /**
  * Returns the drum mix of the song.
  *
@@ -9,7 +16,7 @@ import { DTADocument } from '../@types/DTADocument'
  * @returns {string | undefined} The drum mix of the song. Returns `undefined` if there's no
  * drum part or compatible drum mixing.
  */
-export const checkDrumMix = (song: DTADocument): string | undefined => {
+export const checkDrumMix = (song: DTADocument): CheckDrumMixReturnType => {
     let drumMix: ReturnType<typeof checkDrumMix>
     const drumChannels = song.content.tracks_count[0]
 

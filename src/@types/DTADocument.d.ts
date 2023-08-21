@@ -275,10 +275,10 @@ export type ExtraAuthoringFlags = 'disc_update' | 'pearljam' | 'greenday'
  * Generic type for custom `DTADocument` type.
  */
 export interface CustomDTADocument<T> extends DTADocument {
-    content: DTAContentDocument & T
-    json: () => DTAContentDocument & T
+    content: DTAContentDocument & Partial<T>
+    json: () => DTAContentDocument & Partial<T>
 }
 /**
  * Generic type for custom `DTAContentDocument` type.
  */
-export type CustomDTAContentDocument<T> = DTAContentDocument & T
+export type CustomDTAContentDocument<T> = DTAContentDocument & Partial<T>
