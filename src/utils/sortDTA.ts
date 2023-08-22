@@ -58,6 +58,7 @@ export const sortDTA = (
                 omitLeadingArticle(b.content.artist)
             )
                 return -1
+
             if (a.content.year_released > b.content.year_released) return 1
             if (a.content.year_released < b.content.year_released) return -1
             if (

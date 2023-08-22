@@ -2,7 +2,7 @@ import { DTADocument } from '../@types/DTADocument'
 import { GenreValues, VocalPartsValues } from './locale'
 import { sortDTA } from './sortDTA'
 
-export type FilterSortedByTypes = 'name' | 'artist'
+export type FilterSortedByTypes = 'name' | 'artist' | 'album_name' | null
 
 export type FilterSongNameTypes =
     | '123'
@@ -33,34 +33,30 @@ export type FilterSongNameTypes =
     | 'Y'
     | 'Z'
 
-export type FilterType<SB extends FilterSortedByTypes> = SB extends 'name'
-    ? FilterSongNameTypes | FilterSongNameTypes[]
-    : SB extends 'artist'
-    ? string | string[]
-    : SB extends 'artistFull'
-    ? unknown
-    : never
-
-export interface FilterOptions<
-    SB extends FilterSortedByTypes,
-    V extends FilterType<SB>
-> extends ApplyFilterOptions {
-    /**
-     * Specific filtering options.
-     */
-    options?: {
-        /**
-         * The filtering method.
-         */
-        sortedBy: SB
-        /**
-         * The value of the method you want to search.
-         */
-        value: V
-    }
+export interface FilterAlbumNameTypes {
+    artist: string
+    album_name: string
 }
 
-export interface ApplyFilterOptions {
+export type FiltersSelectorValuesTypes<T extends FilterSortedByTypes> =
+    T extends 'name'
+        ? FilterSongNameTypes | FilterSongNameTypes[]
+        : T extends 'artist'
+        ? string | string[]
+        : T extends 'album_name'
+        ? FilterAlbumNameTypes | FilterAlbumNameTypes[]
+        : never
+
+export interface FilterOptionsWithSelector<
+    T extends NonNullable<FilterSortedByTypes>
+> extends ApplyFiltersOnlyOptions {
+    /**
+     * The value of the method you want to search.
+     */
+    filterSelectorValues: FiltersSelectorValuesTypes<T>
+}
+
+export interface ApplyFiltersOnlyOptions {
     /**
      * Only songs with the specified genres will be returned.
      *
@@ -87,92 +83,167 @@ export interface ApplyFilterOptions {
     hasMultitracks?: boolean
 }
 
+export type FilterOptionsType<T extends FilterSortedByTypes> = T extends null
+    ? ApplyFiltersOnlyOptions
+    : FilterOptionsWithSelector<NonNullable<T>>
+
 /**
  * Filters an array of parsed songs based on the giving filtering options.
  * - - - -
  * @param {DTADocument[]} songs An array of parsed songs.
- * @param {FilterOptions<SB, V>} filters The filtering options.
+ * @param {T} filterSelector Specifies the filter selector based on specific values from the song.
+ * @param {V} filters The filtering options.
  * @returns {DTADocument[]} A filtered array of parsed songs.
  */
 export const filterDTA = <
-    SB extends FilterSortedByTypes,
-    V extends FilterType<SB>
+    T extends FilterSortedByTypes,
+    V extends FilterOptionsType<T>
 >(
     songs: DTADocument[],
-    filters: FilterOptions<SB, V>
+    filterSelector: T,
+    filters: V
 ): DTADocument[] => {
     let returnValue = sortDTA(songs, 'name')
 
-    if (filters.options) {
-        returnValue = returnValue.filter((song) => {
-            if (filters.options?.sortedBy === 'name') {
-                if (Array.isArray(filters.options.value)) {
-                    let proof = false
+    if (filterSelector !== null) {
+        const options = filters as FilterOptionsWithSelector<
+            typeof filterSelector
+        >
 
-                    filters.options.value.forEach((name) => {
-                        if (
-                            name === '123' &&
-                            /^[^a-zA-Z]/.test(song.get('name'))
-                        )
-                            proof = true
-                        else if (
-                            song
-                                .get('name', { leadingArticle: 'omit' })
-                                .slice(0, 1)
-                                .toLowerCase() === name.toLowerCase()
-                        )
-                            proof = true
-                    })
+        if (
+            filterSelector === 'name' &&
+            !Array.isArray(options.filterSelectorValues)
+        ) {
+            const filterSelectorValues =
+                options.filterSelectorValues as FilterSongNameTypes
 
-                    if (proof) return song
-                } else if (typeof filters.options.value === 'string') {
-                    if (
-                        filters.options?.value === '123' &&
-                        /^[^a-zA-Z]/.test(song.get('name'))
-                    )
-                        return song
+            returnValue = returnValue.filter((song) => {
+                if (
+                    filterSelectorValues === '123' &&
+                    /^[^a-zA-Z]/.test(song.get('name'))
+                )
+                    return song
+                else if (
+                    song
+                        .get('name', { leadingArticle: 'omit' })
+                        .slice(0, 1)
+                        .toLowerCase() === filterSelectorValues.toLowerCase()
+                )
+                    return song
+            })
+        } else if (
+            filterSelector === 'name' &&
+            Array.isArray(options.filterSelectorValues)
+        ) {
+            const filterSelectorValues =
+                options.filterSelectorValues as FilterSongNameTypes[]
+
+            returnValue = returnValue.filter((song) => {
+                let proof = false
+
+                filterSelectorValues.forEach((name) => {
+                    if (name === '123' && /^[^a-zA-Z]/.test(song.get('name')))
+                        proof = true
                     else if (
                         song
                             .get('name', { leadingArticle: 'omit' })
                             .slice(0, 1)
-                            .toLowerCase() ===
-                        filters.options?.value.toLowerCase()
+                            .toLowerCase() === name.toLowerCase()
                     )
-                        return song
-                }
-            } else if (filters.options?.sortedBy === 'artist') {
-                if (Array.isArray(filters.options.value)) {
-                    let proof = false
+                        proof = true
+                })
 
-                    filters.options.value.forEach((artist) => {
-                        if (
-                            song.content.artist.toLowerCase() ===
-                            artist.toLowerCase()
-                        )
-                            proof = true
-                    })
+                if (proof) return song
+            })
+        } else if (
+            filterSelector === 'artist' &&
+            !Array.isArray(options.filterSelectorValues)
+        ) {
+            const filterSelectorValues = options.filterSelectorValues as string
 
-                    if (proof) return song
-                } else if (typeof filters.options.value === 'string') {
+            returnValue = returnValue.filter((song) => {
+                if (
+                    song.content.artist.toLowerCase() ===
+                    filterSelectorValues.toString().toLowerCase()
+                )
+                    return song
+            })
+        } else if (
+            filterSelector === 'artist' &&
+            Array.isArray(options.filterSelectorValues)
+        ) {
+            const filterSelectorValues =
+                options.filterSelectorValues as string[]
+
+            returnValue = returnValue.filter((song) => {
+                let proof = false
+
+                filterSelectorValues.forEach((artist) => {
                     if (
                         song.content.artist.toLowerCase() ===
-                        filters.options?.value.toLowerCase()
+                        artist.toLowerCase()
                     )
-                        return song
-                }
-            }
-        })
-    }
+                        proof = true
+                })
 
-    delete filters.options
+                if (proof) return song
+            })
+        } else if (
+            filterSelector === 'album_name' &&
+            !Array.isArray(options.filterSelectorValues)
+        ) {
+            const { album_name, artist } =
+                options.filterSelectorValues as FilterAlbumNameTypes
+
+            returnValue = returnValue.filter((song) => {
+                if (
+                    song.content.artist.toLowerCase() ===
+                        artist.toLowerCase() &&
+                    song.content.album_name?.toLowerCase() ===
+                        album_name.toLowerCase()
+                )
+                    return song
+            })
+        } else if (
+            filterSelector === 'album_name' &&
+            Array.isArray(options.filterSelectorValues)
+        ) {
+            const filterSelectorValues =
+                options.filterSelectorValues as FilterAlbumNameTypes[]
+
+            returnValue = returnValue.filter((song) => {
+                let proof = false
+
+                filterSelectorValues.forEach((filters) => {
+                    const { album_name, artist } = filters
+                    if (
+                        song.content.artist.toLowerCase() ===
+                            artist.toLowerCase() &&
+                        song.content.album_name?.toLowerCase() ===
+                            album_name.toLowerCase()
+                    )
+                        proof = true
+                })
+
+                if (proof) return song
+            })
+        }
+    }
 
     return applyFilters(returnValue, filters)
 }
 
+/**
+ * Applies specific, non-value dependent filters and returns a filtered array of parsed songs.
+ * - - - -
+ * @param {DTADocument[]} songs An array of parsed songs.
+ * @param {ApplyFiltersOnlyOptions} filters The filtering options.
+ * @returns {DTADocument[]} A filtered array of parsed songs.
+ */
 export const applyFilters = (
     songs: DTADocument[],
-    filters: ApplyFilterOptions
-) => {
+    filters: ApplyFiltersOnlyOptions
+): DTADocument[] => {
     if (filters.genres) {
         songs = songs.filter((song) => {
             if (
