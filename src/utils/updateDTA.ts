@@ -726,13 +726,13 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
         if (key_signature.key === 'C Major') {
             dta.content.vocal_tonic_note = 0
             dta.content.song_tonality = 0
-        } else if (key_signature.key === 'D♭ Major') {
+        } else if (key_signature.key === 'Db Major') {
             dta.content.vocal_tonic_note = 1
             dta.content.song_tonality = 0
         } else if (key_signature.key === 'D Major') {
             dta.content.vocal_tonic_note = 2
             dta.content.song_tonality = 0
-        } else if (key_signature.key === 'E♭ Major') {
+        } else if (key_signature.key === 'Eb Major') {
             dta.content.vocal_tonic_note = 3
             dta.content.song_tonality = 0
         } else if (key_signature.key === 'E Major') {
@@ -741,19 +741,19 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
         } else if (key_signature.key === 'F Major') {
             dta.content.vocal_tonic_note = 5
             dta.content.song_tonality = 0
-        } else if (key_signature.key === 'F♯ Major') {
+        } else if (key_signature.key === 'F# Major') {
             dta.content.vocal_tonic_note = 6
             dta.content.song_tonality = 0
         } else if (key_signature.key === 'G Major') {
             dta.content.vocal_tonic_note = 7
             dta.content.song_tonality = 0
-        } else if (key_signature.key === 'A♭ Major') {
+        } else if (key_signature.key === 'Ab Major') {
             dta.content.vocal_tonic_note = 8
             dta.content.song_tonality = 0
         } else if (key_signature.key === 'A Major') {
             dta.content.vocal_tonic_note = 9
             dta.content.song_tonality = 0
-        } else if (key_signature.key === 'B♭ Major') {
+        } else if (key_signature.key === 'Bb Major') {
             dta.content.vocal_tonic_note = 10
             dta.content.song_tonality = 0
         } else if (key_signature.key === 'B Major') {
@@ -762,13 +762,13 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
         } else if (key_signature.key === 'C Minor') {
             dta.content.vocal_tonic_note = 0
             dta.content.song_tonality = 1
-        } else if (key_signature.key === 'C♯ Minor') {
+        } else if (key_signature.key === 'C# Minor') {
             dta.content.vocal_tonic_note = 1
             dta.content.song_tonality = 1
         } else if (key_signature.key === 'D Minor') {
             dta.content.vocal_tonic_note = 2
             dta.content.song_tonality = 1
-        } else if (key_signature.key === 'D♯ Minor') {
+        } else if (key_signature.key === 'D# Minor') {
             dta.content.vocal_tonic_note = 3
             dta.content.song_tonality = 1
         } else if (key_signature.key === 'E Minor') {
@@ -777,19 +777,19 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
         } else if (key_signature.key === 'F Minor') {
             dta.content.vocal_tonic_note = 5
             dta.content.song_tonality = 1
-        } else if (key_signature.key === 'F♯ Minor') {
+        } else if (key_signature.key === 'F# Minor') {
             dta.content.vocal_tonic_note = 6
             dta.content.song_tonality = 1
         } else if (key_signature.key === 'G Minor') {
             dta.content.vocal_tonic_note = 7
             dta.content.song_tonality = 1
-        } else if (key_signature.key === 'G♯ Minor') {
+        } else if (key_signature.key === 'G# Minor') {
             dta.content.vocal_tonic_note = 8
             dta.content.song_tonality = 1
         } else if (key_signature.key === 'A Minor') {
             dta.content.vocal_tonic_note = 9
             dta.content.song_tonality = 1
-        } else if (key_signature.key === 'A♯ Minor') {
+        } else if (key_signature.key === 'A# Minor') {
             dta.content.vocal_tonic_note = 10
             dta.content.song_tonality = 1
         } else {
@@ -802,25 +802,25 @@ export const updateDTA = (dta: DTADocument, update: UpdateDataOptions) => {
         if (key_signature.trainer_key_override) {
             if (key_signature.trainer_key_override === 'C')
                 dta.content.song_key = 0
-            if (key_signature.trainer_key_override === 'C♯/D♭')
+            if (key_signature.trainer_key_override === 'C#/Db')
                 dta.content.song_key = 1
             if (key_signature.trainer_key_override === 'D')
                 dta.content.song_key = 2
-            if (key_signature.trainer_key_override === 'D♯/E♭')
+            if (key_signature.trainer_key_override === 'D#/Eb')
                 dta.content.song_key = 3
             if (key_signature.trainer_key_override === 'E')
                 dta.content.song_key = 4
             if (key_signature.trainer_key_override === 'F')
                 dta.content.song_key = 5
-            if (key_signature.trainer_key_override === 'F♯/G♭')
+            if (key_signature.trainer_key_override === 'F#/Gb')
                 dta.content.song_key = 6
             if (key_signature.trainer_key_override === 'G')
                 dta.content.song_key = 7
-            if (key_signature.trainer_key_override === 'G♯/A♭')
+            if (key_signature.trainer_key_override === 'G#/Ab')
                 dta.content.song_key = 8
             if (key_signature.trainer_key_override === 'A')
                 dta.content.song_key = 9
-            if (key_signature.trainer_key_override === 'A♯/A♭')
+            if (key_signature.trainer_key_override === 'A#/Ab')
                 dta.content.song_key = 10
             if (key_signature.trainer_key_override === 'B')
                 dta.content.song_key = 11

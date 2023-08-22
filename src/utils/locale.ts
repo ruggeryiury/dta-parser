@@ -264,73 +264,73 @@ export type RankLocaleReturnType<T extends RankLocaleTypes> = T extends
 
 const songKeyMajor = [
     'C',
-    'D♭',
+    'Db',
     'D',
-    'E♭',
+    'Eb',
     'E',
     'F',
-    'F♯',
+    'F#',
     'G',
-    'A♭',
+    'Ab',
     'A',
-    'A♭',
+    'Ab',
     'B',
 ]
 const songKeyMinor = [
     'C',
-    'C♯',
+    'C#',
     'D',
-    'D♯',
+    'D#',
     'E',
     'F',
-    'F♯',
+    'F#',
     'G',
-    'G♯',
+    'G#',
     'A',
-    'A♯',
+    'A#',
     'B',
 ]
 
 export type TrainerKeyOverrideValues =
     | 'C'
-    | 'C♯/D♭'
+    | 'C#/Db'
     | 'D'
-    | 'D♯/E♭'
+    | 'D#/Eb'
     | 'E'
     | 'F'
-    | 'F♯/G♭'
+    | 'F#/Gb'
     | 'G'
-    | 'G♯/A♭'
+    | 'G#/Ab'
     | 'A'
-    | 'A♯/A♭'
+    | 'A#/Ab'
     | 'B'
 
 export type SongKeyMajorValues =
     | 'C Major'
-    | 'D♭ Major'
+    | 'Db Major'
     | 'D Major'
-    | 'E♭ Major'
+    | 'Eb Major'
     | 'E Major'
     | 'F Major'
-    | 'F♯ Major'
+    | 'F# Major'
     | 'G Major'
-    | 'A♭ Major'
+    | 'Ab Major'
     | 'A Major'
-    | 'B♭ Major'
+    | 'Bb Major'
     | 'B Major'
 
 export type SongKeyMinorValues =
     | 'C Minor'
-    | 'C♯ Minor'
+    | 'C# Minor'
     | 'D Minor'
-    | 'D♯ Minor'
+    | 'D# Minor'
     | 'E Minor'
     | 'F Minor'
-    | 'F♯ Minor'
+    | 'F# Minor'
     | 'G Minor'
-    | 'G♯ Minor'
+    | 'G# Minor'
     | 'A Minor'
-    | 'A♯ Minor'
+    | 'A# Minor'
     | 'B Minor'
 
 export type SongKeyLocaleReturnType<

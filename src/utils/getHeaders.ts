@@ -2,12 +2,13 @@ import { DTADocument } from '../@types/DTADocument'
 import { FilterSortedByTypes, FilterSongNameTypes } from '../utils/filterDTA'
 import { omitLeadingArticle } from './nameUtils'
 
-export type FilterHeadersReturn<H extends FilterSortedByTypes> =
-    H extends 'name'
-        ? FilterSongNameTypes[]
-        : H extends 'artist'
-        ? string[]
-        : never
+export type HeaderTypes = Exclude<FilterSortedByTypes, 'album_name'>
+
+export type FilterHeadersReturn<H extends HeaderTypes> = H extends 'name'
+    ? FilterSongNameTypes[]
+    : H extends 'artist'
+    ? string[]
+    : never
 
 /**
  * Returns all possible values from a parsed
@@ -17,7 +18,7 @@ export type FilterHeadersReturn<H extends FilterSortedByTypes> =
  * @param {H} type The type of the value you want to get values from.
  * @returns {string[]} An array with strings representing the available values of the parsed songs array based on the given type option.
  */
-export const getHeaders = <H extends FilterSortedByTypes>(
+export const getHeaders = <H extends HeaderTypes>(
     songs: DTADocument[],
     type: H
 ): FilterHeadersReturn<H> => {
@@ -29,7 +30,10 @@ export const getHeaders = <H extends FilterSortedByTypes>(
 
         const charSet = new Set(
             songs.map((song) =>
-                song.get('name', { leadingArticle: 'omit' }).toLowerCase().slice(0, 1)
+                song
+                    .get('name', { leadingArticle: 'omit' })
+                    .toLowerCase()
+                    .slice(0, 1)
             )
         )
 
@@ -38,7 +42,7 @@ export const getHeaders = <H extends FilterSortedByTypes>(
                 allFirstChar.push('123')
                 has123 = true
             } else if (/^[a-zA-Z]/.test(char)) {
-                allFirstChar.push(char)
+                allFirstChar.push(char.toUpperCase())
             }
         })
 
@@ -48,12 +52,20 @@ export const getHeaders = <H extends FilterSortedByTypes>(
             return 0
         }) as FilterHeadersReturn<H>
     }
+    // else if (type === 'album_name') {
+    //     const allFirstChar: string[] = []
+    //     const charSet = new Set(
+    //         songs.map((song) =>
+    //             song.get('name', { leadingArticle: 'omit' }).toLowerCase().slice(0, 1)
+    //         )
+    //     )
+    // }
     else {
         // if (type === 'artist')
         returnArray = Array.from(
             new Set(
                 songs
-                    .map((song) => song.get('artist').toLowerCase())
+                    .map((song) => song.get('artist'))
                     .sort((a, b) => {
                         if (
                             omitLeadingArticle(a.toLowerCase()) >
