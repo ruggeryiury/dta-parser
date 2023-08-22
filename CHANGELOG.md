@@ -1,18 +1,5 @@
 # Changelog
 
-## `1.3.0` August ??, 2023
-
--   Exposed type `DTAContentDocument` to be exported and used.
--   Created generic types `CustomDTADocuument` and `CustomDTAContentDocument` to create custom DTA Document object and DTA Document Content object with additional content values.
--   `DTAParser`:
-    -   New options parameter `asJSON`: Makes the return type of this function a JSON representation of a parsed song rather than a `DTADocument` object.
--   `DTAArray`:
-    -   Added new module method `toJSON()`: Converts an array of parsed songs object to an array with JSON representations of all parsed songs.
-    -   Added new module method `fromJSON()`: Converts JSON representations of parsed songs into an array of `DTADocument` objects.
-    -   Added new module method `filter()`: Filters songs from an array, with a tons of options.
-    -   Added new module method `getHeaders()`: A method that returns an array of string that all, narrowed available values of all songs inside a parsed songs array.
-    -   Added new module method `update()`: Updates a parsed songs array with contents of another parsed songs array.
-    -   Added new module method `songList()`: Returns an array with all available songs unique string ID from a parsed songs array.
 
 ## `1.2.0` July 23, 2023
 
