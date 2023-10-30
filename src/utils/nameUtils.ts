@@ -5,15 +5,15 @@
  * @returns {string} The text processed.
  */
 export const omitLeadingArticle = (text: string): string => {
-    const articles = ['a', 'an', 'the']
-    const words = text.split(' ')
-    const firstWord = words[0]
-    const hasLeadingArticle = articles.includes(firstWord.toLowerCase())
-    if (hasLeadingArticle) {
-        return words.slice(1).join(' ')
-    }
+  const articles = ['a', 'an', 'the']
+  const words = text.split(' ')
+  const firstWord = words[0]
+  const hasLeadingArticle = articles.includes(firstWord.toLowerCase())
+  if (hasLeadingArticle) {
+    return words.slice(1).join(' ')
+  }
 
-    return words.join(' ')
+  return words.join(' ')
 }
 
 /**
@@ -23,13 +23,13 @@ export const omitLeadingArticle = (text: string): string => {
  * @returns {string} The text processed.
  */
 export const leadingArticle2Trailing = (text: string): string => {
-    const articles = ['a', 'an', 'the']
-    const words = text.split(' ')
-    const firstWord = words[0]
-    const hasLeadingArticle = articles.includes(firstWord.toLowerCase())
-    if (hasLeadingArticle) {
-        return `${words.slice(1).join(' ')}, ${firstWord}`
-    }
+  const articles = ['a', 'an', 'the']
+  const words = text.split(' ')
+  const firstWord = words[0]
+  const hasLeadingArticle = articles.includes(firstWord.toLowerCase())
+  if (hasLeadingArticle) {
+    return `${words.slice(1).join(' ')}, ${firstWord}`
+  }
 
-    return words.join(' ')
+  return words.join(' ')
 }

@@ -1,18 +1,15 @@
-import {
-    InstrumentRankingsNumberOptions,
-    InstrumentRankingsVerbosedOptions,
-} from '../utils/updateDTA'
+import { InstrumentRankingsNumberOptions, InstrumentRankingsVerbosedOptions } from './locale'
 
 const ranksMap = {
-    drum: [124, 151, 178, 242, 345, 448],
-    bass: [135, 181, 228, 293, 364, 436],
-    guitar: [139, 176, 221, 267, 333, 409],
-    vocals: [132, 175, 218, 279, 353, 427],
-    keys: [153, 211, 269, 327, 385, 443],
-    real_keys: [153, 211, 269, 327, 385, 443],
-    real_bass: [150, 208, 267, 325, 384, 442],
-    real_guitar: [150, 205, 264, 323, 382, 442],
-    band: [163, 215, 243, 267, 292, 345],
+  drum: [124, 151, 178, 242, 345, 448],
+  bass: [135, 181, 228, 293, 364, 436],
+  guitar: [139, 176, 221, 267, 333, 409],
+  vocals: [132, 175, 218, 279, 353, 427],
+  keys: [153, 211, 269, 327, 385, 443],
+  real_keys: [153, 211, 269, 327, 385, 443],
+  real_bass: [150, 208, 267, 325, 384, 442],
+  real_guitar: [150, 208, 267, 325, 384, 442],
+  band: [163, 215, 243, 267, 292, 345],
 }
 
 export type RankTypes = keyof typeof ranksMap
@@ -28,19 +25,19 @@ export type RankTypes = keyof typeof ranksMap
  * @returns {number} The calculated instrument rank.
  */
 export const rankCalculator = (type: RankTypes, rank?: number): number => {
-    let parseRankReturn = -1
+  let parseRankReturn = -1
 
-    if (rank === undefined || rank === 0) {
-        return parseRankReturn
-    }
-
-    parseRankReturn++
-
-    ranksMap[type].forEach((value) => {
-        if (rank >= value) parseRankReturn++
-    })
-
+  if (rank === undefined || rank === 0) {
     return parseRankReturn
+  }
+
+  parseRankReturn++
+
+  ranksMap[type].forEach((value) => {
+    if (rank >= value) parseRankReturn++
+  })
+
+  return parseRankReturn
 }
 
 /**
@@ -50,21 +47,18 @@ export const rankCalculator = (type: RankTypes, rank?: number): number => {
  * @param {InstrumentRankingsOptions} rank A string that indicates the ranking you want for the instrument part.
  * @returns {number} A `.dta` file-compatible ranking system number.
  */
-export const dtaRankCalculator = (
-    type: RankTypes,
-    rank: InstrumentRankingsNumberOptions | InstrumentRankingsVerbosedOptions
-): number => {
-    if (rank === 'No Part' || rank === -1) return 0
-    else if (rank === 'Warmup' || rank === 0) return 1
-    else if (rank === 'Apprentice' || rank === 1) return ranksMap[type][0]
-    else if (rank === 'Solid' || rank === 2) return ranksMap[type][1]
-    else if (rank === 'Moderate' || rank === 3) return ranksMap[type][2]
-    else if (rank === 'Challenging' || rank === 4) return ranksMap[type][3]
-    else if (rank === 'Nightmare' || rank === 5) return ranksMap[type][4]
-    else {
-        // if (rank === 'Impossible' || rank === 6)
-        return ranksMap[type][5]
-    }
+export const dtaRankCalculator = (type: RankTypes, rank: InstrumentRankingsNumberOptions | InstrumentRankingsVerbosedOptions): number => {
+  if (rank === 'No Part' || rank === -1) return 0
+  else if (rank === 'Warmup' || rank === 0) return 1
+  else if (rank === 'Apprentice' || rank === 1) return ranksMap[type][0]
+  else if (rank === 'Solid' || rank === 2) return ranksMap[type][1]
+  else if (rank === 'Moderate' || rank === 3) return ranksMap[type][2]
+  else if (rank === 'Challenging' || rank === 4) return ranksMap[type][3]
+  else if (rank === 'Nightmare' || rank === 5) return ranksMap[type][4]
+  else {
+    // if (rank === 'Impossible' || rank === 6)
+    return ranksMap[type][5]
+  }
 }
 
 /**
@@ -75,5 +69,4 @@ export const dtaRankCalculator = (
  * @param {number} quantity The quantity of playable instruments.
  * @returns {number} A generic band ranking number.
  */
-export const bandRankCalculator = (count: number, quantity: number): number =>
-    Number((count / quantity).toFixed())
+export const bandRankCalculator = (count: number, quantity: number): number => Number((count / quantity).toFixed())

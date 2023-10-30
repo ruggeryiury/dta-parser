@@ -1,4 +1,4 @@
-import { DTADocument } from '../@types/DTADocument'
+import { DTAFile } from '../@types/DTAFile'
 import { SortByOptionsTypes, sortDTA } from '../utils/sortDTA'
 import { genArraySongList } from './songList'
 
@@ -13,27 +13,23 @@ import { genArraySongList } from './songList'
  * Passing a string as third argument will sort the new parsed songs array
  * based on desired sorting option.
  * - - - -
- * @param {DTADocument[]} oldSongs The old array where outdated songs might be replaced.
- * @param {DTADocument[]} update The new songs to be updated/added
- * @returns {DTADocument[]} An updated parsed songs array.
+ * @param {DTAFile[]} oldSongs The old array where outdated songs might be replaced.
+ * @param {DTAFile[]} update The new songs to be updated/added
+ * @returns {DTAFile[]} An updated parsed songs array.
  */
-export const updateSongArray = (
-    oldSongs: DTADocument[],
-    update: DTADocument[],
-    sortArray?: SortByOptionsTypes
-): DTADocument[] => {
-    // const oldSongsIDs = DTAArray.songList(oldSongs)
-    const updateIDs = genArraySongList(update)
+export const updateSongArray = (oldSongs: DTAFile[], update: DTAFile[], sortArray?: SortByOptionsTypes): DTAFile[] => {
+  // const oldSongsIDs = DTAArray.songList(oldSongs)
+  const updateIDs = genArraySongList(update)
 
-    const newSongs: DTADocument[] = []
+  const newSongs: DTAFile[] = []
 
-    oldSongs.forEach((song) => {
-        if (!updateIDs.includes(song.content.id)) newSongs.push(song)
-    })
+  oldSongs.forEach((song) => {
+    if (!updateIDs.includes(song.content.id)) newSongs.push(song)
+  })
 
-    update.forEach((song) => newSongs.push(song))
+  update.forEach((song) => newSongs.push(song))
 
-    if (sortArray) {
-        return sortDTA(newSongs, sortArray)
-    } else return newSongs
+  if (sortArray) {
+    return sortDTA(newSongs, sortArray)
+  } else return newSongs
 }

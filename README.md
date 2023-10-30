@@ -13,27 +13,21 @@
 
 # 💠 Table of Contents
 
--   [💠 Table of Contents](#-table-of-contents)
--   [Installing](#installing)
--   [Usage](#usage)
-    -   [Parsing a `.dta` File](#parsing-a-dta-file)
-    -   [Sorting all songs](#sorting-all-songs)
-    -   [Getting any value from a song](#getting-any-value-from-a-song)
-    -   [Updating values from a song](#updating-values-from-a-song)
-    -   [Exporting a song individually, or as a pack](#exporting-a-song-individually-or-as-a-pack)
--   [Known Issues](#known-issues)
--   [Changelog](#changelog)
-
-# Installing
-
--   Using npm: `npm install dta-parser`
--   Using yarn `yarn add dta-parser`
+- [💠 Table of Contents](#-table-of-contents)
+- [Usage](#usage)
+  - [Parsing a `.dta` File](#parsing-a-dta-file)
+  - [Sorting all songs](#sorting-all-songs)
+  - [Getting any value from a song](#getting-any-value-from-a-song)
+  - [Updating values from a song](#updating-values-from-a-song)
+  - [Exporting a song individually, or as a pack](#exporting-a-song-individually-or-as-a-pack)
+- [Known Issues](#known-issues)
+- [Changelog](#changelog)
 
 # Usage
 
 ## Parsing a `.dta` File
 
-Just read the contents of a .dta file, when use `DTAParser()` to parse it. It will return an array of each song included on the .dta file parsed as a `DTADocument` type.
+Just read the contents of a .dta file, when use `DTAParser()` to parse it. It will return an array of each song included on the .dta file parsed as a `DTAFile` type.
 
 ```ts
 import DTAParser from 'dta-parser'
@@ -140,13 +134,13 @@ const mySongs = DTAParser(dtaFileContents, {
 })
 ```
 
-You can also use `DTADocument.update()` method to update values after the parsing process.
+You can also use `DTAFile.update()` method to update values after the parsing process.
 
 ## Exporting a song individually, or as a pack
 
-You can stringify a single `DTADocument` or an `Array` for `DTADocument` back to a formatted .dta file contents.
+You can stringify a single `DTAFile` or an `Array` for `DTAFile` back to a formatted .dta file contents.
 
--   For single songs, use the `DTADocument.stringify()`:
+- For single songs, use the `DTAFile.stringify()`:
 
 ```ts
 ...
@@ -160,7 +154,7 @@ const song = DTAArray.getSongByID(parsedDTAs, 'yoursong_str_id')
 const newDTAFileContents = song.stringify()
 ```
 
--   For packs, you can use `DTAArray` module:
+- For packs, you can use `DTAArray` module:
 
 ```ts
 // Import the DTAArray module.
@@ -182,7 +176,7 @@ const newDTAFileContents = DTAArray.stringify(mySongs)
 
 # Known Issues
 
--   The parser only works for **individual songs/songs pack** `.dta` files.
+- The parser only works for **individual songs/songs pack** `.dta` files.
 
 # Changelog
 
