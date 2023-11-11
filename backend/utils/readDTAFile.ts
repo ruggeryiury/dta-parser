@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import DTAParser, { DTAParserOptions, DTAParserReturnType } from '../../src'
+import DTAParser, { DTAFileContents, DTAParserOptions } from '../../src'
 /**
  * Synchronously reads a `.dta` file (or a directory with `.dta` files) and returns their contents.
  * - - - -
@@ -87,7 +87,7 @@ export const readDTAFile = async (pathStr: string): Promise<string> => {
  * @param {O} parserOptions `OPTIONAL` Customizing options for the parsing process.
  * @returns {DTAParserReturnType<O>} The parsed `.dta` file contents (or all `.dta` files contents in a directory merged).
  */
-export const readParseDTAFileSync = <O extends DTAParserOptions>(pathStr: string, parserOptions?: O): DTAParserReturnType<O> => {
+export const readParseDTAFileSync = (pathStr: string, parserOptions?: DTAParserOptions): DTAFileContents[] => {
   const contents = readDTAFileSync(pathStr)
   return DTAParser(contents, parserOptions)
 }
@@ -99,7 +99,7 @@ export const readParseDTAFileSync = <O extends DTAParserOptions>(pathStr: string
  * @param {O} parserOptions `OPTIONAL` Customizing options for the parsing process.
  * @returns {Promise<DTAParserReturnType<O>} The parsed `.dta` file contents (or all `.dta` files contents in a directory merged).
  */
-export const readParseDTAFile = async <O extends DTAParserOptions>(pathStr: string, parserOptions?: O): Promise<DTAParserReturnType<O>> => {
+export const readParseDTAFile = async (pathStr: string, parserOptions?: DTAParserOptions): Promise<DTAFileContents[]> => {
   const contents = await readDTAFile(pathStr)
   return DTAParser(contents, parserOptions)
 }

@@ -1,18 +1,11 @@
-import { DTAFileContents, DTAFile } from './@types/DTAFile'
-import { depackDTA } from './utils/depackDTA'
-import { getSongByID } from './utils/getSongByID'
-import { parseDTA } from './utils/parseDTA'
-import { SortByOptionsTypes, sortDTA } from './utils/sortDTA'
-import { UpdateDataOptions } from './utils/updateDTA'
-import DTAArray from './core/DTAArray'
-import DTATools from './core/DTATools'
+import { DTAFileContents } from './@types/dta'
+import DTAFile from './core/DTAFile'
+import { depackDTA } from './lib/depack'
+import { parseDTA } from './lib/parse'
+import { SortByOptionsTypes, sortDTA } from './lib/sort'
+import { UpdateDataOptions, updateDTA } from './lib/update'
 
 export interface DTAParserOptions {
-  /**
-   * Makes the return type of this function a JSON representation of a parsed song
-   * rather than a `DTAFile` object. Default is `false`.
-   */
-  asJSON?: boolean
   /**
    * Changes the sorting of the songs.
    */
@@ -29,29 +22,23 @@ export interface DTAParserOptions {
   updateAll?: Pick<UpdateDataOptions, 'author' | 'multitrack' | 'pack_name'>
 }
 
-export type DTAParserReturnType<O extends DTAParserOptions> = O extends {
-  asJSON: true
-}
-  ? DTAFileContents[]
-  : DTAFile[]
-
 /**
  * Parses a .dta file content.
  * - - - -
  * @param {string} dtaFileContents The .dta file contents.
- * @param {O} options `OPTIONAL` Customizing options for the parsing process.
- * @returns {DTAParserReturnType<O>} An array of parsed song objects.
+ * @param {DTAParserOptions} options `OPTIONAL` Customizing options for the parsing process.
+ * @returns {DTAFileContents[]} An array of parsed song objects.
  *
  * @see [`DTAFile`](@types/DTAFile.ts) interface.
  */
-const DTAParser = <O extends DTAParserOptions>(dtaFileContents: string, options?: O): DTAParserReturnType<O> => {
-  if (!options) options = {} as O
+const DTAParser = (dtaFileContents: string, options?: DTAParserOptions): DTAFileContents[] => {
+  if (!options) options = {}
 
-  const { asJSON, sortBy, update, updateAll } = options
+  const { sortBy, update, updateAll } = options
 
   const depackedSongs = depackDTA(dtaFileContents)
 
-  let parsedSongs: DTAFile[] = depackedSongs.map((value) => {
+  let parsedSongs = depackedSongs.map((value) => {
     const song = parseDTA(value)
     return song
   })
@@ -60,25 +47,26 @@ const DTAParser = <O extends DTAParserOptions>(dtaFileContents: string, options?
     const updateKeys = Object.keys(update)
 
     updateKeys.forEach((keys) => {
-      const selectedSong = getSongByID(parsedSongs, keys)
-      const updateObject = update?.[keys]
+      parsedSongs = parsedSongs.map((song) => {
+        if (song.id === keys && update[keys]) {
+          return updateDTA(song, update[keys])
+        }
 
-      if (selectedSong && updateObject) {
-        selectedSong.update(updateObject)
-      }
+        return song
+      })
     })
   }
 
   if (updateAll) {
     parsedSongs = parsedSongs.map((song) => {
       if (updateAll.author) {
-        song.content.author = updateAll.author
+        song.author = updateAll.author
       }
       if (updateAll.multitrack !== undefined) {
-        song.content.multitrack = updateAll.multitrack
+        song.multitrack = updateAll.multitrack
       }
       if (updateAll.pack_name) {
-        song.content.pack_name = updateAll.pack_name
+        song.pack_name = updateAll.pack_name
       }
       return song
     })
@@ -88,14 +76,9 @@ const DTAParser = <O extends DTAParserOptions>(dtaFileContents: string, options?
     parsedSongs = sortDTA(parsedSongs, sortBy)
   }
 
-  if (asJSON) {
-    const JSONSongs = parsedSongs.map((song) => song.json())
-    return JSONSongs as DTAParserReturnType<O>
-  }
-
-  return parsedSongs as DTAParserReturnType<O>
+  return parsedSongs
 }
 
-export type { DTAFile, DTAFileContents, ExtDTAFile, ExtDTAFileContents } from './@types/DTAFile'
-export { DTAArray, DTATools }
+export type { DTAFileContents, ExpandedDTAFileContents } from './@types/dta'
+export { DTAFile }
 export default DTAParser

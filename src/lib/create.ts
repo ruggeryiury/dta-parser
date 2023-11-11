@@ -1,48 +1,31 @@
 import cloneDeep from 'lodash/cloneDeep'
-import { DTAFileContents, DTAFile } from '../@types/DTAFile'
-import { DTAtoJSON } from './DTAtoJSON'
-import { getDTA } from './getDTA'
-import { stringifyDTA } from './stringifyDTA'
-import { updateDTA, UpdateDataOptions, TrackUpdateOptions, GenreUpdateOptionsTypes } from './updateDTA'
+import { DTAFileContents } from '../@types/dta'
+import { updateDTA, UpdateDataOptions, TrackUpdateOptions, GenreUpdateOptionsTypes } from './update'
 
-const dtaDefault: DTAFile = {
-  content: {
-    id: '',
-    name: '',
-    artist: '',
-    master: false,
-    song_id: 0,
-    songname: '',
-    tracks_count: [0, 0, 0, 0, 0, 0],
-    pans: [],
-    vols: [],
-    vocal_parts: 0,
-    bank: 'sfx/tambourine_bank.milo',
-    drum_bank: 'sfx/kit01_bank.milo',
-    anim_tempo: 32,
-    preview: [0, 0],
-    song_length: 0,
-    rank_band: 1,
-    game_origin: 'ugc_plus',
-    rating: 4,
-    genre: 'other',
-    vocal_gender: 'male',
-    year_released: new Date().getFullYear(),
-    album_art: false,
-    album_name: '',
-  },
-  get(value, options) {
-    return getDTA(this, value, options)
-  },
-  stringify(options) {
-    return stringifyDTA(this, options)
-  },
-  update(options) {
-    updateDTA(this, options)
-  },
-  json() {
-    return DTAtoJSON(this)
-  },
+const dtaDefault: DTAFileContents = {
+  id: '',
+  name: '',
+  artist: '',
+  master: false,
+  song_id: 0,
+  songname: '',
+  tracks_count: [0, 0, 0, 0, 0, 0],
+  pans: [],
+  vols: [],
+  vocal_parts: 0,
+  bank: 'sfx/tambourine_bank.milo',
+  drum_bank: 'sfx/kit01_bank.milo',
+  anim_tempo: 32,
+  preview: [0, 0],
+  song_length: 0,
+  rank_band: 1,
+  game_origin: 'ugc_plus',
+  rating: 4,
+  genre: 'other',
+  vocal_gender: 'male',
+  year_released: new Date().getFullYear(),
+  album_art: false,
+  album_name: '',
 }
 
 export interface CreateDTAFileRecipe extends UpdateDataOptions {
@@ -105,24 +88,18 @@ export interface CreateDTAFileRecipe extends UpdateDataOptions {
   year_released: number
 }
 
-export type CreateDTAFileJSONConfig = boolean
-export type CreateDTAFileReturnType<T extends CreateDTAFileJSONConfig> = T extends true ? DTAFileContents : DTAFile
-
 /**
  * Creates a new parsed song object.
- * @param {CreateDTAFileRecipe} values Options for the `DTAFile` creation process.
- * If `null`, It will be created using a all-default, all-blank options.
- * @returns {DTAFile} A new parsed song object.
+ * @param {CreateDTAFileRecipe} values `OPTIONAL` Options for the `DTAFile` creation process.
+ * If `undefined`, It will be created using a all-default, all-blank options.
+ * @returns {DTAFileContents} A new parsed song object.
  */
-export const createDTA = <T extends CreateDTAFileJSONConfig, RT extends CreateDTAFileReturnType<T>>(values: CreateDTAFileRecipe | null, asJSON: T): CreateDTAFileReturnType<T> => {
-  const newDTAInstance = cloneDeep(dtaDefault)
+export const createDTA = (values?: CreateDTAFileRecipe): DTAFileContents => {
+  let newDTAInstance = cloneDeep(dtaDefault)
 
   if (values) {
-    newDTAInstance.update(values)
+    newDTAInstance = updateDTA(newDTAInstance, values)
   }
 
-  if (asJSON) {
-    return newDTAInstance.json() as RT
-  }
-  return newDTAInstance as RT
+  return newDTAInstance
 }

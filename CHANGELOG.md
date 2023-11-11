@@ -1,5 +1,33 @@
 # Changelog
 
+## `2.0.0` ???, 2023
+
+- Major changes:
+  - `DTAFile` objects were deprecated, storing the information as a non-complex object (using type `DTAFileContents`).
+  - Now, `DTAFile` is a module where you can find methods to manipulate `DTAFileContents` objects.
+
+- Exposed type `DTAFileContents`.
+- Created generic types `ExpandedDTAFileContents` to create custom DTA File object with additional content values.
+
+- `DTAFile`:
+
+  - Added new module methods `get()`, `stringify()`, and `update()`, to use with single parsed songs.
+  - Added new module method `fullfill()`: Type-safety injects custom DTA file contents attributes.
+
+- `DTAArray`:
+
+  - Added new module method `toJSON()`: Converts an array of parsed songs object to an array with JSON representations of all parsed songs.
+  - Added new module method `fromJSON()`: Converts JSON representations of parsed songs into an array of `DTAFile` objects.
+  - Added new module method `filter()`: Filters songs from an array, with a tons of options.
+  - Added new module method `getHeaders()`: A method that returns an array of string that all, narrowed available values of all songs inside a parsed songs array.
+  - Added new module method `update()`: Updates a parsed songs array with contents of another parsed songs array.
+  - Added new module method `songList()`: Returns an array with all available songs unique string ID from a parsed songs array.
+  - Added new module method `getSongsFromAuthor()`: Filters an array of parsed songs based on the given author ID.
+
+- Some core functions where updated to let you use `DTAFileContents` objects rather than using `DTAFile` complex objects.
+- Fixed a bug where keys solo was not placed when using the `DTAFile.update()` method.
+- Fixed a bug where vocals and keys ranking where calculated from the 5-lane guitar ranking map.
+
 ## `1.2.0` July 23, 2023
 
 - `DTAParser`:

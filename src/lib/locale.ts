@@ -1,4 +1,5 @@
-import { DTAFileContents, SongKeyValues, SongTonalityValues } from '../@types/DTAFile'
+import { SongKeyValues, SongTonalityValues } from '../@types/dta'
+import { SongKeyUpdateOptions } from './update'
 
 /**
  * Locale for `anim_tempo` keys and parsed values.
@@ -274,18 +275,6 @@ export type VocalGenderValues = (typeof vocalGenderValuesObj)[VocalGenderTypes]
 export type VocalPartsTypes = keyof typeof vocalPartsValuesObj
 export type VocalPartsValues = (typeof vocalPartsValuesObj)[VocalPartsTypes]
 
-const songKeyMajor = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Ab', 'B']
-const songKeyMinor = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
-const songTonalityNames = ['Major', 'Minor']
-
-export type TrainerKeyOverrideValues = 'C' | 'C#/Db' | 'D' | 'D#/Eb' | 'E' | 'F' | 'F#/Gb' | 'G' | 'G#/Ab' | 'A' | 'A#/Ab' | 'B'
-
-export type SongKeyMajorValues = 'C Major' | 'Db Major' | 'D Major' | 'Eb Major' | 'E Major' | 'F Major' | 'F# Major' | 'G Major' | 'Ab Major' | 'A Major' | 'Bb Major' | 'B Major'
-
-export type SongKeyMinorValues = 'C Minor' | 'C# Minor' | 'D Minor' | 'D# Minor' | 'E Minor' | 'F Minor' | 'F# Minor' | 'G Minor' | 'G# Minor' | 'A Minor' | 'A# Minor' | 'B Minor'
-
-export type SongKeyLocaleReturnType<K extends NonNullable<DTAFileContents['vocal_tonic_note']> | -1, T extends NonNullable<DTAFileContents['song_tonality']> | -1> = K extends -1 ? 'Not Specified' : T extends 0 ? SongKeyMajorValues : SongKeyMinorValues
-
 export type RankLocaleOnlyNumberTypes = keyof typeof rankValuesObj
 export type InstrumentRankingsNumberOptions = -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6
 export type InstrumentRankingsVerbosedOptions = (typeof rankValuesObj)[keyof typeof rankValuesObj]
@@ -294,9 +283,28 @@ export type BandRankingsNumberOptions = Exclude<InstrumentRankingsNumberOptions,
 export type BandRankingsVerbosedOptions = Exclude<InstrumentRankingsVerbosedOptions, 'No Part'>
 
 /**
+ * Functions used on the update method.
+ *
+ * It resolves many values accepted from the update method to actual values used on the `.dta` file.
+ */
+export const getKeyFromValue = {
+  anim_tempo: (v: AnimTempoValues) => Number(Object.keys(animTempoValuesObj).find((key) => animTempoValuesObj[Number(key) as AnimTempoTypes] === v)) as AnimTempoNumeralTypes,
+  band_fail_cue: (v: BandFailCueValues) => String(Object.keys(bandFailCueValuesObj).find((key) => bandFailCueValuesObj[key as BandFailCueTypes] === v)) as BandFailCueTypes,
+  bank: (v: BankValues) => String(Object.keys(bankValuesObj).find((key) => bankValuesObj[key as BankTypes] === v)) as BankTypes,
+  drum_bank: (v: DrumBankValues) => String(Object.keys(drumBankValuesObj).find((key) => drumBankValuesObj[key as DrumBankTypes] === v)) as DrumBankTypes,
+  genre: (v: GenreValues) => String(Object.keys(genreValuesObj).find((key) => genreValuesObj[key as GenreTypes] === v)) as GenreTypes,
+  rating: (v: RatingValues) => Number(Object.keys(ratingValuesObj).find((key) => ratingValuesObj[Number(key) as RatingTypes] === v)) as RatingTypes,
+  song_scroll_speed: (v: SongScrollSpeedValues) =>
+    Number(Object.keys(songScrollSpeedValuesObj).find((key) => songScrollSpeedValuesObj[Number(key) as SongScrollSpeedTypes] === v)) as SongScrollSpeedTypes,
+  sub_genre: (v: SubGenreValues) => String(Object.keys(subGenreValuesObj).find((key) => subGenreValuesObj[key as SubGenreTypes] === v)) as SubGenreTypes,
+  vocal_gender: (v: VocalGenderValues) => String(Object.keys(vocalGenderValuesObj).find((key) => vocalGenderValuesObj[key as VocalGenderTypes] === v)) as VocalGenderTypes,
+  vocal_parts: (v: VocalPartsValues) => Number(Object.keys(vocalPartsValuesObj).find((key) => vocalPartsValuesObj[Number(key) as VocalPartsTypes] === v)) as VocalPartsTypes,
+}
+
+/**
  * Module for locale convertions.
  */
-export const Locale = {
+export const getLocale = {
   anim_tempo: (value: AnimTempoTypes) => animTempoValuesObj[value] as AnimTempoValues,
   band_fail_cue: (value?: BandFailCueTypes) => (value && bandFailCueValuesObj[value] ? bandFailCueValuesObj[value] : 'Not Specified') as BandFailCueValues,
   bank: (value: BankTypes) => bankValuesObj[value] as BankValues,
@@ -308,12 +316,23 @@ export const Locale = {
   vocal_gender: (value: VocalGenderTypes) => vocalGenderValuesObj[value] as VocalGenderValues,
   vocal_parts: (value: VocalPartsTypes) => vocalPartsValuesObj[value] as VocalPartsValues,
   rank: (rankCalc: number) => rankValuesObj[(rankCalc + 1) as RankLocaleOnlyNumberTypes] as BandRankingsVerbosedOptions,
-  song_key: <K extends NonNullable<SongKeyValues>, T extends NonNullable<SongTonalityValues>>(key: K, tonality: T): SongKeyLocaleReturnType<K, T> => {
-    // if (key === -1) return 'Not Specified' as SongKeyLocaleReturnType<K, T>
-    // else if (tonality === 0 || tonality === -1) return `${songKeyMajor[key]} Major` as SongKeyLocaleReturnType<K, T>
-    // else
-    return `${tonality === 0 ? songKeyMajor[key] : songKeyMinor[key]} ${songTonalityNames[tonality]}` as SongKeyLocaleReturnType<K, T>
+  song_key: (vocal_tonic_note: SongKeyValues, song_tonality: SongTonalityValues): SongKeyUpdateOptions['key'] => {
+    let returnString = ''
+    if (vocal_tonic_note === 0) returnString += 'C'
+    else if (vocal_tonic_note === 1) returnString += 'Db'
+    else if (vocal_tonic_note === 2) returnString += 'D'
+    else if (vocal_tonic_note === 3) returnString += 'Eb'
+    else if (vocal_tonic_note === 4) returnString += 'E'
+    else if (vocal_tonic_note === 5) returnString += 'F'
+    else if (vocal_tonic_note === 6) returnString += 'F#'
+    else if (vocal_tonic_note === 7) returnString += 'G'
+    else if (vocal_tonic_note === 8) returnString += 'Ab'
+    else if (vocal_tonic_note === 9) returnString += 'A'
+    else if (vocal_tonic_note === 10) returnString += 'Bb'
+    else returnString += 'B'
+
+    if (song_tonality === 1) returnString += 'm'
+
+    return returnString as SongKeyUpdateOptions['key']
   },
 }
-
-export type LocaleModuleObject = typeof Locale

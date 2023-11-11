@@ -1,11 +1,7 @@
 import fs from 'fs'
 import path from 'path'
-import DTAParser, { DTAFile } from '../../src'
-import { depackDTA } from '../../src/utils/depackDTA'
-import { getSongByID } from '../../src/utils/getSongByID'
-import { SongKeyUpdateOptions, UpdateDataOptions } from '../../src/utils/updateDTA'
-import { genTabs } from '../../src/utils/genTabs'
-import { readDTAFile } from './readDTAFile'
+import { depackDTA } from '../../src/lib/depack'
+import { SongKeyUpdateOptions } from '../../src/lib/update'
 
 type SongsUpdatesObject = {
   [key: string]: SongsUpdatesKeys
@@ -163,7 +159,10 @@ export const generateSongsUpdates = (): void => {
     const allKeys = Object.keys(allSongsUpdates[songname])
 
     const desiredSongKeys: ('vocal_parts' | 'vols' | 'hopo_threshold')[] = ['vocal_parts', 'vols', 'hopo_threshold']
-    const filteredObject = Object.fromEntries(Object.entries(allSongsUpdates[songname]).filter(([key]) => desiredSongKeys.includes(key as (typeof desiredSongKeys)[number]))) as Pick<SongsUpdatesKeys, (typeof desiredSongKeys)[number]>
+    const filteredObject = Object.fromEntries(Object.entries(allSongsUpdates[songname]).filter(([key]) => desiredSongKeys.includes(key as (typeof desiredSongKeys)[number]))) as Pick<
+      SongsUpdatesKeys,
+      (typeof desiredSongKeys)[number]
+    >
 
     newSongsUpdates += `(${songname}`
 
@@ -205,125 +204,4 @@ export const generateSongsUpdates = (): void => {
   fs.writeFileSync(path.resolve(__dirname, '../database/new_updates.dta'), newSongsUpdates, {
     encoding: 'utf-8',
   })
-}
-
-type SimplifiedVocalTonicNoteTypes = 'C' | 'Cm' | 'Db' | 'C#m' | 'D' | 'Dm' | 'Eb' | 'D#m' | 'E' | 'Em' | 'F' | 'Fm' | 'F#' | 'F#m' | 'G' | 'Gm' | 'Ab' | 'G#m' | 'A' | 'Am' | 'Bb' | 'A#m' | 'B' | 'Bm'
-
-type KeySignatureDataObject = {
-  [key in SimplifiedVocalTonicNoteTypes]: {
-    note: number
-    tonality: number
-    name: SongKeyUpdateOptions['key']
-  }
-}
-
-interface VocalTonicNotePatchObject {
-  [key: string]: SimplifiedVocalTonicNoteTypes | SimplifiedVocalTonicNoteTypes[]
-}
-
-/**
- * Generates a new Vocal Tonic Note Patch for MAGMA C3 customs and returns an update object compatible to
- * the DTAParser `update` method.
- * - - - -
- * @param {boolean} placeSongsInfo `OPTIONAL` If `true`, it will place the song name and charter lines on the generated `.dta` file.
- * @returns {Promise<SongKeyUpdateObject>} An update object compatible to the DTAParser `update` method.
- */
-export const generateVocalTonicNotePatch = async (
-  placeSongsInfo?: boolean
-): Promise<{
-  [id: string]: UpdateDataOptions
-}> => {
-  const keySignatureData: KeySignatureDataObject = {
-    A: { note: 9, tonality: 0, name: 'A Major' },
-    Am: { note: 9, tonality: 1, name: 'A Minor' },
-    'A#m': { note: 10, tonality: 1, name: 'A# Minor' },
-    Bb: { note: 10, tonality: 0, name: 'Bb Major' },
-    B: { note: 11, tonality: 0, name: 'B Major' },
-    Bm: { note: 11, tonality: 1, name: 'B Minor' },
-    C: { note: 0, tonality: 0, name: 'C Major' },
-    Cm: { note: 0, tonality: 1, name: 'C Minor' },
-    Db: { note: 1, tonality: 0, name: 'Db Major' },
-    'C#m': { note: 1, tonality: 1, name: 'C# Minor' },
-    D: { note: 2, tonality: 0, name: 'D Major' },
-    Dm: { note: 2, tonality: 1, name: 'D Minor' },
-    Eb: { note: 3, tonality: 0, name: 'Eb Major' },
-    'D#m': { note: 3, tonality: 1, name: 'D# Minor' },
-    E: { note: 4, tonality: 0, name: 'E Major' },
-    Em: { note: 4, tonality: 1, name: 'E Minor' },
-    F: { note: 5, tonality: 0, name: 'F Major' },
-    Fm: { note: 5, tonality: 1, name: 'F Minor' },
-    'F#': { note: 6, tonality: 0, name: 'F# Major' },
-    'F#m': { note: 6, tonality: 1, name: 'F# Minor' },
-    G: { note: 7, tonality: 0, name: 'G Major' },
-    Gm: { note: 7, tonality: 1, name: 'G Minor' },
-    Ab: { note: 8, tonality: 0, name: 'Ab Major' },
-    'G#m': { note: 8, tonality: 1, name: 'G# Minor' },
-  }
-  const contents = await readDTAFile(path.resolve('C:/Users/Ruggery/Desktop/Rock Band/Tools/RB3 Xbox360/C3/wip/dta_files'))
-
-  const allSongs = DTAParser(contents)
-
-  allSongs.forEach((song) => {
-    if (!(song.content.vocal_tonic_note !== undefined && song.content.song_tonality !== undefined)) {
-      console.log(song.content.id)
-      console.log(song.content.name, '     ', song.content.artist, '\n')
-    }
-  })
-
-  const patch: VocalTonicNotePatchObject = {
-    Indaclub: 'F#m',
-    UM_DYMKKEYSrb3con: 'A',
-    GimmeX3: 'Dm',
-    A_Hello_PVH: 'Fm',
-    BacktoBlack: 'Dm',
-    AW_LoveIsaLosingGame_V1_r: 'C',
-    YouKnowImNoGood: 'Dm',
-    crownoflove: 'Eb',
-    1649900159: 'Cm',
-    'neigh1v#': 'F',
-    'ArcadeFire-PowerOutv#_rb3': 'G',
-    kam_af_ncg2_CON: 'Db',
-    RebellionLiesv2: 'Bb',
-    'AF-Sprawl_2v#': 'Eb',
-    'ArcadeFire-TheSuburbs_rb3': 'D',
-    kam_af_wu2_CON: 'C',
-    BreakFree: 'Gm',
-    problem: 'G#m',
-    SheepQueen_DNA: 'C#m',
-    TheLazySong_PVH: 'B',
-  }
-
-  let newDTA = ''
-  const newUpdate: {
-    [id: string]: UpdateDataOptions
-  } = {}
-
-  const allSongsKeys = Object.keys(patch).sort((a, b) => {
-    if (a.toLowerCase() > b.toLowerCase()) return 1
-    else if (a.toLowerCase() < b.toLowerCase()) return -1
-    return 0
-  })
-
-  allSongsKeys.forEach((song) => {
-    const content = (getSongByID(allSongs, song) as DTAFile).content
-
-    if (placeSongsInfo) newDTA += `;${content.name}${genTabs(0)};Charted by ${content.author as string}\n`
-
-    newDTA += `(${song}${genTabs()}`
-
-    const key_signature = patch[song]
-
-    if (key_signature && typeof key_signature === 'string') {
-      const { name, note, tonality } = keySignatureData[key_signature]
-
-      newDTA += `(vocal_tonic_note ${note})${genTabs()}(song_tonality ${tonality})`
-      newUpdate[song] = { key: { key: name } }
-    }
-
-    newDTA += `)${placeSongsInfo ? `${genTabs(0)}${genTabs(0)}` : `${genTabs(0)}`}`
-  })
-
-  await fs.promises.writeFile(path.resolve('./backend/gen/vocal_tonic_note_upgrades.dta'), newDTA, 'utf-8')
-
-  return newUpdate
 }

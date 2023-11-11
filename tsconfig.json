@@ -92,6 +92,6 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     // "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
-  "include": ["src/**/*.ts", "backend/**/*.ts", "testing/index.ts", "testing/node.env.ts"],
+  "include": ["src/**/*.ts", "backend/**/*.ts", "testing/**/*.ts"],
   "exclude": ["node_modules/"]
 }

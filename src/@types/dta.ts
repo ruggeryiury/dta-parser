@@ -1,50 +1,4 @@
-import { GetDataValueTypes, GetDataValueOptions, GetDataValueReturn } from '../utils/getDTA'
-import { StringifyDataOptions } from '../utils/stringifyDTA'
-import { UpdateDataOptions } from '../utils/updateDTA'
-import { VocalPartsTypes, BankTypes, DrumBankTypes, BandFailCueTypes, SongScrollSpeedTypes, RatingTypes, GenreTypes, SubGenreTypes, VocalGenderTypes, AnimTempoNumeralTypes } from '../utils/locale'
-
-/**
- * A complex parsed song object. It includes several internal methods to fetch, update, and stringify all information.
- */
-export interface DTAFile extends DTAFileMethods {
-  /**
-   * An object containing all parsed information about the song.
-   */
-  content: DTAFileContents
-}
-
-export interface DTAFileMethods {
-  /**
-   * Retrieves a specific value from the song.
-   * - - - -
-   * @param {V extends GetDataValueTypes} value The specific information you want to retrieve.
-   * @param {O extends GetDataValueOptions<V>} options `OPTIONAL` Customization options for the retrieval process.
-   * @returns {GetDataValueReturn<V, O>} The requested specific information.
-   */
-  get<V extends GetDataValueTypes, O extends GetDataValueOptions<V>>(value: V, options?: O): GetDataValueReturn<V, O>
-  /**
-   * Converts this song back to `.dta` file contents string.
-   * - - - -
-   * @param {StringifyDataOptions} options `OPTIONAL` Customization options for the stringifying process. If an object
-   * is not passed as argument at all, it will use default configurations to generate MAGMA C3's `.dta` file contents type.
-   *
-   * Only some values can be customized on the default option for maximum compatibility with other `.dta` file parsers.
-   * @returns {string} A string representation of this parsed song object as a `.dta` file contents string.
-   */
-  stringify(options?: StringifyDataOptions): string
-  /**
-   * Updates this song with the provided update options.
-   * - - - -
-   * @param {UpdateDataOptions} options The options for the song updating process.
-   */
-  update(options: UpdateDataOptions): void
-  /**
-   * Returns a JSON object representation of a parsed song.
-   * - - - -
-   * @returns A JSON object representation of a parsed song.
-   */
-  json(): DTAFileContents
-}
+import { VocalPartsTypes, BankTypes, DrumBankTypes, BandFailCueTypes, SongScrollSpeedTypes, RatingTypes, GenreTypes, SubGenreTypes, VocalGenderTypes, AnimTempoNumeralTypes } from '../lib/locale'
 
 export type SoloFlags = 'drum' | 'bass' | 'guitar' | 'keys' | 'vocal_percussion'
 
@@ -55,6 +9,9 @@ export type ExtraAuthoringFlags = 'disc_update' | 'pearljam' | 'greenday'
 
 export type EncodingValues = 'latin1' | 'utf8'
 
+/**
+ * A parsed song object with all its contents.
+ */
 export interface DTAFileContents {
   /**
    * Unique string ID of the song.
@@ -290,13 +247,6 @@ export interface DTAFileContents {
 export type DTAFileContentsKeys = keyof DTAFileContents
 
 /**
- * Generic type for custom `DTAFile` type.
- */
-export interface ExtDTAFile<T> extends DTAFile {
-  content: DTAFileContents & Partial<T>
-  json: () => DTAFileContents & Partial<T>
-}
-/**
  * Generic type for custom `DTAFileContents` type.
  */
-export type ExtDTAFileContents<T> = DTAFileContents & T
+export type ExpandedDTAFileContents<T> = DTAFileContents & T

@@ -10,12 +10,17 @@ export const genSongIDList = async () => {
   mySongs.forEach((song) => {
     const id = Number(song.song_id.toString().slice(-4))
     while (index < id) {
-      contents += `${index.toString().padStart(3, '0')}\n`
+      contents += `${index.toString().padStart(3, '0')} ------\n`
       index++
     }
-    contents += `${id.toString().padStart(3, '0')} ${song.id.slice(4)}\n`
-    index++
+    if (song.fake) {
+      contents += `${id.toString().padStart(3, '0')} ${song.id.slice(4)} (fake)\n`
+      index++
+    } else {
+      contents += `${id.toString().padStart(3, '0')} ${song.id.slice(4)}\n`
+      index++
+    }
   })
 
-  await fs.promises.writeFile(path.resolve(`./backend/gen/id.dta`), contents, 'utf-8')
+  await fs.promises.writeFile(path.resolve(`./backend/gen/id.dta`), contents)
 }

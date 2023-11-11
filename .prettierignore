@@ -1,4 +1,12 @@
+./lib/
 dist/
-lib/
 module/
 node_modules/
+.eslintrc.js
+.prettierrc.js
+CHANGELOG.md
+README.md
+package.json
+prod.tsconfig.json
+tsconfig.json
+webpack.config.js

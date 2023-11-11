@@ -8,11 +8,11 @@ testing/
 .prettierignore
 .prettierrc.js
 prod.tsconfig.json
-REFACTORING.md
-TO-DO.md
 tsconfig.json
 webpack.config.js
 yarn*
 *.tgz
 *.txt
 *.env
+*.rar
+*.zip

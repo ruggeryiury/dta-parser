@@ -1,55 +1,79 @@
 import path from 'path'
 import fs from 'fs'
-import { DTAArray, DTAFile, DTAFileContents } from '../../src'
-import { JSONtoDTA } from '../../src/utils/JSONtoDTA'
+import { MAGMAProject } from '../@types/magma'
+import { MySongsModule } from '../core/mySongs'
+import { StringifyDataOptions, stringifyDTA } from '../../src/lib/stringify'
+import { DTAFileContents } from '../../src'
+import { sortDTA } from '../../src/lib/sort'
 
-interface SongsGeneratorOptions {
+export type EncodingTypes = 'utf8' | 'latin1'
+
+export interface SongsGeneratorOptions {
   /**
    * Default is `false`.
    */
-  createFakeSongsUpgrades?: boolean
+  createFakeSongsUpgrades?: true
+  /**
+   * Fake songs will be ignored from the generated DTA file.
+   *
+   * Default is `true`.
+   */
+  dontIgnoreFakeSongs?: true
+  /**
+   * Forces DTA file encoding.
+   *
+   * Default is `utf8`.
+   */
+  encoding?: EncodingTypes
+  /**
+   * Default is `default`.
+   */
+  type?: StringifyDataOptions['type']
 }
 
 /**
  * Asynchronously generates a `gen.dta` file inside `backend/gen` folder.
  * - - - -
- * @param {DTAFile[] | DTAFileContents[]} songs An array with parsed songs.
+ * @param {MAGMAProject[]} songs An array with parsed songs.
  * @param {SongsGeneratorOptions} options `OPTIONAL` Customize options for the DTA file generator.
  */
-export const genSongsDTAFile = async (songs: DTAFile[] | DTAFileContents[], options?: SongsGeneratorOptions): Promise<void> => {
-  const databaseSongs: DTAFile[] = []
-  let ids = ''
-  let idIndex = 1
+export const genSongsDTAFile = async (songs: MAGMAProject | MAGMAProject[] | MySongsModule, options?: SongsGeneratorOptions | EncodingTypes): Promise<void> => {
+  const databaseSongs: DTAFileContents[] = []
 
-  songs.forEach((song) => {
-    if ('content' in song) {
-      databaseSongs.push(song)
-    } else {
-      databaseSongs.push(JSONtoDTA(song)[0])
+  let opts: SongsGeneratorOptions = {}
+
+  if (typeof options === 'string') opts.encoding = options
+  else opts = options ? options : {}
+
+  if (Array.isArray(songs)) {
+    songs.forEach((song) => {
+      if (song.fake === true && !opts?.dontIgnoreFakeSongs) {
+        // Do nothing
+      } else databaseSongs.push(song)
+    })
+
+    if (options) {
+      // Do something
     }
-  })
+  } else if ('id' in songs) {
+    databaseSongs.push(songs)
+  } else {
+    Object.keys(songs).forEach((songname) => {
+      const song = songs[songname as keyof MySongsModule]
+      if (song.fake === true && !opts?.dontIgnoreFakeSongs) {
+        // Do nothing
+      } else databaseSongs.push(song)
 
-  databaseSongs.forEach((song) => {
-    const songID = Number(song.content.song_id.toString().slice(-3))
-    const songIDPadding = Number(song.content.song_id.toString().slice(-3)).toString().padStart(3, '0')
-    const id = song.content.id.slice(4)
-    while (idIndex !== songID) {
-      ids += `${idIndex.toString().padStart(3, '0')} ----\n`
-      idIndex++
-    }
-    ids += `${songIDPadding} ${id}\n`
-    idIndex++
-  })
-
-  if (options) {
-    // Do something
+      if (options) {
+        // Do something
+      }
+    })
   }
 
-  const songsContents = DTAArray.stringify(DTAArray.sort(databaseSongs, 'song_id'), {
-    type: 'rb3_dlc',
+  const songsContents = stringifyDTA(sortDTA(databaseSongs, 'song_id'), {
+    type: opts.type ? opts.type : 'default',
     placeCustomAttributes: true,
     guitarCores: true,
   })
-  await fs.promises.writeFile(path.resolve('./backend/gen/songs.dta'), songsContents, 'utf-8')
-  await fs.promises.writeFile(path.resolve('./backend/gen/id.dta'), ids, 'utf-8')
+  await fs.promises.writeFile(path.resolve('./backend/gen/songs.dta'), songsContents, opts.encoding || 'utf8')
 }

@@ -1,10 +1,9 @@
 node_modules/
-testing/
 backend/gen
 dist/
-lib/
+./lib/
 module/
-
+testing/
 *.tgz
-REFACTORING.md
-TO-DO.md
+*.rar
+*.zip

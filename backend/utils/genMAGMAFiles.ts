@@ -1,10 +1,10 @@
 import fs from 'fs'
 import path from 'path'
-import { genTabs as t } from '../../src/utils/genTabs'
+import { genTabs as t } from '../../src/utils/stringProcessors'
 import { rankCalculator as r } from '../../src/utils/rankCalculations'
-import { panVolInfoGen } from '../../src/utils/panVolInfoGen'
-import { SubGenreTypes } from '../../src/utils/locale'
-import { MAGMAFileContents } from '../@types/MAGMAFileContents'
+import { panVolInfoGen } from '../../src/utils/pansAndVols'
+import { SubGenreTypes } from '../../src/lib/locale'
+import { MAGMAProject } from '../@types/magma'
 
 export interface MAGMAFilesGeneratorOptions {
   /**
@@ -17,7 +17,7 @@ export interface MAGMAFilesGeneratorOptions {
   customSaveOnDesktop?: boolean
 }
 
-export const genMAGMAFiles = async (song: MAGMAFileContents, options?: MAGMAFilesGeneratorOptions): Promise<void> => {
+export const genMAGMAFiles = async (song: MAGMAProject, options?: MAGMAFilesGeneratorOptions): Promise<void> => {
   const RBPROJFilePath = path.resolve(`./backend/gen/${song.id}.rbproj`)
 
   const C3FilePath = path.resolve(`./backend/gen/${song.id}.c3`)
@@ -29,27 +29,117 @@ export const genMAGMAFiles = async (song: MAGMAFileContents, options?: MAGMAFile
 
   const RBAPath = path.resolve(`./backend/gen/${song.id}.rba`)
 
-  const MIDIFilePath = `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\${song.id}.mid`
+  const MIDIFilePath = `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\${
+    song.id
+  }.mid`
 
-  const DV0Path = song.hasLipSyncFiles ? (song.vocal_parts > 0 ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\magma\\\\HARM1.wav` : '') : song.vocal_parts > 0 ? DryVox : ''
+  const DV0Path = song.hasLipSyncFiles
+    ? song.vocal_parts > 0
+      ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\magma\\\\HARM1.wav`
+      : ''
+    : song.vocal_parts > 0
+    ? DryVox
+    : ''
 
-  const DV1Path = song.hasLipSyncFiles ? (song.vocal_parts > 1 ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\magma\\\\HARM2.wav` : '') : song.vocal_parts > 1 ? DryVox : ''
+  const DV1Path = song.hasLipSyncFiles
+    ? song.fakeHarm === 2 || song.fakeHarm === 3
+      ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\magma\\\\HARM2.wav`
+      : song.vocal_parts > 1
+      ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\magma\\\\HARM2.wav`
+      : ''
+    : song.vocal_parts > 1
+    ? DryVox
+    : ''
 
-  const DV2Path = song.hasLipSyncFiles ? (song.vocal_parts > 2 ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\magma\\\\HARM3.wav` : '') : song.vocal_parts > 2 ? DryVox : ''
+  const DV2Path = song.hasLipSyncFiles
+    ? song.fakeHarm === 3
+      ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\magma\\\\HARM3.wav`
+      : song.vocal_parts > 2
+      ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\magma\\\\HARM3.wav`
+      : ''
+    : song.vocal_parts > 2
+    ? DryVox
+    : ''
 
-  const AlbumArtPath = song.album_art ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\magma\\\\${song.id}_keep_x256.bmp` : ''
+  const AlbumArtPath = song.album_art
+    ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\magma\\\\${
+        song.id
+      }_keep_x256.bmp`
+    : ''
 
-  const KickWavPath = song.multitrack ? (song.tracks_count[0] > 2 ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\wav\\\\${song.doubleKickOptions?.kickwav ? 'kick2x.wav' : 'kick.wav'}` : '') : song.tracks_count[0] > 2 ? MonoBlank : song.tracks_count[0] > 5 ? StereoBlank : ''
+  const KickWavPath = song.multitrack
+    ? song.tracks_count[0] > 2
+      ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\wav\\\\${
+          song.doubleKickOptions?.kickwav ? 'kick2x.wav' : 'kick.wav'
+        }`
+      : ''
+    : song.tracks_count[0] > 2
+    ? MonoBlank
+    : song.tracks_count[0] > 5
+    ? StereoBlank
+    : ''
 
-  const SnareWavPath = song.multitrack ? (song.tracks_count[0] > 3 ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\wav\\\\snare.wav` : '') : song.tracks_count[0] > 3 ? MonoBlank : song.tracks_count[0] > 4 ? StereoBlank : ''
+  const SnareWavPath = song.multitrack
+    ? song.tracks_count[0] > 3
+      ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\wav\\\\snare.wav`
+      : ''
+    : song.tracks_count[0] > 3
+    ? MonoBlank
+    : song.tracks_count[0] > 4
+    ? StereoBlank
+    : ''
 
-  const DrumKitWavPath = song.multitrack ? (song.tracks_count[0] === 2 ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\wav\\\\${song.doubleKickOptions?.kickwav ? 'drums2x.wav' : 'drums.wav'}` : song.tracks_count[0] > 2 ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\wav\\\\kit.wav` : '') : song.tracks_count[0] > 0 ? StereoBlank : ''
+  const DrumKitWavPath = song.multitrack
+    ? song.tracks_count[0] === 2
+      ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\wav\\\\${
+          song.doubleKickOptions?.kickwav ? 'drums2x.wav' : 'drums.wav'
+        }`
+      : song.tracks_count[0] > 2
+      ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\wav\\\\kit.wav`
+      : ''
+    : song.tracks_count[0] > 0
+    ? StereoBlank
+    : ''
 
-  const BassWavPath = song.multitrack ? (song.tracks_count[1] !== 0 ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\wav\\\\bass.wav` : '') : song.tracks_count[1] === 1 ? MonoBlank : song.tracks_count[1] === 2 ? StereoBlank : ''
-  const GuitarWavPath = song.multitrack ? (song.tracks_count[2] !== 0 ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\wav\\\\guitar.wav` : '') : song.tracks_count[2] === 1 ? MonoBlank : song.tracks_count[2] === 2 ? StereoBlank : ''
-  const VocalsWavPath = song.multitrack ? (song.tracks_count[3] !== 0 ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\wav\\\\vocals.wav` : '') : song.tracks_count[3] === 1 ? MonoBlank : song.tracks_count[3] === 2 ? StereoBlank : ''
-  const KeysWavPath = song.multitrack ? (song.tracks_count[4] !== 0 ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\wav\\\\keys.wav` : '') : song.tracks_count[4] === 1 ? MonoBlank : song.tracks_count[4] === 2 ? StereoBlank : ''
-  const BackingWavPath = `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\wav\\\\backing.wav`
+  const BassWavPath = song.multitrack
+    ? song.tracks_count[1] !== 0
+      ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\wav\\\\bass.wav`
+      : ''
+    : song.tracks_count[1] === 1
+    ? MonoBlank
+    : song.tracks_count[1] === 2
+    ? StereoBlank
+    : ''
+  const GuitarWavPath = song.multitrack
+    ? song.tracks_count[2] !== 0
+      ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\wav\\\\guitar.wav`
+      : ''
+    : song.tracks_count[2] === 1
+    ? MonoBlank
+    : song.tracks_count[2] === 2
+    ? StereoBlank
+    : ''
+  const VocalsWavPath = song.multitrack
+    ? song.tracks_count[3] !== 0
+      ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\wav\\\\vocals.wav`
+      : ''
+    : song.tracks_count[3] === 1
+    ? MonoBlank
+    : song.tracks_count[3] === 2
+    ? StereoBlank
+    : ''
+  const KeysWavPath = song.multitrack
+    ? song.tracks_count[4] !== 0
+      ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\wav\\\\keys.wav`
+      : ''
+    : song.tracks_count[4] === 1
+    ? MonoBlank
+    : song.tracks_count[4] === 2
+    ? StereoBlank
+    : ''
+  const BackingWavPath = `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${
+    song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)
+  }\\\\wav\\\\backing.wav`
 
   output += `(`
   output += `${t(1, 'start')}'project'`
@@ -119,7 +209,7 @@ export const genMAGMAFiles = async (song: MAGMAFileContents, options?: MAGMAFile
   output += `${t(2, 'start')}('anim_tempo' ${song.anim_tempo})`
   output += `${t(2, 'start')}('vocal_gender' ${song.vocal_gender})`
   output += `${t(2, 'start')}('vocal_percussion' '${song.bank.slice(4, -10)}')`
-  output += `${t(2, 'start')}('vocal_parts' ${song.vocal_parts})`
+  output += `${t(2, 'start')}('vocal_parts' ${song.fakeHarm ? song.fakeHarm : song.vocal_parts})`
   output += `${t(2, 'start')}('guide_pitch_volume' ${song.guide_pitch_volume ? song.guide_pitch_volume.toFixed(2) : '-3.00'})`
 
   output += `${t(1, 'start')})`
@@ -168,7 +258,7 @@ export const genMAGMAFiles = async (song: MAGMAFileContents, options?: MAGMAFile
   output += `${t(4, 'start')}'file'`
   output += `${t(4, 'start')}"${DV1Path}"`
   output += `${t(3, 'start')})`
-  output += `${t(3, 'start')}('enabled' ${song.vocal_parts > 1 ? 1 : 0})`
+  output += `${t(3, 'start')}('enabled' ${song.fakeHarm === 2 || song.fakeHarm === 3 ? 1 : song.vocal_parts > 1 ? 1 : 0})`
   output += `${t(2, 'start')})`
 
   output += `${t(2, 'start')}(`
@@ -177,7 +267,7 @@ export const genMAGMAFiles = async (song: MAGMAFileContents, options?: MAGMAFile
   output += `${t(4, 'start')}'file'`
   output += `${t(4, 'start')}"${DV2Path}"`
   output += `${t(3, 'start')})`
-  output += `${t(3, 'start')}('enabled' ${song.vocal_parts > 2 ? 1 : 0})`
+  output += `${t(3, 'start')}('enabled' ${song.fakeHarm === 3 ? 1 : song.vocal_parts > 2 ? 1 : 0})`
   output += `${t(2, 'start')})`
   output += `${t(2, 'start')}('tuning_offset_cents' ${song.tuning_offset_cents ? song.tuning_offset_cents.toFixed(2) : '0.00'})`
   output += `${t(1, 'start')})`
@@ -194,7 +284,9 @@ export const genMAGMAFiles = async (song: MAGMAFileContents, options?: MAGMAFile
 
   output += `${t(1, 'start')}(`
   output += `${t(2, 'start')}'tracks'`
-  output += `${t(2, 'start')}('drum_layout' '${panvol.drum.channels === 0 || panvol.drum.channels === 2 ? 'drum_layout_kit' : panvol.drum.channels === 3 ? 'drum_layout_kit_kick' : 'drum_layout_kit_kick_snare'}')`
+  output += `${t(2, 'start')}('drum_layout' '${
+    panvol.drum.channels === 0 || panvol.drum.channels === 2 ? 'drum_layout_kit' : panvol.drum.channels === 3 ? 'drum_layout_kit_kick' : 'drum_layout_kit_kick_snare'
+  }')`
 
   output += `${t(2, 'start')}(`
   output += `${t(3, 'start')}'drum_kit'`
@@ -294,9 +386,13 @@ export const genMAGMAFiles = async (song: MAGMAFileContents, options?: MAGMAFile
   output += `${t(1, 'start')})`
   output += `${t(0, 'start')})`
 
-  await fs.promises.writeFile(RBPROJFilePath, output, 'utf-8')
-
-  let c3out = `\\\\Created by Magma: C3 Roks Edition v3.3.5\n\\\\DO NOT EDIT MANUALLY\nSong=${song.name}\nArtist=${song.artist}\nAlbum=${song.album_name ? song.album_name : ''}\nCustomID=\nVersion=${options?.useLatestVersion === false ? 1 : song.releaseVer ? song.releaseVer : 1}\nIsMaster=${song.master ? 'True' : 'False'}\nEncodingQuality=7\n${song.year_recorded ? `ReRecordYear=${song.year_recorded}` : ''}2xBass=${song.doubleKick ? 'True' : 'False'}\nRhythmKeys=${song.rhythmOnKeys ? 'True' : 'False'}\nRhythmBass=${song.rhythmOnBass ? 'True' : 'False'}\nKaraoke=${song.karaoke ? 'True' : 'False'}\nMultitrack=${song.multitrack ? 'True' : 'False'}\nConvert=${song.convert ? 'True' : 'False'}\nExpertOnly=${song.expertOnly ? 'True' : 'False'}\n`
+  let c3out = `\\\\Created by Magma: C3 Roks Edition v3.3.5\n\\\\DO NOT EDIT MANUALLY\nSong=${song.name}\nArtist=${song.artist}\nAlbum=${song.album_name ? song.album_name : ''}\nCustomID=\nVersion=${
+    options?.useLatestVersion === false ? 1 : song.releaseVer ? song.releaseVer : 1
+  }\nIsMaster=${song.master ? 'True' : 'False'}\nEncodingQuality=7\n${song.year_recorded ? `ReRecordYear=${song.year_recorded}` : ''}2xBass=${song.doubleKick ? 'True' : 'False'}\nRhythmKeys=${
+    song.rhythmOnKeys ? 'True' : 'False'
+  }\nRhythmBass=${song.rhythmOnBass ? 'True' : 'False'}\nKaraoke=${song.karaoke ? 'True' : 'False'}\nMultitrack=${song.multitrack ? 'True' : 'False'}\nConvert=${
+    song.convert ? 'True' : 'False'
+  }\nExpertOnly=${song.expertOnly ? 'True' : 'False'}\n`
 
   if (song.rank_real_bass && song.real_bass_tuning) {
     c3out += `ProBassDiff=${song.rank_real_bass}\nProBassTuning4=(real_bass_tuning (${song.real_bass_tuning.join(' ')}))\n`
@@ -306,7 +402,11 @@ export const genMAGMAFiles = async (song: MAGMAFileContents, options?: MAGMAFile
     c3out += `ProGuitarDiff=${song.rank_real_guitar}\nProGuitarTuning=(real_guitar_tuning (${song.real_guitar_tuning.join(' ')}))\n`
   }
 
-  c3out += `DisableProKeys=False\nTonicNote=${song.vocal_tonic_note ? song.vocal_tonic_note : '0'}\nTuningCents=${song.tuning_offset_cents ? song.tuning_offset_cents : '0'}\nSongRating=${song.rating}\nDrumKitSFX=${song.drum_bank === 'sfx/kit01_bank.milo' ? 0 : song.drum_bank === 'sfx/kit02_bank.milo' ? 1 : song.drum_bank === 'sfx/kit03_bank.milo' ? 2 : song.drum_bank === 'sfx/kit04_bank.milo' ? 3 : 4}\nHopoTresholdIndex=${song.hopo_threshold === 90 ? 0 : song.hopo_threshold === 130 ? 1 : song.hopo_threshold === 170 ? 2 : song.hopo_threshold === 250 ? 3 : 2}\n`
+  c3out += `DisableProKeys=False\nTonicNote=${song.vocal_tonic_note ? song.vocal_tonic_note : '0'}\nTuningCents=${song.tuning_offset_cents ? song.tuning_offset_cents : '0'}\nSongRating=${
+    song.rating
+  }\nDrumKitSFX=${
+    song.drum_bank === 'sfx/kit01_bank.milo' ? 0 : song.drum_bank === 'sfx/kit02_bank.milo' ? 1 : song.drum_bank === 'sfx/kit03_bank.milo' ? 2 : song.drum_bank === 'sfx/kit04_bank.milo' ? 3 : 4
+  }\nHopoTresholdIndex=${song.hopo_threshold === 90 ? 0 : song.hopo_threshold === 130 ? 1 : song.hopo_threshold === 170 ? 2 : song.hopo_threshold === 250 ? 3 : 2}\n`
 
   const drumSolo = song.solo && song.solo.find((flags) => flags === 'drum') ? 'True' : 'False'
   const guitarSolo = song.solo && song.solo.find((flags) => flags === 'guitar') ? 'True' : 'False'
@@ -314,7 +414,18 @@ export const genMAGMAFiles = async (song: MAGMAFileContents, options?: MAGMAFile
   const keysSolo = song.solo && song.solo.find((flags) => flags === 'keys') ? 'True' : 'False'
   const vocalsSolo = song.solo && song.solo.find((flags) => flags === 'vocal_percussion') ? 'True' : 'False'
 
-  c3out += `MuteVol=${song.mute_volume ? song.mute_volume : -96}\nVocalMuteVol=${song.mute_volume_vocals ? song.mute_volume_vocals : -12}\nSoloDrums=${drumSolo}\nSoloGuitar=${guitarSolo}\nSoloBass=${bassSolo}\nSoloKeys=${keysSolo}\nSoloVocals=${vocalsSolo}\nSongPreview=${song.preview[0]}\nCheckTempoMap=True\nWiiMode=False\nDoDrumMixEvents=True\nPackageDisplay=${song.artist} - ${song.name}\nPackageDescription=Created with Magma: C3 Roks Edition. For more great customs authoring tools, visit forums.customscreators.com\nSongAlbumArt=c:\\users\\ruggery\\documents\\visual studio code\\projects\\ruggy-customs-projects\\songs\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\magma\\${song.id}_keep.png\nPackageThumb=\n${song.encoding === 'utf8' ? 'EncodeANSI=False\nEncodeUTF8=True' : 'EncodeANSI=True\nEncodeUTF8=False'}\nUseNumericID=True\nUniqueNumericID=${song.song_id}\nUniqueNumericID2X=\n\nTO DO List Begin\nToDo1=Verify the accuracy of all metadata,False,False\nToDo2=Grab official *.png_xbox art file if applicable,False,False\nToDo3=Chart reductions in all instruments,False,False\nToDo4=Add drum fills,False,False\nToDo5=Add overdrive for all instruments,False,False\nToDo6=Add overdrive for vocals,False,False\nToDo7=Create practice sessions [EVENTS],False,False\nToDo8=Draw sing-along notes in VENUE,False,False\nToDo9=Record dry vocals for lipsync,False,False\nToDo10=Render audio with RB limiter and count-in,False,False\nToDo12=Click to add new item...,False,False\nToDo13=Click to add new item...,False,False\nToDo14=Click to add new item...,False,False\nToDo15=Click to add new item...,False,False\nTO DO List End\n`
+  c3out += `MuteVol=${song.mute_volume ? song.mute_volume : -96}\nVocalMuteVol=${
+    song.mute_volume_vocals ? song.mute_volume_vocals : -12
+  }\nSoloDrums=${drumSolo}\nSoloGuitar=${guitarSolo}\nSoloBass=${bassSolo}\nSoloKeys=${keysSolo}\nSoloVocals=${vocalsSolo}\nSongPreview=${
+    song.preview[0]
+  }\nCheckTempoMap=True\nWiiMode=False\nDoDrumMixEvents=True\nPackageDisplay=${song.artist} - ${
+    song.name
+  }\nPackageDescription=Created with Magma: C3 Roks Edition. For more great customs authoring tools, visit forums.customscreators.com\nSongAlbumArt=c:\\users\\ruggery\\documents\\visual studio code\\projects\\ruggy-customs-projects\\songs\\${
+    song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)
+  }\\magma\\${song.id}_keep.png\nPackageThumb=\n${song.encoding === 'utf8' ? 'EncodeANSI=False\nEncodeUTF8=True' : 'EncodeANSI=True\nEncodeUTF8=False'}\nUseNumericID=True\nUniqueNumericID=${
+    song.song_id
+  }\nUniqueNumericID2X=\n\nTO DO List Begin\nToDo1=Verify the accuracy of all metadata,False,False\nToDo2=Grab official *.png_xbox art file if applicable,False,False\nToDo3=Chart reductions in all instruments,False,False\nToDo4=Add drum fills,False,False\nToDo5=Add overdrive for all instruments,False,False\nToDo6=Add overdrive for vocals,False,False\nToDo7=Create practice sessions [EVENTS],False,False\nToDo8=Draw sing-along notes in VENUE,False,False\nToDo9=Record dry vocals for lipsync,False,False\nToDo10=Render audio with RB limiter and count-in,False,False\nToDo12=Click to add new item...,False,False\nToDo13=Click to add new item...,False,False\nToDo14=Click to add new item...,False,False\nToDo15=Click to add new item...,False,False\nTO DO List End\n`
 
-  await fs.promises.writeFile(C3FilePath, c3out, 'utf-8')
+  await fs.promises.writeFile(RBPROJFilePath, output, 'ascii')
+  await fs.promises.writeFile(C3FilePath, c3out, 'ascii')
 }
