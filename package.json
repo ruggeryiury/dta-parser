@@ -22,7 +22,7 @@
     "lint": "eslint src/**/*.{ts,js}",
     "lint:backend": "eslint backend",
     "package:create": "yarn build && yarn pack",
-    "start": "nodemon ./testing/init.ts",
+    "start": "nodemon ./backend/testing/init.ts",
     "format": "prettier --write ."
   },
   "exports": {

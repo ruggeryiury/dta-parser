@@ -1,5 +1,5 @@
 import cloneDeep from 'lodash/cloneDeep'
-import { DTAFileContents } from '../@types/dta'
+import { DTAFileContents, DTAFileContentsKeys } from '../@types/dta'
 import { updateDTA, UpdateDataOptions, TrackUpdateOptions, GenreUpdateOptionsTypes } from './update'
 
 const dtaDefault: DTAFileContents = {
@@ -26,6 +26,16 @@ const dtaDefault: DTAFileContents = {
   year_released: new Date().getFullYear(),
   album_art: false,
   album_name: '',
+}
+
+export const clearDTA = (dta: DTAFileContents): Partial<DTAFileContents> => {
+  const song: ReturnType<typeof clearDTA> = dta
+  const allKeys = Object.keys(song) as DTAFileContentsKeys[]
+  allKeys.forEach((key) => {
+    if (song[key] === dtaDefault[key]) delete song[key]
+  })
+
+  return song
 }
 
 export interface CreateDTAFileRecipe extends UpdateDataOptions {

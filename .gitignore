@@ -1,9 +1,9 @@
 node_modules/
 backend/gen
+backend/testing
 dist/
 ./lib/
 module/
-testing/
 *.tgz
 *.rar
 *.zip

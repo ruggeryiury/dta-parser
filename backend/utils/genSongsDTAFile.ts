@@ -1,53 +1,45 @@
 import path from 'path'
 import fs from 'fs'
 import { MAGMAProject } from '../@types/magma'
-import { MySongsModule } from '../core/mySongs'
 import { StringifyDataOptions, stringifyDTA } from '../../src/lib/stringify'
 import { DTAFileContents } from '../../src'
 import { sortDTA } from '../../src/lib/sort'
+import { MySongsID, MySongsModule } from '../core/mySongs'
 
-export type EncodingTypes = 'utf8' | 'latin1'
+export type DTAFileEncodingTypes = 'utf8' | 'latin1' | 'ascii'
 
-export interface SongsGeneratorOptions {
-  /**
-   * Default is `false`.
-   */
-  createFakeSongsUpgrades?: true
-  /**
-   * Fake songs will be ignored from the generated DTA file.
-   *
-   * Default is `true`.
-   */
-  dontIgnoreFakeSongs?: true
+export interface SongsGeneratorOptions extends StringifyDataOptions {
   /**
    * Forces DTA file encoding.
    *
    * Default is `utf8`.
    */
-  encoding?: EncodingTypes
+  encoding?: DTAFileEncodingTypes
   /**
-   * Default is `default`.
+   * If `true`, fake songs will be ignored from the generated DTA file.
+   *
+   * Default is `false`.
    */
-  type?: StringifyDataOptions['type']
+  ignoreFakeSongs?: boolean
 }
 
 /**
  * Asynchronously generates a `gen.dta` file inside `backend/gen` folder.
  * - - - -
- * @param {MAGMAProject[]} songs An array with parsed songs.
- * @param {SongsGeneratorOptions} options `OPTIONAL` Customize options for the DTA file generator.
+ * @param {MAGMAProject | MAGMAProject[] | MySongsModule} songs An array with parsed songs.
+ * @param {SongsGeneratorOptions | DTAFileEncodingTypes} options `OPTIONAL` Customize options for the DTA file generator.
  */
-export const genSongsDTAFile = async (songs: MAGMAProject | MAGMAProject[] | MySongsModule, options?: SongsGeneratorOptions | EncodingTypes): Promise<void> => {
+export const genSongsDTAFile = async (songs: MAGMAProject | MAGMAProject[] | MySongsModule, options?: SongsGeneratorOptions | DTAFileEncodingTypes): Promise<void> => {
   const databaseSongs: DTAFileContents[] = []
 
   let opts: SongsGeneratorOptions = {}
 
   if (typeof options === 'string') opts.encoding = options
-  else opts = options ? options : {}
+  else opts = options || {}
 
   if (Array.isArray(songs)) {
     songs.forEach((song) => {
-      if (song.fake === true && !opts?.dontIgnoreFakeSongs) {
+      if (opts?.ignoreFakeSongs && song.fake === true) {
         // Do nothing
       } else databaseSongs.push(song)
     })
@@ -59,8 +51,8 @@ export const genSongsDTAFile = async (songs: MAGMAProject | MAGMAProject[] | MyS
     databaseSongs.push(songs)
   } else {
     Object.keys(songs).forEach((songname) => {
-      const song = songs[songname as keyof MySongsModule]
-      if (song.fake === true && !opts?.dontIgnoreFakeSongs) {
+      const song = songs[songname as MySongsID]
+      if (opts?.ignoreFakeSongs && song.fake === true) {
         // Do nothing
       } else databaseSongs.push(song)
 
@@ -71,9 +63,12 @@ export const genSongsDTAFile = async (songs: MAGMAProject | MAGMAProject[] | MyS
   }
 
   const songsContents = stringifyDTA(sortDTA(databaseSongs, 'song_id'), {
-    type: opts.type ? opts.type : 'default',
-    placeCustomAttributes: true,
-    guitarCores: true,
+    type: opts.type || 'rb3_dlc',
+    placeCustomAttributes: opts.placeCustomAttributes || true,
+    guitarCores: opts.guitarCores || false,
+    omitUnusedRanks: opts.omitUnusedRanks || false,
+    useSpaces: opts.useSpaces || false,
+    wiiMode: opts.wiiMode,
   })
   await fs.promises.writeFile(path.resolve('./backend/gen/songs.dta'), songsContents, opts.encoding || 'utf8')
 }

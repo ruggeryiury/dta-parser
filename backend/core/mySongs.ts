@@ -3,6 +3,54 @@ import { CreateDTAFileRecipe } from '../../src/lib/create'
 import { MAGMAProject } from '../@types/magma'
 import { fullfillDTA } from '../utils/fullfillDTA'
 
+// All songs
+import anysecondnow from '../database/anysecondnow'
+import aracaazul from '../database/aracaazul'
+import beinfriends from '../database/beinfriends'
+import breakingintocars from '../database/breakingintocars'
+import canyon from '../database/canyon'
+import congratulations from '../database/congratulations'
+import cravoecanela from '../database/cravoecanela'
+import cutmyfingersoff from '../database/cutmyfingersoff'
+import deadwomb from '../database/deadwomb'
+import demon from '../database/demon'
+import fateinhaze from '../database/fateinhaze'
+import flourish from '../database/flourish'
+import hideandseek from '../database/hideandseek'
+import hippiebattle from '../database/hippiebattle'
+import itstimetojump from '../database/itstimetojump'
+import lennastheme from '../database/lennastheme'
+import lightsinthesky from '../database/lightsinthesky'
+import magicant from '../database/magicant'
+import mindmischief from '../database/mindmischief'
+import minuet from '../database/minuet'
+import motherearth from '../database/motherearth'
+import mothernature from '../database/mothernature'
+import myhome from '../database/myhome'
+import onestop from '../database/onestop'
+import paintwar from '../database/paintwar'
+import passport from '../database/passport'
+import patins from '../database/patins'
+import pollyanna from '../database/pollyanna'
+import ponytail from '../database/ponytail'
+import robotsinthegarden from '../database/robotsinthegarden'
+import royalpalace from '../database/royalpalace'
+import ruinus from '../database/ruinus'
+import sanguelatino from '../database/sanguelatino'
+import smb2playersel from '../database/smb2playersel'
+import southparktheme from '../database/southparktheme'
+import spacecadet from '../database/spacecadet'
+import spacecadet2x from '../database/spacecadet2x'
+import tetodevidro from '../database/tetodevidro'
+import thefightisover from '../database/thefightisover'
+import theradiant from '../database/theradiant'
+import thespaceinbetween from '../database/thespaceinbetween'
+import toweroflahja from '../database/toweroflahja'
+import town from '../database/town'
+import twinkle from '../database/twinkle'
+import whydidntyoustopme from '../database/whydidntyoustopme'
+import wisdomoftheworld from '../database/wisdomoftheworld'
+
 /**
  * Generates a parsed song file with additional attributes for MAGMA related actions from a parsed song "recipe" object.
  * - - - -
@@ -10,1307 +58,11 @@ import { fullfillDTA } from '../utils/fullfillDTA'
  * @param {Omit<MAGMAProject, keyof DTAFileContents>} newValues The new values to want to insert on the parsed song object.
  * @returns {MAGMAProject} The parsed song object with new informations added.
  */
-export const genMAGMAProject = (songRecipe: CreateDTAFileRecipe, newValues?: Omit<MAGMAProject, keyof DTAFileContents>): MAGMAProject =>
+export const genMAGMAConfig = (songRecipe: CreateDTAFileRecipe, newValues?: Omit<MAGMAProject, keyof DTAFileContents>): MAGMAProject =>
   fullfillDTA<MAGMAProject>(DTAFile.create(songRecipe), newValues ? newValues : {})
 
-const mySongsRecipes = {
-  paintwar: {
-    id: '7748paintwar',
-    name: 'Paint War',
-    artist: 'Dream Avenue',
-    master: true,
-    song_id: 1774800001,
-    songname: '7748paintwar',
-    tracks: {
-      drum: { rank: 2, channels: 2 },
-      bass: { rank: 0, real_rank: 0, channels: 2 },
-      guitar: { rank: 2, real_rank: 2, channels: 2 },
-      keys: { rank: 2, real_rank: 2, channels: 2 },
-      backing: 2,
-    },
-    preview: 42914,
-    song_length: 119205,
-    rank_band: 2,
-    rating: 1,
-    genre: { genre: 'Pop/Dance/Electronic', sub_genre: 'Chiptune' },
-    year_released: 2018,
-    album: { hasArt: true, name: 'Our Shared Universes', track_number: 4 },
-    key: 'A',
-    multitrack: true,
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  southparktheme: {
-    id: '7748southparktheme',
-    name: 'South Park Theme',
-    artist: 'Primus',
-    master: true,
-    song_id: 1774800002,
-    songname: '7748southparktheme',
-    tracks: {
-      drum: { rank: 3, channels: 2 },
-      bass: { rank: 2, real_rank: 2, channels: 1 },
-      guitar: { rank: 4, real_rank: 4, channels: 1 },
-      vocals: { rank: 0, channels: 1, vocal_parts: 3 },
-      backing: 2,
-    },
-    preview: 4864,
-    song_length: 36318,
-    rank_band: 3,
-    rating: 3,
-    genre: { genre: 'Alternative', sub_genre: 'Alternative' },
-    year_released: 1998,
-    album: {
-      hasArt: true,
-      name: 'Chef Aid: The South Park Album',
-      track_number: 1,
-    },
-    key: 'D#m',
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  hideandseek: {
-    id: '7748hideandseek',
-    name: 'Hide and Seek',
-    artist: 'Imogen Heap',
-    master: true,
-    song_id: 1774800003,
-    songname: '7748hideandseek',
-    tracks: {
-      vocals: { rank: 4, channels: 1, vocal_parts: 2, vocal_gender: 'Female' },
-      backing: 2,
-    },
-    preview: 142990,
-    song_length: 272649,
-    rank_band: 4,
-    rating: 2,
-    genre: { genre: 'Pop/Dance/Electronic', sub_genre: 'Other' },
-    year_released: 2005,
-    album: { hasArt: true, name: 'Speak for Yourself', track_number: 5 },
-    key: 'A',
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  cravoecanela: {
-    id: '7748cravoecanela',
-    name: 'Cravo e Canela',
-    artist: 'Clube da Esquina',
-    master: true,
-    song_id: 1774800004,
-    songname: '7748cravoecanela',
-    tracks: {
-      drum: { rank: 3, channels: 2 },
-      bass: { rank: 2, channels: 1 },
-      guitar: { rank: 4, channels: 1 },
-      vocals: { rank: 3, channels: 1, vocal_parts: 2 },
-      keys: { rank: 2, real_rank: 3, channels: 1, hasSolo: true },
-      backing: 2,
-    },
-    preview: 32426,
-    song_length: 145042,
-    rank_band: 3,
-    encoding: 'utf8',
-    rating: 1,
-    genre: { genre: 'Latin', sub_genre: 'Latin' },
-    year_released: 1972,
-    album: { hasArt: true, name: 'Clube da Esquina', track_number: 6 },
-    key: 'G',
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  deadwomb: {
-    id: '7748deadwomb',
-    name: 'Dead Womb',
-    artist: 'Death From Above 1979',
-    master: true,
-    song_id: 1774800005,
-    songname: '7748deadwomb',
-    tracks: {
-      drum: { rank: 6, channels: 2 },
-      bass: { rank: 5, real_rank: 5, channels: 2, hasSolo: true },
-      vocals: {
-        rank: 0,
-        channels: 1,
-        vocal_parts: 2,
-        hasSolo: true,
-      },
-      backing: 2,
-    },
-    hopo_threshold: 250,
-    anim_tempo: 64,
-    preview: 21254,
-    song_length: 109098,
-    rank_band: 6,
-    rating: 3,
-    genre: { genre: 'Punk', sub_genre: 'Dance Punk' },
-    year_released: 2002,
-    album: { hasArt: true, name: 'Heads Up', track_number: 1 },
-    key: 'Cm',
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  minuet: {
-    id: '7748minuet',
-    name: 'Minuet',
-    artist: 'From First to Last',
-    master: true,
-    song_id: 1774800006,
-    songname: '7748minuet',
-    tracks: {
-      guitar: { rank: 2, real_rank: 2, channels: 2 },
-      backing: 1,
-    },
-    preview: 17303,
-    song_length: 67301,
-    rank_band: 2,
-    rating: 1,
-    genre: { genre: 'Other', sub_genre: 'Acoustic' },
-    year_released: 2004,
-    album: {
-      hasArt: true,
-      name: 'Dear Diary, My Teen Angst Has a Body Count',
-      track_number: 10,
-    },
-    key: 'Dm',
-    multitrack: true,
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  flourish: {
-    id: '7748flourish',
-    name: 'Flourish',
-    artist: 'Nathan Grigg',
-    master: true,
-    song_id: 1774800007,
-    songname: '7748flourish',
-    tracks: {
-      drum: {
-        rank: 6,
-        channels: 4,
-      },
-      bass: {
-        rank: 5,
-        real_rank: 6,
-        channels: 2,
-        tuning: [-4, -4, -4, -4],
-      },
-      guitar: {
-        rank: 5,
-        real_rank: 5,
-        channels: 2,
-        tuning: [-4, -4, -4, -4, -4, -4],
-        hasSolo: true,
-      },
-      keys: {
-        rank: 6,
-        real_rank: 6,
-        channels: 2,
-        hasSolo: true,
-      },
-      backing: 2,
-    },
-    hopo_threshold: 90,
-    preview: 3500,
-    song_length: 94500,
-    rank_band: 6,
-    rating: 1,
-    genre: {
-      genre: 'Fusion',
-      sub_genre: 'Fusion',
-    },
-    year_released: 1998,
-    album: {
-      hasArt: true,
-    },
-    key: 'Bb',
-    author: 'Ruggy',
-    multitrack: true,
-    CATemh: true,
-    pack_name: 'Windows .MID Pack 01',
-  } as CreateDTAFileRecipe,
-
-  town: {
-    id: '7748town',
-    name: 'Town',
-    artist: 'Nathan Grigg',
-    master: true,
-    song_id: 1774800008,
-    songname: '7748town',
-    tracks: {
-      drum: { rank: 4, channels: 4 },
-      bass: { rank: 4, real_rank: 4, channels: 2 },
-      guitar: { rank: 5, real_rank: 4, channels: 2, hasSolo: true },
-      keys: { rank: 6, real_rank: 6, channels: 2, hasSolo: true },
-      backing: 2,
-    },
-    preview: 3500,
-    song_length: 94500,
-    rank_band: 5,
-    rating: 1,
-    genre: {
-      genre: 'Fusion',
-      sub_genre: 'Fusion',
-    },
-    year_released: 1998,
-    album: {
-      hasArt: true,
-    },
-    key: 'B',
-    author: 'Ruggy',
-    multitrack: true,
-    CATemh: true,
-    pack_name: 'Windows .MID Pack 01',
-  } as CreateDTAFileRecipe,
-
-  onestop: {
-    id: '7748onestop',
-    name: 'Onestop',
-    artist: 'David Yackley',
-    master: true,
-    song_id: 1774800009,
-    songname: '7748onestop',
-    tracks: {
-      drum: { rank: 2, channels: 4 },
-      bass: { rank: 4, real_rank: 4, channels: 2, tuning: [-4, -4, -4, -4] },
-      guitar: { rank: 6, real_rank: 6, channels: 2, hasSolo: true },
-      keys: { rank: 6, real_rank: 6, channels: 2, hasSolo: true },
-      backing: 2,
-    },
-    preview: 30000,
-    song_length: 249767,
-    rank_band: 6,
-    rating: 1,
-    genre: {
-      genre: 'Fusion',
-      sub_genre: 'Fusion',
-    },
-    year_released: 1998,
-    album: {
-      hasArt: true,
-    },
-    author: 'Ruggy',
-    multitrack: true,
-    CATemh: true,
-    pack_name: 'Windows .MID Pack 01',
-  } as CreateDTAFileRecipe,
-
-  canyon: {
-    id: '7748canyon',
-    name: 'Trip Through the Grand Canyon',
-    artist: 'George Stone',
-    master: true,
-    song_id: 1774800010,
-    songname: '7748canyon',
-    tracks: {
-      drum: { rank: 2, channels: 5 },
-      bass: { rank: 1, real_rank: 1, channels: 2 },
-      guitar: { rank: 2, real_rank: 3, channels: 2 },
-      keys: { rank: 2, real_rank: 3, channels: 2 },
-      backing: 2,
-    },
-    preview: 10000,
-    song_length: 128823,
-    rank_band: 2,
-    rating: 1,
-    genre: {
-      genre: 'Fusion',
-      sub_genre: 'Fusion',
-    },
-    year_released: 1990,
-    album: {
-      hasArt: true,
-      name: 'Microsoft Windows',
-      track_number: 4,
-    },
-    key: 'C',
-    author: 'Ruggy',
-    multitrack: true,
-    CATemh: true,
-    pack_name: 'Windows .MID Pack 02',
-  } as CreateDTAFileRecipe,
-
-  passport: {
-    id: '7748passport',
-    name: 'Passport',
-    artist: 'George Stone',
-    master: true,
-    song_id: 1774800011,
-    songname: '7748passport',
-    tracks: {
-      drum: { rank: 3, channels: 4 },
-      bass: { rank: 1, real_rank: 1, channels: 2 },
-      guitar: { rank: 2, real_rank: 3, channels: 2 },
-      keys: { rank: 4, real_rank: 4, channels: 2 },
-      backing: 2,
-    },
-    anim_tempo: 64,
-    preview: 89000,
-    song_length: 132705,
-    rank_band: 2,
-    rating: 1,
-    genre: { genre: 'Fusion', sub_genre: 'Fusion' },
-    year_released: 1995,
-    album: { hasArt: true },
-    key: 'Cm',
-    author: 'Ruggy',
-    multitrack: true,
-    CATemh: true,
-    pack_name: 'Windows .MID Pack 02',
-  } as CreateDTAFileRecipe,
-
-  spacecadet: {
-    id: '7748spacecadet',
-    name: '3D Pinball Space Cadet: Level 1',
-    artist: 'Matt Ridgeway',
-    master: true,
-    song_id: 1774800012,
-    songname: '7748spacecadet',
-    tracks: {
-      drum: { rank: 3, channels: 4 },
-      bass: { rank: 3, real_rank: 4, channels: 1 },
-      guitar: { rank: 6, real_rank: 6, channels: 2 },
-      keys: { rank: 6, real_rank: 6, channels: 2 },
-      backing: 1,
-    },
-    preview: 25785,
-    song_length: 65454,
-    rank_band: 6,
-    rating: 1,
-    genre: { genre: 'Fusion', sub_genre: 'Fusion' },
-    year_released: 1995,
-    album: { hasArt: true },
-    key: 'G#m',
-    author: 'Ruggy',
-    multitrack: true,
-    CATemh: true,
-    pack_name: 'Windows .MID Pack 02',
-  } as CreateDTAFileRecipe,
-
-  spacecadet2x: {
-    id: '7748spacecadet2x',
-    name: '3D Pinball Space Cadet: Level 1 (2x Bass Pedal)',
-    artist: 'Matt Ridgeway',
-    master: true,
-    song_id: 1774800013,
-    songname: '7748spacecadet2x',
-    tracks: {
-      drum: { rank: 4, channels: 4 },
-      bass: { rank: 3, real_rank: 4, channels: 1 },
-      guitar: { rank: 6, real_rank: 6, channels: 2 },
-      keys: { rank: 6, real_rank: 6, channels: 2 },
-      backing: 1,
-    },
-    preview: 25785,
-    song_length: 65454,
-    rank_band: 6,
-    rating: 1,
-    genre: { genre: 'Fusion', sub_genre: 'Fusion' },
-    year_released: 1995,
-    album: { hasArt: true },
-    key: 'G#m',
-    author: 'Ruggy',
-    multitrack: true,
-    CATemh: true,
-    doubleKick: true,
-    pack_name: 'Windows .MID Pack 02',
-  } as CreateDTAFileRecipe,
-
-  breakingintocars: {
-    id: '7748breakingintocars',
-    name: 'Breaking Into Cars',
-    artist: 'The Raveonettes',
-    master: true,
-    song_id: 1774800014,
-    songname: '7748breakingintocars',
-    tracks: {
-      drum: { rank: 0, channels: 2 },
-      bass: { rank: 1, real_rank: 1, channels: 1 },
-      guitar: { rank: 1, real_rank: 1, channels: 1, hasSolo: true },
-      vocals: {
-        rank: 1,
-        channels: 1,
-        vocal_parts: 2,
-        hasSolo: true,
-      },
-      backing: 2,
-    },
-    preview: 39500,
-    song_length: 194425,
-    rank_band: 1,
-    rating: 2,
-    genre: { genre: 'Indie Rock', sub_genre: 'Indie Rock' },
-    year_released: 2009,
-    album: { hasArt: true, name: 'In and Out of Control', track_number: 9 },
-    key: 'C#m',
-    CATemh: true,
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  aracaazul: {
-    id: '7748aracaazul',
-    name: 'Araçá Azul',
-    artist: 'Caetano Veloso',
-    master: true,
-    song_id: 1774800015,
-    songname: '7748aracaazul',
-    tracks: {
-      guitar: {
-        rank: 1,
-        real_rank: 0,
-        channels: 1,
-      },
-      vocals: {
-        rank: 2,
-        channels: 1,
-        vocal_parts: 1,
-      },
-      backing: 2,
-    },
-    tuning_offset_cents: 35,
-    preview: 25000,
-    song_length: 89593,
-    rank_band: 0,
-    encoding: 'utf8',
-    rating: 1,
-    genre: {
-      genre: 'Other',
-      sub_genre: 'Acoustic',
-    },
-    year_released: 1973,
-    album: {
-      hasArt: true,
-      name: 'Araçá Azul',
-      track_number: 10,
-    },
-    key: 'Eb',
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  demon: {
-    id: '7748demon',
-    name: 'Demon',
-    artist: 'Bear In Heaven',
-    master: true,
-    song_id: 1774800016,
-    songname: '7748demon',
-    tracks: {
-      drum: { rank: 5, channels: 2 },
-      bass: { rank: 0, real_rank: 0, channels: 1 },
-      vocals: {
-        rank: 1,
-        channels: 1,
-        vocal_parts: 3,
-        hasSolo: true,
-      },
-      keys: { rank: 6, real_rank: 4, channels: 1 },
-      backing: 2,
-    },
-    preview: 31000,
-    song_length: 300000,
-    rank_band: 3,
-    rating: 3,
-    genre: { genre: 'Indie Rock', sub_genre: 'Indie Rock' },
-    year_released: 2014,
-    album: { hasArt: true, name: 'Time Is Over One Day Old', track_number: 7 },
-    key: 'Fm',
-    CATemh: true,
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  cutmyfingersoff: {
-    id: '7748cutmyfingersoff',
-    name: 'Cutting My Fingers Off',
-    artist: 'Turnover',
-    master: true,
-    song_id: 1774800017,
-    songname: '7748cutmyfingersoff',
-    tracks: {
-      drum: { rank: 1, channels: 2 },
-      bass: { rank: 0, real_rank: 0, channels: 1 },
-      guitar: { rank: 2, real_rank: 2, channels: 1, hasSolo: true },
-      vocals: {
-        rank: 1,
-        channels: 1,
-        vocal_parts: 1,
-        hasSolo: true,
-      },
-      backing: 2,
-    },
-    preview: 47917,
-    song_length: 184968,
-    rank_band: 1,
-    rating: 2,
-    genre: { genre: 'Indie Rock', sub_genre: 'Indie Rock' },
-    year_released: 2015,
-    album: { hasArt: true, name: 'Peripheral Vision', track_number: 1 },
-    key: 'C',
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  thefightisover: {
-    id: '7748thefightisover',
-    name: 'The Fight Is Over',
-    artist: 'The Blasting Company',
-    master: true,
-    song_id: 1774800018,
-    songname: '7748thefightisover',
-    tracks: {
-      drum: { rank: 0, channels: 2 },
-      bass: { rank: 0, real_rank: 0, channels: 1 },
-      guitar: { rank: 2, real_rank: 2, channels: 1, hasSolo: true },
-      vocals: { rank: 1, channels: 1, vocal_parts: 3 },
-      backing: 2,
-    },
-    preview: 21991,
-    song_length: 87583,
-    rank_band: 0,
-    rating: 1,
-    genre: { genre: 'Glam', sub_genre: 'Glam' },
-    year_released: 2017,
-    album: { hasArt: true, name: 'Over The Garden Wall', track_number: 25 },
-    key: 'C',
-    CATemh: true,
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  anysecondnow: {
-    id: '7748anysecondnow',
-    name: 'Any Second Now (Voices)',
-    artist: 'Depeche Mode',
-    master: true,
-    song_id: 1774800019,
-    songname: '7748anysecondnow',
-    tracks: {
-      bass: { rank: 0, real_rank: 0, channels: 1 },
-      vocals: { rank: 1, channels: 1, vocal_parts: 2 },
-      keys: { rank: 4, real_rank: 3, channels: 1, hasSolo: true },
-      backing: 2,
-    },
-    preview: 16628,
-    song_length: 163582,
-    rank_band: 1,
-    rating: 1,
-    genre: { genre: 'New Wave', sub_genre: 'Synthpop' },
-    year_released: 1981,
-    album: { hasArt: true, name: 'Speak & Spell', track_number: 10 },
-    key: 'G',
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  congratulations: {
-    id: '7748congratulations',
-    name: 'Congratulations',
-    artist: 'MGMT',
-    master: true,
-    song_id: 1774800020,
-    songname: '7748congratulations',
-    tracks: {
-      drum: { rank: 0, channels: 2 },
-      bass: { rank: 0, real_rank: 0, channels: 1 },
-      guitar: { rank: 2, real_rank: 1, channels: 1 },
-      vocals: {
-        rank: 1,
-        channels: 1,
-        vocal_parts: 1,
-        hasSolo: true,
-      },
-      keys: { rank: 6, real_rank: 6, channels: 1, hasSolo: true },
-      backing: 2,
-    },
-    preview: 79298,
-    song_length: 236430,
-    rank_band: 1,
-    rating: 2,
-    genre: { genre: 'Rock', sub_genre: 'Psychedelic' },
-    year_released: 2010,
-    album: { hasArt: true, name: 'Congratulations', track_number: 9 },
-    key: 'G',
-    CATemh: true,
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  lightsinthesky: {
-    id: '7748lightsinthesky',
-    name: 'Lights In the Sky',
-    artist: 'Nine Inch Nails',
-    master: true,
-    song_id: 1774800021,
-    songname: '7748lightsinthesky',
-    tracks: {
-      vocals: { rank: 0, channels: 2, vocal_parts: 1 },
-      keys: { rank: 0, real_rank: 1, channels: 2 },
-      backing: 2,
-    },
-    anim_tempo: 16,
-    song_scroll_speed: 'Fast',
-    preview: 74181,
-    song_length: 222647,
-    rank_band: 0,
-    rating: 1,
-    genre: { genre: 'Rock', sub_genre: 'Rock' },
-    year_released: 2008,
-    album: { hasArt: true, name: 'The Slip', track_number: 7 },
-    key: 'Fm',
-    multitrack: true,
-    CATemh: true,
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  mothernature: {
-    id: '7748mothernature',
-    name: 'Mother Nature',
-    artist: 'Dream Avenue',
-    master: true,
-    song_id: 1774800022,
-    songname: '7748mothernature',
-    tracks: {
-      drum: { rank: 2, channels: 2 },
-      bass: { rank: 0, real_rank: 1, channels: 2 },
-      guitar: { rank: 1, real_rank: 1, channels: 2 },
-      keys: { rank: 5, real_rank: 5, channels: 2 },
-      backing: 2,
-    },
-    preview: 28413,
-    song_length: 85239,
-    rank_band: 2,
-    rating: 1,
-    genre: { genre: 'Pop/Dance/Electronic', sub_genre: 'Chiptune' },
-    year_released: 2018,
-    album: { hasArt: true, name: 'Our Shared Universes', track_number: 1 },
-    key: 'E',
-    multitrack: true,
-    CATemh: true,
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  mindmischief: {
-    id: '7748mindmischief',
-    name: 'Mind Mischief',
-    artist: 'Tame Impala',
-    master: true,
-    song_id: 1774800023,
-    songname: '7748mindmischief',
-    tracks: {
-      drum: { rank: 2, channels: 2 },
-      bass: { rank: 2, real_rank: 2, channels: 1 },
-      guitar: {
-        rank: 2,
-        real_rank: 2,
-        channels: 1,
-        tuning: [0, 0, 0, 0, 0, 0],
-        hasSolo: true,
-      },
-      vocals: { rank: 2, channels: 1, vocal_parts: 3 },
-      keys: { rank: 0, real_rank: 1, channels: 1 },
-      backing: 2,
-    },
-    preview: 26929,
-    song_length: 276114,
-    rank_band: 2,
-    rating: 1,
-    genre: { genre: 'Rock', sub_genre: 'Psychedelic' },
-    year_released: 2012,
-    album: { hasArt: true, name: 'Lonerism', track_number: 4 },
-    key: 'F#',
-    author: 'Ruggy',
-    CATemh: true,
-  } as CreateDTAFileRecipe,
-
-  theradiant: {
-    id: '7748theradiant',
-    name: 'The Radiant (Chart-A-Thon 2019 Mix)',
-    artist: 'Dream Avenue',
-    master: true,
-    song_id: 1774800024,
-    songname: '7748theradiant',
-    tracks: {
-      drum: { rank: 4, channels: 2 },
-      bass: { rank: 4, real_rank: 4, channels: 2 },
-      guitar: { rank: 3, real_rank: 4, channels: 2 },
-      keys: { rank: 5, real_rank: 5, channels: 2 },
-      backing: 2,
-    },
-    anim_tempo: 64,
-    preview: 14667,
-    song_length: 249333,
-    rank_band: 5,
-    rating: 1,
-    genre: { genre: 'Pop/Dance/Electronic', sub_genre: 'Chiptune' },
-    year_released: 2014,
-    year_recorded: 2019,
-    album: { hasArt: true, name: 'Moonstone', track_number: 3 },
-    key: 'C',
-    multitrack: true,
-    CATemh: true,
-    author: 'Ruggy',
-    pack_name: 'Chart-a-thon 2018',
-  } as CreateDTAFileRecipe,
-
-  whydidntyoustopme: {
-    id: '7748whydidntyoustopme',
-    name: "Why Didn't You Stop Me?",
-    artist: 'Mitski',
-    master: true,
-    song_id: 1774800025,
-    songname: '7748whydidntyoustopme',
-    tracks: {
-      drum: { rank: 3, channels: 2 },
-      bass: { rank: 3, real_rank: 4, channels: 1 },
-      guitar: { rank: 2, real_rank: 2, channels: 1, hasSolo: true },
-      vocals: { rank: 1, channels: 1, vocal_parts: 1, vocal_gender: 'Female' },
-      keys: { rank: 1, real_rank: 1, channels: 1 },
-      backing: 2,
-    },
-    preview: 22000,
-    song_length: 144000,
-    rank_band: 1,
-    rating: 1,
-    genre: { genre: 'Indie Rock', sub_genre: 'Indie Rock' },
-    year_released: 2018,
-    album: { hasArt: true, name: 'Be the Cowboy', track_number: 2 },
-    key: 'E',
-    CATemh: true,
-    author: 'Ruggy',
-    pack_name: 'Chart-a-thon 2018',
-  } as CreateDTAFileRecipe,
-
-  thespaceinbetween: {
-    id: '7748thespaceinbetween',
-    name: 'The Space in Between',
-    artist: 'How to Destroy Angels',
-    master: true,
-    song_id: 1774800026,
-    songname: '7748thespaceinbetween',
-    tracks: {
-      drum: { rank: 2, channels: 2 },
-      bass: { rank: 0, channels: 2 },
-      guitar: { rank: 4, channels: 2 },
-      vocals: { rank: 2, channels: 2, vocal_parts: 3, vocal_gender: 'Female' },
-      backing: 2,
-    },
-    anim_tempo: 16,
-    preview: 90811,
-    song_length: 223784,
-    rank_band: 2,
-    rating: 2,
-    genre: { genre: 'Rock', sub_genre: 'Rock' },
-    year_released: 2010,
-    album: { hasArt: true, name: 'How to Destroy Angels', track_number: 1 },
-    key: 'Gm',
-    author: 'Ruggy',
-    multitrack: true,
-    CATemh: true,
-    pack_name: 'Chart-a-thon 2018',
-  } as CreateDTAFileRecipe,
-
-  sanguelatino: {
-    id: '7748sanguelatino',
-    name: 'Sangue Latino',
-    artist: 'Secos & Molhados',
-    master: true,
-    song_id: 1774800027,
-    songname: '7748sanguelatino',
-    tracks: {
-      drum: { rank: 0, channels: 2 },
-      bass: { rank: 1, channels: 1 },
-      guitar: { rank: 2, channels: 1 },
-      vocals: { rank: 2, channels: 1, vocal_parts: 1 },
-      backing: 2,
-    },
-    preview: 55604,
-    song_length: 135401,
-    rank_band: 1,
-    rating: 1,
-    genre: { genre: 'Glam', sub_genre: 'Glam' },
-    year_released: 1973,
-    album: { hasArt: true, name: 'Secos & Molhados', track_number: 1 },
-    key: 'D',
-    CATemh: true,
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  robotsinthegarden: {
-    id: '7748robotsinthegarden',
-    name: 'Robots in the Garden',
-    artist: 'Autolux',
-    master: true,
-    song_id: 1774800028,
-    songname: '7748robotsinthegarden',
-    tracks: {
-      drum: { rank: 3, channels: 2 },
-      bass: { rank: 1, channels: 1 },
-      guitar: { rank: 2, channels: 1 },
-      vocals: { rank: 1, channels: 1, vocal_parts: 1, hasSolo: true },
-      backing: 2,
-    },
-    preview: 55665,
-    song_length: 135401,
-    rank_band: 2,
-    rating: 1,
-    genre: { genre: 'Rock', sub_genre: 'Rock' },
-    year_released: 2004,
-    album: { hasArt: true, name: 'Future Perfect', track_number: 7 },
-    key: 'D#m',
-    CATemh: true,
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  ponytail: {
-    id: '7748ponytail',
-    name: 'Ponytail',
-    artist: 'Panda Bear',
-    master: true,
-    song_id: 1774800029,
-    songname: '7748ponytail',
-    tracks: {
-      drum: { rank: 0, channels: 2 },
-      bass: { rank: 0, real_rank: 0, channels: 1 },
-      guitar: { rank: 1, real_rank: 1, channels: 1 },
-      vocals: { rank: 1, channels: 1, vocal_parts: 2 },
-      backing: 2,
-    },
-    preview: 14524,
-    song_length: 130025,
-    rank_band: 0,
-    rating: 1,
-    genre: { genre: 'Indie Rock', sub_genre: 'Indie Rock' },
-    year_released: 2007,
-    album: {
-      hasArt: true,
-      name: 'Person Pitch',
-      track_number: 7,
-    },
-    key: 'A',
-    author: 'Ruggy',
-    CATemh: true,
-  } as CreateDTAFileRecipe,
-
-  beinfriends: {
-    id: '7748beinfriends',
-    name: "Bein' Friends",
-    artist: 'Keiichi Suzuki & Hirokazu Tanaka',
-    master: true,
-    song_id: 1774800030,
-    songname: '7748beinfriends',
-    tracks: {
-      drum: { rank: 3, channels: 4 },
-      bass: { rank: 2, real_rank: 3, channels: 1 },
-      guitar: { rank: 3, real_rank: 4, channels: 1, pans: [-0.2] },
-      keys: { rank: 2, real_rank: 2, channels: 1, pans: [0.2] },
-      backing: 1,
-    },
-    preview: 3734,
-    song_length: 102679,
-    rank_band: 3,
-    rating: 1,
-    genre: { genre: 'Pop/Dance/Electronic', sub_genre: 'Chiptune' },
-    year_released: 1989,
-    album: {
-      hasArt: true,
-      name: 'MOTHER (Original Soundtrack)',
-      track_number: 21,
-    },
-    key: 'F',
-    multitrack: true,
-    author: 'Ruggy',
-    pack_name: 'MOTHER Pack 01',
-  } as CreateDTAFileRecipe,
-
-  hippiebattle: {
-    id: '7748hippiebattle',
-    name: 'Battle Theme 2 (Hippie Battle)',
-    artist: 'Keiichi Suzuki & Hirokazu Tanaka',
-    master: true,
-    song_id: 1774800031,
-    songname: '7748hippiebattle',
-    tracks: {
-      drum: { rank: 2, channels: 4 },
-      bass: { rank: 3, real_rank: 3, channels: 1 },
-      guitar: { rank: 3, real_rank: 3, channels: 1 },
-      backing: 2,
-    },
-    drum_bank: 'Vintage Kit',
-    anim_tempo: 64,
-    preview: 36000,
-    song_length: 71333,
-    rank_band: 2,
-    rating: 1,
-    genre: { genre: 'Pop/Dance/Electronic', sub_genre: 'Chiptune' },
-    year_released: 1989,
-    album: {
-      hasArt: true,
-      name: 'MOTHER (Original Soundtrack)',
-      track_number: 7,
-    },
-    key: 'A',
-    multitrack: true,
-    author: 'Ruggy',
-    pack_name: 'MOTHER Pack 01',
-  } as CreateDTAFileRecipe,
-
-  patins: {
-    id: '7748patins',
-    name: 'Patins',
-    artist: 'CSS',
-    master: true,
-    song_id: 1774800032,
-    songname: '7748patins',
-    tracks: {
-      drum: { rank: 1, channels: 2 },
-      bass: { rank: 0, real_rank: 0, channels: 1 },
-      guitar: { rank: 3, real_rank: 2, channels: 1 },
-      vocals: { rank: 1, channels: 1, vocal_parts: 2, hasSolo: true },
-      backing: 2,
-    },
-    preview: 44569,
-    song_length: 135401,
-    rank_band: 1,
-    rating: 1,
-    genre: { genre: 'Indie Rock', sub_genre: 'Indie Rock' },
-    year_released: 2006,
-    album: { hasArt: true, name: 'Cansei de Ser Sexy (International Release)', track_number: 2 },
-    key: 'G',
-    CATemh: true,
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  motherearth: {
-    id: '7748motherearth',
-    name: 'Mother Earth',
-    artist: 'Keiichi Suzuki & Hirokazu Tanaka',
-    master: true,
-    song_id: 1774800033,
-    songname: '7748motherearth',
-    tracks: {
-      drum: { rank: 0, channels: 2 },
-      bass: { rank: 1, real_rank: 1, channels: 1 },
-      guitar: { rank: 2, real_rank: 2, channels: 1, pans: [-0.2] },
-      keys: { rank: 0, real_rank: 0, channels: 1, pans: [0.2] },
-      backing: 1,
-    },
-    anim_tempo: 16,
-    preview: 18668,
-    song_length: 119477,
-    rank_band: 0,
-    rating: 1,
-    genre: { genre: 'Pop/Dance/Electronic', sub_genre: 'Chiptune' },
-    year_released: 1989,
-    album: {
-      hasArt: true,
-      name: 'MOTHER (Original Soundtrack)',
-      track_number: 1,
-    },
-    multitrack: true,
-    author: 'Ruggy',
-    pack_name: 'MOTHER Pack 01',
-  } as CreateDTAFileRecipe,
-
-  pollyanna: {
-    id: '7748pollyanna',
-    name: 'Pollyanna (I Believe in You)',
-    artist: 'Keiichi Suzuki & Hirokazu Tanaka',
-    master: true,
-    song_id: 1774800034,
-    songname: '7748pollyanna',
-    tracks: {
-      drum: { rank: 1, channels: 4 },
-      bass: { rank: 2, real_rank: 1, channels: 1, tuning: [-2, 0, 0, 0] },
-      guitar: { rank: 3, real_rank: 3, channels: 1, pans: [-0.2] },
-      keys: { rank: 2, real_rank: 2, channels: 1, pans: [0.2] },
-      backing: 1,
-    },
-    drum_bank: 'Vintage Kit',
-    preview: 4267,
-    song_length: 121610,
-    rank_band: 2,
-    rating: 1,
-    genre: { genre: 'Pop/Dance/Electronic', sub_genre: 'Chiptune' },
-    year_released: 1989,
-    album: {
-      hasArt: true,
-      name: 'MOTHER (Original Soundtrack)',
-      track_number: 4,
-    },
-    key: 'D',
-    multitrack: true,
-    author: 'Ruggy',
-    pack_name: 'MOTHER Pack 01',
-  } as CreateDTAFileRecipe,
-
-  twinkle: {
-    id: '7748twinkle',
-    name: 'Twinkle Elementary School',
-    artist: 'Keiichi Suzuki & Hirokazu Tanaka',
-    master: true,
-    song_id: 1774800035,
-    songname: '7748twinkle',
-    tracks: {
-      drum: { rank: 1, channels: 4 },
-      bass: { rank: 2, real_rank: 2, channels: 1 },
-      guitar: { rank: 1, real_rank: 1, channels: 1, pans: [0.2] },
-      keys: { rank: 3, real_rank: 3, channels: 1, pans: [-0.2] },
-      backing: 1,
-    },
-    preview: 3200,
-    song_length: 126408,
-    rank_band: 3,
-    rating: 1,
-    genre: { genre: 'Pop/Dance/Electronic', sub_genre: 'Chiptune' },
-    year_released: 1989,
-    album: {
-      hasArt: true,
-      name: 'MOTHER (Original Soundtrack)',
-      track_number: 19,
-    },
-    key: 'A',
-    multitrack: true,
-    author: 'Ruggy',
-    pack_name: 'MOTHER Pack 01',
-  } as CreateDTAFileRecipe,
-
-  tetodevidro: {
-    id: '7748tetodevidro',
-    name: 'Teto de Vidro',
-    artist: 'Pitty',
-    master: true,
-    song_id: 1774800036,
-    songname: '7748tetodevidro',
-    tracks: {
-      drum: { rank: 2, channels: 2 },
-      bass: { rank: 1, channels: 2 },
-      guitar: { rank: 2, channels: 2 },
-      vocals: { rank: 2, channels: 2, vocal_parts: 1, vocal_gender: 'Female' },
-      backing: 2,
-    },
-    preview: 39735,
-    song_length: 215036,
-    rank_band: 2,
-    rating: 1,
-    genre: { genre: 'Rock', sub_genre: 'Rock' },
-    year_released: 2005,
-    album: { hasArt: true, name: 'Admirável Chip Novo', track_number: 1 },
-    key: 'C#m',
-    multitrack: true,
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  lennastheme: {
-    id: '7748lennastheme',
-    name: "Lenna's Theme",
-    artist: 'Nobuo Uematsu',
-    master: true,
-    song_id: 1774800037,
-    songname: '7748lennastheme',
-    tracks: {
-      bass: { rank: 0, real_rank: 0, channels: 2 },
-      guitar: { rank: 1, real_rank: 1, channels: 2 },
-      keys: { rank: 1, real_rank: 1, channels: 2 },
-      backing: 2,
-    },
-    anim_tempo: 16,
-    preview: 34868,
-    song_length: 116955,
-    rank_band: 1,
-    rating: 1,
-    genre: { genre: 'Classical', sub_genre: 'Classical' },
-    year_released: 1992,
-    album: {
-      hasArt: true,
-      name: 'Final Fantasy V (Original Soundtrack)',
-      track_number: 5,
-    },
-    key: 'C',
-    multitrack: true,
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  fateinhaze: {
-    id: '7748fateinhaze',
-    name: 'Fate in Haze',
-    artist: 'Nobuo Uematsu',
-    master: true,
-    song_id: 1774800038,
-    songname: '7748fateinhaze',
-    tracks: {
-      drum: { rank: 0, channels: 2 },
-      bass: { rank: 0, real_rank: 0, channels: 2 },
-      guitar: { rank: 1, real_rank: 1, channels: 2 },
-      keys: { rank: 2, real_rank: 2, channels: 2 },
-      backing: 2,
-    },
-    hopo_threshold: 90,
-    anim_tempo: 16,
-    preview: 12664,
-    song_length: 147797,
-    rank_band: 0,
-    rating: 1,
-    genre: { genre: 'Classical', sub_genre: 'Classical' },
-    year_released: 1992,
-    album: {
-      hasArt: true,
-      name: 'Final Fantasy V (Original Soundtrack)',
-      track_number: 6,
-    },
-    key: 'Db',
-    multitrack: true,
-    CATemh: true,
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  royalpalace: {
-    id: '7748royalpalace',
-    name: 'Royal Palace',
-    artist: 'Nobuo Uematsu',
-    master: true,
-    song_id: 1774800039,
-    songname: '7748royalpalace',
-    tracks: {
-      drum: { rank: 1, channels: 5 },
-      bass: { rank: 0, real_rank: 0, channels: 2 },
-      keys: { rank: 4, real_rank: 4, channels: 2 },
-      backing: 2,
-    },
-    preview: 10536,
-    song_length: 95032,
-    rank_band: 2,
-    rating: 1,
-    genre: { genre: 'Classical', sub_genre: 'Classical' },
-    year_released: 1992,
-    album: {
-      hasArt: true,
-      name: 'Final Fantasy V (Original Soundtrack)',
-      track_number: 21,
-    },
-    key: 'F#',
-    multitrack: true,
-    CATemh: true,
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  magicant: {
-    id: '7748magicant',
-    name: 'Magicant',
-    artist: 'Keiichi Suzuki & Hirokazu Tanaka',
-    master: true,
-    song_id: 1774800040,
-    songname: '7748magicant',
-    tracks: {
-      drum: { rank: 0, channels: 4 },
-      bass: { rank: 1, real_rank: 4, channels: 1 },
-      keys: { rank: 0, real_rank: 0, channels: 1 },
-      backing: 1,
-    },
-    hopo_threshold: 90,
-    anim_tempo: 16,
-    preview: 12664,
-    song_length: 147797,
-    rank_band: 0,
-    rating: 1,
-    genre: { genre: 'Pop/Dance/Electronic', sub_genre: 'Chiptune' },
-    year_released: 1992,
-    album: {
-      hasArt: true,
-      name: 'MOTHER (Original Soundtrack)',
-      track_number: 17,
-    },
-    key: 'C',
-    multitrack: true,
-    CATemh: true,
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  smb2playersel: {
-    id: '7748smb2playersel',
-    name: 'Super Mario Bros. 2: Player Select',
-    artist: 'Koji Kondo',
-    master: true,
-    song_id: 1774800041,
-    songname: '7748smb2playersel',
-    tracks: {
-      drum: { rank: 2, channels: 2 },
-      bass: { rank: 1, real_rank: 1, channels: 1 },
-      guitar: { rank: 3, real_rank: 3, channels: 1, pans: [-0.7] },
-      keys: { rank: 5, real_rank: 5, channels: 1, pans: [0.7] },
-      backing: 1,
-    },
-    preview: 6400,
-    song_length: 147797,
-    rank_band: 3,
-    rating: 1,
-    genre: { genre: 'Pop/Dance/Electronic', sub_genre: 'Chiptune' },
-    year_released: 1988,
-    album: {
-      hasArt: true,
-      name: 'Super Mario Bros 2 (Original Soundtrack)',
-      track_number: 2,
-    },
-    key: 'C',
-    multitrack: true,
-    CATemh: true,
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  itstimetojump: {
-    id: '7748itstimetojump',
-    name: "It's Time To Jump",
-    artist: 'Dream Avenue',
-    master: true,
-    song_id: 1774800042,
-    songname: '7748itstimetojump',
-    tracks: {
-      drum: { rank: 6, channels: 2 },
-      bass: { rank: 1, real_rank: 1, channels: 2 },
-      guitar: { rank: 3, real_rank: 3, channels: 2 },
-      keys: { rank: 6, real_rank: 6, channels: 2 },
-      backing: 2,
-    },
-    anim_tempo: 64,
-    preview: 98900,
-    song_length: 286408,
-    rank_band: 5,
-    rating: 1,
-    genre: { genre: 'Pop/Dance/Electronic', sub_genre: 'Chiptune' },
-    year_released: 2014,
-    album: { hasArt: true, name: 'Moonstone', track_number: 11 },
-    key: 'Eb',
-    multitrack: true,
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-
-  ruinus: {
-    id: '7748ruinus',
-    name: 'Ruin Us',
-    artist: 'The Jellybricks',
-    master: true,
-    song_id: 1774800043,
-    songname: '7748ruinus',
-    tracks: {
-      drum: { rank: 2, channels: 5 },
-      bass: { rank: 1, channels: 2 },
-      guitar: { rank: 2, channels: 2 },
-      vocals: { rank: 2, channels: 2, vocal_parts: 3, vocal_gender: 'Male' },
-      keys: { rank: 1, real_rank: 1, channels: 2 },
-      backing: 2,
-    },
-    anim_tempo: 64,
-    preview: 98900,
-    song_length: 286408,
-    rank_band: 1,
-    rating: 1,
-    genre: { genre: 'Pop-Rock', sub_genre: 'Soft Rock' },
-    year_released: 2014,
-    album: { hasArt: true, name: 'Moonstone', track_number: 11 },
-    key: 'G',
-    multitrack: true,
-    author: 'Ruggy',
-  } as CreateDTAFileRecipe,
-}
-
-export type MySongsID = keyof typeof mySongsRecipes
-export type MySongsModule = { [key in MySongsID]: MAGMAProject }
-
-const mySongs: MySongsModule = {
-  paintwar: genMAGMAProject(mySongsRecipes.paintwar, {
+const mySongs = {
+  paintwar: genMAGMAConfig(paintwar, {
     autogenTheme: 'SynthPop',
     hasAuthoredVenues: true,
     hasLipSyncFiles: true,
@@ -1319,7 +71,7 @@ const mySongs: MySongsModule = {
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  southparktheme: genMAGMAProject(mySongsRecipes.southparktheme, {
+  southparktheme: genMAGMAConfig(southparktheme, {
     autogenTheme: 'PsychJamRock',
     hasAuthoredVenues: true,
     hasLipSyncFiles: true,
@@ -1328,7 +80,7 @@ const mySongs: MySongsModule = {
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  hideandseek: genMAGMAProject(mySongsRecipes.hideandseek, {
+  hideandseek: genMAGMAConfig(hideandseek, {
     autogenTheme: 'SlowJam',
     hasAuthoredVenues: true,
     releaseVer: 3,
@@ -1336,69 +88,69 @@ const mySongs: MySongsModule = {
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  cravoecanela: genMAGMAProject(mySongsRecipes.cravoecanela, {
+  cravoecanela: genMAGMAConfig(cravoecanela, {
     autogenTheme: 'PsychJamRock',
     releaseVer: 3,
     releasedAt: new Date('Sep 17, 2017').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  deadwomb: genMAGMAProject(mySongsRecipes.deadwomb, {
+  deadwomb: genMAGMAConfig(deadwomb, {
     autogenTheme: 'GaragePunkRock',
     releaseVer: 4,
     releasedAt: new Date('Sep 20, 2017').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  minuet: genMAGMAProject(mySongsRecipes.minuet, {
+  minuet: genMAGMAConfig(minuet, {
     autogenTheme: 'SlowJam',
     releaseVer: 4,
     releasedAt: new Date('Oct 7, 2017').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  flourish: genMAGMAProject(mySongsRecipes.flourish, {
+  flourish: genMAGMAConfig(flourish, {
     fake: true,
     releaseVer: 4,
     releasedAt: new Date('Nov 17, 2017').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  town: genMAGMAProject(mySongsRecipes.town, {
+  town: genMAGMAConfig(town, {
     fake: true,
     releaseVer: 3,
     releasedAt: new Date('Dec 4, 2017').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  onestop: genMAGMAProject(mySongsRecipes.onestop, {
+  onestop: genMAGMAConfig(onestop, {
     fake: true,
     releaseVer: 2,
     releasedAt: new Date('Dec 8, 2017').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  canyon: genMAGMAProject(mySongsRecipes.canyon, {
+  canyon: genMAGMAConfig(canyon, {
     fake: true,
     releaseVer: 3,
     releasedAt: new Date('Dec 16, 2017').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  passport: genMAGMAProject(mySongsRecipes.passport, {
+  passport: genMAGMAConfig(passport, {
     releaseVer: 2,
     releasedAt: new Date('Dec 24, 2017').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  spacecadet: genMAGMAProject(mySongsRecipes.spacecadet, {
+  spacecadet: genMAGMAConfig(spacecadet, {
     autogenTheme: 'PsychJamRock',
     releaseVer: 3,
     releasedAt: new Date('Dec 21, 2017').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  spacecadet2x: genMAGMAProject(mySongsRecipes.spacecadet2x, {
+  spacecadet2x: genMAGMAConfig(spacecadet2x, {
     autogenTheme: 'PsychJamRock',
     doubleKickOptions: { kickwav: true },
     releaseVer: 3,
@@ -1406,14 +158,14 @@ const mySongs: MySongsModule = {
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  breakingintocars: genMAGMAProject(mySongsRecipes.breakingintocars, {
+  breakingintocars: genMAGMAConfig(breakingintocars, {
     hasLipSyncFiles: true,
     releaseVer: 3,
     releasedAt: new Date('Jan 11, 2018').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  aracaazul: genMAGMAProject(mySongsRecipes.aracaazul, {
+  aracaazul: genMAGMAConfig(aracaazul, {
     hasLipSyncFiles: true,
     fakeHarm: 2,
     hasAuthoredVenues: true,
@@ -1422,84 +174,84 @@ const mySongs: MySongsModule = {
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  demon: genMAGMAProject(mySongsRecipes.demon, {
+  demon: genMAGMAConfig(demon, {
     releaseVer: 2,
     releasedAt: new Date('Jun 14, 2018').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  cutmyfingersoff: genMAGMAProject(mySongsRecipes.cutmyfingersoff, {
+  cutmyfingersoff: genMAGMAConfig(cutmyfingersoff, {
     releaseVer: 3,
     releasedAt: new Date('Jun 15, 2018').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  thefightisover: genMAGMAProject(mySongsRecipes.thefightisover, {
+  thefightisover: genMAGMAConfig(thefightisover, {
     releaseVer: 3,
     releasedAt: new Date('Jun 15, 2018').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  anysecondnow: genMAGMAProject(mySongsRecipes.anysecondnow, {
+  anysecondnow: genMAGMAConfig(anysecondnow, {
     hasLipSyncFiles: true,
     releaseVer: 2,
     releasedAt: new Date('Jul 18, 2022').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  congratulations: genMAGMAProject(mySongsRecipes.congratulations, {
+  congratulations: genMAGMAConfig(congratulations, {
     releaseVer: 2,
     releasedAt: new Date('Jul 4, 2018').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  lightsinthesky: genMAGMAProject(mySongsRecipes.lightsinthesky, {
+  lightsinthesky: genMAGMAConfig(lightsinthesky, {
     hasLipSyncFiles: true,
     releaseVer: 2,
     releasedAt: new Date('Aug 26, 2018').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  mothernature: genMAGMAProject(mySongsRecipes.mothernature, {
+  mothernature: genMAGMAConfig(mothernature, {
     releaseVer: 2,
     releasedAt: new Date('Aug 28, 2018').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  mindmischief: genMAGMAProject(mySongsRecipes.mindmischief, {
+  mindmischief: genMAGMAConfig(mindmischief, {
     releaseVer: 2,
     releasedAt: new Date('Dec 14, 2018').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  theradiant: genMAGMAProject(mySongsRecipes.theradiant, {
+  theradiant: genMAGMAConfig(theradiant, {
     releaseVer: 2,
     releasedAt: new Date('Dec 5, 2019').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  whydidntyoustopme: genMAGMAProject(mySongsRecipes.whydidntyoustopme, {
+  whydidntyoustopme: genMAGMAConfig(whydidntyoustopme, {
     hasLipSyncFiles: true,
     releaseVer: 2,
     releasedAt: new Date('Dec 5, 2019').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  thespaceinbetween: genMAGMAProject(mySongsRecipes.thespaceinbetween, {
+  thespaceinbetween: genMAGMAConfig(thespaceinbetween, {
     hasLipSyncFiles: true,
     releaseVer: 2,
     releasedAt: new Date('Dec 5, 2019').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  sanguelatino: genMAGMAProject(mySongsRecipes.sanguelatino, {
+  sanguelatino: genMAGMAConfig(sanguelatino, {
     hasLipSyncFiles: true,
     releaseVer: 2,
     releasedAt: new Date('Apr 10, 2020').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  robotsinthegarden: genMAGMAProject(mySongsRecipes.robotsinthegarden, {
+  robotsinthegarden: genMAGMAConfig(robotsinthegarden, {
     hasLipSyncFiles: true,
     hasAuthoredVenues: true,
     releaseVer: 2,
@@ -1507,7 +259,7 @@ const mySongs: MySongsModule = {
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  ponytail: genMAGMAProject(mySongsRecipes.ponytail, {
+  ponytail: genMAGMAConfig(ponytail, {
     hasLipSyncFiles: true,
     hasAuthoredVenues: true,
     releaseVer: 2,
@@ -1515,19 +267,19 @@ const mySongs: MySongsModule = {
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  beinfriends: genMAGMAProject(mySongsRecipes.beinfriends, {
+  beinfriends: genMAGMAConfig(beinfriends, {
     releaseVer: 1,
     releasedAt: new Date('Jul 16, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  hippiebattle: genMAGMAProject(mySongsRecipes.hippiebattle, {
+  hippiebattle: genMAGMAConfig(hippiebattle, {
     releaseVer: 1,
     releasedAt: new Date('Jul 16, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  patins: genMAGMAProject(mySongsRecipes.patins, {
+  patins: genMAGMAConfig(patins, {
     hasLipSyncFiles: true,
     hasAuthoredVenues: true,
     releaseVer: 1,
@@ -1535,72 +287,90 @@ const mySongs: MySongsModule = {
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  motherearth: genMAGMAProject(mySongsRecipes.motherearth, {
+  motherearth: genMAGMAConfig(motherearth, {
     releaseVer: 1,
     releasedAt: new Date('Jul 16, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  pollyanna: genMAGMAProject(mySongsRecipes.pollyanna, {
+  pollyanna: genMAGMAConfig(pollyanna, {
     releaseVer: 1,
     releasedAt: new Date('Jul 16, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  twinkle: genMAGMAProject(mySongsRecipes.twinkle, {
+  twinkle: genMAGMAConfig(twinkle, {
     releaseVer: 1,
     releasedAt: new Date('Jul 16, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  tetodevidro: genMAGMAProject(mySongsRecipes.tetodevidro, {
+  tetodevidro: genMAGMAConfig(tetodevidro, {
     hasLipSyncFiles: true,
     releaseVer: 1,
     releasedAt: new Date('Nov 7, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  lennastheme: genMAGMAProject(mySongsRecipes.lennastheme, {
+  lennastheme: genMAGMAConfig(lennastheme, {
     releaseVer: 1,
     releasedAt: new Date('Nov 7, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  fateinhaze: genMAGMAProject(mySongsRecipes.fateinhaze, {
+  fateinhaze: genMAGMAConfig(fateinhaze, {
     releaseVer: 1,
     releasedAt: new Date('Nov 7, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  royalpalace: genMAGMAProject(mySongsRecipes.royalpalace, {
+  royalpalace: genMAGMAConfig(royalpalace, {
     releaseVer: 1,
     releasedAt: new Date('Nov 7, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  magicant: genMAGMAProject(mySongsRecipes.magicant, {
+  magicant: genMAGMAConfig(magicant, {
     releaseVer: 1,
     releasedAt: new Date('Nov 7, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  smb2playersel: genMAGMAProject(mySongsRecipes.smb2playersel, {
+  smb2playersel: genMAGMAConfig(smb2playersel, {
     releaseVer: 1,
     releasedAt: new Date('Nov 7, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  itstimetojump: genMAGMAProject(mySongsRecipes.itstimetojump, {
+  itstimetojump: genMAGMAConfig(itstimetojump, {
+    releaseVer: 1,
+    releasedAt: new Date('Nov 7, 2023').toDateString(),
+    updatedAt: new Date('Nov 7, 2023').toDateString(),
+  }),
+
+  wisdomoftheworld: genMAGMAConfig(wisdomoftheworld, {
+    releaseVer: 1,
+    releasedAt: new Date('Nov 7, 2023').toDateString(),
+    updatedAt: new Date('Nov 7, 2023').toDateString(),
+  }),
+
+  toweroflahja: genMAGMAConfig(toweroflahja, {
+    releaseVer: 1,
+    releasedAt: new Date('Nov 7, 2023').toDateString(),
+    updatedAt: new Date('Nov 7, 2023').toDateString(),
+  }),
+
+  myhome: genMAGMAConfig(myhome, {
+    releaseVer: 1,
+    releasedAt: new Date('Nov 7, 2023').toDateString(),
+    updatedAt: new Date('Nov 7, 2023').toDateString(),
+  }),
+
+  ruinus: genMAGMAConfig(ruinus, {
+    releaseVer: 1,
+    releasedAt: new Date('Nov 7, 2023').toDateString(),
+    updatedAt: new Date('Nov 7, 2023').toDateString(),
     fake: true,
-    releaseVer: 1,
-    releasedAt: new Date('Nov 7, 2023').toDateString(),
-    updatedAt: new Date('Nov 7, 2023').toDateString(),
-  }),
-
-  ruinus: genMAGMAProject(mySongsRecipes.ruinus, {
-    releaseVer: 1,
-    releasedAt: new Date('Nov 7, 2023').toDateString(),
-    updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 }
 
@@ -1617,5 +387,9 @@ export const mySongsList = (): MAGMAProject[] => {
     return 0
   })
 }
+
+export type MySongsID = keyof typeof mySongs
+
+export type MySongsModule = Record<MySongsID, MAGMAProject>
 
 export default mySongs

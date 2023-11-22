@@ -486,12 +486,12 @@ const stringifyRB3DLC = (value: DTAFileContents, options: StringifyDataOptions):
   })${genTabs(2)}(drum_solo${genTabs(3)}(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))${genTabs(2)})${genTabs(2)}(drum_freestyle${genTabs(
     3
   )}(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))${genTabs(2)})${mute_volume === undefined ? `` : `${genTabs(2)}(mute_volume ${mute_volume})`}${
-    mute_volume_vocals === undefined ? `` : `${genTabs(2)}(mute_volume_vocals ${mute_volume_vocals}`
-  }${hopo_threshold === undefined ? `` : `${genTabs(2)}(hopo_threshold ${hopo_threshold})`}${genTabs()})${genTabs()}(bank ${bank})${
-    drum_bank === 'sfx/kit01_bank.milo' ? `` : `${genTabs()}(drum_bank ${drum_bank})`
-  }${genTabs()}(anim_tempo ${anim_tempo === 16 ? `kTempoSlow` : anim_tempo === 32 ? `kTempoMedium` : `kTempoFast`})${
-    band_fail_cue === undefined ? `` : `${genTabs()}(band_fail_cue ${band_fail_cue})`
-  }${genTabs()}(song_scroll_speed ${song_scroll_speed === undefined ? 2300 : song_scroll_speed})${genTabs()}(preview ${preview.join(' ')})${genTabs()}(song_length ${song_length})`
+    mute_volume_vocals === undefined ? `` : `${genTabs(2)}(mute_volume_vocals ${mute_volume_vocals})`
+  }${hopo_threshold === undefined ? `` : `${genTabs(2)}(hopo_threshold ${hopo_threshold})`}${genTabs()})${genTabs()}(bank ${bank})${genTabs()}(drum_bank ${drum_bank})${genTabs()}(anim_tempo ${
+    anim_tempo === 16 ? `kTempoSlow` : anim_tempo === 32 ? `kTempoMedium` : `kTempoFast`
+  })${band_fail_cue === undefined ? `` : `${genTabs()}(band_fail_cue ${band_fail_cue})`}${genTabs()}(song_scroll_speed ${
+    song_scroll_speed === undefined ? 2300 : song_scroll_speed
+  })${genTabs()}(preview ${preview.join(' ')})${genTabs()}(song_length ${song_length})`
 
   if (solo && solo.length > 0) {
     output += `${genTabs()}(solo (`

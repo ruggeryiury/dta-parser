@@ -1,6 +1,6 @@
 const path = require('path')
-const webpack = require('webpack')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+// const webpack = require('webpack')
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 // const TerserPlugin = require("terser-webpack-plugin")
 
 /** @type {import('webpack').Configuration[]} */

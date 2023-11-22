@@ -244,7 +244,15 @@ export interface DTAFileContents {
   expertOnly?: boolean
 }
 
+/**
+ * Type with all available keys from a DTA File.
+ */
 export type DTAFileContentsKeys = keyof DTAFileContents
+
+/**
+ * All options from `DTAFileContents` converted to optional.
+ */
+export type PartialDTAFileContents = Partial<DTAFileContents>
 
 /**
  * Generic type for custom `DTAFileContents` type.

@@ -1,7 +1,6 @@
 backend/
 images/
 node_modules/
-testing/
 .eslintrc.js
 .gitignore
 .npmignore
