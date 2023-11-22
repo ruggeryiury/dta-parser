@@ -29,6 +29,6 @@ const smb2playersel = {
   multitrack: true,
   CATemh: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default smb2playersel

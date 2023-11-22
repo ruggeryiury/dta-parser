@@ -28,6 +28,6 @@ const theradiant = {
   CATemh: true,
   author: 'Ruggy',
   pack_name: 'Chart-a-thon 2018',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default theradiant

@@ -27,6 +27,6 @@ const southparktheme = {
   },
   key: 'D#m',
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default southparktheme

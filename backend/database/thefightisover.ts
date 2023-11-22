@@ -24,6 +24,6 @@ const thefightisover = {
   key: 'C',
   CATemh: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default thefightisover

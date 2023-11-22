@@ -28,6 +28,6 @@ const royalpalace = {
   multitrack: true,
   CATemh: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default royalpalace

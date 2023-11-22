@@ -20,6 +20,6 @@ const hideandseek = {
   album: { hasArt: true, name: 'Speak for Yourself', track_number: 5 },
   key: 'A',
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default hideandseek

@@ -29,6 +29,6 @@ const demon = {
   key: 'Fm',
   CATemh: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default demon

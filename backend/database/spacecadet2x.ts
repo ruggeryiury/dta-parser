@@ -27,6 +27,6 @@ const spacecadet2x = {
   CATemh: true,
   doubleKick: true,
   pack_name: 'Windows .MID Pack 02',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default spacecadet2x

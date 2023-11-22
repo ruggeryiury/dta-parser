@@ -31,6 +31,6 @@ const town = {
   multitrack: true,
   CATemh: true,
   pack_name: 'Windows .MID Pack 01',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default town

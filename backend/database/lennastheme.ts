@@ -28,6 +28,6 @@ const lennastheme = {
   key: 'C',
   multitrack: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default lennastheme

@@ -29,6 +29,6 @@ const twinkle = {
   multitrack: true,
   author: 'Ruggy',
   pack_name: 'MOTHER Pack 01',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default twinkle

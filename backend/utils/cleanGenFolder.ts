@@ -6,13 +6,13 @@ export type GenFolderFilesTypes = 'songs.dta' | 'id.dta' | 'c3_rbdeps_rbproj' | 
 /**
  * Cleans the `backend/gen` folder.
  * - - - -
- * @param {GenFolderFilesTypes[]} files An array with the type of the files you want to clean on the `backend/gen` folder.
+ * @param {GenFolderFilesTypes[]} args The type of the files you want to clean on the `backend/gen` folder.
  */
-export const cleanGenFolder = (files: GenFolderFilesTypes[]) => {
+export const cleanGenFolder = (...args: GenFolderFilesTypes[]) => {
   const genFolderPath = fs.readdirSync(path.resolve('backend/gen')).map((fn) => path.resolve(`backend/gen/${fn}`))
   const songsDTAPath = path.resolve('backend/gen/songs.dta')
   const idDTAPath = path.resolve('backend/gen/songs.dta')
-  files.forEach((file) => {
+  args.forEach((file) => {
     if (file === 'songs.dta' && fs.existsSync(songsDTAPath)) {
       fs.unlinkSync(songsDTAPath)
       return

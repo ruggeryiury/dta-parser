@@ -15,8 +15,8 @@ const myhome = {
     backing: 1,
   },
   anim_tempo: 16,
-  preview: 5868,
-  song_length: 173105,
+  preview: 3600,
+  song_length: 122409,
   rank_band: 0,
   rating: 1,
   genre: { genre: 'Pop/Dance/Electronic', sub_genre: 'Chiptune' },
@@ -30,6 +30,6 @@ const myhome = {
   multitrack: true,
   CATemh: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default myhome

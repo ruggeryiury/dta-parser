@@ -25,6 +25,6 @@ const itstimetojump = {
   key: 'Eb',
   multitrack: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default itstimetojump

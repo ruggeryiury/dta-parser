@@ -22,6 +22,6 @@ const anysecondnow = {
   album: { hasArt: true, name: 'Speak & Spell', track_number: 10 },
   key: 'G',
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default anysecondnow

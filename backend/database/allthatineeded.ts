@@ -1,34 +1,34 @@
 import { CreateDTAFileRecipe } from '../../src/lib/create'
 
-const motherearth = {
-  id: '7748motherearth',
-  name: 'Mother Earth',
+const allthatineeded = {
+  id: '7748allthatineeded',
+  name: 'All That I Needed (Was You)',
   artist: 'Keiichi Suzuki & Hirokazu Tanaka',
   master: true,
-  song_id: 1774800033,
-  songname: '7748motherearth',
+  song_id: 1774800046,
+  songname: '7748allthatineeded',
   tracks: {
-    drum: { rank: 0, channels: 2 },
+    drum: { rank: 2, channels: 4 },
     bass: { rank: 1, real_rank: 1, channels: 1 },
-    guitar: { rank: 2, real_rank: 2, channels: 1, pans: [-0.2] },
-    keys: { rank: 0, real_rank: 0, channels: 1, pans: [0.2] },
+    guitar: { rank: 3, real_rank: 3, channels: 1 },
+    keys: { rank: 2, real_rank: 2, channels: 1 },
     backing: 1,
   },
-  anim_tempo: 16,
-  preview: 18668,
-  song_length: 119477,
-  rank_band: 0,
+  hopo_threshold: 250,
+  preview: 3200,
+  song_length: 97610,
+  rank_band: 2,
   rating: 1,
   genre: { genre: 'Pop/Dance/Electronic', sub_genre: 'Chiptune' },
   year_released: 1989,
   album: {
     hasArt: true,
     name: 'MOTHER (Original Soundtrack)',
-    track_number: 1,
+    track_number: 31,
   },
+  key: 'A',
   multitrack: true,
   author: 'Ruggy',
-  pack_name: 'MOTHER Pack 01',
 } satisfies CreateDTAFileRecipe
 
-export default motherearth
+export default allthatineeded

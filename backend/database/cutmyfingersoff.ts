@@ -28,6 +28,6 @@ const cutmyfingersoff = {
   album: { hasArt: true, name: 'Peripheral Vision', track_number: 1 },
   key: 'C',
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default cutmyfingersoff

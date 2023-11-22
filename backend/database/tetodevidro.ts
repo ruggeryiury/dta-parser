@@ -24,6 +24,6 @@ const tetodevidro = {
   key: 'C#m',
   multitrack: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default tetodevidro

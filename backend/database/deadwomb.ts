@@ -29,6 +29,6 @@ const deadwomb = {
   album: { hasArt: true, name: 'Heads Up', track_number: 1 },
   key: 'Cm',
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default deadwomb

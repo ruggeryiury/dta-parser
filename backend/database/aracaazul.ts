@@ -38,6 +38,6 @@ const aracaazul = {
   },
   key: 'Eb',
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default aracaazul

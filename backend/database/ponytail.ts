@@ -28,6 +28,6 @@ const ponytail = {
   key: 'A',
   author: 'Ruggy',
   CATemh: true,
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default ponytail

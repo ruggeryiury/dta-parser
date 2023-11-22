@@ -31,6 +31,6 @@ const mindmischief = {
   key: 'F#',
   author: 'Ruggy',
   CATemh: true,
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default mindmischief

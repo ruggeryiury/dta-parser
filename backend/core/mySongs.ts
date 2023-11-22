@@ -4,6 +4,7 @@ import { MAGMAProject } from '../@types/magma'
 import { fullfillDTA } from '../utils/fullfillDTA'
 
 // All songs
+import allthatineeded from '../database/allthatineeded'
 import anysecondnow from '../database/anysecondnow'
 import aracaazul from '../database/aracaazul'
 import beinfriends from '../database/beinfriends'
@@ -361,6 +362,12 @@ const mySongs = {
   }),
 
   myhome: genMAGMAConfig(myhome, {
+    releaseVer: 1,
+    releasedAt: new Date('Nov 7, 2023').toDateString(),
+    updatedAt: new Date('Nov 7, 2023').toDateString(),
+  }),
+
+  allthatineeded: genMAGMAConfig(allthatineeded, {
     releaseVer: 1,
     releasedAt: new Date('Nov 7, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),

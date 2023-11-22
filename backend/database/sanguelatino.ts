@@ -24,6 +24,6 @@ const sanguelatino = {
   key: 'D',
   CATemh: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default sanguelatino

@@ -27,6 +27,6 @@ const passport = {
   multitrack: true,
   CATemh: true,
   pack_name: 'Windows .MID Pack 02',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default passport

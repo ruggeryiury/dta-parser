@@ -29,6 +29,6 @@ const breakingintocars = {
   key: 'C#m',
   CATemh: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default breakingintocars

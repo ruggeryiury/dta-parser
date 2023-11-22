@@ -28,6 +28,6 @@ const toweroflahja = {
   author: 'Ruggy',
   multitrack: true,
   CATemh: true,
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default toweroflahja

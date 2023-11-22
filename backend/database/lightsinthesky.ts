@@ -25,6 +25,6 @@ const lightsinthesky = {
   multitrack: true,
   CATemh: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default lightsinthesky

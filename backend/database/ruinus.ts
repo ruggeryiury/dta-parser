@@ -5,7 +5,7 @@ const ruinus = {
   name: 'Ruin Us',
   artist: 'The Jellybricks',
   master: true,
-  song_id: 1774800046,
+  song_id: 1774800047,
   songname: '7748ruinus',
   tracks: {
     drum: { rank: 2, channels: 5 },
@@ -26,6 +26,6 @@ const ruinus = {
   key: 'G',
   multitrack: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default ruinus

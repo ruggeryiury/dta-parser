@@ -25,6 +25,6 @@ const cravoecanela = {
   album: { hasArt: true, name: 'Clube da Esquina', track_number: 6 },
   key: 'G',
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default cravoecanela

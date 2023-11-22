@@ -24,6 +24,6 @@ const paintwar = {
   key: 'A',
   multitrack: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default paintwar

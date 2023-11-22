@@ -27,6 +27,6 @@ const thespaceinbetween = {
   multitrack: true,
   CATemh: true,
   pack_name: 'Chart-a-thon 2018',
-} as CreateDTAFileRecipe
+} satisfies CreateDTAFileRecipe
 
 export default thespaceinbetween
