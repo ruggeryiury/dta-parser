@@ -46,7 +46,7 @@ export type SortByOptionsTypes = 'name' | 'artist' | 'artist_set' | 'id' | 'song
  * Sorts an array of parsed song objects.
  * - - - -
  * @param {DTAFileContents[]} songs An array with parsed song objects.
- * @param {SortByOptionsTypes | undefined} sortBy `OPTIONAL` The sorting type. Default is `song_id`
+ * @param {SortByOptionsTypes | undefined} sortBy `OPTIONAL` The sorting type. Default is `song_id`.
  * @returns {DTAFileContents[]} A sorted array of parsed song objects.
  */
 export const sortDTA = (songs: DTAFileContents[], sortBy?: SortByOptionsTypes): DTAFileContents[] => {

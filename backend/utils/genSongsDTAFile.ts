@@ -63,7 +63,7 @@ export const genSongsDTAFile = async (songs: MAGMAProject | MAGMAProject[] | MyS
   }
 
   const songsContents = stringifyDTA(sortDTA(databaseSongs, 'song_id'), {
-    type: opts.type || 'rb3_dlc',
+    type: opts.type || 'default',
     placeCustomAttributes: opts.placeCustomAttributes || true,
     guitarCores: opts.guitarCores || false,
     omitUnusedRanks: opts.omitUnusedRanks || false,

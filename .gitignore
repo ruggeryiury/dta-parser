@@ -2,8 +2,9 @@ node_modules/
 backend/gen
 backend/testing
 dist/
-./lib/
+/lib/
 module/
 *.tgz
 *.rar
 *.zip
+*-old.md

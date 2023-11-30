@@ -299,7 +299,7 @@ export const C3Upgrades = (): C3CustomsUpgradesObject => {
     },
     DontPanic: {
       // Don't Panic - Coldplay
-      key: 'C',
+      key: 'Am',
     },
     Side_CCIIMI: {
       // Movin In - Chicago
@@ -331,19 +331,19 @@ export const C3Upgrades = (): C3CustomsUpgradesObject => {
     },
     TheLazySong_PVH: {
       // The Lazy Song - Bruno Mars
-      key: 'C',
+      key: 'B',
     },
     'SHYHMFv#v15': {
       // So Hot You're Hurting My Feelings - Caroline Polachek
-      key: 'C',
+      key: 'F#',
     },
     BoomClapV2: {
       // Boom Clap - Charli XCX
-      key: 'C',
+      key: 'A',
     },
     CharlieBrown: {
       // Charlie Brown - Coldplay
-      key: 'C',
+      key: 'Gm',
     },
   } as C3CustomsUpgradesObject
 }
