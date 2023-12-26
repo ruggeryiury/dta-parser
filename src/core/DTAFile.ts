@@ -1,25 +1,24 @@
-import { DTAFileContents } from '../@types/dta'
-import { CreateDTAFileRecipe, createDTA } from '../lib/create'
-import { GetNamingOptions, getSongArtist, getSongTitle } from '../lib/get'
-import { SortByOptionsTypes, sortDTA } from '../lib/sort'
-import { StringifyDataOptions, stringifyDTA } from '../lib/stringify'
-import { UpdateDataOptions, updateDTA } from '../lib/update'
+import { createDTA } from '../lib/create'
+import { getSongArtist, getSongTitle } from '../lib/get'
+import { sortDTA } from '../lib/sort'
+import { stringifyDTA } from '../lib/stringify'
+import { updateDTA } from '../lib/update'
 
 /**
  * Main module of the `DTAParser` package.
- * 
+ *
  * This includes functions to handle creation, data fetching and manipulation,
  * sorting, stringifying, and updating `DTAFileContents` objects.
  */
 export interface DTAFileModule {
-  create: (values?: CreateDTAFileRecipe | undefined) => DTAFileContents
+  create: typeof createDTA,
   get: {
-    songTitle: (song: DTAFileContents, options?: GetNamingOptions) => string
-    songArtist: (song: DTAFileContents, options?: GetNamingOptions) => string
+    songTitle: typeof getSongTitle
+    songArtist: typeof getSongArtist
   }
-  sort: (songs: DTAFileContents[], sortBy?: SortByOptionsTypes | undefined) => DTAFileContents[]
-  stringify: (songs: DTAFileContents | DTAFileContents[], options?: StringifyDataOptions | undefined) => string
-  update: (dta: DTAFileContents, update: UpdateDataOptions) => DTAFileContents
+  sort: typeof sortDTA
+  stringify: typeof stringifyDTA
+  update: typeof updateDTA
 }
 
 const DTAFile: DTAFileModule = {

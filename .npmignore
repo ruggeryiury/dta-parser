@@ -1,6 +1,7 @@
 backend/
 images/
 node_modules/
+python/
 .eslintrc.js
 .gitignore
 .npmignore

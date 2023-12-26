@@ -47,8 +47,8 @@ export const timeStringToMilliseconds = (timeString: string): number => {
 /**
  * Converts milliseconds to seconds.
  * - - - -
- * @param milliseconds Quantity of milliseconds.
- * @returns The calculated time as seconds.
+ * @param {number} milliseconds Quantity of milliseconds.
+ * @returns {number} The calculated time as seconds.
  */
 export const millisecondsToSeconds = (milliseconds: number): number => {
   return milliseconds / 1000

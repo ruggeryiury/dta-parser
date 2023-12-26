@@ -100,6 +100,7 @@ export interface CreateDTAFileRecipe extends UpdateDataOptions {
 
 /**
  * Creates a new parsed song object.
+ * - - - -
  * @param {CreateDTAFileRecipe} values `OPTIONAL` Options for the `DTAFile` creation process.
  * If `undefined`, It will be created using a all-default, all-blank options.
  * @returns {DTAFileContents} A new parsed song object.

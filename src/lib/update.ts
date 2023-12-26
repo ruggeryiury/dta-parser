@@ -616,6 +616,7 @@ export interface UpdateDataOptions {
 
 /**
  * Updates a song with the provided update options.
+ * - - - -
  * @param {DTAFileContents} dta  The parsed song to update.
  * @param {UpdateDataOptions} update The options for the parsed song updating process.
  */

@@ -240,7 +240,7 @@ export interface PanVolInformationObject {
  * Generates an object with detailed informations about the song's audio file track structure.
  * - - - -
  * @param {DTAFileContents} song The song you want the panning and volume information from.
- * @returns An object with all panning and volume informations.
+ * @returns {PanVolInformationObject} An object with all panning and volume informations.
  */
 export const panVolInfoGen = (song: DTAFileContents): PanVolInformationObject => {
   const { tracks_count, pans, vols, solo } = song

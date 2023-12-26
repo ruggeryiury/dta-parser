@@ -4,6 +4,7 @@ backend/testing
 dist/
 /lib/
 module/
+python/
 *.tgz
 *.rar
 *.zip
