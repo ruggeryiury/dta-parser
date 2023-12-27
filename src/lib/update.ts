@@ -947,7 +947,7 @@ export const updateDTA = (dta: DTAFileContents, update: UpdateDataOptions): DTAF
 
   if (encoding) dta.encoding = encoding
 
-  if (game_origin) dta.game_origin = game_origin
+  if (game_origin) dta.game_origin = game_origin as typeof dta.game_origin
 
   if (rating) dta.rating = typeof rating === 'number' ? rating : getKeyFromValue.rating(rating)
 

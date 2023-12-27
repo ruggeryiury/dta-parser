@@ -11,10 +11,10 @@ import { updateDTA } from '../lib/update'
  * sorting, stringifying, and updating `DTAFileContents` objects.
  */
 export interface DTAFileModule {
-  create: typeof createDTA,
+  create: typeof createDTA
   get: {
-    songTitle: typeof getSongTitle
-    songArtist: typeof getSongArtist
+    title: typeof getSongTitle
+    artist: typeof getSongArtist
   }
   sort: typeof sortDTA
   stringify: typeof stringifyDTA
@@ -24,8 +24,8 @@ export interface DTAFileModule {
 const DTAFile: DTAFileModule = {
   create: createDTA,
   get: {
-    songTitle: getSongTitle,
-    songArtist: getSongArtist,
+    title: getSongTitle,
+    artist: getSongArtist,
   },
   sort: sortDTA,
   stringify: stringifyDTA,

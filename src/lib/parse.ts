@@ -421,7 +421,7 @@ export const parseDTA = (dtaFileContents: string): DTAFileContents => {
     }
 
     if (keyFilter === 'game_origin') {
-      parsed.game_origin = newValue
+      parsed.game_origin = newValue as typeof parsed.game_origin
       return
     }
 

@@ -1,13 +1,11 @@
 import { VocalPartsTypes, BankTypes, DrumBankTypes, BandFailCueTypes, SongScrollSpeedTypes, RatingTypes, GenreTypes, SubGenreTypes, VocalGenderTypes, AnimTempoNumeralTypes } from '../lib/locale'
 
 export type SoloFlags = 'drum' | 'bass' | 'guitar' | 'keys' | 'vocal_percussion'
-
 export type SongKeyValues = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
 export type SongTonalityValues = 0 | 1
-
 export type ExtraAuthoringFlags = 'disc_update' | 'pearljam' | 'greenday'
-
 export type EncodingValues = 'latin1' | 'utf8'
+export type GameOriginValues = 'rb1' | 'rb1_dlc' | 'rb2' | 'rb2_dlc' | 'rb3' | 'rb3_dlc' | 'lego' | 'greenday' | 'ugc' | 'ugc_plus'
 
 /**
  * A parsed song object with all its contents.
@@ -149,7 +147,12 @@ export interface DTAFileContents {
   encoding?: EncodingValues
   format?: number
   version?: number
-  game_origin?: string
+  /**
+   * The game origin of the song.
+   * 
+   * All customs are compiled on MAGMA using `ugc_plus`.
+   */
+  game_origin?: GameOriginValues
   /**
    * The song's rating.
    */
@@ -170,6 +173,12 @@ export interface DTAFileContents {
    * The song's release year.
    */
   year_released: number
+  /**
+   * The song's recorded year.
+   *
+   * This is used on re-recordings or alternative versions of
+   * the song.
+   */
   year_recorded?: number
   /**
    * Tells if the song has an album artwork file to be displayed.
@@ -183,8 +192,22 @@ export interface DTAFileContents {
    * The song's track number on the album.
    */
   album_track_number?: number
+  /**
+   * The vocal tonic note of the song. This changes the HUD on the vocal tracks based on the given note.
+   * 
+   * If `song_key` is not specified, it'll be used as song key in general, changing the accident symbol on
+   * PRO Guitar/Bass parts and showing the song key on PRO Keys trainers based on it.
+   */
   vocal_tonic_note?: SongKeyValues
+  /**
+   * The song tonality of the song.
+   * 
+   * Values can be `0` (Major tonality) or `1` (Minor tonality).
+   */
   song_tonality?: SongTonalityValues
+  /**
+   * Specific parameter to override the `vocal_tonic_note` on PRO Guitar/Bass/Keys parts.
+   */
   song_key?: SongKeyValues
   /**
    * An array with the tuning of all 6 strings of the PRO Guitar part.
