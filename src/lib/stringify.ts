@@ -1,4 +1,4 @@
-import { DTAFileContents } from '../@types/dta'
+import { DTAFileContents } from './dta'
 import { tracksCountToString } from '../utils/audioChannels'
 import { quoteToSlashQ, genTabs } from '../utils/stringProcessors'
 

@@ -1,4 +1,4 @@
-import { DTAFileContents } from '../../src/@types/dta'
+import { DTAFileContents } from '../../src/lib/dta'
 
 /**
  * Type-safety injects custom attributes to create custom DTA file contents types by passing the desired type as type parameter.

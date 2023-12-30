@@ -1,4 +1,4 @@
-import { DTAFileContents, EncodingValues } from '../@types/dta'
+import { DTAFileContents, EncodingValues } from './dta'
 import {
   BankValues,
   DrumBankValues,

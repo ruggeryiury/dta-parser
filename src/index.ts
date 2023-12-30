@@ -1,4 +1,4 @@
-import { DTAFileContents } from './@types/dta'
+import { DTAFileContents } from './lib/dta'
 import DTAFile from './core/DTAFile'
 import { depackDTA } from './lib/depack'
 import { parseDTA } from './lib/parse'
@@ -79,6 +79,6 @@ const DTAParser = (dtaFileContents: string, options?: DTAParserOptions): DTAFile
   return parsedSongs
 }
 
-export type { DTAFileContents, ExpandedDTAFileContents } from './@types/dta'
+export type { DTAFileContents, ExpandedDTAFileContents } from './lib/dta'
 export { DTAFile }
 export default DTAParser

@@ -1,4 +1,4 @@
-import { VocalPartsTypes, BankTypes, DrumBankTypes, BandFailCueTypes, SongScrollSpeedTypes, RatingTypes, GenreTypes, SubGenreTypes, VocalGenderTypes, AnimTempoNumeralTypes } from '../lib/locale'
+import { VocalPartsTypes, BankTypes, DrumBankTypes, BandFailCueTypes, SongScrollSpeedTypes, RatingTypes, GenreTypes, SubGenreTypes, VocalGenderTypes, AnimTempoNumeralTypes } from './locale'
 
 export type SoloFlags = 'drum' | 'bass' | 'guitar' | 'keys' | 'vocal_percussion'
 export type SongKeyValues = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
@@ -149,7 +149,7 @@ export interface DTAFileContents {
   version?: number
   /**
    * The game origin of the song.
-   * 
+   *
    * All customs are compiled on MAGMA using `ugc_plus`.
    */
   game_origin?: GameOriginValues
@@ -194,14 +194,14 @@ export interface DTAFileContents {
   album_track_number?: number
   /**
    * The vocal tonic note of the song. This changes the HUD on the vocal tracks based on the given note.
-   * 
+   *
    * If `song_key` is not specified, it'll be used as song key in general, changing the accident symbol on
    * PRO Guitar/Bass parts and showing the song key on PRO Keys trainers based on it.
    */
   vocal_tonic_note?: SongKeyValues
   /**
    * The song tonality of the song.
-   * 
+   *
    * Values can be `0` (Major tonality) or `1` (Minor tonality).
    */
   song_tonality?: SongTonalityValues
@@ -280,4 +280,30 @@ export type PartialDTAFileContents = Partial<DTAFileContents>
 /**
  * Generic type for custom `DTAFileContents` type.
  */
-export type ExpandedDTAFileContents<T> = DTAFileContents & T
+export type ExpandedDTAFileContents<T> = Omit<DTAFileContents, keyof T> & T
+
+export const dtaDefault: DTAFileContents = {
+  id: '',
+  name: '',
+  artist: '',
+  master: false,
+  song_id: 0,
+  songname: '',
+  tracks_count: [0, 0, 0, 0, 0, 0],
+  pans: [],
+  vols: [],
+  vocal_parts: 0,
+  bank: 'sfx/tambourine_bank.milo',
+  drum_bank: 'sfx/kit01_bank.milo',
+  anim_tempo: 32,
+  preview: [0, 0],
+  song_length: 0,
+  rank_band: 1,
+  game_origin: 'ugc_plus',
+  rating: 4,
+  genre: 'other',
+  vocal_gender: 'male',
+  year_released: new Date().getFullYear(),
+  album_art: false,
+  album_name: '',
+}

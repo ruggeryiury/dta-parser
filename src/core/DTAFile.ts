@@ -1,5 +1,5 @@
 import { createDTA } from '../lib/create'
-import { getSongArtist, getSongTitle } from '../lib/get'
+import { getSongAlbumTitle, getSongArtist, getSongRank, getSongTitle } from '../lib/get'
 import { sortDTA } from '../lib/sort'
 import { stringifyDTA } from '../lib/stringify'
 import { updateDTA } from '../lib/update'
@@ -15,6 +15,8 @@ export interface DTAFileModule {
   get: {
     title: typeof getSongTitle
     artist: typeof getSongArtist
+    albumTitle: typeof getSongAlbumTitle,
+    rank: typeof getSongRank
   }
   sort: typeof sortDTA
   stringify: typeof stringifyDTA
@@ -26,6 +28,8 @@ const DTAFile: DTAFileModule = {
   get: {
     title: getSongTitle,
     artist: getSongArtist,
+    albumTitle: getSongAlbumTitle,
+    rank: getSongRank
   },
   sort: sortDTA,
   stringify: stringifyDTA,

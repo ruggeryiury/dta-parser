@@ -1,32 +1,7 @@
 import cloneDeep from 'lodash/cloneDeep'
-import { DTAFileContents, DTAFileContentsKeys } from '../@types/dta'
+import { DTAFileContents, DTAFileContentsKeys } from './dta'
 import { updateDTA, UpdateDataOptions, TrackUpdateOptions, GenreUpdateOptionsTypes } from './update'
-
-const dtaDefault: DTAFileContents = {
-  id: '',
-  name: '',
-  artist: '',
-  master: false,
-  song_id: 0,
-  songname: '',
-  tracks_count: [0, 0, 0, 0, 0, 0],
-  pans: [],
-  vols: [],
-  vocal_parts: 0,
-  bank: 'sfx/tambourine_bank.milo',
-  drum_bank: 'sfx/kit01_bank.milo',
-  anim_tempo: 32,
-  preview: [0, 0],
-  song_length: 0,
-  rank_band: 1,
-  game_origin: 'ugc_plus',
-  rating: 4,
-  genre: 'other',
-  vocal_gender: 'male',
-  year_released: new Date().getFullYear(),
-  album_art: false,
-  album_name: '',
-}
+import { dtaDefault } from './dta'
 
 export const clearDTA = (dta: DTAFileContents): Partial<DTAFileContents> => {
   const song: ReturnType<typeof clearDTA> = dta

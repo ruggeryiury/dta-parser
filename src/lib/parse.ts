@@ -1,4 +1,4 @@
-import { DTAFileContents } from '../@types/dta'
+import { DTAFileContents } from './dta'
 import { slashQToQuote } from '../utils/stringProcessors'
 import { createDTA } from './create'
 

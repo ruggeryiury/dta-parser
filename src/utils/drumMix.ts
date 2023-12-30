@@ -1,4 +1,4 @@
-import { DTAFileContents } from '../@types/dta'
+import { DTAFileContents } from '../lib/dta'
 
 type CheckDrumMixReturnType = 'drums0' | 'drums1' | 'drums2' | 'drums3' | 'drums4' | undefined
 /**

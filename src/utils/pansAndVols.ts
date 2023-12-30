@@ -1,4 +1,4 @@
-import { DTAFileContents } from '../@types/dta'
+import { DTAFileContents } from '../lib/dta'
 import { DrumTracksTypes, InstrumentTracksTypes } from '../lib/update'
 
 /**

@@ -1,4 +1,4 @@
-import { SongKeyValues, SongTonalityValues } from '../@types/dta'
+import { SongKeyValues, SongTonalityValues } from './dta'
 import { SongKeyUpdateOptions } from './update'
 
 /**
