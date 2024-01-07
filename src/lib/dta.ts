@@ -280,7 +280,7 @@ export type PartialDTAFileContents = Partial<DTAFileContents>
 /**
  * Generic type for custom `DTAFileContents` type.
  */
-export type ExpandedDTAFileContents<T> = Omit<DTAFileContents, keyof T> & T
+export type ExpandedDTAFileContents<T> = DTAFileContents & T
 
 export const dtaDefault: DTAFileContents = {
   id: '',

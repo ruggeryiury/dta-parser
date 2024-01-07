@@ -1,57 +1,10 @@
 import { DTAFileContents, DTAFile } from '../../src'
 import { CreateDTAFileRecipe } from '../../src/lib/create'
-import { MAGMAProject } from '../@types/magma'
-import { fullfillDTA } from '../utils/fullfillDTA'
+import { fullfillDTA } from '../lib/fullfillDTA'
+import { MAGMAProject } from '../lib/magma'
 
 // All songs
-import allthatineeded from '../database/allthatineeded'
-import anysecondnow from '../database/anysecondnow'
-import aracaazul from '../database/aracaazul'
-import beinfriends from '../database/beinfriends'
-import breakingintocars from '../database/breakingintocars'
-import canyon from '../database/canyon'
-import congratulations from '../database/congratulations'
-import cravoecanela from '../database/cravoecanela'
-import cutmyfingersoff from '../database/cutmyfingersoff'
-import deadwomb from '../database/deadwomb'
-import demon from '../database/demon'
-import fateinhaze from '../database/fateinhaze'
-import flourish from '../database/flourish'
-import hideandseek from '../database/hideandseek'
-import hippiebattle from '../database/hippiebattle'
-import itstimetojump from '../database/itstimetojump'
-import lennastheme from '../database/lennastheme'
-import lightsinthesky from '../database/lightsinthesky'
-import magicant from '../database/magicant'
-import mindmischief from '../database/mindmischief'
-import minuet from '../database/minuet'
-import motherearth from '../database/motherearth'
-import mothernature from '../database/mothernature'
-import myhome from '../database/myhome'
-import onestop from '../database/onestop'
-import paintwar from '../database/paintwar'
-import passport from '../database/passport'
-import patins from '../database/patins'
-import pollyanna from '../database/pollyanna'
-import ponytail from '../database/ponytail'
-import robotsinthegarden from '../database/robotsinthegarden'
-import royalpalace from '../database/royalpalace'
-import ruinus from '../database/ruinus'
-import sanguelatino from '../database/sanguelatino'
-import smb2playersel from '../database/smb2playersel'
-import southparktheme from '../database/southparktheme'
-import spacecadet from '../database/spacecadet'
-import spacecadet2x from '../database/spacecadet2x'
-import tetodevidro from '../database/tetodevidro'
-import thefightisover from '../database/thefightisover'
-import theradiant from '../database/theradiant'
-import thespaceinbetween from '../database/thespaceinbetween'
-import toweroflahja from '../database/toweroflahja'
-import town from '../database/town'
-import twinkle from '../database/twinkle'
-import whydidntyoustopme from '../database/whydidntyoustopme'
-import wisdomoftheworld from '../database/wisdomoftheworld'
-
+import * as database from '../database'
 /**
  * Generates a parsed song file with additional attributes for MAGMA related actions from a parsed song "recipe" object.
  * - - - -
@@ -63,7 +16,7 @@ export const genMAGMAConfig = (songRecipe: CreateDTAFileRecipe, newValues?: Omit
   fullfillDTA<MAGMAProject>(DTAFile.create(songRecipe), newValues ? newValues : {})
 
 const mySongs = {
-  paintwar: genMAGMAConfig(paintwar, {
+  paintwar: genMAGMAConfig(database.paintwar, {
     autogenTheme: 'SynthPop',
     hasAuthoredVenues: true,
     hasLipSyncFiles: true,
@@ -72,7 +25,7 @@ const mySongs = {
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  southparktheme: genMAGMAConfig(southparktheme, {
+  southparktheme: genMAGMAConfig(database.southparktheme, {
     autogenTheme: 'PsychJamRock',
     hasAuthoredVenues: true,
     hasLipSyncFiles: true,
@@ -81,7 +34,7 @@ const mySongs = {
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  hideandseek: genMAGMAConfig(hideandseek, {
+  hideandseek: genMAGMAConfig(database.hideandseek, {
     autogenTheme: 'SlowJam',
     hasAuthoredVenues: true,
     releaseVer: 3,
@@ -89,69 +42,69 @@ const mySongs = {
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  cravoecanela: genMAGMAConfig(cravoecanela, {
+  cravoecanela: genMAGMAConfig(database.cravoecanela, {
     autogenTheme: 'PsychJamRock',
     releaseVer: 3,
     releasedAt: new Date('Sep 17, 2017').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  deadwomb: genMAGMAConfig(deadwomb, {
+  deadwomb: genMAGMAConfig(database.deadwomb, {
     autogenTheme: 'GaragePunkRock',
     releaseVer: 4,
     releasedAt: new Date('Sep 20, 2017').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  minuet: genMAGMAConfig(minuet, {
+  minuet: genMAGMAConfig(database.minuet, {
     autogenTheme: 'SlowJam',
     releaseVer: 4,
     releasedAt: new Date('Oct 7, 2017').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  flourish: genMAGMAConfig(flourish, {
+  flourish: genMAGMAConfig(database.flourish, {
     fake: true,
     releaseVer: 4,
     releasedAt: new Date('Nov 17, 2017').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  town: genMAGMAConfig(town, {
+  town: genMAGMAConfig(database.town, {
     fake: true,
     releaseVer: 3,
     releasedAt: new Date('Dec 4, 2017').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  onestop: genMAGMAConfig(onestop, {
+  onestop: genMAGMAConfig(database.onestop, {
     fake: true,
     releaseVer: 2,
     releasedAt: new Date('Dec 8, 2017').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  canyon: genMAGMAConfig(canyon, {
+  canyon: genMAGMAConfig(database.canyon, {
     fake: true,
     releaseVer: 3,
     releasedAt: new Date('Dec 16, 2017').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  passport: genMAGMAConfig(passport, {
+  passport: genMAGMAConfig(database.passport, {
     releaseVer: 2,
     releasedAt: new Date('Dec 24, 2017').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  spacecadet: genMAGMAConfig(spacecadet, {
+  spacecadet: genMAGMAConfig(database.spacecadet, {
     autogenTheme: 'PsychJamRock',
     releaseVer: 3,
     releasedAt: new Date('Dec 21, 2017').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  spacecadet2x: genMAGMAConfig(spacecadet2x, {
+  spacecadet2x: genMAGMAConfig(database.spacecadet2x, {
     autogenTheme: 'PsychJamRock',
     doubleKickOptions: { kickwav: true },
     releaseVer: 3,
@@ -159,14 +112,14 @@ const mySongs = {
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  breakingintocars: genMAGMAConfig(breakingintocars, {
+  breakingintocars: genMAGMAConfig(database.breakingintocars, {
     hasLipSyncFiles: true,
     releaseVer: 3,
     releasedAt: new Date('Jan 11, 2018').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  aracaazul: genMAGMAConfig(aracaazul, {
+  aracaazul: genMAGMAConfig(database.aracaazul, {
     hasLipSyncFiles: true,
     fakeHarm: 2,
     hasAuthoredVenues: true,
@@ -175,84 +128,84 @@ const mySongs = {
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  demon: genMAGMAConfig(demon, {
+  demon: genMAGMAConfig(database.demon, {
     releaseVer: 2,
     releasedAt: new Date('Jun 14, 2018').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  cutmyfingersoff: genMAGMAConfig(cutmyfingersoff, {
+  cutmyfingersoff: genMAGMAConfig(database.cutmyfingersoff, {
     releaseVer: 3,
     releasedAt: new Date('Jun 15, 2018').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  thefightisover: genMAGMAConfig(thefightisover, {
+  thefightisover: genMAGMAConfig(database.thefightisover, {
     releaseVer: 3,
     releasedAt: new Date('Jun 15, 2018').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  anysecondnow: genMAGMAConfig(anysecondnow, {
+  anysecondnow: genMAGMAConfig(database.anysecondnow, {
     hasLipSyncFiles: true,
     releaseVer: 2,
     releasedAt: new Date('Jul 18, 2022').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  congratulations: genMAGMAConfig(congratulations, {
+  congratulations: genMAGMAConfig(database.congratulations, {
     releaseVer: 2,
     releasedAt: new Date('Jul 4, 2018').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  lightsinthesky: genMAGMAConfig(lightsinthesky, {
+  lightsinthesky: genMAGMAConfig(database.lightsinthesky, {
     hasLipSyncFiles: true,
     releaseVer: 2,
     releasedAt: new Date('Aug 26, 2018').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  mothernature: genMAGMAConfig(mothernature, {
+  mothernature: genMAGMAConfig(database.mothernature, {
     releaseVer: 2,
     releasedAt: new Date('Aug 28, 2018').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  mindmischief: genMAGMAConfig(mindmischief, {
+  mindmischief: genMAGMAConfig(database.mindmischief, {
     releaseVer: 2,
     releasedAt: new Date('Dec 14, 2018').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  theradiant: genMAGMAConfig(theradiant, {
+  theradiant: genMAGMAConfig(database.theradiant, {
     releaseVer: 2,
     releasedAt: new Date('Dec 5, 2019').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  whydidntyoustopme: genMAGMAConfig(whydidntyoustopme, {
+  whydidntyoustopme: genMAGMAConfig(database.whydidntyoustopme, {
     hasLipSyncFiles: true,
     releaseVer: 2,
     releasedAt: new Date('Dec 5, 2019').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  thespaceinbetween: genMAGMAConfig(thespaceinbetween, {
+  thespaceinbetween: genMAGMAConfig(database.thespaceinbetween, {
     hasLipSyncFiles: true,
     releaseVer: 2,
     releasedAt: new Date('Dec 5, 2019').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  sanguelatino: genMAGMAConfig(sanguelatino, {
+  sanguelatino: genMAGMAConfig(database.sanguelatino, {
     hasLipSyncFiles: true,
     releaseVer: 2,
     releasedAt: new Date('Apr 10, 2020').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  robotsinthegarden: genMAGMAConfig(robotsinthegarden, {
+  robotsinthegarden: genMAGMAConfig(database.robotsinthegarden, {
     hasLipSyncFiles: true,
     hasAuthoredVenues: true,
     releaseVer: 2,
@@ -260,7 +213,7 @@ const mySongs = {
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  ponytail: genMAGMAConfig(ponytail, {
+  ponytail: genMAGMAConfig(database.ponytail, {
     hasLipSyncFiles: true,
     hasAuthoredVenues: true,
     releaseVer: 2,
@@ -268,19 +221,19 @@ const mySongs = {
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  beinfriends: genMAGMAConfig(beinfriends, {
+  beinfriends: genMAGMAConfig(database.beinfriends, {
     releaseVer: 1,
     releasedAt: new Date('Jul 16, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  hippiebattle: genMAGMAConfig(hippiebattle, {
+  hippiebattle: genMAGMAConfig(database.hippiebattle, {
     releaseVer: 1,
     releasedAt: new Date('Jul 16, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  patins: genMAGMAConfig(patins, {
+  patins: genMAGMAConfig(database.patins, {
     hasLipSyncFiles: true,
     hasAuthoredVenues: true,
     releaseVer: 1,
@@ -288,92 +241,92 @@ const mySongs = {
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  motherearth: genMAGMAConfig(motherearth, {
+  motherearth: genMAGMAConfig(database.motherearth, {
     releaseVer: 1,
     releasedAt: new Date('Jul 16, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  pollyanna: genMAGMAConfig(pollyanna, {
+  pollyanna: genMAGMAConfig(database.pollyanna, {
     releaseVer: 1,
     releasedAt: new Date('Jul 16, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  twinkle: genMAGMAConfig(twinkle, {
+  twinkle: genMAGMAConfig(database.twinkle, {
     releaseVer: 1,
     releasedAt: new Date('Jul 16, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  tetodevidro: genMAGMAConfig(tetodevidro, {
+  tetodevidro: genMAGMAConfig(database.tetodevidro, {
     hasLipSyncFiles: true,
     releaseVer: 1,
     releasedAt: new Date('Nov 7, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  lennastheme: genMAGMAConfig(lennastheme, {
+  lennastheme: genMAGMAConfig(database.lennastheme, {
     releaseVer: 1,
     releasedAt: new Date('Nov 7, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  fateinhaze: genMAGMAConfig(fateinhaze, {
+  fateinhaze: genMAGMAConfig(database.fateinhaze, {
     releaseVer: 1,
     releasedAt: new Date('Nov 7, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  royalpalace: genMAGMAConfig(royalpalace, {
+  royalpalace: genMAGMAConfig(database.royalpalace, {
     releaseVer: 1,
     releasedAt: new Date('Nov 7, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  magicant: genMAGMAConfig(magicant, {
+  magicant: genMAGMAConfig(database.magicant, {
     releaseVer: 1,
     releasedAt: new Date('Nov 7, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  smb2playersel: genMAGMAConfig(smb2playersel, {
+  smb2playersel: genMAGMAConfig(database.smb2playersel, {
     releaseVer: 1,
     releasedAt: new Date('Nov 7, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  itstimetojump: genMAGMAConfig(itstimetojump, {
+  itstimetojump: genMAGMAConfig(database.itstimetojump, {
     releaseVer: 1,
     releasedAt: new Date('Nov 7, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  wisdomoftheworld: genMAGMAConfig(wisdomoftheworld, {
+  wisdomoftheworld: genMAGMAConfig(database.wisdomoftheworld, {
     releaseVer: 1,
     releasedAt: new Date('Nov 7, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  toweroflahja: genMAGMAConfig(toweroflahja, {
+  toweroflahja: genMAGMAConfig(database.toweroflahja, {
     releaseVer: 1,
     releasedAt: new Date('Nov 7, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  myhome: genMAGMAConfig(myhome, {
+  myhome: genMAGMAConfig(database.myhome, {
     releaseVer: 1,
     releasedAt: new Date('Nov 7, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  allthatineeded: genMAGMAConfig(allthatineeded, {
+  allthatineeded: genMAGMAConfig(database.allthatineeded, {
     releaseVer: 1,
     releasedAt: new Date('Nov 7, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),
   }),
 
-  ruinus: genMAGMAConfig(ruinus, {
+  ruinus: genMAGMAConfig(database.ruinus, {
     releaseVer: 1,
     releasedAt: new Date('Nov 7, 2023').toDateString(),
     updatedAt: new Date('Nov 7, 2023').toDateString(),

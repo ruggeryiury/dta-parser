@@ -244,6 +244,17 @@ export const rankValuesObj = {
   7: 'Impossible',
 } as const
 
+export const rankValuesDotVerboseObj = {
+  0: 'No Part',
+  1: 'Zero Dots',
+  2: 'One Dot',
+  3: 'Two Dots',
+  4: 'Three Dots',
+  5: 'Four Dots',
+  6: 'Five Dots',
+  7: 'Devil Dots',
+} as const
+
 export type AnimTempoTypes = keyof typeof animTempoValuesObj
 export type AnimTempoNumeralTypes = Exclude<keyof typeof animTempoValuesObj, 'kTempoSlow' | 'kTempoMedium' | 'kTempoFast'>
 export type AnimTempoValues = (typeof animTempoValuesObj)[AnimTempoTypes]
@@ -276,11 +287,14 @@ export type VocalPartsTypes = keyof typeof vocalPartsValuesObj
 export type VocalPartsValues = (typeof vocalPartsValuesObj)[VocalPartsTypes]
 
 export type RankLocaleOnlyNumberTypes = keyof typeof rankValuesObj
+export type RankLocaleOnlyBandNumberTypes = Exclude<keyof typeof rankValuesObj, 0>
 export type InstrumentRankingsNumberOptions = -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6
 export type InstrumentRankingsVerbosedOptions = (typeof rankValuesObj)[keyof typeof rankValuesObj]
 
 export type BandRankingsNumberOptions = Exclude<InstrumentRankingsNumberOptions, -1>
 export type BandRankingsVerbosedOptions = Exclude<InstrumentRankingsVerbosedOptions, 'No Part'>
+export type BandRankingsDotVerbosedOptions = Exclude<(typeof rankValuesDotVerboseObj)[keyof typeof rankValuesDotVerboseObj], 'No Part'>
+export type InstrumentRankingsDotVerbosedOptions = (typeof rankValuesDotVerboseObj)[keyof typeof rankValuesDotVerboseObj]
 
 /**
  * Functions used on the update method.
@@ -301,6 +315,8 @@ export const getKeyFromValue = {
   vocal_parts: (v: VocalPartsValues) => Number(Object.keys(vocalPartsValuesObj).find((key) => vocalPartsValuesObj[Number(key) as VocalPartsTypes] === v)) as VocalPartsTypes,
 }
 
+export type GetLocaleRankReturnType<V extends boolean> = V extends true ? BandRankingsDotVerbosedOptions : BandRankingsVerbosedOptions
+
 /**
  * Module for locale convertions.
  */
@@ -315,7 +331,13 @@ export const getLocale = {
   sub_genre: (value: SubGenreTypes) => subGenreValuesObj[value] as SubGenreValues,
   vocal_gender: (value: VocalGenderTypes) => vocalGenderValuesObj[value] as VocalGenderValues,
   vocal_parts: (value: VocalPartsTypes) => vocalPartsValuesObj[value] as VocalPartsValues,
-  rank: (rankCalc: number) => rankValuesObj[(rankCalc + 1) as RankLocaleOnlyNumberTypes] as BandRankingsVerbosedOptions,
+  rank: <V extends boolean>(rankCalc: number, asDot?: V): GetLocaleRankReturnType<V> => {
+    if (asDot) {
+      return rankValuesObj[(rankCalc + 1) as RankLocaleOnlyNumberTypes] as BandRankingsDotVerbosedOptions as GetLocaleRankReturnType<V>
+    }
+
+    return rankValuesObj[(rankCalc + 1) as RankLocaleOnlyNumberTypes] as BandRankingsVerbosedOptions as GetLocaleRankReturnType<V>
+  },
   song_key: (vocal_tonic_note: SongKeyValues, song_tonality: SongTonalityValues): SongKeyUpdateOptions['key'] => {
     let returnString = ''
     if (vocal_tonic_note === 0) returnString += 'C'

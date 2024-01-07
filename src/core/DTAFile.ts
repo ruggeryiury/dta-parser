@@ -15,7 +15,7 @@ export interface DTAFileModule {
   get: {
     title: typeof getSongTitle
     artist: typeof getSongArtist
-    albumTitle: typeof getSongAlbumTitle,
+    albumTitle: typeof getSongAlbumTitle
     rank: typeof getSongRank
   }
   sort: typeof sortDTA
@@ -29,7 +29,7 @@ const DTAFile: DTAFileModule = {
     title: getSongTitle,
     artist: getSongArtist,
     albumTitle: getSongAlbumTitle,
-    rank: getSongRank
+    rank: getSongRank,
   },
   sort: sortDTA,
   stringify: stringifyDTA,

@@ -1,6 +1,6 @@
 {
   "name": "dta-parser",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0",
   "private": false,
   "description": "A Rock Band song metadata file parser written in TypeScript",
   "main": "lib/index.js",
@@ -22,7 +22,7 @@
     "lint": "eslint src/**/*.{ts,js}",
     "lint:backend": "eslint backend",
     "package:create": "yarn build && yarn pack",
-    "start": "nodemon ./backend/testing/init.ts",
+    "dev": "nodemon ./backend/testing/init.ts",
     "format": "prettier --write ."
   },
   "exports": {

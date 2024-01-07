@@ -1,6 +1,6 @@
 # Changelog
 
-## `1.0.0` ???, 2023
+## `1.0.0` 2024
 
 - Major changes from older beta releases:
 
@@ -29,7 +29,7 @@
 - Fixed a bug where keys solo was not placed when using the `DTAFile.update()` method.
 - Fixed a bug where vocals and keys ranking where calculated from the 5-lane guitar ranking map.
 
-## `1.0.0-beta.3` July 23, 2023
+## `0.1.2` July 23, 2023
 
 - `DTAParser`:
 
@@ -60,7 +60,7 @@
   - Added new module method `readJSON()`, in addition to new `DTAFile.json()` method.
   - Added new module method `checkDrumMix()`.
 
-## `1.0.0-beta.2` July 13, 2023
+## `0.1.1` July 13, 2023
 
 - `DTAParser`:
 
@@ -68,6 +68,6 @@
 
 - Fixed a bug on the track counting logic, where the last declared instrument tracks count (usually vocals or keys) would be counted wrong on certain `.dta` files' structures.
 
-## `1.0.0-beta` July 11, 2023
+## `0.1.0` July 11, 2023
 
 - First stable version.
