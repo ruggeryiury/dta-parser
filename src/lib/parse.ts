@@ -1,4 +1,4 @@
-import { DTAFileContents } from './dta'
+import { DTAFile } from './dta'
 import { slashQToQuote } from '../utils/stringProcessors'
 import { createDTA } from './create'
 
@@ -6,9 +6,9 @@ import { createDTA } from './create'
  * Parses a `.dta` file contents into a `DTAFile`.
  * - - - -
  * @param {string} dtaFileContents A depacked `.dta` file contents.
- * @returns {DTAFileContents} A song parsed as a `DTAFile` object.
+ * @returns {DTAFile} A song parsed as a `DTAFile` object.
  */
-export const parseDTA = (dtaFileContents: string): DTAFileContents => {
+export const parseDTA = (dtaFileContents: string): DTAFile => {
   let namingIndex = 0,
     hasName = -1,
     hasArtist = -1,

@@ -1,4 +1,4 @@
-import { DTAFileContents } from '../lib/dta'
+import { DTAFile } from '../lib/dta'
 import { DrumTracksTypes, InstrumentTracksTypes } from '../lib/update'
 
 /**
@@ -239,10 +239,10 @@ export interface PanVolInformationObject {
 /**
  * Generates an object with detailed informations about the song's audio file track structure.
  * - - - -
- * @param {DTAFileContents} song The song you want the panning and volume information from.
+ * @param {DTAFile} song The song you want the panning and volume information from.
  * @returns {PanVolInformationObject} An object with all panning and volume informations.
  */
-export const panVolInfoGen = (song: DTAFileContents): PanVolInformationObject => {
+export const panVolInfoGen = (song: DTAFile): PanVolInformationObject => {
   const { tracks_count, pans, vols, solo } = song
   const [all_drum, bass, guitar, vocals, keys, backing, crowd] = tracks_count
   const drumkick = all_drum >= 3 ? (all_drum === 6 ? 2 : 1) : 0

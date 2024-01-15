@@ -10,7 +10,7 @@ export type GameOriginValues = 'rb1' | 'rb1_dlc' | 'rb2' | 'rb2_dlc' | 'rb3' | '
 /**
  * A parsed song object with all its contents.
  */
-export interface DTAFileContents {
+export interface DTAFile {
   /**
    * Unique string ID of the song.
    */
@@ -270,19 +270,14 @@ export interface DTAFileContents {
 /**
  * Type with all available keys from a DTA File.
  */
-export type DTAFileContentsKeys = keyof DTAFileContents
+export type DTAFileKeys = keyof DTAFile
 
 /**
- * All options from `DTAFileContents` converted to optional.
+ * Generic type for custom `DTAFile` types.
  */
-export type PartialDTAFileContents = Partial<DTAFileContents>
+export type DTAFileExpanded<T> = DTAFile & T
 
-/**
- * Generic type for custom `DTAFileContents` type.
- */
-export type ExpandedDTAFileContents<T> = DTAFileContents & T
-
-export const dtaDefault: DTAFileContents = {
+export const dtaDefault: DTAFile = {
   id: '',
   name: '',
   artist: '',

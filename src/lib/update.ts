@@ -1,4 +1,4 @@
-import { DTAFileContents, EncodingValues } from './dta'
+import { DTAFile, EncodingValues } from './dta'
 import {
   BankValues,
   DrumBankValues,
@@ -617,10 +617,10 @@ export interface UpdateDataOptions {
 /**
  * Updates a song with the provided update options.
  * - - - -
- * @param {DTAFileContents} dta  The parsed song to update.
+ * @param {DTAFile} dta  The parsed song to update.
  * @param {UpdateDataOptions} update The options for the parsed song updating process.
  */
-export const updateDTA = (dta: DTAFileContents, update: UpdateDataOptions): DTAFileContents => {
+export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
   const {
     id,
     name,

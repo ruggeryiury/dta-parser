@@ -4,7 +4,7 @@ import { genTabs as t } from '../../src/utils/stringProcessors'
 import { rankCalculator as r } from '../../src/utils/rankCalculations'
 import { panVolInfoGen } from '../../src/utils/pansAndVols'
 import { SubGenreTypes } from '../../src/lib/locale'
-import { DTAFileContents, ExpandedDTAFileContents } from '../../src/lib/dta'
+import { DTAFile, DTAFileExpanded } from '../../src/lib/dta'
 
 export type AutogenValues =
   | 'Default'
@@ -29,7 +29,7 @@ export type DoubleKickOptions = {
   kickwav?: boolean
 }
 
-export interface MAGMAFileValues extends DTAFileContents {
+export interface MAGMAFileValues {
   /**
    * Sets the autogen option when generating the song's MAGMA file. Default is `ArenaRock` (Arena Rock template).
    */
@@ -73,10 +73,9 @@ export interface MAGMAFileValues extends DTAFileContents {
 }
 
 /**
- * An extension of the basic `DTAFileContents` type.
+ * An extension of the basic `DTAFile` type.
  */
-export type MAGMAProject = ExpandedDTAFileContents<Partial<MAGMAFileValues>>
-
+export type MAGMAProject = DTAFileExpanded<Partial<MAGMAFileValues>>
 
 export interface MAGMAFilesGeneratorOptions {
   /**

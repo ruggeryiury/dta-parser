@@ -1,4 +1,4 @@
-import { DTAFileContents } from '../lib/dta'
+import { DTAFile } from '../lib/dta'
 
 type CheckDrumMixReturnType = 'drums0' | 'drums1' | 'drums2' | 'drums3' | 'drums4' | undefined
 /**
@@ -6,11 +6,11 @@ type CheckDrumMixReturnType = 'drums0' | 'drums1' | 'drums2' | 'drums3' | 'drums
  *
  * Returns `undefined` if there's no drum part or compatible drum mixing.
  * - - - -
- * @param {DTAFile | DTAFileContents} song The parsed song you want the drum mixing information from.
+ * @param {DTAFile | DTAFile} song The parsed song you want the drum mixing information from.
  * @returns {string | undefined} The drum mix of the song. Returns `undefined` if there's no
  * drum part or compatible drum mixing.
  */
-export const checkDrumMix = (song: DTAFileContents): CheckDrumMixReturnType => {
+export const checkDrumMix = (song: DTAFile): CheckDrumMixReturnType => {
   let drumMix: CheckDrumMixReturnType
   const drumChannels = song.tracks_count[0]
 

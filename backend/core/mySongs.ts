@@ -1,4 +1,4 @@
-import { DTAFileContents, DTAFile } from '../../src'
+import { DTAFileModule, DTAFile } from '../../src'
 import { CreateDTAFileRecipe } from '../../src/lib/create'
 import { fullfillDTA } from '../lib/fullfillDTA'
 import { MAGMAProject } from '../lib/magma'
@@ -9,11 +9,11 @@ import * as database from '../database'
  * Generates a parsed song file with additional attributes for MAGMA related actions from a parsed song "recipe" object.
  * - - - -
  * @param {CreateDTAFileRecipe} songRecipe An object that represents a parsed song "recipe" for its generation.
- * @param {Omit<MAGMAProject, keyof DTAFileContents>} newValues The new values to want to insert on the parsed song object.
+ * @param {Omit<MAGMAProject, keyof DTAFile>} newValues The new values to want to insert on the parsed song object.
  * @returns {MAGMAProject} The parsed song object with new informations added.
  */
-export const genMAGMAConfig = (songRecipe: CreateDTAFileRecipe, newValues?: Omit<MAGMAProject, keyof DTAFileContents>): MAGMAProject =>
-  fullfillDTA<MAGMAProject>(DTAFile.create(songRecipe), newValues ? newValues : {})
+export const genMAGMAConfig = (songRecipe: CreateDTAFileRecipe, newValues?: Omit<MAGMAProject, keyof DTAFile>): MAGMAProject =>
+  fullfillDTA<MAGMAProject>(DTAFileModule.create(songRecipe), newValues ? newValues : {})
 
 const mySongs = {
   paintwar: genMAGMAConfig(database.paintwar, {

@@ -21,7 +21,7 @@
 
 ## Parsing a `.dta` file
 
-Just read the contents of a `.dta` file, when use `DTAParser()` to parse it. It will return an array of each song included on the .dta file parsed as a `DTAFileContents` type.
+Just read the contents of a `.dta` file, when use `DTAParser()` to parse it. It will return an array of each song included on the .dta file parsed as a `DTAFile` type.
 
 ```ts
 import DTAParser from 'dta-parser'

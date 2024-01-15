@@ -8,9 +8,9 @@ import { updateDTA } from '../lib/update'
  * Main module of the `DTAParser` package.
  *
  * This includes functions to handle creation, data fetching and manipulation,
- * sorting, stringifying, and updating `DTAFileContents` objects.
+ * sorting, stringifying, and updating `DTAFile` objects.
  */
-export interface DTAFileModule {
+export interface DTAFileModuleType {
   create: typeof createDTA
   get: {
     title: typeof getSongTitle
@@ -23,7 +23,7 @@ export interface DTAFileModule {
   update: typeof updateDTA
 }
 
-const DTAFile: DTAFileModule = {
+const DTAFileModule: DTAFileModuleType = {
   create: createDTA,
   get: {
     title: getSongTitle,
@@ -36,4 +36,4 @@ const DTAFile: DTAFileModule = {
   update: updateDTA,
 }
 
-export default DTAFile
+export default DTAFileModule

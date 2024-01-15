@@ -1,5 +1,5 @@
-import { DTAFileContents } from './lib/dta'
-import DTAFile from './core/DTAFile'
+import { DTAFile } from './lib/dta'
+import DTAFileModule from './core/DTAFileModule'
 import { depackDTA } from './lib/depack'
 import { parseDTA } from './lib/parse'
 import { SortByOptionsTypes, sortDTA } from './lib/sort'
@@ -13,9 +13,7 @@ export interface DTAParserOptions {
   /**
    * Applies direct values updates on any song inside the `.dta` file based on the song's unique string ID.
    */
-  update?: {
-    [id: string]: UpdateDataOptions
-  }
+  update?: { [id: string]: UpdateDataOptions }
   /**
    * Applies direct values updates on all songs inside the `.dta` file.
    */
@@ -25,15 +23,11 @@ export interface DTAParserOptions {
 /**
  * Parses a .dta file content.
  * - - - -
- * @param {string} dtaFileContents The .dta file contents.
+ * @param {string} dtaFileContents The .dta file contents as string.
  * @param {DTAParserOptions} options `OPTIONAL` Customizing options for the parsing process.
- * @returns {DTAFileContents[]} An array of parsed song objects.
- *
- * @see [`DTAFile`](@types/DTAFile.ts) interface.
+ * @returns {DTAFile[]} An array of parsed song objects.
  */
-const DTAParser = (dtaFileContents: string, options?: DTAParserOptions): DTAFileContents[] => {
-  if (!options) options = {}
-
+const DTAParser = (dtaFileContents: string, options: DTAParserOptions = {}): DTAFile[] => {
   const { sortBy, update, updateAll } = options
 
   const depackedSongs = depackDTA(dtaFileContents)
@@ -79,6 +73,6 @@ const DTAParser = (dtaFileContents: string, options?: DTAParserOptions): DTAFile
   return parsedSongs
 }
 
-export type { DTAFileContents, ExpandedDTAFileContents } from './lib/dta'
-export { DTAFile }
+export type { DTAFile } from './lib/dta'
+export { DTAFileModule }
 export default DTAParser

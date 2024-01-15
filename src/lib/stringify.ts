@@ -1,4 +1,4 @@
-import { DTAFileContents } from './dta'
+import { DTAFile } from './dta'
 import { tracksCountToString } from '../utils/audioChannels'
 import { quoteToSlashQ, genTabs } from '../utils/stringProcessors'
 
@@ -46,14 +46,14 @@ export interface StringifyDataOptions {
 /**
  * Converts an array of parsed song objects back to `.dta` file contents string.
  * - - - -
- * @param {DTAFileContents[] | DTAFileContents} songs An array of parsed song objects.
+ * @param {DTAFile[] | DTAFile} songs An array of parsed song objects.
  * @param {StringifyDataOptions} options `OPTIONAL` Customization options for the stringifying process. If an object
  * is not passed as argument at all, it will use default configurations to generate MAGMA C3's `.dta` file contents type.
  *
  * Only some values can be customized on the default option for maximum compatibility with other `.dta` file parsers.
  * @returns {string} A string representation of this parsed song object as a `.dta` file contents string.
  */
-export const stringifyDTA = (songs: DTAFileContents[] | DTAFileContents, options?: StringifyDataOptions): string => {
+export const stringifyDTA = (songs: DTAFile[] | DTAFile, options?: StringifyDataOptions): string => {
   if (options === undefined) {
     options = {
       placeCustomAttributes: true,
@@ -98,7 +98,7 @@ export const stringifyDTA = (songs: DTAFileContents[] | DTAFileContents, options
  * @param {StringifyDataOptions} options Customize options for the stringifying process.
  * @returns {string} A stringified version of the song.
  */
-const stringifyDefault = (value: DTAFileContents, options: StringifyDataOptions): string => {
+const stringifyDefault = (value: DTAFile, options: StringifyDataOptions): string => {
   const { guitarCores, omitUnusedRanks, placeCustomAttributes, wiiMode } = options
 
   const {
@@ -341,7 +341,7 @@ const stringifyDefault = (value: DTAFileContents, options: StringifyDataOptions)
  * @param {StringifyDataOptions | undefined} options Customize options for the stringifying process.
  * @returns {string} A stringified version of the song.
  */
-const stringifyRB3DLC = (value: DTAFileContents, options: StringifyDataOptions): string => {
+const stringifyRB3DLC = (value: DTAFile, options: StringifyDataOptions): string => {
   const { guitarCores, omitUnusedRanks, placeCustomAttributes, wiiMode } = options
 
   const {

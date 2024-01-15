@@ -1,4 +1,4 @@
-import { DTAFileContents } from '../'
+import { DTAFile } from '../'
 import { CreateDTAFileRecipe } from './create'
 import { BandRankingsNumberOptions, getLocale, SubGenreTypes } from './locale'
 import { rankCalculator } from '../utils/rankCalculations'
@@ -16,7 +16,7 @@ import {
 } from './update'
 import { panVolInfoGen } from '../utils/pansAndVols'
 
-export const genTracksRecipe = (song: DTAFileContents): TrackUpdateOptions => {
+export const genTracksRecipe = (song: DTAFile): TrackUpdateOptions => {
   const tracks = {} as TrackUpdateOptions
   const { rank_drum, rank_bass, rank_guitar, rank_vocals, rank_keys, rank_real_bass, rank_real_guitar, rank_real_keys, real_bass_tuning, real_guitar_tuning, vocal_parts, vocal_gender } = song
   const { backing, bass, drum, guitar, keys, vocals, crowd } = panVolInfoGen(song)
@@ -202,10 +202,10 @@ export const genTracksRecipe = (song: DTAFileContents): TrackUpdateOptions => {
 /**
  * Converts a parsed song to a parsed song recipe.
  * - - - -
- * @param {DTAFileContents} song The song you want to generate a parsed song recipe from.
+ * @param {DTAFile} song The song you want to generate a parsed song recipe from.
  * @returns {CreateDTAFileRecipe} The song's recipe object.
  */
-export const genDTARecipe = (song: DTAFileContents): CreateDTAFileRecipe => {
+export const genDTARecipe = (song: DTAFile): CreateDTAFileRecipe => {
   const {
     id,
     name,

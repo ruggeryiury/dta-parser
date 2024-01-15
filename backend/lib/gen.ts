@@ -1,10 +1,10 @@
 import path from 'path'
 import fs from 'fs'
-import { MAGMAProject } from '../@types/magma'
 import { StringifyDataOptions, stringifyDTA } from '../../src/lib/stringify'
-import { DTAFileContents } from '../../src'
+import { DTAFile } from '../../src'
 import { sortDTA } from '../../src/lib/sort'
 import { MySongsID, MySongsModule } from '../core/mySongs'
+import { MAGMAProject } from './magma'
 
 export type DTAFileEncodingTypes = 'utf8' | 'latin1' | 'ascii'
 
@@ -30,7 +30,7 @@ export interface SongsGeneratorOptions extends StringifyDataOptions {
  * @param {SongsGeneratorOptions | DTAFileEncodingTypes} options `OPTIONAL` Customize options for the DTA file generator.
  */
 export const genSongsDTAFile = async (songs: MAGMAProject | MAGMAProject[] | MySongsModule, options?: SongsGeneratorOptions | DTAFileEncodingTypes): Promise<void> => {
-  const databaseSongs: DTAFileContents[] = []
+  const databaseSongs: DTAFile[] = []
 
   let opts: SongsGeneratorOptions = {}
 

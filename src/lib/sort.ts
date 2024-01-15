@@ -1,7 +1,7 @@
-import { DTAFileContents } from './dta'
+import { DTAFile } from './dta'
 import { omitLeadingArticle } from '../utils/stringProcessors'
 
-type SortingFunction = (a: DTAFileContents, b: DTAFileContents) => 1 | -1 | 0
+type SortingFunction = (a: DTAFile, b: DTAFile) => 1 | -1 | 0
 
 const sortByName: SortingFunction = (a, b) => {
   if (omitLeadingArticle(a.name) > omitLeadingArticle(b.name)) return 1
@@ -45,11 +45,11 @@ export type SortByOptionsTypes = 'name' | 'artist' | 'artist_set' | 'id' | 'song
 /**
  * Sorts an array of parsed song objects.
  * - - - -
- * @param {DTAFileContents[]} songs An array with parsed song objects.
+ * @param {DTAFile[]} songs An array with parsed song objects.
  * @param {SortByOptionsTypes | undefined} sortBy `OPTIONAL` The sorting type. Default is `song_id`.
- * @returns {DTAFileContents[]} A sorted array of parsed song objects.
+ * @returns {DTAFile[]} A sorted array of parsed song objects.
  */
-export const sortDTA = (songs: DTAFileContents[], sortBy?: SortByOptionsTypes): DTAFileContents[] => {
+export const sortDTA = (songs: DTAFile[], sortBy: SortByOptionsTypes = 'song_id'): DTAFile[] => {
   if (sortBy === 'name') {
     return songs.sort(sortByName)
   } else if (sortBy === 'artist') {
@@ -59,7 +59,5 @@ export const sortDTA = (songs: DTAFileContents[], sortBy?: SortByOptionsTypes): 
   } else if (sortBy === 'id') {
     return songs.sort(sortByID)
   }
-
-  // Default: Song ID
   return songs.sort(sortBySongID)
 }
