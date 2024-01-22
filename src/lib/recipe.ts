@@ -1,15 +1,15 @@
 import { DTAFile } from '../'
 import { CreateDTAFileRecipe } from './create'
-import { BandRankingsNumberOptions, getLocale, SubGenreTypes } from './locale'
+import { BandFailCueNames, BandRankingNumbers, localeKeyToValue } from './locale'
 import { rankCalculator } from '../utils/rankCalculations'
 import {
   AlbumUpdateOptions,
   BackingUpdateOptionsTypes,
   BassUpdateOptionsTypes,
   DrumUpdateOptionsTypes,
-  GenreUpdateOptionsTypes,
   GuitarUpdateOptionsTypes,
   KeysUpdateOptionsTypes,
+  SongGenreUpdateOptions,
   SongKeyUpdateOptions,
   TrackUpdateOptions,
   VocalsUpdateOptionsTypes,
@@ -123,7 +123,7 @@ export const genTracksRecipe = (song: DTAFile): TrackUpdateOptions => {
       rank: rankCalculator('vocals', rank_vocals),
       channels: vocals.channels,
       vocal_parts,
-      vocal_gender: getLocale.vocal_gender(vocal_gender),
+      vocal_gender: localeKeyToValue.vocal_gender(vocal_gender),
       pans: vocals.pan,
       vols: vocals.vol,
       hasSolo: vocals.hasSolo,
@@ -191,9 +191,9 @@ export const genTracksRecipe = (song: DTAFile): TrackUpdateOptions => {
   }
 
   if (crowd.enabled) {
-    if (crowd.vol.join(' ') === '0 0') tracks.crowd = true
+    if (crowd.vol === 0) tracks.crowd = true
     else {
-      tracks.crowd = crowd.vol as [number, number]
+      tracks.crowd = [crowd.vol, crowd.vol] as [number, number]
     }
   }
   return tracks
@@ -255,20 +255,20 @@ export const genDTARecipe = (song: DTAFile): CreateDTAFileRecipe => {
     mute_volume,
     mute_volume_vocals,
     hopo_threshold,
-    bank: getLocale.bank(bank) === 'Tambourine' ? undefined : getLocale.bank(bank),
-    drum_bank: getLocale.drum_bank(drum_bank) === 'Hard Rock Kit' ? undefined : getLocale.drum_bank(drum_bank),
+    bank: localeKeyToValue.bank(bank) === 'Tambourine' ? undefined : localeKeyToValue.bank(bank),
+    drum_bank: localeKeyToValue.drum_bank(drum_bank) === 'Hard Rock Kit' ? undefined : localeKeyToValue.drum_bank(drum_bank),
     anim_tempo,
-    band_fail_cue: getLocale.band_fail_cue(band_fail_cue) === 'Not Specified' ? undefined : getLocale.band_fail_cue(band_fail_cue),
-    song_scroll_speed: song_scroll_speed === undefined ? 'Normal' : getLocale.song_scroll_speed(song_scroll_speed),
+    band_fail_cue: localeKeyToValue.band_fail_cue(band_fail_cue) === 'Not Specified' ? undefined : (localeKeyToValue.band_fail_cue(band_fail_cue) as Exclude<BandFailCueNames, 'Not Specified'>),
+    song_scroll_speed: song_scroll_speed === undefined ? 'Normal' : localeKeyToValue.song_scroll_speed(song_scroll_speed),
     preview: preview[0],
     song_length,
-    rank_band: rankCalculator('band', rank_band) as BandRankingsNumberOptions,
+    rank_band: rankCalculator('band', rank_band) as BandRankingNumbers,
     encoding,
     rating,
     genre: {
-      genre: getLocale.genre(genre),
-      sub_genre: getLocale.sub_genre(sub_genre as SubGenreTypes),
-    } as GenreUpdateOptionsTypes,
+      genre: localeKeyToValue.genre(genre),
+      sub_genre: localeKeyToValue.sub_genre(sub_genre),
+    } as SongGenreUpdateOptions,
     year_released,
     year_recorded,
     album: {} as AlbumUpdateOptions,
@@ -276,7 +276,7 @@ export const genDTARecipe = (song: DTAFile): CreateDTAFileRecipe => {
     key:
       song_key !== undefined && vocal_tonic_note !== undefined && song_tonality !== undefined
         ? ({
-            key: getLocale.song_key(vocal_tonic_note, song_tonality),
+            key: localeKeyToValue.song_key(vocal_tonic_note, song_tonality),
             trainer_key_override:
               song_key === 0
                 ? 'C'
@@ -303,7 +303,7 @@ export const genDTARecipe = (song: DTAFile): CreateDTAFileRecipe => {
                 : 'B',
           } as SongKeyUpdateOptions)
         : vocal_tonic_note !== undefined && song_tonality !== undefined
-        ? getLocale.song_key(vocal_tonic_note, song_tonality)
+        ? localeKeyToValue.song_key(vocal_tonic_note, song_tonality)
         : undefined,
     multitrack,
     CATemh,

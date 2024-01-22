@@ -1,11 +1,21 @@
-import { VocalPartsTypes, BankTypes, DrumBankTypes, BandFailCueTypes, SongScrollSpeedTypes, RatingTypes, GenreTypes, SubGenreTypes, VocalGenderTypes, AnimTempoNumeralTypes } from './locale'
-
-export type SoloFlags = 'drum' | 'bass' | 'guitar' | 'keys' | 'vocal_percussion'
-export type SongKeyValues = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11
-export type SongTonalityValues = 0 | 1
-export type ExtraAuthoringFlags = 'disc_update' | 'pearljam' | 'greenday'
-export type EncodingValues = 'latin1' | 'utf8'
-export type GameOriginValues = 'rb1' | 'rb1_dlc' | 'rb2' | 'rb2_dlc' | 'rb3' | 'rb3_dlc' | 'lego' | 'greenday' | 'ugc' | 'ugc_plus'
+import {
+  VocalParts,
+  VocalPercussion,
+  DrumBank,
+  BandFailCue,
+  SongScrollSpeed,
+  SongRating,
+  SongGenre,
+  SongSubGenre,
+  VocalGender,
+  AnimTempoNumbers,
+  SongKey,
+  SongTonality,
+  ExtraAuthoringFlags,
+  SoloFlags,
+  SongEncoding,
+  SongGameOrigin,
+} from './locale'
 
 /**
  * A parsed song object with all its contents.
@@ -50,7 +60,7 @@ export interface DTAFile {
   /**
    * The quantity of vocal parts of the song.
    */
-  vocal_parts: VocalPartsTypes
+  vocal_parts: VocalParts
   /**
    * This controls the volume reduction of a stem when the player misses notes/fails out.
    * Number value is in decibels. Default is `-96`.
@@ -69,20 +79,20 @@ export interface DTAFile {
   /**
    * The audio cue type of the vocal percussion. Default is `sfx/tambourine_bank.milo` (Tambourine).
    */
-  bank: BankTypes
+  bank: VocalPercussion
   /**
    * The audio cue type of the drums on Drum Fills/Freestyle Mode. Default is `sfx/kit01_bank.milo` (Hard Rock Kit).
    */
-  drum_bank: DrumBankTypes
+  drum_bank: DrumBank
   /**
    * The song animation's speed. Default is `32` (Normal).
    */
-  anim_tempo: AnimTempoNumeralTypes
-  band_fail_cue?: BandFailCueTypes
+  anim_tempo: AnimTempoNumbers
+  band_fail_cue?: BandFailCue
   /**
    * Default is `2300`.
    */
-  song_scroll_speed?: SongScrollSpeedTypes
+  song_scroll_speed?: SongScrollSpeed
   /**
    * An array with start and end of the preview, in milliseconds
    */
@@ -144,7 +154,7 @@ export interface DTAFile {
    *
    * Songs which MIDI file is exported with UTF-8 encoding should have `utf8` as encoding.
    */
-  encoding?: EncodingValues
+  encoding?: SongEncoding
   format?: number
   version?: number
   /**
@@ -152,23 +162,23 @@ export interface DTAFile {
    *
    * All customs are compiled on MAGMA using `ugc_plus`.
    */
-  game_origin?: GameOriginValues
+  game_origin?: SongGameOrigin
   /**
    * The song's rating.
    */
-  rating: RatingTypes
+  rating: SongRating
   /**
    * The song's genre.
    */
-  genre: GenreTypes
+  genre: SongGenre
   /**
    * The song's sub-genre.
    */
-  sub_genre?: SubGenreTypes
+  sub_genre?: SongSubGenre
   /**
    * The gender of the lead vocalist.
    */
-  vocal_gender: VocalGenderTypes
+  vocal_gender: VocalGender
   /**
    * The song's release year.
    */
@@ -198,17 +208,17 @@ export interface DTAFile {
    * If `song_key` is not specified, it'll be used as song key in general, changing the accident symbol on
    * PRO Guitar/Bass parts and showing the song key on PRO Keys trainers based on it.
    */
-  vocal_tonic_note?: SongKeyValues
+  vocal_tonic_note?: SongKey
   /**
    * The song tonality of the song.
    *
    * Values can be `0` (Major tonality) or `1` (Minor tonality).
    */
-  song_tonality?: SongTonalityValues
+  song_tonality?: SongTonality
   /**
    * Specific parameter to override the `vocal_tonic_note` on PRO Guitar/Bass/Keys parts.
    */
-  song_key?: SongKeyValues
+  song_key?: SongKey
   /**
    * An array with the tuning of all 6 strings of the PRO Guitar part.
    */

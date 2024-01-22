@@ -229,10 +229,14 @@ export interface PanVolInformationObject {
     vol: number[]
   }
   crowd: {
+    /**
+     * Tells if the song has crowd tracks. Crowd tracks are always stereo with panning of `-2.5` (for left channel) and `2.5` (for right channel).
+     */
     enabled: boolean
-    channels: number
-    pan: number[]
-    vol: number[]
+    /**
+     * The volume of the crowd tracks, This value with apply equally on both tracks.
+     */
+    vol: number
   }
 }
 
@@ -313,9 +317,7 @@ export const panVolInfoGen = (song: DTAFile): PanVolInformationObject => {
     },
     crowd: {
       enabled: crowd !== undefined,
-      channels: crowd !== undefined ? 2 : 0,
-      pan: crowd === undefined ? [] : [-2.5, 2.5],
-      vol: crowd === undefined ? [] : vols.slice(all_drum + bass + guitar + vocals + keys + backing),
+      vol: crowd === undefined ? 0 : vols.slice(all_drum + bass + guitar + vocals + keys + backing)[0],
     },
   }
 }

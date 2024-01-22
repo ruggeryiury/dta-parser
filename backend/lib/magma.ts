@@ -3,8 +3,8 @@ import path from 'path'
 import { genTabs as t } from '../../src/utils/stringProcessors'
 import { rankCalculator as r } from '../../src/utils/rankCalculations'
 import { panVolInfoGen } from '../../src/utils/pansAndVols'
-import { SubGenreTypes } from '../../src/lib/locale'
-import { DTAFile, DTAFileExpanded } from '../../src/lib/dta'
+import { DTAFileExpanded } from '../../src/lib/dta'
+import { SongSubGenre } from '../../src/lib/locale'
 
 export type AutogenValues =
   | 'Default'
@@ -234,7 +234,7 @@ export const genMAGMAFiles = async (song: MAGMAProject, options?: MAGMAFilesGene
   output += `${t(2, 'start')})`
 
   output += `${t(2, 'start')}('genre' '${song.genre}')`
-  output += `${t(2, 'start')}('sub_genre' '${song.sub_genre as SubGenreTypes}')`
+  output += `${t(2, 'start')}('sub_genre' '${song.sub_genre as SongSubGenre}')`
   output += `${t(2, 'start')}('year_released' ${song.year_released})`
 
   output += `${t(2, 'start')}(`

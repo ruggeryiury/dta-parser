@@ -1,20 +1,20 @@
-import { DTAFile, EncodingValues } from './dta'
+import { DTAFile } from './dta'
 import {
-  BankValues,
-  DrumBankValues,
-  AnimTempoValues,
-  BandFailCueValues,
-  SongScrollSpeedValues,
-  RatingValues,
-  VocalPartsValues,
-  VocalGenderValues,
-  GenreValues,
-  BandRankingsNumberOptions,
-  BandRankingsVerbosedOptions,
-  RatingTypes,
-  AnimTempoNumeralTypes,
-  VocalPartsTypes,
-  getKeyFromValue,
+  AnimTempo,
+  BandFailCueNames,
+  BandRankingNames,
+  BandRankingNumbers,
+  DrumBankNames,
+  SongEncoding,
+  SongGenreNames,
+  SongRating,
+  SongRatingNames,
+  SongScrollSpeedNames,
+  VocalGenderNames,
+  VocalParts,
+  VocalPartsNames,
+  VocalPercussionNames,
+  localeValueToKey,
 } from './locale'
 import { panValueToArray } from '../utils/pansAndVols'
 import { rankValuesToDTARankSystem, bandAverageRankCalculator } from '../utils/rankCalculations'
@@ -119,7 +119,7 @@ export type DrumUpdateOptions<T extends DrumTracksTypes> = {
   /**
    * The ranking of the instrument.
    */
-  rank: BandRankingsVerbosedOptions | BandRankingsNumberOptions
+  rank: BandRankingNames | BandRankingNumbers
   /**
    * Set to `true` if the instrument has solo sessions.
    */
@@ -148,7 +148,7 @@ export interface BassUpdateOptions<T extends InstrumentTracksTypes> {
   /**
    * The ranking of the instrument.
    */
-  rank: BandRankingsVerbosedOptions | BandRankingsNumberOptions
+  rank: BandRankingNames | BandRankingNumbers
   /**
    * Set to `true` if the instrument has solo sessions.
    */
@@ -156,7 +156,7 @@ export interface BassUpdateOptions<T extends InstrumentTracksTypes> {
   /**
    * The ranking of the PRO Bass part.
    */
-  real_rank?: BandRankingsVerbosedOptions | BandRankingsNumberOptions
+  real_rank?: BandRankingNames | BandRankingNumbers
   /**
    * An array with the tuning of all 4 strings of the PRO Bass part.
    *
@@ -187,7 +187,7 @@ export interface GuitarUpdateOptions<T extends InstrumentTracksTypes> {
   /**
    * The ranking of the instrument.
    */
-  rank: BandRankingsVerbosedOptions | BandRankingsNumberOptions
+  rank: BandRankingNames | BandRankingNumbers
   /**
    * Set to `true` if the instrument has solo sessions.
    */
@@ -195,7 +195,7 @@ export interface GuitarUpdateOptions<T extends InstrumentTracksTypes> {
   /**
    * The ranking of the PRO Guitar part.
    */
-  real_rank?: BandRankingsVerbosedOptions | BandRankingsNumberOptions
+  real_rank?: BandRankingNames | BandRankingNumbers
   /**
    * An array with the tuning of all 6 strings of the PRO Guitar part.
    *
@@ -226,7 +226,7 @@ export interface VocalsUpdateOptions<T extends InstrumentTracksTypes> {
   /**
    * The ranking of the instrument.
    */
-  rank: BandRankingsVerbosedOptions | BandRankingsNumberOptions
+  rank: BandRankingNames | BandRankingNumbers
   /**
    * Set to `true` if the instrument has solo sessions.
    */
@@ -234,11 +234,11 @@ export interface VocalsUpdateOptions<T extends InstrumentTracksTypes> {
   /**
    * The quantity of vocal parts of the song.
    */
-  vocal_parts: Exclude<VocalPartsValues, 'No Vocals'> | Exclude<VocalPartsTypes, 0>
+  vocal_parts: Exclude<VocalPartsNames, 'No Vocals'> | Exclude<VocalParts, 0>
   /**
    * The gender of the lead vocalist. Default is `Male`.
    */
-  vocal_gender?: VocalGenderValues
+  vocal_gender?: VocalGenderNames
   /**
    * Custom panning information. If not specified, mono tracks will have centered
    * `0.0` panning, and stereo tracks will be `-1.0` (for the left track) and `1.0` (for the right track).
@@ -263,7 +263,7 @@ export interface KeysUpdateOptions<T extends InstrumentTracksTypes> {
   /**
    * The ranking of the instrument.
    */
-  rank: BandRankingsVerbosedOptions | BandRankingsNumberOptions
+  rank: BandRankingNames | BandRankingNumbers
   /**
    * Set to `true` if the instrument has solo sessions.
    */
@@ -271,7 +271,7 @@ export interface KeysUpdateOptions<T extends InstrumentTracksTypes> {
   /**
    * The ranking of the PRO Keys part.
    */
-  real_rank?: BandRankingsVerbosedOptions | BandRankingsNumberOptions
+  real_rank?: BandRankingNames | BandRankingNumbers
   /**
    * Custom panning information. If not specified, mono tracks will have centered
    * `0.0` panning, and stereo tracks will be `-1.0` (for the left track) and `1.0` (for the right track).
@@ -305,7 +305,7 @@ export type BackingUpdateOptions<T extends InstrumentTracksTypes> = {
   vols?: PansVolsInformation<T>
 }
 
-export interface GenreUpdateOptions<G extends GenreValues> {
+export interface GenreUpdateOptions<G extends SongGenreNames> {
   /**
    * The song's genre.
    */
@@ -315,6 +315,8 @@ export interface GenreUpdateOptions<G extends GenreValues> {
    */
   sub_genre: SubGenreUpdateValues<G>
 }
+
+export type SongGenreUpdateOptions = { [P in SongGenreNames]: GenreUpdateOptions<P> }[SongGenreNames]
 
 export interface AlbumUpdateOptions {
   /**
@@ -410,7 +412,7 @@ export interface SongKeyUpdateOptions {
   trainer_key_override?: TrainerKeyOverrideValues
 }
 
-export type SubGenreUpdateValues<G extends GenreValues> = G extends
+export type SubGenreUpdateValues<G extends SongGenreNames> = G extends
   | 'Classical'
   | 'Classic Rock'
   | 'Emo'
@@ -459,10 +461,6 @@ export type SubGenreUpdateValues<G extends GenreValues> = G extends
   : G extends 'Other'
   ? 'A capella' | 'Acoustic' | 'Contemporary Folk' | 'Experimental' | 'Oldies' | 'Other'
   : never
-
-export type GenreUpdateOptionsTypes = {
-  [P in GenreValues]: GenreUpdateOptions<P>
-}[GenreValues]
 
 export interface UpdateDataOptions {
   /**
@@ -517,17 +515,17 @@ export interface UpdateDataOptions {
   /**
    * The audio cue type of the vocal percussion.
    */
-  bank?: BankValues
+  bank?: VocalPercussionNames
   /**
    * The audio cue type of the drums on Drum Fills/Freestyle Mode.
    */
-  drum_bank?: DrumBankValues
+  drum_bank?: DrumBankNames
   /**
    * The song animation's speed.
    */
-  anim_tempo?: AnimTempoValues | AnimTempoNumeralTypes
-  band_fail_cue?: BandFailCueValues
-  song_scroll_speed?: SongScrollSpeedValues
+  anim_tempo?: AnimTempo
+  band_fail_cue?: BandFailCueNames
+  song_scroll_speed?: SongScrollSpeedNames
   /**
    * The start of the preview (the end of the preview is automatically calculated). It can be either a number, or a string.
    *
@@ -549,22 +547,22 @@ export interface UpdateDataOptions {
    *
    * If not specified, it will be calculated based on the non-PRO ranks of all playable instruments.
    */
-  rank_band?: BandRankingsVerbosedOptions | BandRankingsNumberOptions
+  rank_band?: BandRankingNames | BandRankingNumbers
   /**
    * The encoding of the MIDI song file. Default is `latin1`.
    *
    * Songs which MIDI file is exported with UTF-8 encoding should have `utf8` as encoding.
    */
-  encoding?: EncodingValues
+  encoding?: SongEncoding
   game_origin?: string
   /**
    * The song's rating.
    */
-  rating?: RatingValues | RatingTypes
+  rating?: SongRating | SongRatingNames
   /**
    * An object with the song's genre and sub-genre.
    */
-  genre?: GenreUpdateOptionsTypes
+  genre?: SongGenreUpdateOptions
   /**
    * The song's release year.
    */
@@ -812,7 +810,7 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
       dta.rank_vocals = vocalsR
 
       if (tracks.vocals.vocal_parts !== undefined) {
-        dta.vocal_parts = getKeyFromValue.vocal_parts(
+        dta.vocal_parts = localeValueToKey.vocal_parts(
           tracks.vocals.vocal_parts === 1 ? 'Solo Vocals' : tracks.vocals.vocal_parts === 2 ? '2-Part Harmonies' : tracks.vocals.vocal_parts === 3 ? '3-Part Harmonies' : tracks.vocals.vocal_parts
         )
       } else dta.vocal_parts = 1
@@ -837,7 +835,7 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
         dta.solo.push('vocal_percussion')
       }
 
-      if (tracks.vocals.vocal_gender) dta.vocal_gender = getKeyFromValue.vocal_gender(tracks.vocals.vocal_gender)
+      if (tracks.vocals.vocal_gender) dta.vocal_gender = localeValueToKey.vocal_gender(tracks.vocals.vocal_gender)
       else dta.vocal_gender = 'male'
     }
 
@@ -915,15 +913,15 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
 
   if (hopo_threshold) dta.hopo_threshold = hopo_threshold
 
-  if (bank) dta.bank = getKeyFromValue.bank(bank)
+  if (bank) dta.bank = localeValueToKey.bank(bank)
 
-  if (drum_bank) dta.drum_bank = getKeyFromValue.drum_bank(drum_bank)
+  if (drum_bank) dta.drum_bank = localeValueToKey.drum_bank(drum_bank)
 
-  if (anim_tempo) dta.anim_tempo = typeof anim_tempo === 'number' ? anim_tempo : getKeyFromValue.anim_tempo(anim_tempo)
+  if (anim_tempo) dta.anim_tempo = typeof anim_tempo === 'number' ? anim_tempo : localeValueToKey.anim_tempo(anim_tempo)
 
-  if (band_fail_cue) dta.band_fail_cue = getKeyFromValue.band_fail_cue(band_fail_cue)
+  if (band_fail_cue) dta.band_fail_cue = localeValueToKey.band_fail_cue(band_fail_cue)
 
-  if (song_scroll_speed) dta.song_scroll_speed = getKeyFromValue.song_scroll_speed(song_scroll_speed)
+  if (song_scroll_speed) dta.song_scroll_speed = localeValueToKey.song_scroll_speed(song_scroll_speed)
 
   if (preview) {
     if (typeof preview === 'string') {
@@ -949,11 +947,11 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
 
   if (game_origin) dta.game_origin = game_origin as typeof dta.game_origin
 
-  if (rating) dta.rating = typeof rating === 'number' ? rating : getKeyFromValue.rating(rating)
+  if (rating) dta.rating = typeof rating === 'number' ? rating : localeValueToKey.rating(rating)
 
   if (genre) {
-    dta.genre = getKeyFromValue.genre(genre.genre)
-    dta.sub_genre = getKeyFromValue.sub_genre(genre.sub_genre)
+    dta.genre = localeValueToKey.genre(genre.genre)
+    dta.sub_genre = localeValueToKey.sub_genre(genre.sub_genre)
   }
 
   if (year_released) dta.year_released = year_released

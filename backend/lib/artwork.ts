@@ -1,5 +1,4 @@
 import fs from 'fs'
-import axios from 'axios'
 import path from 'path'
 import sharp from 'sharp'
 
@@ -15,13 +14,10 @@ export const fetchArtwork = async (url: string, fn: string): Promise<void> => {
 
   const saveFn = path.resolve(`./backend/gen/${fn}_keep.png`)
 
-  const imgArrBuffer = await axios<ArrayBuffer>({
-    url,
-    method: 'GET',
-    responseType: 'arraybuffer',
-  })
+  const imgResponse = await fetch(url, { method: 'GET' })
+  const imgArrBuffer = await imgResponse.arrayBuffer()
 
-  const img = sharp(imgArrBuffer.data).png().resize(512, 512)
+  const img = sharp(imgArrBuffer).png().resize(512, 512)
   await fs.promises.writeFile(saveFn, await img.toBuffer())
 }
 

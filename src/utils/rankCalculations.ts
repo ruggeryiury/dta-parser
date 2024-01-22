@@ -1,4 +1,4 @@
-import { InstrumentRankingsNumberOptions, InstrumentRankingsVerbosedOptions } from '../lib/locale'
+import { InstrRankingNames, InstrRankingNumbers } from '../lib/locale'
 
 const ranksMap = {
   drum: [124, 151, 178, 242, 345, 448],
@@ -22,13 +22,13 @@ export type RankTypes = keyof typeof ranksMap
  * - - - -
  * @param {RankTypes} type The instrument part you want to be calculated.
  * @param {number | undefined} rank `OPTIONAL` The rank number from the `.dta` file.
- * @returns {number} The calculated instrument rank.
+ * @returns {InstrRankingNumbers} The calculated instrument rank.
  */
-export const rankCalculator = (type: RankTypes, rank?: number): InstrumentRankingsNumberOptions => {
-  let parseRankReturn = -1
+export const rankCalculator = (type: RankTypes, rank?: number): InstrRankingNumbers => {
+  let parseRankReturn: InstrRankingNumbers = -1
 
   if (rank === undefined || rank === 0) {
-    return parseRankReturn as InstrumentRankingsNumberOptions
+    return parseRankReturn
   }
 
   parseRankReturn++
@@ -37,17 +37,17 @@ export const rankCalculator = (type: RankTypes, rank?: number): InstrumentRankin
     if (rank >= value) parseRankReturn++
   })
 
-  return parseRankReturn as InstrumentRankingsNumberOptions
+  return parseRankReturn as InstrRankingNumbers
 }
 
 /**
  * Returns a `.dta` file-compatible ranking system number based on the given options.
  * - - - -
  * @param {RankTypes} type The instrument part you want to be processed to.
- * @param {InstrumentRankingsOptions} rank A string that indicates the ranking you want for the instrument part.
+ * @param {InstrRankingNumbers | InstrRankingNames} rank A string that indicates the ranking you want for the instrument part.
  * @returns {number} A `.dta` file-compatible ranking system number.
  */
-export const rankValuesToDTARankSystem = (type: RankTypes, rank: InstrumentRankingsNumberOptions | InstrumentRankingsVerbosedOptions): number => {
+export const rankValuesToDTARankSystem = (type: RankTypes, rank: InstrRankingNumbers | InstrRankingNames): number => {
   if (rank === 'No Part' || rank === -1) return 0
   else if (rank === 'Warmup' || rank === 0) return 1
   else if (rank === 'Apprentice' || rank === 1) return ranksMap[type][0]
