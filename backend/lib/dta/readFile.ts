@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import DTAParser, { DTAFile, DTAParserOptions } from '../../src'
+import DTAParser, { DTAFile, DTAParserOptions } from '../../../src'
 /**
  * Synchronously reads a `.dta` file (or a directory with `.dta` files) and returns their contents.
  * - - - -

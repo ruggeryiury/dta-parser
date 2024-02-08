@@ -1,6 +1,6 @@
 import { DTAFile } from './dta'
-import { tracksCountToString } from '../utils/audioChannels'
-import { quoteToSlashQ, genTabs } from '../utils/stringProcessors'
+import { tracksCountToString } from '../../utils/audioChannels'
+import { quoteToSlashQ, genTabs } from '../../utils/stringProcessors'
 
 export interface StringifyDataOptions {
   /**
@@ -54,12 +54,8 @@ export interface StringifyDataOptions {
  * @returns {string} A string representation of this parsed song object as a `.dta` file contents string.
  */
 export const stringifyDTA = (songs: DTAFile[] | DTAFile, options?: StringifyDataOptions): string => {
-  if (options === undefined) {
-    options = {
-      placeCustomAttributes: true,
-      useSpaces: true,
-    } as StringifyDataOptions
-  }
+  if (!options === undefined) options = { placeCustomAttributes: true, useSpaces: true, }
+  else options = { placeCustomAttributes: true, useSpaces: true, ...options }
 
   let output = ''
 
@@ -178,9 +174,8 @@ const stringifyDefault = (value: DTAFile, options: StringifyDataOptions): string
 
   output += `(${genTabs()}'${id}'${genTabs()}(${genTabs(2)}'name'${genTabs(2)}"${quoteToSlashQ(name)}"${genTabs()})${genTabs()}(${genTabs(2)}'artist'${genTabs(2)}"${quoteToSlashQ(
     artist
-  )}"${genTabs()})${genTabs()}('master' ${master ? 1 : 0})${context ? `${genTabs()}('context' ${context})` : ''}${genTabs()}(${genTabs(2)}'song'${genTabs(2)}(${genTabs(3)}'name'${genTabs(3)}"${
-    wiiMode ? `dlc/${wiiMode.gen}/${wiiMode.slot.toString().padStart(3, '0')}/content/songs/${songname}/${songname}` : `songs/${songname}/${songname}`
-  }"${genTabs(2)})${genTabs(2)}(${genTabs(3)}'tracks_count'${genTabs(3)}(${tracks_count.join(' ')})${genTabs(2)})${genTabs(2)}(${genTabs(3)}'tracks'${genTabs(3)}(${genTabs(4)}`
+  )}"${genTabs()})${genTabs()}('master' ${master ? 1 : 0})${context ? `${genTabs()}('context' ${context})` : ''}${genTabs()}(${genTabs(2)}'song'${genTabs(2)}(${genTabs(3)}'name'${genTabs(3)}"${wiiMode ? `dlc/${wiiMode.gen}/${wiiMode.slot.toString().padStart(3, '0')}/content/songs/${songname}/${songname}` : `songs/${songname}/${songname}`
+    }"${genTabs(2)})${genTabs(2)}(${genTabs(3)}'tracks_count'${genTabs(3)}(${tracks_count.join(' ')})${genTabs(2)})${genTabs(2)}(${genTabs(3)}'tracks'${genTabs(3)}(${genTabs(4)}`
 
   if (drum) {
     output += `(${genTabs(5)}'drum'${genTabs(5)}(${tracksCountToString(trackCount, drum)})${genTabs(4)})`
@@ -229,19 +224,15 @@ const stringifyDefault = (value: DTAFile, options: StringifyDataOptions): string
     return
   })
 
-  output += `${crowd ? `${genTabs(2)}('crowd_channels' ${tracksCountToString(crowdTrackStarts, 2)})` : ``}${genTabs(2)}('vocal_parts' ${
-    vocal_parts === undefined ? (vocals > 0 ? 1 : 0) : vocal_parts
-  })${genTabs(2)}(${genTabs(3)}'drum_solo'${genTabs(3)}(${genTabs(4)}'seqs'${genTabs(4)}('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')${genTabs(3)})${genTabs(2)})${genTabs(2)}(${genTabs(
-    3
-  )}'drum_freestyle'${genTabs(3)}(${genTabs(4)}'seqs'${genTabs(4)}('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')${genTabs(3)})${genTabs(2)})${genTabs(2)}(mute_volume ${
-    mute_volume === undefined ? '-96' : mute_volume
-  })${genTabs(2)}(mute_volume_vocals ${mute_volume_vocals === undefined ? '-12' : mute_volume_vocals})${genTabs(2)}(hopo_threshold ${
-    hopo_threshold === undefined ? '170' : hopo_threshold
-  })${genTabs()})${genTabs()}('song_scroll_speed' ${song_scroll_speed === undefined ? '2300' : song_scroll_speed})${genTabs()}(${genTabs(2)}'bank'${genTabs(
-    2
-  )}"${bank}"${genTabs()})${genTabs()}(drum_bank ${drum_bank})${genTabs()}('anim_tempo' ${anim_tempo})${
-    band_fail_cue === undefined ? '' : `${genTabs()}(band_fail_cue ${band_fail_cue})`
-  }${genTabs()}('song_length' ${song_length})${genTabs()}('preview' ${preview.join(' ')})${genTabs()}(${genTabs(2)}'rank'`
+  output += `${crowd ? `${genTabs(2)}('crowd_channels' ${tracksCountToString(crowdTrackStarts, 2)})` : ``}${genTabs(2)}('vocal_parts' ${vocal_parts === undefined ? (vocals > 0 ? 1 : 0) : vocal_parts
+    })${genTabs(2)}(${genTabs(3)}'drum_solo'${genTabs(3)}(${genTabs(4)}'seqs'${genTabs(4)}('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')${genTabs(3)})${genTabs(2)})${genTabs(2)}(${genTabs(
+      3
+    )}'drum_freestyle'${genTabs(3)}(${genTabs(4)}'seqs'${genTabs(4)}('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')${genTabs(3)})${genTabs(2)})${genTabs(2)}(mute_volume ${mute_volume === undefined ? '-96' : mute_volume
+    })${genTabs(2)}(mute_volume_vocals ${mute_volume_vocals === undefined ? '-12' : mute_volume_vocals})${genTabs(2)}(hopo_threshold ${hopo_threshold === undefined ? '170' : hopo_threshold
+    })${genTabs()})${genTabs()}('song_scroll_speed' ${song_scroll_speed === undefined ? '2300' : song_scroll_speed})${genTabs()}(${genTabs(2)}'bank'${genTabs(
+      2
+    )}"${bank}"${genTabs()})${genTabs()}(drum_bank ${drum_bank})${genTabs()}('anim_tempo' ${anim_tempo})${band_fail_cue === undefined ? '' : `${genTabs()}(band_fail_cue ${band_fail_cue})`
+    }${genTabs()}('song_length' ${song_length})${genTabs()}('preview' ${preview.join(' ')})${genTabs()}(${genTabs(2)}'rank'`
 
   if (omitUnusedRanks && (rank_drum === undefined || rank_drum === 0)) {
     // Do nothing
@@ -291,11 +282,9 @@ const stringifyDefault = (value: DTAFile, options: StringifyDataOptions): string
     output += `${genTabs(2)}('real_bass' ${rank_real_bass === undefined ? 0 : rank_real_bass})`
   }
 
-  output += `${genTabs(2)}('band' ${rank_band})${genTabs()})${genTabs()}('genre' '${genre === undefined ? 'other' : genre}')${genTabs()}('vocal_gender' '${vocal_gender}')${genTabs()}('version' ${
-    version === undefined ? 30 : version
-  })${genTabs()}('format' ${format === undefined ? 10 : format})${genTabs()}('album_art' ${album_art ? 1 : 0})${genTabs()}('year_released' ${year_released})${
-    year_recorded === undefined ? '' : `${genTabs()}('year_recorded' ${year_recorded})`
-  }${genTabs()}('rating' ${rating === undefined ? 4 : rating})${sub_genre ? `${genTabs()}('sub_genre' '${sub_genre}')` : ''}${genTabs()}('song_id' ${song_id})`
+  output += `${genTabs(2)}('band' ${rank_band})${genTabs()})${genTabs()}('genre' '${genre === undefined ? 'other' : genre}')${genTabs()}('vocal_gender' '${vocal_gender}')${genTabs()}('version' ${version === undefined ? 30 : version
+    })${genTabs()}('format' ${format === undefined ? 10 : format})${genTabs()}('album_art' ${album_art ? 1 : 0})${genTabs()}('year_released' ${year_released})${year_recorded === undefined ? '' : `${genTabs()}('year_recorded' ${year_recorded})`
+    }${genTabs()}('rating' ${rating === undefined ? 4 : rating})${sub_genre ? `${genTabs()}('sub_genre' '${sub_genre}')` : ''}${genTabs()}('song_id' ${song_id})`
 
   if (solo && solo.length > 0) {
     output += `${genTabs()}(solo (`
@@ -309,24 +298,18 @@ const stringifyDefault = (value: DTAFile, options: StringifyDataOptions): string
     })
   }
 
-  output += `${genTabs()}('tuning_offset_cents' ${tuning_offset_cents === undefined ? 0 : tuning_offset_cents})${genTabs()}('guide_pitch_volume' ${
-    guide_pitch_volume === undefined ? '-3.00' : guide_pitch_volume
-  })${genTabs()}('game_origin' '${game_origin === undefined ? 'ugc_plus' : game_origin}')${genTabs()}('encoding' '${encoding === undefined ? 'latin1' : encoding}')${
-    album_name ? `${genTabs()}(${genTabs(2)}'album_name'${genTabs(2)}"${quoteToSlashQ(album_name)}"${genTabs()})` : ''
-  }${album_track_number ? `${genTabs()}('album_track_number' ${album_track_number})` : ''}${vocal_tonic_note === undefined ? '' : `${genTabs()}(vocal_tonic_note ${vocal_tonic_note})`}${
-    song_tonality === undefined ? '' : `${genTabs()}(song_tonality ${song_tonality})`
-  }${song_key === undefined ? '' : `${genTabs()}(song_key ${song_key})`}${real_guitar_tuning ? `${genTabs()}(real_guitar_tuning (${real_guitar_tuning.join(' ')}))` : ''}${
-    real_bass_tuning ? `${genTabs()}(real_bass_tuning (${real_bass_tuning.join(' ')}))` : ''
-  }${pack_name ? `${genTabs(1)}(pack_name "${quoteToSlashQ(pack_name)}")` : ''}${base_points ? `${genTabs(1)}(base_points ${base_points})` : ''}`
+  output += `${genTabs()}('tuning_offset_cents' ${tuning_offset_cents === undefined ? 0 : tuning_offset_cents})${genTabs()}('guide_pitch_volume' ${guide_pitch_volume === undefined ? '-3.00' : guide_pitch_volume
+    })${genTabs()}('game_origin' '${game_origin === undefined ? 'ugc_plus' : game_origin}')${genTabs()}('encoding' '${encoding === undefined ? 'latin1' : encoding}')${album_name ? `${genTabs()}(${genTabs(2)}'album_name'${genTabs(2)}"${quoteToSlashQ(album_name)}"${genTabs()})` : ''
+    }${album_track_number ? `${genTabs()}('album_track_number' ${album_track_number})` : ''}${vocal_tonic_note === undefined ? '' : `${genTabs()}(vocal_tonic_note ${vocal_tonic_note})`}${song_tonality === undefined ? '' : `${genTabs()}(song_tonality ${song_tonality})`
+    }${song_key === undefined ? '' : `${genTabs()}(song_key ${song_key})`}${real_guitar_tuning ? `${genTabs()}(real_guitar_tuning (${real_guitar_tuning.join(' ')}))` : ''}${real_bass_tuning ? `${genTabs()}(real_bass_tuning (${real_bass_tuning.join(' ')}))` : ''
+    }${pack_name ? `${genTabs(1)}(pack_name "${quoteToSlashQ(pack_name)}")` : ''}${base_points ? `${genTabs(1)}(base_points ${base_points})` : ''}`
 
   if (placeCustomAttributes === undefined || placeCustomAttributes === true) {
-    output += `${genTabs()}${genTabs(0)};DO NOT EDIT THE FOLLOWING LINES MANUALLY${genTabs(0)};Created using Magma: C3 Roks Edition v3.3.5${genTabs(0)};Song authored by ${
-      author ? author : 'Unknown Charter'
-    }${genTabs(0)};Song=${name}${genTabs(0)};Language(s)=${languages ? (languages.length === 1 ? `${languages[0]},` : `${languages.join(',')},`) : `English,`}${genTabs(0)};Karaoke=${
-      karaoke ? 1 : 0
-    }${genTabs(0)};Multitrack=${multitrack ? 1 : 0}${genTabs(0)};Convert=${convert ? 1 : 0}${genTabs(0)};2xBass=${doubleKick ? 1 : 0}${genTabs(0)};RhythmKeys=${rhythmOnKeys ? 1 : 0}${genTabs(
-      0
-    )};RhythmBass=${rhythmOnBass ? 1 : 0}${genTabs(0)};CATemh=${CATemh ? 1 : 0}${genTabs(0)};ExpertOnly=${expertOnly ? 1 : 0}`
+    output += `${genTabs()}${genTabs(0)};DO NOT EDIT THE FOLLOWING LINES MANUALLY${genTabs(0)};Created using Magma: C3 Roks Edition v3.3.5${genTabs(0)};Song authored by ${author ? author : 'Unknown Charter'
+      }${genTabs(0)};Song=${name}${genTabs(0)};Language(s)=${languages ? (languages.length === 1 ? `${languages[0]},` : `${languages.join(',')},`) : `English,`}${genTabs(0)};Karaoke=${karaoke ? 1 : 0
+      }${genTabs(0)};Multitrack=${multitrack ? 1 : 0}${genTabs(0)};Convert=${convert ? 1 : 0}${genTabs(0)};2xBass=${doubleKick ? 1 : 0}${genTabs(0)};RhythmKeys=${rhythmOnKeys ? 1 : 0}${genTabs(
+        0
+      )};RhythmBass=${rhythmOnBass ? 1 : 0}${genTabs(0)};CATemh=${CATemh ? 1 : 0}${genTabs(0)};ExpertOnly=${expertOnly ? 1 : 0}`
   }
 
   output += `${genTabs(0)})${genTabs(0)}`
@@ -419,11 +402,9 @@ const stringifyRB3DLC = (value: DTAFile, options: StringifyDataOptions): string 
 
   let output = ''
 
-  output += `(${id}${genTabs()}(name "${quoteToSlashQ(name)}")${genTabs()}(artist "${quoteToSlashQ(artist)}")${genTabs()}(master ${master ? 'TRUE' : 'FALSE'})${
-    context ? `${genTabs()}(context ${context})` : ''
-  }${genTabs()}(song_id ${song_id})${genTabs()}(song${genTabs(2)}(name "${
-    wiiMode ? `dlc/${wiiMode.gen}/${wiiMode.slot.toString().padStart(3, '0')}/content/songs/${songname}/${songname}` : `songs/${songname}/${songname}`
-  }")${genTabs(2)}(tracks${genTabs(3)}(`
+  output += `(${id}${genTabs()}(name "${quoteToSlashQ(name)}")${genTabs()}(artist "${quoteToSlashQ(artist)}")${genTabs()}(master ${master ? 'TRUE' : 'FALSE'})${context ? `${genTabs()}(context ${context})` : ''
+    }${genTabs()}(song_id ${song_id})${genTabs()}(song${genTabs(2)}(name "${wiiMode ? `dlc/${wiiMode.gen}/${wiiMode.slot.toString().padStart(3, '0')}/content/songs/${songname}/${songname}` : `songs/${songname}/${songname}`
+    }")${genTabs(2)}(tracks${genTabs(3)}(`
 
   if (drum) {
     output += `(drum (${tracksCountToString(trackCount, drum)}))`
@@ -481,17 +462,13 @@ const stringifyRB3DLC = (value: DTAFile, options: StringifyDataOptions): string 
     return
   })
 
-  output += `${crowd ? `${genTabs(2)}(crowd_channels ${tracksCountToString(crowdTrackStarts, 2)})` : ``}${genTabs(2)}(vocal_parts ${
-    vocal_parts === undefined ? (vocals > 0 ? 1 : 0) : vocal_parts
-  })${genTabs(2)}(drum_solo${genTabs(3)}(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))${genTabs(2)})${genTabs(2)}(drum_freestyle${genTabs(
-    3
-  )}(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))${genTabs(2)})${mute_volume === undefined ? `` : `${genTabs(2)}(mute_volume ${mute_volume})`}${
-    mute_volume_vocals === undefined ? `` : `${genTabs(2)}(mute_volume_vocals ${mute_volume_vocals})`
-  }${hopo_threshold === undefined ? `` : `${genTabs(2)}(hopo_threshold ${hopo_threshold})`}${genTabs()})${genTabs()}(bank ${bank})${genTabs()}(drum_bank ${drum_bank})${genTabs()}(anim_tempo ${
-    anim_tempo === 16 ? `kTempoSlow` : anim_tempo === 32 ? `kTempoMedium` : `kTempoFast`
-  })${band_fail_cue === undefined ? `` : `${genTabs()}(band_fail_cue ${band_fail_cue})`}${genTabs()}(song_scroll_speed ${
-    song_scroll_speed === undefined ? 2300 : song_scroll_speed
-  })${genTabs()}(preview ${preview.join(' ')})${genTabs()}(song_length ${song_length})`
+  output += `${crowd ? `${genTabs(2)}(crowd_channels ${tracksCountToString(crowdTrackStarts, 2)})` : ``}${genTabs(2)}(vocal_parts ${vocal_parts === undefined ? (vocals > 0 ? 1 : 0) : vocal_parts
+    })${genTabs(2)}(drum_solo${genTabs(3)}(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))${genTabs(2)})${genTabs(2)}(drum_freestyle${genTabs(
+      3
+    )}(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))${genTabs(2)})${mute_volume === undefined ? `` : `${genTabs(2)}(mute_volume ${mute_volume})`}${mute_volume_vocals === undefined ? `` : `${genTabs(2)}(mute_volume_vocals ${mute_volume_vocals})`
+    }${hopo_threshold === undefined ? `` : `${genTabs(2)}(hopo_threshold ${hopo_threshold})`}${genTabs()})${genTabs()}(bank ${bank})${genTabs()}(drum_bank ${drum_bank})${genTabs()}(anim_tempo ${anim_tempo === 16 ? `kTempoSlow` : anim_tempo === 32 ? `kTempoMedium` : `kTempoFast`
+    })${band_fail_cue === undefined ? `` : `${genTabs()}(band_fail_cue ${band_fail_cue})`}${genTabs()}(song_scroll_speed ${song_scroll_speed === undefined ? 2300 : song_scroll_speed
+    })${genTabs()}(preview ${preview.join(' ')})${genTabs()}(song_length ${song_length})`
 
   if (solo && solo.length > 0) {
     output += `${genTabs()}(solo (`
@@ -555,30 +532,21 @@ const stringifyRB3DLC = (value: DTAFile, options: StringifyDataOptions): string 
     output += `${genTabs(2)}(real_bass ${rank_real_bass === undefined ? 0 : rank_real_bass})`
   }
 
-  output += `${genTabs(2)}(band ${rank_band})${genTabs()})${genTabs()}(format ${format === undefined ? 10 : format})${genTabs()}(version ${
-    version === undefined ? 30 : version
-  })${genTabs()}(game_origin ${game_origin === undefined ? 'ugc_plus' : game_origin})${genTabs()}(rating ${rating === undefined ? 4 : rating})${genTabs()}(genre ${
-    genre === undefined ? 'other' : genre
-  })${genTabs()}(sub_genre ${sub_genre === undefined ? 'subgenre_other' : sub_genre})${genTabs()}(vocal_gender ${vocal_gender})${genTabs()}(year_released ${year_released})${
-    year_recorded ? `${genTabs()}(year_recorded ${year_recorded})` : ``
-  }${genTabs()}(album_art ${album_art ? 'TRUE' : 'FALSE'})${album_name ? `${genTabs()}(album_name "${quoteToSlashQ(album_name)}")` : ``}${
-    album_track_number ? `${genTabs()}(album_track_number ${album_track_number})` : ``
-  }${vocal_tonic_note === undefined ? `` : `${genTabs()}(vocal_tonic_note ${vocal_tonic_note})`}${song_tonality === undefined ? `` : `${genTabs()}(song_tonality ${song_tonality})`}${
-    song_key === undefined ? `` : `${genTabs()}(song_key ${song_key})`
-  }${tuning_offset_cents === undefined ? `` : `${genTabs()}(tuning_offset_cents ${tuning_offset_cents})`}${
-    guide_pitch_volume === undefined ? `` : `${genTabs()}(guide_pitch_volume ${guide_pitch_volume.toFixed(1)})`
-  }${real_guitar_tuning ? `${genTabs()}(real_guitar_tuning (${real_guitar_tuning.join(' ')}))` : ``}${real_bass_tuning ? `${genTabs()}(real_bass_tuning (${real_bass_tuning.join(' ')}))` : ``}${
-    encoding === undefined || encoding === 'latin1' ? `` : `${genTabs()}(encoding ${encoding})`
-  }${pack_name ? `${genTabs()}(pack_name "${quoteToSlashQ(pack_name)}")` : ``}${base_points ? `${genTabs()}(base_points ${base_points})` : ``}`
+  output += `${genTabs(2)}(band ${rank_band})${genTabs()})${genTabs()}(format ${format === undefined ? 10 : format})${genTabs()}(version ${version === undefined ? 30 : version
+    })${genTabs()}(game_origin ${game_origin === undefined ? 'ugc_plus' : game_origin})${genTabs()}(rating ${rating === undefined ? 4 : rating})${genTabs()}(genre ${genre === undefined ? 'other' : genre
+    })${genTabs()}(sub_genre ${sub_genre === undefined ? 'subgenre_other' : sub_genre})${genTabs()}(vocal_gender ${vocal_gender})${genTabs()}(year_released ${year_released})${year_recorded ? `${genTabs()}(year_recorded ${year_recorded})` : ``
+    }${genTabs()}(album_art ${album_art ? 'TRUE' : 'FALSE'})${album_name ? `${genTabs()}(album_name "${quoteToSlashQ(album_name)}")` : ``}${album_track_number ? `${genTabs()}(album_track_number ${album_track_number})` : ``
+    }${vocal_tonic_note === undefined ? `` : `${genTabs()}(vocal_tonic_note ${vocal_tonic_note})`}${song_tonality === undefined ? `` : `${genTabs()}(song_tonality ${song_tonality})`}${song_key === undefined ? `` : `${genTabs()}(song_key ${song_key})`
+    }${tuning_offset_cents === undefined ? `` : `${genTabs()}(tuning_offset_cents ${tuning_offset_cents})`}${guide_pitch_volume === undefined ? `` : `${genTabs()}(guide_pitch_volume ${guide_pitch_volume.toFixed(1)})`
+    }${real_guitar_tuning ? `${genTabs()}(real_guitar_tuning (${real_guitar_tuning.join(' ')}))` : ``}${real_bass_tuning ? `${genTabs()}(real_bass_tuning (${real_bass_tuning.join(' ')}))` : ``}${encoding === undefined || encoding === 'latin1' ? `` : `${genTabs()}(encoding ${encoding})`
+    }${pack_name ? `${genTabs()}(pack_name "${quoteToSlashQ(pack_name)}")` : ``}${base_points ? `${genTabs()}(base_points ${base_points})` : ``}`
 
   if (placeCustomAttributes === undefined || placeCustomAttributes === true) {
-    output += `${genTabs()}${genTabs(0)};DO NOT EDIT THE FOLLOWING LINES MANUALLY${genTabs(0)};Created using Magma: C3 Roks Edition v3.3.5${genTabs(0)};Song authored by ${
-      author ? author : 'Unknown Charter'
-    }${genTabs(0)};Song=${name}${genTabs(0)};Language(s)=${languages ? (languages.length === 1 ? `${languages[0]},` : `${languages.join(',')},`) : `English,`}${genTabs(0)};Karaoke=${
-      karaoke ? 1 : 0
-    }${genTabs(0)};Multitrack=${multitrack ? 1 : 0}${genTabs(0)};Convert=${convert ? 1 : 0}${genTabs(0)};2xBass=${doubleKick ? 1 : 0}${genTabs(0)};RhythmKeys=${rhythmOnKeys ? 1 : 0}${genTabs(
-      0
-    )};RhythmBass=${rhythmOnBass ? 1 : 0}${genTabs(0)};CATemh=${CATemh ? 1 : 0}${genTabs(0)};ExpertOnly=${expertOnly ? 1 : 0}`
+    output += `${genTabs()}${genTabs(0)};DO NOT EDIT THE FOLLOWING LINES MANUALLY${genTabs(0)};Created using Magma: C3 Roks Edition v3.3.5${genTabs(0)};Song authored by ${author ? author : 'Unknown Charter'
+      }${genTabs(0)};Song=${name}${genTabs(0)};Language(s)=${languages ? (languages.length === 1 ? `${languages[0]},` : `${languages.join(',')},`) : `English,`}${genTabs(0)};Karaoke=${karaoke ? 1 : 0
+      }${genTabs(0)};Multitrack=${multitrack ? 1 : 0}${genTabs(0)};Convert=${convert ? 1 : 0}${genTabs(0)};2xBass=${doubleKick ? 1 : 0}${genTabs(0)};RhythmKeys=${rhythmOnKeys ? 1 : 0}${genTabs(
+        0
+      )};RhythmBass=${rhythmOnBass ? 1 : 0}${genTabs(0)};CATemh=${CATemh ? 1 : 0}${genTabs(0)};ExpertOnly=${expertOnly ? 1 : 0}`
   }
 
   output += `${genTabs(0)})${genTabs(0)}`

@@ -1,6 +1,6 @@
 import { DTAFileModule, DTAFile } from '../../src'
-import { CreateDTAFileRecipe } from '../../src/lib/create'
-import { fullfillDTA } from '../lib/fullfillDTA'
+import { CreateDTAFileRecipe } from '../../src/lib/dta/create'
+import { fullfillDTA } from '../lib/dta/fullfill'
 import { MAGMAProject } from '../lib/magma'
 
 // All songs

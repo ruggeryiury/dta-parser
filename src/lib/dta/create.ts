@@ -1,6 +1,5 @@
-import cloneDeep from 'lodash/cloneDeep'
 import { DTAFile } from './dta'
-import { updateDTA, UpdateDataOptions, TrackUpdateOptions, GenreUpdateOptionsTypes } from './update'
+import { updateDTA, UpdateDataOptions, TrackUpdateOptions, SongGenreUpdateOptions } from './update'
 import { dtaDefault } from './dta'
 
 export const clearDTA = (dta: DTAFile): Partial<DTAFile> => {
@@ -66,7 +65,7 @@ export interface CreateDTAFileRecipe extends UpdateDataOptions {
   /**
    * An object with the song's genre and sub-genre.
    */
-  genre: GenreUpdateOptionsTypes
+  genre: SongGenreUpdateOptions
   /**
    * The song's release year.
    */
@@ -81,7 +80,7 @@ export interface CreateDTAFileRecipe extends UpdateDataOptions {
  * @returns {DTAFile} A new parsed song object.
  */
 export const createDTA = (values?: CreateDTAFileRecipe): DTAFile => {
-  let newDTAInstance = cloneDeep(dtaDefault)
+  let newDTAInstance = { ...dtaDefault }
 
   if (values) {
     newDTAInstance = updateDTA(newDTAInstance, values)

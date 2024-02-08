@@ -1,5 +1,5 @@
 import { DTAFile } from './dta'
-import { omitLeadingArticle } from '../utils/stringProcessors'
+import { omitLeadingArticle } from '../../utils/stringProcessors'
 
 type SortingFunction = (a: DTAFile, b: DTAFile) => 1 | -1 | 0
 

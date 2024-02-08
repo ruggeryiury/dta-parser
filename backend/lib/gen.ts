@@ -1,8 +1,8 @@
 import path from 'path'
 import fs from 'fs'
-import { StringifyDataOptions, stringifyDTA } from '../../src/lib/stringify'
+import { StringifyDataOptions, stringifyDTA } from '../../src/lib/dta/stringify'
 import { DTAFile } from '../../src'
-import { sortDTA } from '../../src/lib/sort'
+import { sortDTA } from '../../src/lib/dta/sort'
 import { MySongsID, MySongsModule } from '../core/mySongs'
 import { MAGMAProject } from './magma'
 
@@ -24,10 +24,11 @@ export interface SongsGeneratorOptions extends StringifyDataOptions {
 }
 
 /**
- * Asynchronously generates a `gen.dta` file inside `backend/gen` folder.
+ * Asynchronously generates a `gen.dta` file inside `backend/gen` folder with the provided `DTAFile` array.
  * - - - -
  * @param {MAGMAProject | MAGMAProject[] | MySongsModule} songs An array with parsed songs.
  * @param {SongsGeneratorOptions | DTAFileEncodingTypes} options `OPTIONAL` Customize options for the DTA file generator.
+ * Can be either an object with options or a string with a file encoding type. Default is `utf8`.
  */
 export const genSongsDTAFile = async (songs: MAGMAProject | MAGMAProject[] | MySongsModule, options?: SongsGeneratorOptions | DTAFileEncodingTypes): Promise<void> => {
   const databaseSongs: DTAFile[] = []
@@ -50,6 +51,7 @@ export const genSongsDTAFile = async (songs: MAGMAProject | MAGMAProject[] | MyS
   } else if ('id' in songs) {
     databaseSongs.push(songs)
   } else {
+    // My Songs module
     Object.keys(songs).forEach((songname) => {
       const song = songs[songname as MySongsID]
       if (opts?.ignoreFakeSongs && song.fake === true) {

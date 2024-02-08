@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/create'
+import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
 
 export const spacecadet = {
   id: '7748spacecadet',

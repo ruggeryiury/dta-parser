@@ -6,12 +6,15 @@
   "main": "lib/index.js",
   "module": "module/index.js",
   "types": "lib/index.d.ts",
-  "author": "Ruggery Iury Corrêa <ruggeryiury@gmail.com> (https://ruggeryiury.github.io/my-linktree/)",
+  "author": "Ruggery Iury Corrêa <ruggeryiury@gmail.com>",
   "license": "MIT",
   "keywords": [
     "parser",
     "rock-band",
-    "dta"
+    "dta",
+    "dta-file",
+    "javascript",
+    "typescript"
   ],
   "scripts": {
     "build": "yarn clean && yarn build:commonjs && yarn build:esmodule && webpack",
@@ -33,9 +36,7 @@
     }
   },
   "dependencies": {
-    "core-js": "^3.35.1",
-    "lodash": "^4.17.21",
-    "sharp": "^0.33.2"
+    "core-js": "^3.35.1"
   },
   "devDependencies": {
     "@babel/core": "^7.22.1",
@@ -44,7 +45,6 @@
     "@babel/preset-env": "^7.22.4",
     "@babel/preset-typescript": "^7.21.5",
     "@types/babel__core": "^7.20.1",
-    "@types/lodash": "^4.14.195",
     "@types/node": "^20.2.5",
     "@types/prettier": "^2.7.3",
     "@typescript-eslint/eslint-plugin": "^5.59.9",
@@ -54,6 +54,7 @@
     "eslint": "^8.42.0",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.8",
+    "sharp": "^0.33.2",
     "terser-webpack-plugin": "^5.3.9",
     "ts-loader": "^9.4.4",
     "ts-node": "^10.9.1",
@@ -61,5 +62,9 @@
     "webpack": "^5.85.1",
     "webpack-bundle-analyzer": "^4.9.0",
     "webpack-cli": "^5.1.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ruggeryiury/dta-parser.git"
   }
 }

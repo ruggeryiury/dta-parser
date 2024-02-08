@@ -287,7 +287,7 @@ export type DTAFileKeys = keyof DTAFile
  */
 export type DTAFileExpanded<T> = DTAFile & T
 
-export const dtaDefault: DTAFile = {
+export const dtaDefault: Readonly<DTAFile> = {
   id: '',
   name: '',
   artist: '',

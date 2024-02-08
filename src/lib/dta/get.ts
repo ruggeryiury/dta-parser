@@ -1,6 +1,6 @@
 import { DTAFile } from './dta'
-import { leadingArticleToTrailing, omitLeadingArticle } from '../utils/stringProcessors'
-import { RankTypes, rankCalculator } from '../utils/rankCalculations'
+import { leadingArticleToTrailing, omitLeadingArticle } from '../../utils/stringProcessors'
+import { RankTypes, rankCalculator } from '../../utils/rankCalculations'
 import { BandRankingNames, BandRankingNamesAsDots, BandRankingNumbers, InstrRankingNames, InstrRankingNamesAsDots, InstrRankingNumbers, localeKeyToValue } from './locale'
 
 export interface GetNamingOptions {
@@ -52,7 +52,9 @@ export type GetRankReturnType<P extends RankTypes, T extends GetRankTypeOptions>
  * @param {GetNamingOptions} options `OPTIONAL` Customize options for the song title's return.
  * @returns {string} The song title.
  */
-export const getSongTitle = (song: DTAFile, options: GetNamingOptions = { leadingArticle: 'emit', quoted: false }): string => {
+export const getSongTitle = (song: DTAFile, options?: GetNamingOptions): string => {
+  if (!options) options = { leadingArticle: 'emit', quoted: false }
+  else options = { leadingArticle: 'emit', quoted: false, ...options }
   const { leadingArticle, quoted } = options
   let returnValue = ''
 
@@ -60,7 +62,7 @@ export const getSongTitle = (song: DTAFile, options: GetNamingOptions = { leadin
   else if (leadingArticle === 'omit') returnValue = omitLeadingArticle(song.name)
   else returnValue = leadingArticleToTrailing(song.name)
 
-  if (quoted !== undefined || quoted === true) {
+  if (quoted === true) {
     returnValue = `"${returnValue}"`
   }
 
@@ -74,7 +76,9 @@ export const getSongTitle = (song: DTAFile, options: GetNamingOptions = { leadin
  * @param {GetNamingOptions} options `OPTIONAL` Customize options for the song artist's return.
  * @returns {string} The song artist.
  */
-export const getSongArtist = (song: DTAFile, options: GetNamingOptions = { leadingArticle: 'emit', quoted: false }): string => {
+export const getSongArtist = (song: DTAFile, options?: GetNamingOptions): string => {
+  if (!options) options = { leadingArticle: 'emit', quoted: false }
+  else options = { leadingArticle: 'emit', quoted: false, ...options }
   const { leadingArticle, quoted } = options
   let returnValue = ''
 
@@ -82,7 +86,7 @@ export const getSongArtist = (song: DTAFile, options: GetNamingOptions = { leadi
   else if (leadingArticle === 'omit') returnValue = omitLeadingArticle(song.artist)
   else returnValue = leadingArticleToTrailing(song.artist)
 
-  if (quoted !== undefined || quoted === true) {
+  if (quoted === true) {
     returnValue = `"${returnValue}"`
   }
 
@@ -96,7 +100,9 @@ export const getSongArtist = (song: DTAFile, options: GetNamingOptions = { leadi
  * @param {GetNamingOptions} options `OPTIONAL` Customize options for the song album title's return.
  * @returns {string | undefined} The song album title, returns `undefined` if the song has no album title.
  */
-export const getSongAlbumTitle = (song: DTAFile, options: GetNamingOptions = { leadingArticle: 'emit', quoted: false }): string | undefined => {
+export const getSongAlbumTitle = (song: DTAFile, options?: GetNamingOptions): string | undefined => {
+  if (!options) options = { leadingArticle: 'emit', quoted: false }
+  else options = { leadingArticle: 'emit', quoted: false, ...options }
   const { leadingArticle, quoted } = options
   let returnValue = undefined
 

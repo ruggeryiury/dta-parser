@@ -16,9 +16,9 @@ import {
   VocalPercussionNames,
   localeValueToKey,
 } from './locale'
-import { panValueToArray } from '../utils/pansAndVols'
-import { rankValuesToDTARankSystem, bandAverageRankCalculator } from '../utils/rankCalculations'
-import { timeStringToMilliseconds } from '../utils/timeCalculations'
+import { panValueToArray } from '../../utils/pansAndVols'
+import { rankValuesToDTARankSystem, bandAverageRankCalculator } from '../../utils/rankCalculations'
+import { timeStringToMilliseconds } from '../../utils/timeCalculations'
 
 export type DrumTracksTypes =
   | 2

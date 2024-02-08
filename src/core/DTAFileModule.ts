@@ -1,8 +1,8 @@
-import { createDTA } from '../lib/create'
-import { getSongAlbumTitle, getSongArtist, getSongRank, getSongTitle } from '../lib/get'
-import { sortDTA } from '../lib/sort'
-import { stringifyDTA } from '../lib/stringify'
-import { updateDTA } from '../lib/update'
+import { createDTA } from '../lib/dta/create'
+import { getSongAlbumTitle, getSongArtist, getSongRank, getSongTitle } from '../lib/dta/get'
+import { sortDTA } from '../lib/dta/sort'
+import { stringifyDTA } from '../lib/dta/stringify'
+import { updateDTA } from '../lib/dta/update'
 
 /**
  * Main module of the `DTAParser` package.

@@ -1,9 +1,9 @@
-import { DTAFile } from './lib/dta'
+import { DTAFile } from './lib/dta/dta'
 import DTAFileModule from './core/DTAFileModule'
-import { depackDTA } from './lib/depack'
-import { parseDTA } from './lib/parse'
-import { SortByOptionsTypes, sortDTA } from './lib/sort'
-import { UpdateDataOptions, updateDTA } from './lib/update'
+import { depackDTA } from './lib/dta/depack'
+import { parseDTA } from './lib/dta/parse'
+import { SortByOptionsTypes, sortDTA } from './lib/dta/sort'
+import { UpdateDataOptions, updateDTA } from './lib/dta/update'
 
 export interface DTAParserOptions {
   /**
@@ -73,6 +73,6 @@ const DTAParser = (dtaFileContents: string, options: DTAParserOptions = {}): DTA
   return parsedSongs
 }
 
-export type { DTAFile } from './lib/dta'
+export type { DTAFile } from './lib/dta/dta'
 export { DTAFileModule }
 export default DTAParser

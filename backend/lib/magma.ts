@@ -3,8 +3,8 @@ import path from 'path'
 import { genTabs as t } from '../../src/utils/stringProcessors'
 import { rankCalculator as r } from '../../src/utils/rankCalculations'
 import { panVolInfoGen } from '../../src/utils/pansAndVols'
-import { DTAFileExpanded } from '../../src/lib/dta'
-import { SongSubGenre } from '../../src/lib/locale'
+import { DTAFileExpanded } from '../../src/lib/dta/dta'
+import { SongSubGenre } from '../../src/lib/dta/locale'
 
 export type AutogenValues =
   | 'Default'

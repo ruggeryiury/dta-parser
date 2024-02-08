@@ -1,7 +1,7 @@
-import { DTAFile } from '../'
+import { DTAFile } from '../..'
 import { CreateDTAFileRecipe } from './create'
 import { BandFailCueNames, BandRankingNumbers, localeKeyToValue } from './locale'
-import { rankCalculator } from '../utils/rankCalculations'
+import { rankCalculator } from '../../utils/rankCalculations'
 import {
   AlbumUpdateOptions,
   BackingUpdateOptionsTypes,
@@ -14,7 +14,7 @@ import {
   TrackUpdateOptions,
   VocalsUpdateOptionsTypes,
 } from './update'
-import { panVolInfoGen } from '../utils/pansAndVols'
+import { panVolInfoGen } from '../../utils/pansAndVols'
 
 export const genTracksRecipe = (song: DTAFile): TrackUpdateOptions => {
   const tracks = {} as TrackUpdateOptions
