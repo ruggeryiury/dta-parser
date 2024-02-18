@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const ponytail = {
   id: '7748ponytail',
@@ -28,6 +28,6 @@ export const ponytail = {
   key: 'A',
   author: 'Ruggy',
   CATemh: true,
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default ponytail

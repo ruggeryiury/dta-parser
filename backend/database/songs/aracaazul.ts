@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const aracaazul = {
   id: '7748aracaazul',
@@ -27,8 +27,8 @@ export const aracaazul = {
   encoding: 'utf8',
   rating: 1,
   genre: {
-    genre: 'Other',
-    sub_genre: 'Acoustic',
+    genre: 'Latin',
+    sub_genre: 'Latin',
   },
   year_released: 1973,
   album: {
@@ -38,6 +38,6 @@ export const aracaazul = {
   },
   key: 'Eb',
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default aracaazul

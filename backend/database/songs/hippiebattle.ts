@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const hippiebattle = {
   id: '7748hippiebattle',
@@ -30,6 +30,6 @@ export const hippiebattle = {
   multitrack: true,
   author: 'Ruggy',
   pack_name: 'MOTHER Pack 01',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default hippiebattle

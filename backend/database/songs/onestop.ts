@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const onestop = {
   id: '7748onestop',
@@ -30,6 +30,6 @@ export const onestop = {
   multitrack: true,
   CATemh: true,
   pack_name: 'Windows .MID Pack 01',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default onestop

@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const anysecondnow = {
   id: '7748anysecondnow',
@@ -22,6 +22,6 @@ export const anysecondnow = {
   album: { hasArt: true, name: 'Speak & Spell', track_number: 10 },
   key: 'G',
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default anysecondnow

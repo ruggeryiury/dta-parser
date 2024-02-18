@@ -162,7 +162,7 @@ export interface DTAFile {
    *
    * All customs are compiled on MAGMA using `ugc_plus`.
    */
-  game_origin?: SongGameOrigin
+  game_origin: SongGameOrigin
   /**
    * The song's rating.
    */

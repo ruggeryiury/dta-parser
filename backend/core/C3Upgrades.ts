@@ -1,6 +1,6 @@
 import { DTAParserOptions } from '../../src'
 
-export type C3CustomsUpgradesObject = NonNullable<DTAParserOptions['update']>
+export type C3CustomsUpgradesObject = NonNullable<DTAParserOptions<false>['update']>
 
 export const C3Upgrades = (): C3CustomsUpgradesObject => {
   return {

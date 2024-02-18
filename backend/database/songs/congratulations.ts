@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const congratulations = {
   id: '7748congratulations',
@@ -30,6 +30,6 @@ export const congratulations = {
   key: 'G',
   CATemh: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default congratulations

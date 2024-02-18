@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const lightsinthesky = {
   id: '7748lightsinthesky',
@@ -25,6 +25,6 @@ export const lightsinthesky = {
   multitrack: true,
   CATemh: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default lightsinthesky

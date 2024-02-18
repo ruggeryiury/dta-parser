@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const thefightisover = {
   id: '7748thefightisover',
@@ -24,6 +24,6 @@ export const thefightisover = {
   key: 'C',
   CATemh: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default thefightisover

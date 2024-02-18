@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const whydidntyoustopme = {
   id: '7748whydidntyoustopme',
@@ -26,6 +26,6 @@ export const whydidntyoustopme = {
   CATemh: true,
   author: 'Ruggy',
   pack_name: 'Chart-a-thon 2018',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default whydidntyoustopme

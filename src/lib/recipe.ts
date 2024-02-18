@@ -1,7 +1,7 @@
-import { DTAFile } from '../..'
-import { CreateDTAFileRecipe } from './create'
+import { DTAFile } from '..'
+import { DTAFileRecipe } from './create'
 import { BandFailCueNames, BandRankingNumbers, localeKeyToValue } from './locale'
-import { rankCalculator } from '../../utils/rankCalculations'
+import { rankCalculator } from '../utils/rankCalculations'
 import {
   AlbumUpdateOptions,
   BackingUpdateOptionsTypes,
@@ -14,8 +14,14 @@ import {
   TrackUpdateOptions,
   VocalsUpdateOptionsTypes,
 } from './update'
-import { panVolInfoGen } from '../../utils/pansAndVols'
+import { panVolInfoGen } from '../utils/pansAndVols'
 
+/**
+ * Generates an object specifying the whole song's instruments and audio channels structure.
+ * - - - -
+ * @param {DTAFile} song The song you want to generate a track update recipe from.
+ * @returns {TrackUpdateOptions} An object specifying the whole song's instruments and audio channels structure.
+ */
 export const genTracksRecipe = (song: DTAFile): TrackUpdateOptions => {
   const tracks = {} as TrackUpdateOptions
   const { rank_drum, rank_bass, rank_guitar, rank_vocals, rank_keys, rank_real_bass, rank_real_guitar, rank_real_keys, real_bass_tuning, real_guitar_tuning, vocal_parts, vocal_gender } = song
@@ -203,9 +209,9 @@ export const genTracksRecipe = (song: DTAFile): TrackUpdateOptions => {
  * Converts a parsed song to a parsed song recipe.
  * - - - -
  * @param {DTAFile} song The song you want to generate a parsed song recipe from.
- * @returns {CreateDTAFileRecipe} The song's recipe object.
+ * @returns {DTAFileRecipe} The song's recipe object.
  */
-export const genDTARecipe = (song: DTAFile): CreateDTAFileRecipe => {
+export const genDTARecipe = (song: DTAFile): DTAFileRecipe => {
   const {
     id,
     name,
@@ -243,7 +249,7 @@ export const genDTARecipe = (song: DTAFile): CreateDTAFileRecipe => {
     doubleKick,
   } = song
 
-  const returnObject: CreateDTAFileRecipe = {
+  const returnObject: DTAFileRecipe = {
     id,
     name,
     artist,
@@ -260,7 +266,7 @@ export const genDTARecipe = (song: DTAFile): CreateDTAFileRecipe => {
     anim_tempo,
     band_fail_cue: localeKeyToValue.band_fail_cue(band_fail_cue) === 'Not Specified' ? undefined : (localeKeyToValue.band_fail_cue(band_fail_cue) as Exclude<BandFailCueNames, 'Not Specified'>),
     song_scroll_speed: song_scroll_speed === undefined ? 'Normal' : localeKeyToValue.song_scroll_speed(song_scroll_speed),
-    preview: preview[0],
+    preview: preview && preview[0] ? preview[0] : 0,
     song_length,
     rank_band: rankCalculator('band', rank_band) as BandRankingNumbers,
     encoding,

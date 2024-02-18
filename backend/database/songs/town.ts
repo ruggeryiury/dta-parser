@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const town = {
   id: '7748town',
@@ -31,6 +31,6 @@ export const town = {
   multitrack: true,
   CATemh: true,
   pack_name: 'Windows .MID Pack 01',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default town

@@ -6,6 +6,7 @@ import {
   BandRankingNumbers,
   DrumBankNames,
   SongEncoding,
+  SongGameOrigin,
   SongGenreNames,
   SongRating,
   SongRatingNames,
@@ -16,9 +17,9 @@ import {
   VocalPercussionNames,
   localeValueToKey,
 } from './locale'
-import { panValueToArray } from '../../utils/pansAndVols'
-import { rankValuesToDTARankSystem, bandAverageRankCalculator } from '../../utils/rankCalculations'
-import { timeStringToMilliseconds } from '../../utils/timeCalculations'
+import { panValueToArray } from '../utils/pansAndVols'
+import { rankValuesToDTARankSystem, bandAverageRankCalculator } from '../utils/rankCalculations'
+import { timeStringToMilliseconds } from '../utils/timeCalculations'
 
 export type DrumTracksTypes =
   | 2
@@ -554,7 +555,7 @@ export interface UpdateDataOptions {
    * Songs which MIDI file is exported with UTF-8 encoding should have `utf8` as encoding.
    */
   encoding?: SongEncoding
-  game_origin?: string
+  game_origin?: SongGameOrigin
   /**
    * The song's rating.
    */
@@ -615,10 +616,13 @@ export interface UpdateDataOptions {
 /**
  * Updates a song with the provided update options.
  * - - - -
- * @param {DTAFile} dta  The parsed song to update.
- * @param {UpdateDataOptions} update The options for the parsed song updating process.
+ * @param {DTAFile} dta The parsed song to update.
+ * @param {UpdateDataOptions} update An object with values to be updated.
  */
 export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
+  const newDTA = {
+    ...dta,
+  } as Partial<DTAFile>
   const {
     id,
     name,
@@ -659,33 +663,33 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
     expertOnly,
   } = update
 
-  if (id) dta.id = id
+  if (id) newDTA.id = id
 
-  if (name) dta.name = name
+  if (name) newDTA.name = name
 
-  if (artist) dta.artist = artist
+  if (artist) newDTA.artist = artist
 
-  if (master !== undefined) dta.master = master
+  if (master !== undefined) newDTA.master = master
 
-  if (song_id !== undefined) dta.song_id = song_id
+  if (song_id !== undefined) newDTA.song_id = song_id
 
-  if (songname) dta.songname = songname
+  if (songname) newDTA.songname = songname
 
   if (tracks) {
-    dta.tracks_count = [0, 0, 0, 0, 0, 0]
-    dta.pans = []
-    dta.vols = []
-    dta.vocal_parts = 0
-    dta.rank_band = 0
-    dta.rank_drum = 0
-    dta.rank_bass = 0
-    dta.rank_guitar = 0
-    dta.rank_vocals = 0
-    dta.rank_keys = 0
-    dta.rank_real_guitar = 0
-    dta.rank_real_bass = 0
-    dta.rank_real_keys = 0
-    dta.vocal_gender = 'male'
+    newDTA.tracks_count = [0, 0, 0, 0, 0, 0]
+    newDTA.pans = []
+    newDTA.vols = []
+    newDTA.vocal_parts = 0
+    newDTA.rank_band = 0
+    newDTA.rank_drum = 0
+    newDTA.rank_bass = 0
+    newDTA.rank_guitar = 0
+    newDTA.rank_vocals = 0
+    newDTA.rank_keys = 0
+    newDTA.rank_real_guitar = 0
+    newDTA.rank_real_bass = 0
+    newDTA.rank_real_keys = 0
+    newDTA.vocal_gender = 'male'
     let instrumentCount = 0
 
     const drumT = tracks.drum ? panValueToArray(tracks.drum.channels === undefined ? 'Stereo Else' : tracks.drum.channels).length : 0
@@ -695,7 +699,7 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
     const keysT = tracks.keys ? panValueToArray(tracks.keys.channels === undefined ? 'Stereo' : tracks.keys.channels).length : 0
     const backingT = tracks.backing ? panValueToArray(typeof tracks.backing === 'object' ? tracks.backing.channels : tracks.backing).length : 0
 
-    dta.tracks_count = [drumT, bassT, guitarT, vocalsT, keysT, backingT]
+    newDTA.tracks_count = [drumT, bassT, guitarT, vocalsT, keysT, backingT]
 
     let drumR = 0,
       bassR = 0,
@@ -710,26 +714,26 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
       instrumentCount++
 
       drumR = rankValuesToDTARankSystem('drum', tracks.drum.rank)
-      dta.rank_drum = drumR
+      newDTA.rank_drum = drumR
 
       panValueToArray(tracks.drum.channels === undefined ? 'Stereo Else' : tracks.drum.channels).forEach((pan) => {
-        dta.pans.push(pan)
-        dta.vols.push(0)
+        newDTA.pans?.push(pan)
+        newDTA.vols?.push(0)
       })
 
       if (tracks.drum.pans) {
-        dta.pans = dta.pans.slice(0, tracks.drum.pans.length * -1)
-        tracks.drum.pans.forEach((pan) => dta.pans.push(pan))
+        newDTA.pans = newDTA.pans?.slice(0, tracks.drum.pans.length * -1)
+        tracks.drum.pans.forEach((pan) => newDTA.pans?.push(pan))
       }
 
       if (tracks.drum.vols) {
-        dta.vols = dta.vols.slice(0, tracks.drum.vols.length * -1)
-        tracks.drum.vols.forEach((pan) => dta.pans.push(pan))
+        newDTA.vols = newDTA.vols?.slice(0, tracks.drum.vols.length * -1)
+        tracks.drum.vols.forEach((pan) => newDTA.pans?.push(pan))
       }
 
       if (tracks.drum.hasSolo !== undefined && tracks.drum.hasSolo) {
-        if (!dta.solo) dta.solo = []
-        dta.solo.push('drum')
+        if (!newDTA.solo) newDTA.solo = []
+        newDTA.solo.push('drum')
       }
     }
 
@@ -738,33 +742,33 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
 
       bassR = rankValuesToDTARankSystem('bass', tracks.bass.rank)
       real_bassR = rankValuesToDTARankSystem('real_bass', tracks.bass.real_rank !== undefined ? tracks.bass.real_rank : -1)
-      dta.rank_bass = bassR
-      dta.rank_real_bass = real_bassR
+      newDTA.rank_bass = bassR
+      newDTA.rank_real_bass = real_bassR
 
       if (real_bassR > 0) {
         if (tracks.bass.tuning !== undefined) {
-          dta.real_bass_tuning = tracks.bass.tuning
-        } else dta.real_bass_tuning = [0, 0, 0, 0]
+          newDTA.real_bass_tuning = tracks.bass.tuning
+        } else newDTA.real_bass_tuning = [0, 0, 0, 0]
       }
 
       panValueToArray(tracks.bass.channels === undefined ? 'Stereo' : tracks.bass.channels).forEach((pan) => {
-        dta.pans.push(pan)
-        dta.vols.push(0)
+        newDTA.pans?.push(pan)
+        newDTA.vols?.push(0)
       })
 
       if (tracks.bass.pans) {
-        dta.pans = dta.pans.slice(0, tracks.bass.pans.length * -1)
-        tracks.bass.pans.forEach((pan) => dta.pans.push(pan))
+        newDTA.pans = newDTA.pans?.slice(0, tracks.bass.pans.length * -1)
+        tracks.bass.pans.forEach((pan) => newDTA.pans?.push(pan))
       }
 
       if (tracks.bass.vols) {
-        dta.vols = dta.vols.slice(0, tracks.bass.vols.length * -1)
-        tracks.bass.vols.forEach((pan) => dta.pans.push(pan))
+        newDTA.vols = newDTA.vols?.slice(0, tracks.bass.vols.length * -1)
+        tracks.bass.vols.forEach((pan) => newDTA.pans?.push(pan))
       }
 
       if (tracks.bass.hasSolo !== undefined && tracks.bass.hasSolo) {
-        if (!dta.solo) dta.solo = []
-        dta.solo.push('bass')
+        if (!newDTA.solo) newDTA.solo = []
+        newDTA.solo.push('bass')
       }
     }
 
@@ -773,33 +777,33 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
 
       guitarR = rankValuesToDTARankSystem('guitar', tracks.guitar.rank)
       real_guitarR = rankValuesToDTARankSystem('real_guitar', tracks.guitar.real_rank !== undefined ? tracks.guitar.real_rank : -1)
-      dta.rank_guitar = guitarR
-      dta.rank_real_guitar = real_guitarR
+      newDTA.rank_guitar = guitarR
+      newDTA.rank_real_guitar = real_guitarR
 
       if (real_guitarR > 0) {
         if (tracks.guitar.tuning !== undefined) {
-          dta.real_guitar_tuning = tracks.guitar.tuning
-        } else dta.real_guitar_tuning = [0, 0, 0, 0, 0, 0]
+          newDTA.real_guitar_tuning = tracks.guitar.tuning
+        } else newDTA.real_guitar_tuning = [0, 0, 0, 0, 0, 0]
       }
 
       panValueToArray(tracks.guitar.channels === undefined ? 'Stereo' : tracks.guitar.channels).forEach((pan) => {
-        dta.pans.push(pan)
-        dta.vols.push(0)
+        newDTA.pans?.push(pan)
+        newDTA.vols?.push(0)
       })
 
       if (tracks.guitar.pans) {
-        dta.pans = dta.pans.slice(0, tracks.guitar.pans.length * -1)
-        tracks.guitar.pans.forEach((pan) => dta.pans.push(pan))
+        newDTA.pans = newDTA.pans?.slice(0, tracks.guitar.pans.length * -1)
+        tracks.guitar.pans.forEach((pan) => newDTA.pans?.push(pan))
       }
 
       if (tracks.guitar.vols) {
-        dta.vols = dta.vols.slice(0, tracks.guitar.vols.length * -1)
-        tracks.guitar.vols.forEach((pan) => dta.pans.push(pan))
+        newDTA.vols = newDTA.vols?.slice(0, tracks.guitar.vols.length * -1)
+        tracks.guitar.vols.forEach((pan) => newDTA.pans?.push(pan))
       }
 
       if (tracks.guitar.hasSolo !== undefined && tracks.guitar.hasSolo) {
-        if (!dta.solo) dta.solo = []
-        dta.solo.push('guitar')
+        if (!newDTA.solo) newDTA.solo = []
+        newDTA.solo.push('guitar')
       }
     }
 
@@ -807,36 +811,36 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
       instrumentCount++
 
       vocalsR = rankValuesToDTARankSystem('vocals', tracks.vocals.rank)
-      dta.rank_vocals = vocalsR
+      newDTA.rank_vocals = vocalsR
 
       if (tracks.vocals.vocal_parts !== undefined) {
-        dta.vocal_parts = localeValueToKey.vocal_parts(
+        newDTA.vocal_parts = localeValueToKey.vocal_parts(
           tracks.vocals.vocal_parts === 1 ? 'Solo Vocals' : tracks.vocals.vocal_parts === 2 ? '2-Part Harmonies' : tracks.vocals.vocal_parts === 3 ? '3-Part Harmonies' : tracks.vocals.vocal_parts
         )
-      } else dta.vocal_parts = 1
+      } else newDTA.vocal_parts = 1
 
       panValueToArray(tracks.vocals.channels === undefined ? 'Stereo' : tracks.vocals.channels).forEach((pan) => {
-        dta.pans.push(pan)
-        dta.vols.push(0)
+        newDTA.pans?.push(pan)
+        newDTA.vols?.push(0)
       })
 
       if (tracks.vocals.pans) {
-        dta.pans = dta.pans.slice(0, tracks.vocals.pans.length * -1)
-        tracks.vocals.pans.forEach((pan) => dta.pans.push(pan))
+        newDTA.pans = newDTA.pans?.slice(0, tracks.vocals.pans.length * -1)
+        tracks.vocals.pans.forEach((pan) => newDTA.pans?.push(pan))
       }
 
       if (tracks.vocals.vols) {
-        dta.vols = dta.vols.slice(0, tracks.vocals.vols.length * -1)
-        tracks.vocals.vols.forEach((pan) => dta.pans.push(pan))
+        newDTA.vols = newDTA.vols?.slice(0, tracks.vocals.vols.length * -1)
+        tracks.vocals.vols.forEach((pan) => newDTA.pans?.push(pan))
       }
 
       if (tracks.vocals.hasSolo !== undefined && tracks.vocals.hasSolo) {
-        if (!dta.solo) dta.solo = []
-        dta.solo.push('vocal_percussion')
+        if (!newDTA.solo) newDTA.solo = []
+        newDTA.solo.push('vocal_percussion')
       }
 
-      if (tracks.vocals.vocal_gender) dta.vocal_gender = localeValueToKey.vocal_gender(tracks.vocals.vocal_gender)
-      else dta.vocal_gender = 'male'
+      if (tracks.vocals.vocal_gender) newDTA.vocal_gender = localeValueToKey.vocal_gender(tracks.vocals.vocal_gender)
+      else newDTA.vocal_gender = 'male'
     }
 
     if (tracks.keys) {
@@ -844,313 +848,313 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
 
       keysR = rankValuesToDTARankSystem('keys', tracks.keys.rank)
       real_keysR = rankValuesToDTARankSystem('real_keys', tracks.keys.real_rank !== undefined ? tracks.keys.real_rank : -1)
-      dta.rank_keys = keysR
-      dta.rank_real_keys = real_keysR
+      newDTA.rank_keys = keysR
+      newDTA.rank_real_keys = real_keysR
 
       panValueToArray(tracks.keys.channels === undefined ? 'Stereo' : tracks.keys.channels).forEach((pan) => {
-        dta.pans.push(pan)
-        dta.vols.push(0)
+        newDTA.pans?.push(pan)
+        newDTA.vols?.push(0)
       })
 
       if (tracks.keys.pans) {
-        dta.pans = dta.pans.slice(0, tracks.keys.pans.length * -1)
-        tracks.keys.pans.forEach((pan) => dta.pans.push(pan))
+        newDTA.pans = newDTA.pans?.slice(0, tracks.keys.pans.length * -1)
+        tracks.keys.pans.forEach((pan) => newDTA.pans?.push(pan))
       }
 
       if (tracks.keys.vols) {
-        dta.vols = dta.vols.slice(0, tracks.keys.vols.length * -1)
-        tracks.keys.vols.forEach((pan) => dta.pans.push(pan))
+        newDTA.vols = newDTA.vols?.slice(0, tracks.keys.vols.length * -1)
+        tracks.keys.vols.forEach((pan) => newDTA.pans?.push(pan))
       }
 
       if (tracks.keys.hasSolo !== undefined && tracks.keys.hasSolo) {
-        if (!dta.solo) dta.solo = []
-        dta.solo.push('keys')
+        if (!newDTA.solo) newDTA.solo = []
+        newDTA.solo.push('keys')
       }
     }
 
     if (typeof tracks.backing === 'object') {
       panValueToArray(tracks.backing.channels).forEach((pan) => {
-        dta.pans.push(pan)
-        dta.vols.push(0)
+        newDTA.pans?.push(pan)
+        newDTA.vols?.push(0)
       })
 
       if (tracks.backing.pans) {
-        dta.pans = dta.pans.slice(0, tracks.backing.pans.length * -1)
-        tracks.backing.pans.forEach((pan) => dta.pans.push(pan))
+        newDTA.pans = newDTA.pans?.slice(0, tracks.backing.pans.length * -1)
+        tracks.backing.pans.forEach((pan) => newDTA.pans?.push(pan))
       }
 
       if (tracks.backing.vols) {
-        dta.vols = dta.vols.slice(0, tracks.backing.vols.length * -1)
-        tracks.backing.vols.forEach((pan) => dta.pans.push(pan))
+        newDTA.vols = newDTA.vols?.slice(0, tracks.backing.vols.length * -1)
+        tracks.backing.vols.forEach((pan) => newDTA.pans?.push(pan))
       }
     } else {
       panValueToArray(tracks.backing).forEach((pan) => {
-        dta.pans.push(pan)
-        dta.vols.push(0)
+        newDTA.pans?.push(pan)
+        newDTA.vols?.push(0)
       })
     }
 
     if (tracks.crowd !== undefined) {
-      dta.tracks_count.push(2)
-      dta.pans.push(-2.5, 2.5)
-      if (tracks.crowd === true) dta.vols.push(0, 0)
+      newDTA.tracks_count.push(2)
+      newDTA.pans?.push(-2.5, 2.5)
+      if (tracks.crowd === true) newDTA.vols?.push(0, 0)
       else {
         const [leftC, rightC] = tracks.crowd
-        dta.vols.push(leftC)
-        dta.vols.push(rightC)
+        newDTA.vols?.push(leftC)
+        newDTA.vols?.push(rightC)
       }
     }
 
-    if (rank_band) dta.rank_band = rankValuesToDTARankSystem('band', rank_band)
-    else dta.rank_band = bandAverageRankCalculator(guitarR + bassR + drumR + keysR + vocalsR, instrumentCount)
+    if (rank_band) newDTA.rank_band = rankValuesToDTARankSystem('band', rank_band)
+    else newDTA.rank_band = bandAverageRankCalculator(guitarR + bassR + drumR + keysR + vocalsR, instrumentCount)
   }
 
-  if (tuning_offset_cents && tuning_offset_cents !== 0) dta.tuning_offset_cents = tuning_offset_cents
+  if (tuning_offset_cents && tuning_offset_cents !== 0) newDTA.tuning_offset_cents = tuning_offset_cents
 
-  if (mute_volume) dta.mute_volume = mute_volume
+  if (mute_volume) newDTA.mute_volume = mute_volume
 
-  if (mute_volume_vocals) dta.mute_volume_vocals = mute_volume_vocals
+  if (mute_volume_vocals) newDTA.mute_volume_vocals = mute_volume_vocals
 
-  if (hopo_threshold) dta.hopo_threshold = hopo_threshold
+  if (hopo_threshold) newDTA.hopo_threshold = hopo_threshold
 
-  if (bank) dta.bank = localeValueToKey.bank(bank)
+  if (bank) newDTA.bank = localeValueToKey.bank(bank)
 
-  if (drum_bank) dta.drum_bank = localeValueToKey.drum_bank(drum_bank)
+  if (drum_bank) newDTA.drum_bank = localeValueToKey.drum_bank(drum_bank)
 
-  if (anim_tempo) dta.anim_tempo = typeof anim_tempo === 'number' ? anim_tempo : localeValueToKey.anim_tempo(anim_tempo)
+  if (anim_tempo) newDTA.anim_tempo = typeof anim_tempo === 'number' ? anim_tempo : localeValueToKey.anim_tempo(anim_tempo)
 
-  if (band_fail_cue) dta.band_fail_cue = localeValueToKey.band_fail_cue(band_fail_cue)
+  if (band_fail_cue) newDTA.band_fail_cue = localeValueToKey.band_fail_cue(band_fail_cue)
 
-  if (song_scroll_speed) dta.song_scroll_speed = localeValueToKey.song_scroll_speed(song_scroll_speed)
+  if (song_scroll_speed) newDTA.song_scroll_speed = localeValueToKey.song_scroll_speed(song_scroll_speed)
 
   if (preview) {
     if (typeof preview === 'string') {
       const time = timeStringToMilliseconds(preview)
-      dta.preview = [time, time + 30000]
+      newDTA.preview = [time, time + 30000]
     } else {
       // if (typeof preview === 'number')
-      dta.preview = [preview, preview + 30000]
+      newDTA.preview = [preview, preview + 30000]
     }
   }
 
   if (song_length) {
     if (typeof song_length === 'string') {
       const time = timeStringToMilliseconds(song_length)
-      dta.song_length = time
+      newDTA.song_length = time
     } else {
       // if (typeof song_length === 'number')
-      dta.song_length = song_length
+      newDTA.song_length = song_length
     }
   }
 
-  if (encoding) dta.encoding = encoding
+  if (encoding) newDTA.encoding = encoding
 
-  if (game_origin) dta.game_origin = game_origin as typeof dta.game_origin
+  if (game_origin) newDTA.game_origin = game_origin
 
-  if (rating) dta.rating = typeof rating === 'number' ? rating : localeValueToKey.rating(rating)
+  if (rating) newDTA.rating = typeof rating === 'number' ? rating : localeValueToKey.rating(rating)
 
   if (genre) {
-    dta.genre = localeValueToKey.genre(genre.genre)
-    dta.sub_genre = localeValueToKey.sub_genre(genre.sub_genre)
+    newDTA.genre = localeValueToKey.genre(genre.genre)
+    newDTA.sub_genre = localeValueToKey.sub_genre(genre.sub_genre)
   }
 
-  if (year_released) dta.year_released = year_released
-  if (year_recorded) dta.year_recorded = year_recorded
+  if (year_released) newDTA.year_released = year_released
+  if (year_recorded) newDTA.year_recorded = year_recorded
 
   if (album) {
-    dta.album_art = album.hasArt
-    if (album.name) dta.album_name = album.name
-    if (album.track_number) dta.album_track_number = album.track_number !== undefined ? album.track_number : 1
+    newDTA.album_art = album.hasArt
+    if (album.name) newDTA.album_name = album.name
+    if (album.track_number) newDTA.album_track_number = album.track_number !== undefined ? album.track_number : 1
   }
 
   if (typeof key_signature === 'object') {
-    delete dta.vocal_tonic_note
-    delete dta.song_tonality
-    delete dta.song_key
+    delete newDTA.vocal_tonic_note
+    delete newDTA.song_tonality
+    delete newDTA.song_key
 
     if (key_signature.key === 'C Major' || key_signature.key === 'C') {
-      dta.vocal_tonic_note = 0
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 0
+      newDTA.song_tonality = 0
     } else if (key_signature.key === 'Db Major' || key_signature.key === 'C# Major' || key_signature.key === 'Db' || key_signature.key === 'C#') {
-      dta.vocal_tonic_note = 1
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 1
+      newDTA.song_tonality = 0
     } else if (key_signature.key === 'D Major' || key_signature.key === 'D') {
-      dta.vocal_tonic_note = 2
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 2
+      newDTA.song_tonality = 0
     } else if (key_signature.key === 'Eb Major' || key_signature.key === 'D# Major' || key_signature.key === 'Eb' || key_signature.key === 'D#') {
-      dta.vocal_tonic_note = 3
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 3
+      newDTA.song_tonality = 0
     } else if (key_signature.key === 'E Major' || key_signature.key === 'E') {
-      dta.vocal_tonic_note = 4
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 4
+      newDTA.song_tonality = 0
     } else if (key_signature.key === 'F Major' || key_signature.key === 'F') {
-      dta.vocal_tonic_note = 5
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 5
+      newDTA.song_tonality = 0
     } else if (key_signature.key === 'F# Major' || key_signature.key === 'Gb Major' || key_signature.key === 'F#' || key_signature.key === 'Gb') {
-      dta.vocal_tonic_note = 6
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 6
+      newDTA.song_tonality = 0
     } else if (key_signature.key === 'G Major' || key_signature.key === 'G') {
-      dta.vocal_tonic_note = 7
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 7
+      newDTA.song_tonality = 0
     } else if (key_signature.key === 'Ab Major' || key_signature.key === 'G# Major' || key_signature.key === 'Ab' || key_signature.key === 'G#') {
-      dta.vocal_tonic_note = 8
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 8
+      newDTA.song_tonality = 0
     } else if (key_signature.key === 'A Major' || key_signature.key === 'A') {
-      dta.vocal_tonic_note = 9
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 9
+      newDTA.song_tonality = 0
     } else if (key_signature.key === 'Bb Major' || key_signature.key === 'A# Major' || key_signature.key === 'Bb' || key_signature.key === 'A#') {
-      dta.vocal_tonic_note = 10
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 10
+      newDTA.song_tonality = 0
     } else if (key_signature.key === 'B Major' || key_signature.key === 'B') {
-      dta.vocal_tonic_note = 11
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 11
+      newDTA.song_tonality = 0
     } else if (key_signature.key === 'C Minor' || key_signature.key === 'Cm') {
-      dta.vocal_tonic_note = 0
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 0
+      newDTA.song_tonality = 1
     } else if (key_signature.key === 'C# Minor' || key_signature.key === 'Db Minor' || key_signature.key === 'C#m' || key_signature.key === 'Dbm') {
-      dta.vocal_tonic_note = 1
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 1
+      newDTA.song_tonality = 1
     } else if (key_signature.key === 'D Minor' || key_signature.key === 'Dm') {
-      dta.vocal_tonic_note = 2
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 2
+      newDTA.song_tonality = 1
     } else if (key_signature.key === 'D# Minor' || key_signature.key === 'Eb Minor' || key_signature.key === 'D#m' || key_signature.key === 'Ebm') {
-      dta.vocal_tonic_note = 3
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 3
+      newDTA.song_tonality = 1
     } else if (key_signature.key === 'E Minor' || key_signature.key === 'Em') {
-      dta.vocal_tonic_note = 4
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 4
+      newDTA.song_tonality = 1
     } else if (key_signature.key === 'F Minor' || key_signature.key === 'Fm') {
-      dta.vocal_tonic_note = 5
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 5
+      newDTA.song_tonality = 1
     } else if (key_signature.key === 'F# Minor' || key_signature.key === 'Gb Minor' || key_signature.key === 'F#m' || key_signature.key === 'Gbm') {
-      dta.vocal_tonic_note = 6
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 6
+      newDTA.song_tonality = 1
     } else if (key_signature.key === 'G Minor' || key_signature.key === 'Gm') {
-      dta.vocal_tonic_note = 7
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 7
+      newDTA.song_tonality = 1
     } else if (key_signature.key === 'G# Minor' || key_signature.key === 'Ab Minor' || key_signature.key === 'G#m' || key_signature.key === 'Abm') {
-      dta.vocal_tonic_note = 8
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 8
+      newDTA.song_tonality = 1
     } else if (key_signature.key === 'A Minor' || key_signature.key === 'Am') {
-      dta.vocal_tonic_note = 9
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 9
+      newDTA.song_tonality = 1
     } else if (key_signature.key === 'A# Minor' || key_signature.key === 'Bb Minor' || key_signature.key === 'A#m' || key_signature.key === 'Bbm') {
-      dta.vocal_tonic_note = 10
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 10
+      newDTA.song_tonality = 1
     } else {
-      dta.vocal_tonic_note = 11
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 11
+      newDTA.song_tonality = 0
     }
 
     if (key_signature.trainer_key_override) {
-      if (key_signature.trainer_key_override === 'C') dta.song_key = 0
-      if (key_signature.trainer_key_override === 'C#' || key_signature.trainer_key_override === 'Db') dta.song_key = 1
-      if (key_signature.trainer_key_override === 'D') dta.song_key = 2
-      if (key_signature.trainer_key_override === 'D#' || key_signature.trainer_key_override === 'Eb') dta.song_key = 3
-      if (key_signature.trainer_key_override === 'E') dta.song_key = 4
-      if (key_signature.trainer_key_override === 'F') dta.song_key = 5
-      if (key_signature.trainer_key_override === 'F#' || key_signature.trainer_key_override === 'Gb') dta.song_key = 6
-      if (key_signature.trainer_key_override === 'G') dta.song_key = 7
-      if (key_signature.trainer_key_override === 'G#' || key_signature.trainer_key_override === 'Ab') dta.song_key = 8
-      if (key_signature.trainer_key_override === 'A') dta.song_key = 9
-      if (key_signature.trainer_key_override === 'A#' || key_signature.trainer_key_override === 'Bb') dta.song_key = 10
-      if (key_signature.trainer_key_override === 'B') dta.song_key = 11
+      if (key_signature.trainer_key_override === 'C') newDTA.song_key = 0
+      if (key_signature.trainer_key_override === 'C#' || key_signature.trainer_key_override === 'Db') newDTA.song_key = 1
+      if (key_signature.trainer_key_override === 'D') newDTA.song_key = 2
+      if (key_signature.trainer_key_override === 'D#' || key_signature.trainer_key_override === 'Eb') newDTA.song_key = 3
+      if (key_signature.trainer_key_override === 'E') newDTA.song_key = 4
+      if (key_signature.trainer_key_override === 'F') newDTA.song_key = 5
+      if (key_signature.trainer_key_override === 'F#' || key_signature.trainer_key_override === 'Gb') newDTA.song_key = 6
+      if (key_signature.trainer_key_override === 'G') newDTA.song_key = 7
+      if (key_signature.trainer_key_override === 'G#' || key_signature.trainer_key_override === 'Ab') newDTA.song_key = 8
+      if (key_signature.trainer_key_override === 'A') newDTA.song_key = 9
+      if (key_signature.trainer_key_override === 'A#' || key_signature.trainer_key_override === 'Bb') newDTA.song_key = 10
+      if (key_signature.trainer_key_override === 'B') newDTA.song_key = 11
     }
   } else {
     if (key_signature === 'C Major' || key_signature === 'C') {
-      dta.vocal_tonic_note = 0
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 0
+      newDTA.song_tonality = 0
     } else if (key_signature === 'Db Major' || key_signature === 'C# Major' || key_signature === 'Db' || key_signature === 'C#') {
-      dta.vocal_tonic_note = 1
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 1
+      newDTA.song_tonality = 0
     } else if (key_signature === 'D Major' || key_signature === 'D') {
-      dta.vocal_tonic_note = 2
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 2
+      newDTA.song_tonality = 0
     } else if (key_signature === 'Eb Major' || key_signature === 'D# Major' || key_signature === 'Eb' || key_signature === 'D#') {
-      dta.vocal_tonic_note = 3
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 3
+      newDTA.song_tonality = 0
     } else if (key_signature === 'E Major' || key_signature === 'E') {
-      dta.vocal_tonic_note = 4
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 4
+      newDTA.song_tonality = 0
     } else if (key_signature === 'F Major' || key_signature === 'F') {
-      dta.vocal_tonic_note = 5
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 5
+      newDTA.song_tonality = 0
     } else if (key_signature === 'F# Major' || key_signature === 'Gb Major' || key_signature === 'F#' || key_signature === 'Gb') {
-      dta.vocal_tonic_note = 6
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 6
+      newDTA.song_tonality = 0
     } else if (key_signature === 'G Major' || key_signature === 'G') {
-      dta.vocal_tonic_note = 7
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 7
+      newDTA.song_tonality = 0
     } else if (key_signature === 'Ab Major' || key_signature === 'G# Major' || key_signature === 'Ab' || key_signature === 'G#') {
-      dta.vocal_tonic_note = 8
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 8
+      newDTA.song_tonality = 0
     } else if (key_signature === 'A Major' || key_signature === 'A') {
-      dta.vocal_tonic_note = 9
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 9
+      newDTA.song_tonality = 0
     } else if (key_signature === 'Bb Major' || key_signature === 'A# Major' || key_signature === 'Bb' || key_signature === 'A#') {
-      dta.vocal_tonic_note = 10
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 10
+      newDTA.song_tonality = 0
     } else if (key_signature === 'B Major' || key_signature === 'B') {
-      dta.vocal_tonic_note = 11
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 11
+      newDTA.song_tonality = 0
     } else if (key_signature === 'C Minor' || key_signature === 'Cm') {
-      dta.vocal_tonic_note = 0
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 0
+      newDTA.song_tonality = 1
     } else if (key_signature === 'C# Minor' || key_signature === 'Db Minor' || key_signature === 'C#m' || key_signature === 'Dbm') {
-      dta.vocal_tonic_note = 1
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 1
+      newDTA.song_tonality = 1
     } else if (key_signature === 'D Minor' || key_signature === 'Dm') {
-      dta.vocal_tonic_note = 2
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 2
+      newDTA.song_tonality = 1
     } else if (key_signature === 'D# Minor' || key_signature === 'Eb Minor' || key_signature === 'D#m' || key_signature === 'Ebm') {
-      dta.vocal_tonic_note = 3
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 3
+      newDTA.song_tonality = 1
     } else if (key_signature === 'E Minor' || key_signature === 'Em') {
-      dta.vocal_tonic_note = 4
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 4
+      newDTA.song_tonality = 1
     } else if (key_signature === 'F Minor' || key_signature === 'Fm') {
-      dta.vocal_tonic_note = 5
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 5
+      newDTA.song_tonality = 1
     } else if (key_signature === 'F# Minor' || key_signature === 'Gb Minor' || key_signature === 'F#m' || key_signature === 'Gbm') {
-      dta.vocal_tonic_note = 6
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 6
+      newDTA.song_tonality = 1
     } else if (key_signature === 'G Minor' || key_signature === 'Gm') {
-      dta.vocal_tonic_note = 7
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 7
+      newDTA.song_tonality = 1
     } else if (key_signature === 'G# Minor' || key_signature === 'Ab Minor' || key_signature === 'G#m' || key_signature === 'Abm') {
-      dta.vocal_tonic_note = 8
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 8
+      newDTA.song_tonality = 1
     } else if (key_signature === 'A Minor' || key_signature === 'Am') {
-      dta.vocal_tonic_note = 9
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 9
+      newDTA.song_tonality = 1
     } else if (key_signature === 'A# Minor' || key_signature === 'Bb Minor' || key_signature === 'A#m' || key_signature === 'Bbm') {
-      dta.vocal_tonic_note = 10
-      dta.song_tonality = 1
+      newDTA.vocal_tonic_note = 10
+      newDTA.song_tonality = 1
     } else {
-      dta.vocal_tonic_note = 11
-      dta.song_tonality = 0
+      newDTA.vocal_tonic_note = 11
+      newDTA.song_tonality = 0
     }
   }
 
-  if (pack_name) dta.pack_name = pack_name
+  if (pack_name) newDTA.pack_name = pack_name
 
-  if (author) dta.author = author
+  if (author) newDTA.author = author
 
-  if (karaoke !== undefined) dta.karaoke = karaoke
+  if (karaoke !== undefined) newDTA.karaoke = karaoke
 
-  if (multitrack !== undefined) dta.multitrack = multitrack
+  if (multitrack !== undefined) newDTA.multitrack = multitrack
 
-  if (doubleKick !== undefined) dta.doubleKick = doubleKick
+  if (doubleKick !== undefined) newDTA.doubleKick = doubleKick
 
-  if (convert !== undefined) dta.convert = convert
+  if (convert !== undefined) newDTA.convert = convert
 
-  if (rhythmOnBass !== undefined) dta.rhythmOnBass = rhythmOnBass
+  if (rhythmOnBass !== undefined) newDTA.rhythmOnBass = rhythmOnBass
 
-  if (rhythmOnKeys !== undefined) dta.rhythmOnKeys = rhythmOnKeys
+  if (rhythmOnKeys !== undefined) newDTA.rhythmOnKeys = rhythmOnKeys
 
-  if (CATemh !== undefined) dta.CATemh = CATemh
+  if (CATemh !== undefined) newDTA.CATemh = CATemh
 
-  if (expertOnly !== undefined) dta.expertOnly = expertOnly
+  if (expertOnly !== undefined) newDTA.expertOnly = expertOnly
 
-  return dta
+  return newDTA as DTAFile
 }

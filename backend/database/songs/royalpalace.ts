@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const royalpalace = {
   id: '7748royalpalace',
@@ -28,6 +28,6 @@ export const royalpalace = {
   multitrack: true,
   CATemh: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default royalpalace

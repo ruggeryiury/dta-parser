@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const minuet = {
   id: '7748minuet',
@@ -25,6 +25,6 @@ export const minuet = {
   key: 'Dm',
   multitrack: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default minuet

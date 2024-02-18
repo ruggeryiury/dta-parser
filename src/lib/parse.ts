@@ -1,5 +1,5 @@
 import { DTAFile } from './dta'
-import { slashQToQuote } from '../../utils/stringProcessors'
+import { slashQToQuote } from '../utils/stringProcessors'
 import { createDTA } from './create'
 
 /**

@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const thespaceinbetween = {
   id: '7748thespaceinbetween',
@@ -27,6 +27,6 @@ export const thespaceinbetween = {
   multitrack: true,
   CATemh: true,
   pack_name: 'Chart-a-thon 2018',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default thespaceinbetween

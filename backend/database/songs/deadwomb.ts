@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const deadwomb = {
   id: '7748deadwomb',
@@ -29,6 +29,6 @@ export const deadwomb = {
   album: { hasArt: true, name: 'Heads Up', track_number: 1 },
   key: 'Cm',
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default deadwomb

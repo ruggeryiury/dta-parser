@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const tetodevidro = {
   id: '7748tetodevidro',
@@ -24,6 +24,6 @@ export const tetodevidro = {
   key: 'C#m',
   multitrack: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default tetodevidro

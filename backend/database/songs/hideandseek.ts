@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const hideandseek = {
   id: '7748hideandseek',
@@ -20,6 +20,6 @@ export const hideandseek = {
   album: { hasArt: true, name: 'Speak for Yourself', track_number: 5 },
   key: 'A',
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default hideandseek

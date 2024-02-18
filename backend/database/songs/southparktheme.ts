@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const southparktheme = {
   id: '7748southparktheme',
@@ -27,6 +27,6 @@ export const southparktheme = {
   },
   key: 'D#m',
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default southparktheme

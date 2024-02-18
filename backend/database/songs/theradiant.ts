@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const theradiant = {
   id: '7748theradiant',
@@ -28,6 +28,6 @@ export const theradiant = {
   CATemh: true,
   author: 'Ruggy',
   pack_name: 'Chart-a-thon 2018',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default theradiant

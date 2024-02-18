@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const cutmyfingersoff = {
   id: '7748cutmyfingersoff',
@@ -28,6 +28,6 @@ export const cutmyfingersoff = {
   album: { hasArt: true, name: 'Peripheral Vision', track_number: 1 },
   key: 'C',
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default cutmyfingersoff

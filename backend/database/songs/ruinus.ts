@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const ruinus = {
   id: '7748ruinus',
@@ -26,6 +26,6 @@ export const ruinus = {
   key: 'G',
   multitrack: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default ruinus

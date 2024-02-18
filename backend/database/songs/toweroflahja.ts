@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const toweroflahja = {
   id: '7748toweroflahja',
@@ -28,6 +28,6 @@ export const toweroflahja = {
   author: 'Ruggy',
   multitrack: true,
   CATemh: true,
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default toweroflahja

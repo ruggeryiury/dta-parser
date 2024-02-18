@@ -1,11 +1,11 @@
-import { DTAFile } from './lib/dta/dta'
-import DTAFileModule from './core/DTAFileModule'
-import { depackDTA } from './lib/dta/depack'
-import { parseDTA } from './lib/dta/parse'
-import { SortByOptionsTypes, sortDTA } from './lib/dta/sort'
-import { UpdateDataOptions, updateDTA } from './lib/dta/update'
+import { DTAFile } from './lib/dta'
+import { depackDTA } from './lib/depack'
+import { parseDTA } from './lib/parse'
+import { SortByOptionsTypes, sortDTA } from './lib/sort'
+import { UpdateDataOptions, updateDTA } from './lib/update'
+import { Song, SongCollection } from './classes'
 
-export interface DTAParserOptions {
+export interface DTAParserOptions<RT extends boolean | undefined> {
   /**
    * Changes the sorting of the songs.
    */
@@ -18,6 +18,10 @@ export interface DTAParserOptions {
    * Applies direct values updates on all songs inside the `.dta` file.
    */
   updateAll?: Pick<UpdateDataOptions, 'author' | 'multitrack' | 'pack_name'>
+  /**
+   * Parses a `.dta` file directly into a simple `DTAFile` object. Default is `false`.
+   */
+  asJSON?: RT
 }
 
 /**
@@ -27,8 +31,9 @@ export interface DTAParserOptions {
  * @param {DTAParserOptions} options `OPTIONAL` Customizing options for the parsing process.
  * @returns {DTAFile[]} An array of parsed song objects.
  */
-const DTAParser = (dtaFileContents: string, options: DTAParserOptions = {}): DTAFile[] => {
-  const { sortBy, update, updateAll } = options
+const DTAParser = <RT extends boolean | undefined = undefined>(dtaFileContents: string, options?: DTAParserOptions<RT>): RT extends true ? DTAFile[] : SongCollection => {
+  if (!options) options = {}
+  const { sortBy, update, updateAll, asJSON } = options
 
   const depackedSongs = depackDTA(dtaFileContents)
 
@@ -70,9 +75,16 @@ const DTAParser = (dtaFileContents: string, options: DTAParserOptions = {}): DTA
     parsedSongs = sortDTA(parsedSongs, sortBy)
   }
 
-  return parsedSongs
+  if (asJSON) return parsedSongs as RT extends true ? DTAFile[] : SongCollection
+
+  const collection: Song[] = []
+  parsedSongs.forEach((song) => {
+    collection.push(new Song(song))
+  })
+
+  return new SongCollection(collection) as RT extends true ? DTAFile[] : SongCollection
 }
 
-export type { DTAFile } from './lib/dta/dta'
-export { DTAFileModule }
+export type { DTAFile } from './lib/dta'
+export { Song, SongCollection }
 export default DTAParser

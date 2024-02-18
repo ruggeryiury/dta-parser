@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const passport = {
   id: '7748passport',
@@ -27,6 +27,6 @@ export const passport = {
   multitrack: true,
   CATemh: true,
   pack_name: 'Windows .MID Pack 02',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default passport

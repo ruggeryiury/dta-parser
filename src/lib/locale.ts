@@ -1,10 +1,39 @@
-import { SongKeyMajorValues, SongKeyMinorValues, SongKeyUpdateOptions } from './update'
+import { SongKeyMajorValues, SongKeyMinorValues } from './update'
 
 type ExtractNumbers<T> = T extends number ? T : never
 type ExtractStrings<T> = T extends string ? T : never
 type StringNumToNum<T> = T extends '-1' ? -1 : T
 
 export const localeObject = {
+  name: {
+    '123': '123',
+    A: 'a',
+    B: 'b',
+    C: 'c',
+    D: 'd',
+    E: 'e',
+    F: 'f',
+    G: 'g',
+    H: 'h',
+    I: 'i',
+    J: 'j',
+    K: 'k',
+    L: 'l',
+    M: 'm',
+    N: 'n',
+    O: 'o',
+    P: 'p',
+    Q: 'q',
+    R: 'r',
+    S: 's',
+    T: 't',
+    U: 'u',
+    V: 'v',
+    W: 'w',
+    X: 'x',
+    Y: 'y',
+    Z: 'z',
+  },
   anim_tempo: {
     16: 'Slow',
     32: 'Medium',
@@ -267,6 +296,7 @@ export const localeObject = {
 } as const
 
 const {
+  name,
   anim_tempo,
   band_fail_cue,
   bank,
@@ -285,6 +315,9 @@ const {
   vocal_gender,
   vocal_parts,
 } = localeObject
+
+export type SongTitleOptionsUppercaseNames = keyof typeof name
+export type SongTitleOptionsLowercaseNames = (typeof name)[SongTitleOptionsUppercaseNames]
 
 export type AnimTempo = keyof typeof anim_tempo
 export type AnimTempoStrings = ExtractStrings<AnimTempo>
@@ -376,6 +409,9 @@ export const localeKeyToValue = {
   },
   vocal_parts: (key: VocalParts): VocalPartsNames => {
     return vocal_parts[key]
+  },
+  game_origin: (key: SongGameOrigin): SongGameOriginNames => {
+    return game_origin[key]
   },
   song_key: <V extends SongKey, T extends SongTonality>(vocal_tonic_note: V, song_tonality: T): SongKeyMajorValues | SongKeyMinorValues => {
     let returnString = ''

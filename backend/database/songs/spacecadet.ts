@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const spacecadet = {
   id: '7748spacecadet',
@@ -26,6 +26,6 @@ export const spacecadet = {
   multitrack: true,
   CATemh: true,
   pack_name: 'Windows .MID Pack 02',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default spacecadet

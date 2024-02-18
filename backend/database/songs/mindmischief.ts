@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const mindmischief = {
   id: '7748mindmischief',
@@ -31,6 +31,6 @@ export const mindmischief = {
   key: 'F#',
   author: 'Ruggy',
   CATemh: true,
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default mindmischief

@@ -1,6 +1,6 @@
-import { DTAFile } from '../lib/dta/dta'
+import { DTAFile } from '../lib/dta'
 
-type CheckDrumMixReturnType = 'drums0' | 'drums1' | 'drums2' | 'drums3' | 'drums4' | undefined
+export type CheckDrumMixReturnType = 'drums0' | 'drums1' | 'drums2' | 'drums3' | 'drums4' | undefined
 /**
  * Returns the drum mix of the song.
  *

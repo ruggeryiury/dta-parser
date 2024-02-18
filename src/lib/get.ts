@@ -1,6 +1,6 @@
 import { DTAFile } from './dta'
-import { leadingArticleToTrailing, omitLeadingArticle } from '../../utils/stringProcessors'
-import { RankTypes, rankCalculator } from '../../utils/rankCalculations'
+import { leadingArticleToTrailing, omitLeadingArticle } from '../utils/stringProcessors'
+import { RankTypes, rankCalculator } from '../utils/rankCalculations'
 import { BandRankingNames, BandRankingNamesAsDots, BandRankingNumbers, InstrRankingNames, InstrRankingNamesAsDots, InstrRankingNumbers, localeKeyToValue } from './locale'
 
 export interface GetNamingOptions {
@@ -32,24 +32,28 @@ export interface GetNamingOptions {
 
 export type GetRankTypeOptions = 'number' | 'verbose' | 'verboseDots'
 
-export type GetRankReturnType<P extends RankTypes, T extends GetRankTypeOptions> = P extends 'band'
+export type GetRankReturnType<P extends RankTypes, T extends GetRankTypeOptions | undefined> = P extends 'band'
   ? T extends 'number'
     ? BandRankingNumbers
     : T extends 'verbose'
     ? BandRankingNames
+    : T extends undefined
+    ? BandRankingNumbers
     : BandRankingNamesAsDots
   : // P extends else
   T extends 'number'
   ? InstrRankingNumbers
   : T extends 'verbose'
   ? InstrRankingNames
+  : T extends undefined
+  ? InstrRankingNumbers
   : InstrRankingNamesAsDots
 
 /**
  * Fetches the song title from a `DTAFile`.
  * - - - -
  * @param {DTAFile} song The song you want to get the song title from.
- * @param {GetNamingOptions} options `OPTIONAL` Customize options for the song title's return.
+ * @param {GetNamingOptions} options `OPTIONAL` Customize options for the song title's return value.
  * @returns {string} The song title.
  */
 export const getSongTitle = (song: DTAFile, options?: GetNamingOptions): string => {
@@ -73,7 +77,7 @@ export const getSongTitle = (song: DTAFile, options?: GetNamingOptions): string 
  * Fetches the song artist from a `DTAFile`.
  * - - - -
  * @param {DTAFile} song The song you want to get the song artist from.
- * @param {GetNamingOptions} options `OPTIONAL` Customize options for the song artist's return.
+ * @param {GetNamingOptions} options `OPTIONAL` Customize options for the song artist's return value.
  * @returns {string} The song artist.
  */
 export const getSongArtist = (song: DTAFile, options?: GetNamingOptions): string => {
@@ -97,7 +101,7 @@ export const getSongArtist = (song: DTAFile, options?: GetNamingOptions): string
  * Fetches the song's album title from a `DTAFile`. Returns `undefined` if the song has no album title.
  * - - - -
  * @param {DTAFile} song The song you want to get the song's album title from.
- * @param {GetNamingOptions} options `OPTIONAL` Customize options for the song album title's return.
+ * @param {GetNamingOptions} options `OPTIONAL` Customize options for the song album title's return value.
  * @returns {string | undefined} The song album title, returns `undefined` if the song has no album title.
  */
 export const getSongAlbumTitle = (song: DTAFile, options?: GetNamingOptions): string | undefined => {
@@ -124,15 +128,15 @@ export const getSongAlbumTitle = (song: DTAFile, options?: GetNamingOptions): st
  * - - - -
  * @param {DTAFile} song The song you want to fetch the ranking from.
  * @param {P} part The instrument you want to fetch the ranking from.
- * @param {T} type `OPTIONAL` Customize the return type of the function.
+ * @param {T} type `OPTIONAL` Customize the return type value.
  *
  * Valid values are:
  * - `'number'`: Returns as a numeral ranking type from `-1` (No Part) to `6` (Impossible). Is the default value.
  * - `'verbosed'`: Returns as a string ranking type from `'No Part'` to `'Impossible'`.
- * - `'verbosed'`: Returns as a string ranking type from `'No Part'` to `'Devil Dots'`.
+ * - `'verboseDots'`: Returns as a string ranking type from `'No Part'` to `'Devil Dots'`.
  * @returns {GetRankReturnType<P, T>} The instrument ranking from the given instrument.
  */
-export const getSongRank = <P extends RankTypes, T extends GetRankTypeOptions>(song: DTAFile, part: P, type: T = 'number' as T): GetRankReturnType<P, T> => {
+export const getSongRank = <P extends RankTypes, T extends GetRankTypeOptions | undefined = undefined>(song: DTAFile, part: P, type?: T): GetRankReturnType<P, T> => {
   const minusOne = rankCalculator(part, song[`rank_${part}`])
   if (type === 'number' || type === undefined) return minusOne as GetRankReturnType<P, T>
   const verbosed = localeKeyToValue.rank(minusOne)

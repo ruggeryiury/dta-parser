@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const lennastheme = {
   id: '7748lennastheme',
@@ -28,6 +28,6 @@ export const lennastheme = {
   key: 'C',
   multitrack: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default lennastheme

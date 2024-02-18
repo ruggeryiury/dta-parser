@@ -1,18 +1,10 @@
+import { cloneDeep } from 'lodash'
 import { DTAFile } from './dta'
 import { updateDTA, UpdateDataOptions, TrackUpdateOptions, SongGenreUpdateOptions } from './update'
 import { dtaDefault } from './dta'
+import { Song } from '../classes'
 
-export const clearDTA = (dta: DTAFile): Partial<DTAFile> => {
-  const song: ReturnType<typeof clearDTA> = dta
-  const allKeys = Object.keys(song) as (keyof DTAFile)[]
-  allKeys.forEach((key) => {
-    if (song[key] === dtaDefault[key]) delete song[key]
-  })
-
-  return song
-}
-
-export interface CreateDTAFileRecipe extends UpdateDataOptions {
+export interface DTAFileRecipe extends UpdateDataOptions {
   /**
    * Unique string ID of the song.
    */
@@ -75,16 +67,20 @@ export interface CreateDTAFileRecipe extends UpdateDataOptions {
 /**
  * Creates a new parsed song object.
  * - - - -
- * @param {CreateDTAFileRecipe} values `OPTIONAL` Options for the `DTAFile` creation process.
- * If `undefined`, It will be created using a all-default, all-blank options.
+ * @param {DTAFileRecipe} values `OPTIONAL` Options for the `DTAFile` creation process. If `undefined`, It will be created using a all-default, all-blank options.
+ * @param {RT} asClass Refines the object to a `Song` class.
  * @returns {DTAFile} A new parsed song object.
  */
-export const createDTA = (values?: CreateDTAFileRecipe): DTAFile => {
-  let newDTAInstance = { ...dtaDefault }
+export const createDTA = <RT extends boolean | undefined = undefined>(values?: DTAFileRecipe, asClass?: RT): RT extends true ? Song : DTAFile => {
+  let newDTAInstance = cloneDeep(dtaDefault)
 
   if (values) {
     newDTAInstance = updateDTA(newDTAInstance, values)
   }
 
-  return newDTAInstance
+  if (asClass) {
+    return new Song(newDTAInstance) as RT extends true ? Song : DTAFile
+  }
+
+  return newDTAInstance as RT extends true ? Song : DTAFile
 }

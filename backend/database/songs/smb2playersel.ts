@@ -1,4 +1,4 @@
-import { CreateDTAFileRecipe } from '../../../src/lib/dta/create'
+import { DTAFileRecipe } from '../../../src/lib/create'
 
 export const smb2playersel = {
   id: '7748smb2playersel',
@@ -29,6 +29,6 @@ export const smb2playersel = {
   multitrack: true,
   CATemh: true,
   author: 'Ruggy',
-} as CreateDTAFileRecipe
+} as DTAFileRecipe
 
 export default smb2playersel

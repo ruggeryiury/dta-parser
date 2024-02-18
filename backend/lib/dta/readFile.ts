@@ -87,7 +87,7 @@ export const readDTAFile = async (pathStr: string): Promise<string> => {
  * @param {O} parserOptions `OPTIONAL` Customizing options for the parsing process.
  * @returns {DTAParserReturnType<O>} The parsed `.dta` file contents (or all `.dta` files contents in a directory merged).
  */
-export const readParseDTAFileSync = (pathStr: string, parserOptions?: DTAParserOptions): DTAFile[] => {
+export const readParseDTAFileSync = (pathStr: string, parserOptions?: DTAParserOptions<false>): DTAFile[] => {
   const contents = readDTAFileSync(pathStr)
   return DTAParser(contents, parserOptions)
 }
@@ -99,7 +99,7 @@ export const readParseDTAFileSync = (pathStr: string, parserOptions?: DTAParserO
  * @param {O} parserOptions `OPTIONAL` Customizing options for the parsing process.
  * @returns {Promise<DTAParserReturnType<O>} The parsed `.dta` file contents (or all `.dta` files contents in a directory merged).
  */
-export const readParseDTAFile = async (pathStr: string, parserOptions?: DTAParserOptions): Promise<DTAFile[]> => {
+export const readParseDTAFile = async (pathStr: string, parserOptions?: DTAParserOptions<false>): Promise<DTAFile[]> => {
   const contents = await readDTAFile(pathStr)
   return DTAParser(contents, parserOptions)
 }

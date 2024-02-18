@@ -1,4 +1,4 @@
-import { InstrRankingNames, InstrRankingNumbers } from '../lib/dta/locale'
+import { InstrRankingNames, InstrRankingNumbers } from '../lib/locale'
 
 const ranksMap = {
   drum: [124, 151, 178, 242, 345, 448],

@@ -1,8 +1,8 @@
 import path from 'path'
 import fs from 'fs'
-import { StringifyDataOptions, stringifyDTA } from '../../src/lib/dta/stringify'
+import { StringifyDataOptions, stringifyDTA } from '../../src/lib/stringify'
 import { DTAFile } from '../../src'
-import { sortDTA } from '../../src/lib/dta/sort'
+import { sortDTA } from '../../src/lib/sort'
 import { MySongsID, MySongsModule } from '../core/mySongs'
 import { MAGMAProject } from './magma'
 

@@ -3,8 +3,8 @@ import path from 'path'
 import { genTabs as t } from '../../src/utils/stringProcessors'
 import { rankCalculator as r } from '../../src/utils/rankCalculations'
 import { panVolInfoGen } from '../../src/utils/pansAndVols'
-import { DTAFileExpanded } from '../../src/lib/dta/dta'
-import { SongSubGenre } from '../../src/lib/dta/locale'
+import { DTAFileExpanded } from '../../src/lib/dta'
+import { SongSubGenre } from '../../src/lib/locale'
 
 export type AutogenValues =
   | 'Default'
@@ -361,10 +361,10 @@ export const genMAGMAFiles = async (song: MAGMAProject, options?: MAGMAFilesGene
 
   output += `${t(2, 'start')}(`
   output += `${t(3, 'start')}'drum_kit'`
-  output += `${t(3, 'start')}('enabled' ${panvol.drum.kit_enabled ? 1 : 0})`
-  output += `${t(3, 'start')}('channels' ${panvol.drum.kit_channels})`
-  output += `${t(3, 'start')}('pan' ${panvol.drum.kit_pan.map((pan) => pan.toFixed(2)).join(' ')})`
-  output += `${t(3, 'start')}('vol' ${panvol.drum.kit_vol.map((vol) => vol.toFixed(2)).join(' ')})`
+  output += `${t(3, 'start')}('enabled' ${panvol.drum.kitEnabled ? 1 : 0})`
+  output += `${t(3, 'start')}('channels' ${panvol.drum.kitChannels})`
+  output += `${t(3, 'start')}('pan' ${panvol.drum.kitPan.map((pan) => pan.toFixed(2)).join(' ')})`
+  output += `${t(3, 'start')}('vol' ${panvol.drum.kitVol.map((vol) => vol.toFixed(2)).join(' ')})`
   output += `${t(3, 'start')}(`
   output += `${t(4, 'start')}'file'`
   output += `${t(4, 'start')}"${DrumKitWavPath}"`
@@ -373,10 +373,10 @@ export const genMAGMAFiles = async (song: MAGMAProject, options?: MAGMAFilesGene
 
   output += `${t(2, 'start')}(`
   output += `${t(3, 'start')}'drum_kick'`
-  output += `${t(3, 'start')}('enabled' ${panvol.drum.kick_enabled ? 1 : 0})`
-  output += `${t(3, 'start')}('channels' ${panvol.drum.kick_channels})`
-  output += `${t(3, 'start')}('pan' ${panvol.drum.kick_enabled ? panvol.drum.kick_pan.map((pan) => pan.toFixed(2)).join(' ') : '0.00'})`
-  output += `${t(3, 'start')}('vol' ${panvol.drum.kick_enabled ? panvol.drum.kick_vol.map((vol) => vol.toFixed(2)).join(' ') : '0.00'})`
+  output += `${t(3, 'start')}('enabled' ${panvol.drum.kickEnabled ? 1 : 0})`
+  output += `${t(3, 'start')}('channels' ${panvol.drum.kickChannels})`
+  output += `${t(3, 'start')}('pan' ${panvol.drum.kickEnabled ? panvol.drum.kickPan.map((pan) => pan.toFixed(2)).join(' ') : '0.00'})`
+  output += `${t(3, 'start')}('vol' ${panvol.drum.kickEnabled ? panvol.drum.kickVol.map((vol) => vol.toFixed(2)).join(' ') : '0.00'})`
   output += `${t(3, 'start')}(`
   output += `${t(4, 'start')}'file'`
   output += `${t(4, 'start')}"${KickWavPath}"`
@@ -385,10 +385,10 @@ export const genMAGMAFiles = async (song: MAGMAProject, options?: MAGMAFilesGene
 
   output += `${t(2, 'start')}(`
   output += `${t(3, 'start')}'drum_snare'`
-  output += `${t(3, 'start')}('enabled' ${panvol.drum.snare_enabled ? 1 : 0})`
-  output += `${t(3, 'start')}('channels' ${panvol.drum.snare_channels})`
-  output += `${t(3, 'start')}('pan' ${panvol.drum.snare_enabled ? panvol.drum.snare_pan.map((pan) => pan.toFixed(2)).join(' ') : '0.00'})`
-  output += `${t(3, 'start')}('vol' ${panvol.drum.snare_enabled ? panvol.drum.snare_vol.map((vol) => vol.toFixed(2)).join(' ') : '0.00'})`
+  output += `${t(3, 'start')}('enabled' ${panvol.drum.snareEnabled ? 1 : 0})`
+  output += `${t(3, 'start')}('channels' ${panvol.drum.snareChannels})`
+  output += `${t(3, 'start')}('pan' ${panvol.drum.snareEnabled ? panvol.drum.snarePan.map((pan) => pan.toFixed(2)).join(' ') : '0.00'})`
+  output += `${t(3, 'start')}('vol' ${panvol.drum.snareEnabled ? panvol.drum.snareVol.map((vol) => vol.toFixed(2)).join(' ') : '0.00'})`
   output += `${t(3, 'start')}(`
   output += `${t(4, 'start')}'file'`
   output += `${t(4, 'start')}"${SnareWavPath}"`
