@@ -22,7 +22,7 @@ import { panVolInfoGen } from '../utils/pansAndVols'
  * @param {DTAFile} song The song you want to generate a track update recipe from.
  * @returns {TrackUpdateOptions} An object specifying the whole song's instruments and audio channels structure.
  */
-export const genTracksRecipe = (song: DTAFile): TrackUpdateOptions => {
+export const genAudioTracksRecipe = (song: DTAFile): TrackUpdateOptions => {
   const tracks = {} as TrackUpdateOptions
   const { rank_drum, rank_bass, rank_guitar, rank_vocals, rank_keys, rank_real_bass, rank_real_guitar, rank_real_keys, real_bass_tuning, real_guitar_tuning, vocal_parts, vocal_gender } = song
   const { backing, bass, drum, guitar, keys, vocals, crowd } = panVolInfoGen(song)
@@ -256,7 +256,7 @@ export const genDTARecipe = (song: DTAFile): DTAFileRecipe => {
     master,
     song_id,
     songname,
-    tracks: genTracksRecipe(song),
+    tracks: genAudioTracksRecipe(song),
     tuning_offset_cents: tuning_offset_cents && tuning_offset_cents !== 0 ? tuning_offset_cents : undefined,
     mute_volume,
     mute_volume_vocals,

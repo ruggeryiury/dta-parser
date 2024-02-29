@@ -47,10 +47,6 @@ export interface MAGMAFileValues {
    */
   releaseVer: number
   /**
-   * Tells if the song is not yet available to be used through any metadata generator.
-   */
-  fake: boolean
-  /**
    * Tells if the custom has vocals lipsync files. Default is `false`.
    */
   hasLipSyncFiles: boolean

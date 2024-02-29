@@ -1,6 +1,6 @@
 import {
   VocalParts,
-  VocalPercussion,
+  PercussionBank,
   DrumBank,
   BandFailCue,
   SongScrollSpeed,
@@ -22,7 +22,7 @@ import {
  */
 export interface DTAFile {
   /**
-   * Unique string ID of the song.
+   * An unique shortname ID of the song.
    */
   id: string
   /**
@@ -38,11 +38,15 @@ export interface DTAFile {
    */
   master: boolean
   /**
-   * The numerical, unique number ID of the song. Might be a string ID as well.
+   * If `true`, the song won't appear on the song library. Default is `false`.
+   */
+  fake?: boolean
+  /**
+   * A numerical, unique number ID of the song, used as an ID for saving scores. Might be a string ID as well (but scores won't be saved on these songs).
    */
   song_id: number | string
   /**
-   * The file name used inside the song's CON file structure.
+   * The filename used inside the song's CON file structure.
    */
   songname: string
   /**
@@ -79,7 +83,7 @@ export interface DTAFile {
   /**
    * The audio cue type of the vocal percussion. Default is `sfx/tambourine_bank.milo` (Tambourine).
    */
-  bank: VocalPercussion
+  bank: PercussionBank
   /**
    * The audio cue type of the drums on Drum Fills/Freestyle Mode. Default is `sfx/kit01_bank.milo` (Hard Rock Kit).
    */
@@ -106,7 +110,7 @@ export interface DTAFile {
    */
   rank_band: number
   /**
-   * The song's drums ranking number.
+   * The song's drums ranking number. This rank is shared with PRO Drums as well.
    */
   rank_drum?: number
   /**
@@ -118,7 +122,7 @@ export interface DTAFile {
    */
   rank_guitar?: number
   /**
-   * The song's vocals ranking number.
+   * The song's vocals ranking number. This rank is shared with Harmonies as well.
    */
   rank_vocals?: number
   /**
@@ -142,7 +146,7 @@ export interface DTAFile {
    */
   solo?: SoloFlags[]
   /**
-   * Adjusts the entire MIDI vocal chart up or down by cents. Default is `0`.
+   * Adjusts the entire song's vocal chart up or down by cents. Default is `0`.
    */
   tuning_offset_cents?: number
   /**
@@ -227,6 +231,11 @@ export interface DTAFile {
    * An array with the tuning of all 4 strings of the PRO Bass part.
    */
   real_bass_tuning?: [number, number, number, number]
+  /**
+   * An array with flags about the existence of an MIDI file with any track update for the song inside the game's file structure.
+   *
+   * Rock Band 3 uses this flag to update several pre-RB3 DLCs songs and exports.
+   */
   extra_authoring?: ExtraAuthoringFlags[]
   alternate_path?: boolean
   context?: number

@@ -1,5 +1,5 @@
 import path from 'path'
-import { mySongsList } from '../core/mySongs'
+import { mySongsList } from '../core/database'
 import fs from 'fs'
 
 export const genSongIDList = async () => {

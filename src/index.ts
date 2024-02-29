@@ -2,7 +2,7 @@ import { DTAFile } from './lib/dta'
 import { depackDTA } from './lib/depack'
 import { parseDTA } from './lib/parse'
 import { SortByOptionsTypes, sortDTA } from './lib/sort'
-import { UpdateDataOptions, updateDTA } from './lib/update'
+import { MultipleSongsUpdateObject, SongUpdateObject, updateDTA } from './lib/update'
 import { Song, SongCollection } from './classes'
 
 export interface DTAParserOptions<RT extends boolean | undefined> {
@@ -13,25 +13,27 @@ export interface DTAParserOptions<RT extends boolean | undefined> {
   /**
    * Applies direct values updates on any song inside the `.dta` file based on the song's unique string ID.
    */
-  update?: { [id: string]: UpdateDataOptions }
+  update?: SongUpdateObject
   /**
    * Applies direct values updates on all songs inside the `.dta` file.
    */
-  updateAll?: Pick<UpdateDataOptions, 'author' | 'multitrack' | 'pack_name'>
+  updateAll?: MultipleSongsUpdateObject
   /**
    * Parses a `.dta` file directly into a simple `DTAFile` object. Default is `false`.
    */
   asJSON?: RT
 }
 
+export type DTAParserReturnType<RT extends boolean | undefined> = RT extends true ? DTAFile[] : SongCollection
+
 /**
  * Parses a .dta file content.
  * - - - -
  * @param {string} dtaFileContents The .dta file contents as string.
- * @param {DTAParserOptions} options `OPTIONAL` Customizing options for the parsing process.
+ * @param {DTAParserOptions} options `OPTIONAL` An object with options that customizes the parsing process.
  * @returns {DTAFile[]} An array of parsed song objects.
  */
-const DTAParser = <RT extends boolean | undefined = undefined>(dtaFileContents: string, options?: DTAParserOptions<RT>): RT extends true ? DTAFile[] : SongCollection => {
+const DTAParser = <RT extends boolean | undefined = undefined>(dtaFileContents: string, options?: DTAParserOptions<RT>): DTAParserReturnType<RT> => {
   if (!options) options = {}
   const { sortBy, update, updateAll, asJSON } = options
 

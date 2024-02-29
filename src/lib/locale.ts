@@ -327,8 +327,8 @@ export type AnimTempoNames = (typeof anim_tempo)[AnimTempo]
 export type BandFailCue = Exclude<keyof typeof band_fail_cue, 'undefined'>
 export type BandFailCueNames = (typeof band_fail_cue)[BandFailCue]
 
-export type VocalPercussion = keyof typeof bank
-export type VocalPercussionNames = (typeof bank)[VocalPercussion]
+export type PercussionBank = keyof typeof bank
+export type PercussionBankNames = (typeof bank)[PercussionBank]
 
 export type DrumBank = keyof typeof drum_bank
 export type DrumBankNames = (typeof drum_bank)[DrumBank]
@@ -386,7 +386,7 @@ export const localeKeyToValue = {
   band_fail_cue: (key?: BandFailCue): BandFailCueNames | 'Not Specified' => {
     return band_fail_cue[key === undefined ? 'undefined' : key]
   },
-  bank: (key: VocalPercussion): VocalPercussionNames => {
+  bank: (key: PercussionBank): PercussionBankNames => {
     return bank[key]
   },
   drum_bank: (key: DrumBank): DrumBankNames => {
@@ -442,34 +442,34 @@ export const localeKeyToValue = {
 }
 
 export const localeValueToKey = {
-  anim_tempo: (value: AnimTempoStrings) => {
+  anim_tempo: (value: AnimTempoStrings): AnimTempoNumbers => {
     return Number(Object.keys(anim_tempo).find((key) => key === value)) as AnimTempoNumbers
   },
-  band_fail_cue: (value: BandFailCueNames) => {
+  band_fail_cue: (value: BandFailCueNames): BandFailCue => {
     return (Object.keys(band_fail_cue) as (keyof typeof band_fail_cue)[]).find((key) => band_fail_cue[key] === value) as BandFailCue
   },
-  bank: (value: VocalPercussionNames) => {
-    return (Object.keys(bank) as (keyof typeof bank)[]).find((key) => bank[key] === value) as VocalPercussion
+  bank: (value: PercussionBankNames): PercussionBank => {
+    return (Object.keys(bank) as (keyof typeof bank)[]).find((key) => bank[key] === value) as PercussionBank
   },
-  drum_bank: (value: DrumBankNames) => {
+  drum_bank: (value: DrumBankNames): DrumBank => {
     return (Object.keys(drum_bank) as (keyof typeof drum_bank)[]).find((key) => drum_bank[key] === value) as DrumBank
   },
-  genre: (value: SongGenreNames) => {
+  genre: (value: SongGenreNames): SongGenre => {
     return (Object.keys(genre) as (keyof typeof genre)[]).find((key) => genre[key] === value) as SongGenre
   },
-  rating: (value: SongRatingNames) => {
+  rating: (value: SongRatingNames): SongRating => {
     return Number(Object.keys(rating).find((key) => rating[Number(key) as SongRating] === value)) as SongRating
   },
-  song_scroll_speed: (value: SongScrollSpeedNames) => {
+  song_scroll_speed: (value: SongScrollSpeedNames): SongScrollSpeed => {
     return Number(Object.keys(song_scroll_speed).find((key) => song_scroll_speed[Number(key) as SongScrollSpeed] === value)) as SongScrollSpeed
   },
-  sub_genre: (value: SongSubGenreNames) => {
+  sub_genre: (value: SongSubGenreNames): SongSubGenre => {
     return (Object.keys(sub_genre) as (keyof typeof sub_genre)[]).find((key) => sub_genre[key] === value) as SongSubGenre
   },
-  vocal_gender: (value: VocalGenderNames) => {
+  vocal_gender: (value: VocalGenderNames): VocalGender => {
     return (Object.keys(vocal_gender) as (keyof typeof vocal_gender)[]).find((key) => vocal_gender[key] === value) as VocalGender
   },
-  vocal_parts: (value: VocalPartsNames) => {
+  vocal_parts: (value: VocalPartsNames): VocalParts => {
     return Number(Object.keys(vocal_parts).find((key) => vocal_parts[Number(key) as VocalParts] === value)) as VocalParts
   },
 }

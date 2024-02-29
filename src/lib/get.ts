@@ -1,5 +1,4 @@
 import { DTAFile } from './dta'
-import { leadingArticleToTrailing, omitLeadingArticle } from '../utils/stringProcessors'
 import { RankTypes, rankCalculator } from '../utils/rankCalculations'
 import { BandRankingNames, BandRankingNamesAsDots, BandRankingNumbers, InstrRankingNames, InstrRankingNamesAsDots, InstrRankingNumbers, localeKeyToValue } from './locale'
 
@@ -48,80 +47,6 @@ export type GetRankReturnType<P extends RankTypes, T extends GetRankTypeOptions 
   : T extends undefined
   ? InstrRankingNumbers
   : InstrRankingNamesAsDots
-
-/**
- * Fetches the song title from a `DTAFile`.
- * - - - -
- * @param {DTAFile} song The song you want to get the song title from.
- * @param {GetNamingOptions} options `OPTIONAL` Customize options for the song title's return value.
- * @returns {string} The song title.
- */
-export const getSongTitle = (song: DTAFile, options?: GetNamingOptions): string => {
-  if (!options) options = { leadingArticle: 'emit', quoted: false }
-  else options = { leadingArticle: 'emit', quoted: false, ...options }
-  const { leadingArticle, quoted } = options
-  let returnValue = ''
-
-  if (leadingArticle === 'emit') returnValue = song.name
-  else if (leadingArticle === 'omit') returnValue = omitLeadingArticle(song.name)
-  else returnValue = leadingArticleToTrailing(song.name)
-
-  if (quoted === true) {
-    returnValue = `"${returnValue}"`
-  }
-
-  return returnValue
-}
-
-/**
- * Fetches the song artist from a `DTAFile`.
- * - - - -
- * @param {DTAFile} song The song you want to get the song artist from.
- * @param {GetNamingOptions} options `OPTIONAL` Customize options for the song artist's return value.
- * @returns {string} The song artist.
- */
-export const getSongArtist = (song: DTAFile, options?: GetNamingOptions): string => {
-  if (!options) options = { leadingArticle: 'emit', quoted: false }
-  else options = { leadingArticle: 'emit', quoted: false, ...options }
-  const { leadingArticle, quoted } = options
-  let returnValue = ''
-
-  if (leadingArticle === 'emit') returnValue = song.artist
-  else if (leadingArticle === 'omit') returnValue = omitLeadingArticle(song.artist)
-  else returnValue = leadingArticleToTrailing(song.artist)
-
-  if (quoted === true) {
-    returnValue = `"${returnValue}"`
-  }
-
-  return returnValue
-}
-
-/**
- * Fetches the song's album title from a `DTAFile`. Returns `undefined` if the song has no album title.
- * - - - -
- * @param {DTAFile} song The song you want to get the song's album title from.
- * @param {GetNamingOptions} options `OPTIONAL` Customize options for the song album title's return value.
- * @returns {string | undefined} The song album title, returns `undefined` if the song has no album title.
- */
-export const getSongAlbumTitle = (song: DTAFile, options?: GetNamingOptions): string | undefined => {
-  if (!options) options = { leadingArticle: 'emit', quoted: false }
-  else options = { leadingArticle: 'emit', quoted: false, ...options }
-  const { leadingArticle, quoted } = options
-  let returnValue = undefined
-
-  if (song.album_name) {
-    if (leadingArticle === 'emit') returnValue = song.album_name
-    else if (leadingArticle === 'omit') returnValue = omitLeadingArticle(song.album_name)
-    else returnValue = leadingArticleToTrailing(song.album_name)
-
-    if (quoted === true) {
-      returnValue = `"${returnValue}"`
-    }
-  }
-
-  return returnValue
-}
 
 /**
  * Fetches the given instrument ranking from a `DTAFile`.

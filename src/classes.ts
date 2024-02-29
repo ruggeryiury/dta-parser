@@ -1,6 +1,7 @@
 import { DTAFileRecipe, createDTA } from './lib/create'
 import { DTAFile } from './lib/dta'
-import { GetNamingOptions, GetRankTypeOptions, getSongArtist, getSongRank, getSongTitle } from './lib/get'
+import { formatDTAStringValue } from './lib/format'
+import { GetNamingOptions, GetRankTypeOptions, getSongRank } from './lib/get'
 import {
   BandRankingNames,
   BandRankingNamesAsDots,
@@ -158,7 +159,7 @@ export interface SongGetValueMethods {
    * @param {GetNamingOptions | undefined} options `OPTIONAL` Customize options for the song title's return value.
    * @returns {string} The song title.
    */
-  title: (options?: GetNamingOptions) => string
+  name: (options?: GetNamingOptions) => string
   /**
    * Fetches the song artist.
    * - - - -
@@ -226,6 +227,7 @@ export interface SongGetValueMethods {
    * @returns {number} The song's recorded year.
    */
   yearRecorded: () => number | undefined
+  albumName: (options?: GetNamingOptions) => string
   /**
    * Methods to fetch data about the song instruments and band rankings.
    */
@@ -235,11 +237,11 @@ export interface SongGetValueMethods {
 /**
  * A class representing a parsed song.
  */
-export class Song {
+export class Song<T extends DTAFile = DTAFile> {
   /**
    * A parsed song object with all its contents.
    */
-  value: Readonly<DTAFile>
+  value: Readonly<T>
   /**
    * An object containing detailed informations about the song's audio file track structure.
    */
@@ -257,11 +259,11 @@ export class Song {
   constructor(recipe: DTAFile | DTAFileRecipe) {
     if ('tracks' in recipe) {
       const newSong = createDTA(recipe)
-      this.value = newSong
+      this.value = newSong as Readonly<T>
       this.tracks = panVolInfoGen(newSong)
       this.recipe = recipe
     } else {
-      this.value = recipe
+      this.value = recipe as Readonly<T>
       this.tracks = panVolInfoGen(recipe)
       this.recipe = genDTARecipe(recipe)
     }
@@ -271,8 +273,8 @@ export class Song {
    * Functions to fetch data from the song, with several tweaks to manipulate the results.
    */
   getValue: SongGetValueMethods = {
-    title: (options) => getSongTitle(this.value, options),
-    artist: (options) => getSongArtist(this.value, options),
+    name: (options) => formatDTAStringValue(this.value.name, options),
+    artist: (options) => formatDTAStringValue(this.value.artist, options),
     master: () => this.value.master,
     drumMix: () => checkDrumMix(this.value),
     genre: () => localeKeyToValue.genre(this.value.genre),
@@ -283,6 +285,7 @@ export class Song {
     gameOrigin: () => localeKeyToValue.game_origin(this.value.game_origin),
     yearReleased: () => this.value.year_released,
     yearRecorded: () => this.value.year_recorded,
+    albumName: (options) => (this.value.album_name ? formatDTAStringValue(this.value.album_name, options) : '*No Album*'),
     rank: {
       band: <T extends GetRankTypeOptions | undefined = undefined>(type?: T) => getSongRank(this.value, 'band', type),
       drum: <T extends GetRankTypeOptions | undefined = undefined>(type?: T) => getSongRank(this.value, 'drum', type),
@@ -310,7 +313,7 @@ export class Song {
    */
   update(update: UpdateDataOptions): void {
     const updated = updateDTA(this.value, update)
-    this.value = updated
+    this.value = updated as Readonly<T>
     this.tracks = panVolInfoGen(updated)
     this.recipe = genDTARecipe(updated)
   }

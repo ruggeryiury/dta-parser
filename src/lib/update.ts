@@ -14,7 +14,7 @@ import {
   VocalGenderNames,
   VocalParts,
   VocalPartsNames,
-  VocalPercussionNames,
+  PercussionBankNames,
   localeValueToKey,
 } from './locale'
 import { panValueToArray } from '../utils/pansAndVols'
@@ -314,7 +314,7 @@ export interface GenreUpdateOptions<G extends SongGenreNames> {
   /**
    * The song's sub-genre.
    */
-  sub_genre: SubGenreUpdateValues<G>
+  sub_genre?: SubGenreUpdateValues<G>
 }
 
 export type SongGenreUpdateOptions = { [P in SongGenreNames]: GenreUpdateOptions<P> }[SongGenreNames]
@@ -323,7 +323,7 @@ export interface AlbumUpdateOptions {
   /**
    * Tells if the song has an album artwork file to be displayed. Default is `true`.
    */
-  hasArt: boolean
+  hasArt?: boolean
   /**
    * The name of the song's album.
    */
@@ -481,6 +481,10 @@ export interface UpdateDataOptions {
    */
   master?: boolean
   /**
+   * If `true`, the song won't appear on the song library. Default is `false`.
+   */
+  fake?: boolean
+  /**
    * The numerical, unique number ID of the song. Might be a string ID as well.
    */
   song_id?: string | number
@@ -516,7 +520,7 @@ export interface UpdateDataOptions {
   /**
    * The audio cue type of the vocal percussion.
    */
-  bank?: VocalPercussionNames
+  bank?: PercussionBankNames
   /**
    * The audio cue type of the drums on Drum Fills/Freestyle Mode.
    */
@@ -571,6 +575,7 @@ export interface UpdateDataOptions {
   year_recorded?: number
   album?: AlbumUpdateOptions
   key?: SongKeyMajorValues | SongKeyMinorValues | SongKeyUpdateOptions
+  alternate_path?: boolean
   /**
    * The name of the song's pack.
    */
@@ -613,6 +618,9 @@ export interface UpdateDataOptions {
   expertOnly?: boolean
 }
 
+export type SongUpdateObject = { [id: string]: UpdateDataOptions }
+
+export type MultipleSongsUpdateObject = Pick<UpdateDataOptions, 'author' | 'multitrack' | 'pack_name'>
 /**
  * Updates a song with the provided update options.
  * - - - -
@@ -651,6 +659,7 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
     year_recorded,
     album,
     key: key_signature,
+    alternate_path,
     pack_name,
     author,
     karaoke,
@@ -955,14 +964,14 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
 
   if (genre) {
     newDTA.genre = localeValueToKey.genre(genre.genre)
-    newDTA.sub_genre = localeValueToKey.sub_genre(genre.sub_genre)
+    if (genre.sub_genre) newDTA.sub_genre = localeValueToKey.sub_genre(genre.sub_genre)
   }
 
   if (year_released) newDTA.year_released = year_released
   if (year_recorded) newDTA.year_recorded = year_recorded
 
   if (album) {
-    newDTA.album_art = album.hasArt
+    if (typeof album.hasArt === 'boolean') newDTA.album_art = album.hasArt
     if (album.name) newDTA.album_name = album.name
     if (album.track_number) newDTA.album_track_number = album.track_number !== undefined ? album.track_number : 1
   }
@@ -1135,6 +1144,8 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
       newDTA.song_tonality = 0
     }
   }
+
+  if (alternate_path) newDTA.alternate_path = alternate_path
 
   if (pack_name) newDTA.pack_name = pack_name
 

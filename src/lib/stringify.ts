@@ -61,50 +61,6 @@ export interface StringifyDataOptions {
 }
 
 /**
- * Converts a parsed song object or an array of parsed song objects back to `.dta` file contents string.
- * - - - -
- * @param {DTAFile[] | DTAFile} songs A parsed song object or an array of parsed song objects.
- * @param {StringifyDataOptions} options `OPTIONAL` Customization options for the stringifying process. If an object
- * is not passed as argument at all, it will use default configurations to generate MAGMA C3's `.dta` file contents type.
- *
- * Only some values can be customized on the default option for maximum compatibility with other `.dta` file parsers.
- * @returns {string} A string representation of this parsed song object as a `.dta` file contents string.
- */
-export const stringifyDTA = (songs: DTAFile[] | DTAFile, options?: StringifyDataOptions): string => {
-  if (!options === undefined) options = { placeCustomAttributes: true, useSpaces: true }
-  else options = { placeCustomAttributes: true, useSpaces: true, ...options }
-
-  let output = ''
-
-  const { type, useSpaces } = options
-
-  if (Array.isArray(songs)) {
-    songs.forEach((value) => {
-      if (type === 'rb3_dlc') output += stringifyRB3DLC(value, options as StringifyDataOptions)
-      else output += stringifyDefault(value, options as StringifyDataOptions)
-    })
-  } else {
-    if (type === 'rb3_dlc') output += stringifyRB3DLC(songs, options)
-    else output += stringifyDefault(songs, options)
-  }
-
-  if (useSpaces !== undefined) {
-    if (typeof useSpaces === 'boolean') {
-      output = output.replace(/\t/g, '   ')
-    } else {
-      output = output.replace(/\t/g, ' '.repeat(useSpaces))
-    }
-  }
-
-  return (
-    output
-      .split('\n')
-      .filter((line) => line)
-      .join('\n') + '\n'
-  )
-}
-
-/**
  * Specific stringify method for MAGMA C3-generated `.dta` file contents.
  * - - - -
  * @param {DTAFile} value The parsed song you want to be stringified.
@@ -597,4 +553,48 @@ const stringifyRB3DLC = (value: DTAFile, options: StringifyDataOptions): string 
   output += `${genTabs(0)})${genTabs(0)}`
 
   return output
+}
+
+/**
+ * Converts a parsed song object or an array of parsed song objects back to `.dta` file contents string.
+ * - - - -
+ * @param {DTAFile[] | DTAFile} songs A parsed song object or an array of parsed song objects.
+ * @param {StringifyDataOptions} options `OPTIONAL` An object with options that customizes the stringify process. If an object
+ * is not passed as argument at all, it will use default configurations to generate MAGMA C3's `.dta` file contents type.
+ *
+ * Only some values can be customized on the default option for maximum compatibility with other `.dta` file parsers.
+ * @returns {string} A string representation of this parsed song object as a `.dta` file contents string.
+ */
+export const stringifyDTA = (songs: DTAFile[] | DTAFile, options?: StringifyDataOptions): string => {
+  if (!options === undefined) options = { placeCustomAttributes: true, useSpaces: true }
+  else options = { placeCustomAttributes: true, useSpaces: true, ...options }
+
+  let output = ''
+
+  const { type, useSpaces } = options
+
+  if (Array.isArray(songs)) {
+    songs.forEach((value) => {
+      if (type === 'rb3_dlc') output += stringifyRB3DLC(value, options as StringifyDataOptions)
+      else output += stringifyDefault(value, options as StringifyDataOptions)
+    })
+  } else {
+    if (type === 'rb3_dlc') output += stringifyRB3DLC(songs, options)
+    else output += stringifyDefault(songs, options)
+  }
+
+  if (useSpaces !== undefined) {
+    if (typeof useSpaces === 'boolean') {
+      output = output.replace(/\t/g, '   ')
+    } else {
+      output = output.replace(/\t/g, ' '.repeat(useSpaces))
+    }
+  }
+
+  return (
+    output
+      .split('\n')
+      .filter((line) => line)
+      .join('\n') + '\n'
+  )
 }

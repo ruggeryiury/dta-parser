@@ -14,7 +14,7 @@ export const fetchArtwork = async (url: string, songname: string): Promise<void>
   const imgResponse = await fetch(url, { method: 'GET' })
   const imgArrBuffer = await imgResponse.arrayBuffer()
 
-  const img = sharp(imgArrBuffer).png().resize(512, 512)
+  const img = sharp(imgArrBuffer).png().resize(256, 256)
   await fs.promises.writeFile(saveFn, await img.toBuffer())
 }
 

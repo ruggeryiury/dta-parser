@@ -5,10 +5,10 @@ import { createDTA } from './create'
 /**
  * Parses a `.dta` file contents into a `DTAFile`.
  * - - - -
- * @param {string} dtaFileContents A depacked `.dta` file contents.
- * @returns {DTAFile} A song parsed as a `DTAFile` object.
+ * @param {string} song A depacked `.dta` file contents.
+ * @returns {DTAFile} The song parsed as a `DTAFile` object.
  */
-export const parseDTA = (dtaFileContents: string): DTAFile => {
+export const parseDTA = (song: string): DTAFile => {
   let namingIndex = 0,
     hasName = -1,
     hasArtist = -1,
@@ -23,7 +23,7 @@ export const parseDTA = (dtaFileContents: string): DTAFile => {
     soloStarted = false
 
   const parsed = createDTA()
-  const split = dtaFileContents.split(/[;(]/).map((value) => value.trim())
+  const split = song.split(/[;(]/).map((value) => value.trim())
 
   split.forEach((value) => {
     const [key, ...content] = value.split(' ')
@@ -50,18 +50,22 @@ export const parseDTA = (dtaFileContents: string): DTAFile => {
     }
   })
 
-  const names = Array.from(dtaFileContents.match(/"(.*?)"/g) as RegExpMatchArray)
-    .map((name) => name.slice(1, -1))
-    .filter((name) => {
-      if (!(name.startsWith('songs/') || name.endsWith('.mid') || name.startsWith('sfx/') || name.endsWith('.milo') || name.endsWith('.cue'))) return name
-    })
+  try {
+    const names = Array.from(song.match(/"(.*?)"/g) as RegExpMatchArray)
+      .map((name) => name.slice(1, -1))
+      .filter((name) => {
+        if (!(name.startsWith('songs/') || name.endsWith('.mid') || name.startsWith('sfx/') || name.endsWith('.milo') || name.endsWith('.cue'))) return name
+      })
 
-  names.forEach((name, i) => {
-    if (i === hasName) parsed.name = slashQToQuote(name)
-    else if (i === hasArtist) parsed.artist = slashQToQuote(name)
-    else if (i === hasAlbumName) parsed.album_name = slashQToQuote(name)
-    else if (i === hasPackName) parsed.pack_name = slashQToQuote(name)
-  })
+    names.forEach((name, i) => {
+      if (i === hasName) parsed.name = slashQToQuote(name)
+      else if (i === hasArtist) parsed.artist = slashQToQuote(name)
+      else if (i === hasAlbumName) parsed.album_name = slashQToQuote(name)
+      else if (i === hasPackName) parsed.pack_name = slashQToQuote(name)
+    })
+  } catch (e) {
+    // Do nothing
+  }
 
   split.forEach((value) => {
     const clean = value.replaceAll("'", '').trim()
