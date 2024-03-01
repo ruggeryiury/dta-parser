@@ -349,90 +349,90 @@ export const C3LibraryPatch: SongUpdateObject = {
     key: 'Am',
     genre: {
       genre: 'Indie Rock',
-      sub_genre: 'Indie Rock'
+      sub_genre: 'Indie Rock',
     },
-    alternate_path: true
+    alternate_path: true,
   },
   AllMyOwnStuntsMGMv0_rb3co: {
     // All My Own Stunts
     key: 'Bm',
-    alternate_path: true
+    alternate_path: true,
   },
   klop_thebadthing: {
     // The Bad Thing
     key: 'Em',
-    alternate_path: true
+    alternate_path: true,
   },
   Brianstormv9: {
     // Brianstorm
     key: 'Fm',
-    alternate_path: true
+    alternate_path: true,
   },
   BrickByBrickMGMv0: {
     // Brick by Brick
     key: 'Em',
-    alternate_path: true
+    alternate_path: true,
   },
   acertainromance: {
     // A Certain Romance
     key: 'B',
-    alternate_path: true
+    alternate_path: true,
   },
   Cornerstone: {
     // Cornerstone
     key: 'A',
     rating: 'Family Friendly',
-    alternate_path: true
+    alternate_path: true,
   },
   AMCryinLightning: {
     // Crying Lightning (UngratefulDead version)
     key: 'Am',
     rating: 'Family Friendly',
-    alternate_path: true
+    alternate_path: true,
   },
   klop_cryinglightning: {
     // Crying Lightning (Kloporte version)
     key: 'Am',
-    alternate_path: true
+    alternate_path: true,
   },
   klop_disfordangerous_rb3c: {
     // D is for Dangerous
     key: 'Cm',
-    alternate_path: true
+    alternate_path: true,
   },
   DanceLittleLiarMGMv0_rb3c: {
     // Dance Little Liar
     key: 'C#m',
-    alternate_path: true
+    alternate_path: true,
   },
   DangerousAnimalsMGMv0_rb3: {
     // Dangerous Animals
     key: 'Gm',
-    alternate_path: true
+    alternate_path: true,
   },
   DoIWannaKnowv3: {
     // Do I Wanna Know?
     key: 'Gm',
     rating: 'Supervision Recommended',
-    alternate_path: true
+    alternate_path: true,
   },
   domeafavour: {
     // Do Me a Favour
     name: 'Do Me a Favour',
     genre: {
       genre: 'Indie Rock',
-      sub_genre: 'Indie Rock'
+      sub_genre: 'Indie Rock',
     },
     rating: 'Mature Content',
     key: 'F#m',
-    alternate_path: true
+    alternate_path: true,
   },
   klop_dontsitdown2: {
     // Don't Sit Down 'Cause I've Moved Your Chair (Rhythm Version)
     album: { name: 'Suck it and See' },
     key: 'Dm',
     rating: 'Supervision Recommended',
-    alternate_path: true
+    alternate_path: true,
   },
   Fireandthethud: {
     // Fire and the Thud
@@ -440,56 +440,56 @@ export const C3LibraryPatch: SongUpdateObject = {
     rating: 'Supervision Recommended',
     genre: {
       genre: 'Indie Rock',
-      sub_genre: 'Indie Rock'
+      sub_genre: 'Indie Rock',
     },
-    alternate_path: true
+    alternate_path: true,
   },
   fromtheritztotherubble_rb: {
     // From the Ritz to the Rubble
     name: 'From the Ritz to the Rubble',
     key: 'Bm',
     rating: 'Family Friendly',
-    alternate_path: true
+    alternate_path: true,
   },
   TheHellCatSpangled1: {
     // The Hellcat Spangled Shalalala
     name: 'The Hellcat Spangled Shalalala',
     key: 'B',
     rating: 'Mature Content',
-    alternate_path: true
+    alternate_path: true,
   },
   am_dancefloor: {
     // I Bet You Look Good on the Dancefloor (Rex Voluntas version)
     genre: {
       genre: 'Indie Rock',
-      sub_genre: 'Indie Rock'
+      sub_genre: 'Indie Rock',
     },
     key: 'F#m',
     rating: 'Supervision Recommended',
-    alternate_path: true
+    alternate_path: true,
   },
   IBetYouLookGoodOnTheDance: {
     // I Bet You Look Good on the Dancefloor (Ghostbyob version)
     key: 'F#m',
     genre: {
       genre: 'Indie Rock',
-      sub_genre: 'Indie Rock'
+      sub_genre: 'Indie Rock',
     },
-    alternate_path: true
+    alternate_path: true,
   },
   IfYouveFound: {
     // If You've Found This, It's Probably Too Late
     genre: {
       genre: 'Indie Rock',
-      sub_genre: 'Indie Rock'
+      sub_genre: 'Indie Rock',
     },
     rating: 'Supervision Recommended',
-    key: 'Am'
+    key: 'Am',
   },
   klop_thejewellershands: {
     // The Jeweller's Hands
     key: 'Cm',
-    alternate_path: true
+    alternate_path: true,
   },
   lbtlco: {
     // Leave Before The Lights Come On
@@ -497,105 +497,105 @@ export const C3LibraryPatch: SongUpdateObject = {
     rating: 'Family Friendly',
     genre: {
       genre: 'Indie Rock',
-      sub_genre: 'Indie Rock'
+      sub_genre: 'Indie Rock',
     },
   },
   LibraryPicturesMGMv3_rb3c: {
     // Library Pictures
-    key: "C#m",
+    key: 'C#m',
     rating: 'Mature Content',
-    alternate_path: true
+    alternate_path: true,
   },
   mardybum: {
     // Mardy Bum
     key: 'D',
     rating: 'Supervision Recommended',
-    alternate_path: true
+    alternate_path: true,
   },
   MyPropellerMGMv0: {
     // My Propeller
     key: 'Em',
-    alternate_path: true
+    alternate_path: true,
   },
   OnePointPMGM_F: {
     // One Point Perspective
-    key: "Eb",
-    alternate_path: true
+    key: 'Eb',
+    alternate_path: true,
   },
   klop_prettyvisitors_fb_rb: {
     // Pretty Visitors (Kloporte version)
     key: 'F#m',
     rating: 'Supervision Recommended',
-    alternate_path: true
+    alternate_path: true,
   },
   prettyvisitorsfish: {
     // Pretty Visitors (Sr. Dedos Rapidos version)
     key: 'F#m',
     genre: {
       genre: 'Indie Rock',
-      sub_genre: 'Indie Rock'
+      sub_genre: 'Indie Rock',
     },
-    alternate_path: true
+    alternate_path: true,
   },
   RecklessSerenadeMGMv0_rb3: {
     // Reckless Serenade
     key: 'D',
-    alternate_path: true
+    alternate_path: true,
   },
   ShesThunderStorms2: {
     // She's Thunderstorms
-    name: 'She\'s Thunderstorms',
+    name: "She's Thunderstorms",
     key: 'G',
-    alternate_path: true
+    alternate_path: true,
   },
   SuckItAndSeeMGMv0: {
     // Suck it and See
     key: 'E',
-    alternate_path: true
+    alternate_path: true,
   },
   sots_teddypickerv4: {
     // Teddy Picker
     key: 'Am',
-    alternate_path: true
+    alternate_path: true,
   },
   ThatsWhereYoureWMGMv1_rb3: {
     // That's Where You're Wrong
     key: 'E',
-    alternate_path: true
+    alternate_path: true,
   },
   TheredBetterBAMBMGMv0_rb3: {
     // There'd Better Be a Mirrorball
-    key: 'Eb'
+    key: 'Eb',
   },
   klop_thishouseisacircus_r: {
     // This House is a Circus
     name: 'This House is a Circus',
     key: 'Bm',
-    alternate_path: true
+    alternate_path: true,
   },
   AMHotelCasino: {
     // Tranquility Base Hotel & Casino
     key: 'Am',
     genre: {
       genre: 'Indie Rock',
-      sub_genre: 'Indie Rock'
+      sub_genre: 'Indie Rock',
     },
     rating: 'Supervision Recommended',
-    alternate_path: true
+    alternate_path: true,
   },
   klop_whenthesungoesdown_r: {
     // When the Sun Goes Down
     key: 'B',
-    alternate_path: true
+    alternate_path: true,
   },
   WYOCMWYH: {
     // Why'd You Only Call Me When You're High?
     key: 'F#m',
     genre: {
       genre: 'Indie Rock',
-      sub_genre: 'Indie Rock'
+      sub_genre: 'Indie Rock',
     },
-    alternate_path: true
+    alternate_path: true,
   },
 
   // Ariana Grande ____________________________________________________________________
@@ -689,6 +689,134 @@ export const C3LibraryPatch: SongUpdateObject = {
   NoSoyYuriWetHands: {
     // Wet Hands
     key: 'A',
+  },
+
+  // Depeche Mode ____________________________________________________________________
+  o24823057_barrelofagun_dep: {
+    // Barrel of a Gun
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Electronica'
+    },
+    key: 'E',
+    alternate_path: true
+  },
+  behindthewheel_dm: {
+    // Behind the Wheel
+    key: 'Dm',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Electronica'
+    },
+    rating: 'Supervision Recommended',
+    alternate_path: true
+  },
+  o246657559_brokenlivestudi: {
+    // Broken (Live Studio Session)
+    key: 'Fm',
+    rating: 'Family Friendly',
+    album: {
+      name: 'Delta Machine (Live Studio Session)'
+    }
+  },
+  EnjoytheSilence_pro: {
+    // Enjoy the Silence
+    key: 'Eb',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Electronica'
+    },
+    alternate_path: true
+  },
+  SheepQueen_EnjoySilence04: {
+    // Enjoy The Silence (Reinterpreted) (ft. Mike Shinoda)
+    name: 'Enjoy the Silence (Reinterpreted) (ft. Mike Shinoda)',
+    key: 'Eb'
+  },
+  o29972202_ghostsagain_depe: {
+    // Ghost Again
+    key: 'A',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Electronica'
+    },
+  },
+  1649900104: {
+    // Heroes
+    key: 'D',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Electronica'
+    },
+  },
+  1649900182: {
+    // Home
+    key: 'Ab',
+    alternate_path: true
+  },
+  ud_ifeelyou: {
+    // I Feel You
+    key: 'Am',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Electronica'
+    },
+  },
+  1547711256: {
+    // John the Revelator
+    name: 'John the Revelator',
+    key: 'G#m',
+    album: {name: 'Playing the Angel'},
+    alternate_path: true
+  },
+  far_justcantgetenough_rb3: {
+    // Just Can't Get Enough
+    key: 'G',
+    alternate_path: true
+  },
+  1649900260: {
+    // Martyr
+    key: 'G#m'
+  },
+  1649900350: {
+    // Precious
+    key: 'D#m',
+    album: {name: 'Playing the Angel'},
+    alternate_path: true
+  },
+  1649900112: {
+    // A Question of Time
+    key: 'Gm',
+    alternate_path: true
+  },
+  1547707683: {
+    // Shake the Disease
+    name: 'Shake the Disease',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Electronica'
+    },
+    key: 'F'
+  },
+  o571833423_stripped_depec: {
+    // Stripped
+    key: 'Dm',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Electronica'
+    },
+    rating: 'Supervision Recommended',
+    alternate_path: true
+  },
+  1547700699: {
+    // Suffer Well
+    key: 'Em',
+    album: {name: 'Playing the Angel'},
+    alternate_path: true
+  },
+  1649900105: {
+    // Wrong
+    key: 'Bm'
   },
 
   // Troye Sivan ____________________________________________________________________
