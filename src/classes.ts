@@ -331,6 +331,16 @@ export class Song<T extends DTAFile = DTAFile> {
   }
 }
 
+export interface SingleSongSelectorMethods {
+  /**
+   * Returns a song with the provided shortname ID, or `undefined` if no song is found having the provided shortname ID.
+   * - - - -
+   * @param id The shortname ID of the song.
+   * @returns {Song | undefined} A song with the provided shortname ID, or `undefined` if no song is found having the provided shortname ID.
+   */
+  byID: (id: string) => Song | undefined
+}
+
 /** A class representing an array with parsed songs. */
 export class SongCollection {
   collection: Song[] = []
@@ -401,5 +411,11 @@ export class SongCollection {
     return this.collection.map((song) => {
       return song.value as DTAFile
     })
+  }
+  /**
+   * Methods to select a single song from the collection.
+   */
+  selectOne: SingleSongSelectorMethods = {
+    byID: (id) => this.collection.find(song => song.value.id === id)
   }
 }
