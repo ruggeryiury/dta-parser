@@ -1140,7 +1140,7 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
       newDTA.song_tonality = 1
     } else {
       newDTA.vocal_tonic_note = 11
-      newDTA.song_tonality = 0
+      newDTA.song_tonality = 1
     }
   }
 

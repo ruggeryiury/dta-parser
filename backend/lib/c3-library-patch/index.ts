@@ -74,21 +74,13 @@ export const C3LibraryPatchModule: C3LibraryPatchModuleObject = {
       const { songname, alternate_path } = song.value
       if (alternate_path) {
         const songUpdateFolder = `${updatesFolder}/${songname}`
+        const songMiloGenFolder = `${songUpdateFolder}/gen`
         const songMilo = `${miloFilesPath}/${songname}.milo_xbox`
-        const songMiloGenFolder = `${updatesFolder}/${songname}/gen`
-        const songMiloLocation = `${updatesFolder}/${songname}/gen/${songname}.milo_xbox`
+        const songMiloLocation = `${songUpdateFolder}/gen/${songname}.milo_xbox`
 
         if (!existsSync(songUpdateFolder)) {
           try {
             await fs.mkdir(songUpdateFolder)
-          } catch (e) {
-            // Do nothing
-          }
-        }
-
-        if (!existsSync(songMilo)) {
-          try {
-            await fs.mkdir(songMilo)
           } catch (e) {
             // Do nothing
           }

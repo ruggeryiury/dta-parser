@@ -1,7 +1,7 @@
 import { SongUpdateObject } from '../../../src/lib/update'
 
 export const C3LibraryPatch: SongUpdateObject = {
-  // ABBA
+  // ABBA ____________________________________________________________________
   dancingqueenv12: {
     // Dancing Queen
     key: 'A',
@@ -71,7 +71,7 @@ export const C3LibraryPatch: SongUpdateObject = {
     alternate_path: true,
   },
 
-  // Adele
+  // Adele ____________________________________________________________________
   A_Hello_PVH: {
     // Hello
     key: 'Fm',
@@ -125,7 +125,7 @@ export const C3LibraryPatch: SongUpdateObject = {
     alternate_path: true,
   },
 
-  // American Football
+  // American Football ____________________________________________________________________
   AF_NeverMeant: {
     // Never Meant
     key: 'C',
@@ -149,7 +149,7 @@ export const C3LibraryPatch: SongUpdateObject = {
     },
   },
 
-  // Amy Winehouse
+  // Amy Winehouse ____________________________________________________________________
   BacktoBlack: {
     // Back to Black
     key: 'Dm',
@@ -175,7 +175,7 @@ export const C3LibraryPatch: SongUpdateObject = {
     alternate_path: true,
   },
 
-  // Anamanaguchi
+  // Anamanaguchi ____________________________________________________________________
   sots_anotherwinterv9: {
     // Another Winter
     key: 'A',
@@ -198,13 +198,13 @@ export const C3LibraryPatch: SongUpdateObject = {
     alternate_path: true,
   },
 
-  // Animal Collective
+  // Animal Collective ____________________________________________________________________
   mygirlsv1: {
     album: { track_number: 2 },
     key: 'C',
   },
 
-  // Arcade Fire
+  // Arcade Fire ____________________________________________________________________
   awfulsound: {
     // Awful Sound (Oh Eurydice)
     key: 'F#m',
@@ -343,7 +343,262 @@ export const C3LibraryPatch: SongUpdateObject = {
     alternate_path: true,
   },
 
-  // Ariana Grande
+  // Arctic Monkeys ____________________________________________________________________
+  505: {
+    // 505
+    key: 'Am',
+    genre: {
+      genre: 'Indie Rock',
+      sub_genre: 'Indie Rock'
+    },
+    alternate_path: true
+  },
+  AllMyOwnStuntsMGMv0_rb3co: {
+    // All My Own Stunts
+    key: 'Bm',
+    alternate_path: true
+  },
+  klop_thebadthing: {
+    // The Bad Thing
+    key: 'Em',
+    alternate_path: true
+  },
+  Brianstormv9: {
+    // Brianstorm
+    key: 'Fm',
+    alternate_path: true
+  },
+  BrickByBrickMGMv0: {
+    // Brick by Brick
+    key: 'Em',
+    alternate_path: true
+  },
+  acertainromance: {
+    // A Certain Romance
+    key: 'B',
+    alternate_path: true
+  },
+  Cornerstone: {
+    // Cornerstone
+    key: 'A',
+    rating: 'Family Friendly',
+    alternate_path: true
+  },
+  AMCryinLightning: {
+    // Crying Lightning (UngratefulDead version)
+    key: 'Am',
+    rating: 'Family Friendly',
+    alternate_path: true
+  },
+  klop_cryinglightning: {
+    // Crying Lightning (Kloporte version)
+    key: 'Am',
+    alternate_path: true
+  },
+  klop_disfordangerous_rb3c: {
+    // D is for Dangerous
+    key: 'Cm',
+    alternate_path: true
+  },
+  DanceLittleLiarMGMv0_rb3c: {
+    // Dance Little Liar
+    key: 'C#m',
+    alternate_path: true
+  },
+  DangerousAnimalsMGMv0_rb3: {
+    // Dangerous Animals
+    key: 'Gm',
+    alternate_path: true
+  },
+  DoIWannaKnowv3: {
+    // Do I Wanna Know?
+    key: 'Gm',
+    rating: 'Supervision Recommended',
+    alternate_path: true
+  },
+  domeafavour: {
+    // Do Me a Favour
+    name: 'Do Me a Favour',
+    genre: {
+      genre: 'Indie Rock',
+      sub_genre: 'Indie Rock'
+    },
+    rating: 'Mature Content',
+    key: 'F#m',
+    alternate_path: true
+  },
+  klop_dontsitdown2: {
+    // Don't Sit Down 'Cause I've Moved Your Chair (Rhythm Version)
+    album: { name: 'Suck it and See' },
+    key: 'Dm',
+    rating: 'Supervision Recommended',
+    alternate_path: true
+  },
+  Fireandthethud: {
+    // Fire and the Thud
+    key: 'Bm',
+    rating: 'Supervision Recommended',
+    genre: {
+      genre: 'Indie Rock',
+      sub_genre: 'Indie Rock'
+    },
+    alternate_path: true
+  },
+  fromtheritztotherubble_rb: {
+    // From the Ritz to the Rubble
+    name: 'From the Ritz to the Rubble',
+    key: 'Bm',
+    rating: 'Family Friendly',
+    alternate_path: true
+  },
+  TheHellCatSpangled1: {
+    // The Hellcat Spangled Shalalala
+    name: 'The Hellcat Spangled Shalalala',
+    key: 'B',
+    rating: 'Mature Content',
+    alternate_path: true
+  },
+  am_dancefloor: {
+    // I Bet You Look Good on the Dancefloor (Rex Voluntas version)
+    genre: {
+      genre: 'Indie Rock',
+      sub_genre: 'Indie Rock'
+    },
+    key: 'F#m',
+    rating: 'Supervision Recommended',
+    alternate_path: true
+  },
+  IBetYouLookGoodOnTheDance: {
+    // I Bet You Look Good on the Dancefloor (Ghostbyob version)
+    key: 'F#m',
+    genre: {
+      genre: 'Indie Rock',
+      sub_genre: 'Indie Rock'
+    },
+    alternate_path: true
+  },
+  IfYouveFound: {
+    // If You've Found This, It's Probably Too Late
+    genre: {
+      genre: 'Indie Rock',
+      sub_genre: 'Indie Rock'
+    },
+    rating: 'Supervision Recommended',
+    key: 'Am'
+  },
+  klop_thejewellershands: {
+    // The Jeweller's Hands
+    key: 'Cm',
+    alternate_path: true
+  },
+  lbtlco: {
+    // Leave Before The Lights Come On
+    key: 'C',
+    rating: 'Family Friendly',
+    genre: {
+      genre: 'Indie Rock',
+      sub_genre: 'Indie Rock'
+    },
+  },
+  LibraryPicturesMGMv3_rb3c: {
+    // Library Pictures
+    key: "C#m",
+    rating: 'Mature Content',
+    alternate_path: true
+  },
+  mardybum: {
+    // Mardy Bum
+    key: 'D',
+    rating: 'Supervision Recommended',
+    alternate_path: true
+  },
+  MyPropellerMGMv0: {
+    // My Propeller
+    key: 'Em',
+    alternate_path: true
+  },
+  OnePointPMGM_F: {
+    // One Point Perspective
+    key: "Eb",
+    alternate_path: true
+  },
+  klop_prettyvisitors_fb_rb: {
+    // Pretty Visitors (Kloporte version)
+    key: 'F#m',
+    rating: 'Supervision Recommended',
+    alternate_path: true
+  },
+  prettyvisitorsfish: {
+    // Pretty Visitors (Sr. Dedos Rapidos version)
+    key: 'F#m',
+    genre: {
+      genre: 'Indie Rock',
+      sub_genre: 'Indie Rock'
+    },
+    alternate_path: true
+  },
+  RecklessSerenadeMGMv0_rb3: {
+    // Reckless Serenade
+    key: 'D',
+    alternate_path: true
+  },
+  ShesThunderStorms2: {
+    // She's Thunderstorms
+    name: 'She\'s Thunderstorms',
+    key: 'G',
+    alternate_path: true
+  },
+  SuckItAndSeeMGMv0: {
+    // Suck it and See
+    key: 'E',
+    alternate_path: true
+  },
+  sots_teddypickerv4: {
+    // Teddy Picker
+    key: 'Am',
+    alternate_path: true
+  },
+  ThatsWhereYoureWMGMv1_rb3: {
+    // That's Where You're Wrong
+    key: 'E',
+    alternate_path: true
+  },
+  TheredBetterBAMBMGMv0_rb3: {
+    // There'd Better Be a Mirrorball
+    key: 'Eb'
+  },
+  klop_thishouseisacircus_r: {
+    // This House is a Circus
+    name: 'This House is a Circus',
+    key: 'Bm',
+    alternate_path: true
+  },
+  AMHotelCasino: {
+    // Tranquility Base Hotel & Casino
+    key: 'Am',
+    genre: {
+      genre: 'Indie Rock',
+      sub_genre: 'Indie Rock'
+    },
+    rating: 'Supervision Recommended',
+    alternate_path: true
+  },
+  klop_whenthesungoesdown_r: {
+    // When the Sun Goes Down
+    key: 'B',
+    alternate_path: true
+  },
+  WYOCMWYH: {
+    // Why'd You Only Call Me When You're High?
+    key: 'F#m',
+    genre: {
+      genre: 'Indie Rock',
+      sub_genre: 'Indie Rock'
+    },
+    alternate_path: true
+  },
+
+  // Ariana Grande ____________________________________________________________________
   BreakFree: {
     // Break Free
     key: 'Gm',
@@ -422,7 +677,7 @@ export const C3LibraryPatch: SongUpdateObject = {
     vocal_gender: 'Female',
   },
 
-  // C418
+  // C418 ____________________________________________________________________
   NoSoyYuriMinecraft: {
     // Minecraft
     key: 'F#',
@@ -436,7 +691,7 @@ export const C3LibraryPatch: SongUpdateObject = {
     key: 'A',
   },
 
-  // Troye Sivan
+  // Troye Sivan ____________________________________________________________________
   DanceToThisJIM: {
     name: 'Dance to This (ft. Ariana Grande)',
   },
