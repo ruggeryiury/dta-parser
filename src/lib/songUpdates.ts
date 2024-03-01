@@ -3,6 +3,9 @@ import { localeValueToKey } from './locale'
 import { SongUpdateObject } from './update'
 
 export interface StringifySongUpdatesOptions {
+  /**
+   * If `true`, each song updates will be placed on a single line. Default is `false`.
+   */
   inline?: boolean
 }
 
@@ -33,7 +36,7 @@ export const stringifySongUpdates = (updates: SongUpdateObject, options?: String
   })
 
   upgKeys.forEach((key) => {
-    const { key: key_signature, genre, rating, name, album, id, artist, alternate_path } = updates[key]
+    const { key: key_signature, genre, rating, name, album, id, artist, alternate_path, vocal_gender } = updates[key]
     if (id) return
     rtnString += `(${key}`
 
@@ -52,6 +55,10 @@ export const stringifySongUpdates = (updates: SongUpdateObject, options?: String
       if (sub_genre) {
         rtnString += `${inline ? ' ' : genTabs()}(sub_genre ${localeValueToKey.sub_genre(sub_genre)})`
       }
+    }
+
+    if (vocal_gender) {
+      rtnString += `${inline ? ' ' : genTabs()}(vocal_gender ${localeValueToKey.vocal_gender(vocal_gender)})`
     }
 
     if (rating) {

@@ -8,7 +8,7 @@ export const hideandseek = {
   song_id: 1774800003,
   songname: '7748hideandseek',
   tracks: {
-    vocals: { rank: 4, channels: 1, vocal_parts: 2, vocal_gender: 'Female' },
+    vocals: { rank: 4, channels: 1, vocal_parts: 2 },
     backing: 2,
   },
   preview: 142990,
@@ -16,6 +16,7 @@ export const hideandseek = {
   rank_band: 4,
   rating: 2,
   genre: { genre: 'Pop/Dance/Electronic', sub_genre: 'Other' },
+  vocal_gender: 'Female',
   year_released: 2005,
   album: { hasArt: true, name: 'Speak for Yourself', track_number: 5 },
   key: 'A',

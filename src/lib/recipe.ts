@@ -24,7 +24,7 @@ import { panVolInfoGen } from '../utils/pansAndVols'
  */
 export const genAudioTracksRecipe = (song: DTAFile): TrackUpdateOptions => {
   const tracks = {} as TrackUpdateOptions
-  const { rank_drum, rank_bass, rank_guitar, rank_vocals, rank_keys, rank_real_bass, rank_real_guitar, rank_real_keys, real_bass_tuning, real_guitar_tuning, vocal_parts, vocal_gender } = song
+  const { rank_drum, rank_bass, rank_guitar, rank_vocals, rank_keys, rank_real_bass, rank_real_guitar, rank_real_keys, real_bass_tuning, real_guitar_tuning, vocal_parts } = song
   const { backing, bass, drum, guitar, keys, vocals, crowd } = panVolInfoGen(song)
 
   if (drum.enabled) {
@@ -129,7 +129,6 @@ export const genAudioTracksRecipe = (song: DTAFile): TrackUpdateOptions => {
       rank: rankCalculator('vocals', rank_vocals),
       channels: vocals.channels,
       vocal_parts,
-      vocal_gender: localeKeyToValue.vocal_gender(vocal_gender),
       pans: vocals.pan,
       vols: vocals.vol,
       hasSolo: vocals.hasSolo,
@@ -143,7 +142,6 @@ export const genAudioTracksRecipe = (song: DTAFile): TrackUpdateOptions => {
       if (vocals.vol.join(' ') === '0') delete tracks.vocals.vols
     }
 
-    if (vocal_gender === 'male') delete tracks.vocals.vocal_gender
     if (!vocals.hasSolo) delete tracks.vocals.hasSolo
   }
 
@@ -235,6 +233,7 @@ export const genDTARecipe = (song: DTAFile): DTAFileRecipe => {
     sub_genre,
     song_length,
     preview,
+    vocal_gender,
     year_released,
     year_recorded,
     album_art,
@@ -275,6 +274,7 @@ export const genDTARecipe = (song: DTAFile): DTAFileRecipe => {
       genre: localeKeyToValue.genre(genre),
       sub_genre: localeKeyToValue.sub_genre(sub_genre),
     } as SongGenreUpdateOptions,
+    vocal_gender: localeKeyToValue.vocal_gender(vocal_gender),
     year_released,
     year_recorded,
     album: {} as AlbumUpdateOptions,

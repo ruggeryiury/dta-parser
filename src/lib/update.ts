@@ -237,10 +237,6 @@ export interface VocalsUpdateOptions<T extends InstrumentTracksTypes> {
    */
   vocal_parts: Exclude<VocalPartsNames, 'No Vocals'> | Exclude<VocalParts, 0>
   /**
-   * The gender of the lead vocalist. Default is `Male`.
-   */
-  vocal_gender?: VocalGenderNames
-  /**
    * Custom panning information. If not specified, mono tracks will have centered
    * `0.0` panning, and stereo tracks will be `-1.0` (for the left track) and `1.0` (for the right track).
    */
@@ -569,6 +565,10 @@ export interface UpdateDataOptions {
    */
   genre?: SongGenreUpdateOptions
   /**
+   * The gender of the lead vocalist. Default is `Male`.
+   */
+  vocal_gender?: VocalGenderNames
+  /**
    * The song's release year.
    */
   year_released?: number
@@ -655,6 +655,7 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
     game_origin,
     rating,
     genre,
+    vocal_gender,
     year_released,
     year_recorded,
     album,
@@ -698,7 +699,6 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
     newDTA.rank_real_guitar = 0
     newDTA.rank_real_bass = 0
     newDTA.rank_real_keys = 0
-    newDTA.vocal_gender = 'male'
     let instrumentCount = 0
 
     const drumT = tracks.drum ? panValueToArray(tracks.drum.channels === undefined ? 'Stereo Else' : tracks.drum.channels).length : 0
@@ -847,9 +847,6 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
         if (!newDTA.solo) newDTA.solo = []
         newDTA.solo.push('vocal_percussion')
       }
-
-      if (tracks.vocals.vocal_gender) newDTA.vocal_gender = localeValueToKey.vocal_gender(tracks.vocals.vocal_gender)
-      else newDTA.vocal_gender = 'male'
     }
 
     if (tracks.keys) {
@@ -966,6 +963,8 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
     newDTA.genre = localeValueToKey.genre(genre.genre)
     if (genre.sub_genre) newDTA.sub_genre = localeValueToKey.sub_genre(genre.sub_genre)
   }
+
+  if (vocal_gender) newDTA.vocal_gender = localeValueToKey.vocal_gender(vocal_gender)
 
   if (year_released) newDTA.year_released = year_released
   if (year_recorded) newDTA.year_recorded = year_recorded

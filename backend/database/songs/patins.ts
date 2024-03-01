@@ -19,6 +19,7 @@ export const patins = {
   rank_band: 1,
   rating: 1,
   genre: { genre: 'Indie Rock', sub_genre: 'Indie Rock' },
+  vocal_gender: 'Female',
   year_released: 2006,
   album: { hasArt: true, name: 'Cansei de Ser Sexy (International Release)', track_number: 2 },
   key: 'G',

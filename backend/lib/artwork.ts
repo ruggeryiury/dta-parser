@@ -6,16 +6,33 @@ import sharp from 'sharp'
  * Asynchronously fetches an album artwork and save it on `backend/gen`.
  * - - - -
  * @param {string} url The URL of the artwork.
- * @param {string} songname The file name to be saved, `_keep` will be added to file name automatically.
+ * @param {string | string[]} songname The file nam or an array of file names to be saved, `_keep` will be added to file name automatically.
  */
-export const fetchArtwork = async (url: string, songname: string): Promise<void> => {
-  const saveFn = path.resolve(`./backend/gen/${songname}_keep.png`)
+export const fetchArtwork = async (url: string, songname: string | string[]): Promise<void> => {
+  if (Array.isArray(songname)) {
+    // eslint-disable-next-line  @typescript-eslint/no-misused-promises
+    songname.forEach(async (name) => {
+      if (name) {
+        const saveFn = path.resolve(`./backend/gen/${name}_keep.png`)
 
-  const imgResponse = await fetch(url, { method: 'GET' })
-  const imgArrBuffer = await imgResponse.arrayBuffer()
+        const imgResponse = await fetch(url, { method: 'GET' })
+        const imgArrBuffer = await imgResponse.arrayBuffer()
 
-  const img = sharp(imgArrBuffer).png().resize(256, 256)
-  await fs.promises.writeFile(saveFn, await img.toBuffer())
+        const img = sharp(imgArrBuffer).png().resize(256, 256)
+        await fs.promises.writeFile(saveFn, await img.toBuffer())
+      }
+    })
+  } else {
+    if (songname) {
+      const saveFn = path.resolve(`./backend/gen/${songname}_keep.png`)
+
+      const imgResponse = await fetch(url, { method: 'GET' })
+      const imgArrBuffer = await imgResponse.arrayBuffer()
+
+      const img = sharp(imgArrBuffer).png().resize(256, 256)
+      await fs.promises.writeFile(saveFn, await img.toBuffer())
+    }
+  }
 }
 
 /**
