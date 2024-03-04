@@ -1051,7 +1051,7 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
       newDTA.song_tonality = 1
     } else {
       newDTA.vocal_tonic_note = 11
-      newDTA.song_tonality = 0
+      newDTA.song_tonality = 1
     }
 
     if (key_signature.trainer_key_override) {
@@ -1068,7 +1068,7 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
       if (key_signature.trainer_key_override === 'A#' || key_signature.trainer_key_override === 'Bb') newDTA.song_key = 10
       if (key_signature.trainer_key_override === 'B') newDTA.song_key = 11
     }
-  } else {
+  } else if (typeof key_signature === 'string') {
     if (key_signature === 'C Major' || key_signature === 'C') {
       newDTA.vocal_tonic_note = 0
       newDTA.song_tonality = 0

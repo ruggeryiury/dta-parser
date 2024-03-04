@@ -2,7 +2,7 @@ import path from 'path'
 import fs from 'fs'
 import { StringifyDataOptions, stringifyDTA } from '../../src/lib/stringify'
 import { DTAFile } from '../../src'
-import { SortByOptionsTypes, sortDTA } from '../../src/lib/sort'
+import { SongSortingTypes, sortDTA } from '../../src/lib/sort'
 import { MySongsID, MySongsModule } from '../core/database'
 import { MAGMAProject } from './magma'
 
@@ -24,7 +24,7 @@ export interface SongsGeneratorOptions extends StringifyDataOptions {
   /**
    * Changes the sorting of the songs.
    */
-  sortBy?: SortByOptionsTypes
+  sortBy?: SongSortingTypes
 }
 
 /**
@@ -63,7 +63,7 @@ export const genSongsDTAFile = async (songs: MAGMAProject | MAGMAProject[] | MyS
     })
   }
 
-  const songsContents = stringifyDTA(sortDTA(databaseSongs, opts.sortBy !== undefined ? opts.sortBy : 'song_id'), {
+  const songsContents = stringifyDTA(sortDTA(databaseSongs, opts.sortBy !== undefined ? opts.sortBy : 'Song ID'), {
     type: opts.type,
     placeCustomAttributes: opts.placeCustomAttributes,
     guitarCores: opts.guitarCores,

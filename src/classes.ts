@@ -1,7 +1,7 @@
 import { DTAFileRecipe, createDTA } from './lib/create'
 import { DTAFile } from './lib/dta'
-import { formatDTAStringValue } from './lib/format'
-import { GetNamingOptions, GetRankTypeOptions, getSongRank } from './lib/get'
+import { DTAStringValueFormattingOptions, formatDTAStringValue } from './lib/format'
+import { GetRankTypeOptions, getSongRank } from './lib/get'
 import {
   BandRankingNames,
   BandRankingNamesAsDots,
@@ -18,6 +18,7 @@ import {
   localeKeyToValue,
 } from './lib/locale'
 import { genDTARecipe } from './lib/recipe'
+import { SongSortingTypes, sortDTA } from './lib/sort'
 import { StringifyDataOptions, stringifyDTA } from './lib/stringify'
 import { UpdateDataOptions, updateDTA } from './lib/update'
 import { CheckDrumMixReturnType, checkDrumMix } from './utils/drumMix'
@@ -156,17 +157,17 @@ export interface SongGetValueMethods {
   /**
    * Fetches the song title.
    * - - - -
-   * @param {GetNamingOptions | undefined} options `OPTIONAL` Customize options for the song title's return value.
+   * @param {DTAStringValueFormattingOptions | undefined} options `OPTIONAL` Customize options for the song title's return value.
    * @returns {string} The song title.
    */
-  name: (options?: GetNamingOptions) => string
+  name: (options?: DTAStringValueFormattingOptions) => string
   /**
    * Fetches the song artist.
    * - - - -
-   * @param {GetNamingOptions | undefined} options `OPTIONAL` Customize options for the song artist's return value.
+   * @param {DTAStringValueFormattingOptions | undefined} options `OPTIONAL` Customize options for the song artist's return value.
    * @returns {string} The song artist.
    */
-  artist: (options?: GetNamingOptions) => string
+  artist: (options?: DTAStringValueFormattingOptions) => string
   /**
    * Checks if the song is an original master recording.
    * - - - -
@@ -227,7 +228,12 @@ export interface SongGetValueMethods {
    * @returns {number} The song's recorded year.
    */
   yearRecorded: () => number | undefined
-  albumName: (options?: GetNamingOptions) => string
+  /**
+   * Fetches the song's album name. Returns `undefined` if the song has no album name settled.
+   * @param {DTAStringValueFormattingOptions | undefined} options `OPTIONAL` Customize options for the song's album name value.
+   * @returns {string | undefined} The song's album name. Returns `undefined` if the song has no album name settled.
+   */
+  albumName: (options?: DTAStringValueFormattingOptions) => string | undefined
   /**
    * Methods to fetch data about the song instruments and band rankings.
    */
@@ -285,7 +291,7 @@ export class Song<T extends DTAFile = DTAFile> {
     gameOrigin: () => localeKeyToValue.game_origin(this.value.game_origin),
     yearReleased: () => this.value.year_released,
     yearRecorded: () => this.value.year_recorded,
-    albumName: (options) => (this.value.album_name ? formatDTAStringValue(this.value.album_name, options) : '*No Album*'),
+    albumName: (options) => (this.value.album_name ? formatDTAStringValue(this.value.album_name, options) : undefined),
     rank: {
       band: <T extends GetRankTypeOptions | undefined = undefined>(type?: T) => getSongRank(this.value, 'band', type),
       drum: <T extends GetRankTypeOptions | undefined = undefined>(type?: T) => getSongRank(this.value, 'drum', type),
@@ -413,9 +419,21 @@ export class SongCollection {
     })
   }
   /**
+   * Sorts this `SongCollection` based on the provided sorting type, mutating the song collection array of this class.
+   * - - - -
+   * @param {SongSortingTypes} sortBy The sorting type of the song collection.
+   */
+  sort(sortBy: SongSortingTypes): void {
+    const newArray = sortDTA(
+      this.collection.map((song) => song.json()),
+      sortBy
+    )
+    this.collection = newArray.map((song) => new Song(song))
+  }
+  /**
    * Methods to select a single song from the collection.
    */
   selectOne: SingleSongSelectorMethods = {
-    byID: (id) => this.collection.find(song => song.value.id === id)
+    byID: (id) => this.collection.find((song) => song.value.id === id),
   }
 }

@@ -677,6 +677,546 @@ export const C3LibraryPatch: SongUpdateObject = {
     vocal_gender: 'Female',
   },
 
+  // Avril Lavigne ____________________________________________________________________
+  AL4Real: {
+    // 4 Real
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    key: 'C',
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  Alice: {
+    // Alice (Qweflol version)
+    key: 'G',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    vocal_gender: 'Female',
+    alternate_path: true,
+  },
+  ALAliceExtended: {
+    // Alice (Extended Version) (Ultimate_MANG0 version)
+    key: 'G',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALAlone: {
+    // Alone
+    key: 'A',
+    rating: 'Family Friendly',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    alternate_path: true,
+  },
+  ALAnythingbutOrdinary_rb3: {
+    // Anything but Ordinary
+    key: 'C',
+    rating: 'Supervision Recommended',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    alternate_path: true,
+  },
+  ALBestDamnThingV5: {
+    // The Best Damn Thing
+    key: 'D',
+    rating: 'Supervision Recommended',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    alternate_path: true,
+  },
+  o563466780_biteme_avrillav: {
+    // Bite Me
+    album: {
+      name: 'Love Sux (Deluxe)',
+      track_number: 3,
+    },
+    key: 'Eb',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Mature Content',
+    alternate_path: true
+  },
+  ALBlackStar: {
+    // Black Star
+    key: 'C',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  Complicated: {
+    // Complicated
+    key: 'F',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALContagious: {
+    // Contagious
+    key: 'Db',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Supervision Recommended',
+    alternate_path: true,
+  },
+  ALDarlin: {
+    // Darlin
+    key: 'C',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALEverbodyHurts: {
+    // Everbody Hurts
+    key: 'Bb',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALEverythingBackV2: {
+    // Everything Back But You
+    key: 'E',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Mature Content',
+    alternate_path: true,
+  },
+  ALGirlfriendV4: {
+    // Girlfriend
+    key: 'D',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Mature Content',
+    alternate_path: true,
+  },
+  ALGoodbye: {
+    // Goodbye (Ultimate_MANG0 version)
+    key: 'G',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  Goodbye: {
+    // Goodbye (Qweflol version)
+    key: 'G',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  o142591279_hewasnt_avrilla: {
+    // He Wasn't
+    key: 'D',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  htnguV2: {
+    // Here's to Never Growing Up
+    key: 'F',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    alternate_path: true
+  },
+  o504803015_herestonevergro: {
+    // Here's to Never Growing Up (Audio Revamp)
+    key: 'F',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    alternate_path: true
+  },
+  ALHotV3: {
+    // Hot
+    key: 'Ab',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  AvrLavHot: {
+    // Hot
+    key: 'Ab',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALICanDoBetterV3: {
+    // I Can Do Better
+    key: 'C',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Mature Content',
+    alternate_path: true,
+  },
+  ALDontHaveToTry: {
+    // I Don't Have To Try
+    key: 'B',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Mature Content',
+    alternate_path: true,
+  },
+  ALILoveYou: {
+    // I Love You
+    key: 'C',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALIWillBeV4: {
+    // I Will Be
+    key: 'G',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  o375585180_imamess_avrilla: {
+    // I'm a Mess
+    name: "I'm a Mess (ft. YUNGBLUD)",
+    artist: 'Avril Lavigne',
+    album: {
+      name: 'Love Sux (Deluxe)',
+      track_number: 13,
+    },
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    key: 'Db',
+    rating: 'Supervision Recommended',
+    alternate_path: true,
+  },
+  ALImwithYou: {
+    // I'm with You
+    key: 'A',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALInnocenceV2: {
+    // Innocence
+    key: 'E',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALKeepHoldingOn: {
+    // Keep Holding On
+    key: 'G',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALLosingGrip: {
+    // Losing Grip
+    key: 'G#m',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALMobile: {
+    // Mobile
+    key: 'A',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALMyWorld: {
+    // My World
+    key: 'Db',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALNaked: {
+    // Naked
+    key: 'G',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALNobodysFool: {
+    // Nobody's Fool (Ultimate_MANG0 version)
+    key: 'E',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  AvrilNobodysFool: {
+    // Nobody's Fool (Nudles version)
+    key: 'E',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  Nobodyshome: {
+    // Nobody's Home
+    key: 'Em',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALNotEnough: {
+    // Not Enough
+    key: 'D',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALOneofThoseGirls: {
+    // One of Those Girls
+    key: 'Db',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALPush: {
+    // Push
+    key: 'Bb',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALRememberWhen: {
+    // Remember When
+    key: 'C',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALRunawayV3: {
+    // Runaway
+    key: 'C',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALSmile: {
+    // Smile
+    key: 'F#m',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Mature Content',
+    alternate_path: true,
+  },
+  Smile: {
+    // Smile
+    key: 'F#m',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Mature Content',
+    alternate_path: true,
+  },
+  ALStopStandingThereV2_rb3: {
+    // Stop Standing There
+    key: 'C',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  o303704460_tellmeitsover_a: {
+    // Tell Me It's Over
+    key: 'A',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+  },
+  ALThingsIllNeverSayV3_rb3: {
+    // Things I'll Never Say
+    key: 'D',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALTomorrowV2: {
+    // Tomorrow
+    key: 'A',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALTooMuchtoAskV3: {
+    // Too Much to Ask
+    key: 'G',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  ALUnwantedV2: {
+    // Unwanted
+    key: 'Em',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Family Friendly',
+    alternate_path: true,
+  },
+  WhattheHell: {
+    // What the Hell
+    key: 'A',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Supervision Recommended',
+    alternate_path: true,
+  },
+  ALWhenYoureGoneV2: {
+    // When You're Gone (Ultimate_MANG0 version)
+    key: 'G',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Supervision Recommended',
+    alternate_path: true,
+  },
+  whenyouregoneTRUCE: {
+    // When You're Gone (Truce version)
+    key: 'G',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Supervision Recommended',
+    alternate_path: true,
+  },
+  ALWishYouHereV2: {
+    // Wish You Were Here
+    key: 'E',
+    genre: {
+      genre: 'Pop-Rock',
+      sub_genre: 'Pop',
+    },
+    rating: 'Mature Content',
+    alternate_path: true,
+  },
+
   // C418 ____________________________________________________________________
   NoSoyYuriMinecraft: {
     // Minecraft
@@ -696,49 +1236,49 @@ export const C3LibraryPatch: SongUpdateObject = {
     // Barrel of a Gun
     genre: {
       genre: 'Pop/Dance/Electronic',
-      sub_genre: 'Electronica'
+      sub_genre: 'Electronica',
     },
     key: 'E',
-    alternate_path: true
+    alternate_path: true,
   },
   behindthewheel_dm: {
     // Behind the Wheel
     key: 'Dm',
     genre: {
       genre: 'Pop/Dance/Electronic',
-      sub_genre: 'Electronica'
+      sub_genre: 'Electronica',
     },
     rating: 'Supervision Recommended',
-    alternate_path: true
+    alternate_path: true,
   },
   o246657559_brokenlivestudi: {
     // Broken (Live Studio Session)
     key: 'Fm',
     rating: 'Family Friendly',
     album: {
-      name: 'Delta Machine (Live Studio Session)'
-    }
+      name: 'Delta Machine (Live Studio Session)',
+    },
   },
   EnjoytheSilence_pro: {
     // Enjoy the Silence
     key: 'Eb',
     genre: {
       genre: 'Pop/Dance/Electronic',
-      sub_genre: 'Electronica'
+      sub_genre: 'Electronica',
     },
-    alternate_path: true
+    alternate_path: true,
   },
   SheepQueen_EnjoySilence04: {
     // Enjoy The Silence (Reinterpreted) (ft. Mike Shinoda)
     name: 'Enjoy the Silence (Reinterpreted) (ft. Mike Shinoda)',
-    key: 'Eb'
+    key: 'Eb',
   },
   o29972202_ghostsagain_depe: {
     // Ghost Again
     key: 'A',
     genre: {
       genre: 'Pop/Dance/Electronic',
-      sub_genre: 'Electronica'
+      sub_genre: 'Electronica',
     },
   },
   1649900104: {
@@ -746,77 +1286,77 @@ export const C3LibraryPatch: SongUpdateObject = {
     key: 'D',
     genre: {
       genre: 'Pop/Dance/Electronic',
-      sub_genre: 'Electronica'
+      sub_genre: 'Electronica',
     },
   },
   1649900182: {
     // Home
     key: 'Ab',
-    alternate_path: true
+    alternate_path: true,
   },
   ud_ifeelyou: {
     // I Feel You
     key: 'Am',
     genre: {
       genre: 'Pop/Dance/Electronic',
-      sub_genre: 'Electronica'
+      sub_genre: 'Electronica',
     },
   },
   1547711256: {
     // John the Revelator
     name: 'John the Revelator',
     key: 'G#m',
-    album: {name: 'Playing the Angel'},
-    alternate_path: true
+    album: { name: 'Playing the Angel' },
+    alternate_path: true,
   },
   far_justcantgetenough_rb3: {
     // Just Can't Get Enough
     key: 'G',
-    alternate_path: true
+    alternate_path: true,
   },
   1649900260: {
     // Martyr
-    key: 'G#m'
+    key: 'G#m',
   },
   1649900350: {
     // Precious
     key: 'D#m',
-    album: {name: 'Playing the Angel'},
-    alternate_path: true
+    album: { name: 'Playing the Angel' },
+    alternate_path: true,
   },
   1649900112: {
     // A Question of Time
     key: 'Gm',
-    alternate_path: true
+    alternate_path: true,
   },
   1547707683: {
     // Shake the Disease
     name: 'Shake the Disease',
     genre: {
       genre: 'Pop/Dance/Electronic',
-      sub_genre: 'Electronica'
+      sub_genre: 'Electronica',
     },
-    key: 'F'
+    key: 'F',
   },
   o571833423_stripped_depec: {
     // Stripped
     key: 'Dm',
     genre: {
       genre: 'Pop/Dance/Electronic',
-      sub_genre: 'Electronica'
+      sub_genre: 'Electronica',
     },
     rating: 'Supervision Recommended',
-    alternate_path: true
+    alternate_path: true,
   },
   1547700699: {
     // Suffer Well
     key: 'Em',
-    album: {name: 'Playing the Angel'},
-    alternate_path: true
+    album: { name: 'Playing the Angel' },
+    alternate_path: true,
   },
   1649900105: {
     // Wrong
-    key: 'Bm'
+    key: 'Bm',
   },
 
   // Troye Sivan ____________________________________________________________________

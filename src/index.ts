@@ -1,21 +1,21 @@
 import { DTAFile } from './lib/dta'
 import { depackDTA } from './lib/depack'
 import { parseDTA } from './lib/parse'
-import { SortByOptionsTypes, sortDTA } from './lib/sort'
+import { SongSortingTypes, sortDTA } from './lib/sort'
 import { MultipleSongsUpdateObject, SongUpdateObject, updateDTA } from './lib/update'
 import { Song, SongCollection } from './classes'
 
 export interface DTAParserOptions<RT extends boolean | undefined> {
   /**
-   * Changes the sorting of the songs.
+   * Changes the sorting of the songs. Is no sorting is specified, it will keep the order from the parsed `.dta` file.
    */
-  sortBy?: SortByOptionsTypes
+  sortBy?: SongSortingTypes
   /**
-   * Applies direct values updates on any song inside the `.dta` file based on the song's unique string ID.
+   * Applies direct values updates on any song inside the `.dta` file based on the song's shortname ID.
    */
   update?: SongUpdateObject
   /**
-   * Applies direct values updates on all songs inside the `.dta` file.
+   * Applies common direct values updates on all songs inside the `.dta` file.
    */
   updateAll?: MultipleSongsUpdateObject
   /**
@@ -30,8 +30,8 @@ export type DTAParserReturnType<RT extends boolean | undefined> = RT extends tru
  * Parses a .dta file content.
  * - - - -
  * @param {string} dtaFileContents The .dta file contents as string.
- * @param {DTAParserOptions} options `OPTIONAL` An object with options that customizes the parsing process.
- * @returns {DTAFile[]} An array of parsed song objects.
+ * @param {DTAParserOptions<RT>} options `OPTIONAL` An object with options that customizes the parsing process.
+ * @returns {DTAParserReturnType<RT>} An array of parsed song objects, or a `SongCollection` class.
  */
 const DTAParser = <RT extends boolean | undefined = undefined>(dtaFileContents: string, options?: DTAParserOptions<RT>): DTAParserReturnType<RT> => {
   if (!options) options = {}

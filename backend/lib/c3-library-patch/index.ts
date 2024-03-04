@@ -1,10 +1,9 @@
 import { promises as fs, existsSync } from 'fs'
 import { readParseDTAFile } from '../dta/readFile'
-import { C3LibraryPatch, C3LibraryPatch as patch } from '../../database/updates/C3LibraryPatch'
-import { SongCollection } from '../../../src'
+import { C3LibraryPatch as patch } from '../../database/updates/C3LibraryPatch'
 import { stringifySongUpdates } from '../../../src/lib/songUpdates'
 
-export interface C3LibraryPatchModuleObject {
+export const C3LibraryPatch = {
   /**
    * Paths related to the `c3-library-patch` project.
    */
@@ -12,64 +11,45 @@ export interface C3LibraryPatchModuleObject {
     /**
      * Path to `updates` folder.
      */
-    readonly updatesFolder: string
+    updatesFolder: `C:\\Users\\Ruggery\\Documents\\Visual Studio Code\\Projects\\c3-library-patch\\updates`,
     /**
      * Path to the `c3-library-patch.dta` file.
      */
-    readonly patchDTA: string
+    patchDTA: `C:\\Users\\Ruggery\\Documents\\Visual Studio Code\\Projects\\c3-library-patch\\c3_library_patch.dta`,
     /**
      * Path to the extracted `*.dta` files.
      */
-    readonly dtaFiles: string
+    dtaFiles: `C:\\Users\\Ruggery\\Documents\\Visual Studio Code\\Projects\\c3-library-patch\\confiles\\dta_files`,
     /**
      * Path to the extracted `*_keep.png_xbox` and converted PNG files.
      */
-    readonly pngFiles: string
+    pngFiles: `C:\\Users\\Ruggery\\Documents\\Visual Studio Code\\Projects\\c3-library-patch\\confiles\\png_xbox_files`,
     /**
      * Path to the extracted `*.milo_xbox` files.
      */
-    readonly miloFiles: string
-  }
+    miloFiles: `C:\\Users\\Ruggery\\Documents\\Visual Studio Code\\Projects\\c3-library-patch\\confiles\\milo_xbox_files`,
+  },
   /**
    * Returns all songs which contents were extracted on the `confiles` directory.
    * - - - -
    * @returns {Promise<SongCollection>} All songs which contents were extracted on the `confiles` directory.
    */
-  songs: () => Promise<SongCollection>
+  songs: async () => await readParseDTAFile('C:\\Users\\Ruggery\\Documents\\Visual Studio Code\\Projects\\c3-library-patch\\confiles\\dta_files', { update: patch }),
+
   /**
-   * Generates a `c3_library_patch.dta` file on the `c3-library-patch` project folder.
-   * @param {boolean | undefined} genHere if `true`, the DTA patch file will also be generated on the `backend/gen` folder on the `dta-parser` project. Default is `false`.
+   * Generates a `c3_library_patch.dta` file on the `c3-library-patch` project folder and here, on `backend/gen` folder.
    */
-  genPatchDTAFile: (genHere?: boolean) => Promise<void>
+  genPatchDTAFile: async () => {
+    await fs.writeFile(C3LibraryPatch.paths.patchDTA, stringifySongUpdates(patch, { inline: true }), 'utf-8')
+    await fs.writeFile(`${process.cwd()}/backend/gen/c3_library_patch.dta`, stringifySongUpdates(patch, { inline: true }), 'utf-8')
+  },
   /**
    * Automatically moves extracted MILO files to the `updates` folder structure if the `alternate_path` value is `true`.
    */
-  moveMiloFiles: () => Promise<void>
-  /**
-   * Automatically moves fetched artworks from the `backend/gen` folder to the `updates` folder structure if the `alternate_path` value is `true`.
-   */
-  moveAlbumArts: () => Promise<void>
-}
-
-export const C3LibraryPatchModule: C3LibraryPatchModuleObject = {
-  paths: {
-    updatesFolder: `C:\\Users\\Ruggery\\Documents\\Visual Studio Code\\Projects\\c3-library-patch\\updates`,
-    patchDTA: `C:\\Users\\Ruggery\\Documents\\Visual Studio Code\\Projects\\c3-library-patch\\c3_library_patch.dta`,
-    dtaFiles: `C:\\Users\\Ruggery\\Documents\\Visual Studio Code\\Projects\\c3-library-patch\\confiles\\dta_files`,
-    pngFiles: `C:\\Users\\Ruggery\\Documents\\Visual Studio Code\\Projects\\c3-library-patch\\confiles\\png_xbox_files`,
-    miloFiles: `C:\\Users\\Ruggery\\Documents\\Visual Studio Code\\Projects\\c3-library-patch\\confiles\\milo_xbox_files`,
-  },
-  songs: async () => await readParseDTAFile('C:\\Users\\Ruggery\\Documents\\Visual Studio Code\\Projects\\c3-library-patch\\confiles\\dta_files', { update: patch }),
-  genPatchDTAFile: async (genHere) => {
-    await fs.writeFile(C3LibraryPatchModule.paths.patchDTA, stringifySongUpdates(C3LibraryPatch, { inline: true }), 'utf-8')
-    if (genHere) {
-      await fs.writeFile(`${process.cwd()}/backend/gen/c3_library_patch.dta`, stringifySongUpdates(C3LibraryPatch, { inline: true }), 'utf-8')
-    }
-  },
   moveMiloFiles: async () => {
-    const { miloFiles: miloFilesPath, updatesFolder } = C3LibraryPatchModule.paths
+    const { miloFiles: miloFilesPath, updatesFolder } = C3LibraryPatch.paths
 
-    const songs = await C3LibraryPatchModule.songs()
+    const songs = await C3LibraryPatch.songs()
     songs.collection.forEach(async (song) => {
       const { songname, alternate_path } = song.value
       if (alternate_path) {
@@ -102,10 +82,13 @@ export const C3LibraryPatchModule: C3LibraryPatchModuleObject = {
       }
     })
   },
+  /**
+   * Automatically moves fetched artworks from the `backend/gen` folder to the `updates` folder structure if the `alternate_path` value is `true`.
+   */
   moveAlbumArts: async () => {
-    const { updatesFolder } = C3LibraryPatchModule.paths
+    const { updatesFolder } = C3LibraryPatch.paths
 
-    const songs = await C3LibraryPatchModule.songs()
+    const songs = await C3LibraryPatch.songs()
     songs.collection.forEach(async (song) => {
       const { songname, alternate_path } = song.value
       if (alternate_path) {

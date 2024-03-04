@@ -2,33 +2,6 @@ import { DTAFile } from './dta'
 import { RankTypes, rankCalculator } from '../utils/rankCalculations'
 import { BandRankingNames, BandRankingNamesAsDots, BandRankingNumbers, InstrRankingNames, InstrRankingNamesAsDots, InstrRankingNumbers, localeKeyToValue } from './locale'
 
-export interface GetNamingOptions {
-  /** You can specify how the leading article will be
-   * placed on the string. Default is `'emit'`.
-   * - - - -
-   * * `emit`: Default option. Will return the whole
-   * name/artist as it is.
-   *
-   * Ex.: ``An Example`` => `An Example`.
-   * - - - -
-   * * `omit`: Will return the name/artist with the
-   * leading article ommited.
-   *
-   * Ex.: `An Example` => `Example`.
-   * - - - -
-   * * `trailing`: Will return the name/artist with the
-   * leading article on the end of the string, separated with
-   * a comma.
-   *
-   * Ex.: `An Example` => `Example, An`.
-   */
-  leadingArticle?: 'emit' | 'omit' | 'trailing'
-  /**
-   * If `true`, the string will come quoted. Default is `false`.
-   */
-  quoted?: boolean
-}
-
 export type GetRankTypeOptions = 'number' | 'verbose' | 'verboseDots'
 
 export type GetRankReturnType<P extends RankTypes, T extends GetRankTypeOptions | undefined> = P extends 'band'

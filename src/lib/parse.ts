@@ -310,40 +310,31 @@ export const parseDTA = (song: string): DTAFile => {
       if (keyFilter === 'drum') {
         parsed.rank_drum = Number(newValue)
         return
-      }
-      else if (keyFilter === 'bass') {
+      } else if (keyFilter === 'bass') {
         parsed.rank_bass = Number(newValue)
         return
-      }
-      else if (keyFilter === 'guitar') {
+      } else if (keyFilter === 'guitar') {
         parsed.rank_guitar = Number(newValue)
         return
-      }
-      else if (keyFilter === 'keys') {
+      } else if (keyFilter === 'keys') {
         parsed.rank_keys = Number(newValue)
         return
-      }
-      else if (keyFilter === 'vocals') {
+      } else if (keyFilter === 'vocals') {
         parsed.rank_vocals = Number(newValue)
         return
-      }
-      else if (keyFilter === 'real_bass') {
+      } else if (keyFilter === 'real_bass') {
         parsed.rank_real_bass = Number(newValue)
         return
-      }
-      else if (keyFilter === 'real_guitar') {
+      } else if (keyFilter === 'real_guitar') {
         parsed.rank_real_guitar = Number(newValue)
         return
-      }
-      else if (keyFilter === 'real_keys') {
+      } else if (keyFilter === 'real_keys') {
         parsed.rank_real_keys = Number(newValue)
         return
-      }
-      else if (keyFilter === 'band') {
+      } else if (keyFilter === 'band') {
         parsed.rank_band = Number(newValue)
         return
-      }
-      else {
+      } else {
         rankFinished = true
       }
     }
