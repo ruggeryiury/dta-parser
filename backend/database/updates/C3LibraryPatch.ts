@@ -751,7 +751,7 @@ export const C3LibraryPatch: SongUpdateObject = {
       sub_genre: 'Pop',
     },
     rating: 'Mature Content',
-    alternate_path: true
+    alternate_path: true,
   },
   ALBlackStar: {
     // Black Star
@@ -860,7 +860,7 @@ export const C3LibraryPatch: SongUpdateObject = {
       genre: 'Pop-Rock',
       sub_genre: 'Pop',
     },
-    alternate_path: true
+    alternate_path: true,
   },
   o504803015_herestonevergro: {
     // Here's to Never Growing Up (Audio Revamp)
@@ -869,7 +869,7 @@ export const C3LibraryPatch: SongUpdateObject = {
       genre: 'Pop-Rock',
       sub_genre: 'Pop',
     },
-    alternate_path: true
+    alternate_path: true,
   },
   ALHotV3: {
     // Hot
@@ -1215,6 +1215,217 @@ export const C3LibraryPatch: SongUpdateObject = {
     },
     rating: 'Mature Content',
     alternate_path: true,
+  },
+
+  // Bag Raiders ____________________________________________________________________
+  SheepQueen_ShootingStars_: {
+    // Shooting Stars
+    key: 'E',
+  },
+
+  // Beach House ____________________________________________________________________
+  NSYmyth: {
+    // Myth
+    key: 'Eb',
+    genre: {
+      genre: 'Indie Rock',
+      sub_genre: 'Shoegazing',
+    },
+    vocal_gender: 'Female',
+  },
+  beach_hospace_song: {
+    // Space Song
+    key: 'Eb',
+  },
+
+  // Billie Eilish ____________________________________________________________________
+  fugg_badGuy: {
+    // bad guy
+    key: 'Gm',
+    album: {
+      name: 'WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?',
+    },
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Electronica',
+    },
+  },
+  dingo_everythingiwantedv0: {
+    // everything i wanted
+    key: 'F#m',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Downtempo',
+    },
+    album: {
+      name: 'everything i wanted',
+      track_number: 1,
+    },
+    alternate_path: true,
+  },
+  o563817712: {
+    // Happier Than Ever
+    key: 'C',
+    rating: 'Mature Content',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Downtempo',
+    },
+    alternate_path: true,
+  },
+  o486606900_idontwannabeyou: {
+    // idontwannabeyouanymore
+    key: 'G',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Downtempo',
+    },
+    rating: 'Family Friendly',
+  },
+  '1649900369': {
+    // No Time To Die
+    key: 'Em',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Downtempo',
+    },
+  },
+  o487420672_oxytocin_billie: {
+    // Oxytocin
+    key: 'Gm',
+    rating: 'Supervision Recommended',
+    alternate_path: true,
+  },
+
+  // Björk ____________________________________________________________________
+  ArmyOfMe: {
+    // Army Of Me
+    key: 'Cm',
+  },
+  SheepQueen_BTSensuality_r: {
+    // Big Time Sensuality
+    key: 'D#m',
+  },
+  SheepQ_Bjor_HumaBeha_rb3c: {
+    // Human Behaviour
+    key: 'Am',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Electronica',
+    },
+  },
+
+  // Blank Banshee ____________________________________________________________________
+  bbanshee_pregnant: {
+    // Teen Pregnancy
+    key: 'Dm',
+  },
+
+  // Bon Iver ____________________________________________________________________
+  '715creeks': {
+    // 715 - CREEKS
+    key: 'Ab',
+    rating: 'Supervision Recommended',
+  },
+  Ollie_Holocene: {
+    // Holocene
+    key: 'Db',
+    genre: {
+      genre: 'Indie Rock',
+      sub_genre: 'Post Rock',
+    },
+  },
+
+  // Brad Sucks ____________________________________________________________________
+  BS_BadAttraction: {
+    // Bad Attraction
+    key: 'Em',
+  },
+  BS_BadSign: {
+    // Bad Sign
+    key: 'Eb',
+  },
+  BS_Borderline: {
+    // Borderline
+    key: 'Em',
+  },
+  BS_CertainDeath: {
+    // Certain Death
+    key: 'D',
+  },
+  BS_Dirtbag: {
+    // Dirtbag
+    key: 'F#m',
+  },
+  BS_DroppingOutOfSchool_rb: {
+    // Dropping Out of School
+    name: 'Dropping Out of School',
+    key: 'Dm',
+  },
+  BS_FakeIt: {
+    // Fake It
+    key: 'Gm',
+  },
+  BS_FixingMyBrain: {
+    // Fixing My Brain
+    key: 'D',
+  },
+  BS_Gasoline: {
+    // Gasoline
+    key: 'E',
+  },
+  BS_IThinkIStartedTrend_rb: {
+    // I Think I Started a Trend
+    key: 'F',
+  },
+  BS_LookFeelYearsYounger_r: {
+    // Look and Feel Years Younger
+    key: 'Gm',
+  },
+  MakingMeNervous: {
+    // Making Me Nervous
+    key: 'Dm',
+    alternate_path: true,
+  },
+  BS_NeverGetOut: {
+    // Never Get Out
+    key: 'C#m',
+  },
+  BS_OutOfIt: {
+    // Out of It
+    key: 'D',
+  },
+  BS_Overreacting: {
+    // Overreacting
+    key: 'A',
+  },
+  BS_SickAsADog: {
+    // Sick as a Dog
+    key: 'Am',
+  },
+  BS_TheresSomethingWrong_r: {
+    // There's Something Wrong
+    key: 'D',
+  },
+  BS_TimeTakeOutTrash_rb3co: {
+    // Time to Take Out the Trash
+    key: 'A',
+  },
+  BS_TotalBreakdown: {
+    // Total Breakdown
+    key: 'Bb',
+  },
+  BS_UnderstoodByYourDad_rb: {
+    // Understood by Your Dad
+    key: 'C#m',
+  },
+  BS_WorkOutFine: {
+    // Work Out Fine
+    key: 'Ab',
+  },
+  BS_YoureNotGoingAnywhere_: {
+    // You're Not Going Anywhere
+    key: 'C',
   },
 
   // C418 ____________________________________________________________________

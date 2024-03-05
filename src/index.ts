@@ -27,9 +27,9 @@ export interface DTAParserOptions<RT extends boolean | undefined> {
 export type DTAParserReturnType<RT extends boolean | undefined> = RT extends true ? DTAFile[] : SongCollection
 
 /**
- * Parses a .dta file content.
+ * Parses a `.dta` file contents.
  * - - - -
- * @param {string} dtaFileContents The .dta file contents as string.
+ * @param {string} dtaFileContents The `.dta` file contents as string.
  * @param {DTAParserOptions<RT>} options `OPTIONAL` An object with options that customizes the parsing process.
  * @returns {DTAParserReturnType<RT>} An array of parsed song objects, or a `SongCollection` class.
  */

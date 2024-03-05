@@ -16,11 +16,9 @@
 - [Features](#features)
 - [Basic Usage](#basic-usage)
   - [Parsing a `.dta` file](#parsing-a-dta-file)
-  - [Creating a new song](#creating-a-new-song)
+  - [Creating a new song entry (using recipe)](#creating-a-new-song-entry-using-recipe)
   - ["Stringify" a `Song` class back to `.dta` file contents](#stringify-a-song-class-back-to-dta-file-contents)
   - [Sort a collection of songs (`SongCollection` class)](#sort-a-collection-of-songs-songcollection-class)
-- [Package API](#package-api)
-  - [`DTAParser()`](#dtaparser)
 
 # Features
 
@@ -50,7 +48,7 @@ const mySongs = DTAParser(dtaFileContents)
 ...
 ```
 
-## Creating a new song
+## Creating a new song entry (using recipe)
 
 ```ts
 // Create a recipe.
@@ -103,26 +101,9 @@ const songContents = song.stringify()
 ## Sort a collection of songs (`SongCollection` class)
 
 ```ts
-// Create a new Song class.
-const song = new Song(...)
+// Parse a .dta file contents
+const mySongs = DTAParser(dtaFileContents)
 
 // Sort all songs based on the songs' artist.
-song.sort('Artist')
+mySongs.sort('Artist')
 ```
-
-# Package API
-
-## `DTAParser()`
-
-Parses a .dta file content.
-
-- #### _dtaFileContents_ `string`
-
-  - The .dta file contents as string.
-
-- #### _options?_ `DTAParserOptions`
-  - `OPTIONAL`: An object with options that customizes the parsing process.
-    - _sortBy?_ `SongSortingTypes`: Changes the sorting of the songs. Is no sorting is specified, it will keep the order from the parsed `.dta` file.
-    - _update?_ `SongUpdateObject`: Applies direct values updates on any song inside the `.dta` file based on the song's shortname ID.
-    - _updateAll?_ `MultipleSongsUpdateObject`: Applies common direct values updates on all songs inside the `.dta` file.
-    - _asJSON?_ `boolean`: Parses a `.dta` file directly into a simple `DTAFile` object. Default is `false`.
