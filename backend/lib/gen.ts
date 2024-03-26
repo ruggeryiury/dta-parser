@@ -70,6 +70,7 @@ export const genSongsDTAFile = async (songs: MAGMAProject | MAGMAProject[] | MyS
     omitUnusedRanks: opts.omitUnusedRanks,
     useSpaces: opts.useSpaces,
     wiiMode: opts.wiiMode,
+    gameOriginAsRB3DLC: opts.gameOriginAsRB3DLC
   })
   await fs.promises.writeFile(path.resolve('./backend/gen/songs.dta'), songsContents, opts.encoding)
 }

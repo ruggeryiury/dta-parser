@@ -1238,6 +1238,25 @@ export const C3LibraryPatch: SongUpdateObject = {
     key: 'Eb',
   },
 
+  // Beyoncé ____________________________________________________________________
+  'Demsingleladies': {
+    // Single Ladies (Put a Ring on It)
+    artist: 'Beyoncé',
+    rating: 'Family Friendly',
+    key: 'E'
+  },
+  'Crazyinlove': {
+    // Crazy In Love (ft. JAY Z)
+    name: 'Crazy in Love (ft. JAY-Z)',
+    rating: 'Family Friendly',
+    key: 'Gm',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Dance'
+    },
+    alternate_path: true
+  },
+
   // Billie Eilish ____________________________________________________________________
   fugg_badGuy: {
     // bad guy
@@ -1428,6 +1447,97 @@ export const C3LibraryPatch: SongUpdateObject = {
     key: 'C',
   },
 
+  // Britney Spears
+  babyonemoretimev1: {
+    // ...Baby One More Time
+    key: 'Cm',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Dance',
+    },
+    alternate_path: true,
+  },
+  'Brit_Crim_v#': {
+    // Criminal
+    key: 'G',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Dance',
+    },
+    alternate_path: true,
+  },
+  EMailMyHeart: {
+    // E-Mail My Heart
+    key: 'C',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Dance',
+    },
+    alternate_path: true,
+  },
+  BritneySpearsHoldItAgains: {
+    // Hold It Against Me
+    key: 'Cm',
+    rating: 'Supervision Recommended',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Dance',
+    },
+    alternate_path: true,
+  },
+  Lucky: {
+    // Lucky
+    key: 'Db',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Dance',
+    },
+    alternate_path: true,
+  },
+  oohlala: {
+    // Ooh La La
+    key: 'F#',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Dance',
+    },
+  },
+  BS_OIDIA: {
+    // Oops!... I Did It Again
+    key: 'C#m',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Dance',
+    },
+    alternate_path: true,
+  },
+  'M12O_TillTheWorldEndsv#_r': {
+    // Till The World Ends
+    key: 'Eb',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Dance',
+    },
+    alternate_path: true,
+  },
+  toxicv10: {
+    // Toxic
+    key: 'Cm',
+    rating: 'Supervision Recommended',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Dance',
+    },
+  },
+  'M12OBSWmnzrv#': {
+    // Womanizer
+    key: 'C#m',
+    genre: {
+      genre: 'Pop/Dance/Electronic',
+      sub_genre: 'Dance',
+    },
+  },
+
   // C418 ____________________________________________________________________
   NoSoyYuriMinecraft: {
     // Minecraft
@@ -1573,5 +1683,11 @@ export const C3LibraryPatch: SongUpdateObject = {
   // Troye Sivan ____________________________________________________________________
   DanceToThisJIM: {
     name: 'Dance to This (ft. Ariana Grande)',
+  },
+
+  // will.i.am
+  ScreamAndShout: {
+    // Scream & Shout (ft. Britney Spears)
+    key: 'Dm',
   },
 }

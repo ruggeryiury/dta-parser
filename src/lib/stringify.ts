@@ -58,6 +58,10 @@ export interface StringifyDataOptions {
      */
     slot: number
   }
+  /**
+   * Place the game origin of all songs as `rb3_dlc`, ignoring the game origin of the DTA.
+   */
+  gameOriginAsRB3DLC?: boolean
 }
 
 /**
@@ -68,7 +72,7 @@ export interface StringifyDataOptions {
  * @returns {string} A stringified version of the song.
  */
 const stringifyDefault = (value: DTAFile, options: StringifyDataOptions): string => {
-  const { guitarCores, omitUnusedRanks, placeCustomAttributes, wiiMode } = options
+  const { guitarCores, omitUnusedRanks, placeCustomAttributes, wiiMode, gameOriginAsRB3DLC } = options
 
   const {
     id,
@@ -280,7 +284,7 @@ const stringifyDefault = (value: DTAFile, options: StringifyDataOptions): string
 
   output += `${genTabs()}('tuning_offset_cents' ${tuning_offset_cents === undefined ? 0 : tuning_offset_cents})${genTabs()}('guide_pitch_volume' ${
     guide_pitch_volume === undefined ? '-3.00' : guide_pitch_volume
-  })${genTabs()}('game_origin' '${game_origin === undefined ? 'ugc_plus' : game_origin}')${genTabs()}('encoding' '${encoding === undefined ? 'latin1' : encoding}')${
+  })${genTabs()}('game_origin' '${gameOriginAsRB3DLC !== undefined && gameOriginAsRB3DLC ? 'rb3_dlc' : game_origin === undefined ? 'ugc_plus' : game_origin}')${genTabs()}('encoding' '${encoding === undefined ? 'latin1' : encoding}')${
     album_name ? `${genTabs()}(${genTabs(2)}'album_name'${genTabs(2)}"${quoteToSlashQ(album_name)}"${genTabs()})` : ''
   }${album_track_number ? `${genTabs()}('album_track_number' ${album_track_number})` : ''}${vocal_tonic_note === undefined ? '' : `${genTabs()}(vocal_tonic_note ${vocal_tonic_note})`}${
     song_tonality === undefined ? '' : `${genTabs()}(song_tonality ${song_tonality})`
@@ -311,7 +315,7 @@ const stringifyDefault = (value: DTAFile, options: StringifyDataOptions): string
  * @returns {string} A stringified version of the song.
  */
 const stringifyRB3DLC = (value: DTAFile, options: StringifyDataOptions): string => {
-  const { guitarCores, omitUnusedRanks, placeCustomAttributes, wiiMode } = options
+  const { guitarCores, omitUnusedRanks, placeCustomAttributes, wiiMode, gameOriginAsRB3DLC } = options
 
   const {
     id,
@@ -526,7 +530,7 @@ const stringifyRB3DLC = (value: DTAFile, options: StringifyDataOptions): string 
 
   output += `${genTabs(2)}(band ${rank_band})${genTabs()})${genTabs()}(format ${format === undefined ? 10 : format})${genTabs()}(version ${
     version === undefined ? 30 : version
-  })${genTabs()}(game_origin ${game_origin === undefined ? 'ugc_plus' : game_origin})${genTabs()}(rating ${rating === undefined ? 4 : rating})${genTabs()}(genre ${
+  })${genTabs()}(game_origin ${gameOriginAsRB3DLC !== undefined && gameOriginAsRB3DLC ? 'rb3_dlc' : game_origin === undefined ? 'ugc_plus' : game_origin})${genTabs()}(rating ${rating === undefined ? 4 : rating})${genTabs()}(genre ${
     genre === undefined ? 'other' : genre
   })${genTabs()}(sub_genre ${sub_genre === undefined ? 'subgenre_other' : sub_genre})${genTabs()}(vocal_gender ${vocal_gender})${genTabs()}(year_released ${year_released})${
     year_recorded ? `${genTabs()}(year_recorded ${year_recorded})` : ``

@@ -18,7 +18,7 @@
   - [Parsing a `.dta` file](#parsing-a-dta-file)
   - [Creating a new song entry (using recipe)](#creating-a-new-song-entry-using-recipe)
   - ["Stringify" a `Song` class back to `.dta` file contents](#stringify-a-song-class-back-to-dta-file-contents)
-  - [Sort a collection of songs (`SongCollection` class)](#sort-a-collection-of-songs-songcollection-class)
+  - [Sort a collection of songs](#sort-a-collection-of-songs)
 
 # Features
 
@@ -98,7 +98,7 @@ const song = new Song(...)
 const songContents = song.stringify()
 ```
 
-## Sort a collection of songs (`SongCollection` class)
+## Sort a collection of songs
 
 ```ts
 // Parse a .dta file contents
