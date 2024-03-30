@@ -2,7 +2,6 @@ node_modules/
 old_modules/
 backend/gen
 backend/testing
-backend/utils
 dist/
 /lib/
 module/
@@ -10,4 +9,4 @@ python/
 *.tgz
 *.rar
 *.zip
-*-old.md
+.yarnrc.yml

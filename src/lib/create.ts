@@ -3,6 +3,7 @@ import { DTAFile } from './dta'
 import { updateDTA, UpdateDataOptions, TrackUpdateOptions, SongGenreUpdateOptions } from './update'
 import { dtaDefault } from './dta'
 import { Song } from '../classes'
+import { SongRating, SongRatingNames } from './locale'
 
 export interface DTAFileRecipe extends UpdateDataOptions {
   /**
@@ -43,7 +44,7 @@ export interface DTAFileRecipe extends UpdateDataOptions {
    *
    * If it's a number, you must place the length of the song in milliseconds.
    *
-   * You can also place a formatted time string (for example: `'2:30'`)
+   * You can also place a formatted time string (for example: `'2:30'`).
    */
   preview: string | number
   /**
@@ -51,7 +52,7 @@ export interface DTAFileRecipe extends UpdateDataOptions {
    *
    * If it's a number, you must place the length of the song in milliseconds.
    *
-   * You can also place a formatted time string (for example: `'2:30'`)
+   * You can also place a formatted time string (for example: `'2:30'`).
    */
   song_length: string | number
   /**
@@ -62,6 +63,10 @@ export interface DTAFileRecipe extends UpdateDataOptions {
    * The song's release year.
    */
   year_released: number
+  /**
+   * The song's rating.
+   */
+  rating: SongRating | SongRatingNames
 }
 
 /**

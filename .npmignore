@@ -8,6 +8,7 @@ python/
 .npmignore
 .prettierignore
 .prettierrc.js
+.yarnrc.yml
 prod.tsconfig.json
 tsconfig.json
 webpack.config.js
@@ -17,4 +18,3 @@ yarn*
 *.env
 *.rar
 *.zip
-*-old.md

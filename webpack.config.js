@@ -35,7 +35,7 @@ module.exports = [
             loader: 'babel-loader',
             options: {
               presets: ['@babel/env', '@babel/typescript'],
-              plugins: ['@babel/proposal-class-properties', '@babel/proposal-object-rest-spread', '@babel/transform-modules-umd', ['polyfill-corejs3', { method: 'usage-global', version: '3.20' }]],
+              plugins: ['@babel/transform-class-properties', '@babel/transform-object-rest-spread', '@babel/transform-modules-umd', ['polyfill-corejs3', { method: 'usage-global', version: '3.20' }]],
             },
           },
         },
