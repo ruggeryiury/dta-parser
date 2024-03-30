@@ -455,7 +455,7 @@ const stringifyRB3DLC = (value: DTAFile, options: StringifyDataOptions): string 
   }
 
   if (fancyPanVolCores) {
-    output += `${genTabs(2)};            ${drum === 2 ? fancyPanVolRB3StringGenerator('drums', 'desc', panVol, guitarCores) : ''}${
+    output += `${genTabs(2)};            ${drum === 2 ? `      ${fancyPanVolRB3StringGenerator('drums', 'desc', panVol, guitarCores)}` : ''}${
       drum > 2 ? `      ${fancyPanVolRB3StringGenerator('kick', 'desc', panVol, guitarCores)}` : ''
     }${drum > 3 ? `      ${fancyPanVolRB3StringGenerator('snare', 'desc', panVol, guitarCores)}` : ''}${
       drum > 2 ? `      ${fancyPanVolRB3StringGenerator('drumkit', 'desc', panVol, guitarCores)}` : ''
@@ -464,7 +464,7 @@ const stringifyRB3DLC = (value: DTAFile, options: StringifyDataOptions): string 
     }${vocals > 0 ? `      ${fancyPanVolRB3StringGenerator('vocals', 'desc', panVol, guitarCores)}` : ''}${
       keys > 0 ? `      ${fancyPanVolRB3StringGenerator('keys', 'desc', panVol, guitarCores)}` : ''
     }${backing > 0 ? `      ${fancyPanVolRB3StringGenerator('trks', 'desc', panVol, guitarCores)}` : ''}`
-    output += `${genTabs(2)}( pans      (${drum === 2 ? fancyPanVolRB3StringGenerator('drums', 'pans', panVol, guitarCores) : ''}${
+    output += `${genTabs(2)}( pans      (${drum === 2 ? `      ${fancyPanVolRB3StringGenerator('drums', 'pans', panVol, guitarCores)}` : ''}${
       drum > 2 ? `      ${fancyPanVolRB3StringGenerator('kick', 'pans', panVol, guitarCores)}` : ''
     }${drum > 3 ? `      ${fancyPanVolRB3StringGenerator('snare', 'pans', panVol, guitarCores)}` : ''}${
       drum > 2 ? `      ${fancyPanVolRB3StringGenerator('drumkit', 'pans', panVol, guitarCores)}` : ''
@@ -472,8 +472,8 @@ const stringifyRB3DLC = (value: DTAFile, options: StringifyDataOptions): string 
       guitar > 0 ? `      ${fancyPanVolRB3StringGenerator('guitar', 'pans', panVol, guitarCores)}` : ''
     }${vocals > 0 ? `      ${fancyPanVolRB3StringGenerator('vocals', 'pans', panVol, guitarCores)}` : ''}${
       keys > 0 ? `      ${fancyPanVolRB3StringGenerator('keys', 'pans', panVol, guitarCores)}` : ''
-    }${backing > 0 ? `      ${fancyPanVolRB3StringGenerator('trks', 'pans', panVol, guitarCores)}` : ''}   ))`
-    output += `${genTabs(2)}( vols      (${drum === 2 ? fancyPanVolRB3StringGenerator('drums', 'vols', panVol, guitarCores) : ''}${
+    }${backing > 0 ? `      ${fancyPanVolRB3StringGenerator('trks', 'pans', panVol, guitarCores)}` : ''}      ))`
+    output += `${genTabs(2)}( vols      (${drum === 2 ? `      ${fancyPanVolRB3StringGenerator('drums', 'vols', panVol, guitarCores)}` : ''}${
       drum > 2 ? `      ${fancyPanVolRB3StringGenerator('kick', 'vols', panVol, guitarCores)}` : ''
     }${drum > 3 ? `      ${fancyPanVolRB3StringGenerator('snare', 'vols', panVol, guitarCores)}` : ''}${
       drum > 2 ? `      ${fancyPanVolRB3StringGenerator('drumkit', 'vols', panVol, guitarCores)}` : ''
@@ -481,8 +481,8 @@ const stringifyRB3DLC = (value: DTAFile, options: StringifyDataOptions): string 
       guitar > 0 ? `      ${fancyPanVolRB3StringGenerator('guitar', 'vols', panVol, guitarCores)}` : ''
     }${vocals > 0 ? `      ${fancyPanVolRB3StringGenerator('vocals', 'vols', panVol, guitarCores)}` : ''}${
       keys > 0 ? `      ${fancyPanVolRB3StringGenerator('keys', 'vols', panVol, guitarCores)}` : ''
-    }${backing > 0 ? `      ${fancyPanVolRB3StringGenerator('trks', 'vols', panVol, guitarCores)}` : ''}   ))`
-    output += `${genTabs(2)}( cores     (${drum === 2 ? fancyPanVolRB3StringGenerator('drums', 'cores', panVol, guitarCores) : ''}${
+    }${backing > 0 ? `      ${fancyPanVolRB3StringGenerator('trks', 'vols', panVol, guitarCores)}` : ''}      ))`
+    output += `${genTabs(2)}( cores     (${drum === 2 ? `      ${fancyPanVolRB3StringGenerator('drums', 'cores', panVol, guitarCores)}` : ''}${
       drum > 2 ? `      ${fancyPanVolRB3StringGenerator('kick', 'cores', panVol, guitarCores)}` : ''
     }${drum > 3 ? `      ${fancyPanVolRB3StringGenerator('snare', 'cores', panVol, guitarCores)}` : ''}${
       drum > 2 ? `      ${fancyPanVolRB3StringGenerator('drumkit', 'cores', panVol, guitarCores)}` : ''
@@ -490,7 +490,7 @@ const stringifyRB3DLC = (value: DTAFile, options: StringifyDataOptions): string 
       guitar > 0 ? `      ${fancyPanVolRB3StringGenerator('guitar', 'cores', panVol, guitarCores)}` : ''
     }${vocals > 0 ? `      ${fancyPanVolRB3StringGenerator('vocals', 'cores', panVol, guitarCores)}` : ''}${
       keys > 0 ? `      ${fancyPanVolRB3StringGenerator('keys', 'cores', panVol, guitarCores)}` : ''
-    }${backing > 0 ? `      ${fancyPanVolRB3StringGenerator('trks', 'cores', panVol, guitarCores)}` : ''}   ))`
+    }${backing > 0 ? `      ${fancyPanVolRB3StringGenerator('trks', 'cores', panVol, guitarCores)}` : ''}      ))`
   } else {
     output += `${genTabs(2)}(pans (`
 

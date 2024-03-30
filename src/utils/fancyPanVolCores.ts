@@ -124,14 +124,14 @@ export const fancyPanVolRB3StringGenerator = (part: FancyPartTypes, row: FancyRo
     }
   } else if (part === 'drumkit') {
     if (panvol.drum.kitChannels === 2) {
-      if (row === 'desc') return '  DRUMKIT '
+      if (row === 'desc') return '  DRUM KIT '
       else if (row === 'pans') {
         let returnString = ''
         if (panvol.drum.kitPan[0] < 0) returnString += panvol.drum.kitPan[0].toFixed(1)
         else returnString += ` ${panvol.drum.kitPan[0].toFixed(1)}`
 
-        if (panvol.drum.kitPan[1] < 0) returnString += `  ${panvol.drum.kitPan[1].toFixed(1)}`
-        else returnString += `   ${panvol.drum.kitPan[1].toFixed(1)}`
+        if (panvol.drum.kitPan[1] < 0) returnString += `   ${panvol.drum.kitPan[1].toFixed(1)}`
+        else returnString += `    ${panvol.drum.kitPan[1].toFixed(1)}`
 
         return returnString
       } else if (row === 'vols') {
@@ -139,12 +139,12 @@ export const fancyPanVolRB3StringGenerator = (part: FancyPartTypes, row: FancyRo
         if (panvol.drum.kitVol[0] < 0) returnString += panvol.drum.kitVol[0].toFixed(1)
         else returnString += ` ${panvol.drum.kitVol[0].toFixed(1)}`
 
-        if (panvol.drum.kitVol[1] < 0) returnString += `  ${panvol.drum.kitVol[1].toFixed(1)}`
-        else returnString += `   ${panvol.drum.kitVol[1].toFixed(1)}`
+        if (panvol.drum.kitVol[1] < 0) returnString += `   ${panvol.drum.kitVol[1].toFixed(1)}`
+        else returnString += `    ${panvol.drum.kitVol[1].toFixed(1)}`
 
         return returnString
       } else {
-        return ' -1    -1 '
+        return ' -1     -1 '
       }
     } else return ''
   } else if (part === 'bass') {
