@@ -37,7 +37,8 @@
   },
   "dependencies": {
     "core-js": "^3.35.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "sharp": "^0.33.3"
   },
   "devDependencies": {
     "@babel/core": "^7.22.1",

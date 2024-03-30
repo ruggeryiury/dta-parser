@@ -1,6 +1,6 @@
 import { createDTA } from '../../../../src/lib/create'
 import { extendDTAFile } from '../../../../src/lib/extend'
-import { MAGMAProject } from '../../magma'
+import { MAGMAProject } from '../../backend-gen-folder'
 import * as database from './songs'
 
 const songs = {
