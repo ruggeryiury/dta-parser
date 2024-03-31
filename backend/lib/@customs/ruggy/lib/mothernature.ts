@@ -1,4 +1,4 @@
-import { DTAFileRecipe } from '../../../../../src/lib/create'
+import { DTAFileRecipe } from '../../../../../src/core/lib/create'
 
 export const mothernature = {
   id: '7748mothernature',

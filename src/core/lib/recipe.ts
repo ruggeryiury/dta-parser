@@ -1,7 +1,8 @@
-import { DTAFile } from '..'
+import { DTAFile } from '../..'
+import { panVolInfoGen } from '../../utils/lib/pansAndVols'
+import { rankCalculator } from '../../utils/lib/rankCalculations'
 import { DTAFileRecipe } from './create'
 import { BandFailCueNames, BandRankingNumbers, localeKeyToValue } from './locale'
-import { rankCalculator } from '../utils/rankCalculations'
 import {
   AlbumUpdateOptions,
   BackingUpdateOptionsTypes,
@@ -14,7 +15,6 @@ import {
   TrackUpdateOptions,
   VocalsUpdateOptionsTypes,
 } from './update'
-import { panVolInfoGen } from '../utils/pansAndVols'
 
 /**
  * Generates an object specifying the whole song's instruments and audio channels structure.

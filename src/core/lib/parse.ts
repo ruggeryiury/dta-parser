@@ -1,6 +1,6 @@
-import { DTAFile } from './dta'
-import { slashQToQuote } from '../utils/stringProcessors'
+import { slashQToQuote } from '../../utils/lib/stringProcessors'
 import { createDTA } from './create'
+import { DTAFile } from './dta'
 
 /**
  * Parses a `.dta` file contents into a `DTAFile`.

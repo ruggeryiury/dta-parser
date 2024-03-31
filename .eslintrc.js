@@ -1,14 +1,26 @@
-/** @type {import('eslint').Linter.Config} */
+/** @type {import('eslint').Linter.BaseConfig} */
 module.exports = {
   env: {
     node: true,
     browser: true,
     amd: true,
   },
-  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:import/recommended', 'plugin:import/typescript'],
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
-  ignorePatterns: ['src/debug/test.ts'],
+  plugins: ['import', '@typescript-eslint'],
+  rules: {
+    'import/no-unresolved': 'error',
+  },
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true,
+      },
+    },
+  },
   overrides: [
     {
       files: ['*.ts'],
@@ -17,11 +29,15 @@ module.exports = {
         project: ['./tsconfig.json'],
       },
       rules: {
-        'prefer-const': [
+        'prefer-arrow-callback': 'error',
+        'sort-imports': ['error', { ignoreCase: true, ignoreDeclarationSort: true, ignoreMemberSort: true }],
+        'import/order': [
           'error',
           {
-            destructuring: 'any',
-            ignoreReadBeforeAssign: false,
+            alphabetize: {
+              order: 'asc' /* sort in ascending order. Options: ['ignore', 'asc', 'desc'] */,
+              caseInsensitive: true /* ignore case. Options: [true, false] */,
+            },
           },
         ],
       },

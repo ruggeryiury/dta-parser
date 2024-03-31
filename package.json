@@ -22,8 +22,10 @@
     "build:commonjs": "tsc --project ./prod.tsconfig.json",
     "build:esmodule": "tsc --project ./prod.tsconfig.json --module es6 --outDir module",
     "clean": "rimraf dist lib module",
-    "lint": "eslint src/**/*.{ts,js}",
-    "lint:backend": "eslint backend/**/*.{ts,js}",
+    "lint": "eslint src/**/*.{ts,js,tsx,jsx}",
+    "lint-fix": "eslint src/**/*.{ts,js,tsx,jsx} --fix",
+    "lint:backend": "eslint backend/**/*.{ts,js,tsx,jsx}",
+    "lint:backend-fix": "eslint backend/**/*.{ts,js,tsx,jsx} --fix",
     "package:create": "yarn build && yarn pack",
     "dev": "nodemon ./backend/testing/init.ts",
     "format": "prettier --write ."
@@ -37,8 +39,7 @@
   },
   "dependencies": {
     "core-js": "^3.35.1",
-    "lodash": "^4.17.21",
-    "sharp": "^0.33.3"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@babel/core": "^7.22.1",
@@ -53,9 +54,12 @@
     "babel-loader": "^9.1.2",
     "babel-plugin-polyfill-corejs3": "^0.8.3",
     "eslint": "^8.42.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
     "jschardet": "^3.1.2",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.8",
+    "sharp": "^0.33.3",
     "terser-webpack-plugin": "^5.3.9",
     "ts-loader": "^9.4.4",
     "ts-node": "^10.9.1",

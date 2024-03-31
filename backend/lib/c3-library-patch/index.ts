@@ -1,9 +1,9 @@
 import { promises as fs, existsSync } from 'fs'
 import { resolve } from 'path'
-import { C3LibraryPatches as patch } from './patch'
-import { stringifySongUpdates } from '../../../src/lib/songUpdates'
-import DTAFileReader from '../dtafile-reader'
 import { SongCollection } from '../../../src'
+import { stringifySongUpdates } from '../../../src/core/lib/songUpdates'
+import DTAFileReader from '../dtafile-reader'
+import { C3LibraryPatches as patch } from './patch'
 
 const C3LibraryPatchModule = {
   /**

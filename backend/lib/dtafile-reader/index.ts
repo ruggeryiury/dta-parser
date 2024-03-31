@@ -1,5 +1,5 @@
 import { existsSync, lstatSync, promises as fs } from 'fs'
-import path from 'path'
+import { resolve } from 'path'
 import { detect } from 'jschardet'
 import DTAParser, { DTAParserOptions, DTAParserReturnType } from '../../../src'
 
@@ -18,7 +18,7 @@ export const readDTAFileContents = async (pathStr: string): Promise<string> => {
     await folderFiles.reduce<Promise<string>>(async (prev, curr) => {
       await prev
       if (curr.endsWith('.dta')) {
-        const filePath = path.resolve(pathStr, curr)
+        const filePath = resolve(pathStr, curr)
 
         const fileBuffer = await fs.readFile(filePath)
         if (detect(fileBuffer).encoding === 'windows-1252') {
@@ -49,7 +49,7 @@ export const readDTAFileContents = async (pathStr: string): Promise<string> => {
  * @param {DTAParserOptions<RT>} parserOptions `OPTIONAL` Customizing options for the parsing process.
  * @returns {Promise<DTAParserReturnType<RT>>} The parsed `.dta` file contents (or all `.dta` files contents in a directory merged).
  */
-export const DTAFileReader = async <RT extends boolean | undefined = undefined>(pathStr: string, parserOptions?: DTAParserOptions<RT>): Promise<DTAParserReturnType<RT>> => {
+const DTAFileReader = async <RT extends boolean | undefined = undefined>(pathStr: string, parserOptions?: DTAParserOptions<RT>): Promise<DTAParserReturnType<RT>> => {
   const contents = await readDTAFileContents(pathStr)
   return DTAParser(contents, parserOptions)
 }

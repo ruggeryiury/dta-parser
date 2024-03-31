@@ -1,5 +1,5 @@
+import { RankTypes, rankCalculator } from '../../utils/lib/rankCalculations'
 import { DTAFile } from './dta'
-import { RankTypes, rankCalculator } from '../utils/rankCalculations'
 import { BandRankingNames, BandRankingNamesAsDots, BandRankingNumbers, InstrRankingNames, InstrRankingNamesAsDots, InstrRankingNumbers, localeKeyToValue } from './locale'
 
 export type GetRankTypeOptions = 'number' | 'verbose' | 'verboseDots'

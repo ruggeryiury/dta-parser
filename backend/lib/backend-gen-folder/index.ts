@@ -1,14 +1,9 @@
-import { resolve } from 'path'
 import { promises as fs, existsSync } from 'fs'
+import { resolve } from 'path'
 import { detect } from 'jschardet'
-import { StringifyDataOptions, stringifyDTA } from '../../../src/lib/stringify'
 import { DTAFile } from '../../../src'
-import { sortDTA } from '../../../src/lib/sort'
-import { DTAFileExpanded } from '../../../src/lib/dta'
-import { genTabs as t } from '../../../src/utils/stringProcessors'
-import { rankCalculator as r } from '../../../src/utils/rankCalculations'
-import { SongSubGenre } from '../../../src/lib/locale'
-import { panVolInfoGen } from '../../../src/utils/pansAndVols'
+import { StringifyDataOptions, DTAFileExpanded, stringifyDTA, sortDTA, SongSubGenre } from '../../../src/core'
+import { genTabs as t, rankCalculator as r, panVolInfoGen } from '../../../src/utils'
 
 export type GenFolderFilesTypes = 'songs.dta' | 'id.dta' | '*.c3_rbdeps_rbproj' | '*.png'
 

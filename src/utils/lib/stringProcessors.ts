@@ -54,14 +54,24 @@ export const quoteToSlashQ = (text: string): string => text.replace(/"/g, '\\q')
  */
 export const slashQToQuote = (text: string): string => text.replace(/\\q/g, '"')
 
-type TabGeneratorNewLineTypes = 'start' | 'end' | 'both'
+type TabOrSpaceGeneratorNewLineTypes = 'start' | 'end' | 'both' | 'none'
 
 /**
  * Generates a string containing tab characters ('\t') repeated a specified number of times.
  * - - - -
  * @param {number} tabCount The number of tab characters to repeat. Default is `1`.
- * @param {TabGeneratorNewLineTypes} newLine `OPTIONAL` Places a new line charater wherever you want. Default is `'start'`.
+ * @param {TabOrSpaceGeneratorNewLineTypes} newLine `OPTIONAL` Places a new line charater wherever you want. Default is `'start'`.
  * @returns {string} A string with '\n' charaters and '\t' characters repeated `tabCount` times.
  */
-export const genTabs = (tabCount = 1, newLine: TabGeneratorNewLineTypes = 'start'): string =>
+export const genTabs = (tabCount = 1, newLine: TabOrSpaceGeneratorNewLineTypes = 'start'): string =>
   `${newLine === 'start' || newLine === 'both' ? '\n' : ''}${'\t'.repeat(tabCount)}${newLine === 'end' || newLine === 'both' ? '\n' : ''}`
+
+/**
+ * Generates a string containing space characters repeated a specified number of times.
+ * - - - -
+ * @param {number} spaceCount The number of space characters to repeat. Default is `1`.
+ * @param {TabOrSpaceGeneratorNewLineTypes} newLine `OPTIONAL` Places a new line charater wherever you want. Default is `'none'`.
+ * @returns {string} A string with space characters repeated `spaceCount` times.
+ */
+export const genSpaces = (spaceCount = 1, newLine: TabOrSpaceGeneratorNewLineTypes = 'none') =>
+  `${newLine === 'start' || newLine === 'both' ? '\n' : ''}${' '.repeat(spaceCount)}${newLine === 'end' || newLine === 'both' ? '\n' : ''}`

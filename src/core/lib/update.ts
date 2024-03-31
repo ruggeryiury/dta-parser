@@ -1,3 +1,6 @@
+import { panValueToArray } from '../../utils/lib/pansAndVols'
+import { rankValuesToDTARankSystem, bandAverageRankCalculator } from '../../utils/lib/rankCalculations'
+import { timeStringToMilliseconds } from '../../utils/lib/timeCalculations'
 import { DTAFile } from './dta'
 import {
   AnimTempo,
@@ -17,9 +20,6 @@ import {
   PercussionBankNames,
   localeValueToKey,
 } from './locale'
-import { panValueToArray } from '../utils/pansAndVols'
-import { rankValuesToDTARankSystem, bandAverageRankCalculator } from '../utils/rankCalculations'
-import { timeStringToMilliseconds } from '../utils/timeCalculations'
 
 export type DrumTracksTypes =
   | 2
@@ -98,11 +98,13 @@ export interface TrackUpdateOptions {
    *
    * If `true`, crowd channels will be placed as stereo tracks with `0dB` volume.
    *
-   * if it's an `array`, you can specify the volume of the crowd tracks.
+   * If it's a `number`, you can specify the volume of both crowd tracks
+   *
+   * if it's an `array`, you can specify the volume of each crowd tracks.
    *
    * Crowd channels are always stereo.
    */
-  crowd?: true | [number, number]
+  crowd?: true | [number, number] | number
 }
 
 export type DrumUpdateOptions<T extends DrumTracksTypes> = {
@@ -904,7 +906,9 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
       newDTA.tracks_count.push(2)
       newDTA.pans?.push(-2.5, 2.5)
       if (tracks.crowd === true) newDTA.vols?.push(0, 0)
-      else {
+      else if (typeof tracks.crowd === 'number') {
+        newDTA.vols?.push(tracks.crowd, tracks.crowd)
+      } else {
         const [leftC, rightC] = tracks.crowd
         newDTA.vols?.push(leftC)
         newDTA.vols?.push(rightC)

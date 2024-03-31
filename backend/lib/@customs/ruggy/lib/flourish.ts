@@ -1,4 +1,4 @@
-import { DTAFileRecipe } from '../../../../../src/lib/create'
+import { DTAFileRecipe } from '../../../../../src/core/lib/create'
 
 export const flourish = {
   id: '7748flourish',

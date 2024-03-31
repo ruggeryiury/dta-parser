@@ -1,5 +1,5 @@
+import { omitLeadingArticle } from '../../utils/lib/stringProcessors'
 import { DTAFile } from './dta'
-import { omitLeadingArticle } from '../utils/stringProcessors'
 
 const sortingLocale = {
   name: 'Song Title',

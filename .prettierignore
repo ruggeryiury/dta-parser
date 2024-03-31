@@ -3,9 +3,6 @@ dist/
 module/
 node_modules/
 old_modules/
-.eslintrc.js
-.prettierrc.js
-package.json
 prod.tsconfig.json
 tsconfig.json
 webpack.config.js

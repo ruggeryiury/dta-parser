@@ -1,4 +1,4 @@
-import { omitLeadingArticle, leadingArticleToTrailing } from '../utils/stringProcessors'
+import { leadingArticleToTrailing, omitLeadingArticle } from '../../utils/lib/stringProcessors'
 
 export interface DTAStringValueFormattingOptions {
   /** You can specify how the leading article will be

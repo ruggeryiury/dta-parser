@@ -1,9 +1,9 @@
-import { DTAFile } from './lib/dta'
-import { depackDTA } from './lib/depack'
-import { parseDTA } from './lib/parse'
-import { SongSortingTypes, sortDTA } from './lib/sort'
-import { MultipleSongsUpdateObject, SongUpdateObject, updateDTA } from './lib/update'
-import { Song, SongCollection } from './classes'
+import { Song, SongCollection } from './core/lib/classes'
+import { depackDTA } from './core/lib/depack'
+import { DTAFile } from './core/lib/dta'
+import { parseDTA } from './core/lib/parse'
+import { SongSortingTypes, sortDTA } from './core/lib/sort'
+import { MultipleSongsUpdateObject, SongUpdateObject, updateDTA } from './core/lib/update'
 
 export interface DTAParserOptions<RT extends boolean | undefined> {
   /**
@@ -87,6 +87,6 @@ const DTAParser = <RT extends boolean | undefined = undefined>(dtaFileContents: 
   return new SongCollection(collection) as RT extends true ? DTAFile[] : SongCollection
 }
 
-export type { DTAFile } from './lib/dta'
+export type { DTAFile } from './core/lib/dta'
 export { Song, SongCollection }
 export default DTAParser

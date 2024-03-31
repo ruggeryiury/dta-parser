@@ -1,5 +1,4 @@
-import { DTAFile } from '../lib/dta'
-import { DrumTracksTypes, InstrumentTracksTypes } from '../lib/update'
+import { DTAFile, DrumTracksTypes, InstrumentTracksTypes } from '../../core'
 
 /**
  * Generates an array of pan values based on the provided track count.

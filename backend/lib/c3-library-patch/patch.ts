@@ -1,4 +1,4 @@
-import { SongUpdateObject } from '../../../src/lib/update'
+import { SongUpdateObject } from '../../../src/core'
 
 export const C3LibraryPatches: SongUpdateObject = {
   // ABBA ____________________________________________________________________

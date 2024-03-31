@@ -1,9 +1,8 @@
 import { cloneDeep } from 'lodash'
-import { DTAFile } from './dta'
-import { updateDTA, UpdateDataOptions, TrackUpdateOptions, SongGenreUpdateOptions } from './update'
-import { dtaDefault } from './dta'
-import { Song } from '../classes'
+import { Song } from './classes'
+import { DTAFile, dtaDefault } from './dta'
 import { SongRating, SongRatingNames } from './locale'
+import { UpdateDataOptions, TrackUpdateOptions, SongGenreUpdateOptions, updateDTA } from './update'
 
 export interface DTAFileRecipe extends UpdateDataOptions {
   /**

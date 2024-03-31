@@ -15,23 +15,25 @@ export type ArtworkImageSizeTypes = '256x256' | '512x512'
  */
 export const fetchArtwork = async (url: string, songname: string | string[], imageSize?: ArtworkImageSizeTypes): Promise<void> => {
   if (Array.isArray(songname)) {
-    for (const name of songname) {
-      if (name) {
-        const newName = name.endsWith('_keep') ? name : `${name}_keep`
-        const saveFn = path.resolve(`./backend/gen/${newName}.png`)
+    await Promise.all(
+      songname.map(async (name) => {
+        if (name) {
+          const newName = name.endsWith('_keep') ? name : `${name}_keep`
+          const saveFn = path.resolve(`./backend/gen/${newName}.png`)
 
-        const imgResponse = await fetch(url, { method: 'GET' })
-        const imgArrBuffer = await imgResponse.arrayBuffer()
+          const imgResponse = await fetch(url, { method: 'GET' })
+          const imgArrBuffer = await imgResponse.arrayBuffer()
 
-        if (imageSize === undefined || imageSize === '256x256') {
-          const img = sharp(imgArrBuffer).png().resize(256, 256)
-          await fs.promises.writeFile(saveFn, await img.toBuffer())
-        } else {
-          const img = sharp(imgArrBuffer).png().resize(512, 512)
-          await fs.promises.writeFile(saveFn, await img.toBuffer())
+          if (imageSize === undefined || imageSize === '256x256') {
+            const img = sharp(imgArrBuffer).png().resize(256, 256)
+            await fs.promises.writeFile(saveFn, await img.toBuffer())
+          } else {
+            const img = sharp(imgArrBuffer).png().resize(512, 512)
+            await fs.promises.writeFile(saveFn, await img.toBuffer())
+          }
         }
-      }
-    }
+      })
+    )
   } else {
     if (songname) {
       const saveFn = path.resolve(`./backend/gen/${songname}_keep.png`)

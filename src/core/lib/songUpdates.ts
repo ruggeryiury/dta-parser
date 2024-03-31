@@ -1,4 +1,4 @@
-import { genTabs, quoteToSlashQ } from '../utils/stringProcessors'
+import { genTabs, quoteToSlashQ } from '../../utils/lib/stringProcessors'
 import { localeValueToKey } from './locale'
 import { SongUpdateObject } from './update'
 

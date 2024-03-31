@@ -1,7 +1,9 @@
-import { DTAFileRecipe, createDTA } from './lib/create'
-import { DTAFile } from './lib/dta'
-import { DTAStringValueFormattingOptions, formatDTAStringValue } from './lib/format'
-import { GetRankTypeOptions, getSongRank } from './lib/get'
+import { SongDrumMixNames, checkDrumMix } from '../../utils/lib/drumMix'
+import { PanVolInformationObject, panVolInfoGen } from '../../utils/lib/pansAndVols'
+import { DTAFileRecipe, createDTA } from './create'
+import { DTAFile } from './dta'
+import { DTAStringValueFormattingOptions, formatDTAStringValue } from './format'
+import { GetRankTypeOptions, getSongRank } from './get'
 import {
   BandRankingNames,
   BandRankingNamesAsDots,
@@ -16,13 +18,11 @@ import {
   VocalGenderNames,
   VocalPartsNames,
   localeKeyToValue,
-} from './lib/locale'
-import { genDTARecipe } from './lib/recipe'
-import { SongSortingTypes, sortDTA } from './lib/sort'
-import { StringifyDataOptions, stringifyDTA } from './lib/stringify'
-import { UpdateDataOptions, updateDTA } from './lib/update'
-import { CheckDrumMixReturnType, checkDrumMix } from './utils/drumMix'
-import { PanVolInformationObject, panVolInfoGen } from './utils/pansAndVols'
+} from './locale'
+import { genDTARecipe } from './recipe'
+import { SongSortingTypes, sortDTA } from './sort'
+import { StringifyDataOptions, stringifyDTA } from './stringify'
+import { UpdateDataOptions, updateDTA } from './update'
 
 export interface SongGetRankMethods {
   /**
@@ -177,9 +177,9 @@ export interface SongGetValueMethods {
   /**
    * Returns the drum mix of the song.
    * - - - -
-   * @returns {CheckDrumMixReturnType} The drum mix of the song.
+   * @returns {SongDrumMixNames} The drum mix of the song.
    */
-  drumMix: () => CheckDrumMixReturnType
+  drumMix: () => SongDrumMixNames
   /**
    * Fetches the song genre.
    * - - - -

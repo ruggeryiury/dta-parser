@@ -1,5 +1,4 @@
-import { createDTA } from '../../../../src/lib/create'
-import { extendDTAFile } from '../../../../src/lib/extend'
+import { createDTA, extendDTAFile } from '../../../../src/core'
 import { MAGMAProject } from '../../backend-gen-folder'
 import * as database from './songs'
 

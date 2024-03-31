@@ -1,17 +1,17 @@
-const path = require('path')
+import { resolve } from 'path'
 // const webpack = require('webpack')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 // const TerserPlugin = require("terser-webpack-plugin")
 
 /** @type {import('webpack').Configuration[]} */
-module.exports = [
+const webpackConfig = [
   {
     entry: {
       'dta-parser': './src/index.ts',
     },
     output: {
       filename: 'dta-parser.js',
-      path: path.resolve(__dirname, 'dist'),
+      path: resolve(__dirname, 'dist'),
       library: {
         name: 'DTAParser',
         type: 'var',
@@ -47,3 +47,4 @@ module.exports = [
     plugins: [new BundleAnalyzerPlugin()],
   },
 ]
+export default webpackConfig
