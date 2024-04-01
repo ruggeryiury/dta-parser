@@ -1,5 +1,4 @@
-import { PanVolInformationObject } from './pansAndVols'
-import { genSpaces as s } from './stringProcessors'
+import { genSpaces as s, PanVolInformationObject } from '..'
 
 export type FancyPartTypes = 'drums' | 'kick' | 'snare' | 'drumkit' | 'bass' | 'guitar' | 'vocals' | 'keys' | 'trks' | 'crowd'
 export type FancyRowTypes = 'desc' | 'pans' | 'vols' | 'cores'

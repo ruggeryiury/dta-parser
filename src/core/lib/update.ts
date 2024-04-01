@@ -1,13 +1,11 @@
-import { panValueToArray } from '../../utils/lib/pansAndVols'
-import { rankValuesToDTARankSystem, bandAverageRankCalculator } from '../../utils/lib/rankCalculations'
-import { timeStringToMilliseconds } from '../../utils/lib/timeCalculations'
-import { DTAFile } from './dta'
 import {
   AnimTempo,
   BandFailCueNames,
   BandRankingNames,
   BandRankingNumbers,
+  DTAFile,
   DrumBankNames,
+  PercussionBankNames,
   SongEncoding,
   SongGameOrigin,
   SongGenreNames,
@@ -17,9 +15,9 @@ import {
   VocalGenderNames,
   VocalParts,
   VocalPartsNames,
-  PercussionBankNames,
   localeValueToKey,
-} from './locale'
+} from '..'
+import { panValueToArray, rankValuesToDTARankSystem, bandAverageRankCalculator, timeStringToMilliseconds } from '../../utils'
 
 export type DrumTracksTypes =
   | 2

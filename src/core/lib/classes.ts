@@ -1,28 +1,33 @@
-import { SongDrumMixNames, checkDrumMix } from '../../utils/lib/drumMix'
-import { PanVolInformationObject, panVolInfoGen } from '../../utils/lib/pansAndVols'
-import { DTAFileRecipe, createDTA } from './create'
-import { DTAFile } from './dta'
-import { DTAStringValueFormattingOptions, formatDTAStringValue } from './format'
-import { GetRankTypeOptions, getSongRank } from './get'
 import {
   BandRankingNames,
   BandRankingNamesAsDots,
   BandRankingNumbers,
+  DTAFile,
+  DTAFileRecipe,
+  DTAStringValueFormattingOptions,
+  GetRankTypeOptions,
   InstrRankingNames,
   InstrRankingNamesAsDots,
   InstrRankingNumbers,
   SongGameOriginNames,
   SongGenreNames,
   SongRatingNames,
+  SongSortingTypes,
   SongSubGenreNames,
+  StringifyDataOptions,
+  UpdateDataOptions,
   VocalGenderNames,
   VocalPartsNames,
+  createDTA,
+  formatDTAStringValue,
+  genDTARecipe,
+  getSongRank,
   localeKeyToValue,
-} from './locale'
-import { genDTARecipe } from './recipe'
-import { SongSortingTypes, sortDTA } from './sort'
-import { StringifyDataOptions, stringifyDTA } from './stringify'
-import { UpdateDataOptions, updateDTA } from './update'
+  sortDTA,
+  stringifyDTA,
+  updateDTA,
+} from '..'
+import { PanVolInformationObject, SongDrumMixNames, checkDrumMix, panVolInfoGen } from '../../utils'
 
 export interface SongGetRankMethods {
   /**

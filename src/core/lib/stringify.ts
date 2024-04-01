@@ -1,8 +1,5 @@
-import { panVolInfoGen } from '../../utils/lib/pansAndVols'
-import { panVolCoresPrettierRB3 as prettierRB3 } from '../../utils/lib/panVolCoresPrettier'
-import { quoteToSlashQ, genTabs as t, genSpaces as s } from '../../utils/lib/stringProcessors'
-import { DTAFile } from './dta'
-import { SongSortingTypes, sortDTA } from './sort'
+import { DTAFile, SongSortingTypes, sortDTA } from '..'
+import { panVolInfoGen, panVolCoresPrettierRB3 as prettierRB3, quoteToSlashQ, genTabs as t, genSpaces as s } from '../../utils'
 
 /**
  * Generates a string representing a series of track counts incremented by a specified value.

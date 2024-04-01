@@ -1,4 +1,4 @@
-import { DTAFile } from '../../core'
+import { DTAFile } from '../../core/lib/dta'
 
 export type SongDrumMixNames = 'drums0' | 'drums1' | 'drums2' | 'drums3' | 'drums4' | undefined
 /**

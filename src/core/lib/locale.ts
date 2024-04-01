@@ -1,4 +1,4 @@
-import { SongKeyMajorValues, SongKeyMinorValues } from './update'
+import { SongKeyMajorValues, SongKeyMinorValues } from '..'
 
 type ExtractNumbers<T> = T extends number ? T : never
 type ExtractStrings<T> = T extends string ? T : never

@@ -1,9 +1,4 @@
-import { Song, SongCollection } from './core/lib/classes'
-import { depackDTA } from './core/lib/depack'
-import { DTAFile } from './core/lib/dta'
-import { parseDTA } from './core/lib/parse'
-import { SongSortingTypes, sortDTA } from './core/lib/sort'
-import { MultipleSongsUpdateObject, SongUpdateObject, updateDTA } from './core/lib/update'
+import { DTAFile, MultipleSongsUpdateObject, Song, SongCollection, SongSortingTypes, SongUpdateObject, depackDTA, parseDTA, sortDTA, updateDTA } from './core'
 
 export interface DTAParserOptions<RT extends boolean | undefined> {
   /**

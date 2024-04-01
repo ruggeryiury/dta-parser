@@ -1,6 +1,5 @@
-import { genTabs, quoteToSlashQ } from '../../utils/lib/stringProcessors'
-import { localeValueToKey } from './locale'
-import { SongUpdateObject } from './update'
+import { SongUpdateObject, localeValueToKey } from '..'
+import { genTabs, quoteToSlashQ } from '../../utils'
 
 export interface StringifySongUpdatesOptions {
   /**
