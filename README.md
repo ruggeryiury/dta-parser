@@ -1,5 +1,5 @@
 <div align=center>
-<img src='https://raw.githubusercontent.com/ruggeryiury/dta-parser/master/images/header.webp' alt='Header'>
+<img src='https://raw.githubusercontent.com/ruggeryiury/dta-parser/master/assets/header.webp' alt='DTA Parser: Package Header Image'>
 </div>
 
 <div align=center>

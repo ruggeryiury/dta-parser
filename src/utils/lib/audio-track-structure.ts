@@ -1,5 +1,5 @@
 import { DTAFile, DrumTracksTypes, InstrumentTracksTypes } from '../../core'
-import { genSpaces as s } from '../../utils'
+import { genSpaces as s } from '..'
 
 /**
  * Generates a string representing a series of track counts incremented by a specified value.
