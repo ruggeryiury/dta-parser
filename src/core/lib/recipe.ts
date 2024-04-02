@@ -15,7 +15,7 @@ import {
   VocalsUpdateOptionsTypes,
   localeKeyToValue,
 } from '..'
-import { panVolInfoGen, rankCalculator } from '../../utils'
+import { genAudioFileStructure, rankCalculator } from '../../utils'
 
 /**
  * Generates an object specifying the whole song's instruments and audio channels structure.
@@ -26,7 +26,7 @@ import { panVolInfoGen, rankCalculator } from '../../utils'
 export const genAudioTracksRecipe = (song: DTAFile): TrackUpdateOptions => {
   const tracks = {} as TrackUpdateOptions
   const { rank_drum, rank_bass, rank_guitar, rank_vocals, rank_keys, rank_real_bass, rank_real_guitar, rank_real_keys, real_bass_tuning, real_guitar_tuning, vocal_parts } = song
-  const { backing, bass, drum, guitar, keys, vocals, crowd } = panVolInfoGen(song)
+  const { backing, bass, drum, guitar, keys, vocals, crowd } = genAudioFileStructure(song)
 
   if (drum.enabled) {
     tracks.drum = {
@@ -288,30 +288,30 @@ export const genDTARecipe = (song: DTAFile): DTAFileRecipe => {
               song_key === 0
                 ? 'C'
                 : song_key === 1
-                ? 'Db'
-                : song_key === 2
-                ? 'D'
-                : song_key === 3
-                ? 'Eb'
-                : song_key === 4
-                ? 'E'
-                : song_key === 5
-                ? 'F'
-                : song_key === 6
-                ? 'F#'
-                : song_key === 7
-                ? 'G'
-                : song_key === 8
-                ? 'Ab'
-                : song_key === 9
-                ? 'A'
-                : song_key === 10
-                ? 'Ab'
-                : 'B',
+                  ? 'Db'
+                  : song_key === 2
+                    ? 'D'
+                    : song_key === 3
+                      ? 'Eb'
+                      : song_key === 4
+                        ? 'E'
+                        : song_key === 5
+                          ? 'F'
+                          : song_key === 6
+                            ? 'F#'
+                            : song_key === 7
+                              ? 'G'
+                              : song_key === 8
+                                ? 'Ab'
+                                : song_key === 9
+                                  ? 'A'
+                                  : song_key === 10
+                                    ? 'Ab'
+                                    : 'B',
           } as SongKeyUpdateOptions)
         : vocal_tonic_note !== undefined && song_tonality !== undefined
-        ? localeKeyToValue.song_key(vocal_tonic_note, song_tonality)
-        : undefined,
+          ? localeKeyToValue.song_key(vocal_tonic_note, song_tonality)
+          : undefined,
     multitrack,
     CATemh,
     author,

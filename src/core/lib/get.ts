@@ -7,18 +7,18 @@ export type GetRankReturnType<P extends RankTypes, T extends GetRankTypeOptions 
   ? T extends 'number'
     ? BandRankingNumbers
     : T extends 'verbose'
-    ? BandRankingNames
-    : T extends undefined
-    ? BandRankingNumbers
-    : BandRankingNamesAsDots
+      ? BandRankingNames
+      : T extends undefined
+        ? BandRankingNumbers
+        : BandRankingNamesAsDots
   : // P extends else
-  T extends 'number'
-  ? InstrRankingNumbers
-  : T extends 'verbose'
-  ? InstrRankingNames
-  : T extends undefined
-  ? InstrRankingNumbers
-  : InstrRankingNamesAsDots
+    T extends 'number'
+    ? InstrRankingNumbers
+    : T extends 'verbose'
+      ? InstrRankingNames
+      : T extends undefined
+        ? InstrRankingNumbers
+        : InstrRankingNamesAsDots
 
 /**
  * Fetches the given instrument ranking from a `DTAFile`.

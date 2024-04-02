@@ -2,7 +2,7 @@ import { promises as fs, existsSync } from 'fs'
 import { resolve } from 'path'
 import { detect } from 'jschardet'
 import { StringifyDataOptions, DTAFileExpanded, stringifyDTA, sortDTA, SongSubGenre, DTAFile } from '../../../src/core'
-import { genTabs as t, rankCalculator as r, panVolInfoGen } from '../../../src/utils'
+import { genTabs as t, rankCalculator as r, genAudioFileStructure } from '../../../src/utils'
 
 export type GenFolderFilesTypes = 'songs.dta' | 'id.dta' | '*.c3_rbdeps_rbproj' | '*.png'
 
@@ -241,12 +241,12 @@ const GenFolderModule = {
           text === 'artist'
             ? `${song.artist}`
             : text === 'artist_title'
-            ? `${song.artist} - ${song.name}`
-            : text === 'internal_name'
-            ? `${song.songname}`
-            : text === 'title'
-            ? `${song.name}`
-            : `${song.name} - ${song.artist}`
+              ? `${song.artist} - ${song.name}`
+              : text === 'internal_name'
+                ? `${song.songname}`
+                : text === 'title'
+                  ? `${song.name}`
+                  : `${song.name} - ${song.artist}`
         }\n`
         songIndex++
         return content
@@ -373,8 +373,8 @@ const GenFolderModule = {
             }\\\\magma\\\\HARM1.wav`
           : ''
         : song.vocal_parts > 0
-        ? DryVox
-        : ''
+          ? DryVox
+          : ''
 
       const DV1Path = song.hasLipSyncFiles
         ? song.fakeHarm === 2 || song.fakeHarm === 3
@@ -382,13 +382,13 @@ const GenFolderModule = {
               song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)
             }\\\\magma\\\\HARM2.wav`
           : song.vocal_parts > 1
-          ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${
-              song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)
-            }\\\\magma\\\\HARM2.wav`
-          : ''
+            ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${
+                song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)
+              }\\\\magma\\\\HARM2.wav`
+            : ''
         : song.vocal_parts > 1
-        ? DryVox
-        : ''
+          ? DryVox
+          : ''
 
       const DV2Path = song.hasLipSyncFiles
         ? song.fakeHarm === 3
@@ -396,13 +396,13 @@ const GenFolderModule = {
               song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)
             }\\\\magma\\\\HARM3.wav`
           : song.vocal_parts > 2
-          ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${
-              song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)
-            }\\\\magma\\\\HARM3.wav`
-          : ''
+            ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${
+                song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)
+              }\\\\magma\\\\HARM3.wav`
+            : ''
         : song.vocal_parts > 2
-        ? DryVox
-        : ''
+          ? DryVox
+          : ''
 
       const AlbumArtPath = song.album_art
         ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\magma\\\\${
@@ -417,10 +417,10 @@ const GenFolderModule = {
             }`
           : ''
         : song.tracks_count[0] > 2
-        ? MonoBlank
-        : song.tracks_count[0] > 5
-        ? StereoBlank
-        : ''
+          ? MonoBlank
+          : song.tracks_count[0] > 5
+            ? StereoBlank
+            : ''
 
       const SnareWavPath = song.multitrack
         ? song.tracks_count[0] > 3
@@ -429,10 +429,10 @@ const GenFolderModule = {
             }\\\\wav\\\\snare.wav`
           : ''
         : song.tracks_count[0] > 3
-        ? MonoBlank
-        : song.tracks_count[0] > 4
-        ? StereoBlank
-        : ''
+          ? MonoBlank
+          : song.tracks_count[0] > 4
+            ? StereoBlank
+            : ''
 
       const DrumKitWavPath = song.multitrack
         ? song.tracks_count[0] === 2
@@ -440,11 +440,11 @@ const GenFolderModule = {
               song.doubleKickOptions?.kickwav ? 'drums2x.wav' : 'drums.wav'
             }`
           : song.tracks_count[0] > 2
-          ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\wav\\\\kit.wav`
-          : ''
+            ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)}\\\\wav\\\\kit.wav`
+            : ''
         : song.tracks_count[0] > 0
-        ? StereoBlank
-        : ''
+          ? StereoBlank
+          : ''
 
       const BassWavPath = song.multitrack
         ? song.tracks_count[1] !== 0
@@ -453,10 +453,10 @@ const GenFolderModule = {
             }\\\\wav\\\\bass.wav`
           : ''
         : song.tracks_count[1] === 1
-        ? MonoBlank
-        : song.tracks_count[1] === 2
-        ? StereoBlank
-        : ''
+          ? MonoBlank
+          : song.tracks_count[1] === 2
+            ? StereoBlank
+            : ''
       const GuitarWavPath = song.multitrack
         ? song.tracks_count[2] !== 0
           ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${
@@ -464,10 +464,10 @@ const GenFolderModule = {
             }\\\\wav\\\\guitar.wav`
           : ''
         : song.tracks_count[2] === 1
-        ? MonoBlank
-        : song.tracks_count[2] === 2
-        ? StereoBlank
-        : ''
+          ? MonoBlank
+          : song.tracks_count[2] === 2
+            ? StereoBlank
+            : ''
       const VocalsWavPath = song.multitrack
         ? song.tracks_count[3] !== 0
           ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${
@@ -475,10 +475,10 @@ const GenFolderModule = {
             }\\\\wav\\\\vocals.wav`
           : ''
         : song.tracks_count[3] === 1
-        ? MonoBlank
-        : song.tracks_count[3] === 2
-        ? StereoBlank
-        : ''
+          ? MonoBlank
+          : song.tracks_count[3] === 2
+            ? StereoBlank
+            : ''
       const KeysWavPath = song.multitrack
         ? song.tracks_count[4] !== 0
           ? `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${
@@ -486,10 +486,10 @@ const GenFolderModule = {
             }\\\\wav\\\\keys.wav`
           : ''
         : song.tracks_count[4] === 1
-        ? MonoBlank
-        : song.tracks_count[4] === 2
-        ? StereoBlank
-        : ''
+          ? MonoBlank
+          : song.tracks_count[4] === 2
+            ? StereoBlank
+            : ''
       const BackingWavPath = `c:\\\\Users\\\\Ruggery\\\\Documents\\\\Visual Studio Code\\\\Projects\\\\ruggy-customs-projects\\\\songs\\\\${
         song.doubleKick ? song.id.slice(4, -2) : song.id.slice(4)
       }\\\\wav\\\\backing.wav`
@@ -633,7 +633,7 @@ const GenFolderModule = {
       output += `${t(2, 'start')})`
       output += `${t(1, 'start')})`
 
-      const panvol = panVolInfoGen(song)
+      const panvol = genAudioFileStructure(song)
 
       output += `${t(1, 'start')}(`
       output += `${t(2, 'start')}'tracks'`

@@ -36,14 +36,14 @@ export type InstrumentTracksTypes = 'Mono' | 'Stereo' | 1 | 2
 export type PansVolsDrumsInformation<T extends DrumTracksTypes> = T extends 2 | 'Stereo Else'
   ? [number, number]
   : T extends 3 | 'Mono Kick + Stereo Else'
-  ? [number, number, number]
-  : T extends 4 | 'Mono Kick + Mono Snare + Stereo Else'
-  ? [number, number, number, number]
-  : T extends 5 | 'Mono Kick + Stereo Snare + Stereo Else'
-  ? [number, number, number, number, number]
-  : T extends 6 | 'Stereo Kick + Stereo Snare + Stereo Else'
-  ? [number, number, number, number, number, number]
-  : never
+    ? [number, number, number]
+    : T extends 4 | 'Mono Kick + Mono Snare + Stereo Else'
+      ? [number, number, number, number]
+      : T extends 5 | 'Mono Kick + Stereo Snare + Stereo Else'
+        ? [number, number, number, number, number]
+        : T extends 6 | 'Stereo Kick + Stereo Snare + Stereo Else'
+          ? [number, number, number, number, number, number]
+          : never
 
 export type PansVolsInformation<T extends InstrumentTracksTypes> = T extends 1 | 'Mono' ? [number] : T extends 2 | 'Stereo' ? [number, number] : never
 
@@ -424,40 +424,55 @@ export type SubGenreUpdateValues<G extends SongGenreNames> = G extends
   | 'World'
   ? G
   : G extends 'Alternative'
-  ? 'Alternative' | 'College' | 'Other'
-  : G extends 'Blues'
-  ? 'Acoustic' | 'Chicago' | 'Classic' | 'Contemporary' | 'Country' | 'Delta' | 'Electric' | 'Other'
-  : G extends 'Country'
-  ? 'Alternative' | 'Bluegrass' | 'Contemporary' | 'Honky Tonk' | 'Outlaw' | 'Traditional Folk' | 'Other'
-  : G extends 'Glam'
-  ? 'Glam' | 'Goth' | 'Other'
-  : G extends 'Hip-Hop/Rap'
-  ? 'Alternative Rap' | 'Gangsta' | 'Hardcore Rap' | 'Hip Hop' | 'Old School Hip Hop' | 'Rap' | 'Trip Hop' | 'Underground Rap' | 'Other'
-  : G extends 'Indie Rock'
-  ? 'Indie Rock' | 'Lo-fi' | 'Math Rock' | 'Noise' | 'Post Rock' | 'Shoegazing' | 'Other'
-  : G extends 'Jazz'
-  ? 'Acid Jazz' | 'Contemporary' | 'Experimental' | 'Ragtime' | 'Smooth' | 'Other'
-  : G extends 'Metal'
-  ? 'Alternative' | 'Black' | 'Core' | 'Death' | 'Hair' | 'Industrial' | 'Metal' | 'Power' | 'Prog' | 'Speed' | 'Thrash' | 'Other'
-  : G extends 'New Wave'
-  ? 'Dark Wave' | 'Electroclash' | 'New Wave' | 'Synthpop' | 'Other'
-  : G extends 'Pop/Dance/Electronic'
-  ? 'Ambient' | 'Breakbeat' | 'Chiptune' | 'Dance' | 'Downtempo' | 'Dub' | 'Drum and Bass' | 'Electronica' | 'Garage' | 'Hardcore Dance' | 'House' | 'Industrial' | 'Techno' | 'Trance' | 'Other'
-  : G extends 'Pop-Rock'
-  ? 'Contemporary' | 'Pop' | 'Soft Rock' | 'Teen' | 'Other'
-  : G extends 'Prog'
-  ? 'Prog Rock'
-  : G extends 'Punk'
-  ? 'Alternative' | 'Classic' | 'Dance Punk' | 'Garage' | 'Hardcore' | 'Pop' | 'Other'
-  : G extends 'R&B/Soul/Funk'
-  ? 'Disco' | 'Funk' | 'Motown' | 'Rhythm and Blues' | 'Soul' | 'Other'
-  : G extends 'Reggae/Ska'
-  ? 'Reggae' | 'Ska' | 'Other'
-  : G extends 'Rock'
-  ? 'Arena' | 'Blues' | 'Folk Rock' | 'Garage' | 'Hard Rock' | 'Psychedelic' | 'Rock' | 'Rockabilly' | 'Rock and Roll' | 'Surf' | 'Other'
-  : G extends 'Other'
-  ? 'A capella' | 'Acoustic' | 'Contemporary Folk' | 'Experimental' | 'Oldies' | 'Other'
-  : never
+    ? 'Alternative' | 'College' | 'Other'
+    : G extends 'Blues'
+      ? 'Acoustic' | 'Chicago' | 'Classic' | 'Contemporary' | 'Country' | 'Delta' | 'Electric' | 'Other'
+      : G extends 'Country'
+        ? 'Alternative' | 'Bluegrass' | 'Contemporary' | 'Honky Tonk' | 'Outlaw' | 'Traditional Folk' | 'Other'
+        : G extends 'Glam'
+          ? 'Glam' | 'Goth' | 'Other'
+          : G extends 'Hip-Hop/Rap'
+            ? 'Alternative Rap' | 'Gangsta' | 'Hardcore Rap' | 'Hip Hop' | 'Old School Hip Hop' | 'Rap' | 'Trip Hop' | 'Underground Rap' | 'Other'
+            : G extends 'Indie Rock'
+              ? 'Indie Rock' | 'Lo-fi' | 'Math Rock' | 'Noise' | 'Post Rock' | 'Shoegazing' | 'Other'
+              : G extends 'Jazz'
+                ? 'Acid Jazz' | 'Contemporary' | 'Experimental' | 'Ragtime' | 'Smooth' | 'Other'
+                : G extends 'Metal'
+                  ? 'Alternative' | 'Black' | 'Core' | 'Death' | 'Hair' | 'Industrial' | 'Metal' | 'Power' | 'Prog' | 'Speed' | 'Thrash' | 'Other'
+                  : G extends 'New Wave'
+                    ? 'Dark Wave' | 'Electroclash' | 'New Wave' | 'Synthpop' | 'Other'
+                    : G extends 'Pop/Dance/Electronic'
+                      ?
+                          | 'Ambient'
+                          | 'Breakbeat'
+                          | 'Chiptune'
+                          | 'Dance'
+                          | 'Downtempo'
+                          | 'Dub'
+                          | 'Drum and Bass'
+                          | 'Electronica'
+                          | 'Garage'
+                          | 'Hardcore Dance'
+                          | 'House'
+                          | 'Industrial'
+                          | 'Techno'
+                          | 'Trance'
+                          | 'Other'
+                      : G extends 'Pop-Rock'
+                        ? 'Contemporary' | 'Pop' | 'Soft Rock' | 'Teen' | 'Other'
+                        : G extends 'Prog'
+                          ? 'Prog Rock'
+                          : G extends 'Punk'
+                            ? 'Alternative' | 'Classic' | 'Dance Punk' | 'Garage' | 'Hardcore' | 'Pop' | 'Other'
+                            : G extends 'R&B/Soul/Funk'
+                              ? 'Disco' | 'Funk' | 'Motown' | 'Rhythm and Blues' | 'Soul' | 'Other'
+                              : G extends 'Reggae/Ska'
+                                ? 'Reggae' | 'Ska' | 'Other'
+                                : G extends 'Rock'
+                                  ? 'Arena' | 'Blues' | 'Folk Rock' | 'Garage' | 'Hard Rock' | 'Psychedelic' | 'Rock' | 'Rockabilly' | 'Rock and Roll' | 'Surf' | 'Other'
+                                  : G extends 'Other'
+                                    ? 'A capella' | 'Acoustic' | 'Contemporary Folk' | 'Experimental' | 'Oldies' | 'Other'
+                                    : never
 
 export interface UpdateDataOptions {
   /**

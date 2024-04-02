@@ -1,23 +1,5 @@
 import { DTAFile, SongSortingTypes, sortDTA } from '..'
-import { panVolInfoGen, panVolCoresPrettierRB3 as prettierRB3, quoteToSlashQ, genTabs as t, genSpaces as s } from '../../utils'
-
-/**
- * Generates a string representing a series of track counts incremented by a specified value.
- * - - - -
- * @param {number} trackStart The starting track count.
- * @param {number} add The value to increment the track count by.
- * @returns {string} A string representing the series of track counts.
- */
-export const tracksCountToString = (trackStart: number, add: number): string => {
-  let returnString = ''
-  const iterator = Array(add).fill(0)
-  iterator.forEach((_, i) => {
-    returnString += `${trackStart}${i === iterator.length - 1 ? '' : ' '}`
-    trackStart++
-    return
-  })
-  return returnString
-}
+import { genAudioFileStructure, genRB3DLCDetailedTracksStructure as genRB3DLCDetailedTrack, quoteToSlashQ, genTabs as t, genSpaces as s, incrementTracksCount } from '../../utils'
 
 export interface StringifyDataOptions {
   /**
@@ -54,11 +36,11 @@ export interface StringifyDataOptions {
    */
   sortBy?: SongSortingTypes
   /**
-   * Aligns information of panning, volume, and cores based on each audio file part. Default is `false`.
+   * Aligns information of panning, volume, and cores based on each audio file track name. Default is `false`.
    *
    * This only works using `'rb3_dlc'` as type.
    */
-  prettyPanVolCores?: boolean
+  detailedTracksStructure?: boolean
   /**
    * Uses spaces rather than tabs. This can be either a number or a boolean value. Default is `false`.
    *
@@ -174,27 +156,27 @@ const stringifyDefault = (value: DTAFile, options: StringifyDataOptions): string
   }"${t(2)})${t(2)}(${t(3)}'tracks_count'${t(3)}(${tracks_count.join(' ')})${t(2)})${t(2)}(${t(3)}'tracks'${t(3)}(${t(4)}`
 
   if (drum) {
-    output += `(${t(5)}'drum'${t(5)}(${tracksCountToString(trackCount, drum)})${t(4)})`
+    output += `(${t(5)}'drum'${t(5)}(${incrementTracksCount(trackCount, drum)})${t(4)})`
     trackCount += drum
   }
   if (bass) {
     if (drum !== 0) output += `${t(4)}`
-    output += `(${t(5)}'bass'${t(5)}(${tracksCountToString(trackCount, bass)})${t(4)})`
+    output += `(${t(5)}'bass'${t(5)}(${incrementTracksCount(trackCount, bass)})${t(4)})`
     trackCount += bass
   }
   if (guitar) {
     if (drum !== 0 || bass !== 0) output += `${t(4)}`
-    output += `(${t(5)}'guitar'${t(5)}(${tracksCountToString(trackCount, guitar)})${t(4)})`
+    output += `(${t(5)}'guitar'${t(5)}(${incrementTracksCount(trackCount, guitar)})${t(4)})`
     trackCount += guitar
   }
   if (vocals) {
     if (drum !== 0 || bass !== 0 || guitar !== 0) output += `${t(4)}`
-    output += `(${t(5)}'vocals'${t(5)}(${tracksCountToString(trackCount, vocals)})${t(4)})`
+    output += `(${t(5)}'vocals'${t(5)}(${incrementTracksCount(trackCount, vocals)})${t(4)})`
     trackCount += vocals
   }
   if (keys) {
     if (drum !== 0 || bass !== 0 || guitar !== 0 || vocals !== 0) output += `${t(4)}`
-    output += `(${t(5)}'keys'${t(5)}(${tracksCountToString(trackCount, keys)})${t(4)})`
+    output += `(${t(5)}'keys'${t(5)}(${incrementTracksCount(trackCount, keys)})${t(4)})`
     trackCount += keys
   }
   output += `${t(3)})${t(2)})${t(2)}(${t(3)}'pans'${t(3)}(`
@@ -220,7 +202,7 @@ const stringifyDefault = (value: DTAFile, options: StringifyDataOptions): string
     return
   })
 
-  output += `${crowd ? `${t(2)}('crowd_channels' ${tracksCountToString(crowdTrackStarts, 2)})` : ``}${t(2)}('vocal_parts' ${vocal_parts === undefined ? (vocals > 0 ? 1 : 0) : vocal_parts})${t(2)}(${t(
+  output += `${crowd ? `${t(2)}('crowd_channels' ${incrementTracksCount(crowdTrackStarts, 2)})` : ``}${t(2)}('vocal_parts' ${vocal_parts === undefined ? (vocals > 0 ? 1 : 0) : vocal_parts})${t(2)}(${t(
     3
   )}'drum_solo'${t(3)}(${t(4)}'seqs'${t(4)}('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')${t(3)})${t(2)})${t(2)}(${t(3)}'drum_freestyle'${t(3)}(${t(4)}'seqs'${t(
     4
@@ -333,8 +315,8 @@ const stringifyDefault = (value: DTAFile, options: StringifyDataOptions): string
  * @returns {string} A stringified version of the song.
  */
 const stringifyRB3DLC = (value: DTAFile, options: StringifyDataOptions): string => {
-  const { guitarCores, omitUnusedRanks, placeCustomAttributes, placeRB3DXAttributes, wiiMode, gameOriginAsRB3DLC, prettyPanVolCores } = options
-  const panVol = panVolInfoGen(value)
+  const { guitarCores, omitUnusedRanks, placeCustomAttributes, placeRB3DXAttributes, wiiMode, gameOriginAsRB3DLC, detailedTracksStructure } = options
+  const panVol = genAudioFileStructure(value)
   // console.log(panVol)
 
   const {
@@ -419,67 +401,67 @@ const stringifyRB3DLC = (value: DTAFile, options: StringifyDataOptions): string 
   }")${t(2)}(tracks${t(3)}(`
 
   if (drum) {
-    output += `(drum (${tracksCountToString(trackCount, drum)}))`
+    output += `(drum (${incrementTracksCount(trackCount, drum)}))`
     trackCount += drum
     if (!bass && !guitar && !vocals && !keys) output += `)${t(2)})`
     else output += `${t(3)} `
   }
 
   if (bass) {
-    output += `(bass (${tracksCountToString(trackCount, bass)}))`
+    output += `(bass (${incrementTracksCount(trackCount, bass)}))`
     trackCount += bass
     if (!guitar && !vocals && !keys) output += `)${t(2)})`
     else output += `${t(3)} `
   }
 
   if (guitar) {
-    output += `(guitar (${tracksCountToString(trackCount, guitar)}))`
+    output += `(guitar (${incrementTracksCount(trackCount, guitar)}))`
     trackCount += guitar
     if (!vocals && !keys) output += `)${t(2)})`
     else output += `${t(3)} `
   }
 
   if (vocals) {
-    output += `(vocals (${tracksCountToString(trackCount, vocals)}))`
+    output += `(vocals (${incrementTracksCount(trackCount, vocals)}))`
     trackCount += vocals
     if (!keys) output += `)${t(2)})`
     else output += `${t(3)} `
   }
 
   if (keys) {
-    output += `(keys (${tracksCountToString(trackCount, keys)})))${t(2)})`
+    output += `(keys (${incrementTracksCount(trackCount, keys)})))${t(2)})`
     trackCount += keys
   }
 
-  if (prettyPanVolCores) {
-    output += `${t(2)};${s(12)}${drum === 2 ? `${s(6)}${prettierRB3('drums', 'desc', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${prettierRB3('kick', 'desc', panVol, guitarCores)}` : ''}${
-      drum > 3 ? `${s(6)}${prettierRB3('snare', 'desc', panVol, guitarCores)}` : ''
-    }${drum > 2 ? `${s(6)}${prettierRB3('drumkit', 'desc', panVol, guitarCores)}` : ''}${bass > 0 ? `${s(6)}${prettierRB3('bass', 'desc', panVol, guitarCores)}` : ''}${
-      guitar > 0 ? `${s(6)}${prettierRB3('guitar', 'desc', panVol, guitarCores)}` : ''
-    }${vocals > 0 ? `${s(6)}${prettierRB3('vocals', 'desc', panVol, guitarCores)}` : ''}${keys > 0 ? `${s(6)}${prettierRB3('keys', 'desc', panVol, guitarCores)}` : ''}${
-      backing > 0 ? `${s(6)}${prettierRB3('trks', 'desc', panVol, guitarCores)}` : ''
-    }${crowd && crowd > 0 ? `${s(6)}${prettierRB3('crowd', 'desc', panVol, guitarCores)}` : ''}`
-    output += `${t(2)}( pans${s(6)}(${drum === 2 ? `${s(6)}${prettierRB3('drums', 'pans', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${prettierRB3('kick', 'pans', panVol, guitarCores)}` : ''}${
-      drum > 3 ? `${s(6)}${prettierRB3('snare', 'pans', panVol, guitarCores)}` : ''
-    }${drum > 2 ? `${s(6)}${prettierRB3('drumkit', 'pans', panVol, guitarCores)}` : ''}${bass > 0 ? `${s(6)}${prettierRB3('bass', 'pans', panVol, guitarCores)}` : ''}${
-      guitar > 0 ? `${s(6)}${prettierRB3('guitar', 'pans', panVol, guitarCores)}` : ''
-    }${vocals > 0 ? `${s(6)}${prettierRB3('vocals', 'pans', panVol, guitarCores)}` : ''}${keys > 0 ? `${s(6)}${prettierRB3('keys', 'pans', panVol, guitarCores)}` : ''}${
-      backing > 0 ? `${s(6)}${prettierRB3('trks', 'pans', panVol, guitarCores)}` : ''
-    }${crowd && crowd > 0 ? `${s(6)}${prettierRB3('crowd', 'pans', panVol, guitarCores)}` : ''}${s(6)}))`
-    output += `${t(2)}( vols${s(6)}(${drum === 2 ? `${s(6)}${prettierRB3('drums', 'vols', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${prettierRB3('kick', 'vols', panVol, guitarCores)}` : ''}${
-      drum > 3 ? `${s(6)}${prettierRB3('snare', 'vols', panVol, guitarCores)}` : ''
-    }${drum > 2 ? `${s(6)}${prettierRB3('drumkit', 'vols', panVol, guitarCores)}` : ''}${bass > 0 ? `${s(6)}${prettierRB3('bass', 'vols', panVol, guitarCores)}` : ''}${
-      guitar > 0 ? `${s(6)}${prettierRB3('guitar', 'vols', panVol, guitarCores)}` : ''
-    }${vocals > 0 ? `${s(6)}${prettierRB3('vocals', 'vols', panVol, guitarCores)}` : ''}${keys > 0 ? `${s(6)}${prettierRB3('keys', 'vols', panVol, guitarCores)}` : ''}${
-      backing > 0 ? `${s(6)}${prettierRB3('trks', 'vols', panVol, guitarCores)}` : ''
-    }${crowd && crowd > 0 ? `${s(6)}${prettierRB3('crowd', 'vols', panVol, guitarCores)}` : ''}${s(6)}))`
-    output += `${t(2)}( cores     (${drum === 2 ? `${s(6)}${prettierRB3('drums', 'cores', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${prettierRB3('kick', 'cores', panVol, guitarCores)}` : ''}${
-      drum > 3 ? `${s(6)}${prettierRB3('snare', 'cores', panVol, guitarCores)}` : ''
-    }${drum > 2 ? `${s(6)}${prettierRB3('drumkit', 'cores', panVol, guitarCores)}` : ''}${bass > 0 ? `${s(6)}${prettierRB3('bass', 'cores', panVol, guitarCores)}` : ''}${
-      guitar > 0 ? `${s(6)}${prettierRB3('guitar', 'cores', panVol, guitarCores)}` : ''
-    }${vocals > 0 ? `${s(6)}${prettierRB3('vocals', 'cores', panVol, guitarCores)}` : ''}${keys > 0 ? `${s(6)}${prettierRB3('keys', 'cores', panVol, guitarCores)}` : ''}${
-      backing > 0 ? `${s(6)}${prettierRB3('trks', 'cores', panVol, guitarCores)}` : ''
-    }${crowd && crowd > 0 ? `${s(6)}${prettierRB3('crowd', 'cores', panVol, guitarCores)}` : ''}${s(6)}))`
+  if (detailedTracksStructure) {
+    output += `${t(2)};${s(12)}${drum === 2 ? `${s(6)}${genRB3DLCDetailedTrack('drums', 'desc', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('kick', 'desc', panVol, guitarCores)}` : ''}${
+      drum > 3 ? `${s(6)}${genRB3DLCDetailedTrack('snare', 'desc', panVol, guitarCores)}` : ''
+    }${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('drumkit', 'desc', panVol, guitarCores)}` : ''}${bass > 0 ? `${s(6)}${genRB3DLCDetailedTrack('bass', 'desc', panVol, guitarCores)}` : ''}${
+      guitar > 0 ? `${s(6)}${genRB3DLCDetailedTrack('guitar', 'desc', panVol, guitarCores)}` : ''
+    }${vocals > 0 ? `${s(6)}${genRB3DLCDetailedTrack('vocals', 'desc', panVol, guitarCores)}` : ''}${keys > 0 ? `${s(6)}${genRB3DLCDetailedTrack('keys', 'desc', panVol, guitarCores)}` : ''}${
+      backing > 0 ? `${s(6)}${genRB3DLCDetailedTrack('trks', 'desc', panVol, guitarCores)}` : ''
+    }${crowd && crowd > 0 ? `${s(6)}${genRB3DLCDetailedTrack('crowd', 'desc', panVol, guitarCores)}` : ''}`
+    output += `${t(2)}( pans${s(6)}(${drum === 2 ? `${s(6)}${genRB3DLCDetailedTrack('drums', 'pans', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('kick', 'pans', panVol, guitarCores)}` : ''}${
+      drum > 3 ? `${s(6)}${genRB3DLCDetailedTrack('snare', 'pans', panVol, guitarCores)}` : ''
+    }${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('drumkit', 'pans', panVol, guitarCores)}` : ''}${bass > 0 ? `${s(6)}${genRB3DLCDetailedTrack('bass', 'pans', panVol, guitarCores)}` : ''}${
+      guitar > 0 ? `${s(6)}${genRB3DLCDetailedTrack('guitar', 'pans', panVol, guitarCores)}` : ''
+    }${vocals > 0 ? `${s(6)}${genRB3DLCDetailedTrack('vocals', 'pans', panVol, guitarCores)}` : ''}${keys > 0 ? `${s(6)}${genRB3DLCDetailedTrack('keys', 'pans', panVol, guitarCores)}` : ''}${
+      backing > 0 ? `${s(6)}${genRB3DLCDetailedTrack('trks', 'pans', panVol, guitarCores)}` : ''
+    }${crowd && crowd > 0 ? `${s(6)}${genRB3DLCDetailedTrack('crowd', 'pans', panVol, guitarCores)}` : ''}${s(6)}))`
+    output += `${t(2)}( vols${s(6)}(${drum === 2 ? `${s(6)}${genRB3DLCDetailedTrack('drums', 'vols', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('kick', 'vols', panVol, guitarCores)}` : ''}${
+      drum > 3 ? `${s(6)}${genRB3DLCDetailedTrack('snare', 'vols', panVol, guitarCores)}` : ''
+    }${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('drumkit', 'vols', panVol, guitarCores)}` : ''}${bass > 0 ? `${s(6)}${genRB3DLCDetailedTrack('bass', 'vols', panVol, guitarCores)}` : ''}${
+      guitar > 0 ? `${s(6)}${genRB3DLCDetailedTrack('guitar', 'vols', panVol, guitarCores)}` : ''
+    }${vocals > 0 ? `${s(6)}${genRB3DLCDetailedTrack('vocals', 'vols', panVol, guitarCores)}` : ''}${keys > 0 ? `${s(6)}${genRB3DLCDetailedTrack('keys', 'vols', panVol, guitarCores)}` : ''}${
+      backing > 0 ? `${s(6)}${genRB3DLCDetailedTrack('trks', 'vols', panVol, guitarCores)}` : ''
+    }${crowd && crowd > 0 ? `${s(6)}${genRB3DLCDetailedTrack('crowd', 'vols', panVol, guitarCores)}` : ''}${s(6)}))`
+    output += `${t(2)}( cores     (${drum === 2 ? `${s(6)}${genRB3DLCDetailedTrack('drums', 'cores', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('kick', 'cores', panVol, guitarCores)}` : ''}${
+      drum > 3 ? `${s(6)}${genRB3DLCDetailedTrack('snare', 'cores', panVol, guitarCores)}` : ''
+    }${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('drumkit', 'cores', panVol, guitarCores)}` : ''}${bass > 0 ? `${s(6)}${genRB3DLCDetailedTrack('bass', 'cores', panVol, guitarCores)}` : ''}${
+      guitar > 0 ? `${s(6)}${genRB3DLCDetailedTrack('guitar', 'cores', panVol, guitarCores)}` : ''
+    }${vocals > 0 ? `${s(6)}${genRB3DLCDetailedTrack('vocals', 'cores', panVol, guitarCores)}` : ''}${keys > 0 ? `${s(6)}${genRB3DLCDetailedTrack('keys', 'cores', panVol, guitarCores)}` : ''}${
+      backing > 0 ? `${s(6)}${genRB3DLCDetailedTrack('trks', 'cores', panVol, guitarCores)}` : ''
+    }${crowd && crowd > 0 ? `${s(6)}${genRB3DLCDetailedTrack('crowd', 'cores', panVol, guitarCores)}` : ''}${s(6)}))`
   } else {
     output += `${t(2)}(pans (`
 
@@ -505,7 +487,7 @@ const stringifyRB3DLC = (value: DTAFile, options: StringifyDataOptions): string 
     })
   }
 
-  output += `${crowd ? `${t(2)}(crowd_channels ${tracksCountToString(crowdTrackStarts, 2)})` : ``}${t(2)}(vocal_parts ${vocal_parts === undefined ? (vocals > 0 ? 1 : 0) : vocal_parts})${t(
+  output += `${crowd ? `${t(2)}(crowd_channels ${incrementTracksCount(crowdTrackStarts, 2)})` : ``}${t(2)}(vocal_parts ${vocal_parts === undefined ? (vocals > 0 ? 1 : 0) : vocal_parts})${t(
     2
   )}(drum_solo${t(3)}(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))${t(2)})${t(2)}(drum_freestyle${t(3)}(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))${t(2)})${
     mute_volume === undefined ? `` : `${t(2)}(mute_volume ${mute_volume})`
@@ -623,7 +605,7 @@ export const stringifyDTA = (songs: DTAFile[] | DTAFile, options?: StringifyData
   else options = { placeCustomAttributes: true, useSpaces: true, ...options }
   let output = ''
 
-  const { type, useSpaces, ignoreFakeSongs, sortBy, prettyPanVolCores } = options
+  const { type, useSpaces, ignoreFakeSongs, sortBy, detailedTracksStructure } = options
 
   if (Array.isArray(songs) && sortBy) {
     songs = sortDTA(songs, sortBy)
@@ -648,7 +630,7 @@ export const stringifyDTA = (songs: DTAFile[] | DTAFile, options?: StringifyData
   }
 
   if (useSpaces !== undefined) {
-    if (prettyPanVolCores) {
+    if (detailedTracksStructure) {
       // output = output.replace(/\t/g, '   ')
     } else if (typeof useSpaces === 'boolean') {
       output = output.replace(/\t/g, '   ')

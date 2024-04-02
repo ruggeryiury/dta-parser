@@ -1,8 +1,8 @@
 import { SongKeyMajorValues, SongKeyMinorValues } from '..'
 
-type ExtractNumbers<T> = T extends number ? T : never
-type ExtractStrings<T> = T extends string ? T : never
-type StringNumToNum<T> = T extends '-1' ? -1 : T
+export type ExtractNumbers<T> = T extends number ? T : never
+export type ExtractStrings<T> = T extends string ? T : never
+export type StringNumToNum<T> = T extends '-1' ? -1 : T
 
 export const localeObject = {
   name: {

@@ -27,7 +27,7 @@ import {
   stringifyDTA,
   updateDTA,
 } from '..'
-import { PanVolInformationObject, SongDrumMixNames, checkDrumMix, panVolInfoGen } from '../../utils'
+import { FetchAlbumArtworkImageSize, AudioFileTracksStructureDocument, SongDrumMixNames, checkDrumMix, fetchAlbumArtwork, genAudioFileStructure } from '../../utils'
 
 export interface SongGetRankMethods {
   /**
@@ -256,7 +256,7 @@ export class Song<T extends DTAFile = DTAFile> {
   /**
    * An object containing detailed informations about the song's audio file track structure.
    */
-  tracks: Readonly<PanVolInformationObject>
+  tracks: Readonly<AudioFileTracksStructureDocument>
   /**
    * A recipe object from this song, you can use it on a `Song` class constructor to re-create this `Song` class object.
    */
@@ -271,13 +271,25 @@ export class Song<T extends DTAFile = DTAFile> {
     if ('tracks' in recipe) {
       const newSong = createDTA(recipe)
       this.value = newSong as Readonly<T>
-      this.tracks = panVolInfoGen(newSong)
+      this.tracks = genAudioFileStructure(newSong)
       this.recipe = recipe
     } else {
       this.value = recipe as Readonly<T>
-      this.tracks = panVolInfoGen(recipe)
+      this.tracks = genAudioFileStructure(recipe)
       this.recipe = genDTARecipe(recipe)
     }
+  }
+
+  /**
+   * Fetches an album artwork URL for the song using the Spotify API.
+   * - - - -
+   * @param {FetchAlbumArtworkImageSize | undefined} imageSize `OPTIONAL` The size of the album artwork. Default is `'large'`.
+   * @throws {Error} If the function is unable to encode authorization string to base64 using `btoa()` or using the `Buffer` constructor.
+   * @returns {Promise<string | undefined>} The album artwork URL as string. Returns `undefined` if the connection to the API has been refused
+   * at any point, if the provided song has no album name, or if no album has been found on the Spotify database.
+   */
+  async albumArtworkURL(imageSize: FetchAlbumArtworkImageSize = 'large'): Promise<string | undefined> {
+    return await fetchAlbumArtwork(this.value, imageSize)
   }
 
   /**
@@ -325,7 +337,7 @@ export class Song<T extends DTAFile = DTAFile> {
   update(update: UpdateDataOptions): void {
     const updated = updateDTA(this.value, update)
     this.value = updated as Readonly<T>
-    this.tracks = panVolInfoGen(updated)
+    this.tracks = genAudioFileStructure(updated)
     this.recipe = genDTARecipe(updated)
   }
   /**
