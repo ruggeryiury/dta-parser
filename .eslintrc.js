@@ -15,14 +15,7 @@ module.exports = {
     warnOnUnsupportedTypeScriptVersion: false,
   },
   plugins: ['@typescript-eslint', 'n', 'import', 'promise'],
-  extends: [
-    'eslint:recommended',
-    'plugin:n/recommended',
-    'plugin:promise/recommended',
-    'plugin:import/typescript',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:@typescript-eslint/recommended-type-checked',
-  ],
+  extends: ['eslint:recommended', 'plugin:n/recommended', 'plugin:promise/recommended', 'plugin:@typescript-eslint/recommended-type-checked', 'plugin:import/typescript'],
   settings: {
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
@@ -38,15 +31,17 @@ module.exports = {
     'prefer-arrow-callback': 'error',
     'sort-imports': ['error', { ignoreCase: true, ignoreDeclarationSort: true, ignoreMemberSort: true }],
     'import/order': ['error', { alphabetize: { order: 'asc', caseInsensitive: true } }],
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/require-await': 'off',
   },
   overrides: [
     {
-      files: ['backend/testing/init.ts'],
+      files: ['backend/testing/*.ts'],
       rules: {
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-floating-promises': 'off',
-        '@typescript-eslint/require-await': 'warn',
-        '@typescript-eslint/no-empty-function': 'warn',
+        '@typescript-eslint/require-await': 'off',
+        '@typescript-eslint/no-empty-function': 'off',
       },
     },
     {

@@ -48,7 +48,7 @@ export const fetchArtwork = async (url: string, songname: string | string[], ima
 }
 
 /**
- * Asynchronously converts any image file to a 256x256 PNG image file.
+ * Asynchronously converts any image file to a PNG image file.
  * - - - -
  * @param {string} fp The file path of image.
  * @param {string} songname The file name to be saved. `*_keep` will be added to the end of the file name automatically, if not present.
