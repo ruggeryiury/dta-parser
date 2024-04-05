@@ -3,6 +3,7 @@ images/
 node_modules/
 old_modules/
 python/
+assets/
 .eslintrc.js
 .gitignore
 .npmignore
