@@ -38,7 +38,7 @@
     }
   },
   "dependencies": {
-    "core-js": "^3.35.1",
+    "core-js": "^3.36.1",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
@@ -52,6 +52,7 @@
     "@typescript-eslint/eslint-plugin": "^7.5.0",
     "@typescript-eslint/parser": "^7.5.0",
     "babel-loader": "^9.1.2",
+    "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-polyfill-corejs3": "^0.8.3",
     "eslint": "^8.42.0",
     "eslint-import-resolver-typescript": "^3.6.1",
@@ -59,9 +60,9 @@
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.1.1",
     "jschardet": "^3.1.2",
+    "lodash-webpack-plugin": "^0.11.6",
     "nodemon": "^2.0.22",
     "prettier": "^3.2.5",
-    "sharp": "^0.33.3",
     "terser-webpack-plugin": "^5.3.9",
     "ts-loader": "^9.4.4",
     "ts-node": "^10.9.1",

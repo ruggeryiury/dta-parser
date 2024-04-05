@@ -1,17 +1,19 @@
-import { resolve } from 'path'
-// const webpack = require('webpack')
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
+const path = require('path')
+const webpack = require('webpack')
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
+const TerserPlugin = require("terser-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 // const TerserPlugin = require("terser-webpack-plugin")
 
 /** @type {import('webpack').Configuration[]} */
-const webpackConfig = [
+module.exports = [
   {
     entry: {
       'dta-parser': './src/index.ts',
     },
     output: {
       filename: 'dta-parser.js',
-      path: resolve(__dirname, 'dist'),
+      path: path.resolve(__dirname, 'dist'),
       library: {
         name: 'DTAParser',
         type: 'var',
@@ -24,6 +26,8 @@ const webpackConfig = [
     mode: 'production',
     optimization: {
       usedExports: true,
+      minimize: true,
+      minimizer: [new TerserPlugin()]
     },
     module: {
       rules: [
@@ -34,8 +38,8 @@ const webpackConfig = [
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/env', '@babel/typescript'],
-              plugins: ['@babel/transform-class-properties', '@babel/transform-object-rest-spread', '@babel/transform-modules-umd', ['polyfill-corejs3', { method: 'usage-global', version: '3.20' }]],
+              presets: ['@babel/preset-env', '@babel/typescript'],
+              plugins: ['lodash', '@babel/transform-class-properties', '@babel/transform-object-rest-spread', '@babel/transform-modules-umd', ['polyfill-corejs3', { method: 'usage-global', version: '3.20' }]],
             },
           },
         },
@@ -44,7 +48,9 @@ const webpackConfig = [
     resolve: {
       extensions: ['.*', '.js', '.jsx', '.tsx', '.ts'],
     },
-    plugins: [new BundleAnalyzerPlugin()],
+    plugins: [
+      new LodashModuleReplacementPlugin(),
+      new BundleAnalyzerPlugin()
+    ],
   },
 ]
-export default webpackConfig

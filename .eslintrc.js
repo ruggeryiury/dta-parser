@@ -49,7 +49,7 @@ module.exports = {
       parserOptions: {
         project: false,
       },
-      extends: ['plugin:import/recommended', 'plugin:@typescript-eslint/disable-type-checked'],
+      extends: ['plugin:import/recommended'],
     },
   ],
 }
