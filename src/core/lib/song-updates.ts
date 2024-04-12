@@ -1,4 +1,5 @@
 import { SongUpdateObject, localeValueToKey } from '..'
+import useDefaultOptions from '../../lib/ruggy-js/use-default-options'
 import { genTabs, quoteToSlashQ } from '../../utils'
 
 export interface StringifySongUpdatesOptions {
@@ -23,9 +24,9 @@ export interface StringifySongUpdatesOptions {
  * @returns {string} The new upgrade file contents
  */
 export const stringifySongUpdates = (updates: SongUpdateObject, options?: StringifySongUpdatesOptions): string => {
-  if (!options) options = { inline: false }
+  const opts = useDefaultOptions<StringifySongUpdatesOptions, true>({ inline: false }, options)
+  const { inline } = opts
 
-  const { inline } = options
   let rtnString = ''
 
   const upgKeys = Object.keys(updates).sort((a, b) => {

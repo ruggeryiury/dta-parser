@@ -65,6 +65,8 @@ export interface DTAFileRecipe extends UpdateDataOptions {
   rating: SongRating | SongRatingNames
 }
 
+export type CreateDTAReturnType<RT extends boolean | undefined> = RT extends true ? Song : DTAFile
+
 /**
  * Creates a new parsed song object.
  * - - - -
@@ -72,7 +74,7 @@ export interface DTAFileRecipe extends UpdateDataOptions {
  * @param {RT} asClass Refines the object to a `Song` class.
  * @returns {DTAFile} A new parsed song object.
  */
-export const createDTA = <RT extends boolean | undefined = undefined>(values?: DTAFileRecipe, asClass?: RT): RT extends true ? Song : DTAFile => {
+export const createDTA = <RT extends boolean | undefined = undefined>(values?: DTAFileRecipe, asClass?: RT): CreateDTAReturnType<RT> => {
   let newDTAInstance = cloneDeep(dtaDefault)
 
   if (values) {

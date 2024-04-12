@@ -28,10 +28,10 @@ export interface SpotifyAlbumSearchDocument {
         /** The internal Spotify ID for the artist. */
         id: string
         /** The name of the artist. */
-        name: 'Death From Above 1979'
+        name: string
         /** The type of the artist. */
-        type: 'artist'
-        uri: 'spotify:artist:18H0sAptzdwid08XGg1Lcj'
+        type: string
+        uri: string
       }[]
       /** An array with country codes which the album is available. */
       available_markets: string[]

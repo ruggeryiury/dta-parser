@@ -1,5 +1,6 @@
-import { promises as fs, existsSync } from 'fs'
-import { resolve } from 'path'
+import { existsSync } from 'node:fs'
+import { mkdir, rename, writeFile } from 'node:fs/promises'
+import { resolve } from 'node:path'
 import { SongCollection } from '../../../src'
 import { stringifySongUpdates } from '../../../src/core'
 import DTAFileReader from '../dtafile-reader'
@@ -43,8 +44,8 @@ const C3LibraryPatchModule = {
    * Generates a `c3_library_patch.dta` file on the `c3-library-patch` project folder and here, on `backend/gen` folder.
    */
   genPatchDTAFile: async (): Promise<void> => {
-    await fs.writeFile(C3LibraryPatchModule.paths.patchDTAFile, stringifySongUpdates(patch, { inline: true }), 'utf-8')
-    await fs.writeFile(`${process.cwd()}/backend/gen/c3_library_patch.dta`, stringifySongUpdates(patch, { inline: true }), 'utf-8')
+    await writeFile(C3LibraryPatchModule.paths.patchDTAFile, stringifySongUpdates(patch, { inline: true }), 'utf-8')
+    await writeFile(`${process.cwd()}/backend/gen/c3_library_patch.dta`, stringifySongUpdates(patch, { inline: true }), 'utf-8')
   },
   /**
    * Automatically moves extracted MILO files to the `updates` folder structure if the `alternate_path` value is `true`.
@@ -63,7 +64,7 @@ const C3LibraryPatchModule = {
 
         if (!existsSync(songUpdateFolder)) {
           try {
-            await fs.mkdir(songUpdateFolder)
+            await mkdir(songUpdateFolder)
           } catch (e) {
             // Do nothing
           }
@@ -71,14 +72,14 @@ const C3LibraryPatchModule = {
 
         if (!existsSync(songMiloGenFolder)) {
           try {
-            await fs.mkdir(songMiloGenFolder)
+            await mkdir(songMiloGenFolder)
           } catch (e) {
             // Do nothing
           }
         }
 
         try {
-          await fs.rename(songMilo, songMiloLocation)
+          await rename(songMilo, songMiloLocation)
         } catch (e) {
           // Do nothing
         }
@@ -101,7 +102,7 @@ const C3LibraryPatchModule = {
 
         if (!existsSync(songUpdateFolder)) {
           try {
-            await fs.mkdir(songUpdateFolder)
+            await mkdir(songUpdateFolder)
           } catch (e) {
             // Do nothing
           }
@@ -109,7 +110,7 @@ const C3LibraryPatchModule = {
 
         if (existsSync(fetchedArtwork)) {
           try {
-            await fs.rename(fetchedArtwork, newArtorkLocation)
+            await rename(fetchedArtwork, newArtorkLocation)
           } catch (e) {
             // Do nothing
           }

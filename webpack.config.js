@@ -38,8 +38,8 @@ module.exports = [
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env', '@babel/typescript'],
-              plugins: ['lodash', '@babel/transform-class-properties', '@babel/transform-object-rest-spread', '@babel/transform-modules-umd', ['polyfill-corejs3', { method: 'usage-global', version: '3.20' }]],
+              presets: ['@babel/preset-env', '@babel/typescript',],
+              plugins: ['lodash', ['polyfill-corejs3', { method: 'usage-global' }]],
             },
           },
         },

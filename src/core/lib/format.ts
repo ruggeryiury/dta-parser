@@ -1,3 +1,4 @@
+import useDefaultOptions from '../../lib/ruggy-js/use-default-options'
 import { leadingArticleToTrailing, omitLeadingArticle } from '../../utils'
 
 export interface DTAStringValueFormattingOptions {
@@ -35,9 +36,8 @@ export interface DTAStringValueFormattingOptions {
  * @returns {string} The song title.
  */
 export const formatDTAStringValue = (str: string, options?: DTAStringValueFormattingOptions): string => {
-  if (!options) options = { leadingArticle: 'emit', quoted: false }
-  else options = { leadingArticle: 'emit', quoted: false, ...options }
-  const { leadingArticle, quoted } = options
+  const opts = useDefaultOptions<DTAStringValueFormattingOptions, true>({ leadingArticle: 'emit', quoted: false }, options)
+  const { leadingArticle, quoted } = opts
   let returnValue = ''
 
   if (leadingArticle === 'emit') returnValue = str

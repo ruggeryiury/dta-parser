@@ -1,6 +1,6 @@
 {
   "name": "dta-parser",
-  "version": "1.1.0",
+  "version": "1.1.4",
   "private": false,
   "description": "A Rock Band song metadata file parser written in TypeScript",
   "main": "lib/index.js",
@@ -17,24 +17,30 @@
     "typescript"
   ],
   "scripts": {
-    "build": "yarn clean && yarn build:commonjs && yarn build:esmodule && webpack",
-    "tgz": "yarn clean && yarn build:commonjs && yarn build:esmodule && yarn pack",
+    "build": "yarn clear && yarn build:commonjs && yarn build:esmodules && webpack",
     "build:commonjs": "tsc --project ./prod.tsconfig.json",
-    "build:esmodule": "tsc --project ./prod.tsconfig.json --module es6 --outDir module",
-    "clean": "rimraf dist lib module",
-    "lint": "eslint src/**/*.{ts,js,tsx,jsx}",
-    "lint-fix": "eslint src/**/*.{ts,js,tsx,jsx} --fix",
-    "lint:backend": "eslint backend/**/*.{ts,js,tsx,jsx}",
-    "lint:backend-fix": "eslint backend/**/*.{ts,js,tsx,jsx} --fix",
-    "package:create": "yarn build && yarn pack",
+    "build:esmodules": "tsc --project ./prod.tsconfig.json --module es6 --outDir module",
+    "clear": "rimraf dist lib module",
     "dev": "nodemon ./backend/testing/init.ts",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "lint": "eslint src/**/*.{ts,js,tsx,jsx}",
+    "lint:backend": "eslint backend/**/*.{ts,js,tsx,jsx}"
   },
   "exports": {
     ".": {
       "require": "./lib/index.js",
       "import": "./module/index.js",
       "default": "./lib/index.js"
+    },
+    "./core": {
+      "require": "./lib/core/index.js",
+      "import": "./module/core/index.js",
+      "default": "./lib/core/index.js"
+    },
+    "./utils": {
+      "require": "./lib/utils/index.js",
+      "import": "./module/utils/index.js",
+      "default": "./lib/utils/index.js"
     }
   },
   "dependencies": {
@@ -43,7 +49,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.22.1",
-    "@babel/preset-env": "^7.22.4",
+    "@babel/preset-env": "^7.24.4",
     "@babel/preset-typescript": "^7.21.5",
     "@types/babel__core": "^7.20.1",
     "@types/lodash": "^4.14.202",

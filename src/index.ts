@@ -1,8 +1,15 @@
-import { DTAFile, MultipleSongsUpdateObject, Song, SongCollection, SongSortingTypes, SongUpdateObject, depackDTA, parseDTA, sortDTA, updateDTA } from './core'
+import { DTAFile, DTAFileRecipe, MultipleSongsUpdateObject, Song, SongCollection, SongSortingTypes, SongUpdateObject, depackDTA, genDTARecipe, parseDTA, sortDTA, updateDTA } from './core'
+import useDefaultOptions from './lib/ruggy-js/use-default-options'
 
-export interface DTAParserOptions<RT extends boolean | undefined> {
+export type DTAParserExportTypes = 'DTAFile' | 'DTARecipe' | 'SongClass' | undefined
+
+export interface DTAParserOptions<RT extends DTAParserExportTypes> {
   /**
-   * Changes the sorting of the songs. Is no sorting is specified, it will keep the order from the parsed `.dta` file.
+   * Parses a `.dta` file directly into a simple `DTAFile` object, or as a `DTARecipe` object. Default is `SongClass`.
+   */
+  format?: RT
+  /**
+   * Changes the sorting of the songs. If `undefined`, it will keep the order from the parsed `.dta` file.
    */
   sortBy?: SongSortingTypes
   /**
@@ -13,13 +20,9 @@ export interface DTAParserOptions<RT extends boolean | undefined> {
    * Applies common direct values updates on all songs inside the `.dta` file.
    */
   updateAll?: MultipleSongsUpdateObject
-  /**
-   * Parses a `.dta` file directly into a simple `DTAFile` object. Default is `false`.
-   */
-  asJSON?: RT
 }
 
-export type DTAParserReturnType<RT extends boolean | undefined> = RT extends true ? DTAFile[] : SongCollection
+export type DTAParserReturnType<RT extends DTAParserExportTypes> = RT extends 'DTAFile' ? DTAFile[] : RT extends 'DTARecipe' ? DTAFileRecipe[] : SongCollection
 
 /**
  * Parses a `.dta` file contents.
@@ -28,9 +31,8 @@ export type DTAParserReturnType<RT extends boolean | undefined> = RT extends tru
  * @param {DTAParserOptions<RT>} options `OPTIONAL` An object with options that customizes the parsing process.
  * @returns {DTAParserReturnType<RT>} An array of parsed song objects, or a `SongCollection` class.
  */
-const DTAParser = <RT extends boolean | undefined = undefined>(dtaFileContents: string, options?: DTAParserOptions<RT>): DTAParserReturnType<RT> => {
-  if (!options) options = {}
-  const { sortBy, update, updateAll, asJSON } = options
+const DTAParser = <RT extends DTAParserExportTypes = undefined>(dtaFileContents: string, options?: DTAParserOptions<RT>): DTAParserReturnType<RT> => {
+  const { format, sortBy, update, updateAll } = useDefaultOptions<DTAParserOptions<RT>, false>({ format: undefined, sortBy: undefined, update: undefined, updateAll: undefined }, options)
 
   const depackedSongs = depackDTA(dtaFileContents)
 
@@ -72,14 +74,15 @@ const DTAParser = <RT extends boolean | undefined = undefined>(dtaFileContents: 
     parsedSongs = sortDTA(parsedSongs, sortBy)
   }
 
-  if (asJSON) return parsedSongs as RT extends true ? DTAFile[] : SongCollection
+  if (format === 'DTAFile') return parsedSongs as DTAParserReturnType<RT>
+  else if (format === 'DTARecipe') return parsedSongs.map((ps) => genDTARecipe(ps)) as DTAParserReturnType<RT>
 
   const collection: Song[] = []
   parsedSongs.forEach((song) => {
     collection.push(new Song(song))
   })
 
-  return new SongCollection(collection) as RT extends true ? DTAFile[] : SongCollection
+  return new SongCollection(collection) as DTAParserReturnType<RT>
 }
 
 export type { DTAFile } from './core/lib/dta'

@@ -1,5 +1,6 @@
-import { promises as fs, existsSync } from 'fs'
-import { resolve } from 'path'
+import { existsSync } from 'node:fs'
+import { copyFile, mkdir, readdir, rm, unlink, writeFile } from 'node:fs/promises'
+import { resolve } from 'node:path'
 import { detect } from 'jschardet'
 import { StringifyDataOptions, DTAFileExpanded, stringifyDTA, sortDTA, SongSubGenre, DTAFile } from '../../../src/core'
 import { genTabs as t, rankCalculator as r, genAudioFileStructure } from '../../../src/utils'
@@ -133,17 +134,17 @@ const GenFolderModule = {
    */
   cleanFolder: async (...args: GenFolderFilesTypes[]): Promise<void> => {
     const genFolderPath = GenFolderModule.path
-    const genFolderContents = (await fs.readdir(genFolderPath)).map((fn) => resolve(genFolderPath, fn))
+    const genFolderContents = (await readdir(genFolderPath)).map((fn) => resolve(genFolderPath, fn))
     for (const arg of args) {
       if (arg === 'songs.dta' && existsSync(resolve(genFolderPath, arg))) {
         try {
-          await fs.unlink(resolve(genFolderPath, arg))
+          await unlink(resolve(genFolderPath, arg))
         } catch (e) {
           // Do nothing
         }
       } else if (arg === 'id.dta' && existsSync(resolve(genFolderPath, arg))) {
         try {
-          await fs.unlink(resolve(genFolderPath, arg))
+          await unlink(resolve(genFolderPath, arg))
         } catch (e) {
           // Do nothing
         }
@@ -151,7 +152,7 @@ const GenFolderModule = {
         for (const filename of genFolderContents) {
           if (filename.endsWith('.c3') || filename.endsWith('.rbdeps') || filename.endsWith('.rbproj') || filename.endsWith('.rbdeps.new')) {
             try {
-              await fs.unlink(filename)
+              await unlink(filename)
             } catch (e) {
               // Do nothing
             }
@@ -161,7 +162,7 @@ const GenFolderModule = {
         for (const filename of genFolderContents) {
           if (filename.endsWith('.png')) {
             try {
-              await fs.unlink(filename)
+              await unlink(filename)
             } catch (e) {
               // Do nothing
             }
@@ -201,7 +202,7 @@ const GenFolderModule = {
       const newDTAContents = stringifyDTA(allSongs, options)
       const { encoding: enc } = detect(newDTAContents)
       const encoding: DTAFileEncodingTypes = options?.forceEncoding ? options.forceEncoding : enc === 'windows-1251' ? 'latin1' : enc === 'UTF-8' ? 'utf-8' : 'utf-8'
-      await fs.writeFile(newFilePath, newDTAContents, encoding)
+      await writeFile(newFilePath, newDTAContents, encoding)
     },
     /**
      * Asynchronously generates a text file with a `.dta` extension, with a list with the provided songs inside the `backend/gen` folder.
@@ -252,7 +253,7 @@ const GenFolderModule = {
         return content
       }, Promise.resolve(''))
 
-      await fs.writeFile(resolve(GenFolderModule.path, `${genFilename}.dta`), contents, 'utf-8')
+      await writeFile(resolve(GenFolderModule.path, `${genFilename}.dta`), contents, 'utf-8')
     },
     /**
      * Asynchronously generates a CON file folder structure on the `backend/gen/confile` folder for quick custom testing.
@@ -273,14 +274,14 @@ const GenFolderModule = {
 
       if (existsSync(buildPath)) {
         try {
-          await fs.rm(buildPath, { recursive: true, force: true })
+          await rm(buildPath, { recursive: true, force: true })
         } catch (e) {
           // Do nothing
         }
       }
 
       try {
-        await fs.mkdir(buildPath)
+        await mkdir(buildPath)
       } catch (e) {
         // Do nothing
       }
@@ -290,8 +291,8 @@ const GenFolderModule = {
         const dtaPath = resolve(songsPath, 'songs.dta')
 
         try {
-          await fs.writeFile(dtaPath, stringifyDTA(dta, { gameOriginAsRB3DLC: true, guitarCores: true, placeCustomAttributes: true, placeRB3DXAttributes: true, type: 'rb3_dlc' }), 'utf-8')
-          await fs.mkdir(songsPath)
+          await writeFile(dtaPath, stringifyDTA(dta, { gameOriginAsRB3DLC: true, guitarCores: true, placeCustomAttributes: true, placeRB3DXAttributes: true, type: 'rb3_dlc' }), 'utf-8')
+          await mkdir(songsPath)
         } catch (e) {
           // Do nothing
         }
@@ -305,13 +306,13 @@ const GenFolderModule = {
           const PngFilePath = resourcesPath && existsSync(resolve(resourcesPath, `${songname}_keep.png_xbox`)) ? resolve(resourcesPath, `${songname}_keep.png_xbox`) : undefined
 
           try {
-            await fs.mkdir(songPath)
-            await fs.mkdir(songGenPath)
-            await fs.copyFile(blankMiloPath, miloPath)
+            await mkdir(songPath)
+            await mkdir(songGenPath)
+            await copyFile(blankMiloPath, miloPath)
             if (resourcesPath && existsSync(resolve(resourcesPath))) {
-              if (midFilePath) await fs.copyFile(midFilePath, resolve(songPath, `${songname}.mid`))
-              if (moggFilePath) await fs.copyFile(moggFilePath, resolve(songPath, `${songname}.mogg`))
-              if (PngFilePath) await fs.copyFile(PngFilePath, resolve(songGenPath, `${songname}_keep.png_xbox`))
+              if (midFilePath) await copyFile(midFilePath, resolve(songPath, `${songname}.mid`))
+              if (moggFilePath) await copyFile(moggFilePath, resolve(songPath, `${songname}.mogg`))
+              if (PngFilePath) await copyFile(PngFilePath, resolve(songGenPath, `${songname}_keep.png_xbox`))
             }
           } catch (e) {
             // Do nothing
@@ -329,15 +330,15 @@ const GenFolderModule = {
         const PngFilePath = resourcesPath && existsSync(resolve(resourcesPath, `${songname}_keep.png_xbox`)) ? resolve(resourcesPath, `${songname}_keep.png_xbox`) : undefined
 
         try {
-          await fs.mkdir(songsPath)
-          await fs.mkdir(songPath)
-          await fs.mkdir(songGenPath)
-          await fs.writeFile(dtaPath, stringifyDTA(dta, { gameOriginAsRB3DLC: true, guitarCores: true, placeCustomAttributes: true, placeRB3DXAttributes: true, type: 'rb3_dlc' }), 'utf-8')
-          await fs.copyFile(blankMiloPath, miloPath)
+          await mkdir(songsPath)
+          await mkdir(songPath)
+          await mkdir(songGenPath)
+          await writeFile(dtaPath, stringifyDTA(dta, { gameOriginAsRB3DLC: true, guitarCores: true, placeCustomAttributes: true, placeRB3DXAttributes: true, type: 'rb3_dlc' }), 'utf-8')
+          await copyFile(blankMiloPath, miloPath)
           if (resourcesPath && existsSync(resolve(resourcesPath))) {
-            if (midFilePath) await fs.copyFile(midFilePath, resolve(songPath, `${songname}.mid`))
-            if (moggFilePath) await fs.copyFile(moggFilePath, resolve(songPath, `${songname}.mogg`))
-            if (PngFilePath) await fs.copyFile(PngFilePath, resolve(songGenPath, `${songname}_keep.png_xbox`))
+            if (midFilePath) await copyFile(midFilePath, resolve(songPath, `${songname}.mid`))
+            if (moggFilePath) await copyFile(moggFilePath, resolve(songPath, `${songname}.mogg`))
+            if (PngFilePath) await copyFile(PngFilePath, resolve(songGenPath, `${songname}_keep.png_xbox`))
           }
         } catch (e) {
           // Do nothing
@@ -779,8 +780,8 @@ const GenFolderModule = {
         song.song_id
       }\nUniqueNumericID2X=\n\nTO DO List Begin\nToDo1=Verify the accuracy of all metadata,False,False\nToDo2=Grab official *.png_xbox art file if applicable,False,False\nToDo3=Chart reductions in all instruments,False,False\nToDo4=Add drum fills,False,False\nToDo5=Add overdrive for all instruments,False,False\nToDo6=Add overdrive for vocals,False,False\nToDo7=Create practice sessions [EVENTS],False,False\nToDo8=Draw sing-along notes in VENUE,False,False\nToDo9=Record dry vocals for lipsync,False,False\nToDo10=Render audio with RB limiter and count-in,False,False\nToDo12=Click to add new item...,False,False\nToDo13=Click to add new item...,False,False\nToDo14=Click to add new item...,False,False\nToDo15=Click to add new item...,False,False\nTO DO List End\n`
 
-      await fs.writeFile(RBPROJFilePath, output, 'ascii')
-      await fs.writeFile(C3FilePath, c3out, 'ascii')
+      await writeFile(RBPROJFilePath, output, 'ascii')
+      await writeFile(C3FilePath, c3out, 'ascii')
     },
   },
 }

@@ -1,4 +1,5 @@
 import { DTAFile, SongSortingTypes, sortDTA } from '..'
+import useDefaultOptions from '../../lib/ruggy-js/use-default-options'
 import { genAudioFileStructure, genRB3DLCDetailedTracksStructure as genRB3DLCDetailedTrack, quoteToSlashQ, genTabs as t, genSpaces as s, incrementTracksCount } from '../../utils'
 
 export interface StringifyDataOptions {
@@ -601,11 +602,10 @@ const stringifyRB3DLC = (value: DTAFile, options: StringifyDataOptions): string 
  * @returns {string} A string representation of this parsed song object as a `.dta` file contents string.
  */
 export const stringifyDTA = (songs: DTAFile[] | DTAFile, options?: StringifyDataOptions): string => {
-  if (!options === undefined) options = { placeCustomAttributes: true, useSpaces: true }
-  else options = { placeCustomAttributes: true, useSpaces: true, ...options }
+  const opts = useDefaultOptions<StringifyDataOptions, false>({ placeCustomAttributes: true, useSpaces: true }, options)
   let output = ''
 
-  const { type, useSpaces, ignoreFakeSongs, sortBy, detailedTracksStructure } = options
+  const { type, useSpaces, ignoreFakeSongs, sortBy, detailedTracksStructure } = opts
 
   if (Array.isArray(songs) && sortBy) {
     songs = sortDTA(songs, sortBy)
@@ -616,16 +616,16 @@ export const stringifyDTA = (songs: DTAFile[] | DTAFile, options?: StringifyData
       if (ignoreFakeSongs && value.fake) {
         // Don't add to songs...
       } else {
-        if (type === 'rb3_dlc') output += stringifyRB3DLC(value, options)
-        else output += stringifyDefault(value, options)
+        if (type === 'rb3_dlc') output += stringifyRB3DLC(value, opts)
+        else output += stringifyDefault(value, opts)
       }
     }
   } else {
     if (ignoreFakeSongs && songs.fake) {
       // Don't add to songs...
     } else {
-      if (type === 'rb3_dlc') output += stringifyRB3DLC(songs, options)
-      else output += stringifyDefault(songs, options)
+      if (type === 'rb3_dlc') output += stringifyRB3DLC(songs, opts)
+      else output += stringifyDefault(songs, opts)
     }
   }
 
