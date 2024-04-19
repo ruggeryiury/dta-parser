@@ -269,7 +269,7 @@ export class Song<T extends DTAFile = DTAFile> {
    */
   constructor(recipe: DTAFile | DTAFileRecipe) {
     if ('tracks' in recipe) {
-      const newSong = createDTA(recipe)
+      const newSong = createDTA(recipe, true)
       this.value = newSong as Readonly<T>
       this.tracks = genAudioFileStructure(newSong)
       this.recipe = recipe
