@@ -223,7 +223,7 @@ export interface VocalsUpdateOptions<T extends InstrumentTracksTypes> {
    * - `Mono` (or `1`)
    * - `Stereo` (or `2`)
    */
-  channels: InstrumentTracksTypes
+  channels: T
   /**
    * The ranking of the instrument.
    */
@@ -256,7 +256,7 @@ export interface KeysUpdateOptions<T extends InstrumentTracksTypes> {
    * - `Mono` (or `1`)
    * - `Stereo` (or `2`)
    */
-  channels: InstrumentTracksTypes
+  channels: T
   /**
    * The ranking of the instrument.
    */

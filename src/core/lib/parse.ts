@@ -21,7 +21,7 @@ export const parseDTA = (song: string): DTAFile => {
     rankFinished = false,
     soloStarted = false
 
-  const parsed = createDTA()
+  const parsed = createDTA(undefined, true)
   const split = song.split(/[;(]/).map((value) => value.trim())
 
   split.forEach((value) => {

@@ -5,7 +5,7 @@ export const ruinus = {
   name: 'Ruin Us',
   artist: 'The Jellybricks',
   master: true,
-  song_id: 1774800047,
+  song_id: 1774800048,
   songname: '7748ruinus',
   tracks: {
     drum: { rank: 2, channels: 5 },
