@@ -2,7 +2,7 @@ import { createDTA, extendDTAFile } from '../../../../src/core'
 import { MAGMAProject } from '../../backend-gen-folder'
 import * as database from './songs'
 
-const songs = {
+export const ruggy = {
   paintwar: extendDTAFile<MAGMAProject>(createDTA(database.paintwar, true), {
     autogenTheme: 'SynthPop',
     hasAuthoredVenues: true,
@@ -356,8 +356,8 @@ const songs = {
 const RuggyCustoms = (): MAGMAProject[] => {
   const list: MAGMAProject[] = []
 
-  Object.keys(songs).forEach((song) => {
-    list.push(songs[song as keyof typeof songs])
+  Object.keys(ruggy).forEach((song) => {
+    list.push(ruggy[song as keyof typeof ruggy])
   })
 
   return list.sort((a, b) => {

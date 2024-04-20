@@ -9,7 +9,7 @@ assets/
 .npmignore
 .prettierignore
 .prettierrc.js
-.yarnrc.yml
+babel.config.js
 prod.tsconfig.json
 tsconfig.json
 webpack.config.js

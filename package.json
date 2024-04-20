@@ -1,6 +1,6 @@
 {
   "name": "dta-parser",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "private": false,
   "description": "A Rock Band song metadata file parser written in TypeScript",
   "main": "lib/index.js",
