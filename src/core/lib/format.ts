@@ -1,4 +1,4 @@
-import useDefaultOptions from '../../lib/ruggy-js/use-default-options'
+import useDefaultOptions from '../../lib/ruggy-js/useDefaultOptions'
 import { leadingArticleToTrailing, omitLeadingArticle } from '../../utils'
 
 export interface DTAStringValueFormattingOptions {

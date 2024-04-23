@@ -10,7 +10,7 @@ const sortingLocale = {
   song_id: 'Song ID',
 } as const
 
-export type SongSortingTypes = (typeof sortingLocale)[keyof typeof sortingLocale]
+export type SongSortingTypes = (typeof sortingLocale)[keyof typeof sortingLocale] | null
 
 /**
  * Sorts an array of parsed song objects.
@@ -58,12 +58,12 @@ export const sortDTA = (songs: DTAFile[], sortBy: SongSortingTypes): DTAFile[] =
       if (a.id.toLowerCase() < b.id.toLowerCase()) return -1
       return 0
     })
-  } else {
+  } else if (sortBy === 'Song ID') {
     // Sorting by Song ID
     return songs.sort((a, b) => {
       if (String(a.song_id).toLowerCase() > String(b.song_id).toLowerCase()) return 1
       if (String(a.song_id).toLowerCase() < String(b.song_id).toLowerCase()) return -1
       return 0
     })
-  }
+  } else return songs
 }

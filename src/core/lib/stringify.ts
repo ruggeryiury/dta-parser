@@ -1,12 +1,12 @@
 import { DTAFile, SongSortingTypes, sortDTA } from '..'
-import useDefaultOptions from '../../lib/ruggy-js/use-default-options'
+import useDefaultOptions from '../../lib/ruggy-js/useDefaultOptions'
 import { genAudioFileStructure, genRB3DLCDetailedTracksStructure as genRB3DLCDetailedTrack, quoteToSlashQ, genTabs as t, genSpaces as s, incrementTracksCount } from '../../utils'
 
 export interface StringifyDataOptions {
   /**
-   * Specify the generated type of the DTA. Default is `'default'`.
+   * Specify the generated type of the DTA. Default is `'rbn'`.
    */
-  type?: 'default' | 'rb3_dlc'
+  type?: 'rbn' | 'rb3_dlc'
   /**
    * By setting this to `true`, it places 1 to the
    * guitar audio channels on `cores`. Default is `false`.
@@ -21,7 +21,7 @@ export interface StringifyDataOptions {
    */
   placeRB3DXAttributes?: boolean
   /**
-   * Place the game origin of all songs as `rb3_dlc`, ignoring the game origin of the DTA.
+   * Place the game origin of all songs as `rb3_dlc`, ignoring the game origin of the DTA. Default is `false`.
    */
   gameOriginAsRB3DLC?: boolean
   /**
@@ -29,7 +29,7 @@ export interface StringifyDataOptions {
    */
   omitUnusedRanks?: boolean
   /**
-   * If `true`, fake songs will be ignored from the generated DTA file contents. Default is `false`.
+   * If `false`, fake songs won't be ignored from the generated DTA file contents. Default is `true`.
    */
   ignoreFakeSongs?: boolean
   /**
@@ -46,8 +46,10 @@ export interface StringifyDataOptions {
    * Uses spaces rather than tabs. This can be either a number or a boolean value. Default is `false`.
    *
    * If this argument is a boolean value (specially `true`), it will use 3 (three) spaces as default. You can change the amount of space characters by placing a number.
+   *
+   * *This value won't have any effect when property `detailedTracksStructure` is set to `false`.*
    */
-  useSpaces?: boolean | number
+  useSpaces?: boolean | number | null
   /**
    * Changes some properties to generate `.dta` file contents for Wii systems.
    */
@@ -62,7 +64,7 @@ export interface StringifyDataOptions {
      * Odd, positive numbers only.
      */
     slot: number
-  }
+  } | null
 }
 
 /**
@@ -318,7 +320,6 @@ const stringifyDefault = (value: DTAFile, options: StringifyDataOptions): string
 const stringifyRB3DLC = (value: DTAFile, options: StringifyDataOptions): string => {
   const { guitarCores, omitUnusedRanks, placeCustomAttributes, placeRB3DXAttributes, wiiMode, gameOriginAsRB3DLC, detailedTracksStructure } = options
   const panVol = genAudioFileStructure(value)
-  // console.log(panVol)
 
   const {
     id,
@@ -602,7 +603,22 @@ const stringifyRB3DLC = (value: DTAFile, options: StringifyDataOptions): string 
  * @returns {string} A string representation of this parsed song object as a `.dta` file contents string.
  */
 export const stringifyDTA = (songs: DTAFile[] | DTAFile, options?: StringifyDataOptions): string => {
-  const opts = useDefaultOptions<StringifyDataOptions, false>({ placeCustomAttributes: true, useSpaces: true }, options)
+  const opts = useDefaultOptions<StringifyDataOptions, true>(
+    {
+      detailedTracksStructure: false,
+      gameOriginAsRB3DLC: false,
+      guitarCores: false,
+      ignoreFakeSongs: true,
+      omitUnusedRanks: false,
+      placeCustomAttributes: true,
+      placeRB3DXAttributes: false,
+      sortBy: null,
+      type: 'rbn',
+      useSpaces: false,
+      wiiMode: null,
+    },
+    options
+  )
   let output = ''
 
   const { type, useSpaces, ignoreFakeSongs, sortBy, detailedTracksStructure } = opts
@@ -629,12 +645,12 @@ export const stringifyDTA = (songs: DTAFile[] | DTAFile, options?: StringifyData
     }
   }
 
-  if (useSpaces !== undefined) {
+  if (!useSpaces === undefined || !useSpaces === null) {
     if (detailedTracksStructure) {
       // output = output.replace(/\t/g, '   ')
     } else if (typeof useSpaces === 'boolean') {
       output = output.replace(/\t/g, '   ')
-    } else {
+    } else if (typeof useSpaces === 'number') {
       output = output.replace(/\t/g, ' '.repeat(useSpaces))
     }
   }

@@ -72,18 +72,18 @@ export interface SpotifyAlbumSearchDocument {
   }
 }
 
-export type FetchAlbumArtworkImageSize = 'small' | 'medium' | 'large'
+export type SearchAlbumArtworkImageSize = 'small' | 'medium' | 'large'
 
 /**
  * Fetches an album artwork URL using the Spotify API.
  * - - - -
  * @param {DTAFile} song A parsed song that you want to fetch the album artwork URL from.
- * @param {FetchAlbumArtworkImageSize | undefined} imageSize `OPTIONAL` The size of the album artwork. Default is `'large'`.
+ * @param {SearchAlbumArtworkImageSize | undefined} imageSize `OPTIONAL` The size of the album artwork. Default is `'large'`.
  * @throws {Error} If the function is unable to encode authorization string to base64 using `btoa()` or using the `Buffer` constructor.
  * @returns {Promise<string | undefined>} The album artwork URL as string. Returns `undefined` if the connection to the API has been refused
  * at any point, if the provided song has no album name, or if no album has been found on the Spotify database.
  */
-export const fetchAlbumArtwork = async (song: DTAFile, imageSize: FetchAlbumArtworkImageSize = 'large'): Promise<string | undefined> => {
+export const searchAlbumArtwork = async (song: DTAFile, imageSize: SearchAlbumArtworkImageSize = 'large'): Promise<string | undefined> => {
   if (!song.album_name) return undefined
   else {
     const query = `${song.artist.replaceAll('&', 'and')} ${song.album_name.replaceAll('&', 'and')}`

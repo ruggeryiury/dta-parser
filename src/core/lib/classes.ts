@@ -27,7 +27,7 @@ import {
   stringifyDTA,
   updateDTA,
 } from '..'
-import { FetchAlbumArtworkImageSize, AudioFileTracksStructureDocument, SongDrumMixNames, checkDrumMix, fetchAlbumArtwork, genAudioFileStructure } from '../../utils'
+import { SearchAlbumArtworkImageSize, AudioFileTracksStructureDocument, SongDrumMixNames, checkDrumMix, searchAlbumArtwork, genAudioFileStructure } from '../../utils'
 
 export interface SongGetRankMethods {
   /**
@@ -283,13 +283,13 @@ export class Song<T extends DTAFile = DTAFile> {
   /**
    * Fetches an album artwork URL for the song using the Spotify API.
    * - - - -
-   * @param {FetchAlbumArtworkImageSize | undefined} imageSize `OPTIONAL` The size of the album artwork. Default is `'large'`.
+   * @param {SearchAlbumArtworkImageSize | undefined} imageSize `OPTIONAL` The size of the album artwork. Default is `'large'`.
    * @throws {Error} If the function is unable to encode authorization string to base64 using `btoa()` or using the `Buffer` constructor.
    * @returns {Promise<string | undefined>} The album artwork URL as string. Returns `undefined` if the connection to the API has been refused
    * at any point, if the provided song has no album name, or if no album has been found on the Spotify database.
    */
-  async albumArtworkURL(imageSize: FetchAlbumArtworkImageSize = 'large'): Promise<string | undefined> {
-    return await fetchAlbumArtwork(this.value, imageSize)
+  async albumArtworkURL(imageSize: SearchAlbumArtworkImageSize = 'large'): Promise<string | undefined> {
+    return await searchAlbumArtwork(this.value, imageSize)
   }
 
   /**

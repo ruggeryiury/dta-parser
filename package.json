@@ -1,6 +1,6 @@
 {
   "name": "dta-parser",
-  "version": "1.1.6",
+  "version": "1.1.8",
   "private": false,
   "description": "A Rock Band song metadata file parser written in TypeScript",
   "main": "lib/index.js",
@@ -18,13 +18,14 @@
   ],
   "scripts": {
     "build": "yarn clear && yarn build:commonjs && yarn build:esmodules && webpack",
+    "build:package": "yarn clear && yarn build:commonjs && yarn build:esmodules && yarn pack && yarn clear",
     "build:commonjs": "tsc --project ./prod.tsconfig.json",
     "build:esmodules": "tsc --project ./prod.tsconfig.json --module es6 --outDir module",
     "clear": "rimraf dist lib module",
     "dev": "nodemon ./backend/testing/init.ts",
     "format": "prettier --write .",
-    "lint": "eslint src/**/*.{ts,js,tsx,jsx}",
-    "lint:backend": "eslint backend/**/*.{ts,js,tsx,jsx}"
+    "lint": "eslint scr",
+    "lint:backend": "eslint backend"
   },
   "exports": {
     ".": {
@@ -45,6 +46,7 @@
   },
   "dependencies": {
     "core-js": "^3.36.1",
+    "jschardet": "^3.1.2",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
@@ -65,7 +67,6 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-promise": "^6.1.1",
-    "jschardet": "^3.1.2",
     "lodash-webpack-plugin": "^0.11.6",
     "nodemon": "^2.0.22",
     "prettier": "^3.2.5",

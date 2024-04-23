@@ -1,5 +1,6 @@
 import { DTAFile, DTAFileRecipe, MultipleSongsUpdateObject, Song, SongCollection, SongSortingTypes, SongUpdateObject, depackDTA, genDTARecipe, parseDTA, sortDTA, updateDTA } from './core'
-import useDefaultOptions from './lib/ruggy-js/use-default-options'
+import useDefaultOptions from './lib/ruggy-js/useDefaultOptions'
+import detectBufferEncoding from './utils/lib/detectBufferEncoding'
 
 export type DTAParserExportTypes = 'DTAFile' | 'DTARecipe' | 'SongClass' | undefined
 
@@ -15,11 +16,11 @@ export interface DTAParserOptions<RT extends DTAParserExportTypes> {
   /**
    * Applies direct values updates on any song inside the `.dta` file based on the song's shortname ID.
    */
-  update?: SongUpdateObject
+  update?: SongUpdateObject | null
   /**
    * Applies common direct values updates on all songs inside the `.dta` file.
    */
-  updateAll?: MultipleSongsUpdateObject
+  updateAll?: MultipleSongsUpdateObject | null
 }
 
 export type DTAParserReturnType<RT extends DTAParserExportTypes> = RT extends 'DTAFile' ? DTAFile[] : RT extends 'DTARecipe' ? DTAFileRecipe[] : SongCollection
@@ -27,14 +28,16 @@ export type DTAParserReturnType<RT extends DTAParserExportTypes> = RT extends 'D
 /**
  * Parses a `.dta` file contents.
  * - - - -
- * @param {string} dtaFileContents The `.dta` file contents as string.
+ * @param {string | Buffer} dtaFileContents The `.dta` file contents as string or Buffer.
  * @param {DTAParserOptions<RT>} options `OPTIONAL` An object with options that customizes the parsing process.
  * @returns {DTAParserReturnType<RT>} An array of parsed song objects, or a `SongCollection` class.
  */
-const DTAParser = <RT extends DTAParserExportTypes = undefined>(dtaFileContents: string, options?: DTAParserOptions<RT>): DTAParserReturnType<RT> => {
+const DTAParser = <RT extends DTAParserExportTypes = undefined>(dtaFileContents: string | Buffer, options?: DTAParserOptions<RT>): DTAParserReturnType<RT> => {
   const { format, sortBy, update, updateAll } = useDefaultOptions<DTAParserOptions<RT>, false>({ format: undefined, sortBy: undefined, update: undefined, updateAll: undefined }, options)
 
-  const depackedSongs = depackDTA(dtaFileContents)
+  const encoding = detectBufferEncoding(dtaFileContents)
+  const content = typeof dtaFileContents === 'string' ? dtaFileContents : dtaFileContents.toString(encoding)
+  const depackedSongs = depackDTA(content)
 
   let parsedSongs = depackedSongs.map((value) => {
     const song = parseDTA(value)
