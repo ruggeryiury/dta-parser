@@ -39,8 +39,8 @@ With _DTA Parser_ you can:
 import DTAParser from 'dta-parser'
 import fs from 'fs'
 
-// Fetch a .dta file to get its contents as string.
-const dtaFileContents = fs.readFileSync('/path/to/dta-file.dta', 'utf-8')
+// Read a .dta file to get its contents.
+const dtaFileContents = fs.readFileSync('/path/to/dta-file.dta')
 
 // Use "DTAParser()", passing the .dta file contents
 // as first argument.
