@@ -1,5 +1,5 @@
-import { DTAFile, createDTA } from '..'
-import { slashQToQuote } from '../../utils'
+import { DTAFile, createDTA } from '../core'
+import { slashQToQuote } from '../utils'
 
 /**
  * Parses a `.dta` file contents into a `DTAFile`.

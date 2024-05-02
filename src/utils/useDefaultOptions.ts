@@ -10,9 +10,7 @@ export type DefaultOptionsObject<T, R extends boolean | object | undefined> = R 
  * @returns {DefaultOptionsReturnType<T, R>} The default options merged with given user options.
  * @since v1.1
  */
-const useDefaultOptions = <T, R extends boolean | object | undefined = undefined>(defaultOptions: DefaultOptionsObject<T, R>, userOptions?: T): DefaultOptionsObject<T, R> => {
+export const useDefaultOptions = <T, R extends boolean | object | undefined = undefined>(defaultOptions: DefaultOptionsObject<T, R>, userOptions?: T): DefaultOptionsObject<T, R> => {
   if (!userOptions) return defaultOptions
   return { ...defaultOptions, ...userOptions }
 }
-
-export default useDefaultOptions

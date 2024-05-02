@@ -16,8 +16,8 @@ import {
   VocalParts,
   VocalPartsNames,
   localeValueToKey,
-} from '..'
-import { panValueToArray, rankValuesToDTARankSystem, bandAverageRankCalculator, timeStringToMilliseconds } from '../../utils'
+} from '../core'
+import { panValueToArray, rankValuesToDTARankSystem, bandAverageRankCalculator, timeStringToMilliseconds } from '../utils'
 
 export type DrumTracksTypes =
   | 2

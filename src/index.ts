@@ -1,6 +1,5 @@
 import { DTAFile, DTAFileRecipe, MultipleSongsUpdateObject, Song, SongCollection, SongSortingTypes, SongUpdateObject, depackDTA, genDTARecipe, parseDTA, sortDTA, updateDTA } from './core'
-import useDefaultOptions from './lib/ruggy-js/useDefaultOptions'
-import detectBufferEncoding from './utils/lib/detectBufferEncoding'
+import { detectBufferEncoding, useDefaultOptions } from './utils'
 
 export type DTAParserExportTypes = 'DTAFile' | 'DTARecipe' | 'SongClass' | undefined
 
@@ -88,6 +87,6 @@ const DTAParser = <RT extends DTAParserExportTypes = undefined>(dtaFileContents:
   return new SongCollection(collection) as DTAParserReturnType<RT>
 }
 
-export type { DTAFile } from './core/lib/dta'
+export type { DTAFile } from './core'
 export { Song, SongCollection }
 export default DTAParser

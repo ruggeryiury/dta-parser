@@ -14,8 +14,8 @@ import {
   TrackUpdateOptions,
   VocalsUpdateOptionsTypes,
   localeKeyToValue,
-} from '..'
-import { genAudioFileStructure, rankCalculator } from '../../utils'
+} from '../core'
+import { genAudioFileStructure, rankCalculator } from '../utils'
 
 /**
  * Generates an object specifying the whole song's instruments and audio channels structure.

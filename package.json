@@ -1,6 +1,6 @@
 {
   "name": "dta-parser",
-  "version": "1.1.8",
+  "version": "1.2.0",
   "private": false,
   "description": "A Rock Band song metadata file parser written in TypeScript",
   "main": "lib/index.js",
@@ -22,10 +22,9 @@
     "build:commonjs": "tsc --project ./prod.tsconfig.json",
     "build:esmodules": "tsc --project ./prod.tsconfig.json --module es6 --outDir module",
     "clear": "rimraf dist lib module",
-    "dev": "nodemon ./backend/testing/init.ts",
+    "dev": "nodemon ./tests/init.ts",
     "format": "prettier --write .",
-    "lint": "eslint scr",
-    "lint:backend": "eslint backend"
+    "lint": "eslint src"
   },
   "exports": {
     ".": {
@@ -34,14 +33,14 @@
       "default": "./lib/index.js"
     },
     "./core": {
-      "require": "./lib/core/index.js",
-      "import": "./module/core/index.js",
-      "default": "./lib/core/index.js"
+      "require": "./lib/core.js",
+      "import": "./module/core.js",
+      "default": "./lib/core.js"
     },
     "./utils": {
-      "require": "./lib/utils/index.js",
-      "import": "./module/utils/index.js",
-      "default": "./lib/utils/index.js"
+      "require": "./lib/utils.js",
+      "import": "./module/utils.js",
+      "default": "./lib/utils.js"
     }
   },
   "dependencies": {

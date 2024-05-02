@@ -1,6 +1,5 @@
-import { SongUpdateObject, localeValueToKey } from '..'
-import useDefaultOptions from '../../lib/ruggy-js/useDefaultOptions'
-import { genTabs, quoteToSlashQ } from '../../utils'
+import { SongUpdateObject, localeValueToKey } from '../core'
+import { genTabs, quoteToSlashQ, useDefaultOptions } from '../utils'
 
 export interface StringifySongUpdatesOptions {
   /**

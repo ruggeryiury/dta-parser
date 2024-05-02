@@ -36,7 +36,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['backend/testing/*.ts'],
+      files: ['tests/*.ts'],
       rules: {
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-floating-promises': 'off',

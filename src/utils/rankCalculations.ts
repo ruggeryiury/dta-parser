@@ -1,4 +1,4 @@
-import { InstrRankingNames, InstrRankingNumbers } from '../../core'
+import { InstrRankingNames, InstrRankingNumbers } from '../core'
 
 const ranksMap = {
   drum: [124, 151, 178, 242, 345, 448],

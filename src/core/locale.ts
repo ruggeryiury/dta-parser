@@ -1,4 +1,4 @@
-import { SongKeyMajorValues, SongKeyMinorValues } from '..'
+import { SongKeyMajorValues, SongKeyMinorValues } from '../core'
 
 export type ExtractNumbers<T> = T extends number ? T : never
 export type ExtractStrings<T> = T extends string ? T : never

@@ -1,6 +1,5 @@
-import { DTAFile, SongSortingTypes, sortDTA } from '..'
-import useDefaultOptions from '../../lib/ruggy-js/useDefaultOptions'
-import { genAudioFileStructure, genRB3DLCDetailedTracksStructure as genRB3DLCDetailedTrack, quoteToSlashQ, genTabs as t, genSpaces as s, incrementTracksCount } from '../../utils'
+import { DTAFile, SongSortingTypes, sortDTA } from '../core'
+import { genAudioFileStructure, genRB3DLCDetailedTracksStructure as genRB3DLCDetailedTrack, quoteToSlashQ, genTabs as t, genSpaces as s, incrementTracksCount, useDefaultOptions } from '../utils'
 
 export interface StringifyDataOptions {
   /**

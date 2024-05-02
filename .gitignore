@@ -1,11 +1,10 @@
 node_modules/
 old_modules/
-backend/gen
-backend/testing
 dist/
 /lib/
 module/
 python/
+tests/
 *.tgz
 *.rar
 *.zip

@@ -26,8 +26,8 @@ import {
   sortDTA,
   stringifyDTA,
   updateDTA,
-} from '..'
-import { SearchAlbumArtworkImageSize, AudioFileTracksStructureDocument, SongDrumMixNames, checkDrumMix, searchAlbumArtwork, genAudioFileStructure } from '../../utils'
+} from '../core'
+import { SongDrumMixNames, AudioFileTracksStructureDocument, genAudioFileStructure, SearchAlbumArtworkImageSize, searchAlbumArtwork, checkDrumMix } from '../utils'
 
 export interface SongGetRankMethods {
   /**
@@ -160,12 +160,19 @@ export interface SongGetRankMethods {
 
 export interface SongGetValueMethods {
   /**
-   * Fetches the song title.
+   * Fetches the song title. Alias to `Song.getValue.title()`.
    * - - - -
    * @param {DTAStringValueFormattingOptions | undefined} options `OPTIONAL` Customize options for the song title's return value.
    * @returns {string} The song title.
    */
   name: (options?: DTAStringValueFormattingOptions) => string
+  /**
+   * Fetches the song title. Alias to `Song.getValue.name()`.
+   * - - - -
+   * @param {DTAStringValueFormattingOptions | undefined} options `OPTIONAL` Customize options for the song title's return value.
+   * @returns {string} The song title.
+   */
+  title: (options?: DTAStringValueFormattingOptions) => string
   /**
    * Fetches the song artist.
    * - - - -
@@ -252,15 +259,15 @@ export class Song<T extends DTAFile = DTAFile> {
   /**
    * A parsed song object with all its contents.
    */
-  value: Readonly<T>
+  public value: Readonly<T>
   /**
    * An object containing detailed informations about the song's audio file track structure.
    */
-  tracks: Readonly<AudioFileTracksStructureDocument>
+  public tracks: Readonly<AudioFileTracksStructureDocument>
   /**
    * A recipe object from this song, you can use it on a `Song` class constructor to re-create this `Song` class object.
    */
-  recipe: Readonly<DTAFileRecipe>
+  public recipe: Readonly<DTAFileRecipe>
 
   /**
    * A class representing a parsed song.
@@ -288,15 +295,16 @@ export class Song<T extends DTAFile = DTAFile> {
    * @returns {Promise<string | undefined>} The album artwork URL as string. Returns `undefined` if the connection to the API has been refused
    * at any point, if the provided song has no album name, or if no album has been found on the Spotify database.
    */
-  async albumArtworkURL(imageSize: SearchAlbumArtworkImageSize = 'large'): Promise<string | undefined> {
+  public async albumArtworkURL(imageSize: SearchAlbumArtworkImageSize = 'large'): Promise<string | undefined> {
     return await searchAlbumArtwork(this.value, imageSize)
   }
 
   /**
    * Functions to fetch data from the song, with several tweaks to manipulate the results.
    */
-  getValue: SongGetValueMethods = {
+  public getValue: SongGetValueMethods = {
     name: (options) => formatDTAStringValue(this.value.name, options),
+    title: (options) => formatDTAStringValue(this.value.name, options),
     artist: (options) => formatDTAStringValue(this.value.artist, options),
     master: () => this.value.master,
     drumMix: () => checkDrumMix(this.value),
@@ -326,7 +334,7 @@ export class Song<T extends DTAFile = DTAFile> {
    * - - - -
    * @returns {DTAFile} The raw parsed song object.
    */
-  json(): DTAFile {
+  public json(): DTAFile {
     return this.value
   }
   /**
@@ -334,7 +342,7 @@ export class Song<T extends DTAFile = DTAFile> {
    * - - - -
    * @param {UpdateDataOptions} update An object with values to be updated.
    */
-  update(update: UpdateDataOptions): void {
+  public update(update: UpdateDataOptions): void {
     const updated = updateDTA(this.value, update)
     this.value = updated as Readonly<T>
     this.tracks = genAudioFileStructure(updated)
@@ -349,7 +357,7 @@ export class Song<T extends DTAFile = DTAFile> {
    * Only some values can be customized on the default option for maximum compatibility with other `.dta` file parsers.
    * @returns {string} A string representation of this parsed song object as a `.dta` file contents string.
    */
-  stringify(options?: StringifyDataOptions): string {
+  public stringify(options?: StringifyDataOptions): string {
     return stringifyDTA(this.value, options)
   }
 }
@@ -366,7 +374,7 @@ export interface SingleSongSelectorMethods {
 
 /** A class representing an array with parsed songs. */
 export class SongCollection {
-  collection: Song[] = []
+  public collection: Song[] = []
   constructor(collection: (Song | DTAFile)[]) {
     collection.forEach((song) => {
       if (song instanceof Song) {
@@ -381,7 +389,7 @@ export class SongCollection {
    * - - - -
    * @param {DTAFile | Song | DTAFile[] | Song[]} song A song (or an array of songs) that you want to add to the collection.
    */
-  add(song: DTAFile | Song | DTAFile[] | Song[]): void {
+  public add(song: DTAFile | Song | DTAFile[] | Song[]): void {
     if (Array.isArray(song)) {
       song.forEach((s) => {
         if (s instanceof Song) {
@@ -403,7 +411,7 @@ export class SongCollection {
    * - - - -
    * @param {string} id The unique string ID of the song you want to be removed from the collection.
    */
-  remove(id: string): void {
+  public remove(id: string): void {
     this.collection = this.collection.filter((song) => {
       if (id !== song.value.id) return song
     })
@@ -417,7 +425,7 @@ export class SongCollection {
    * Only some values can be customized on the default option for maximum compatibility with other `.dta` file parsers.
    * @returns {string} A string representation of this array of songs as a `.dta` file contents string.
    */
-  stringify(options?: StringifyDataOptions): string {
+  public stringify(options?: StringifyDataOptions): string {
     let returnString = ''
     this.collection.forEach((song) => {
       returnString += song.stringify(options)
@@ -430,7 +438,7 @@ export class SongCollection {
    * - - - -
    * @returns {DTAFile[]} An array with raw parsed song objects.
    */
-  json(): DTAFile[] {
+  public json(): DTAFile[] {
     return this.collection.map((song) => {
       return song.value as DTAFile
     })
@@ -440,7 +448,7 @@ export class SongCollection {
    * - - - -
    * @param {SongSortingTypes} sortBy The sorting type of the song collection.
    */
-  sort(sortBy: SongSortingTypes): void {
+  public sort(sortBy: SongSortingTypes): void {
     const newArray = sortDTA(
       this.collection.map((song) => song.json()),
       sortBy
@@ -450,7 +458,7 @@ export class SongCollection {
   /**
    * Methods to select a single song from the collection.
    */
-  selectOne: SingleSongSelectorMethods = {
+  public selectOne: SingleSongSelectorMethods = {
     byID: (id) => this.collection.find((song) => song.value.id === id),
   }
 }

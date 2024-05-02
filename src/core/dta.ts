@@ -15,7 +15,7 @@ import {
   SoloFlags,
   SongEncoding,
   SongGameOrigin,
-} from '..'
+} from '../core'
 
 /**
  * A parsed song object with all its contents.
