@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "yarn clear && yarn build:commonjs && yarn build:esmodules",
-    "build:package": "yarn clear && yarn build:commonjs && yarn build:esmodules && yarn pack && yarn clear",
+    "build:package": "yarn clear && yarn build:commonjs && yarn build:esmodules && yarn pack",
     "build:commonjs": "tsc --project ./prod.tsconfig.json",
     "build:esmodules": "tsc --project ./prod.tsconfig.json --module esnext --moduleResolution bundler --outDir module",
     "clear": "rimraf dist lib module",

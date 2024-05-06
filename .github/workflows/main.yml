@@ -28,7 +28,7 @@ jobs:
         run: yarn install
 
       - name: Build Package
-        run: yarn build
+        run: yarn build:package
 
       - name: Extract Package Version and Name
         id: extract_version
