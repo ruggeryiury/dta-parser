@@ -1,1 +1,1 @@
-First release of `dta-parser`.
+First release of `dta-parser`!

@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "private": false,
   "description": "A Rock Band song metadata file parser written in TypeScript",
+  "homepage": "https://github.com/ruggeryiury/dta-parser#readme",
+  "repository": "github:ruggeryiury/dta-parser",
   "type": "module",
   "main": "lib/index.js",
   "module": "module/index.js",
@@ -62,9 +64,5 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.8.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ruggeryiury/dta-parser.git"
   }
 }
