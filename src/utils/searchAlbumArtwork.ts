@@ -83,7 +83,10 @@ export type SearchAlbumArtworkImageSize = 'small' | 'medium' | 'large'
  * @returns {Promise<string | undefined>} The album artwork URL as string. Returns `undefined` if the connection to the API has been refused
  * at any point, if the provided song has no album name, or if no album has been found on the Spotify database.
  */
-export const searchAlbumArtwork = async (song: DTAFile, imageSize: SearchAlbumArtworkImageSize = 'large'): Promise<string | undefined> => {
+export const searchAlbumArtwork = async (
+  song: DTAFile,
+  imageSize: SearchAlbumArtworkImageSize = 'large'
+): Promise<string | undefined> => {
   if (!song.album_name) return undefined
   else {
     const query = `${song.artist.replaceAll('&', 'and')} ${song.album_name.replaceAll('&', 'and')}`
@@ -94,11 +97,7 @@ export const searchAlbumArtwork = async (song: DTAFile, imageSize: SearchAlbumAr
     const authEndpoint = 'https://accounts.spotify.com/api/token'
     const authString = `6cfb201730dd4d0093eef69a96623fe9:796f9f01577f4104891dbda684d25463`
 
-    let authorization: string
-
-    if (btoa && typeof btoa === 'function') authorization = btoa(authString)
-    else if (Buffer) authorization = Buffer.from(authString).toString('base64')
-    else throw new Error("Unable to encode authorization string to base64: Neither 'btoa' nor 'Buffer' is available in this environment.")
+    const authorization = Buffer.from(authString).toString('base64')
 
     const authToken = await fetch(authEndpoint, {
       method: 'post',

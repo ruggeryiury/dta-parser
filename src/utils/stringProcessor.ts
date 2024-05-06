@@ -63,7 +63,10 @@ type TabOrSpaceGeneratorNewLineTypes = 'start' | 'end' | 'both' | 'none'
  * @param {TabOrSpaceGeneratorNewLineTypes} newLine `OPTIONAL` Places a new line charater wherever you want. Default is `'start'`.
  * @returns {string} A string with '\n' charaters and '\t' characters repeated `tabCount` times.
  */
-export const genTabs = (tabCount = 1, newLine: TabOrSpaceGeneratorNewLineTypes = 'start'): string =>
+export const genTabs = (
+  tabCount = 1,
+  newLine: TabOrSpaceGeneratorNewLineTypes = 'start'
+): string =>
   `${newLine === 'start' || newLine === 'both' ? '\n' : ''}${'\t'.repeat(tabCount)}${newLine === 'end' || newLine === 'both' ? '\n' : ''}`
 
 /**
@@ -73,5 +76,8 @@ export const genTabs = (tabCount = 1, newLine: TabOrSpaceGeneratorNewLineTypes =
  * @param {TabOrSpaceGeneratorNewLineTypes} newLine `OPTIONAL` Places a new line charater wherever you want. Default is `'none'`.
  * @returns {string} A string with space characters repeated `spaceCount` times.
  */
-export const genSpaces = (spaceCount = 1, newLine: TabOrSpaceGeneratorNewLineTypes = 'none') =>
+export const genSpaces = (
+  spaceCount = 1,
+  newLine: TabOrSpaceGeneratorNewLineTypes = 'none'
+) =>
   `${newLine === 'start' || newLine === 'both' ? '\n' : ''}${' '.repeat(spaceCount)}${newLine === 'end' || newLine === 'both' ? '\n' : ''}`

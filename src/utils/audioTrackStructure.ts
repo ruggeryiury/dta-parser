@@ -8,11 +8,14 @@ import { genSpaces as s } from '../utils'
  * @param {number} add The value to increment the track count by.
  * @returns {string} A string representing the series of track counts.
  */
-export const incrementTracksCount = (trackStart: number, add: number): string => {
+export const incrementTracksCount = (
+  trackStart: number,
+  add: number
+): string => {
   let returnString = ''
   const iterator = Array(add).fill(0)
   iterator.forEach((_, i) => {
-    returnString += `${trackStart}${i === iterator.length - 1 ? '' : ' '}`
+    returnString += `${trackStart.toString()}${i === iterator.length - 1 ? '' : ' '}`
     trackStart++
     return
   })
@@ -25,7 +28,9 @@ export const incrementTracksCount = (trackStart: number, add: number): string =>
  * @param {DrumTracksTypes | InstrumentTracksTypes} count The type of tracks.
  * @returns {number[]} An array of pan values based on the track count.
  */
-export const panValueToArray = (count: DrumTracksTypes | InstrumentTracksTypes): number[] => {
+export const panValueToArray = (
+  count: DrumTracksTypes | InstrumentTracksTypes
+): number[] => {
   switch (count) {
     case 'Mono':
     case 1:
@@ -49,7 +54,13 @@ export const panValueToArray = (count: DrumTracksTypes | InstrumentTracksTypes):
   }
 }
 
-export type SongDrumMixNames = 'drums0' | 'drums1' | 'drums2' | 'drums3' | 'drums4' | undefined
+export type SongDrumMixNames =
+  | 'drums0'
+  | 'drums1'
+  | 'drums2'
+  | 'drums3'
+  | 'drums4'
+  | undefined
 /**
  * Returns the drum mix of the song.
  *
@@ -303,7 +314,9 @@ export interface AudioFileTracksStructureDocument {
  * @param {DTAFile} song The song you want the panning and volume information from.
  * @returns {AudioFileTracksStructureDocument} An object with all panning and volume informations.
  */
-export const genAudioFileStructure = (song: DTAFile): AudioFileTracksStructureDocument => {
+export const genAudioFileStructure = (
+  song: DTAFile
+): AudioFileTracksStructureDocument => {
   const { tracks_count, pans, vols, solo } = song
   const [allDrum, bass, guitar, vocals, keys, backing, crowd] = tracks_count
   const drumkick = allDrum >= 3 ? (allDrum === 6 ? 2 : 1) : 0
@@ -335,8 +348,14 @@ export const genAudioFileStructure = (song: DTAFile): AudioFileTracksStructureDo
       // Drum kit
       kitEnabled: drumkit !== 0,
       kitChannels: drumkit,
-      kitPan: allDrum < 3 ? pans.slice(0, allDrum) : pans.slice(drumkick + drumsnare, drumkick + drumsnare + drumkit),
-      kitVol: allDrum < 3 ? vols.slice(0, allDrum) : vols.slice(drumkick + drumsnare, drumkick + drumsnare + drumkit),
+      kitPan:
+        allDrum < 3
+          ? pans.slice(0, allDrum)
+          : pans.slice(drumkick + drumsnare, drumkick + drumsnare + drumkit),
+      kitVol:
+        allDrum < 3
+          ? vols.slice(0, allDrum)
+          : vols.slice(drumkick + drumsnare, drumkick + drumsnare + drumkit),
     },
     bass: {
       enabled: bass !== 0,
@@ -348,68 +367,130 @@ export const genAudioFileStructure = (song: DTAFile): AudioFileTracksStructureDo
     guitar: {
       enabled: guitar !== 0,
       channels: guitar,
-      pan: guitar === 0 ? [] : pans.slice(allDrum + bass, allDrum + bass + guitar),
-      vol: guitar === 0 ? [] : vols.slice(allDrum + bass, allDrum + bass + guitar),
+      pan:
+        guitar === 0 ? [] : pans.slice(allDrum + bass, allDrum + bass + guitar),
+      vol:
+        guitar === 0 ? [] : vols.slice(allDrum + bass, allDrum + bass + guitar),
       hasSolo: solo ? solo.some((value) => value === 'guitar') : false,
     },
     vocals: {
       enabled: vocals !== 0,
       channels: vocals,
-      pan: vocals === 0 ? [] : pans.slice(allDrum + bass + guitar, allDrum + bass + guitar + vocals),
-      vol: vocals === 0 ? [] : vols.slice(allDrum + bass + guitar, allDrum + bass + guitar + vocals),
-      hasSolo: solo ? solo.some((value) => value === 'vocal_percussion') : false,
+      pan:
+        vocals === 0
+          ? []
+          : pans.slice(
+              allDrum + bass + guitar,
+              allDrum + bass + guitar + vocals
+            ),
+      vol:
+        vocals === 0
+          ? []
+          : vols.slice(
+              allDrum + bass + guitar,
+              allDrum + bass + guitar + vocals
+            ),
+      hasSolo: solo
+        ? solo.some((value) => value === 'vocal_percussion')
+        : false,
     },
     keys: {
       enabled: keys !== 0,
       channels: keys,
-      pan: keys === 0 ? [] : pans.slice(allDrum + bass + guitar + vocals, allDrum + bass + guitar + vocals + keys),
-      vol: keys === 0 ? [] : vols.slice(allDrum + bass + guitar + vocals, allDrum + bass + guitar + vocals + keys),
+      pan:
+        keys === 0
+          ? []
+          : pans.slice(
+              allDrum + bass + guitar + vocals,
+              allDrum + bass + guitar + vocals + keys
+            ),
+      vol:
+        keys === 0
+          ? []
+          : vols.slice(
+              allDrum + bass + guitar + vocals,
+              allDrum + bass + guitar + vocals + keys
+            ),
       hasSolo: solo ? solo.some((value) => value === 'keys') : false,
     },
     backing: {
       enabled: backing !== 0,
       channels: backing,
-      pan: backing === 0 ? [] : pans.slice(allDrum + bass + guitar + vocals + keys, allDrum + bass + guitar + vocals + keys + backing),
-      vol: backing === 0 ? [] : vols.slice(allDrum + bass + guitar + vocals + keys, allDrum + bass + guitar + vocals + keys + backing),
+      pan:
+        backing === 0
+          ? []
+          : pans.slice(
+              allDrum + bass + guitar + vocals + keys,
+              allDrum + bass + guitar + vocals + keys + backing
+            ),
+      vol:
+        backing === 0
+          ? []
+          : vols.slice(
+              allDrum + bass + guitar + vocals + keys,
+              allDrum + bass + guitar + vocals + keys + backing
+            ),
     },
     crowd: {
       enabled: crowd !== undefined,
-      vol: crowd === undefined ? undefined : vols.slice(allDrum + bass + guitar + vocals + keys + backing)[0],
+      vol:
+        crowd === undefined
+          ? undefined
+          : vols.slice(allDrum + bass + guitar + vocals + keys + backing)[0],
     },
   }
 }
 
-export type DetailedTrackTypes = 'drums' | 'kick' | 'snare' | 'drumkit' | 'bass' | 'guitar' | 'vocals' | 'keys' | 'trks' | 'crowd'
+export type DetailedTrackTypes =
+  | 'drums'
+  | 'kick'
+  | 'snare'
+  | 'drumkit'
+  | 'bass'
+  | 'guitar'
+  | 'vocals'
+  | 'keys'
+  | 'trks'
+  | 'crowd'
 export type DetailedTracksInfoTypes = 'desc' | 'pans' | 'vols' | 'cores'
 
 /**
  * Generates a detailed audio track structure information with aligned names and values to use on the stringify process with `'rb3_dlc'` type.
  * - - - -
  * @param {DetailedTrackTypes} part The instrument part to generate the audio track structure information.
- * @param {DetailedTracksInfoTypes} row The actual structure to generate the audio track structure information.
- * @param {AudioFileTracksStructureDocument} panvol An object containing detailed informations about the song's audio file track structure.
+ * @param {DetailedTracksInfoTypes} info The actual structure to generate the audio track structure information.
+ * @param {AudioFileTracksStructureDocument} structure An object containing detailed informations about the song's audio file track structure.
  * @param {boolean | undefined} guitarCores `OPTIONAL` By setting this to `true`, it places 1 to the guitar audio channels on `cores`. Default is `false`.
  * @returns {string} The detailed audio track structure information as string.
  */
-export const genRB3DLCDetailedTracksStructure = (part: DetailedTrackTypes, info: DetailedTracksInfoTypes, structure: AudioFileTracksStructureDocument, guitarCores?: boolean): string => {
+export const genRB3DLCDetailedTracksStructure = (
+  part: DetailedTrackTypes,
+  info: DetailedTracksInfoTypes,
+  structure: AudioFileTracksStructureDocument,
+  guitarCores?: boolean
+): string => {
   if (part === 'drums') {
     if (structure.drum.kitChannels === 2) {
       if (info === 'desc') return `${s(3)}DRUMS${s(2)}`
       else if (info === 'pans') {
         let returnString = ''
-        if (structure.drum.kitPan[0] < 0) returnString += structure.drum.kitPan[0].toFixed(1)
+        if (structure.drum.kitPan[0] < 0)
+          returnString += structure.drum.kitPan[0].toFixed(1)
         else returnString += `${s()}${structure.drum.kitPan[0].toFixed(1)}`
 
-        if (structure.drum.kitPan[1] < 0) returnString += `${s(2)}${structure.drum.kitPan[1].toFixed(1)}`
+        if (structure.drum.kitPan[1] < 0)
+          returnString += `${s(2)}${structure.drum.kitPan[1].toFixed(1)}`
         else returnString += `${s(3)}${structure.drum.kitPan[1].toFixed(1)}`
 
         return returnString
       } else if (info === 'vols') {
         let returnString = ''
-        if (structure.drum.kitVol[0] < 0) returnString += structure.drum.kitVol[0].toFixed(1)
+        if (structure.drum.kitVol[0] < 0)
+          returnString += structure.drum.kitVol[0].toFixed(1)
         else returnString += `${s()}${structure.drum.kitVol[0].toFixed(1)}`
 
-        if (structure.drum.kitVol[1] < 0) returnString += `${s(2)}${structure.drum.kitVol[1].toFixed(1)}`
+        if (structure.drum.kitVol[1] < 0)
+          returnString += `${s(2)}${structure.drum.kitVol[1].toFixed(1)}`
         else returnString += `${s(3)}${structure.drum.kitVol[1].toFixed(1)}`
 
         return returnString
@@ -422,19 +503,23 @@ export const genRB3DLCDetailedTracksStructure = (part: DetailedTrackTypes, info:
       if (info === 'desc') return `${s(4)}KICK${s(3)}`
       if (info === 'pans') {
         let returnString = ''
-        if (structure.drum.kickPan[0] < 0) returnString += structure.drum.kickPan[0].toFixed(1)
+        if (structure.drum.kickPan[0] < 0)
+          returnString += structure.drum.kickPan[0].toFixed(1)
         else returnString += `${s()}${structure.drum.kickPan[0].toFixed(1)}`
 
-        if (structure.drum.kickPan[1] < 0) returnString += `${s(3)}${structure.drum.kickPan[1].toFixed(1)}`
+        if (structure.drum.kickPan[1] < 0)
+          returnString += `${s(3)}${structure.drum.kickPan[1].toFixed(1)}`
         else returnString += `${s(4)}${structure.drum.kickPan[1].toFixed(1)}`
 
         return returnString
       } else if (info === 'vols') {
         let returnString = ''
-        if (structure.drum.kickVol[0] < 0) returnString += structure.drum.kickVol[0].toFixed(1)
+        if (structure.drum.kickVol[0] < 0)
+          returnString += structure.drum.kickVol[0].toFixed(1)
         else returnString += `${s()}${structure.drum.kickVol[0].toFixed(1)}`
 
-        if (structure.drum.kickVol[1] < 0) returnString += `${s(3)}${structure.drum.kickVol[1].toFixed(1)}`
+        if (structure.drum.kickVol[1] < 0)
+          returnString += `${s(3)}${structure.drum.kickVol[1].toFixed(1)}`
         else returnString += `${s(4)}${structure.drum.kickVol[1].toFixed(1)}`
 
         return returnString
@@ -445,13 +530,15 @@ export const genRB3DLCDetailedTracksStructure = (part: DetailedTrackTypes, info:
       if (info === 'desc') return 'KICK'
       if (info === 'pans') {
         let returnString = ''
-        if (structure.drum.kickPan[0] < 0) returnString += structure.drum.kickPan[0].toFixed(1)
+        if (structure.drum.kickPan[0] < 0)
+          returnString += structure.drum.kickPan[0].toFixed(1)
         else returnString += `${s()}${structure.drum.kickPan[0].toFixed(1)}`
 
         return returnString
       } else if (info === 'vols') {
         let returnString = ''
-        if (structure.drum.kickVol[0] < 0) returnString += structure.drum.kickVol[0].toFixed(1)
+        if (structure.drum.kickVol[0] < 0)
+          returnString += structure.drum.kickVol[0].toFixed(1)
         else returnString += `${s()}${structure.drum.kickVol[0].toFixed(1)}`
 
         return returnString
@@ -464,19 +551,23 @@ export const genRB3DLCDetailedTracksStructure = (part: DetailedTrackTypes, info:
       if (info === 'desc') return `${s(3)}SNARE${s(2)}`
       else if (info === 'pans') {
         let returnString = ''
-        if (structure.drum.kitPan[0] < 0) returnString += structure.drum.kitPan[0].toFixed(1)
+        if (structure.drum.kitPan[0] < 0)
+          returnString += structure.drum.kitPan[0].toFixed(1)
         else returnString += `${s()}${structure.drum.kitPan[0].toFixed(1)}`
 
-        if (structure.drum.kitPan[1] < 0) returnString += `${s(2)}${structure.drum.kitPan[1].toFixed(1)}`
+        if (structure.drum.kitPan[1] < 0)
+          returnString += `${s(2)}${structure.drum.kitPan[1].toFixed(1)}`
         else returnString += `${s(3)}${structure.drum.kitPan[1].toFixed(1)}`
 
         return returnString
       } else if (info === 'vols') {
         let returnString = ''
-        if (structure.drum.kitVol[0] < 0) returnString += structure.drum.kitVol[0].toFixed(1)
+        if (structure.drum.kitVol[0] < 0)
+          returnString += structure.drum.kitVol[0].toFixed(1)
         else returnString += `${s()}${structure.drum.kitVol[0].toFixed(1)}`
 
-        if (structure.drum.kitVol[1] < 0) returnString += `${s(2)}${structure.drum.kitVol[1].toFixed(1)}`
+        if (structure.drum.kitVol[1] < 0)
+          returnString += `${s(2)}${structure.drum.kitVol[1].toFixed(1)}`
         else returnString += `${s(3)}${structure.drum.kitVol[1].toFixed(1)}`
 
         return returnString
@@ -487,13 +578,15 @@ export const genRB3DLCDetailedTracksStructure = (part: DetailedTrackTypes, info:
       if (info === 'desc') return 'SNARE'
       if (info === 'pans') {
         let returnString = ''
-        if (structure.drum.snarePan[0] < 0) returnString += `${structure.drum.snarePan[0].toFixed(1)} `
+        if (structure.drum.snarePan[0] < 0)
+          returnString += `${structure.drum.snarePan[0].toFixed(1)} `
         else returnString += `${s()}${structure.drum.snarePan[0].toFixed(1)} `
 
         return returnString
       } else if (info === 'vols') {
         let returnString = ''
-        if (structure.drum.snareVol[0] < 0) returnString += `${structure.drum.snareVol[0].toFixed(1)} `
+        if (structure.drum.snareVol[0] < 0)
+          returnString += `${structure.drum.snareVol[0].toFixed(1)} `
         else returnString += `${s()}${structure.drum.snareVol[0].toFixed(1)} `
 
         return returnString
@@ -506,19 +599,23 @@ export const genRB3DLCDetailedTracksStructure = (part: DetailedTrackTypes, info:
       if (info === 'desc') return `${s(2)}DRUM KIT${s()}`
       else if (info === 'pans') {
         let returnString = ''
-        if (structure.drum.kitPan[0] < 0) returnString += structure.drum.kitPan[0].toFixed(1)
+        if (structure.drum.kitPan[0] < 0)
+          returnString += structure.drum.kitPan[0].toFixed(1)
         else returnString += `${s()}${structure.drum.kitPan[0].toFixed(1)}`
 
-        if (structure.drum.kitPan[1] < 0) returnString += `${s(3)}${structure.drum.kitPan[1].toFixed(1)}`
+        if (structure.drum.kitPan[1] < 0)
+          returnString += `${s(3)}${structure.drum.kitPan[1].toFixed(1)}`
         else returnString += `${s(4)}${structure.drum.kitPan[1].toFixed(1)}`
 
         return returnString
       } else if (info === 'vols') {
         let returnString = ''
-        if (structure.drum.kitVol[0] < 0) returnString += structure.drum.kitVol[0].toFixed(1)
+        if (structure.drum.kitVol[0] < 0)
+          returnString += structure.drum.kitVol[0].toFixed(1)
         else returnString += `${s()}${structure.drum.kitVol[0].toFixed(1)}`
 
-        if (structure.drum.kitVol[1] < 0) returnString += `${s(3)}${structure.drum.kitVol[1].toFixed(1)}`
+        if (structure.drum.kitVol[1] < 0)
+          returnString += `${s(3)}${structure.drum.kitVol[1].toFixed(1)}`
         else returnString += `${s(4)}${structure.drum.kitVol[1].toFixed(1)}`
 
         return returnString
@@ -531,19 +628,23 @@ export const genRB3DLCDetailedTracksStructure = (part: DetailedTrackTypes, info:
       if (info === 'desc') return `${s(4)}BASS${s(3)}`
       else if (info === 'pans') {
         let returnString = ''
-        if (structure.bass.pan[0] < 0) returnString += structure.bass.pan[0].toFixed(1)
+        if (structure.bass.pan[0] < 0)
+          returnString += structure.bass.pan[0].toFixed(1)
         else returnString += `${s()}${structure.bass.pan[0].toFixed(1)}`
 
-        if (structure.bass.pan[1] < 0) returnString += `${s(3)}${structure.bass.pan[1].toFixed(1)}`
+        if (structure.bass.pan[1] < 0)
+          returnString += `${s(3)}${structure.bass.pan[1].toFixed(1)}`
         else returnString += `${s(4)}${structure.bass.pan[1].toFixed(1)}`
 
         return returnString
       } else if (info === 'vols') {
         let returnString = ''
-        if (structure.bass.vol[0] < 0) returnString += structure.bass.vol[0].toFixed(1)
+        if (structure.bass.vol[0] < 0)
+          returnString += structure.bass.vol[0].toFixed(1)
         else returnString += `${s()}${structure.bass.vol[0].toFixed(1)}`
 
-        if (structure.bass.vol[1] < 0) returnString += `${s(3)}${structure.bass.vol[1].toFixed(1)}`
+        if (structure.bass.vol[1] < 0)
+          returnString += `${s(3)}${structure.bass.vol[1].toFixed(1)}`
         else returnString += `${s(4)}${structure.bass.vol[1].toFixed(1)}`
 
         return returnString
@@ -554,13 +655,15 @@ export const genRB3DLCDetailedTracksStructure = (part: DetailedTrackTypes, info:
       if (info === 'desc') return 'BASS'
       if (info === 'pans') {
         let returnString = ''
-        if (structure.bass.pan[0] < 0) returnString += `${structure.bass.pan[0].toFixed(1)}`
+        if (structure.bass.pan[0] < 0)
+          returnString += structure.bass.pan[0].toFixed(1)
         else returnString += `${s()}${structure.bass.pan[0].toFixed(1)}`
 
         return returnString
       } else if (info === 'vols') {
         let returnString = ''
-        if (structure.bass.pan[0] < 0) returnString += structure.bass.pan[0].toFixed(1)
+        if (structure.bass.pan[0] < 0)
+          returnString += structure.bass.pan[0].toFixed(1)
         else returnString += `${s()}${structure.bass.pan[0].toFixed(1)}`
 
         return returnString
@@ -573,19 +676,23 @@ export const genRB3DLCDetailedTracksStructure = (part: DetailedTrackTypes, info:
       if (info === 'desc') return `${s(3)}GUITAR${s(2)}`
       else if (info === 'pans') {
         let returnString = ''
-        if (structure.guitar.pan[0] < 0) returnString += structure.guitar.pan[0].toFixed(1)
+        if (structure.guitar.pan[0] < 0)
+          returnString += structure.guitar.pan[0].toFixed(1)
         else returnString += `${s()}${structure.guitar.pan[0].toFixed(1)}`
 
-        if (structure.guitar.pan[1] < 0) returnString += `${s(3)}${structure.guitar.pan[1].toFixed(1)}`
+        if (structure.guitar.pan[1] < 0)
+          returnString += `${s(3)}${structure.guitar.pan[1].toFixed(1)}`
         else returnString += `${s(4)}${structure.guitar.pan[1].toFixed(1)}`
 
         return returnString
       } else if (info === 'vols') {
         let returnString = ''
-        if (structure.guitar.vol[0] < 0) returnString += structure.guitar.vol[0].toFixed(1)
+        if (structure.guitar.vol[0] < 0)
+          returnString += structure.guitar.vol[0].toFixed(1)
         else returnString += `${s()}${structure.guitar.vol[0].toFixed(1)}`
 
-        if (structure.guitar.vol[1] < 0) returnString += `${s(3)}${structure.guitar.vol[1].toFixed(1)}`
+        if (structure.guitar.vol[1] < 0)
+          returnString += `${s(3)}${structure.guitar.vol[1].toFixed(1)}`
         else returnString += `${s(4)}${structure.guitar.vol[1].toFixed(1)}`
 
         return returnString
@@ -600,13 +707,15 @@ export const genRB3DLCDetailedTracksStructure = (part: DetailedTrackTypes, info:
       if (info === 'desc') return 'GUITAR'
       if (info === 'pans') {
         let returnString = ''
-        if (structure.guitar.pan[0] < 0) returnString += `${s()}${structure.guitar.pan[0].toFixed(1)} `
+        if (structure.guitar.pan[0] < 0)
+          returnString += `${s()}${structure.guitar.pan[0].toFixed(1)} `
         else returnString += `${s(2)}${structure.guitar.pan[0].toFixed(1)} `
 
         return returnString
       } else if (info === 'vols') {
         let returnString = ''
-        if (structure.guitar.pan[0] < 0) returnString += `${s()}${structure.guitar.pan[0].toFixed(1)} `
+        if (structure.guitar.pan[0] < 0)
+          returnString += `${s()}${structure.guitar.pan[0].toFixed(1)} `
         else returnString += `${s(2)}${structure.guitar.pan[0].toFixed(1)} `
 
         return returnString
@@ -623,19 +732,23 @@ export const genRB3DLCDetailedTracksStructure = (part: DetailedTrackTypes, info:
       if (info === 'desc') return `${s(3)}VOCALS${s(2)}`
       else if (info === 'pans') {
         let returnString = ''
-        if (structure.vocals.pan[0] < 0) returnString += structure.vocals.pan[0].toFixed(1)
+        if (structure.vocals.pan[0] < 0)
+          returnString += structure.vocals.pan[0].toFixed(1)
         else returnString += `${s()}${structure.vocals.pan[0].toFixed(1)}`
 
-        if (structure.vocals.pan[1] < 0) returnString += `${s(3)}${structure.vocals.pan[1].toFixed(1)}`
+        if (structure.vocals.pan[1] < 0)
+          returnString += `${s(3)}${structure.vocals.pan[1].toFixed(1)}`
         else returnString += `${s(4)}${structure.vocals.pan[1].toFixed(1)}`
 
         return returnString
       } else if (info === 'vols') {
         let returnString = ''
-        if (structure.vocals.vol[0] < 0) returnString += structure.vocals.vol[0].toFixed(1)
+        if (structure.vocals.vol[0] < 0)
+          returnString += structure.vocals.vol[0].toFixed(1)
         else returnString += `${s()}${structure.vocals.vol[0].toFixed(1)}`
 
-        if (structure.vocals.vol[1] < 0) returnString += `${s(3)}${structure.vocals.vol[1].toFixed(1)}`
+        if (structure.vocals.vol[1] < 0)
+          returnString += `${s(3)}${structure.vocals.vol[1].toFixed(1)}`
         else returnString += `${s(4)}${structure.vocals.vol[1].toFixed(1)}`
 
         return returnString
@@ -646,13 +759,15 @@ export const genRB3DLCDetailedTracksStructure = (part: DetailedTrackTypes, info:
       if (info === 'desc') return 'VOCALS'
       if (info === 'pans') {
         let returnString = ''
-        if (structure.vocals.pan[0] < 0) returnString += `${s()}${structure.vocals.pan[0].toFixed(1)} `
+        if (structure.vocals.pan[0] < 0)
+          returnString += `${s()}${structure.vocals.pan[0].toFixed(1)} `
         else returnString += `${s(2)}${structure.vocals.pan[0].toFixed(1)} `
 
         return returnString
       } else if (info === 'vols') {
         let returnString = ''
-        if (structure.vocals.pan[0] < 0) returnString += `${s()}${structure.vocals.pan[0].toFixed(1)} `
+        if (structure.vocals.pan[0] < 0)
+          returnString += `${s()}${structure.vocals.pan[0].toFixed(1)} `
         else returnString += `${s(2)}${structure.vocals.pan[0].toFixed(1)} `
 
         return returnString
@@ -665,19 +780,23 @@ export const genRB3DLCDetailedTracksStructure = (part: DetailedTrackTypes, info:
       if (info === 'desc') return `${s(4)}KEYS${s(3)}`
       else if (info === 'pans') {
         let returnString = ''
-        if (structure.keys.pan[0] < 0) returnString += structure.keys.pan[0].toFixed(1)
+        if (structure.keys.pan[0] < 0)
+          returnString += structure.keys.pan[0].toFixed(1)
         else returnString += `${s()}${structure.keys.pan[0].toFixed(1)}`
 
-        if (structure.keys.pan[1] < 0) returnString += `${s(3)}${structure.keys.pan[1].toFixed(1)}`
+        if (structure.keys.pan[1] < 0)
+          returnString += `${s(3)}${structure.keys.pan[1].toFixed(1)}`
         else returnString += `${s(4)}${structure.keys.pan[1].toFixed(1)}`
 
         return returnString
       } else if (info === 'vols') {
         let returnString = ''
-        if (structure.keys.vol[0] < 0) returnString += structure.keys.vol[0].toFixed(1)
+        if (structure.keys.vol[0] < 0)
+          returnString += structure.keys.vol[0].toFixed(1)
         else returnString += `${s()}${structure.keys.vol[0].toFixed(1)}`
 
-        if (structure.keys.vol[1] < 0) returnString += `${s(3)}${structure.keys.vol[1].toFixed(1)}`
+        if (structure.keys.vol[1] < 0)
+          returnString += `${s(3)}${structure.keys.vol[1].toFixed(1)}`
         else returnString += `${s(4)}${structure.keys.vol[1].toFixed(1)}`
 
         return returnString
@@ -688,13 +807,15 @@ export const genRB3DLCDetailedTracksStructure = (part: DetailedTrackTypes, info:
       if (info === 'desc') return 'KEYS'
       if (info === 'pans') {
         let returnString = ''
-        if (structure.keys.pan[0] < 0) returnString += `${structure.keys.pan[0].toFixed(1)}`
+        if (structure.keys.pan[0] < 0)
+          returnString += structure.keys.pan[0].toFixed(1)
         else returnString += `${s()}${structure.keys.pan[0].toFixed(1)}`
 
         return returnString
       } else if (info === 'vols') {
         let returnString = ''
-        if (structure.keys.pan[0] < 0) returnString += structure.keys.pan[0].toFixed(1)
+        if (structure.keys.pan[0] < 0)
+          returnString += structure.keys.pan[0].toFixed(1)
         else returnString += `${s()}${structure.keys.pan[0].toFixed(1)}`
 
         return returnString
@@ -707,19 +828,23 @@ export const genRB3DLCDetailedTracksStructure = (part: DetailedTrackTypes, info:
       if (info === 'desc') return `${s(4)}TRKS${s(3)}`
       else if (info === 'pans') {
         let returnString = ''
-        if (structure.backing.pan[0] < 0) returnString += structure.backing.pan[0].toFixed(1)
+        if (structure.backing.pan[0] < 0)
+          returnString += structure.backing.pan[0].toFixed(1)
         else returnString += `${s()}${structure.backing.pan[0].toFixed(1)}`
 
-        if (structure.backing.pan[1] < 0) returnString += `${s(3)}${structure.backing.pan[1].toFixed(1)}`
+        if (structure.backing.pan[1] < 0)
+          returnString += `${s(3)}${structure.backing.pan[1].toFixed(1)}`
         else returnString += `${s(4)}${structure.backing.pan[1].toFixed(1)}`
 
         return returnString
       } else if (info === 'vols') {
         let returnString = ''
-        if (structure.backing.vol[0] < 0) returnString += structure.backing.vol[0].toFixed(1)
+        if (structure.backing.vol[0] < 0)
+          returnString += structure.backing.vol[0].toFixed(1)
         else returnString += `${s()}${structure.backing.vol[0].toFixed(1)}`
 
-        if (structure.backing.vol[1] < 0) returnString += `${s(3)}${structure.backing.vol[1].toFixed(1)}`
+        if (structure.backing.vol[1] < 0)
+          returnString += `${s(3)}${structure.backing.vol[1].toFixed(1)}`
         else returnString += `${s(4)}${structure.backing.vol[1].toFixed(1)}`
 
         return returnString
@@ -730,13 +855,15 @@ export const genRB3DLCDetailedTracksStructure = (part: DetailedTrackTypes, info:
       if (info === 'desc') return 'TRKS'
       else if (info === 'pans') {
         let returnString = ''
-        if (structure.backing.pan[0] < 0) returnString += `${structure.backing.pan[0].toFixed(1)}`
+        if (structure.backing.pan[0] < 0)
+          returnString += structure.backing.pan[0].toFixed(1)
         else returnString += `${s()}${structure.backing.pan[0].toFixed(1)}`
 
         return returnString
       } else if (info === 'vols') {
         let returnString = ''
-        if (structure.backing.pan[0] < 0) returnString += structure.backing.pan[0].toFixed(1)
+        if (structure.backing.pan[0] < 0)
+          returnString += structure.backing.pan[0].toFixed(1)
         else returnString += `${s()}${structure.backing.pan[0].toFixed(1)}`
 
         return returnString
@@ -753,8 +880,10 @@ export const genRB3DLCDetailedTracksStructure = (part: DetailedTrackTypes, info:
         let returnString = ''
 
         if (structure.crowd.vol) {
-          if (structure.crowd.vol < 0) returnString += `${s()}${structure.crowd.vol.toFixed(1)}${s(3)}${structure.crowd.vol.toFixed(1)}`
-          else returnString += `${structure.crowd.vol.toFixed(1)}${s(2)}${structure.crowd.vol.toFixed(1)}`
+          if (structure.crowd.vol < 0)
+            returnString += `${s()}${structure.crowd.vol.toFixed(1)}${s(3)}${structure.crowd.vol.toFixed(1)}`
+          else
+            returnString += `${structure.crowd.vol.toFixed(1)}${s(2)}${structure.crowd.vol.toFixed(1)}`
         } else {
           returnString += `${s()}0.0${s(3)}0.0`
         }

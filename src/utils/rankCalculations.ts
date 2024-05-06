@@ -24,7 +24,10 @@ export type RankTypes = keyof typeof ranksMap
  * @param {number | undefined} rank `OPTIONAL` The rank number from the `.dta` file.
  * @returns {InstrRankingNumbers} The calculated instrument rank.
  */
-export const rankCalculator = (type: RankTypes, rank?: number): InstrRankingNumbers => {
+export const rankCalculator = (
+  type: RankTypes,
+  rank?: number
+): InstrRankingNumbers => {
   let parseRankReturn: InstrRankingNumbers = -1
 
   if (rank === undefined || rank === 0) {
@@ -47,7 +50,10 @@ export const rankCalculator = (type: RankTypes, rank?: number): InstrRankingNumb
  * @param {InstrRankingNumbers | InstrRankingNames} rank A string that indicates the ranking you want for the instrument part.
  * @returns {number} A `.dta` file-compatible ranking system number.
  */
-export const rankValuesToDTARankSystem = (type: RankTypes, rank: InstrRankingNumbers | InstrRankingNames): number => {
+export const rankValuesToDTARankSystem = (
+  type: RankTypes,
+  rank: InstrRankingNumbers | InstrRankingNames
+): number => {
   if (rank === 'No Part' || rank === -1) return 0
   else if (rank === 'Warmup' || rank === 0) return 1
   else if (rank === 'Apprentice' || rank === 1) return ranksMap[type][0]
@@ -69,4 +75,7 @@ export const rankValuesToDTARankSystem = (type: RankTypes, rank: InstrRankingNum
  * @param {number} quantity The quantity of playable instruments.
  * @returns {number} A generic band ranking number.
  */
-export const bandAverageRankCalculator = (count: number, quantity: number): number => Number((count / quantity).toFixed())
+export const bandAverageRankCalculator = (
+  count: number,
+  quantity: number
+): number => Number((count / quantity).toFixed())

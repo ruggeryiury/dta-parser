@@ -11,7 +11,11 @@ export type ExtendNewValuesOnlyObject<T> = Omit<T, keyof DTAFile>
  * @param {UpdateDataOptions} update `OPTIONAL` An object with values to update any default `DTAFile` value.
  * @returns {T} The parsed song object with new informations added.
  */
-export const extendDTAFile = <T extends DTAFile>(song: DTAFile, newValues: ExtendNewValuesOnlyObject<T>, update?: UpdateDataOptions): T => {
+export const extendDTAFile = <T extends DTAFile>(
+  song: DTAFile,
+  newValues: ExtendNewValuesOnlyObject<T>,
+  update?: UpdateDataOptions
+): T => {
   const extendedSongObject = {
     ...cloneDeep(song),
     ...cloneDeep(newValues),

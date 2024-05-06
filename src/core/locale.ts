@@ -1,4 +1,5 @@
 import { SongKeyMajorValues, SongKeyMinorValues } from '../core'
+import { getKeyByValue } from '../utils'
 
 export type ExtractNumbers<T> = T extends number ? T : never
 export type ExtractStrings<T> = T extends string ? T : never
@@ -38,6 +39,8 @@ export const localeObject = {
     16: 'Slow',
     32: 'Medium',
     64: 'Fast',
+  },
+  anim_tempo_strings: {
     kTempoSlow: 'Slow',
     kTempoMedium: 'Medium',
     kTempoFast: 'Fast',
@@ -317,7 +320,8 @@ const {
 } = localeObject
 
 export type SongTitleOptionsUppercaseNames = keyof typeof name
-export type SongTitleOptionsLowercaseNames = (typeof name)[SongTitleOptionsUppercaseNames]
+export type SongTitleOptionsLowercaseNames =
+  (typeof name)[SongTitleOptionsUppercaseNames]
 
 export type AnimTempo = keyof typeof anim_tempo
 export type AnimTempoStrings = ExtractStrings<AnimTempo>
@@ -366,7 +370,8 @@ export type SoloFlags = keyof typeof solo
 export type SoloFlagsNames = (typeof solo)[SoloFlags]
 
 export type ExtraAuthoringFlags = keyof typeof extra_authoring
-export type ExtraAuthoringFlagsNames = (typeof extra_authoring)[ExtraAuthoringFlags]
+export type ExtraAuthoringFlagsNames =
+  (typeof extra_authoring)[ExtraAuthoringFlags]
 
 export type SongEncoding = keyof typeof encoding
 export type SongEncodingNames = (typeof encoding)[SongEncoding]
@@ -374,7 +379,8 @@ export type SongEncodingNames = (typeof encoding)[SongEncoding]
 export type SongGameOrigin = keyof typeof game_origin
 export type SongGameOriginNames = (typeof game_origin)[SongGameOrigin]
 
-export type GetLocaleRankReturnType<D extends boolean | undefined> = D extends true ? BandRankingNamesAsDots : BandRankingNames
+export type GetLocaleRankReturnType<D extends boolean | undefined> =
+  D extends true ? BandRankingNamesAsDots : BandRankingNames
 
 /**
  * Translates DTA file language values to human readable strings.
@@ -384,7 +390,7 @@ export const localeKeyToValue = {
     return anim_tempo[key]
   },
   band_fail_cue: (key?: BandFailCue): BandFailCueNames | 'Not Specified' => {
-    return band_fail_cue[key === undefined ? 'undefined' : key]
+    return band_fail_cue[key ?? 'undefined']
   },
   bank: (key: PercussionBank): PercussionBankNames => {
     return bank[key]
@@ -402,7 +408,7 @@ export const localeKeyToValue = {
     return song_scroll_speed[key]
   },
   sub_genre: (key?: SongSubGenre): SongSubGenreNames | 'Not Specified' => {
-    return sub_genre[key === undefined ? 'undefined' : key]
+    return sub_genre[key ?? 'undefined']
   },
   vocal_gender: (key: VocalGender): VocalGenderNames => {
     return vocal_gender[key]
@@ -413,63 +419,58 @@ export const localeKeyToValue = {
   game_origin: (key: SongGameOrigin): SongGameOriginNames => {
     return game_origin[key]
   },
-  song_key: <V extends SongKey, T extends SongTonality>(vocal_tonic_note: V, song_tonality: T): SongKeyMajorValues | SongKeyMinorValues => {
-    let returnString = ''
-    if (vocal_tonic_note === 0) returnString += 'C'
-    else if (vocal_tonic_note === 1) returnString += 'Db'
-    else if (vocal_tonic_note === 2) returnString += 'D'
-    else if (vocal_tonic_note === 3) returnString += 'Eb'
-    else if (vocal_tonic_note === 4) returnString += 'E'
-    else if (vocal_tonic_note === 5) returnString += 'F'
-    else if (vocal_tonic_note === 6) returnString += 'F#'
-    else if (vocal_tonic_note === 7) returnString += 'G'
-    else if (vocal_tonic_note === 8) returnString += 'Ab'
-    else if (vocal_tonic_note === 9) returnString += 'A'
-    else if (vocal_tonic_note === 10) returnString += 'Bb'
-    else returnString += 'B'
-
-    if (song_tonality === 1) returnString += 'm'
-
-    return returnString as SongKeyMajorValues | SongKeyMinorValues
-  },
-  rank: <D extends boolean | undefined>(rankCalc: number, asDot?: D): GetLocaleRankReturnType<D> => {
+  song_key: <V extends SongKey, T extends SongTonality>(
+    vocal_tonic_note: V,
+    song_tonality: T
+  ): SongKeyMajorValues | SongKeyMinorValues =>
+    `${localeObject.song_key[vocal_tonic_note]}${song_tonality === 1 ? 'm' : ''}`,
+  rank: <D extends boolean | undefined>(
+    rankCalc: number,
+    asDot?: D
+  ): GetLocaleRankReturnType<D> => {
     if (asDot) {
-      return localeObject.rank.dots[String(rankCalc) as keyof typeof localeObject.rank.name] as GetLocaleRankReturnType<D>
+      return localeObject.rank.dots[
+        String(rankCalc) as keyof typeof localeObject.rank.name
+      ] as GetLocaleRankReturnType<D>
     }
 
-    return localeObject.rank.name[String(rankCalc) as keyof typeof localeObject.rank.name] as GetLocaleRankReturnType<D>
+    return localeObject.rank.name[
+      String(rankCalc) as keyof typeof localeObject.rank.name
+    ] as GetLocaleRankReturnType<D>
   },
 }
 
 export const localeValueToKey = {
   anim_tempo: (value: AnimTempoStrings): AnimTempoNumbers => {
-    return Number(Object.keys(anim_tempo).find((key) => key === value)) as AnimTempoNumbers
+    return getKeyByValue(anim_tempo, value)
   },
   band_fail_cue: (value: BandFailCueNames): BandFailCue => {
-    return (Object.keys(band_fail_cue) as (keyof typeof band_fail_cue)[]).find((key) => band_fail_cue[key] === value) as BandFailCue
+    const key = getKeyByValue(band_fail_cue, value)
+    return key === 'undefined' ? 'band_fail_rock.cue' : key
   },
   bank: (value: PercussionBankNames): PercussionBank => {
-    return (Object.keys(bank) as (keyof typeof bank)[]).find((key) => bank[key] === value) as PercussionBank
+    return getKeyByValue(bank, value)
   },
   drum_bank: (value: DrumBankNames): DrumBank => {
-    return (Object.keys(drum_bank) as (keyof typeof drum_bank)[]).find((key) => drum_bank[key] === value) as DrumBank
+    return getKeyByValue(drum_bank, value)
   },
   genre: (value: SongGenreNames): SongGenre => {
-    return (Object.keys(genre) as (keyof typeof genre)[]).find((key) => genre[key] === value) as SongGenre
+    return getKeyByValue(genre, value)
   },
   rating: (value: SongRatingNames): SongRating => {
-    return Number(Object.keys(rating).find((key) => rating[Number(key) as SongRating] === value)) as SongRating
+    return getKeyByValue(rating, value)
   },
   song_scroll_speed: (value: SongScrollSpeedNames): SongScrollSpeed => {
-    return Number(Object.keys(song_scroll_speed).find((key) => song_scroll_speed[Number(key) as SongScrollSpeed] === value)) as SongScrollSpeed
+    return getKeyByValue(song_scroll_speed, value)
   },
   sub_genre: (value: SongSubGenreNames): SongSubGenre => {
-    return (Object.keys(sub_genre) as (keyof typeof sub_genre)[]).find((key) => sub_genre[key] === value) as SongSubGenre
+    const key = getKeyByValue(sub_genre, value)
+    return key === 'undefined' ? 'subgenre_other' : key
   },
   vocal_gender: (value: VocalGenderNames): VocalGender => {
-    return (Object.keys(vocal_gender) as (keyof typeof vocal_gender)[]).find((key) => vocal_gender[key] === value) as VocalGender
+    return getKeyByValue(vocal_gender, value)
   },
   vocal_parts: (value: VocalPartsNames): VocalParts => {
-    return Number(Object.keys(vocal_parts).find((key) => vocal_parts[Number(key) as VocalParts] === value)) as VocalParts
+    return getKeyByValue(vocal_parts, value)
   },
 }

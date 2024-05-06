@@ -27,7 +27,14 @@ import {
   stringifyDTA,
   updateDTA,
 } from '../core'
-import { SongDrumMixNames, AudioFileTracksStructureDocument, genAudioFileStructure, SearchAlbumArtworkImageSize, searchAlbumArtwork, checkDrumMix } from '../utils'
+import {
+  SongDrumMixNames,
+  AudioFileTracksStructureDocument,
+  genAudioFileStructure,
+  SearchAlbumArtworkImageSize,
+  searchAlbumArtwork,
+  checkDrumMix,
+} from '../utils'
 
 export interface SongGetRankMethods {
   /**
@@ -43,7 +50,13 @@ export interface SongGetRankMethods {
    */
   band: <T extends GetRankTypeOptions | undefined = undefined>(
     type?: T | undefined
-  ) => T extends 'number' ? BandRankingNumbers : T extends 'verbose' ? BandRankingNames : T extends undefined ? BandRankingNumbers : BandRankingNamesAsDots
+  ) => T extends 'number'
+    ? BandRankingNumbers
+    : T extends 'verbose'
+      ? BandRankingNames
+      : T extends undefined
+        ? BandRankingNumbers
+        : BandRankingNamesAsDots
   /**
    * Fetches the drum ranking of the song.
    * - - - -
@@ -57,7 +70,13 @@ export interface SongGetRankMethods {
    */
   drum: <T extends GetRankTypeOptions | undefined = undefined>(
     type?: T | undefined
-  ) => T extends 'number' ? InstrRankingNumbers : T extends 'verbose' ? InstrRankingNames : T extends undefined ? InstrRankingNumbers : InstrRankingNamesAsDots
+  ) => T extends 'number'
+    ? InstrRankingNumbers
+    : T extends 'verbose'
+      ? InstrRankingNames
+      : T extends undefined
+        ? InstrRankingNumbers
+        : InstrRankingNamesAsDots
   /**
    * Fetches the bass ranking of the song.
    * - - - -
@@ -71,7 +90,13 @@ export interface SongGetRankMethods {
    */
   bass: <T extends GetRankTypeOptions | undefined = undefined>(
     type?: T | undefined
-  ) => T extends 'number' ? InstrRankingNumbers : T extends 'verbose' ? InstrRankingNames : T extends undefined ? InstrRankingNumbers : InstrRankingNamesAsDots
+  ) => T extends 'number'
+    ? InstrRankingNumbers
+    : T extends 'verbose'
+      ? InstrRankingNames
+      : T extends undefined
+        ? InstrRankingNumbers
+        : InstrRankingNamesAsDots
   /**
    * Fetches the guitar ranking of the song.
    * - - - -
@@ -85,7 +110,13 @@ export interface SongGetRankMethods {
    */
   guitar: <T extends GetRankTypeOptions | undefined = undefined>(
     type?: T | undefined
-  ) => T extends 'number' ? InstrRankingNumbers : T extends 'verbose' ? InstrRankingNames : T extends undefined ? InstrRankingNumbers : InstrRankingNamesAsDots
+  ) => T extends 'number'
+    ? InstrRankingNumbers
+    : T extends 'verbose'
+      ? InstrRankingNames
+      : T extends undefined
+        ? InstrRankingNumbers
+        : InstrRankingNamesAsDots
   /**
    * Fetches the vocals ranking of the song.
    * - - - -
@@ -99,7 +130,13 @@ export interface SongGetRankMethods {
    */
   vocals: <T extends GetRankTypeOptions | undefined = undefined>(
     type?: T | undefined
-  ) => T extends 'number' ? InstrRankingNumbers : T extends 'verbose' ? InstrRankingNames : T extends undefined ? InstrRankingNumbers : InstrRankingNamesAsDots
+  ) => T extends 'number'
+    ? InstrRankingNumbers
+    : T extends 'verbose'
+      ? InstrRankingNames
+      : T extends undefined
+        ? InstrRankingNumbers
+        : InstrRankingNamesAsDots
   /**
    * Fetches the keys ranking of the song.
    * - - - -
@@ -113,7 +150,13 @@ export interface SongGetRankMethods {
    */
   keys: <T extends GetRankTypeOptions | undefined = undefined>(
     type?: T | undefined
-  ) => T extends 'number' ? InstrRankingNumbers : T extends 'verbose' ? InstrRankingNames : T extends undefined ? InstrRankingNumbers : InstrRankingNamesAsDots
+  ) => T extends 'number'
+    ? InstrRankingNumbers
+    : T extends 'verbose'
+      ? InstrRankingNames
+      : T extends undefined
+        ? InstrRankingNumbers
+        : InstrRankingNamesAsDots
   /**
    * Fetches the PRO guitar ranking of the song.
    * - - - -
@@ -127,7 +170,13 @@ export interface SongGetRankMethods {
    */
   proGuitar: <T extends GetRankTypeOptions | undefined = undefined>(
     type?: T | undefined
-  ) => T extends 'number' ? InstrRankingNumbers : T extends 'verbose' ? InstrRankingNames : T extends undefined ? InstrRankingNumbers : InstrRankingNamesAsDots
+  ) => T extends 'number'
+    ? InstrRankingNumbers
+    : T extends 'verbose'
+      ? InstrRankingNames
+      : T extends undefined
+        ? InstrRankingNumbers
+        : InstrRankingNamesAsDots
   /**
    * Fetches the PRO bass ranking of the song.
    * - - - -
@@ -141,7 +190,13 @@ export interface SongGetRankMethods {
    */
   proBass: <T extends GetRankTypeOptions | undefined = undefined>(
     type?: T | undefined
-  ) => T extends 'number' ? InstrRankingNumbers : T extends 'verbose' ? InstrRankingNames : T extends undefined ? InstrRankingNumbers : InstrRankingNamesAsDots
+  ) => T extends 'number'
+    ? InstrRankingNumbers
+    : T extends 'verbose'
+      ? InstrRankingNames
+      : T extends undefined
+        ? InstrRankingNumbers
+        : InstrRankingNamesAsDots
   /**
    * Fetches the PRO keys ranking of the song.
    * - - - -
@@ -155,7 +210,13 @@ export interface SongGetRankMethods {
    */
   proKeys: <T extends GetRankTypeOptions | undefined = undefined>(
     type?: T | undefined
-  ) => T extends 'number' ? InstrRankingNumbers : T extends 'verbose' ? InstrRankingNames : T extends undefined ? InstrRankingNumbers : InstrRankingNamesAsDots
+  ) => T extends 'number'
+    ? InstrRankingNumbers
+    : T extends 'verbose'
+      ? InstrRankingNames
+      : T extends undefined
+        ? InstrRankingNumbers
+        : InstrRankingNamesAsDots
 }
 
 export interface SongGetValueMethods {
@@ -272,7 +333,7 @@ export class Song<T extends DTAFile = DTAFile> {
   /**
    * A class representing a parsed song.
    * - - - -
-   * @param recipe A parsed song object or a recipe object for a song.
+   * @param { DTAFile | DTAFileRecipe} recipe A parsed song object or a recipe object for a song.
    */
   constructor(recipe: DTAFile | DTAFileRecipe) {
     if ('tracks' in recipe) {
@@ -295,7 +356,9 @@ export class Song<T extends DTAFile = DTAFile> {
    * @returns {Promise<string | undefined>} The album artwork URL as string. Returns `undefined` if the connection to the API has been refused
    * at any point, if the provided song has no album name, or if no album has been found on the Spotify database.
    */
-  public async albumArtworkURL(imageSize: SearchAlbumArtworkImageSize = 'large'): Promise<string | undefined> {
+  public async albumArtworkURL(
+    imageSize: SearchAlbumArtworkImageSize = 'large'
+  ): Promise<string | undefined> {
     return await searchAlbumArtwork(this.value, imageSize)
   }
 
@@ -316,17 +379,34 @@ export class Song<T extends DTAFile = DTAFile> {
     gameOrigin: () => localeKeyToValue.game_origin(this.value.game_origin),
     yearReleased: () => this.value.year_released,
     yearRecorded: () => this.value.year_recorded,
-    albumName: (options) => (this.value.album_name ? formatDTAStringValue(this.value.album_name, options) : undefined),
+    albumName: (options) =>
+      this.value.album_name
+        ? formatDTAStringValue(this.value.album_name, options)
+        : undefined,
     rank: {
-      band: <T extends GetRankTypeOptions | undefined = undefined>(type?: T) => getSongRank(this.value, 'band', type),
-      drum: <T extends GetRankTypeOptions | undefined = undefined>(type?: T) => getSongRank(this.value, 'drum', type),
-      bass: <T extends GetRankTypeOptions | undefined = undefined>(type?: T) => getSongRank(this.value, 'bass', type),
-      guitar: <T extends GetRankTypeOptions | undefined = undefined>(type?: T) => getSongRank(this.value, 'guitar', type),
-      vocals: <T extends GetRankTypeOptions | undefined = undefined>(type?: T) => getSongRank(this.value, 'vocals', type),
-      keys: <T extends GetRankTypeOptions | undefined = undefined>(type?: T) => getSongRank(this.value, 'keys', type),
-      proGuitar: <T extends GetRankTypeOptions | undefined = undefined>(type?: T) => getSongRank(this.value, 'real_guitar', type),
-      proBass: <T extends GetRankTypeOptions | undefined = undefined>(type?: T) => getSongRank(this.value, 'real_bass', type),
-      proKeys: <T extends GetRankTypeOptions | undefined = undefined>(type?: T) => getSongRank(this.value, 'real_keys', type),
+      band: <T extends GetRankTypeOptions | undefined = undefined>(type?: T) =>
+        getSongRank(this.value, 'band', type),
+      drum: <T extends GetRankTypeOptions | undefined = undefined>(type?: T) =>
+        getSongRank(this.value, 'drum', type),
+      bass: <T extends GetRankTypeOptions | undefined = undefined>(type?: T) =>
+        getSongRank(this.value, 'bass', type),
+      guitar: <T extends GetRankTypeOptions | undefined = undefined>(
+        type?: T
+      ) => getSongRank(this.value, 'guitar', type),
+      vocals: <T extends GetRankTypeOptions | undefined = undefined>(
+        type?: T
+      ) => getSongRank(this.value, 'vocals', type),
+      keys: <T extends GetRankTypeOptions | undefined = undefined>(type?: T) =>
+        getSongRank(this.value, 'keys', type),
+      proGuitar: <T extends GetRankTypeOptions | undefined = undefined>(
+        type?: T
+      ) => getSongRank(this.value, 'real_guitar', type),
+      proBass: <T extends GetRankTypeOptions | undefined = undefined>(
+        type?: T
+      ) => getSongRank(this.value, 'real_bass', type),
+      proKeys: <T extends GetRankTypeOptions | undefined = undefined>(
+        type?: T
+      ) => getSongRank(this.value, 'real_keys', type),
     },
   }
   /**

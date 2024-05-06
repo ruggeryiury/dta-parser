@@ -28,7 +28,14 @@ export const parseDTA = (song: string): DTAFile => {
     const [key, ...content] = value.split(' ')
     const keyFilter = key.replaceAll("'", '')
 
-    if (keyFilter === 'name' && !(content.join(' ').startsWith('songs/') || content.join(' ').startsWith('"songs/') || content.join(' ').startsWith("'songs/"))) {
+    if (
+      keyFilter === 'name' &&
+      !(
+        content.join(' ').startsWith('songs/') ||
+        content.join(' ').startsWith('"songs/') ||
+        content.join(' ').startsWith("'songs/")
+      )
+    ) {
       hasName = namingIndex
       namingIndex++
     }
@@ -49,11 +56,21 @@ export const parseDTA = (song: string): DTAFile => {
     }
   })
 
-  try {
-    const names = Array.from(song.match(/"(.*?)"/g) as RegExpMatchArray)
+  const quoteMatches = song.match(/"(.*?)"/g)
+  if (quoteMatches) {
+    const names = Array.from(quoteMatches)
       .map((name) => name.slice(1, -1))
       .filter((name) => {
-        if (!(name.startsWith('songs/') || name.endsWith('.mid') || name.startsWith('sfx/') || name.endsWith('.milo') || name.endsWith('.cue'))) return name
+        if (
+          !(
+            name.startsWith('songs/') ||
+            name.endsWith('.mid') ||
+            name.startsWith('sfx/') ||
+            name.endsWith('.milo') ||
+            name.endsWith('.cue')
+          )
+        )
+          return name
       })
 
     names.forEach((name, i) => {
@@ -62,15 +79,17 @@ export const parseDTA = (song: string): DTAFile => {
       else if (i === hasAlbumName) parsed.album_name = slashQToQuote(name)
       else if (i === hasPackName) parsed.pack_name = slashQToQuote(name)
     })
-  } catch (e) {
-    // Do nothing
   }
 
   split.forEach((value) => {
     const clean = value.replaceAll("'", '').trim()
     const [key, ...content] = value.split(' ')
     const keyFilter = key.replaceAll("'", '')
-    const newValue = content.join(' ').replaceAll(')', '').replaceAll("'", '').trim()
+    const newValue = content
+      .join(' ')
+      .replaceAll(')', '')
+      .replaceAll("'", '')
+      .trim()
 
     if (!gotID) {
       if (clean) {
@@ -107,7 +126,12 @@ export const parseDTA = (song: string): DTAFile => {
       return
     }
 
-    if (keyFilter === 'name' && (content.join(' ').startsWith('songs/') || content.join(' ').startsWith('"songs/') || content.join(' ').startsWith("'songs/"))) {
+    if (
+      keyFilter === 'name' &&
+      (content.join(' ').startsWith('songs/') ||
+        content.join(' ').startsWith('"songs/') ||
+        content.join(' ').startsWith("'songs/"))
+    ) {
       parsed.songname = newValue.replaceAll('"', '').split('/')[1]
       return
     }
@@ -225,8 +249,10 @@ export const parseDTA = (song: string): DTAFile => {
         } else {
           parsed.tracks_count[5] = tracksCount - diffTracksCount
         }
-      } else if (processedAudio === 'real_guitar_tuning') parsed.real_guitar_tuning = numbers as typeof parsed.real_guitar_tuning
-      else if (processedAudio === 'real_bass_tuning') parsed.real_bass_tuning = numbers as typeof parsed.real_bass_tuning
+      } else if (processedAudio === 'real_guitar_tuning')
+        parsed.real_guitar_tuning = numbers as typeof parsed.real_guitar_tuning
+      else if (processedAudio === 'real_bass_tuning')
+        parsed.real_bass_tuning = numbers as typeof parsed.real_bass_tuning
       processedAudio = ''
       return
     }
@@ -257,7 +283,9 @@ export const parseDTA = (song: string): DTAFile => {
 
     if (keyFilter === 'song_scroll_speed') {
       if (Number(newValue) === 2300) return
-      parsed.song_scroll_speed = Number(newValue) as typeof parsed.song_scroll_speed
+      parsed.song_scroll_speed = Number(
+        newValue
+      ) as typeof parsed.song_scroll_speed
       return
     }
 
@@ -289,7 +317,10 @@ export const parseDTA = (song: string): DTAFile => {
     }
 
     if (keyFilter === 'band_fail_cue') {
-      parsed.band_fail_cue = newValue.replaceAll('"', '') as typeof parsed.band_fail_cue
+      parsed.band_fail_cue = newValue.replaceAll(
+        '"',
+        ''
+      ) as typeof parsed.band_fail_cue
       return
     }
 
@@ -393,7 +424,10 @@ export const parseDTA = (song: string): DTAFile => {
     }
 
     if (soloStarted) {
-      const soloFlags = value.replaceAll(')', '').replaceAll("'", '').split(' ') as typeof parsed.solo
+      const soloFlags = value
+        .replaceAll(')', '')
+        .replaceAll("'", '')
+        .split(' ') as typeof parsed.solo
       soloFlags &&
         soloFlags.forEach((flag) => {
           if (!parsed.solo) parsed.solo = []
@@ -431,7 +465,9 @@ export const parseDTA = (song: string): DTAFile => {
     }
 
     if (keyFilter === 'vocal_tonic_note') {
-      parsed.vocal_tonic_note = Number(newValue) as typeof parsed.vocal_tonic_note
+      parsed.vocal_tonic_note = Number(
+        newValue
+      ) as typeof parsed.vocal_tonic_note
       return
     }
 
@@ -485,7 +521,9 @@ export const parseDTA = (song: string): DTAFile => {
     }
 
     if (value.includes('Karaoke=')) {
-      const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
+      const proof = Boolean(
+        Number(value.split('=')[1].replaceAll(')', '').trim())
+      )
 
       if (proof) {
         parsed.karaoke = proof
@@ -495,7 +533,9 @@ export const parseDTA = (song: string): DTAFile => {
     }
 
     if (value.includes('Multitrack=')) {
-      const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
+      const proof = Boolean(
+        Number(value.split('=')[1].replaceAll(')', '').trim())
+      )
 
       if (proof) {
         parsed.multitrack = proof
@@ -505,7 +545,9 @@ export const parseDTA = (song: string): DTAFile => {
     }
 
     if (value.includes('Convert=')) {
-      const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
+      const proof = Boolean(
+        Number(value.split('=')[1].replaceAll(')', '').trim())
+      )
 
       if (proof) {
         parsed.convert = proof
@@ -515,7 +557,9 @@ export const parseDTA = (song: string): DTAFile => {
     }
 
     if (value.includes('2xBass=')) {
-      const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
+      const proof = Boolean(
+        Number(value.split('=')[1].replaceAll(')', '').trim())
+      )
 
       if (proof) {
         parsed.doubleKick = proof
@@ -525,7 +569,9 @@ export const parseDTA = (song: string): DTAFile => {
     }
 
     if (value.includes('RhythmKeys=')) {
-      const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
+      const proof = Boolean(
+        Number(value.split('=')[1].replaceAll(')', '').trim())
+      )
 
       if (proof) {
         parsed.rhythmOnKeys = proof
@@ -535,7 +581,9 @@ export const parseDTA = (song: string): DTAFile => {
     }
 
     if (value.includes('RhythmBass=')) {
-      const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
+      const proof = Boolean(
+        Number(value.split('=')[1].replaceAll(')', '').trim())
+      )
 
       if (proof) {
         parsed.rhythmOnBass = proof
@@ -545,7 +593,9 @@ export const parseDTA = (song: string): DTAFile => {
     }
 
     if (value.includes('CATemh=')) {
-      const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
+      const proof = Boolean(
+        Number(value.split('=')[1].replaceAll(')', '').trim())
+      )
 
       if (proof) {
         parsed.CATemh = proof
@@ -555,7 +605,9 @@ export const parseDTA = (song: string): DTAFile => {
     }
 
     if (value.includes('ExpertOnly=')) {
-      const proof = Boolean(Number(value.split('=')[1].replaceAll(')', '').trim()))
+      const proof = Boolean(
+        Number(value.split('=')[1].replaceAll(')', '').trim())
+      )
 
       if (proof) {
         parsed.expertOnly = proof
@@ -565,7 +617,11 @@ export const parseDTA = (song: string): DTAFile => {
     }
   })
 
-  if (parsed.vocal_tonic_note !== undefined && parsed.song_tonality === undefined) parsed.song_tonality = 0
+  if (
+    parsed.vocal_tonic_note !== undefined &&
+    parsed.song_tonality === undefined
+  )
+    parsed.song_tonality = 0
 
   return parsed
 }

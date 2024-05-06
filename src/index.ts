@@ -1,7 +1,24 @@
-import { DTAFile, DTAFileRecipe, MultipleSongsUpdateObject, Song, SongCollection, SongSortingTypes, SongUpdateObject, depackDTA, genDTARecipe, parseDTA, sortDTA, updateDTA } from './core'
+import {
+  DTAFile,
+  DTAFileRecipe,
+  MultipleSongsUpdateObject,
+  Song,
+  SongCollection,
+  SongSortingTypes,
+  SongUpdateObject,
+  depackDTA,
+  genDTARecipe,
+  parseDTA,
+  sortDTA,
+  updateDTA,
+} from './core'
 import { detectBufferEncoding, useDefaultOptions } from './utils'
 
-export type DTAParserExportTypes = 'DTAFile' | 'DTARecipe' | 'SongClass' | undefined
+export type DTAParserExportTypes =
+  | 'DTAFile'
+  | 'DTARecipe'
+  | 'SongClass'
+  | undefined
 
 export interface DTAParserOptions<RT extends DTAParserExportTypes> {
   /**
@@ -22,7 +39,12 @@ export interface DTAParserOptions<RT extends DTAParserExportTypes> {
   updateAll?: MultipleSongsUpdateObject | null
 }
 
-export type DTAParserReturnType<RT extends DTAParserExportTypes> = RT extends 'DTAFile' ? DTAFile[] : RT extends 'DTARecipe' ? DTAFileRecipe[] : SongCollection
+export type DTAParserReturnType<RT extends DTAParserExportTypes> =
+  RT extends 'DTAFile'
+    ? DTAFile[]
+    : RT extends 'DTARecipe'
+      ? DTAFileRecipe[]
+      : SongCollection
 
 /**
  * Parses a `.dta` file contents.
@@ -31,11 +53,28 @@ export type DTAParserReturnType<RT extends DTAParserExportTypes> = RT extends 'D
  * @param {DTAParserOptions<RT>} options `OPTIONAL` An object with options that customizes the parsing process.
  * @returns {DTAParserReturnType<RT>} An array of parsed song objects, or a `SongCollection` class.
  */
-const DTAParser = <RT extends DTAParserExportTypes = undefined>(dtaFileContents: string | Buffer, options?: DTAParserOptions<RT>): DTAParserReturnType<RT> => {
-  const { format, sortBy, update, updateAll } = useDefaultOptions<DTAParserOptions<RT>, false>({ format: undefined, sortBy: undefined, update: undefined, updateAll: undefined }, options)
+const DTAParser = <RT extends DTAParserExportTypes = undefined>(
+  dtaFileContents: string | Buffer,
+  options?: DTAParserOptions<RT>
+): DTAParserReturnType<RT> => {
+  const { format, sortBy, update, updateAll } = useDefaultOptions<
+    DTAParserOptions<RT>,
+    false
+  >(
+    {
+      format: undefined,
+      sortBy: undefined,
+      update: undefined,
+      updateAll: undefined,
+    },
+    options
+  )
 
   const encoding = detectBufferEncoding(dtaFileContents)
-  const content = typeof dtaFileContents === 'string' ? dtaFileContents : dtaFileContents.toString(encoding)
+  const content =
+    typeof dtaFileContents === 'string'
+      ? dtaFileContents
+      : dtaFileContents.toString(encoding)
   const depackedSongs = depackDTA(content)
 
   let parsedSongs = depackedSongs.map((value) => {
@@ -48,7 +87,7 @@ const DTAParser = <RT extends DTAParserExportTypes = undefined>(dtaFileContents:
 
     updateKeys.forEach((keys) => {
       parsedSongs = parsedSongs.map((song) => {
-        if (song.id === keys && update[keys]) {
+        if (song.id === keys) {
           return updateDTA(song, update[keys])
         }
 
@@ -77,7 +116,8 @@ const DTAParser = <RT extends DTAParserExportTypes = undefined>(dtaFileContents:
   }
 
   if (format === 'DTAFile') return parsedSongs as DTAParserReturnType<RT>
-  else if (format === 'DTARecipe') return parsedSongs.map((ps) => genDTARecipe(ps)) as DTAParserReturnType<RT>
+  else if (format === 'DTARecipe')
+    return parsedSongs.map((ps) => genDTARecipe(ps)) as DTAParserReturnType<RT>
 
   const collection: Song[] = []
   parsedSongs.forEach((song) => {

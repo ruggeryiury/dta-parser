@@ -10,9 +10,12 @@ import { leadingArticleToTrailing } from './stringProcessor'
  * @param {DTAFile | Song} song A `DTAFile` object, or a `Song` class you want to generate
  * a file name for.
  * @param {string} format A string with format values you want to add.
- * @returns {string}
+ * @returns {string} A generated file name for the song as string.
  */
-export const createFilename = (song: DTAFile | Song, format: string): string => {
+export const createFilename = (
+  song: DTAFile | Song,
+  format: string
+): string => {
   const regex = /\{\{([^}]+)\}\}/g
 
   const name = format.replace(regex, (match, key) => {
@@ -21,17 +24,29 @@ export const createFilename = (song: DTAFile | Song, format: string): string => 
     switch (key) {
       case 'title':
       case 'name':
-        value = song instanceof Song ? song.getValue.name({ leadingArticle: 'emit' }) : song.name
+        value =
+          song instanceof Song
+            ? song.getValue.name({ leadingArticle: 'emit' })
+            : song.name
         break
       case 'artist':
-        value = song instanceof Song ? song.getValue.artist({ leadingArticle: 'emit' }) : song.artist
+        value =
+          song instanceof Song
+            ? song.getValue.artist({ leadingArticle: 'emit' })
+            : song.artist
         break
       case 'title-the':
       case 'name-the':
-        value = song instanceof Song ? song.getValue.name({ leadingArticle: 'trailing' }) : leadingArticleToTrailing(song.name)
+        value =
+          song instanceof Song
+            ? song.getValue.name({ leadingArticle: 'trailing' })
+            : leadingArticleToTrailing(song.name)
         break
       case 'artist-the':
-        value = song instanceof Song ? song.getValue.artist({ leadingArticle: 'trailing' }) : leadingArticleToTrailing(song.artist)
+        value =
+          song instanceof Song
+            ? song.getValue.artist({ leadingArticle: 'trailing' })
+            : leadingArticleToTrailing(song.artist)
         break
       case 'songname':
         value = song instanceof Song ? song.value.songname : song.songname
@@ -39,7 +54,7 @@ export const createFilename = (song: DTAFile | Song, format: string): string => 
       default:
         value = match
     }
-    return value !== undefined ? value : match
+    return value
   })
 
   return name.endsWith('.dta') ? name : `${name}.dta`

@@ -1,5 +1,15 @@
 import { cloneDeep } from 'lodash'
-import { DTAFile, Song, SongGenreUpdateOptions, SongRating, SongRatingNames, TrackUpdateOptions, UpdateDataOptions, dtaDefault, updateDTA } from '../core'
+import {
+  DTAFile,
+  Song,
+  SongGenreUpdateOptions,
+  SongRating,
+  SongRatingNames,
+  TrackUpdateOptions,
+  UpdateDataOptions,
+  dtaDefault,
+  updateDTA,
+} from '../core'
 
 export interface DTAFileRecipe extends UpdateDataOptions {
   /**
@@ -65,7 +75,8 @@ export interface DTAFileRecipe extends UpdateDataOptions {
   rating: SongRating | SongRatingNames
 }
 
-export type CreateDTAReturnType<RT extends boolean | undefined> = RT extends true ? DTAFile : Song
+export type CreateDTAReturnType<RT extends boolean | undefined> =
+  RT extends true ? DTAFile : Song
 
 /**
  * Creates a new parsed song object.
@@ -74,7 +85,10 @@ export type CreateDTAReturnType<RT extends boolean | undefined> = RT extends tru
  * @param {RT} asJSON Returns the song as a `DTAFile` object. Default is `false`.
  * @returns {DTAFile} A new parsed song object.
  */
-export const createDTA = <RT extends boolean | undefined = undefined>(values?: DTAFileRecipe, asJSON?: RT): CreateDTAReturnType<RT> => {
+export const createDTA = <RT extends boolean | undefined = undefined>(
+  values?: DTAFileRecipe,
+  asJSON?: RT
+): CreateDTAReturnType<RT> => {
   let newDTAInstance = cloneDeep(dtaDefault)
 
   if (values) {
