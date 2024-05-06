@@ -1,7 +1,7 @@
 {
   "name": "dta-parser",
   "version": "1.0.0",
-  "private": false,
+  "private": true,
   "description": "A Rock Band song metadata file parser written in TypeScript",
   "homepage": "https://github.com/ruggeryiury/dta-parser#readme",
   "repository": "github:ruggeryiury/dta-parser",
