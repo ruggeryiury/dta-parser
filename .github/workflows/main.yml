@@ -32,12 +32,12 @@ jobs:
 
       - name: Extract Package Version and Name
         id: extract_version
-        run: echo "package_name=${cat $GITHUB_WORKSPACE/package.json | jq -r '.name'} version=$(cat $GITHUB_WORKSPACE/package.json | jq -r '.version')" >> $GITHUB_OUTPUT
+        run: echo "package_name=$(cat $GITHUB_WORKSPACE/package.json | jq -r '.name') version=$(cat $GITHUB_WORKSPACE/package.json | jq -r '.version')" >> $GITHUB_OUTPUT
 
       - name: Generate Release Body
         id: generate_release_body
         run:
-          echo "body=${cat $GITHUB_WORKSPACE/docs/CHANGELOG-v${{steps.extract_version.outputs.version}}.md}" >> $GITHUB_OUTPUT
+          echo "body=$(cat $GITHUB_WORKSPACE/docs/CHANGELOG-v${{steps.extract_version.outputs.version}}.md)" >> $GITHUB_OUTPUT
           echo "::set-output name=body::$(cat release_body.md)"
 
       - name: Create Release
