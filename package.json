@@ -25,8 +25,8 @@
     "build:commonjs": "tsc --project ./prod.tsconfig.json",
     "build:esmodules": "tsc --project ./prod.tsconfig.json --module esnext --moduleResolution bundler --outDir module",
     "clear": "rimraf dist lib module",
-    "dev": "nodemon ./tests/init.ts",
-    "format": "prettier --write .",
+    "dev": "tsx watch ./tests/init.ts",
+    "format": "prettier --write src",
     "lint": "eslint src"
   },
   "exports": {
@@ -58,10 +58,8 @@
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsdoc": "^48.2.3",
     "eslint-plugin-n": "^17.4.0",
-    "nodemon": "^3.1.0",
     "prettier": "^3.2.5",
-    "ts-loader": "^9.5.1",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.9.3",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.8.0"
   }

@@ -34,6 +34,8 @@ import {
   SearchAlbumArtworkImageSize,
   searchAlbumArtwork,
   checkDrumMix,
+  isSongClass,
+  isDTAFileRecipe,
 } from '../utils'
 
 export interface SongGetRankMethods {
@@ -315,6 +317,7 @@ export interface SongGetValueMethods {
 
 /**
  * A class representing a parsed song.
+ * - - - -
  */
 export class Song<T extends DTAFile = DTAFile> {
   /**
@@ -336,7 +339,7 @@ export class Song<T extends DTAFile = DTAFile> {
    * @param { DTAFile | DTAFileRecipe} recipe A parsed song object or a recipe object for a song.
    */
   constructor(recipe: DTAFile | DTAFileRecipe) {
-    if ('tracks' in recipe) {
+    if (isDTAFileRecipe(recipe)) {
       const newSong = createDTA(recipe, true)
       this.value = newSong as Readonly<T>
       this.tracks = genAudioFileStructure(newSong)
@@ -452,12 +455,21 @@ export interface SingleSongSelectorMethods {
   byID: (id: string) => Song | undefined
 }
 
-/** A class representing an array with parsed songs. */
+/**
+ * A class representing an array with parsed songs.
+ * - - - -
+ */
 export class SongCollection {
   public collection: Song[] = []
-  constructor(collection: (Song | DTAFile)[]) {
+
+  /**
+   * A class representing an array with parsed songs.
+   * - - - -
+   * @param {(Song | DTAFile | DTAFileRecipe)[]} collection An array with known parsed song types to be added.
+   */
+  constructor(collection: (Song | DTAFile | DTAFileRecipe)[]) {
     collection.forEach((song) => {
-      if (song instanceof Song) {
+      if (isSongClass(song)) {
         this.collection.push(song)
       } else {
         this.collection.push(new Song(song))
@@ -467,22 +479,22 @@ export class SongCollection {
   /**
    * Adds one of more songs into the song collection.
    * - - - -
-   * @param {DTAFile | Song | DTAFile[] | Song[]} song A song (or an array of songs) that you want to add to the collection.
+   * @param {DTAFile | Song | DTAFile[] | Song[]} songs A song (or an array of songs) that you want to add to the collection.
    */
-  public add(song: DTAFile | Song | DTAFile[] | Song[]): void {
-    if (Array.isArray(song)) {
-      song.forEach((s) => {
-        if (s instanceof Song) {
-          this.collection.push(s)
+  public add(songs: DTAFile | Song | DTAFile[] | Song[]): void {
+    if (Array.isArray(songs)) {
+      songs.forEach((song) => {
+        if (isSongClass(song)) {
+          this.collection.push(song)
         } else {
-          this.collection.push(new Song(s))
+          this.collection.push(new Song(song))
         }
       })
     } else {
-      if (song instanceof Song) {
-        this.collection.push(song)
+      if (isSongClass(songs)) {
+        this.collection.push(songs)
       } else {
-        this.collection.push(new Song(song))
+        this.collection.push(new Song(songs))
       }
     }
   }

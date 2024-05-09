@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - main
-    paths: package.json
+    paths:
+      - package.json
 
 jobs:
   build:
@@ -19,48 +20,44 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Check if version has been updated
+        id: check
+        uses: EndBug/version-check@v2
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
+        if: steps.check.outputs.changed == 'true'
         with:
           node-version: '20'
 
       - name: Install Dependencies
+        if: steps.check.outputs.changed == 'true'
         run: yarn install
 
       - name: Build Package
+        if: steps.check.outputs.changed == 'true'
         run: yarn build:package
-
-      - name: Extract Package Name
-        id: extract_name
-        run: echo "name=$(cat $GITHUB_WORKSPACE/package.json | jq -r '.name')" >> $GITHUB_OUTPUT
-
-      - name: Extract Package Version
-        id: extract_version
-        run: echo "version=$(cat $GITHUB_WORKSPACE/package.json | jq -r '.version')" >> $GITHUB_OUTPUT
-
-      - name: Generate Release Body
-        id: generate_release_body
-        run: echo "body=$(cat $GITHUB_WORKSPACE/docs/CHANGELOG-v${{steps.extract_version.outputs.version}}.md)" >> $GITHUB_OUTPUT
 
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
+        if: steps.check.outputs.changed == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{steps.extract_version.outputs.version}}
-          release_name: v${{steps.extract_version.outputs.version}}
-          body: ${{steps.generate_release_body.outputs.body}}
+          tag_name: v${{steps.check.outputs.version}}
+          release_name: v${{steps.check.outputs.version}}
           draft: false
           prerelease: false
 
       - name: Upload Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
+        if: steps.check.outputs.changed == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./${{steps.extract_name.outputs.name}}-v${{steps.extract_version.outputs.version}}.tgz
-          asset_name: ${{steps.extract_name.outputs.name}}-v${{steps.extract_version.outputs.version}}.tgz
+          asset_path: ./path-js-v${{steps.check.outputs.version}}.tgz
+          asset_name: path-js-v${{steps.check.outputs.version}}.tgz
           asset_content_type: application/gzip

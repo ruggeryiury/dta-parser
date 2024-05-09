@@ -1,4 +1,5 @@
 import { DTAFile, Song } from '../core'
+import { isSongClass } from '../utils'
 import { leadingArticleToTrailing } from './stringProcessor'
 
 /**
@@ -24,32 +25,28 @@ export const createFilename = (
     switch (key) {
       case 'title':
       case 'name':
-        value =
-          song instanceof Song
-            ? song.getValue.name({ leadingArticle: 'emit' })
-            : song.name
+        value = isSongClass(song)
+          ? song.getValue.name({ leadingArticle: 'emit' })
+          : song.name
         break
       case 'artist':
-        value =
-          song instanceof Song
-            ? song.getValue.artist({ leadingArticle: 'emit' })
-            : song.artist
+        value = isSongClass(song)
+          ? song.getValue.artist({ leadingArticle: 'emit' })
+          : song.artist
         break
       case 'title-the':
       case 'name-the':
-        value =
-          song instanceof Song
-            ? song.getValue.name({ leadingArticle: 'trailing' })
-            : leadingArticleToTrailing(song.name)
+        value = isSongClass(song)
+          ? song.getValue.name({ leadingArticle: 'trailing' })
+          : leadingArticleToTrailing(song.name)
         break
       case 'artist-the':
-        value =
-          song instanceof Song
-            ? song.getValue.artist({ leadingArticle: 'trailing' })
-            : leadingArticleToTrailing(song.artist)
+        value = isSongClass(song)
+          ? song.getValue.artist({ leadingArticle: 'trailing' })
+          : leadingArticleToTrailing(song.artist)
         break
       case 'songname':
-        value = song instanceof Song ? song.value.songname : song.songname
+        value = isSongClass(song) ? song.value.songname : song.songname
         break
       default:
         value = match

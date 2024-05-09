@@ -1,10 +1,7 @@
 node_modules/
-old_modules/
-dist/
 /lib/
-module/
-python/
-tests/
+/module/
+tests/exec.ts
 *.tgz
-*.rar
-*.zip
+
+old_modules/

@@ -5,7 +5,8 @@ import importPlugin from 'eslint-plugin-import'
 import jsdoc from 'eslint-plugin-jsdoc'
 import n from 'eslint-plugin-n'
 
-export default tseslint.config({
+/** @type {import('typescript-eslint').ConfigWithExtends} */
+const tseslintConfig = {
   languageOptions: {
     parser: tseslint.parser,
     sourceType: 'module',
@@ -36,6 +37,7 @@ export default tseslint.config({
     'jsdoc/valid-types': 'off',
     '@typescript-eslint/non-nullable-type-assertion-style': 'warn',
     '@typescript-eslint/no-dynamic-delete': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn',
     'import/order': [
       'error',
       {
@@ -46,4 +48,6 @@ export default tseslint.config({
       },
     ],
   },
-})
+}
+
+export default tseslint.config(tseslintConfig)

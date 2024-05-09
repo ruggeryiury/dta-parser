@@ -1,8 +1,4 @@
-./lib/
-dist/
-module/
 node_modules/
-old_modules/
-prod.tsconfig.json
-tsconfig.json
-webpack.config.js
+/lib/
+/dist/
+/module/
