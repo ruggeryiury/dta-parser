@@ -7,8 +7,8 @@ import {
   InstrRankingNamesAsDots,
   InstrRankingNumbers,
   localeKeyToValue,
-} from '../core'
-import { RankTypes, rankCalculator } from '../utils'
+} from '../core.js'
+import { RankTypes, rankCalculator } from '../utils.js'
 
 export type GetRankTypeOptions = 'number' | 'verbose' | 'verboseDots'
 

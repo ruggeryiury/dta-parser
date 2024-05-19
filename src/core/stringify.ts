@@ -1,4 +1,4 @@
-import { DTAFile, SongSortingTypes, sortDTA } from '../core'
+import { DTAFile, SongSortingTypes, sortDTA } from '../core.js'
 import {
   genAudioFileStructure,
   genRB3DLCDetailedTracksStructure as genRB3DLCDetailedTrack,
@@ -7,7 +7,7 @@ import {
   genSpaces as s,
   incrementTracksCount,
   useDefaultOptions,
-} from '../utils'
+} from '../utils.js'
 
 export interface StringifyDataOptions {
   /**

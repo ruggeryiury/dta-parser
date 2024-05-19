@@ -2,7 +2,7 @@
   "name": "dta-parser",
   "version": "1.0.0",
   "private": true,
-  "description": "A Rock Band song metadata file parser written in TypeScript",
+  "description": "A Rock Band song metadata file parser written in Javascript",
   "homepage": "https://github.com/ruggeryiury/dta-parser#readme",
   "repository": "github:ruggeryiury/dta-parser",
   "type": "module",
@@ -20,12 +20,11 @@
     "typescript"
   ],
   "scripts": {
-    "build": "yarn build:commonjs && yarn build:esmodules",
-    "build:package": "yarn build:commonjs && yarn build:esmodules && yarn pack",
+    "build": "pnpm run build:commonjs && pnpm run build:esmodules && pnpm pack",
     "build:commonjs": "tsc --project ./prod.tsconfig.json",
-    "build:esmodules": "tsc --project ./prod.tsconfig.json --module esnext --moduleResolution bundler --outDir module",
-    "clear": "rimraf dist lib module",
-    "dev": "tsx watch ./tests/init.ts",
+    "build:esmodules": "tsc --project ./prod.tsconfig.json --module nodenext --moduleResolution nodenext --outDir module",
+    "clear": "rimraf lib module",
+    "dev": "tsx watch ./tests/exec.ts",
     "format": "prettier --write src",
     "lint": "eslint src"
   },
@@ -51,16 +50,17 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.1",
-    "@types/node": "^20.12.8",
-    "eslint": "^9.2.0",
+    "@types/lodash": "^4.17.4",
+    "@types/node": "^20.12.12",
+    "eslint": "^9.3.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jsdoc": "^48.2.3",
-    "eslint-plugin-n": "^17.4.0",
+    "eslint-plugin-jsdoc": "^48.2.5",
+    "eslint-plugin-n": "^17.7.0",
+    "globals": "^15.3.0",
     "prettier": "^3.2.5",
-    "tsx": "^4.9.3",
+    "tsx": "^4.10.5",
     "typescript": "^5.4.5",
-    "typescript-eslint": "^7.8.0"
+    "typescript-eslint": "^7.9.0"
   }
 }

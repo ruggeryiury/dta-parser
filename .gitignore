@@ -3,5 +3,4 @@ node_modules/
 /module/
 tests/exec.ts
 *.tgz
-
 old_modules/

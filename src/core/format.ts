@@ -2,7 +2,7 @@ import {
   leadingArticleToTrailing,
   omitLeadingArticle,
   useDefaultOptions,
-} from '../utils'
+} from '../utils.js'
 
 export interface DTAStringValueFormattingOptions {
   /**

@@ -26,7 +26,7 @@ import {
   sortDTA,
   stringifyDTA,
   updateDTA,
-} from '../core'
+} from '../core.js'
 import {
   SongDrumMixNames,
   AudioFileTracksStructureDocument,
@@ -36,7 +36,7 @@ import {
   checkDrumMix,
   isSongClass,
   isDTAFileRecipe,
-} from '../utils'
+} from '../utils.js'
 
 export interface SongGetRankMethods {
   /**

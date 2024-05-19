@@ -1,6 +1,5 @@
-import { DTAFile, Song } from '../core'
-import { isSongClass } from '../utils'
-import { leadingArticleToTrailing } from './stringProcessor'
+import { DTAFile, Song } from '../core.js'
+import { isSongClass, leadingArticleToTrailing } from '../utils.js'
 
 /**
  * Creates a file name for a `DTAFile` object based on its values.

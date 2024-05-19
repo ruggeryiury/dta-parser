@@ -11,8 +11,8 @@ import {
   parseDTA,
   sortDTA,
   updateDTA,
-} from './core'
-import { detectBufferEncoding, useDefaultOptions } from './utils'
+} from './core.js'
+import { detectBufferEncoding, useDefaultOptions } from './utils.js'
 
 export type DTAParserExportTypes =
   | 'DTAFile'
@@ -127,6 +127,6 @@ const DTAParser = <RT extends DTAParserExportTypes = undefined>(
   return new SongCollection(collection) as DTAParserReturnType<RT>
 }
 
-export type { DTAFile } from './core'
+export type { DTAFile } from './core.js'
 export { Song, SongCollection }
 export default DTAParser

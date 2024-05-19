@@ -1,4 +1,4 @@
-import { DTAFile, DTAFileRecipe, Song, SongCollection } from '../core'
+import { DTAFile, DTAFileRecipe, Song, SongCollection } from '../core.js'
 
 export type DTASongObjectTypes =
   | DTAFile

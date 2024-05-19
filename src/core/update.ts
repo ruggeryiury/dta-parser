@@ -16,13 +16,13 @@ import {
   VocalParts,
   VocalPartsNames,
   localeValueToKey,
-} from '../core'
+} from '../core.js'
 import {
   panValueToArray,
   rankValuesToDTARankSystem,
   bandAverageRankCalculator,
   timeStringToMilliseconds,
-} from '../utils'
+} from '../utils.js'
 
 export type DrumTracksTypes =
   | 2

@@ -15,7 +15,7 @@ import {
   SoloFlags,
   SongEncoding,
   SongGameOrigin,
-} from '../core'
+} from '../core.js'
 
 /**
  * A parsed song object with all its contents.

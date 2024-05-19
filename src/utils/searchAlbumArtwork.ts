@@ -1,4 +1,4 @@
-import { DTAFile } from '../core'
+import { DTAFile } from '../core.js'
 
 export interface SpotifyAuthToken {
   /**

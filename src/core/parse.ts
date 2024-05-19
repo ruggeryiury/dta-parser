@@ -1,5 +1,5 @@
-import { DTAFile, createDTA } from '../core'
-import { slashQToQuote } from '../utils'
+import { DTAFile, createDTA } from '../core.js'
+import { slashQToQuote } from '../utils.js'
 
 /**
  * Parses a `.dta` file contents into a `DTAFile`.

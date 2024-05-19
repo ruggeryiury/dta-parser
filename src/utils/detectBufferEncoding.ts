@@ -1,5 +1,5 @@
 import { detect } from 'jschardet'
-import { SongEncoding } from '../core'
+import { SongEncoding } from '../core.js'
 
 /**
  * Figures out the encoding of a string of buffer.

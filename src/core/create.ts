@@ -9,7 +9,7 @@ import {
   UpdateDataOptions,
   dtaDefault,
   updateDTA,
-} from '../core'
+} from '../core.js'
 
 export interface DTAFileRecipe extends UpdateDataOptions {
   /**

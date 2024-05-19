@@ -1,5 +1,5 @@
 import { cloneDeep } from 'lodash'
-import { DTAFile, UpdateDataOptions, updateDTA } from '../core'
+import { DTAFile, UpdateDataOptions, updateDTA } from '../core.js'
 
 export type ExtendNewValuesOnlyObject<T> = Omit<T, keyof DTAFile>
 

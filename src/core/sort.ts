@@ -1,5 +1,5 @@
-import { DTAFile } from '../core'
-import { omitLeadingArticle } from '../utils'
+import { DTAFile } from '../core.js'
+import { omitLeadingArticle } from '../utils.js'
 
 const sortingLocale = {
   name: 'Song Title',

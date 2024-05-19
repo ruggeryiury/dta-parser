@@ -1,5 +1,5 @@
-import { SongUpdateObject, localeValueToKey } from '../core'
-import { genTabs, quoteToSlashQ, useDefaultOptions } from '../utils'
+import { SongUpdateObject, localeValueToKey } from '../core.js'
+import { genTabs, quoteToSlashQ, useDefaultOptions } from '../utils.js'
 
 export interface StringifySongUpdatesOptions {
   /**
