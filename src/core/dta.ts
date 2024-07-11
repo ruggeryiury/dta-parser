@@ -1,20 +1,21 @@
-import {
-  VocalParts,
-  PercussionBank,
-  DrumBank,
-  BandFailCue,
-  SongScrollSpeed,
-  SongRating,
-  SongGenre,
-  SongSubGenre,
-  VocalGender,
+import type {
   AnimTempoNumbers,
-  SongKey,
-  SongTonality,
+  BandFailCue,
+  DrumBank,
   ExtraAuthoringFlags,
+  PercussionBank,
   SoloFlags,
   SongEncoding,
   SongGameOrigin,
+  SongGenre,
+  SongKey,
+  SongRating,
+  SongScrollSpeed,
+  SongSubGenre,
+  SongTonality,
+  UpdateDataOptions,
+  VocalGender,
+  VocalParts,
 } from '../core.js'
 
 /**
@@ -159,6 +160,9 @@ export interface DTAFile {
    * Songs which MIDI file is exported with UTF-8 encoding should have `utf8` as encoding.
    */
   encoding?: SongEncoding
+  /**
+   * The version of the song's MILO file.
+   */
   format?: number
   version?: number
   /**
@@ -237,6 +241,9 @@ export interface DTAFile {
    * Rock Band 3 uses this flag to update several pre-RB3 DLCs songs and exports.
    */
   extra_authoring?: ExtraAuthoringFlags[]
+  /**
+   * If `true`, the game will load both album art and MILO file from the game patch file system.
+   */
   alternate_path?: boolean
   context?: number
   /**
@@ -244,6 +251,19 @@ export interface DTAFile {
    */
   pack_name?: string
   base_points?: number
+  /**
+   * The loading phrase that will appear on the loading screen. _This value only works on Rock Band 3 Deluxe_.
+   */
+  loading_phrase?: string
+  /**
+   * The PRO Guitar/Bass chart author. _This value only works on Rock Band 3 Deluxe_.
+   */
+  strings_author?: string
+  /**
+   * The PRO Keys chart author. _This value only works on Rock Band 3 Deluxe_.
+   */
+  keys_author?: string
+  update?: UpdateDataOptions
   /**
    * The author of the song.
    */
@@ -296,28 +316,36 @@ export type DTAFileKeys = keyof DTAFile
  */
 export type DTAFileExpanded<T> = DTAFile & T
 
-export const dtaDefault: Readonly<DTAFile> = {
-  id: '',
-  name: '',
-  artist: '',
-  master: false,
-  song_id: 0,
-  songname: '',
-  tracks_count: [0, 0, 0, 0, 0, 0],
-  pans: [],
-  vols: [],
-  vocal_parts: 0,
-  bank: 'sfx/tambourine_bank.milo',
-  drum_bank: 'sfx/kit01_bank.milo',
-  anim_tempo: 32,
-  preview: [0, 0],
-  song_length: 0,
-  rank_band: 1,
-  game_origin: 'ugc_plus',
-  rating: 4,
-  genre: 'other',
-  vocal_gender: 'male',
-  year_released: new Date().getFullYear(),
-  album_art: false,
-  album_name: '',
+export const dtaDefault = () => {
+  const defaultDTA: DTAFile = {
+    id: '',
+    name: '',
+    artist: '',
+    master: false,
+    song_id: 0,
+    songname: '',
+    tracks_count: [0, 0, 0, 0, 0, 0],
+    pans: [],
+    vols: [],
+    vocal_parts: 0,
+    bank: 'sfx/tambourine_bank.milo',
+    drum_bank: 'sfx/kit01_bank.milo',
+    anim_tempo: 32,
+    preview: [0, 0],
+    song_length: 0,
+    rank_band: 1,
+    game_origin: 'ugc_plus',
+    rating: 4,
+    genre: 'other',
+    vocal_gender: 'male',
+    year_released: new Date().getFullYear(),
+    album_art: false,
+    album_name: '',
+  }
+
+  const newDefault = new Map()
+  for (const key of Object.keys(defaultDTA) as DTAFileKeys[]) {
+    newDefault.set(key, defaultDTA[key])
+  }
+  return Object.fromEntries(newDefault) as DTAFile
 }

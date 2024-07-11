@@ -1,4 +1,4 @@
-import { InstrRankingNames, InstrRankingNumbers } from '../core.js'
+import type { InstrRankingNames, InstrRankingNumbers } from '../core.js'
 
 const ranksMap = {
   drum: [124, 151, 178, 242, 345, 448],
@@ -36,9 +36,9 @@ export const rankCalculator = (
 
   parseRankReturn++
 
-  ranksMap[type].forEach((value) => {
+  for (const value of ranksMap[type]) {
     if (rank >= value) parseRankReturn++
-  })
+  }
 
   return parseRankReturn as InstrRankingNumbers
 }

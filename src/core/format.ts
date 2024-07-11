@@ -4,6 +4,8 @@ import {
   useDefaultOptions,
 } from '../utils.js'
 
+export type LeadingArticleTypes = 'emit' | 'omit' | 'trailing'
+
 export interface DTAStringValueFormattingOptions {
   /**
    * You can specify how the leading article will be
@@ -25,7 +27,7 @@ export interface DTAStringValueFormattingOptions {
    *
    * Ex.: `An Example` => `Example, An`.
    */
-  leadingArticle?: 'emit' | 'omit' | 'trailing'
+  leadingArticle?: LeadingArticleTypes
   /**
    * If `true`, the string will come quoted. Default is `false`.
    */

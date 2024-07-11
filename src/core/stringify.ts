@@ -1,4 +1,4 @@
-import { DTAFile, SongSortingTypes, sortDTA } from '../core.js'
+import { type DTAFile, type SongSortingTypes, sortDTA } from '../core.js'
 import {
   genAudioFileStructure,
   genRB3DLCDetailedTracksStructure as genRB3DLCDetailedTrack,
@@ -159,6 +159,7 @@ const stringifyDefault = (
     pack_name,
     base_points,
     author,
+    loading_phrase,
     languages,
     karaoke,
     multitrack,
@@ -337,7 +338,7 @@ const stringifyDefault = (
       : ''
   }${real_bass_tuning ? `${t()}(real_bass_tuning (${real_bass_tuning.join(' ')}))` : ''}${pack_name ? `${t(1)}(pack_name "${quoteToSlashQ(pack_name)}")` : ''}${
     base_points ? `${t(1)}(base_points ${base_points.toString()})` : ''
-  }${placeRB3DXAttributes && author ? `${t(1)}(${t(2)}'author'${t(2)}"${quoteToSlashQ(author)}"${t()})` : ''}`
+  }${placeRB3DXAttributes && author ? `${t(1)}(${t(2)}'author'${t(2)}"${quoteToSlashQ(author)}"${t()})` : ''}${placeRB3DXAttributes && loading_phrase ? `${t(1)}(${t(2)}'loading_phrase'${t(2)}"${quoteToSlashQ(loading_phrase)}"${t()})` : ''}`
 
   if (placeCustomAttributes === undefined || placeCustomAttributes) {
     output += `${t()}${t(0)};DO NOT EDIT THE FOLLOWING LINES MANUALLY${t(0)};Created using Magma: C3 Roks Edition v3.3.5${t(0)};Song authored by ${author ? author : 'Unknown Charter'}${t(
@@ -431,6 +432,7 @@ const stringifyRB3DLC = (
     pack_name,
     base_points,
     author,
+    loading_phrase,
     languages,
     karaoke,
     multitrack,
@@ -670,6 +672,10 @@ const stringifyRB3DLC = (
   }${pack_name ? `${t()}(pack_name "${quoteToSlashQ(pack_name)}")` : ``}${base_points ? `${t()}(base_points ${base_points.toString()})` : ``}${
     placeRB3DXAttributes && author
       ? `${t(1)}(author "${quoteToSlashQ(author)}")`
+      : ''
+  }${
+    placeRB3DXAttributes && loading_phrase
+      ? `${t(1)}(loading_phrase "${quoteToSlashQ(loading_phrase)}")`
       : ''
   }`
 

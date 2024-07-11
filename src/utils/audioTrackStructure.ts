@@ -1,4 +1,8 @@
-import { DTAFile, DrumTracksTypes, InstrumentTracksTypes } from '../core.js'
+import type {
+  DTAFile,
+  DrumTracksTypes,
+  InstrumentTracksTypes,
+} from '../core.js'
 import { genSpaces as s } from '../utils.js'
 
 /**

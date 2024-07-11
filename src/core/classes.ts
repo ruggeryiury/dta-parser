@@ -1,23 +1,4 @@
 import {
-  BandRankingNames,
-  BandRankingNamesAsDots,
-  BandRankingNumbers,
-  DTAFile,
-  DTAFileRecipe,
-  DTAStringValueFormattingOptions,
-  GetRankTypeOptions,
-  InstrRankingNames,
-  InstrRankingNamesAsDots,
-  InstrRankingNumbers,
-  SongGameOriginNames,
-  SongGenreNames,
-  SongRatingNames,
-  SongSortingTypes,
-  SongSubGenreNames,
-  StringifyDataOptions,
-  UpdateDataOptions,
-  VocalGenderNames,
-  VocalPartsNames,
   createDTA,
   formatDTAStringValue,
   genDTARecipe,
@@ -26,16 +7,35 @@ import {
   sortDTA,
   stringifyDTA,
   updateDTA,
+  type BandRankingNames,
+  type BandRankingNamesAsDots,
+  type BandRankingNumbers,
+  type DTAFile,
+  type DTAFileRecipe,
+  type DTAStringValueFormattingOptions,
+  type GetRankTypeOptions,
+  type InstrRankingNames,
+  type InstrRankingNamesAsDots,
+  type InstrRankingNumbers,
+  type SongGameOriginNames,
+  type SongGenreNames,
+  type SongRatingNames,
+  type SongSortingTypes,
+  type SongSubGenreNames,
+  type StringifyDataOptions,
+  type UpdateDataOptions,
+  type VocalGenderNames,
+  type VocalPartsNames,
 } from '../core.js'
 import {
-  SongDrumMixNames,
-  AudioFileTracksStructureDocument,
+  type SongDrumMixNames,
+  type AudioFileTracksStructureDocument,
+  isDTAFileRecipe,
   genAudioFileStructure,
-  SearchAlbumArtworkImageSize,
+  type SearchAlbumArtworkImageSize,
   searchAlbumArtwork,
   checkDrumMix,
   isSongClass,
-  isDTAFileRecipe,
 } from '../utils.js'
 
 export interface SongGetRankMethods {
@@ -468,13 +468,13 @@ export class SongCollection {
    * @param {(Song | DTAFile | DTAFileRecipe)[]} collection An array with known parsed song types to be added.
    */
   constructor(collection: (Song | DTAFile | DTAFileRecipe)[]) {
-    collection.forEach((song) => {
+    for (const song of collection) {
       if (isSongClass(song)) {
         this.collection.push(song)
       } else {
         this.collection.push(new Song(song))
       }
-    })
+    }
   }
   /**
    * Adds one of more songs into the song collection.
@@ -483,13 +483,13 @@ export class SongCollection {
    */
   public add(songs: DTAFile | Song | DTAFile[] | Song[]): void {
     if (Array.isArray(songs)) {
-      songs.forEach((song) => {
+      for (const song of songs) {
         if (isSongClass(song)) {
           this.collection.push(song)
         } else {
           this.collection.push(new Song(song))
         }
-      })
+      }
     } else {
       if (isSongClass(songs)) {
         this.collection.push(songs)
@@ -519,9 +519,9 @@ export class SongCollection {
    */
   public stringify(options?: StringifyDataOptions): string {
     let returnString = ''
-    this.collection.forEach((song) => {
+    for (const song of this.collection) {
       returnString += song.stringify(options)
-    })
+    }
 
     return returnString
   }

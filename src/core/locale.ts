@@ -1,4 +1,4 @@
-import { SongKeyMajorValues, SongKeyMinorValues } from '../core.js'
+import type { SongKeyMajorValues, SongKeyMinorValues } from '../core.js'
 import { getKeyByValue } from '../utils.js'
 
 export type ExtractNumbers<T> = T extends number ? T : never

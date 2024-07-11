@@ -1,4 +1,4 @@
-import { DTAFile, Song } from '../core.js'
+import { type DTAFile, Song } from '../core.js'
 import { isSongClass, leadingArticleToTrailing } from '../utils.js'
 
 /**

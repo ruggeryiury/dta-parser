@@ -1,11 +1,11 @@
 import {
-  DTAFile,
-  DTAFileRecipe,
-  MultipleSongsUpdateObject,
+  type DTAFile,
+  type DTAFileRecipe,
+  type MultipleSongsUpdateObject,
   Song,
   SongCollection,
-  SongSortingTypes,
-  SongUpdateObject,
+  type SongSortingTypes,
+  type SongUpdateObject,
   depackDTA,
   genDTARecipe,
   parseDTA,
@@ -85,7 +85,7 @@ const DTAParser = <RT extends DTAParserExportTypes = undefined>(
   if (update) {
     const updateKeys = Object.keys(update)
 
-    updateKeys.forEach((keys) => {
+    for (const keys of updateKeys) {
       parsedSongs = parsedSongs.map((song) => {
         if (song.id === keys) {
           return updateDTA(song, update[keys])
@@ -93,7 +93,7 @@ const DTAParser = <RT extends DTAParserExportTypes = undefined>(
 
         return song
       })
-    })
+    }
   }
 
   if (updateAll) {
@@ -120,9 +120,9 @@ const DTAParser = <RT extends DTAParserExportTypes = undefined>(
     return parsedSongs.map((ps) => genDTARecipe(ps)) as DTAParserReturnType<RT>
 
   const collection: Song[] = []
-  parsedSongs.forEach((song) => {
+  for (const song of parsedSongs) {
     collection.push(new Song(song))
-  })
+  }
 
   return new SongCollection(collection) as DTAParserReturnType<RT>
 }

@@ -1,6 +1,5 @@
 node_modules/
-/lib/
-/module/
+/dist/
 tests/exec.ts
 *.tgz
 old_modules/

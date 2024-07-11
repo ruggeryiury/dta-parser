@@ -1,4 +1,4 @@
-import { DTAFile } from '../core.js'
+import type { DTAFile } from '../core.js'
 
 export interface SpotifyAuthToken {
   /**
@@ -107,7 +107,7 @@ export const searchAlbumArtwork = async (
         Authorization: `Basic ${authorization}`,
       },
     })
-      .then<SpotifyAuthToken>((res) => res.json())
+      .then((res) => res.json() as Promise<SpotifyAuthToken>)
       .then((json) => json.access_token)
       .catch(() => undefined)
 
@@ -120,7 +120,7 @@ export const searchAlbumArtwork = async (
           Authorization: `Bearer ${authToken}`,
         },
       })
-        .then<SpotifyAlbumSearchDocument>((res) => res.json())
+        .then((res) => res.json() as Promise<SpotifyAlbumSearchDocument>)
         .catch(() => undefined)
 
       if (!response || response.albums.items.length === 0) {

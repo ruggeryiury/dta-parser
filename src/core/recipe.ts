@@ -1,19 +1,19 @@
 import {
-  AlbumUpdateOptions,
-  BackingUpdateOptionsTypes,
-  BandFailCueNames,
-  BandRankingNumbers,
-  BassUpdateOptionsTypes,
-  DTAFile,
-  DTAFileRecipe,
-  DrumUpdateOptionsTypes,
-  GuitarUpdateOptionsTypes,
-  KeysUpdateOptionsTypes,
-  SongGenreUpdateOptions,
-  SongKeyUpdateOptions,
-  TrackUpdateOptions,
-  VocalsUpdateOptionsTypes,
   localeKeyToValue,
+  type AlbumUpdateOptions,
+  type BackingUpdateOptionsTypes,
+  type BandFailCueNames,
+  type BandRankingNumbers,
+  type BassUpdateOptionsTypes,
+  type DrumUpdateOptionsTypes,
+  type DTAFile,
+  type DTAFileRecipe,
+  type GuitarUpdateOptionsTypes,
+  type KeysUpdateOptionsTypes,
+  type SongGenreUpdateOptions,
+  type SongKeyUpdateOptions,
+  type TrackUpdateOptions,
+  type VocalsUpdateOptionsTypes,
 } from '../core.js'
 import { genAudioFileStructure, rankCalculator } from '../utils.js'
 
@@ -266,6 +266,9 @@ export const genDTARecipe = (song: DTAFile): DTAFileRecipe => {
     CATemh,
     author,
     doubleKick,
+    loading_phrase,
+    strings_author,
+    keys_author,
   } = song
 
   const returnObject: DTAFileRecipe = {
@@ -316,7 +319,6 @@ export const genDTARecipe = (song: DTAFile): DTAFileRecipe => {
     year_released,
     year_recorded,
     album: {} as AlbumUpdateOptions,
-
     key:
       song_key !== undefined &&
       vocal_tonic_note !== undefined &&
@@ -351,6 +353,9 @@ export const genDTARecipe = (song: DTAFile): DTAFileRecipe => {
         : vocal_tonic_note !== undefined && song_tonality !== undefined
           ? localeKeyToValue.song_key(vocal_tonic_note, song_tonality)
           : undefined,
+    loading_phrase,
+    strings_author,
+    keys_author,
     multitrack,
     CATemh,
     author,
@@ -359,9 +364,9 @@ export const genDTARecipe = (song: DTAFile): DTAFileRecipe => {
 
   const allKeys = Object.keys(returnObject) as (keyof typeof returnObject)[]
 
-  allKeys.forEach((key) => {
+  for (const key of allKeys) {
     if (returnObject[key] === undefined) delete returnObject[key]
-  })
+  }
 
   if (song_scroll_speed === undefined) delete returnObject.song_scroll_speed
   if (anim_tempo === 32) delete returnObject.anim_tempo

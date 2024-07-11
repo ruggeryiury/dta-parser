@@ -1,4 +1,4 @@
-import { DTAFile } from '../core.js'
+import type { DTAFile } from '../core.js'
 import { omitLeadingArticle } from '../utils.js'
 
 const sortingLocale = {

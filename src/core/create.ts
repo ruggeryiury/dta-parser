@@ -1,14 +1,13 @@
-import { cloneDeep } from 'lodash'
 import {
-  DTAFile,
-  Song,
-  SongGenreUpdateOptions,
-  SongRating,
-  SongRatingNames,
-  TrackUpdateOptions,
-  UpdateDataOptions,
   dtaDefault,
+  Song,
   updateDTA,
+  type DTAFile,
+  type SongGenreUpdateOptions,
+  type SongRating,
+  type SongRatingNames,
+  type TrackUpdateOptions,
+  type UpdateDataOptions,
 } from '../core.js'
 
 export interface DTAFileRecipe extends UpdateDataOptions {
@@ -89,7 +88,7 @@ export const createDTA = <RT extends boolean | undefined = undefined>(
   values?: DTAFileRecipe,
   asJSON?: RT
 ): CreateDTAReturnType<RT> => {
-  let newDTAInstance = cloneDeep(dtaDefault)
+  let newDTAInstance = dtaDefault()
 
   if (values) {
     newDTAInstance = updateDTA(newDTAInstance, values)

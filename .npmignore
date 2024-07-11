@@ -1,7 +1,6 @@
 /.github/
 /assets/
 node_modules/
-/packages/
 /src/
 /tests/
 .gitignore

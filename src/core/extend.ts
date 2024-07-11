@@ -1,5 +1,4 @@
-import { cloneDeep } from 'lodash'
-import { DTAFile, UpdateDataOptions, updateDTA } from '../core.js'
+import { updateDTA, type DTAFile, type UpdateDataOptions } from '../core.js'
 
 export type ExtendNewValuesOnlyObject<T> = Omit<T, keyof DTAFile>
 
@@ -17,8 +16,8 @@ export const extendDTAFile = <T extends DTAFile>(
   update?: UpdateDataOptions
 ): T => {
   const extendedSongObject = {
-    ...cloneDeep(song),
-    ...cloneDeep(newValues),
+    ...song,
+    ...newValues,
   } as T
 
   if (update) {

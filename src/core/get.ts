@@ -1,14 +1,14 @@
 import {
-  BandRankingNames,
-  BandRankingNamesAsDots,
-  BandRankingNumbers,
-  DTAFile,
-  InstrRankingNames,
-  InstrRankingNamesAsDots,
-  InstrRankingNumbers,
   localeKeyToValue,
+  type BandRankingNames,
+  type BandRankingNamesAsDots,
+  type BandRankingNumbers,
+  type DTAFile,
+  type InstrRankingNames,
+  type InstrRankingNamesAsDots,
+  type InstrRankingNumbers,
 } from '../core.js'
-import { RankTypes, rankCalculator } from '../utils.js'
+import { rankCalculator, type RankTypes } from '../utils.js'
 
 export type GetRankTypeOptions = 'number' | 'verbose' | 'verboseDots'
 

@@ -1,4 +1,4 @@
-import { SongUpdateObject, localeValueToKey } from '../core.js'
+import { type SongUpdateObject, localeValueToKey } from '../core.js'
 import { genTabs, quoteToSlashQ, useDefaultOptions } from '../utils.js'
 
 export interface StringifySongUpdatesOptions {
@@ -111,7 +111,7 @@ export const stringifySongUpdates = (
     return 0
   })
 
-  upgKeys.forEach((key) => {
+  for (const key of upgKeys) {
     const {
       key: key_signature,
       genre,
@@ -123,7 +123,7 @@ export const stringifySongUpdates = (
       alternate_path,
       vocal_gender,
     } = updates[key]
-    if (id) return
+    if (id) break
     rtnString += `(${key}`
 
     if (name) {
@@ -180,6 +180,6 @@ export const stringifySongUpdates = (
       rtnString += `${inline ? ' ' : genTabs()}(alternate_path TRUE)`
 
     rtnString += `)${genTabs(0)}`
-  })
+  }
   return rtnString
 }

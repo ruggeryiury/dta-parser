@@ -1,14 +1,14 @@
 {
   "name": "dta-parser",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "private": true,
   "description": "A Rock Band song metadata file parser written in Javascript",
   "homepage": "https://github.com/ruggeryiury/dta-parser#readme",
   "repository": "github:ruggeryiury/dta-parser",
   "type": "module",
-  "main": "lib/index.js",
-  "module": "module/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "author": "Ruggery Iury Corrêa <ruggeryiury@gmail.com>",
   "license": "MIT",
   "keywords": [
@@ -20,37 +20,27 @@
     "typescript"
   ],
   "scripts": {
-    "build": "pnpm run build:commonjs && pnpm run build:esmodules && pnpm pack",
-    "build:commonjs": "tsc --project ./prod.tsconfig.json",
-    "build:esmodules": "tsc --project ./prod.tsconfig.json --module nodenext --moduleResolution nodenext --outDir module",
-    "clear": "rimraf lib module",
+    "build": "tsc --project ./prod.tsconfig.json",
+    "clear": "rimraf dist",
     "dev": "tsx watch ./tests/exec.ts",
     "format": "prettier --write src",
-    "lint": "eslint src"
+    "lint": "eslint src/**/*.ts"
   },
   "exports": {
     ".": {
-      "require": "./lib/index.js",
-      "import": "./module/index.js",
-      "default": "./lib/index.js"
+      "import": "./dist/index.js"
     },
     "./core": {
-      "require": "./lib/core.js",
-      "import": "./module/core.js",
-      "default": "./lib/core.js"
+      "import": "./dist/core.js"
     },
     "./utils": {
-      "require": "./lib/utils.js",
-      "import": "./module/utils.js",
-      "default": "./lib/utils.js"
+      "import": "./dist/utils.js"
     }
   },
   "dependencies": {
-    "jschardet": "^3.1.2",
-    "lodash": "^4.17.21"
+    "jschardet": "^3.1.2"
   },
   "devDependencies": {
-    "@types/lodash": "^4.17.4",
     "@types/node": "^20.12.12",
     "eslint": "^9.3.0",
     "eslint-import-resolver-typescript": "^3.6.1",
@@ -58,6 +48,7 @@
     "eslint-plugin-jsdoc": "^48.2.5",
     "eslint-plugin-n": "^17.7.0",
     "globals": "^15.3.0",
+    "path-js": "file:C:/Users/Ruggery/Documents/Visual Studio Code/js/@packages/path-js-v1.1.0.tgz",
     "prettier": "^3.2.5",
     "tsx": "^4.10.5",
     "typescript": "^5.4.5",

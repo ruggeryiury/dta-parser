@@ -38,6 +38,7 @@ const tseslintConfig = {
     '@typescript-eslint/non-nullable-type-assertion-style': 'warn',
     '@typescript-eslint/no-dynamic-delete': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/no-extraneous-class': 'off',
     'import/order': [
       'error',
       {

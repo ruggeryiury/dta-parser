@@ -1,21 +1,21 @@
 import {
-  AnimTempo,
-  BandFailCueNames,
-  BandRankingNames,
-  BandRankingNumbers,
-  DTAFile,
-  DrumBankNames,
-  PercussionBankNames,
-  SongEncoding,
-  SongGameOrigin,
-  SongGenreNames,
-  SongRating,
-  SongRatingNames,
-  SongScrollSpeedNames,
-  VocalGenderNames,
-  VocalParts,
-  VocalPartsNames,
   localeValueToKey,
+  type AnimTempo,
+  type BandFailCueNames,
+  type BandRankingNames,
+  type BandRankingNumbers,
+  type DrumBankNames,
+  type DTAFile,
+  type PercussionBankNames,
+  type SongEncoding,
+  type SongGameOrigin,
+  type SongGenreNames,
+  type SongRating,
+  type SongRatingNames,
+  type SongScrollSpeedNames,
+  type VocalGenderNames,
+  type VocalParts,
+  type VocalPartsNames,
 } from '../core.js'
 import {
   panValueToArray,
@@ -709,13 +709,34 @@ export interface UpdateDataOptions {
    */
   year_released?: number
   year_recorded?: number
+  /**
+   * An object that contains information about the album of the song (name, track number).
+   */
   album?: AlbumUpdateOptions
+  /**
+   * An object that contains information about the key signature of the song.
+   */
   key?: SongKeyMajorValues | SongKeyMinorValues | SongKeyUpdateOptions
+  /**
+   * If `true`, the game will load both album art and MILO file from the game patch file system.
+   */
   alternate_path?: boolean
   /**
    * The name of the song's pack.
    */
   pack_name?: string
+  /**
+   * The loading phrase that will appear on the loading screen. _This value only works on Rock Band 3 Deluxe_.
+   */
+  loading_phrase?: string
+  /**
+   * The PRO Guitar/Bass chart author. _This value only works on Rock Band 3 Deluxe_.
+   */
+  strings_author?: string
+  /**
+   * The PRO Keys chart author. _This value only works on Rock Band 3 Deluxe_.
+   */
+  keys_author?: string
   /**
    * The author of the song.
    */
@@ -772,6 +793,7 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
     ...dta,
   } as Partial<DTAFile>
   const {
+    fake,
     id,
     name,
     artist,
@@ -803,6 +825,9 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
     alternate_path,
     pack_name,
     author,
+    loading_phrase,
+    keys_author,
+    strings_author,
     karaoke,
     multitrack,
     doubleKick,
@@ -824,6 +849,8 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
   if (song_id !== undefined) newDTA.song_id = song_id
 
   if (songname) newDTA.songname = songname
+
+  if (fake !== undefined) newDTA.fake = fake
 
   if (tracks) {
     newDTA.tracks_count = [0, 0, 0, 0, 0, 0]
@@ -1450,6 +1477,12 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
 
   if (author) newDTA.author = author
 
+  if (loading_phrase) newDTA.loading_phrase = loading_phrase
+
+  if (keys_author) newDTA.keys_author = keys_author
+
+  if (strings_author) newDTA.strings_author = strings_author
+
   if (karaoke !== undefined) newDTA.karaoke = karaoke
 
   if (multitrack !== undefined) newDTA.multitrack = multitrack
@@ -1467,4 +1500,21 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
   if (expertOnly !== undefined) newDTA.expertOnly = expertOnly
 
   return newDTA as DTAFile
+}
+
+/**
+ * Applies all updates found on the `update` key on a `DTAFile` object and clears the `update` value.
+ * - - - -
+ * @param {DTAFile} song The song of want to merge the updated information.
+ * @returns {DTAFile} The `DTAFile` object with updates merged.
+ */
+export const applyUpdatesToDTAFileObject = (song: DTAFile): DTAFile => {
+  if (song.update)
+    return {
+      ...song,
+      ...updateDTA(song, song.update),
+      update: undefined,
+    }
+
+  return song
 }

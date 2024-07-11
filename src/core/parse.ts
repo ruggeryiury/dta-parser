@@ -1,4 +1,4 @@
-import { DTAFile, createDTA } from '../core.js'
+import { type DTAFile, createDTA } from '../core.js'
 import { slashQToQuote } from '../utils.js'
 
 /**
@@ -13,6 +13,8 @@ export const parseDTA = (song: string): DTAFile => {
     hasArtist = -1,
     hasAlbumName = -1,
     hasPackName = -1,
+    hasLoadingPhrase = -1,
+    hasAuthorName = -1,
     gotID = false,
     tracksStarted = false,
     processedTrack = '',
@@ -24,7 +26,7 @@ export const parseDTA = (song: string): DTAFile => {
   const parsed = createDTA(undefined, true)
   const split = song.split(/[;(]/).map((value) => value.trim())
 
-  split.forEach((value) => {
+  for (const value of split) {
     const [key, ...content] = value.split(' ')
     const keyFilter = key.replaceAll("'", '')
 
@@ -54,7 +56,17 @@ export const parseDTA = (song: string): DTAFile => {
       hasPackName = namingIndex
       namingIndex++
     }
-  })
+
+    if (keyFilter === 'loading_phrase') {
+      hasLoadingPhrase = namingIndex
+      namingIndex++
+    }
+
+    if (keyFilter === 'author') {
+      hasAuthorName = namingIndex
+      namingIndex++
+    }
+  }
 
   const quoteMatches = song.match(/"(.*?)"/g)
   if (quoteMatches) {
@@ -78,6 +90,9 @@ export const parseDTA = (song: string): DTAFile => {
       else if (i === hasArtist) parsed.artist = slashQToQuote(name)
       else if (i === hasAlbumName) parsed.album_name = slashQToQuote(name)
       else if (i === hasPackName) parsed.pack_name = slashQToQuote(name)
+      else if (i === hasLoadingPhrase)
+        parsed.loading_phrase = slashQToQuote(name)
+      else if (i === hasAuthorName) parsed.author = slashQToQuote(name)
     })
   }
 
@@ -239,11 +254,11 @@ export const parseDTA = (song: string): DTAFile => {
         const tracksCount = numbers.length
 
         let diffTracksCount = 0
-        parsed.tracks_count.forEach((count) => {
+        for (const count of parsed.tracks_count) {
           if (count) {
             diffTracksCount += count
           }
-        })
+        }
         if (tracksCount - diffTracksCount > 2) {
           parsed.tracks_count[5] = tracksCount - diffTracksCount - 2
         } else {
@@ -503,7 +518,7 @@ export const parseDTA = (song: string): DTAFile => {
       return
     }
 
-    if (value.includes('Song authored by')) {
+    if (value.includes('Song authored by') && !parsed.author) {
       const [, , , ...authorArray] = value.split(' ')
 
       parsed.author = authorArray.join(' ').trim()
@@ -515,9 +530,9 @@ export const parseDTA = (song: string): DTAFile => {
       if (!parsed.languages) {
         parsed.languages = []
       }
-      langs.forEach((lang) => {
-        parsed.languages?.push(lang)
-      })
+      for (const lang of langs) {
+        parsed.languages.push(lang)
+      }
     }
 
     if (value.includes('Karaoke=')) {
