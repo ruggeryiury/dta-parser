@@ -48,7 +48,7 @@
     "eslint-plugin-jsdoc": "^48.2.5",
     "eslint-plugin-n": "^17.7.0",
     "globals": "^15.3.0",
-    "path-js": "file:C:/Users/Ruggery/Documents/Visual Studio Code/js/@packages/path-js-v1.1.0.tgz",
+    "path-js": "link:..\\path-js",
     "prettier": "^3.2.5",
     "tsx": "^4.10.5",
     "typescript": "^5.4.5",

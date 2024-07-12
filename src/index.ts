@@ -52,6 +52,7 @@ export type DTAParserReturnType<RT extends DTAParserExportTypes> =
  * @param {string | Buffer} dtaFileContents The `.dta` file contents as string or Buffer.
  * @param {DTAParserOptions<RT>} options `OPTIONAL` An object with options that customizes the parsing process.
  * @returns {DTAParserReturnType<RT>} An array of parsed song objects, or a `SongCollection` class.
+ * @see [DTAParser GitHub Repository](https://github.com/ruggeryiury/dta-parser).
  */
 const DTAParser = <RT extends DTAParserExportTypes = undefined>(
   dtaFileContents: string | Buffer,

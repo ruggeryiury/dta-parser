@@ -34,8 +34,8 @@ importers:
         specifier: ^15.3.0
         version: 15.3.0
       path-js:
-        specifier: file:C:/Users/Ruggery/Documents/Visual Studio Code/js/@packages/path-js-v1.1.0.tgz
-        version: file:../@packages/path-js-v1.1.0.tgz
+        specifier: link:..\path-js
+        version: link:../path-js
       prettier:
         specifier: ^3.2.5
         version: 3.2.5
@@ -938,10 +938,6 @@ packages:
   path-exists@4.0.0:
     resolution: {integrity: sha512-ak9Qy5Q7jYb2Wwcey5Fpvg2KoAc/ZIhLSLOSBmRmygPsGwkVVt0fZa0qrtMz+m6tJTAHfZQ8FnmB4MG4LWy7/w==}
     engines: {node: '>=8'}
-
-  path-js@file:../@packages/path-js-v1.1.0.tgz:
-    resolution: {integrity: sha512-uY1MSAvuE26AoyoJBrdKYCrdD42Mlyo36G5eqVQijcZR3uv/AG61PC3X5XYEWUcp1aw1nhFZqiCfWfoZuvqggA==, tarball: file:../@packages/path-js-v1.1.0.tgz}
-    version: 1.1.0
 
   path-key@3.1.1:
     resolution: {integrity: sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==}
@@ -2172,8 +2168,6 @@ snapshots:
       callsites: 3.1.0
 
   path-exists@4.0.0: {}
-
-  path-js@file:../@packages/path-js-v1.1.0.tgz: {}
 
   path-key@3.1.1: {}
 
