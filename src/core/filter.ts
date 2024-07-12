@@ -2,7 +2,11 @@ import type { DTAFile } from '../core.js'
 import {
   addIndexToDTAFileList,
   applyGeneralFilters,
-  dtaFilterCalculator,
+  filterSongsByArtist,
+  filterSongsByAuthor,
+  filterSongsByGenre,
+  filterSongsBySongDifficulty,
+  filterSongsByTitle,
   useDefaultOptions,
   type SongsFilteredByArtistObject,
   type SongsFilteredByAuthorObject,
@@ -100,24 +104,18 @@ export const filterDTA = <T extends SongFilterSortingTypes = 'title'>(
   switch (sortedBy) {
     case 'title':
     default:
-      return dtaFilterCalculator.byTitle(
-        allSongsFiltered
-      ) as DTAFilteringReturnType<T>
+      return filterSongsByTitle(allSongsFiltered) as DTAFilteringReturnType<T>
     case 'artist':
-      return dtaFilterCalculator.byArtist(
+      return filterSongsByArtist(
         allSongsFiltered,
         albumQuantityThreshold
       ) as DTAFilteringReturnType<T>
     case 'author':
-      return dtaFilterCalculator.byAuthor(
-        allSongsFiltered
-      ) as DTAFilteringReturnType<T>
+      return filterSongsByAuthor(allSongsFiltered) as DTAFilteringReturnType<T>
     case 'genre':
-      return dtaFilterCalculator.byGenre(
-        allSongsFiltered
-      ) as DTAFilteringReturnType<T>
+      return filterSongsByGenre(allSongsFiltered) as DTAFilteringReturnType<T>
     case 'songdifficulty':
-      return dtaFilterCalculator.bySongDifficulty(
+      return filterSongsBySongDifficulty(
         allSongsFiltered,
         instrument
       ) as DTAFilteringReturnType<T>

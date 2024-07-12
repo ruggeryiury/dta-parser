@@ -1502,19 +1502,26 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
   return newDTA as DTAFile
 }
 
+export interface DTAFileWithUpdates extends DTAFile {
+  update?: UpdateDataOptions
+}
+
 /**
  * Applies all updates found on the `update` key on a `DTAFile` object and clears the `update` value.
  * - - - -
  * @param {DTAFile} song The song of want to merge the updated information.
  * @returns {DTAFile} The `DTAFile` object with updates merged.
  */
-export const applyUpdatesToDTAFileObject = (song: DTAFile): DTAFile => {
-  if (song.update)
-    return {
+export const applyUpdatesToDTAFileObject = (song: DTAFileWithUpdates): DTAFile => {
+  if (song.update) {
+    const newDTA = {
       ...song,
       ...updateDTA(song, song.update),
       update: undefined,
-    }
+    } as DTAFile
+
+    return newDTA
+  }
 
   return song
 }

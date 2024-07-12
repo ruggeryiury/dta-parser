@@ -13,7 +13,6 @@ import type {
   SongScrollSpeed,
   SongSubGenre,
   SongTonality,
-  UpdateDataOptions,
   VocalGender,
   VocalParts,
 } from '../core.js'
@@ -263,7 +262,6 @@ export interface DTAFile {
    * The PRO Keys chart author. _This value only works on Rock Band 3 Deluxe_.
    */
   keys_author?: string
-  update?: UpdateDataOptions
   /**
    * The author of the song.
    */
