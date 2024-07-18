@@ -7,12 +7,14 @@ import {
   filterSongsByGenre,
   filterSongsBySongDifficulty,
   filterSongsByTitle,
+  filterSongsByYearReleased,
   useDefaultOptions,
   type SongsFilteredByArtistObject,
   type SongsFilteredByAuthorObject,
   type SongsFilteredByGenreObject,
   type SongsFilteredBySongDifficultyObject,
   type SongsFilteredByTitleObject,
+  type SongsFilteredByYearReleasedObject,
 } from '../utils.js'
 
 export interface DTAFileWithIndex extends DTAFile {
@@ -24,10 +26,11 @@ export interface DTAFileWithIndex extends DTAFile {
 
 export type SongFilterSortingTypes =
   | 'title'
-  | 'artist'
   | 'genre'
-  | 'songdifficulty'
+  | 'song_difficulty'
   | 'author'
+  | 'artist'
+  | 'year_released'
 
 export type InstrumentDifficultyTypes =
   | 'guitar'
@@ -66,11 +69,13 @@ export type DTAFilteringReturnType<T extends SongFilterSortingTypes> =
       ? SongsFilteredByArtistObject
       : T extends 'genre'
         ? SongsFilteredByGenreObject
-        : T extends 'songdifficulty'
+        : T extends 'song_difficulty'
           ? SongsFilteredBySongDifficultyObject
           : T extends 'author'
             ? SongsFilteredByAuthorObject
-            : never
+            : T extends 'year_released'
+              ? SongsFilteredByYearReleasedObject
+              : never
 /**
  * Apply filters to a song collection.
  *
@@ -105,19 +110,23 @@ export const filterDTA = <T extends SongFilterSortingTypes = 'title'>(
     case 'title':
     default:
       return filterSongsByTitle(allSongsFiltered) as DTAFilteringReturnType<T>
+    case 'genre':
+      return filterSongsByGenre(allSongsFiltered) as DTAFilteringReturnType<T>
+    case 'song_difficulty':
+      return filterSongsBySongDifficulty(
+        allSongsFiltered,
+        instrument
+      ) as DTAFilteringReturnType<T>
+    case 'author':
+      return filterSongsByAuthor(allSongsFiltered) as DTAFilteringReturnType<T>
     case 'artist':
       return filterSongsByArtist(
         allSongsFiltered,
         albumQuantityThreshold
       ) as DTAFilteringReturnType<T>
-    case 'author':
-      return filterSongsByAuthor(allSongsFiltered) as DTAFilteringReturnType<T>
-    case 'genre':
-      return filterSongsByGenre(allSongsFiltered) as DTAFilteringReturnType<T>
-    case 'songdifficulty':
-      return filterSongsBySongDifficulty(
-        allSongsFiltered,
-        instrument
+    case 'year_released':
+      return filterSongsByYearReleased(
+        allSongsFiltered
       ) as DTAFilteringReturnType<T>
   }
 }

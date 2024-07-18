@@ -1512,7 +1512,9 @@ export interface DTAFileWithUpdates extends DTAFile {
  * @param {DTAFile} song The song of want to merge the updated information.
  * @returns {DTAFile} The `DTAFile` object with updates merged.
  */
-export const applyUpdatesToDTAFileObject = (song: DTAFileWithUpdates): DTAFile => {
+export const applyUpdatesToDTAFileObject = (
+  song: DTAFileWithUpdates
+): DTAFile => {
   if (song.update) {
     const newDTA = {
       ...song,

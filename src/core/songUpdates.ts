@@ -122,6 +122,7 @@ export const stringifySongUpdates = (
       artist,
       alternate_path,
       vocal_gender,
+      author,
     } = updates[key]
     if (id) break
     rtnString += `(${key}`
@@ -178,6 +179,9 @@ export const stringifySongUpdates = (
 
     if (alternate_path)
       rtnString += `${inline ? ' ' : genTabs()}(alternate_path TRUE)`
+
+    if (author)
+      rtnString += `${inline ? ' ' : genTabs()}(author "${quoteToSlashQ(author)}")`
 
     rtnString += `)${genTabs(0)}`
   }

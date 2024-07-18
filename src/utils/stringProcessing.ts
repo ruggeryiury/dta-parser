@@ -138,7 +138,7 @@ export interface StringFormatterOptions {
 export const formatStringFromDTA = (
   song: DTAFile | null,
   format: string,
-  options?: StringFormatterOptions | 'id'
+  options?: StringFormatterOptions | 'id' | 'id_with_space'
 ): string => {
   if (options === 'id')
     options = {
@@ -146,6 +146,14 @@ export const formatStringFromDTA = (
       forceCase: 'lower',
       normalizeNFD: true,
       removeSpaces: true,
+      trim: true,
+    }
+  else if (options === 'id_with_space')
+    options = {
+      azNumOnly: true,
+      forceCase: 'lower',
+      normalizeNFD: true,
+      removeSpaces: false,
       trim: true,
     }
   else options = {}
