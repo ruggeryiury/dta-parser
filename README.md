@@ -17,6 +17,7 @@
   - [Creating a new song entry (using recipe)](#creating-a-new-song-entry-using-recipe)
   - ["Stringify" a `Song` class back to `.dta` file contents](#stringify-a-song-class-back-to-dta-file-contents)
   - [Sort a collection of songs](#sort-a-collection-of-songs)
+- [More Rock Band related projects](#more-rock-band-related-projects)
 
 # Features
 
@@ -105,3 +106,10 @@ const mySongs = DTAParser(dtaFileContents)
 // Sort all songs based on the songs' artist.
 mySongs.sort('Artist')
 ```
+
+# More Rock Band related projects
+
+- [RBTools-JS](https://github.com/ruggeryiury/rbtools-js): A highly typed module package to manipulate several Rock Band game files.
+- [My Customs Projects](https://github.com/ruggeryiury/ruggy-customs-projects): All my customs projects.
+- [C3 Library Patch](https://github.com/ruggeryiury/c3-library-patch): A metadata patch for many released customs.
+- [PRO Guitar/Bass Guide](https://ruggeryiury.github.io/proguitarbass-guide/): My famous PRO Guitar/Bass guide.
