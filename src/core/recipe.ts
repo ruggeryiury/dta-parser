@@ -1,20 +1,4 @@
-import {
-  localeKeyToValue,
-  type AlbumUpdateOptions,
-  type BackingUpdateOptionsTypes,
-  type BandFailCueNames,
-  type BandRankingNumbers,
-  type BassUpdateOptionsTypes,
-  type DrumUpdateOptionsTypes,
-  type DTAFile,
-  type DTAFileRecipe,
-  type GuitarUpdateOptionsTypes,
-  type KeysUpdateOptionsTypes,
-  type SongGenreUpdateOptions,
-  type SongKeyUpdateOptions,
-  type TrackUpdateOptions,
-  type VocalsUpdateOptionsTypes,
-} from '../core.js'
+import { localeKeyToValue, type AlbumUpdateOptions, type BackingUpdateOptionsTypes, type BandFailCueNames, type BandRankingNumbers, type BassUpdateOptionsTypes, type DrumUpdateOptionsTypes, type DTAFile, type DTAFileRecipe, type GuitarUpdateOptionsTypes, type KeysUpdateOptionsTypes, type SongGenreUpdateOptions, type SongKeyUpdateOptions, type TrackUpdateOptions, type VocalsUpdateOptionsTypes } from '../core.js'
 import { genAudioFileStructure, rankCalculator } from '../utils.js'
 
 /**
@@ -25,21 +9,8 @@ import { genAudioFileStructure, rankCalculator } from '../utils.js'
  */
 export const genAudioTracksRecipe = (song: DTAFile): TrackUpdateOptions => {
   const tracks = {} as TrackUpdateOptions
-  const {
-    rank_drum,
-    rank_bass,
-    rank_guitar,
-    rank_vocals,
-    rank_keys,
-    rank_real_bass,
-    rank_real_guitar,
-    rank_real_keys,
-    real_bass_tuning,
-    real_guitar_tuning,
-    vocal_parts,
-  } = song
-  const { backing, bass, drum, guitar, keys, vocals, crowd } =
-    genAudioFileStructure(song)
+  const { rank_drum, rank_bass, rank_guitar, rank_vocals, rank_keys, rank_real_bass, rank_real_guitar, rank_real_keys, real_bass_tuning, real_guitar_tuning, vocal_parts } = song
+  const { backing, bass, drum, guitar, keys, vocals, crowd } = genAudioFileStructure(song)
 
   if (drum.enabled) {
     tracks.drum = {
@@ -87,13 +58,7 @@ export const genAudioTracksRecipe = (song: DTAFile): TrackUpdateOptions => {
       delete tracks.bass.tuning
     }
 
-    if (
-      tracks.bass.tuning?.[0] === 0 &&
-      tracks.bass.tuning[1] === 0 &&
-      tracks.bass.tuning[2] === 0 &&
-      tracks.bass.tuning[3] === 0
-    )
-      delete tracks.bass.tuning
+    if (tracks.bass.tuning?.[0] === 0 && tracks.bass.tuning[1] === 0 && tracks.bass.tuning[2] === 0 && tracks.bass.tuning[3] === 0) delete tracks.bass.tuning
 
     if (bass.channels === 2) {
       if (bass.pan.join(' ') === '-1 1') delete tracks.bass.pans
@@ -123,15 +88,7 @@ export const genAudioTracksRecipe = (song: DTAFile): TrackUpdateOptions => {
       delete tracks.guitar.tuning
     }
 
-    if (
-      tracks.guitar.tuning?.[0] === 0 &&
-      tracks.guitar.tuning[1] === 0 &&
-      tracks.guitar.tuning[2] === 0 &&
-      tracks.guitar.tuning[3] === 0 &&
-      tracks.guitar.tuning[4] === 0 &&
-      tracks.guitar.tuning[5] === 0
-    )
-      delete tracks.guitar.tuning
+    if (tracks.guitar.tuning?.[0] === 0 && tracks.guitar.tuning[1] === 0 && tracks.guitar.tuning[2] === 0 && tracks.guitar.tuning[3] === 0 && tracks.guitar.tuning[4] === 0 && tracks.guitar.tuning[5] === 0) delete tracks.guitar.tuning
 
     if (guitar.channels === 2) {
       if (guitar.pan.join(' ') === '-1 1') delete tracks.guitar.pans
@@ -230,46 +187,7 @@ export const genAudioTracksRecipe = (song: DTAFile): TrackUpdateOptions => {
  * @returns {DTAFileRecipe} The song's recipe object.
  */
 export const genDTARecipe = (song: DTAFile): DTAFileRecipe => {
-  const {
-    id,
-    name,
-    artist,
-    master,
-    song_id,
-    songname,
-    tuning_offset_cents,
-    mute_volume,
-    mute_volume_vocals,
-    hopo_threshold,
-    bank,
-    drum_bank,
-    anim_tempo,
-    band_fail_cue,
-    song_scroll_speed,
-    rank_band,
-    encoding,
-    rating,
-    genre,
-    sub_genre,
-    song_length,
-    preview,
-    vocal_gender,
-    year_released,
-    year_recorded,
-    album_art,
-    album_name,
-    album_track_number,
-    vocal_tonic_note,
-    song_tonality,
-    song_key,
-    multitrack,
-    CATemh,
-    author,
-    doubleKick,
-    loading_phrase,
-    strings_author,
-    keys_author,
-  } = song
+  const { id, name, artist, master, song_id, songname, tuning_offset_cents, mute_volume, mute_volume_vocals, hopo_threshold, bank, drum_bank, anim_tempo, band_fail_cue, song_scroll_speed, rank_band, encoding, rating, genre, sub_genre, song_length, preview, vocal_gender, year_released, year_recorded, album_art, album_name, album_track_number, vocal_tonic_note, song_tonality, song_key, multitrack, CATemh, author, doubleKick, loading_phrase, strings_author, keys_author } = song
 
   const returnObject: DTAFileRecipe = {
     id,
@@ -279,33 +197,15 @@ export const genDTARecipe = (song: DTAFile): DTAFileRecipe => {
     song_id,
     songname,
     tracks: genAudioTracksRecipe(song),
-    tuning_offset_cents:
-      tuning_offset_cents && tuning_offset_cents !== 0
-        ? tuning_offset_cents
-        : undefined,
+    tuning_offset_cents: tuning_offset_cents && tuning_offset_cents !== 0 ? tuning_offset_cents : undefined,
     mute_volume,
     mute_volume_vocals,
     hopo_threshold,
-    bank:
-      localeKeyToValue.bank(bank) === 'Tambourine'
-        ? undefined
-        : localeKeyToValue.bank(bank),
-    drum_bank:
-      localeKeyToValue.drum_bank(drum_bank) === 'Hard Rock Kit'
-        ? undefined
-        : localeKeyToValue.drum_bank(drum_bank),
+    bank: localeKeyToValue.bank(bank) === 'Tambourine' ? undefined : localeKeyToValue.bank(bank),
+    drum_bank: localeKeyToValue.drum_bank(drum_bank) === 'Hard Rock Kit' ? undefined : localeKeyToValue.drum_bank(drum_bank),
     anim_tempo,
-    band_fail_cue:
-      localeKeyToValue.band_fail_cue(band_fail_cue) === 'Not Specified'
-        ? undefined
-        : (localeKeyToValue.band_fail_cue(band_fail_cue) as Exclude<
-            BandFailCueNames,
-            'Not Specified'
-          >),
-    song_scroll_speed:
-      song_scroll_speed === undefined
-        ? 'Normal'
-        : localeKeyToValue.song_scroll_speed(song_scroll_speed),
+    band_fail_cue: localeKeyToValue.band_fail_cue(band_fail_cue) === 'Not Specified' ? undefined : (localeKeyToValue.band_fail_cue(band_fail_cue) as Exclude<BandFailCueNames, 'Not Specified'>),
+    song_scroll_speed: song_scroll_speed === undefined ? 'Normal' : localeKeyToValue.song_scroll_speed(song_scroll_speed),
     preview: preview[0],
     song_length,
     rank_band: rankCalculator('band', rank_band) as BandRankingNumbers,
@@ -320,35 +220,10 @@ export const genDTARecipe = (song: DTAFile): DTAFileRecipe => {
     year_recorded,
     album: {} as AlbumUpdateOptions,
     key:
-      song_key !== undefined &&
-      vocal_tonic_note !== undefined &&
-      song_tonality !== undefined
+      song_key !== undefined && vocal_tonic_note !== undefined && song_tonality !== undefined
         ? ({
             key: localeKeyToValue.song_key(vocal_tonic_note, song_tonality),
-            trainer_key_override:
-              song_key === 0
-                ? 'C'
-                : song_key === 1
-                  ? 'Db'
-                  : song_key === 2
-                    ? 'D'
-                    : song_key === 3
-                      ? 'Eb'
-                      : song_key === 4
-                        ? 'E'
-                        : song_key === 5
-                          ? 'F'
-                          : song_key === 6
-                            ? 'F#'
-                            : song_key === 7
-                              ? 'G'
-                              : song_key === 8
-                                ? 'Ab'
-                                : song_key === 9
-                                  ? 'A'
-                                  : song_key === 10
-                                    ? 'Ab'
-                                    : 'B',
+            trainer_key_override: song_key === 0 ? 'C' : song_key === 1 ? 'Db' : song_key === 2 ? 'D' : song_key === 3 ? 'Eb' : song_key === 4 ? 'E' : song_key === 5 ? 'F' : song_key === 6 ? 'F#' : song_key === 7 ? 'G' : song_key === 8 ? 'Ab' : song_key === 9 ? 'A' : song_key === 10 ? 'Ab' : 'B',
           } as SongKeyUpdateOptions)
         : vocal_tonic_note !== undefined && song_tonality !== undefined
           ? localeKeyToValue.song_key(vocal_tonic_note, song_tonality)

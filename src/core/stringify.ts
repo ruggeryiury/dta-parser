@@ -1,13 +1,5 @@
 import { type DTAFile, type SongSortingTypes, sortDTA } from '../core.js'
-import {
-  genAudioFileStructure,
-  genRB3DLCDetailedTracksStructure as genRB3DLCDetailedTrack,
-  quoteToSlashQ,
-  genTabs as t,
-  genSpaces as s,
-  incrementTracksCount,
-  useDefaultOptions,
-} from '../utils.js'
+import { genAudioFileStructure, genRB3DLCDetailedTracksStructure as genRB3DLCDetailedTrack, quoteToSlashQ, genTabs as t, genSpaces as s, incrementTracksCount, useDefaultOptions } from '../utils.js'
 
 export interface StringifyDataOptions {
   /**
@@ -64,17 +56,7 @@ export interface StringifyDataOptions {
     /**
      * The generation of the pack you want to build.
      */
-    gen:
-      | 'sZAE'
-      | 'sZBE'
-      | 'sZCE'
-      | 'sZDE'
-      | 'sZEE'
-      | 'sZFE'
-      | 'sZGE'
-      | 'sZHE'
-      | 'sZJE'
-      | 'sZKE'
+    gen: 'sZAE' | 'sZBE' | 'sZCE' | 'sZDE' | 'sZEE' | 'sZFE' | 'sZGE' | 'sZHE' | 'sZJE' | 'sZKE'
     /**
      * The slot of the pack you want to build.
      *
@@ -91,85 +73,10 @@ export interface StringifyDataOptions {
  * @param {StringifyDataOptions} options Customize options for the stringifying process.
  * @returns {string} A stringified version of the song.
  */
-const stringifyDefault = (
-  value: DTAFile,
-  options: StringifyDataOptions
-): string => {
-  const {
-    guitarCores,
-    omitUnusedRanks,
-    placeCustomAttributes,
-    placeRB3DXAttributes,
-    wiiMode,
-    gameOriginAsRB3DLC,
-  } = options
+const stringifyDefault = (value: DTAFile, options: StringifyDataOptions): string => {
+  const { guitarCores, omitUnusedRanks, placeCustomAttributes, placeRB3DXAttributes, wiiMode, gameOriginAsRB3DLC } = options
 
-  const {
-    id,
-    name,
-    artist,
-    master,
-    songname,
-    context,
-    tracks_count,
-    pans,
-    vols,
-    vocal_parts,
-    mute_volume,
-    mute_volume_vocals,
-    hopo_threshold,
-    song_scroll_speed,
-    bank,
-    drum_bank,
-    band_fail_cue,
-    anim_tempo,
-    song_length,
-    preview,
-    rank_drum,
-    rank_bass,
-    rank_guitar,
-    rank_vocals,
-    rank_keys,
-    rank_real_keys,
-    rank_real_guitar,
-    rank_real_bass,
-    rank_band,
-    genre,
-    vocal_gender,
-    version,
-    format,
-    album_art,
-    year_released,
-    year_recorded,
-    rating,
-    sub_genre,
-    song_id,
-    solo,
-    tuning_offset_cents,
-    guide_pitch_volume,
-    game_origin,
-    encoding,
-    album_name,
-    album_track_number,
-    vocal_tonic_note,
-    song_tonality,
-    song_key,
-    real_guitar_tuning,
-    real_bass_tuning,
-    pack_name,
-    base_points,
-    author,
-    loading_phrase,
-    languages,
-    karaoke,
-    multitrack,
-    convert,
-    doubleKick,
-    rhythmOnKeys,
-    rhythmOnBass,
-    CATemh,
-    expertOnly,
-  } = value
+  const { id, name, artist, master, songname, context, tracks_count, pans, vols, vocal_parts, mute_volume, mute_volume_vocals, hopo_threshold, song_scroll_speed, bank, drum_bank, band_fail_cue, anim_tempo, song_length, preview, rank_drum, rank_bass, rank_guitar, rank_vocals, rank_keys, rank_real_keys, rank_real_guitar, rank_real_bass, rank_band, genre, vocal_gender, version, format, album_art, year_released, year_recorded, rating, sub_genre, song_id, solo, tuning_offset_cents, guide_pitch_volume, game_origin, encoding, album_name, album_track_number, vocal_tonic_note, song_tonality, song_key, real_guitar_tuning, real_bass_tuning, pack_name, base_points, author, loading_phrase, languages, karaoke, multitrack, convert, doubleKick, rhythmOnKeys, rhythmOnBass, CATemh, expertOnly } = value
 
   const [drum, bass, guitar, vocals, keys, backing, crowd] = tracks_count
 
@@ -180,13 +87,7 @@ const stringifyDefault = (
 
   let output = ''
 
-  output += `(${t()}'${id}'${t()}(${t(2)}'name'${t(2)}"${quoteToSlashQ(name)}"${t()})${t()}(${t(2)}'artist'${t(2)}"${quoteToSlashQ(artist)}"${t()})${t()}('master' ${master ? '1' : '0'})${
-    context ? `${t()}('context' ${context.toString()})` : ''
-  }${t()}(${t(2)}'song'${t(2)}(${t(3)}'name'${t(3)}"${
-    wiiMode
-      ? `dlc/${wiiMode.gen}/${wiiMode.slot.toString().padStart(3, '0')}/content/songs/${songname}/${songname}`
-      : `songs/${songname}/${songname}`
-  }"${t(2)})${t(2)}(${t(3)}'tracks_count'${t(3)}(${tracks_count.join(' ')})${t(2)})${t(2)}(${t(3)}'tracks'${t(3)}(${t(4)}`
+  output += `(${t()}'${id}'${t()}(${t(2)}'name'${t(2)}"${quoteToSlashQ(name)}"${t()})${t()}(${t(2)}'artist'${t(2)}"${quoteToSlashQ(artist)}"${t()})${t()}('master' ${master ? '1' : '0'})${context ? `${t()}('context' ${context.toString()})` : ''}${t()}(${t(2)}'song'${t(2)}(${t(3)}'name'${t(3)}"${wiiMode ? `dlc/${wiiMode.gen}/${wiiMode.slot.toString().padStart(3, '0')}/content/songs/${songname}/${songname}` : `songs/${songname}/${songname}`}"${t(2)})${t(2)}(${t(3)}'tracks_count'${t(3)}(${tracks_count.join(' ')})${t(2)})${t(2)}(${t(3)}'tracks'${t(3)}(${t(4)}`
 
   if (drum) {
     output += `(${t(5)}'drum'${t(5)}(${incrementTracksCount(trackCount, drum)})${t(4)})`
@@ -235,17 +136,7 @@ const stringifyDefault = (
     return
   })
 
-  output += `${crowd ? `${t(2)}('crowd_channels' ${incrementTracksCount(crowdTrackStarts, 2)})` : ``}${t(2)}('vocal_parts' ${vocal_parts.toString()})${t(2)}(${t(
-    3
-  )}'drum_solo'${t(3)}(${t(4)}'seqs'${t(4)}('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')${t(3)})${t(2)})${t(2)}(${t(3)}'drum_freestyle'${t(3)}(${t(4)}'seqs'${t(
-    4
-  )}('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')${t(3)})${t(2)})${t(2)}(mute_volume ${mute_volume?.toString() ?? '-96'})${t(2)}(mute_volume_vocals ${
-    mute_volume_vocals?.toString() ?? '-12'
-  })${t(2)}(hopo_threshold ${hopo_threshold?.toString() ?? '170'})${t()})${t()}('song_scroll_speed' ${song_scroll_speed?.toString() ?? '2300'})${t()}(${t(
-    2
-  )}'bank'${t(2)}"${bank}"${t()})${t()}(drum_bank ${drum_bank})${t()}('anim_tempo' ${anim_tempo.toString()})${
-    !band_fail_cue ? '' : `${t()}(band_fail_cue ${band_fail_cue})`
-  }${t()}('song_length' ${song_length.toString()})${t()}('preview' ${preview.join(' ')})${t()}(${t(2)}'rank'`
+  output += `${crowd ? `${t(2)}('crowd_channels' ${incrementTracksCount(crowdTrackStarts, 2)})` : ``}${t(2)}('vocal_parts' ${vocal_parts.toString()})${t(2)}(${t(3)}'drum_solo'${t(3)}(${t(4)}'seqs'${t(4)}('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')${t(3)})${t(2)})${t(2)}(${t(3)}'drum_freestyle'${t(3)}(${t(4)}'seqs'${t(4)}('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')${t(3)})${t(2)})${t(2)}(mute_volume ${mute_volume?.toString() ?? '-96'})${t(2)}(mute_volume_vocals ${mute_volume_vocals?.toString() ?? '-12'})${t(2)}(hopo_threshold ${hopo_threshold?.toString() ?? '170'})${t()})${t()}('song_scroll_speed' ${song_scroll_speed?.toString() ?? '2300'})${t()}(${t(2)}'bank'${t(2)}"${bank}"${t()})${t()}(drum_bank ${drum_bank})${t()}('anim_tempo' ${anim_tempo.toString()})${!band_fail_cue ? '' : `${t()}(band_fail_cue ${band_fail_cue})`}${t()}('song_length' ${song_length.toString()})${t()}('preview' ${preview.join(' ')})${t()}(${t(2)}'rank'`
 
   if (omitUnusedRanks && (rank_drum === undefined || rank_drum === 0)) {
     // Do nothing
@@ -277,40 +168,25 @@ const stringifyDefault = (
     output += `${t(2)}('keys' ${rank_keys?.toString() ?? '0'})`
   }
 
-  if (
-    omitUnusedRanks &&
-    (rank_real_keys === undefined || rank_real_keys === 0)
-  ) {
+  if (omitUnusedRanks && (rank_real_keys === undefined || rank_real_keys === 0)) {
     // Do nothing
   } else {
     output += `${t(2)}('real_keys' ${rank_real_keys?.toString() ?? '0'})`
   }
 
-  if (
-    omitUnusedRanks &&
-    (rank_real_guitar === undefined || rank_real_guitar === 0)
-  ) {
+  if (omitUnusedRanks && (rank_real_guitar === undefined || rank_real_guitar === 0)) {
     // Do nothing
   } else {
     output += `${t(2)}('real_guitar' ${rank_real_guitar?.toString() ?? '0'})`
   }
 
-  if (
-    omitUnusedRanks &&
-    (rank_real_bass === undefined || rank_real_bass === 0)
-  ) {
+  if (omitUnusedRanks && (rank_real_bass === undefined || rank_real_bass === 0)) {
     // Do nothing
   } else {
     output += `${t(2)}('real_bass' ${rank_real_bass?.toString() ?? '0'})`
   }
 
-  output += `${t(2)}('band' ${rank_band.toString()})${t()})${t()}('genre' '${genre}')${t()}('vocal_gender' '${vocal_gender}')${t()}('version' ${
-    version?.toString() ?? '30'
-  })${t()}('format' ${format?.toString() ?? '10'})${t()}('album_art' ${album_art ? '1' : '0'})${t()}('year_released' ${year_released.toString()})${
-    year_recorded === undefined
-      ? ''
-      : `${t()}('year_recorded' ${year_recorded.toString()})`
-  }${t()}('rating' ${rating.toString()})${sub_genre ? `${t()}('sub_genre' '${sub_genre}')` : ''}${t()}('song_id' ${song_id.toString()})`
+  output += `${t(2)}('band' ${rank_band.toString()})${t()})${t()}('genre' '${genre}')${t()}('vocal_gender' '${vocal_gender}')${t()}('version' ${version?.toString() ?? '30'})${t()}('format' ${format?.toString() ?? '10'})${t()}('album_art' ${album_art ? '1' : '0'})${t()}('year_released' ${year_released.toString()})${year_recorded === undefined ? '' : `${t()}('year_recorded' ${year_recorded.toString()})`}${t()}('rating' ${rating.toString()})${sub_genre ? `${t()}('sub_genre' '${sub_genre}')` : ''}${t()}('song_id' ${song_id.toString()})`
 
   if (solo && solo.length > 0) {
     output += `${t()}(solo (`
@@ -324,30 +200,10 @@ const stringifyDefault = (
     })
   }
 
-  output += `${t()}('tuning_offset_cents' ${tuning_offset_cents?.toString() ?? '0'})${t()}('guide_pitch_volume' ${
-    guide_pitch_volume?.toString() ?? '-3.00'
-  })${t()}('game_origin' '${gameOriginAsRB3DLC ? 'rb3_dlc' : game_origin}')${t()}('encoding' '${
-    encoding ?? 'latin1'
-  }')${album_name ? `${t()}(${t(2)}'album_name'${t(2)}"${quoteToSlashQ(album_name)}"${t()})` : ''}${album_track_number ? `${t()}('album_track_number' ${album_track_number.toString()})` : ''}${
-    vocal_tonic_note === undefined
-      ? ''
-      : `${t()}(vocal_tonic_note ${vocal_tonic_note.toString()})`
-  }${song_tonality === undefined ? '' : `${t()}(song_tonality ${song_tonality.toString()})`}${song_key === undefined ? '' : `${t()}(song_key ${song_key.toString()})`}${
-    real_guitar_tuning
-      ? `${t()}(real_guitar_tuning (${real_guitar_tuning.join(' ')}))`
-      : ''
-  }${real_bass_tuning ? `${t()}(real_bass_tuning (${real_bass_tuning.join(' ')}))` : ''}${pack_name ? `${t(1)}(pack_name "${quoteToSlashQ(pack_name)}")` : ''}${
-    base_points ? `${t(1)}(base_points ${base_points.toString()})` : ''
-  }${placeRB3DXAttributes && author ? `${t(1)}(${t(2)}'author'${t(2)}"${quoteToSlashQ(author)}"${t()})` : ''}${placeRB3DXAttributes && loading_phrase ? `${t(1)}(${t(2)}'loading_phrase'${t(2)}"${quoteToSlashQ(loading_phrase)}"${t()})` : ''}`
+  output += `${t()}('tuning_offset_cents' ${tuning_offset_cents?.toString() ?? '0'})${t()}('guide_pitch_volume' ${guide_pitch_volume?.toString() ?? '-3.00'})${t()}('game_origin' '${gameOriginAsRB3DLC ? 'rb3_dlc' : game_origin}')${t()}('encoding' '${encoding ?? 'latin1'}')${album_name ? `${t()}(${t(2)}'album_name'${t(2)}"${quoteToSlashQ(album_name)}"${t()})` : ''}${album_track_number ? `${t()}('album_track_number' ${album_track_number.toString()})` : ''}${vocal_tonic_note === undefined ? '' : `${t()}(vocal_tonic_note ${vocal_tonic_note.toString()})`}${song_tonality === undefined ? '' : `${t()}(song_tonality ${song_tonality.toString()})`}${song_key === undefined ? '' : `${t()}(song_key ${song_key.toString()})`}${real_guitar_tuning ? `${t()}(real_guitar_tuning (${real_guitar_tuning.join(' ')}))` : ''}${real_bass_tuning ? `${t()}(real_bass_tuning (${real_bass_tuning.join(' ')}))` : ''}${pack_name ? `${t(1)}(pack_name "${quoteToSlashQ(pack_name)}")` : ''}${base_points ? `${t(1)}(base_points ${base_points.toString()})` : ''}${placeRB3DXAttributes && author ? `${t(1)}(${t(2)}'author'${t(2)}"${quoteToSlashQ(author)}"${t()})` : ''}${placeRB3DXAttributes && loading_phrase ? `${t(1)}(${t(2)}'loading_phrase'${t(2)}"${quoteToSlashQ(loading_phrase)}"${t()})` : ''}`
 
   if (placeCustomAttributes === undefined || placeCustomAttributes) {
-    output += `${t()}${t(0)};DO NOT EDIT THE FOLLOWING LINES MANUALLY${t(0)};Created using Magma: C3 Roks Edition v3.3.5${t(0)};Song authored by ${author ? author : 'Unknown Charter'}${t(
-      0
-    )};Song=${name}${t(0)};Language(s)=${languages ? (languages.length === 1 ? `${languages[0]},` : `${languages.join(',')},`) : `English,`}${t(0)};Karaoke=${karaoke ? '1' : '0'}${t(0)};Multitrack=${
-      multitrack ? '1' : '0'
-    }${t(0)};Convert=${convert ? '1' : '0'}${t(0)};2xBass=${doubleKick ? '1' : '0'}${t(0)};RhythmKeys=${rhythmOnKeys ? '1' : '0'}${t(0)};RhythmBass=${rhythmOnBass ? '1' : '0'}${t(0)};CATemh=${CATemh ? '1' : '0'}${t(
-      0
-    )};ExpertOnly=${expertOnly ? '1' : '0'}`
+    output += `${t()}${t(0)};DO NOT EDIT THE FOLLOWING LINES MANUALLY${t(0)};Created using Magma: C3 Roks Edition v3.3.5${t(0)};Song authored by ${author ? author : 'Unknown Charter'}${t(0)};Song=${name}${t(0)};Language(s)=${languages ? (languages.length === 1 ? `${languages[0]},` : `${languages.join(',')},`) : `English,`}${t(0)};Karaoke=${karaoke ? '1' : '0'}${t(0)};Multitrack=${multitrack ? '1' : '0'}${t(0)};Convert=${convert ? '1' : '0'}${t(0)};2xBass=${doubleKick ? '1' : '0'}${t(0)};RhythmKeys=${rhythmOnKeys ? '1' : '0'}${t(0)};RhythmBass=${rhythmOnBass ? '1' : '0'}${t(0)};CATemh=${CATemh ? '1' : '0'}${t(0)};ExpertOnly=${expertOnly ? '1' : '0'}`
   }
 
   output += `${t(0)})${t(0)}`
@@ -362,87 +218,11 @@ const stringifyDefault = (
  * @param {StringifyDataOptions | undefined} options Customize options for the stringifying process.
  * @returns {string} A stringified version of the song.
  */
-const stringifyRB3DLC = (
-  value: DTAFile,
-  options: StringifyDataOptions
-): string => {
-  const {
-    guitarCores,
-    omitUnusedRanks,
-    placeCustomAttributes,
-    placeRB3DXAttributes,
-    wiiMode,
-    gameOriginAsRB3DLC,
-    detailedTracksStructure,
-  } = options
+const stringifyRB3DLC = (value: DTAFile, options: StringifyDataOptions): string => {
+  const { guitarCores, omitUnusedRanks, placeCustomAttributes, placeRB3DXAttributes, wiiMode, gameOriginAsRB3DLC, detailedTracksStructure } = options
   const panVol = genAudioFileStructure(value)
 
-  const {
-    id,
-    name,
-    artist,
-    master,
-    songname,
-    context,
-    tracks_count,
-    pans,
-    vols,
-    vocal_parts,
-    mute_volume,
-    mute_volume_vocals,
-    hopo_threshold,
-    song_scroll_speed,
-    bank,
-    drum_bank,
-    band_fail_cue,
-    anim_tempo,
-    song_length,
-    preview,
-    rank_drum,
-    rank_bass,
-    rank_guitar,
-    rank_vocals,
-    rank_keys,
-    rank_real_keys,
-    rank_real_guitar,
-    rank_real_bass,
-    rank_band,
-    genre,
-    vocal_gender,
-    version,
-    format,
-    album_art,
-    year_released,
-    year_recorded,
-    rating,
-    sub_genre,
-    song_id,
-    solo,
-    tuning_offset_cents,
-    guide_pitch_volume,
-    game_origin,
-    encoding,
-    album_name,
-    album_track_number,
-    vocal_tonic_note,
-    song_tonality,
-    song_key,
-    real_guitar_tuning,
-    real_bass_tuning,
-    pack_name,
-    base_points,
-    author,
-    loading_phrase,
-    languages,
-    karaoke,
-    multitrack,
-    convert,
-    doubleKick,
-    rhythmOnKeys,
-    rhythmOnBass,
-    CATemh,
-    expertOnly,
-  } = value
+  const { id, name, artist, master, songname, context, tracks_count, pans, vols, vocal_parts, mute_volume, mute_volume_vocals, hopo_threshold, song_scroll_speed, bank, drum_bank, band_fail_cue, anim_tempo, song_length, preview, rank_drum, rank_bass, rank_guitar, rank_vocals, rank_keys, rank_real_keys, rank_real_guitar, rank_real_bass, rank_band, genre, vocal_gender, version, format, album_art, year_released, year_recorded, rating, sub_genre, song_id, solo, tuning_offset_cents, guide_pitch_volume, game_origin, encoding, album_name, album_track_number, vocal_tonic_note, song_tonality, song_key, real_guitar_tuning, real_bass_tuning, pack_name, base_points, author, loading_phrase, languages, karaoke, multitrack, convert, doubleKick, rhythmOnKeys, rhythmOnBass, CATemh, expertOnly } = value
 
   const [drum, bass, guitar, vocals, keys, backing, crowd] = tracks_count
 
@@ -453,13 +233,7 @@ const stringifyRB3DLC = (
 
   let output = ''
 
-  output += `(${id}${t()}(name "${quoteToSlashQ(name)}")${t()}(artist "${quoteToSlashQ(artist)}")${t()}(master ${master ? 'TRUE' : 'FALSE'})${
-    context ? `${t()}(context ${context.toString()})` : ''
-  }${t()}(song_id ${song_id.toString()})${t()}(song${t(2)}(name "${
-    wiiMode
-      ? `dlc/${wiiMode.gen}/${wiiMode.slot.toString().padStart(3, '0')}/content/songs/${songname}/${songname}`
-      : `songs/${songname}/${songname}`
-  }")${t(2)}(tracks${t(3)}(`
+  output += `(${id}${t()}(name "${quoteToSlashQ(name)}")${t()}(artist "${quoteToSlashQ(artist)}")${t()}(master ${master ? 'TRUE' : 'FALSE'})${context ? `${t()}(context ${context.toString()})` : ''}${t()}(song_id ${song_id.toString()})${t()}(song${t(2)}(name "${wiiMode ? `dlc/${wiiMode.gen}/${wiiMode.slot.toString().padStart(3, '0')}/content/songs/${songname}/${songname}` : `songs/${songname}/${songname}`}")${t(2)}(tracks${t(3)}(`
 
   if (drum) {
     output += `(drum (${incrementTracksCount(trackCount, drum)}))`
@@ -495,58 +269,10 @@ const stringifyRB3DLC = (
   }
 
   if (detailedTracksStructure) {
-    output += `${t(2)};${s(12)}${drum === 2 ? `${s(6)}${genRB3DLCDetailedTrack('drums', 'desc', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('kick', 'desc', panVol, guitarCores)}` : ''}${
-      drum > 3
-        ? `${s(6)}${genRB3DLCDetailedTrack('snare', 'desc', panVol, guitarCores)}`
-        : ''
-    }${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('drumkit', 'desc', panVol, guitarCores)}` : ''}${bass > 0 ? `${s(6)}${genRB3DLCDetailedTrack('bass', 'desc', panVol, guitarCores)}` : ''}${
-      guitar > 0
-        ? `${s(6)}${genRB3DLCDetailedTrack('guitar', 'desc', panVol, guitarCores)}`
-        : ''
-    }${vocals > 0 ? `${s(6)}${genRB3DLCDetailedTrack('vocals', 'desc', panVol, guitarCores)}` : ''}${keys > 0 ? `${s(6)}${genRB3DLCDetailedTrack('keys', 'desc', panVol, guitarCores)}` : ''}${
-      backing > 0
-        ? `${s(6)}${genRB3DLCDetailedTrack('trks', 'desc', panVol, guitarCores)}`
-        : ''
-    }${crowd && crowd > 0 ? `${s(6)}${genRB3DLCDetailedTrack('crowd', 'desc', panVol, guitarCores)}` : ''}`
-    output += `${t(2)}( pans${s(6)}(${drum === 2 ? `${s(6)}${genRB3DLCDetailedTrack('drums', 'pans', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('kick', 'pans', panVol, guitarCores)}` : ''}${
-      drum > 3
-        ? `${s(6)}${genRB3DLCDetailedTrack('snare', 'pans', panVol, guitarCores)}`
-        : ''
-    }${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('drumkit', 'pans', panVol, guitarCores)}` : ''}${bass > 0 ? `${s(6)}${genRB3DLCDetailedTrack('bass', 'pans', panVol, guitarCores)}` : ''}${
-      guitar > 0
-        ? `${s(6)}${genRB3DLCDetailedTrack('guitar', 'pans', panVol, guitarCores)}`
-        : ''
-    }${vocals > 0 ? `${s(6)}${genRB3DLCDetailedTrack('vocals', 'pans', panVol, guitarCores)}` : ''}${keys > 0 ? `${s(6)}${genRB3DLCDetailedTrack('keys', 'pans', panVol, guitarCores)}` : ''}${
-      backing > 0
-        ? `${s(6)}${genRB3DLCDetailedTrack('trks', 'pans', panVol, guitarCores)}`
-        : ''
-    }${crowd && crowd > 0 ? `${s(6)}${genRB3DLCDetailedTrack('crowd', 'pans', panVol, guitarCores)}` : ''}${s(6)}))`
-    output += `${t(2)}( vols${s(6)}(${drum === 2 ? `${s(6)}${genRB3DLCDetailedTrack('drums', 'vols', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('kick', 'vols', panVol, guitarCores)}` : ''}${
-      drum > 3
-        ? `${s(6)}${genRB3DLCDetailedTrack('snare', 'vols', panVol, guitarCores)}`
-        : ''
-    }${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('drumkit', 'vols', panVol, guitarCores)}` : ''}${bass > 0 ? `${s(6)}${genRB3DLCDetailedTrack('bass', 'vols', panVol, guitarCores)}` : ''}${
-      guitar > 0
-        ? `${s(6)}${genRB3DLCDetailedTrack('guitar', 'vols', panVol, guitarCores)}`
-        : ''
-    }${vocals > 0 ? `${s(6)}${genRB3DLCDetailedTrack('vocals', 'vols', panVol, guitarCores)}` : ''}${keys > 0 ? `${s(6)}${genRB3DLCDetailedTrack('keys', 'vols', panVol, guitarCores)}` : ''}${
-      backing > 0
-        ? `${s(6)}${genRB3DLCDetailedTrack('trks', 'vols', panVol, guitarCores)}`
-        : ''
-    }${crowd && crowd > 0 ? `${s(6)}${genRB3DLCDetailedTrack('crowd', 'vols', panVol, guitarCores)}` : ''}${s(6)}))`
-    output += `${t(2)}( cores     (${drum === 2 ? `${s(6)}${genRB3DLCDetailedTrack('drums', 'cores', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('kick', 'cores', panVol, guitarCores)}` : ''}${
-      drum > 3
-        ? `${s(6)}${genRB3DLCDetailedTrack('snare', 'cores', panVol, guitarCores)}`
-        : ''
-    }${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('drumkit', 'cores', panVol, guitarCores)}` : ''}${bass > 0 ? `${s(6)}${genRB3DLCDetailedTrack('bass', 'cores', panVol, guitarCores)}` : ''}${
-      guitar > 0
-        ? `${s(6)}${genRB3DLCDetailedTrack('guitar', 'cores', panVol, guitarCores)}`
-        : ''
-    }${vocals > 0 ? `${s(6)}${genRB3DLCDetailedTrack('vocals', 'cores', panVol, guitarCores)}` : ''}${keys > 0 ? `${s(6)}${genRB3DLCDetailedTrack('keys', 'cores', panVol, guitarCores)}` : ''}${
-      backing > 0
-        ? `${s(6)}${genRB3DLCDetailedTrack('trks', 'cores', panVol, guitarCores)}`
-        : ''
-    }${crowd && crowd > 0 ? `${s(6)}${genRB3DLCDetailedTrack('crowd', 'cores', panVol, guitarCores)}` : ''}${s(6)}))`
+    output += `${t(2)};${s(12)}${drum === 2 ? `${s(6)}${genRB3DLCDetailedTrack('drums', 'desc', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('kick', 'desc', panVol, guitarCores)}` : ''}${drum > 3 ? `${s(6)}${genRB3DLCDetailedTrack('snare', 'desc', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('drumkit', 'desc', panVol, guitarCores)}` : ''}${bass > 0 ? `${s(6)}${genRB3DLCDetailedTrack('bass', 'desc', panVol, guitarCores)}` : ''}${guitar > 0 ? `${s(6)}${genRB3DLCDetailedTrack('guitar', 'desc', panVol, guitarCores)}` : ''}${vocals > 0 ? `${s(6)}${genRB3DLCDetailedTrack('vocals', 'desc', panVol, guitarCores)}` : ''}${keys > 0 ? `${s(6)}${genRB3DLCDetailedTrack('keys', 'desc', panVol, guitarCores)}` : ''}${backing > 0 ? `${s(6)}${genRB3DLCDetailedTrack('trks', 'desc', panVol, guitarCores)}` : ''}${crowd && crowd > 0 ? `${s(6)}${genRB3DLCDetailedTrack('crowd', 'desc', panVol, guitarCores)}` : ''}`
+    output += `${t(2)}( pans${s(6)}(${drum === 2 ? `${s(6)}${genRB3DLCDetailedTrack('drums', 'pans', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('kick', 'pans', panVol, guitarCores)}` : ''}${drum > 3 ? `${s(6)}${genRB3DLCDetailedTrack('snare', 'pans', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('drumkit', 'pans', panVol, guitarCores)}` : ''}${bass > 0 ? `${s(6)}${genRB3DLCDetailedTrack('bass', 'pans', panVol, guitarCores)}` : ''}${guitar > 0 ? `${s(6)}${genRB3DLCDetailedTrack('guitar', 'pans', panVol, guitarCores)}` : ''}${vocals > 0 ? `${s(6)}${genRB3DLCDetailedTrack('vocals', 'pans', panVol, guitarCores)}` : ''}${keys > 0 ? `${s(6)}${genRB3DLCDetailedTrack('keys', 'pans', panVol, guitarCores)}` : ''}${backing > 0 ? `${s(6)}${genRB3DLCDetailedTrack('trks', 'pans', panVol, guitarCores)}` : ''}${crowd && crowd > 0 ? `${s(6)}${genRB3DLCDetailedTrack('crowd', 'pans', panVol, guitarCores)}` : ''}${s(6)}))`
+    output += `${t(2)}( vols${s(6)}(${drum === 2 ? `${s(6)}${genRB3DLCDetailedTrack('drums', 'vols', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('kick', 'vols', panVol, guitarCores)}` : ''}${drum > 3 ? `${s(6)}${genRB3DLCDetailedTrack('snare', 'vols', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('drumkit', 'vols', panVol, guitarCores)}` : ''}${bass > 0 ? `${s(6)}${genRB3DLCDetailedTrack('bass', 'vols', panVol, guitarCores)}` : ''}${guitar > 0 ? `${s(6)}${genRB3DLCDetailedTrack('guitar', 'vols', panVol, guitarCores)}` : ''}${vocals > 0 ? `${s(6)}${genRB3DLCDetailedTrack('vocals', 'vols', panVol, guitarCores)}` : ''}${keys > 0 ? `${s(6)}${genRB3DLCDetailedTrack('keys', 'vols', panVol, guitarCores)}` : ''}${backing > 0 ? `${s(6)}${genRB3DLCDetailedTrack('trks', 'vols', panVol, guitarCores)}` : ''}${crowd && crowd > 0 ? `${s(6)}${genRB3DLCDetailedTrack('crowd', 'vols', panVol, guitarCores)}` : ''}${s(6)}))`
+    output += `${t(2)}( cores     (${drum === 2 ? `${s(6)}${genRB3DLCDetailedTrack('drums', 'cores', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('kick', 'cores', panVol, guitarCores)}` : ''}${drum > 3 ? `${s(6)}${genRB3DLCDetailedTrack('snare', 'cores', panVol, guitarCores)}` : ''}${drum > 2 ? `${s(6)}${genRB3DLCDetailedTrack('drumkit', 'cores', panVol, guitarCores)}` : ''}${bass > 0 ? `${s(6)}${genRB3DLCDetailedTrack('bass', 'cores', panVol, guitarCores)}` : ''}${guitar > 0 ? `${s(6)}${genRB3DLCDetailedTrack('guitar', 'cores', panVol, guitarCores)}` : ''}${vocals > 0 ? `${s(6)}${genRB3DLCDetailedTrack('vocals', 'cores', panVol, guitarCores)}` : ''}${keys > 0 ? `${s(6)}${genRB3DLCDetailedTrack('keys', 'cores', panVol, guitarCores)}` : ''}${backing > 0 ? `${s(6)}${genRB3DLCDetailedTrack('trks', 'cores', panVol, guitarCores)}` : ''}${crowd && crowd > 0 ? `${s(6)}${genRB3DLCDetailedTrack('crowd', 'cores', panVol, guitarCores)}` : ''}${s(6)}))`
   } else {
     output += `${t(2)}(pans (`
 
@@ -572,15 +298,7 @@ const stringifyRB3DLC = (
     })
   }
 
-  output += `${crowd ? `${t(2)}(crowd_channels ${incrementTracksCount(crowdTrackStarts, 2)})` : ``}${t(2)}(vocal_parts ${vocal_parts.toString()})${t(
-    2
-  )}(drum_solo${t(3)}(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))${t(2)})${t(2)}(drum_freestyle${t(3)}(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))${t(2)})${
-    mute_volume === undefined
-      ? ``
-      : `${t(2)}(mute_volume ${mute_volume.toString()})`
-  }${mute_volume_vocals === undefined ? `` : `${t(2)}(mute_volume_vocals ${mute_volume_vocals.toString()})`}${hopo_threshold === undefined ? `` : `${t(2)}(hopo_threshold ${hopo_threshold.toString()})`}${t()})${t()}(bank ${bank})${t()}(drum_bank ${drum_bank})${t()}(anim_tempo ${anim_tempo === 16 ? `kTempoSlow` : anim_tempo === 32 ? `kTempoMedium` : `kTempoFast`})${
-    band_fail_cue === undefined ? `` : `${t()}(band_fail_cue ${band_fail_cue})`
-  }${t()}(song_scroll_speed ${song_scroll_speed?.toString() ?? '2300'})${t()}(preview ${preview.join(' ')})${t()}(song_length ${song_length.toString()})`
+  output += `${crowd ? `${t(2)}(crowd_channels ${incrementTracksCount(crowdTrackStarts, 2)})` : ``}${t(2)}(vocal_parts ${vocal_parts.toString()})${t(2)}(drum_solo${t(3)}(seqs (kick.cue snare.cue tom1.cue tom2.cue crash.cue))${t(2)})${t(2)}(drum_freestyle${t(3)}(seqs (kick.cue snare.cue hat.cue ride.cue crash.cue))${t(2)})${mute_volume === undefined ? `` : `${t(2)}(mute_volume ${mute_volume.toString()})`}${mute_volume_vocals === undefined ? `` : `${t(2)}(mute_volume_vocals ${mute_volume_vocals.toString()})`}${hopo_threshold === undefined ? `` : `${t(2)}(hopo_threshold ${hopo_threshold.toString()})`}${t()})${t()}(bank ${bank})${t()}(drum_bank ${drum_bank})${t()}(anim_tempo ${anim_tempo === 16 ? `kTempoSlow` : anim_tempo === 32 ? `kTempoMedium` : `kTempoFast`})${band_fail_cue === undefined ? `` : `${t()}(band_fail_cue ${band_fail_cue})`}${t()}(song_scroll_speed ${song_scroll_speed?.toString() ?? '2300'})${t()}(preview ${preview.join(' ')})${t()}(song_length ${song_length.toString()})`
 
   if (solo && solo.length > 0) {
     output += `${t()}(solo (`
@@ -626,67 +344,28 @@ const stringifyRB3DLC = (
     output += `${t(2)}(keys ${rank_keys?.toString() ?? '0'})`
   }
 
-  if (
-    omitUnusedRanks &&
-    (rank_real_keys === undefined || rank_real_keys === 0)
-  ) {
+  if (omitUnusedRanks && (rank_real_keys === undefined || rank_real_keys === 0)) {
     // Do nothing
   } else {
     output += `${t(2)}(real_keys ${rank_real_keys?.toString() ?? '0'})`
   }
 
-  if (
-    omitUnusedRanks &&
-    (rank_real_guitar === undefined || rank_real_guitar === 0)
-  ) {
+  if (omitUnusedRanks && (rank_real_guitar === undefined || rank_real_guitar === 0)) {
     // Do nothing
   } else {
     output += `${t(2)}(real_guitar ${rank_real_guitar?.toString() ?? '0'})`
   }
 
-  if (
-    omitUnusedRanks &&
-    (rank_real_bass === undefined || rank_real_bass === 0)
-  ) {
+  if (omitUnusedRanks && (rank_real_bass === undefined || rank_real_bass === 0)) {
     // Do nothing
   } else {
     output += `${t(2)}(real_bass ${rank_real_bass?.toString() ?? '0'})`
   }
 
-  output += `${t(2)}(band ${rank_band.toString()})${t()})${t()}(format ${format?.toString() ?? '10'})${t()}(version ${version?.toString() ?? '30'})${t()}(game_origin ${
-    gameOriginAsRB3DLC ? 'rb3_dlc' : game_origin
-  })${t()}(rating ${rating.toString()})${t()}(genre ${genre})${sub_genre ? `${t()}(sub_genre ${sub_genre})` : ''}${t()}(vocal_gender ${vocal_gender})${t()}(year_released ${year_released.toString()})${year_recorded ? `${t()}(year_recorded ${year_recorded.toString()})` : ``}${t()}(album_art ${album_art ? 'TRUE' : 'FALSE'})${
-    album_name ? `${t()}(album_name "${quoteToSlashQ(album_name)}")` : ``
-  }${album_track_number ? `${t()}(album_track_number ${album_track_number.toString()})` : ``}${vocal_tonic_note === undefined ? `` : `${t()}(vocal_tonic_note ${vocal_tonic_note.toString()})`}${
-    song_tonality === undefined
-      ? ``
-      : `${t()}(song_tonality ${song_tonality.toString()})`
-  }${song_key === undefined ? `` : `${t()}(song_key ${song_key.toString()})`}${tuning_offset_cents === undefined ? `` : `${t()}(tuning_offset_cents ${tuning_offset_cents.toString()})`}${
-    guide_pitch_volume === undefined
-      ? ``
-      : `${t()}(guide_pitch_volume ${guide_pitch_volume.toFixed(1)})`
-  }${real_guitar_tuning ? `${t()}(real_guitar_tuning (${real_guitar_tuning.join(' ')}))` : ``}${real_bass_tuning ? `${t()}(real_bass_tuning (${real_bass_tuning.join(' ')}))` : ``}${
-    encoding === undefined || encoding === 'latin1'
-      ? ``
-      : `${t()}(encoding ${encoding})`
-  }${pack_name ? `${t()}(pack_name "${quoteToSlashQ(pack_name)}")` : ``}${base_points ? `${t()}(base_points ${base_points.toString()})` : ``}${
-    placeRB3DXAttributes && author
-      ? `${t(1)}(author "${quoteToSlashQ(author)}")`
-      : ''
-  }${
-    placeRB3DXAttributes && loading_phrase
-      ? `${t(1)}(loading_phrase "${quoteToSlashQ(loading_phrase)}")`
-      : ''
-  }`
+  output += `${t(2)}(band ${rank_band.toString()})${t()})${t()}(format ${format?.toString() ?? '10'})${t()}(version ${version?.toString() ?? '30'})${t()}(game_origin ${gameOriginAsRB3DLC ? 'rb3_dlc' : game_origin})${t()}(rating ${rating.toString()})${t()}(genre ${genre})${sub_genre ? `${t()}(sub_genre ${sub_genre})` : ''}${t()}(vocal_gender ${vocal_gender})${t()}(year_released ${year_released.toString()})${year_recorded ? `${t()}(year_recorded ${year_recorded.toString()})` : ``}${t()}(album_art ${album_art ? 'TRUE' : 'FALSE'})${album_name ? `${t()}(album_name "${quoteToSlashQ(album_name)}")` : ``}${album_track_number ? `${t()}(album_track_number ${album_track_number.toString()})` : ``}${vocal_tonic_note === undefined ? `` : `${t()}(vocal_tonic_note ${vocal_tonic_note.toString()})`}${song_tonality === undefined ? `` : `${t()}(song_tonality ${song_tonality.toString()})`}${song_key === undefined ? `` : `${t()}(song_key ${song_key.toString()})`}${tuning_offset_cents === undefined ? `` : `${t()}(tuning_offset_cents ${tuning_offset_cents.toString()})`}${guide_pitch_volume === undefined ? `` : `${t()}(guide_pitch_volume ${guide_pitch_volume.toFixed(1)})`}${real_guitar_tuning ? `${t()}(real_guitar_tuning (${real_guitar_tuning.join(' ')}))` : ``}${real_bass_tuning ? `${t()}(real_bass_tuning (${real_bass_tuning.join(' ')}))` : ``}${encoding === undefined || encoding === 'latin1' ? `` : `${t()}(encoding ${encoding})`}${pack_name ? `${t()}(pack_name "${quoteToSlashQ(pack_name)}")` : ``}${base_points ? `${t()}(base_points ${base_points.toString()})` : ``}${placeRB3DXAttributes && author ? `${t(1)}(author "${quoteToSlashQ(author)}")` : ''}${placeRB3DXAttributes && loading_phrase ? `${t(1)}(loading_phrase "${quoteToSlashQ(loading_phrase)}")` : ''}`
 
   if (placeCustomAttributes === undefined || placeCustomAttributes) {
-    output += `${t()}${t(0)};DO NOT EDIT THE FOLLOWING LINES MANUALLY${t(0)};Created using Magma: C3 Roks Edition v3.3.5${t(0)};Song authored by ${author ? author : 'Unknown Charter'}${t(
-      0
-    )};Song=${name}${t(0)};Language(s)=${languages ? (languages.length === 1 ? `${languages[0]},` : `${languages.join(',')},`) : `English,`}${t(0)};Karaoke=${karaoke ? '1' : '0'}${t(0)};Multitrack=${
-      multitrack ? '1' : '0'
-    }${t(0)};Convert=${convert ? '1' : '0'}${t(0)};2xBass=${doubleKick ? '1' : '0'}${t(0)};RhythmKeys=${rhythmOnKeys ? '1' : '0'}${t(0)};RhythmBass=${rhythmOnBass ? '1' : '0'}${t(0)};CATemh=${CATemh ? '1' : '0'}${t(
-      0
-    )};ExpertOnly=${expertOnly ? '1' : '0'}`
+    output += `${t()}${t(0)};DO NOT EDIT THE FOLLOWING LINES MANUALLY${t(0)};Created using Magma: C3 Roks Edition v3.3.5${t(0)};Song authored by ${author ? author : 'Unknown Charter'}${t(0)};Song=${name}${t(0)};Language(s)=${languages ? (languages.length === 1 ? `${languages[0]},` : `${languages.join(',')},`) : `English,`}${t(0)};Karaoke=${karaoke ? '1' : '0'}${t(0)};Multitrack=${multitrack ? '1' : '0'}${t(0)};Convert=${convert ? '1' : '0'}${t(0)};2xBass=${doubleKick ? '1' : '0'}${t(0)};RhythmKeys=${rhythmOnKeys ? '1' : '0'}${t(0)};RhythmBass=${rhythmOnBass ? '1' : '0'}${t(0)};CATemh=${CATemh ? '1' : '0'}${t(0)};ExpertOnly=${expertOnly ? '1' : '0'}`
   }
 
   output += `${t(0)})${t(0)}`
@@ -704,10 +383,7 @@ const stringifyRB3DLC = (
  * Only some values can be customized on the default option for maximum compatibility with other `.dta` file parsers.
  * @returns {string} A string representation of this parsed song object as a `.dta` file contents string.
  */
-export const stringifyDTA = (
-  songs: DTAFile[] | DTAFile,
-  options?: StringifyDataOptions
-): string => {
+export const stringifyDTA = (songs: DTAFile[] | DTAFile, options?: StringifyDataOptions): string => {
   const opts = useDefaultOptions<StringifyDataOptions, true>(
     {
       detailedTracksStructure: false,
@@ -726,8 +402,7 @@ export const stringifyDTA = (
   )
   let output = ''
 
-  const { type, useSpaces, ignoreFakeSongs, sortBy, detailedTracksStructure } =
-    opts
+  const { type, useSpaces, ignoreFakeSongs, sortBy, detailedTracksStructure } = opts
 
   if (Array.isArray(songs) && sortBy) {
     songs = sortDTA(songs, sortBy)

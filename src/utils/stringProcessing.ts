@@ -1,16 +1,7 @@
 import type { DTAFile } from '../core.js'
 import { useDefaultOptions } from '../utils.js'
 
-export const articles = [
-  'a',
-  'an',
-  'the',
-  'um',
-  'uma',
-  'uns',
-  'umas',
-  'o',
-] as const
+export const articles = ['a', 'an', 'the', 'um', 'uma', 'uns', 'umas', 'o'] as const
 
 /**
  * Removes the leading article from a string, if any.
@@ -21,9 +12,7 @@ export const articles = [
 export const omitLeadingArticle = (text: string): string => {
   const words = text.split(' ')
   const firstWord = words[0]
-  const hasLeadingArticle = articles.includes(
-    firstWord.toLowerCase() as (typeof articles)[number]
-  )
+  const hasLeadingArticle = articles.includes(firstWord.toLowerCase() as (typeof articles)[number])
   if (hasLeadingArticle) {
     return words.slice(1).join(' ')
   }
@@ -40,9 +29,7 @@ export const omitLeadingArticle = (text: string): string => {
 export const leadingArticleToTrailing = (text: string): string => {
   const words = text.split(' ')
   const firstWord = words[0]
-  const hasLeadingArticle = articles.includes(
-    firstWord.toLowerCase() as (typeof articles)[number]
-  )
+  const hasLeadingArticle = articles.includes(firstWord.toLowerCase() as (typeof articles)[number])
   if (hasLeadingArticle) {
     return `${words.slice(1).join(' ')}, ${firstWord}`
   }
@@ -79,11 +66,7 @@ type TabOrSpaceGeneratorNewLineTypes = 'start' | 'end' | 'both' | 'none'
  * @param {TabOrSpaceGeneratorNewLineTypes} newLine `OPTIONAL` Places a new line charater wherever you want. Default is `'start'`.
  * @returns {string} A string with '\n' charaters and '\t' characters repeated `tabCount` times.
  */
-export const genTabs = (
-  tabCount = 1,
-  newLine: TabOrSpaceGeneratorNewLineTypes = 'start'
-): string =>
-  `${newLine === 'start' || newLine === 'both' ? '\n' : ''}${'\t'.repeat(tabCount)}${newLine === 'end' || newLine === 'both' ? '\n' : ''}`
+export const genTabs = (tabCount = 1, newLine: TabOrSpaceGeneratorNewLineTypes = 'start'): string => `${newLine === 'start' || newLine === 'both' ? '\n' : ''}${'\t'.repeat(tabCount)}${newLine === 'end' || newLine === 'both' ? '\n' : ''}`
 
 /**
  * Generates a string containing space characters repeated a specified number of times.
@@ -92,11 +75,7 @@ export const genTabs = (
  * @param {TabOrSpaceGeneratorNewLineTypes} newLine `OPTIONAL` Places a new line charater wherever you want. Default is `'none'`.
  * @returns {string} A string with space characters repeated `spaceCount` times.
  */
-export const genSpaces = (
-  spaceCount = 1,
-  newLine: TabOrSpaceGeneratorNewLineTypes = 'none'
-) =>
-  `${newLine === 'start' || newLine === 'both' ? '\n' : ''}${' '.repeat(spaceCount)}${newLine === 'end' || newLine === 'both' ? '\n' : ''}`
+export const genSpaces = (spaceCount = 1, newLine: TabOrSpaceGeneratorNewLineTypes = 'none') => `${newLine === 'start' || newLine === 'both' ? '\n' : ''}${' '.repeat(spaceCount)}${newLine === 'end' || newLine === 'both' ? '\n' : ''}`
 
 export interface StringFormatterOptions {
   /**
@@ -135,11 +114,7 @@ export interface StringFormatterOptions {
  * @param {StringFormatterOptions | 'id' | undefined} options `OPTIONAL` An object that changes the behavior of the formatting process.
  * @returns {string} The string with format flags replaced to actual values from the provided `DTAFile` object.
  */
-export const formatStringFromDTA = (
-  song: DTAFile | null,
-  format: string,
-  options?: StringFormatterOptions | 'id' | 'id_with_space'
-): string => {
+export const formatStringFromDTA = (song: DTAFile | null, format: string, options?: StringFormatterOptions | 'id' | 'id_with_space'): string => {
   if (options === 'id')
     options = {
       azNumOnly: true,
@@ -158,17 +133,16 @@ export const formatStringFromDTA = (
     }
   else options = {}
 
-  const { azNumOnly, forceCase, normalizeNFD, removeSpaces, trim } =
-    useDefaultOptions<StringFormatterOptions, true>(
-      {
-        azNumOnly: false,
-        forceCase: null,
-        normalizeNFD: false,
-        removeSpaces: false,
-        trim: false,
-      },
-      options
-    )
+  const { azNumOnly, forceCase, normalizeNFD, removeSpaces, trim } = useDefaultOptions<StringFormatterOptions, true>(
+    {
+      azNumOnly: false,
+      forceCase: null,
+      normalizeNFD: false,
+      removeSpaces: false,
+      trim: false,
+    },
+    options
+  )
 
   let newText = format
 
@@ -177,50 +151,28 @@ export const formatStringFromDTA = (
     const allSongKeys = Object.keys(song) as (keyof typeof song)[]
     for (const songKey of allSongKeys) {
       if (valuesThatAreUnique.includes(songKey)) continue
-      newText = newText.replace(
-        new RegExp(`{{${songKey}}}`, 'g'),
-        String(song[songKey])
-      )
+      newText = newText.replace(new RegExp(`{{${songKey}}}`, 'g'), String(song[songKey]))
     }
 
     for (const uniqueKeys of valuesThatAreUnique) {
-      newText = newText.replace(
-        new RegExp(`{{${uniqueKeys}}}`, 'g'),
-        String(song[uniqueKeys as keyof typeof song])
-      )
+      newText = newText.replace(new RegExp(`{{${uniqueKeys}}}`, 'g'), String(song[uniqueKeys as keyof typeof song]))
 
-      newText = newText.replace(
-        new RegExp(`{{${uniqueKeys}.emit}}`, 'g'),
-        String(song[uniqueKeys as keyof typeof song])
-      )
+      newText = newText.replace(new RegExp(`{{${uniqueKeys}.emit}}`, 'g'), String(song[uniqueKeys as keyof typeof song]))
 
-      newText = newText.replace(
-        new RegExp(`{{${uniqueKeys}.omit}}`, 'g'),
-        omitLeadingArticle(String(song[uniqueKeys as keyof typeof song]))
-      )
+      newText = newText.replace(new RegExp(`{{${uniqueKeys}.omit}}`, 'g'), omitLeadingArticle(String(song[uniqueKeys as keyof typeof song])))
 
-      newText = newText.replace(
-        new RegExp(`{{${uniqueKeys}.trailing}}`, 'g'),
-        leadingArticleToTrailing(String(song[uniqueKeys as keyof typeof song]))
-      )
+      newText = newText.replace(new RegExp(`{{${uniqueKeys}.trailing}}`, 'g'), leadingArticleToTrailing(String(song[uniqueKeys as keyof typeof song])))
     }
 
     newText.replace(new RegExp(`{{title}}`, 'g'), song.name)
 
     newText = newText.replace(new RegExp(`{{title.emit}}`, 'g'), song.name)
 
-    newText = newText.replace(
-      new RegExp(`{{title.omit}}`, 'g'),
-      omitLeadingArticle(song.name)
-    )
+    newText = newText.replace(new RegExp(`{{title.omit}}`, 'g'), omitLeadingArticle(song.name))
 
-    newText = newText.replace(
-      new RegExp(`{{title.trailing}}`, 'g'),
-      leadingArticleToTrailing(song.name)
-    )
+    newText = newText.replace(new RegExp(`{{title.trailing}}`, 'g'), leadingArticleToTrailing(song.name))
   }
-  if (normalizeNFD)
-    newText = newText.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  if (normalizeNFD) newText = newText.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
   if (azNumOnly) newText = newText.replace(/[^a-zA-Z0-9]/g, '')
   if (removeSpaces) newText = newText.replace(/ /g, '')
   if (trim) newText = newText.trim()

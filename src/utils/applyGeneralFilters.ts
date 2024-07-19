@@ -7,10 +7,7 @@ import type { DTAFileWithIndex, SongFilterOptions } from '../core.js'
  * @param {Required<SongFilterOptions>} options An object to change the behavior of the filtering process and results.
  * @returns {DTAFileWithIndex[]} An array with songs filtered based on the provided filtering options.
  */
-export const applyGeneralFilters = (
-  allSongsWithIndex: DTAFileWithIndex[],
-  options: Required<SongFilterOptions>
-): DTAFileWithIndex[] => {
+export const applyGeneralFilters = (allSongsWithIndex: DTAFileWithIndex[], options: Required<SongFilterOptions>): DTAFileWithIndex[] => {
   const { keysSupport, proGtrBassSupport } = options
   return allSongsWithIndex.filter((song) => {
     let passed = true

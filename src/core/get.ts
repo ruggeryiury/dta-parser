@@ -1,21 +1,9 @@
-import {
-  localeKeyToValue,
-  type BandRankingNames,
-  type BandRankingNamesAsDots,
-  type BandRankingNumbers,
-  type DTAFile,
-  type InstrRankingNames,
-  type InstrRankingNamesAsDots,
-  type InstrRankingNumbers,
-} from '../core.js'
+import { localeKeyToValue, type BandRankingNames, type BandRankingNamesAsDots, type BandRankingNumbers, type DTAFile, type InstrRankingNames, type InstrRankingNamesAsDots, type InstrRankingNumbers } from '../core.js'
 import { rankCalculator, type RankTypes } from '../utils.js'
 
 export type GetRankTypeOptions = 'number' | 'verbose' | 'verboseDots'
 
-export type GetRankReturnType<
-  P extends RankTypes,
-  T extends GetRankTypeOptions | undefined,
-> = P extends 'band'
+export type GetRankReturnType<P extends RankTypes, T extends GetRankTypeOptions | undefined> = P extends 'band'
   ? T extends 'number'
     ? BandRankingNumbers
     : T extends 'verbose'
@@ -45,17 +33,9 @@ export type GetRankReturnType<
  * - `'verboseDots'`: Returns as a string ranking type from `'No Part'` to `'Devil Dots'`.
  * @returns {GetRankReturnType<P, T>} The instrument ranking from the given instrument.
  */
-export const getSongRank = <
-  P extends RankTypes,
-  T extends GetRankTypeOptions | undefined = undefined,
->(
-  song: DTAFile,
-  part: P,
-  type?: T
-): GetRankReturnType<P, T> => {
+export const getSongRank = <P extends RankTypes, T extends GetRankTypeOptions | undefined = undefined>(song: DTAFile, part: P, type?: T): GetRankReturnType<P, T> => {
   const minusOne = rankCalculator(part, song[`rank_${part}`])
-  if (type === 'number' || type === undefined)
-    return minusOne as GetRankReturnType<P, T>
+  if (type === 'number' || type === undefined) return minusOne as GetRankReturnType<P, T>
   const verbosed = localeKeyToValue.rank(minusOne)
   if (type === 'verbose') return verbosed as GetRankReturnType<P, T>
   const dotVerbosed = localeKeyToValue.rank(minusOne, true)

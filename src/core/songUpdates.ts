@@ -93,14 +93,8 @@ export const keySignatureMap = {
  * @param {StringifySongUpdatesOptions} options `OPTIONAL` An object with options that customizes the stringify process.
  * @returns {string} The new upgrade file contents
  */
-export const stringifySongUpdates = (
-  updates: SongUpdateObject,
-  options?: StringifySongUpdatesOptions
-): string => {
-  const opts = useDefaultOptions<StringifySongUpdatesOptions, true>(
-    { inline: false },
-    options
-  )
+export const stringifySongUpdates = (updates: SongUpdateObject, options?: StringifySongUpdatesOptions): string => {
+  const opts = useDefaultOptions<StringifySongUpdatesOptions, true>({ inline: false }, options)
   const { inline } = opts
 
   let rtnString = ''
@@ -112,18 +106,7 @@ export const stringifySongUpdates = (
   })
 
   for (const key of upgKeys) {
-    const {
-      key: key_signature,
-      genre,
-      rating,
-      name,
-      album,
-      id,
-      artist,
-      alternate_path,
-      vocal_gender,
-      author,
-    } = updates[key]
+    const { key: key_signature, genre, rating, name, album, id, artist, alternate_path, vocal_gender, author } = updates[key]
     if (id) break
     rtnString += `(${key}`
 
@@ -154,11 +137,7 @@ export const stringifySongUpdates = (
 
     if (album) {
       const { hasArt, name: album_name, track_number } = album
-      rtnString += `${hasArt !== undefined ? `${inline ? ' ' : genTabs()}(album_art ${hasArt ? 'TRUE' : 'FALSE'})` : ''}${
-        album_name
-          ? `${inline ? ' ' : genTabs()}(album_name "${quoteToSlashQ(album_name)}")`
-          : ''
-      }${track_number ? `${inline ? ' ' : genTabs()}(album_track_number ${track_number.toString()})` : ''}`
+      rtnString += `${hasArt !== undefined ? `${inline ? ' ' : genTabs()}(album_art ${hasArt ? 'TRUE' : 'FALSE'})` : ''}${album_name ? `${inline ? ' ' : genTabs()}(album_name "${quoteToSlashQ(album_name)}")` : ''}${track_number ? `${inline ? ' ' : genTabs()}(album_track_number ${track_number.toString()})` : ''}`
     }
 
     if (key_signature) {
@@ -177,11 +156,9 @@ export const stringifySongUpdates = (
       }
     }
 
-    if (alternate_path)
-      rtnString += `${inline ? ' ' : genTabs()}(alternate_path TRUE)`
+    if (alternate_path) rtnString += `${inline ? ' ' : genTabs()}(alternate_path TRUE)`
 
-    if (author)
-      rtnString += `${inline ? ' ' : genTabs()}(author "${quoteToSlashQ(author)}")`
+    if (author) rtnString += `${inline ? ' ' : genTabs()}(author "${quoteToSlashQ(author)}")`
 
     rtnString += `)${genTabs(0)}`
   }

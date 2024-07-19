@@ -1,21 +1,4 @@
-import type {
-  AnimTempoNumbers,
-  BandFailCue,
-  DrumBank,
-  ExtraAuthoringFlags,
-  PercussionBank,
-  SoloFlags,
-  SongEncoding,
-  SongGameOrigin,
-  SongGenre,
-  SongKey,
-  SongRating,
-  SongScrollSpeed,
-  SongSubGenre,
-  SongTonality,
-  VocalGender,
-  VocalParts,
-} from '../core.js'
+import type { AnimTempoNumbers, BandFailCue, DrumBank, ExtraAuthoringFlags, PercussionBank, SoloFlags, SongEncoding, SongGameOrigin, SongGenre, SongKey, SongRating, SongScrollSpeed, SongSubGenre, SongTonality, VocalGender, VocalParts } from '../core.js'
 
 /**
  * A parsed song object with all its contents.

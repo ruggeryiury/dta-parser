@@ -40,9 +40,7 @@ export const timeStringToMilliseconds = (timeString: string): number => {
     const totalMilliseconds = (minutes * 60 + seconds) * 1000
     return totalMilliseconds
   } else {
-    throw new Error(
-      'Invalid time format. Expected either "HH:MM:SS" or "MM:SS".'
-    )
+    throw new Error('Invalid time format. Expected either "HH:MM:SS" or "MM:SS".')
   }
 }
 

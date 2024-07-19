@@ -1,14 +1,4 @@
-import {
-  dtaDefault,
-  Song,
-  updateDTA,
-  type DTAFile,
-  type SongGenreUpdateOptions,
-  type SongRating,
-  type SongRatingNames,
-  type TrackUpdateOptions,
-  type UpdateDataOptions,
-} from '../core.js'
+import { dtaDefault, Song, updateDTA, type DTAFile, type SongGenreUpdateOptions, type SongRating, type SongRatingNames, type TrackUpdateOptions, type UpdateDataOptions } from '../core.js'
 
 export interface DTAFileRecipe extends UpdateDataOptions {
   /**
@@ -74,8 +64,7 @@ export interface DTAFileRecipe extends UpdateDataOptions {
   rating: SongRating | SongRatingNames
 }
 
-export type CreateDTAReturnType<RT extends boolean | undefined> =
-  RT extends true ? DTAFile : Song
+export type CreateDTAReturnType<RT extends boolean | undefined> = RT extends true ? DTAFile : Song
 
 /**
  * Creates a new parsed song object.
@@ -84,10 +73,7 @@ export type CreateDTAReturnType<RT extends boolean | undefined> =
  * @param {RT} asJSON Returns the song as a `DTAFile` object. Default is `false`.
  * @returns {DTAFile} A new parsed song object.
  */
-export const createDTA = <RT extends boolean | undefined = undefined>(
-  values?: DTAFileRecipe,
-  asJSON?: RT
-): CreateDTAReturnType<RT> => {
+export const createDTA = <RT extends boolean | undefined = undefined>(values?: DTAFileRecipe, asJSON?: RT): CreateDTAReturnType<RT> => {
   let newDTAInstance = dtaDefault()
 
   if (values) {

@@ -1,17 +1,6 @@
-import {
-  type DTAFile,
-  type DTAFileWithIndex,
-  type InstrRankingNumbers,
-  type InstrumentDifficultyTypes,
-  localeObject,
-  type SongFilterSortingTypes,
-  sortDTA,
-} from '../core.js'
+import { type DTAFile, type DTAFileWithIndex, type InstrRankingNumbers, type InstrumentDifficultyTypes, localeObject, type SongFilterSortingTypes, sortDTA } from '../core.js'
 import { rankCalculator } from './rankCalculations.js'
-import {
-  formatStringFromDTA as formatstr,
-  omitLeadingArticle as omit,
-} from './stringProcessing.js'
+import { formatStringFromDTA as formatstr, omitLeadingArticle as omit } from './stringProcessing.js'
 
 // #region Types
 export interface SongFilterHeaderObject {
@@ -52,13 +41,11 @@ export interface SongsFilteredByGenreObject extends SongFilteringResultsObject {
   sortedBy: 'genre'
 }
 
-export interface SongsFilteredBySongDifficultyObject
-  extends SongFilteringResultsObject {
+export interface SongsFilteredBySongDifficultyObject extends SongFilteringResultsObject {
   sortedBy: 'song_difficulty'
 }
 
-export interface SongsFilteredByAuthorObject
-  extends SongFilteringResultsObject {
+export interface SongsFilteredByAuthorObject extends SongFilteringResultsObject {
   sortedBy: 'author'
 }
 
@@ -69,26 +56,20 @@ export interface ArtistFilterHeaderObject extends SongFilterHeaderObject {
   albums: SongFilterHeaderObject[]
 }
 
-export interface SongsFilteredByArtistObject
-  extends SongFilteringResultsObject {
+export interface SongsFilteredByArtistObject extends SongFilteringResultsObject {
   sortedBy: 'artist'
   headers: ArtistFilterHeaderObject[]
 }
 
-export interface SongsFilteredByYearReleasedObject
-  extends SongFilteringResultsObject {
+export interface SongsFilteredByYearReleasedObject extends SongFilteringResultsObject {
   sortedBy: 'year_released'
 }
 
 // #region By Title
-export const filterSongsByTitle = (
-  songs: DTAFileWithIndex[]
-): SongsFilteredByTitleObject => {
+export const filterSongsByTitle = (songs: DTAFileWithIndex[]): SongsFilteredByTitleObject => {
   const headers: SongFilterHeaderObject[] = []
 
-  const localeNames = Object.keys(
-    localeObject.name
-  ) as (keyof (typeof localeObject)['name'])[]
+  const localeNames = Object.keys(localeObject.name) as (keyof (typeof localeObject)['name'])[]
 
   for (const key of localeNames) {
     const newHeader = {
@@ -112,21 +93,15 @@ export const filterSongsByTitle = (
 
   return {
     sortedBy: 'title',
-    headers: headers
-      .map((header) => ({ ...header, count: header.songs.length }))
-      .filter((song) => song.songs.length > 0),
+    headers: headers.map((header) => ({ ...header, count: header.songs.length })).filter((song) => song.songs.length > 0),
   }
 }
 
 // #region By Genre
-export const filterSongsByGenre = (
-  songs: DTAFileWithIndex[]
-): SongsFilteredByGenreObject => {
+export const filterSongsByGenre = (songs: DTAFileWithIndex[]): SongsFilteredByGenreObject => {
   const headers: SongFilterHeaderObject[] = []
 
-  const localeGenres = Object.keys(
-    localeObject.genre
-  ) as (keyof (typeof localeObject)['genre'])[]
+  const localeGenres = Object.keys(localeObject.genre) as (keyof (typeof localeObject)['genre'])[]
 
   for (const key of localeGenres) {
     const newHeader = {
@@ -147,17 +122,12 @@ export const filterSongsByGenre = (
   }
   return {
     sortedBy: 'genre',
-    headers: headers
-      .map((header) => ({ ...header, count: header.songs.length }))
-      .filter((song) => song.songs.length > 0),
+    headers: headers.map((header) => ({ ...header, count: header.songs.length })).filter((song) => song.songs.length > 0),
   }
 }
 
 // #region By Song Difficulty
-export const filterSongsBySongDifficulty = (
-  songs: DTAFileWithIndex[],
-  instrument: InstrumentDifficultyTypes
-): SongsFilteredBySongDifficultyObject => {
+export const filterSongsBySongDifficulty = (songs: DTAFileWithIndex[], instrument: InstrumentDifficultyTypes): SongsFilteredBySongDifficultyObject => {
   const headers: SongFilterHeaderObject[] = []
 
   const localeRank = [0, 1, 2, 3, 4, 5, 6, -1] as InstrRankingNumbers[]
@@ -184,21 +154,15 @@ export const filterSongsBySongDifficulty = (
   }
   return {
     sortedBy: 'song_difficulty',
-    headers: headers
-      .map((header) => ({ ...header, count: header.songs.length }))
-      .filter((song) => song.songs.length > 0),
+    headers: headers.map((header) => ({ ...header, count: header.songs.length })).filter((song) => song.songs.length > 0),
   }
 }
 
 // #region By Author
-export const filterSongsByAuthor = (
-  songs: DTAFileWithIndex[]
-): SongsFilteredByAuthorObject => {
+export const filterSongsByAuthor = (songs: DTAFileWithIndex[]): SongsFilteredByAuthorObject => {
   const headers: SongFilterHeaderObject[] = []
 
-  const allAuthors = Array.from(
-    new Set(songs.map((song) => song.author ?? 'Unknown Charter'))
-  )
+  const allAuthors = Array.from(new Set(songs.map((song) => song.author ?? 'Unknown Charter')))
 
   for (const author of allAuthors) {
     const newHeader = {
@@ -214,9 +178,7 @@ export const filterSongsByAuthor = (
 
   for (const song of sortedSongs) {
     const authorName = song.author ?? 'Unknown Charter'
-    const authorIndex = allAuthors.includes(authorName)
-      ? allAuthors.indexOf(authorName)
-      : 0
+    const authorIndex = allAuthors.includes(authorName) ? allAuthors.indexOf(authorName) : 0
     const { songs: songlist } = headers[authorIndex]
     songlist.push(song.index)
   }
@@ -234,71 +196,30 @@ export const filterSongsByAuthor = (
 }
 
 // #region By Artist
-export const filterSongsByArtist = (
-  songs: DTAFileWithIndex[],
-  albumQuantityThreshold: number
-) => {
+export const filterSongsByArtist = (songs: DTAFileWithIndex[], albumQuantityThreshold: number) => {
   // <-- Sortings
   const allArtistSorting = (a: string, b: string): number => {
-    if (
-      formatstr(null, omit(a), 'id_with_space') >
-      formatstr(null, omit(b), 'id_with_space')
-    )
-      return 1
-    else if (
-      formatstr(null, omit(a), 'id_with_space') <
-      formatstr(null, omit(b), 'id_with_space')
-    )
-      return -1
+    if (formatstr(null, omit(a), 'id_with_space') > formatstr(null, omit(b), 'id_with_space')) return 1
+    else if (formatstr(null, omit(a), 'id_with_space') < formatstr(null, omit(b), 'id_with_space')) return -1
     return 0
   }
 
-  const allAlbumsFromArtistSorting = (
-    a: string | undefined,
-    b: string | undefined
-  ): number => {
-    if (
-      a &&
-      b &&
-      formatstr(null, omit(a), 'id_with_space') >
-        formatstr(null, omit(b), 'id_with_space')
-    )
-      return 1
-    else if (
-      a &&
-      b &&
-      formatstr(null, omit(a), 'id_with_space') <
-        formatstr(null, omit(b), 'id_with_space')
-    )
-      return -1
+  const allAlbumsFromArtistSorting = (a: string | undefined, b: string | undefined): number => {
+    if (a && b && formatstr(null, omit(a), 'id_with_space') > formatstr(null, omit(b), 'id_with_space')) return 1
+    else if (a && b && formatstr(null, omit(a), 'id_with_space') < formatstr(null, omit(b), 'id_with_space')) return -1
     return 0
   }
 
-  const tracksFromAlbumSorting = (
-    a: DTAFileWithIndex,
-    b: DTAFileWithIndex
-  ): number => {
-    if (
-      a.album_track_number &&
-      b.album_track_number &&
-      a.album_track_number > b.album_track_number
-    )
-      return 1
-    else if (
-      a.album_track_number &&
-      b.album_track_number &&
-      a.album_track_number < b.album_track_number
-    )
-      return -1
+  const tracksFromAlbumSorting = (a: DTAFileWithIndex, b: DTAFileWithIndex): number => {
+    if (a.album_track_number && b.album_track_number && a.album_track_number > b.album_track_number) return 1
+    else if (a.album_track_number && b.album_track_number && a.album_track_number < b.album_track_number) return -1
     return 0
   }
 
   // <-- Function
   const headers: ArtistFilterHeaderObject[] = []
   const sortedSongs = sortDTA(songs, 'Song Title') as DTAFileWithIndex[]
-  const allArtists = Array.from(
-    new Set(sortedSongs.map((song) => song.artist))
-  ).sort(allArtistSorting)
+  const allArtists = Array.from(new Set(sortedSongs.map((song) => song.artist))).sort(allArtistSorting)
 
   for (const artist of allArtists) {
     headers.push({
@@ -312,23 +233,15 @@ export const filterSongsByArtist = (
 
   for (const header of headers) {
     let noAlbumSpecifiedCount = 0
-    const allSongsFromArtist = sortedSongs.filter(
-      (song) => formatstr(song, '{{artist}}', 'id') === header.id
-    )
+    const allSongsFromArtist = sortedSongs.filter((song) => formatstr(song, '{{artist}}', 'id') === header.id)
     header.count = allSongsFromArtist.length
-    const allArtistAlbums = Array.from(
-      new Set(allSongsFromArtist.map((song) => song.album_name))
-    ).sort(allAlbumsFromArtistSorting)
+    const allArtistAlbums = Array.from(new Set(allSongsFromArtist.map((song) => song.album_name))).sort(allAlbumsFromArtistSorting)
 
     for (const album of allArtistAlbums) {
-      const allTracksFromAlbum = allSongsFromArtist.filter(
-        (song) => song.album_name?.toLowerCase() === album?.toLowerCase()
-      )
+      const allTracksFromAlbum = allSongsFromArtist.filter((song) => song.album_name?.toLowerCase() === album?.toLowerCase())
       if (allTracksFromAlbum.length >= albumQuantityThreshold) {
         header.albums.push({
-          id: album
-            ? `album_${header.id}_${formatstr(null, album, 'id')}`
-            : `album_${header.id}_${formatstr(null, 'No Album Specified', 'id')}_${noAlbumSpecifiedCount.toString()}`,
+          id: album ? `album_${header.id}_${formatstr(null, album, 'id')}` : `album_${header.id}_${formatstr(null, 'No Album Specified', 'id')}_${noAlbumSpecifiedCount.toString()}`,
           name: album ?? 'No Album Specified',
           songs: allTracksFromAlbum
             .map((track) => track)
@@ -337,12 +250,7 @@ export const filterSongsByArtist = (
           count: allTracksFromAlbum.length,
         })
         if (!album) noAlbumSpecifiedCount++
-      } else
-        header.songs.push(
-          ...(
-            sortDTA(allTracksFromAlbum, 'Song Title') as DTAFileWithIndex[]
-          ).map((song) => song.index)
-        )
+      } else header.songs.push(...(sortDTA(allTracksFromAlbum, 'Song Title') as DTAFileWithIndex[]).map((song) => song.index))
     }
   }
 
@@ -353,14 +261,10 @@ export const filterSongsByArtist = (
 }
 
 // #region By Year Released
-export const filterSongsByYearReleased = (
-  songs: DTAFileWithIndex[]
-): SongsFilteredByYearReleasedObject => {
+export const filterSongsByYearReleased = (songs: DTAFileWithIndex[]): SongsFilteredByYearReleasedObject => {
   const headers: SongFilterHeaderObject[] = []
 
-  const allYears = Array.from(
-    new Set(songs.map((song) => song.year_released))
-  ).sort((a, b) => {
+  const allYears = Array.from(new Set(songs.map((song) => song.year_released))).sort((a, b) => {
     if (a > b) return 1
     else if (a < b) return -1
     return 0

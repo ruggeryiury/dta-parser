@@ -12,10 +12,7 @@ import { isSongClass, leadingArticleToTrailing } from '../utils.js'
  * @param {string} format A string with format values you want to add.
  * @returns {string} A generated file name for the song as string.
  */
-export const createFilename = (
-  song: DTAFile | Song,
-  format: string
-): string => {
+export const createFilename = (song: DTAFile | Song, format: string): string => {
   const regex = /\{\{([^}]+)\}\}/g
 
   const name = format.replace(regex, (match, key) => {
@@ -24,25 +21,17 @@ export const createFilename = (
     switch (key) {
       case 'title':
       case 'name':
-        value = isSongClass(song)
-          ? song.getValue.name({ leadingArticle: 'emit' })
-          : song.name
+        value = isSongClass(song) ? song.getValue.name({ leadingArticle: 'emit' }) : song.name
         break
       case 'artist':
-        value = isSongClass(song)
-          ? song.getValue.artist({ leadingArticle: 'emit' })
-          : song.artist
+        value = isSongClass(song) ? song.getValue.artist({ leadingArticle: 'emit' }) : song.artist
         break
       case 'title-the':
       case 'name-the':
-        value = isSongClass(song)
-          ? song.getValue.name({ leadingArticle: 'trailing' })
-          : leadingArticleToTrailing(song.name)
+        value = isSongClass(song) ? song.getValue.name({ leadingArticle: 'trailing' }) : leadingArticleToTrailing(song.name)
         break
       case 'artist-the':
-        value = isSongClass(song)
-          ? song.getValue.artist({ leadingArticle: 'trailing' })
-          : leadingArticleToTrailing(song.artist)
+        value = isSongClass(song) ? song.getValue.artist({ leadingArticle: 'trailing' }) : leadingArticleToTrailing(song.artist)
         break
       case 'songname':
         value = isSongClass(song) ? song.value.songname : song.songname

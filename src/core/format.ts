@@ -1,8 +1,4 @@
-import {
-  leadingArticleToTrailing,
-  omitLeadingArticle,
-  useDefaultOptions,
-} from '../utils.js'
+import { leadingArticleToTrailing, omitLeadingArticle, useDefaultOptions } from '../utils.js'
 
 export type LeadingArticleTypes = 'emit' | 'omit' | 'trailing'
 
@@ -41,14 +37,8 @@ export interface DTAStringValueFormattingOptions {
  * @param {DTAStringValueFormattingOptions} options `OPTIONAL` Customize options for the song title's return value.
  * @returns {string} The song title.
  */
-export const formatDTAStringValue = (
-  str: string,
-  options?: DTAStringValueFormattingOptions
-): string => {
-  const opts = useDefaultOptions<DTAStringValueFormattingOptions, true>(
-    { leadingArticle: 'emit', quoted: false },
-    options
-  )
+export const formatDTAStringValue = (str: string, options?: DTAStringValueFormattingOptions): string => {
+  const opts = useDefaultOptions<DTAStringValueFormattingOptions, true>({ leadingArticle: 'emit', quoted: false }, options)
   const { leadingArticle, quoted } = opts
   let returnValue = ''
 

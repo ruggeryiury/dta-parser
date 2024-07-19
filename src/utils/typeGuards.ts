@@ -1,16 +1,6 @@
-import {
-  type DTAFile,
-  type DTAFileRecipe,
-  Song,
-  SongCollection,
-} from '../core.js'
+import { type DTAFile, type DTAFileRecipe, Song, SongCollection } from '../core.js'
 
-export type DTASongObjectTypes =
-  | DTAFile
-  | DTAFile[]
-  | Song
-  | SongCollection
-  | DTAFileRecipe
+export type DTASongObjectTypes = DTAFile | DTAFile[] | Song | SongCollection | DTAFileRecipe
 
 /**
  * Type guard function to check through all known parsed song types if the provided parsed song
@@ -32,9 +22,7 @@ export const isSongClass = (song: DTASongObjectTypes): song is Song => {
  * @returns {song is SongCollection} A boolean value that tells the provided parsed song is a
  * `SongCollection` class instance.
  */
-export const isSongCollection = (
-  song: DTASongObjectTypes
-): song is SongCollection => {
+export const isSongCollection = (song: DTASongObjectTypes): song is SongCollection => {
   return song instanceof SongCollection
 }
 
@@ -70,8 +58,6 @@ export const isDTAFileArray = (song: DTASongObjectTypes): song is DTAFile[] => {
  * @returns {song is DTAFileRecipe} A boolean value that tells the provided parsed song is a
  * `DTAFileRecipe` object.
  */
-export const isDTAFileRecipe = (
-  song: DTASongObjectTypes
-): song is DTAFileRecipe => {
-  return !(isSongClass(song)) && !(isSongCollection(song)) && !isDTAFileArray(song) && !isDTAFile(song)
+export const isDTAFileRecipe = (song: DTASongObjectTypes): song is DTAFileRecipe => {
+  return !isSongClass(song) && !isSongCollection(song) && !isDTAFileArray(song) && !isDTAFile(song)
 }

@@ -298,30 +298,10 @@ export const localeObject = {
   },
 } as const
 
-const {
-  name,
-  anim_tempo,
-  band_fail_cue,
-  bank,
-  drum_bank,
-  encoding,
-  extra_authoring,
-  game_origin,
-  genre,
-  rank,
-  rating,
-  solo,
-  song_scroll_speed,
-  song_key,
-  song_tonality,
-  sub_genre,
-  vocal_gender,
-  vocal_parts,
-} = localeObject
+const { name, anim_tempo, band_fail_cue, bank, drum_bank, encoding, extra_authoring, game_origin, genre, rank, rating, solo, song_scroll_speed, song_key, song_tonality, sub_genre, vocal_gender, vocal_parts } = localeObject
 
 export type SongTitleOptionsUppercaseNames = keyof typeof name
-export type SongTitleOptionsLowercaseNames =
-  (typeof name)[SongTitleOptionsUppercaseNames]
+export type SongTitleOptionsLowercaseNames = (typeof name)[SongTitleOptionsUppercaseNames]
 
 export type AnimTempo = keyof typeof anim_tempo
 export type AnimTempoStrings = ExtractStrings<AnimTempo>
@@ -370,8 +350,7 @@ export type SoloFlags = keyof typeof solo
 export type SoloFlagsNames = (typeof solo)[SoloFlags]
 
 export type ExtraAuthoringFlags = keyof typeof extra_authoring
-export type ExtraAuthoringFlagsNames =
-  (typeof extra_authoring)[ExtraAuthoringFlags]
+export type ExtraAuthoringFlagsNames = (typeof extra_authoring)[ExtraAuthoringFlags]
 
 export type SongEncoding = keyof typeof encoding
 export type SongEncodingNames = (typeof encoding)[SongEncoding]
@@ -379,8 +358,7 @@ export type SongEncodingNames = (typeof encoding)[SongEncoding]
 export type SongGameOrigin = keyof typeof game_origin
 export type SongGameOriginNames = (typeof game_origin)[SongGameOrigin]
 
-export type GetLocaleRankReturnType<D extends boolean | undefined> =
-  D extends true ? BandRankingNamesAsDots : BandRankingNames
+export type GetLocaleRankReturnType<D extends boolean | undefined> = D extends true ? BandRankingNamesAsDots : BandRankingNames
 
 /**
  * Translates DTA file language values to human readable strings.
@@ -419,24 +397,13 @@ export const localeKeyToValue = {
   game_origin: (key: SongGameOrigin): SongGameOriginNames => {
     return game_origin[key]
   },
-  song_key: <V extends SongKey, T extends SongTonality>(
-    vocal_tonic_note: V,
-    song_tonality: T
-  ): SongKeyMajorValues | SongKeyMinorValues =>
-    `${localeObject.song_key[vocal_tonic_note]}${song_tonality === 1 ? 'm' : ''}`,
-  rank: <D extends boolean | undefined>(
-    rankCalc: number,
-    asDot?: D
-  ): GetLocaleRankReturnType<D> => {
+  song_key: <V extends SongKey, T extends SongTonality>(vocal_tonic_note: V, song_tonality: T): SongKeyMajorValues | SongKeyMinorValues => `${localeObject.song_key[vocal_tonic_note]}${song_tonality === 1 ? 'm' : ''}`,
+  rank: <D extends boolean | undefined>(rankCalc: number, asDot?: D): GetLocaleRankReturnType<D> => {
     if (asDot) {
-      return localeObject.rank.dots[
-        String(rankCalc) as keyof typeof localeObject.rank.name
-      ] as GetLocaleRankReturnType<D>
+      return localeObject.rank.dots[String(rankCalc) as keyof typeof localeObject.rank.name] as GetLocaleRankReturnType<D>
     }
 
-    return localeObject.rank.name[
-      String(rankCalc) as keyof typeof localeObject.rank.name
-    ] as GetLocaleRankReturnType<D>
+    return localeObject.rank.name[String(rankCalc) as keyof typeof localeObject.rank.name] as GetLocaleRankReturnType<D>
   },
 }
 
