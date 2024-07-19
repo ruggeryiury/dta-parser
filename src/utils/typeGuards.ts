@@ -47,7 +47,7 @@ export const isSongCollection = (
  * `DTAFile` object.
  */
 export const isDTAFile = (song: DTASongObjectTypes): song is DTAFile => {
-  return 'tracks_count' in song
+  return typeof song === 'object' && 'tracks_count' in song
 }
 
 /**
@@ -73,5 +73,5 @@ export const isDTAFileArray = (song: DTASongObjectTypes): song is DTAFile[] => {
 export const isDTAFileRecipe = (
   song: DTASongObjectTypes
 ): song is DTAFileRecipe => {
-  return 'tracks' in song
+  return !(isSongClass(song)) && !(isSongCollection(song)) && !isDTAFileArray(song) && !isDTAFile(song)
 }
