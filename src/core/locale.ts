@@ -5,6 +5,9 @@ export type ExtractNumbers<T> = T extends number ? T : never
 export type ExtractStrings<T> = T extends string ? T : never
 export type StringNumToNum<T> = T extends '-1' ? -1 : T
 
+/**
+ * An object mapping all DTA keys to values.
+ */
 export const localeObject = {
   name: {
     '123': '123',
@@ -298,15 +301,15 @@ export const localeObject = {
   },
 } as const
 
-const { name, anim_tempo, band_fail_cue, bank, drum_bank, encoding, extra_authoring, game_origin, genre, rank, rating, solo, song_scroll_speed, song_key, song_tonality, sub_genre, vocal_gender, vocal_parts } = localeObject
+const { name, anim_tempo, band_fail_cue, bank, drum_bank, encoding, extra_authoring, game_origin, genre, rank, rating, solo, song_scroll_speed, song_key, song_tonality, sub_genre, vocal_gender, vocal_parts, anim_tempo_strings } = localeObject
 
 export type SongTitleOptionsUppercaseNames = keyof typeof name
 export type SongTitleOptionsLowercaseNames = (typeof name)[SongTitleOptionsUppercaseNames]
 
-export type AnimTempo = keyof typeof anim_tempo
+export type AnimTempo = keyof typeof anim_tempo | keyof typeof anim_tempo_strings
 export type AnimTempoStrings = ExtractStrings<AnimTempo>
 export type AnimTempoNumbers = ExtractNumbers<AnimTempo>
-export type AnimTempoNames = (typeof anim_tempo)[AnimTempo]
+export type AnimTempoNames = (typeof anim_tempo)[AnimTempoNumbers]
 
 export type BandFailCue = Exclude<keyof typeof band_fail_cue, 'undefined'>
 export type BandFailCueNames = (typeof band_fail_cue)[BandFailCue]
@@ -365,6 +368,7 @@ export type GetLocaleRankReturnType<D extends boolean | undefined> = D extends t
  */
 export const localeKeyToValue = {
   anim_tempo: (key: AnimTempo): AnimTempoNames => {
+    if (typeof key === 'string') return anim_tempo_strings[key]
     return anim_tempo[key]
   },
   band_fail_cue: (key?: BandFailCue): BandFailCueNames | 'Not Specified' => {
@@ -408,7 +412,7 @@ export const localeKeyToValue = {
 }
 
 export const localeValueToKey = {
-  anim_tempo: (value: AnimTempoStrings): AnimTempoNumbers => {
+  anim_tempo: (value: AnimTempoNames): AnimTempoNumbers => {
     return getKeyByValue(anim_tempo, value)
   },
   band_fail_cue: (value: BandFailCueNames): BandFailCue => {

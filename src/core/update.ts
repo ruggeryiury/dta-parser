@@ -757,7 +757,7 @@ export const updateDTA = (dta: DTAFile, update: UpdateDataOptions): DTAFile => {
 
   if (drum_bank) newDTA.drum_bank = localeValueToKey.drum_bank(drum_bank)
 
-  if (anim_tempo) newDTA.anim_tempo = typeof anim_tempo === 'number' ? anim_tempo : localeValueToKey.anim_tempo(anim_tempo)
+  if (anim_tempo) newDTA.anim_tempo = typeof anim_tempo === 'number' ? anim_tempo : anim_tempo === 'kTempoFast' ? 64 : anim_tempo === 'kTempoMedium' ? 32 : 16
 
   if (band_fail_cue) newDTA.band_fail_cue = localeValueToKey.band_fail_cue(band_fail_cue)
 
