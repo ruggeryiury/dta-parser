@@ -106,7 +106,7 @@ export const stringifySongUpdates = (updates: SongUpdateObject, options?: String
   })
 
   for (const key of upgKeys) {
-    const { key: key_signature, genre, rating, name, album, id, artist, alternate_path, vocal_gender, author } = updates[key]
+    const { key: key_signature, genre, rating, name, album, id, artist, game_origin, alternate_path, vocal_gender, author } = updates[key]
     if (id) break
     rtnString += `(${key}`
 
@@ -116,6 +116,10 @@ export const stringifySongUpdates = (updates: SongUpdateObject, options?: String
 
     if (artist) {
       rtnString += `${inline ? ' ' : genTabs()}(artist "${quoteToSlashQ(artist)}")`
+    }
+
+    if (game_origin) {
+      rtnString += `${inline ? ' ' : genTabs()}(game_origin ${quoteToSlashQ(game_origin)})`
     }
 
     if (genre) {

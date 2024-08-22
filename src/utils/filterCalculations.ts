@@ -177,7 +177,7 @@ export const filterSongsByAuthor = (songs: DTAFileWithIndex[]): SongsFilteredByA
   const sortedSongs = sortDTA(songs, 'Song Title') as DTAFileWithIndex[]
 
   for (const song of sortedSongs) {
-    const authorName = song.author ?? 'Unknown Charter'
+    const authorName = song.author === undefined || !song.author ? 'Unknown Charter' : song.author
     const authorIndex = allAuthors.includes(authorName) ? allAuthors.indexOf(authorName) : 0
     const { songs: songlist } = headers[authorIndex]
     songlist.push(song.index)
@@ -230,7 +230,7 @@ export const filterSongsByArtist = (songs: DTAFileWithIndex[], albumQuantityThre
       if (allTracksFromAlbum.length >= albumQuantityThreshold) {
         header.albums.push({
           id: album ? `album_${header.id}_${formatstr(null, album, 'id')}` : `album_${header.id}_${formatstr(null, 'No Album Specified', 'id')}_${noAlbumSpecifiedCount.toString()}`,
-          name: album ?? 'No Album Specified',
+          name: album ? album : 'No Album Specified',
           songs: allTracksFromAlbum
             .map((track) => track)
             .sort((a, b): number => {

@@ -1,6 +1,6 @@
 {
   "name": "dta-parser",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "private": true,
   "description": "A Rock Band song metadata file parser written in Javascript",
   "homepage": "https://github.com/ruggeryiury/dta-parser#readme",
@@ -50,6 +50,7 @@
     "globals": "^15.3.0",
     "path-js": "link:..\\path-js",
     "prettier": "^3.2.5",
+    "rbtools-js": "link:..\\rbtools-js",
     "tsx": "^4.10.5",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.9.0"

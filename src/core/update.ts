@@ -403,7 +403,12 @@ export interface UpdateDataOptions {
    * Songs which MIDI file is exported with UTF-8 encoding should have `utf8` as encoding.
    */
   encoding?: SongEncoding
-  game_origin?: SongGameOrigin
+  /**
+   * The game origin of the song.
+   *
+   * All customs are compiled on MAGMA using `ugc_plus`.
+   */
+  game_origin?: SongGameOrigin | string
   /**
    * The song's rating.
    */
