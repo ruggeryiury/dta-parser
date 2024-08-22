@@ -1,4 +1,4 @@
-import type { AnimTempoNumbers, BandFailCue, DrumBank, ExtraAuthoringFlags, PercussionBank, SoloFlags, SongEncoding, SongGameOrigin, SongGenre, SongKey, SongRating, SongScrollSpeed, SongSubGenre, SongTonality, VocalGender, VocalParts } from '../core.js'
+import type { AnimTempoNumbers, BandFailCue, DrumBank, ExtraAuthoringFlags, PercussionBank, SoloFlags, SongEncoding, SongGenre, SongKey, SongRating, SongScrollSpeed, SongSubGenre, SongTonality, VocalGender, VocalParts } from '../core.js'
 
 /**
  * A parsed song object with all its contents.
@@ -152,7 +152,7 @@ export interface DTAFile {
    *
    * All customs are compiled on MAGMA using `ugc_plus`.
    */
-  game_origin: SongGameOrigin | string
+  game_origin: string
   /**
    * The song's rating.
    */

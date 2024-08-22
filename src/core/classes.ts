@@ -1,4 +1,4 @@
-import { createDTA, formatDTAStringValue, genDTARecipe, getSongRank, localeKeyToValue, sortDTA, stringifyDTA, updateDTA, type BandRankingNames, type BandRankingNamesAsDots, type BandRankingNumbers, type DTAFile, type DTAFileRecipe, type DTAStringValueFormattingOptions, type GetRankTypeOptions, type InstrRankingNames, type InstrRankingNamesAsDots, type InstrRankingNumbers, type SongGameOriginNames, type SongGenreNames, type SongRatingNames, type SongSortingTypes, type SongSubGenreNames, type StringifyDataOptions, type UpdateDataOptions, type VocalGenderNames, type VocalPartsNames } from '../core.js'
+import { createDTA, formatDTAStringValue, genDTARecipe, getSongRank, localeKeyToValue, sortDTA, stringifyDTA, updateDTA, type BandRankingNames, type BandRankingNamesAsDots, type BandRankingNumbers, type DTAFile, type DTAFileRecipe, type DTAStringValueFormattingOptions, type GetRankTypeOptions, type InstrRankingNames, type InstrRankingNamesAsDots, type InstrRankingNumbers, type SongGenreNames, type SongRatingNames, type SongSortingTypes, type SongSubGenreNames, type StringifyDataOptions, type UpdateDataOptions, type VocalGenderNames, type VocalPartsNames } from '../core.js'
 import { type SongDrumMixNames, type AudioFileTracksStructureDocument, isDTAFileRecipe, genAudioFileStructure, checkDrumMix, isSongClass } from '../utils.js'
 
 export interface SongGetRankMethods {
@@ -177,12 +177,6 @@ export interface SongGetValueMethods {
    */
   vocalGender: () => VocalGenderNames
   /**
-   * Fetches the game origin of the song.
-   * - - - -
-   * @returns {SongGameOriginNames} The game origin of the song.
-   */
-  gameOrigin: () => SongGameOriginNames
-  /**
    * Fetches the song's release year.
    * - - - -
    * @returns {number} The song's release year.
@@ -256,7 +250,6 @@ export class Song<T extends DTAFile = DTAFile> {
     vocalParts: () => localeKeyToValue.vocal_parts(this.value.vocal_parts),
     rating: () => localeKeyToValue.rating(this.value.rating),
     vocalGender: () => localeKeyToValue.vocal_gender(this.value.vocal_gender),
-    gameOrigin: () => localeKeyToValue.game_origin(this.value.game_origin),
     yearReleased: () => this.value.year_released,
     yearRecorded: () => this.value.year_recorded,
     albumName: (options) => (this.value.album_name ? formatDTAStringValue(this.value.album_name, options) : undefined),

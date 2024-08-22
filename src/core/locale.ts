@@ -398,9 +398,6 @@ export const localeKeyToValue = {
   vocal_parts: (key: VocalParts): VocalPartsNames => {
     return vocal_parts[key]
   },
-  game_origin: (key: SongGameOrigin): SongGameOriginNames => {
-    return game_origin[key]
-  },
   song_key: <V extends SongKey, T extends SongTonality>(vocal_tonic_note: V, song_tonality: T): SongKeyMajorValues | SongKeyMinorValues => `${localeObject.song_key[vocal_tonic_note]}${song_tonality === 1 ? 'm' : ''}`,
   rank: <D extends boolean | undefined>(rankCalc: number, asDot?: D): GetLocaleRankReturnType<D> => {
     if (asDot) {

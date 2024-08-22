@@ -1,4 +1,4 @@
-import { localeValueToKey, type AnimTempo, type BandFailCueNames, type BandRankingNames, type BandRankingNumbers, type DrumBankNames, type DTAFile, type PercussionBankNames, type SongEncoding, type SongGameOrigin, type SongGenreNames, type SongRating, type SongRatingNames, type SongScrollSpeedNames, type VocalGenderNames, type VocalParts, type VocalPartsNames } from '../core.js'
+import { localeValueToKey, type AnimTempo, type BandFailCueNames, type BandRankingNames, type BandRankingNumbers, type DrumBankNames, type DTAFile, type PercussionBankNames, type SongEncoding, type SongGenreNames, type SongRating, type SongRatingNames, type SongScrollSpeedNames, type VocalGenderNames, type VocalParts, type VocalPartsNames } from '../core.js'
 import { panValueToArray, rankValuesToDTARankSystem, bandAverageRankCalculator, timeStringToMilliseconds } from '../utils.js'
 
 export type DrumTracksTypes = 2 | 'Stereo Else' | 3 | 'Mono Kick + Stereo Else' | 4 | 'Mono Kick + Mono Snare + Stereo Else' | 5 | 'Mono Kick + Stereo Snare + Stereo Else' | 6 | 'Stereo Kick + Stereo Snare + Stereo Else'
@@ -408,7 +408,7 @@ export interface UpdateDataOptions {
    *
    * All customs are compiled on MAGMA using `ugc_plus`.
    */
-  game_origin?: SongGameOrigin | string
+  game_origin?: string
   /**
    * The song's rating.
    */
