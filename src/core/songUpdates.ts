@@ -118,10 +118,6 @@ export const stringifySongUpdates = (updates: SongUpdateObject, options?: String
       rtnString += `${inline ? ' ' : genTabs()}(artist "${quoteToSlashQ(artist)}")`
     }
 
-    if (game_origin) {
-      rtnString += `${inline ? ' ' : genTabs()}(game_origin ${quoteToSlashQ(game_origin)})`
-    }
-
     if (genre) {
       const { genre: song_genre, sub_genre } = genre
       rtnString += `${inline ? ' ' : genTabs()}(genre ${localeValueToKey.genre(song_genre)})`
@@ -142,6 +138,10 @@ export const stringifySongUpdates = (updates: SongUpdateObject, options?: String
     if (album) {
       const { hasArt, name: album_name, track_number } = album
       rtnString += `${hasArt !== undefined ? `${inline ? ' ' : genTabs()}(album_art ${hasArt ? 'TRUE' : 'FALSE'})` : ''}${album_name ? `${inline ? ' ' : genTabs()}(album_name "${quoteToSlashQ(album_name)}")` : ''}${track_number ? `${inline ? ' ' : genTabs()}(album_track_number ${track_number.toString()})` : ''}`
+    }
+
+    if (game_origin) {
+      rtnString += `${inline ? ' ' : genTabs()}(game_origin ${quoteToSlashQ(game_origin)})`
     }
 
     if (key_signature) {
