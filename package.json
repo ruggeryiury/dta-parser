@@ -1,6 +1,6 @@
 {
   "name": "dta-parser",
-  "version": "1.2.3",
+  "version": "2.0.0",
   "private": true,
   "description": "A Rock Band song metadata file parser written in Javascript",
   "homepage": "https://github.com/ruggeryiury/dta-parser#readme",
@@ -24,7 +24,7 @@
     "clear": "rimraf dist",
     "dev": "tsx watch ./tests/exec.ts",
     "format": "prettier --write src",
-    "lint": "eslint src/**/*.ts"
+    "lint": "eslint ."
   },
   "exports": {
     ".": {

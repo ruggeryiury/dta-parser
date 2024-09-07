@@ -19,19 +19,15 @@ const tseslintConfig = {
       ...globals.es2021,
     },
   },
-  files: ['**/*.ts'],
+  files: ['src/**/*.ts'],
   plugins: {
     '@typescript-eslint': tseslint.plugin,
     import: importPlugin,
     jsdoc: jsdoc,
     n: n,
   },
-  extends: [
-    eslint.configs.recommended,
-    ...tseslint.configs.strictTypeChecked,
-    ...tseslint.configs.stylisticTypeChecked,
-    jsdoc.configs['flat/recommended'],
-  ],
+  extends: [eslint.configs.recommended, ...tseslint.configs.strictTypeChecked, ...tseslint.configs.stylisticTypeChecked, jsdoc.configs['flat/recommended']],
+  ignores: ['tests/**/*.ts', 'dist/**/*', 'src-old/**/*'],
   rules: {
     'jsdoc/no-undefined-types': 'off',
     'jsdoc/valid-types': 'off',

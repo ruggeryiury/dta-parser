@@ -1,8 +1,9 @@
-/.github/
-/assets/
+.github/
+assets/
 node_modules/
-/src/
-/tests/
+src/
+src-old/
+tests/
 .gitignore
 .npmignore
 .prettierignore

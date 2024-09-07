@@ -15,8 +15,6 @@
 - [Basic Usage](#basic-usage)
   - [Parsing a `.dta` file](#parsing-a-dta-file)
   - [Creating a new song entry (using recipe)](#creating-a-new-song-entry-using-recipe)
-  - ["Stringify" a `Song` class back to `.dta` file contents](#stringify-a-song-class-back-to-dta-file-contents)
-  - [Sort a collection of songs](#sort-a-collection-of-songs)
 - [More Rock Band related projects](#more-rock-band-related-projects)
 
 # Features
@@ -79,32 +77,12 @@ const newSongRecipe: DTAFileRecipe = {
   },
   author: 'Ruggy',
   multitrack: true,
-  CATemh: true,
+  catEMH: true,
   pack_name: 'Windows .MID Pack 01',
 }
 
 // Create a new Song class.
 const song = new Song(newSongRecipe)
-```
-
-## "Stringify" a `Song` class back to `.dta` file contents
-
-```ts
-// Create a new Song class.
-const song = new Song(...)
-
-// Stringify its contents.
-const songContents = song.stringify()
-```
-
-## Sort a collection of songs
-
-```ts
-// Parse a .dta file contents
-const mySongs = DTAParser(dtaFileContents)
-
-// Sort all songs based on the songs' artist.
-mySongs.sort('Artist')
 ```
 
 # More Rock Band related projects
