@@ -16,7 +16,6 @@ export const extendDTAFile = <T extends AnyDTAType>(song: T, newValues: ExtendNe
     ...newValues,
   } as DTASelfReturnType<T>
 
-  
   if (update) {
     return updateDTA(extendedSongObject, update) as DTASelfReturnType<T>
   }

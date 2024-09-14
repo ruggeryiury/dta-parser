@@ -340,7 +340,7 @@ export type CreateDTAFileFromRecipeReturnObject<T extends DTAContentParserFormat
  * @returns {CreateDTAFileFromRecipeReturnObject<T>} A new parsed song object.
  */
 export const createDTAFileFromRecipe = <T extends DTAContentParserFormatTypes = 'complete'>(type: T = 'complete' as T, values?: CreateDTAFileFromRecipeValuesType<T>): T extends 'complete' ? DTAFile : PartialDTAFile => {
-  let newDTAInstance = type === 'complete' ? {} as PartialDTAFile : dtaDefault()
+  let newDTAInstance = type === 'complete' ? ({} as PartialDTAFile) : dtaDefault()
 
   if (values) {
     newDTAInstance = updateDTA(newDTAInstance, values)

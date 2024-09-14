@@ -10,7 +10,7 @@ import type { PartialDTAFile, SongKeyMajorValues, SongKeyMinorValues } from '../
 export const getKeyByValue = <T extends Record<string, T[keyof T]>>(object: T, value: T[keyof T]): keyof T => {
   const key = Object.keys(object).find((key) => object[key] === value) as keyof T
   const keyAsNumber = Number(key)
-  return isNaN(keyAsNumber) ? key : keyAsNumber as keyof T
+  return isNaN(keyAsNumber) ? key : (keyAsNumber as keyof T)
 }
 
 export type ExtractNumbers<T> = T extends number ? T : never

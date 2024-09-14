@@ -30,6 +30,7 @@ const tseslintConfig = {
   ignores: ['tests/**/*.ts', 'dist/**/*', 'src-old/**/*'],
   rules: {
     'jsdoc/no-undefined-types': 'off',
+    'jsdoc/require-returns-description': 'off',
     'jsdoc/valid-types': 'off',
     '@typescript-eslint/non-nullable-type-assertion-style': 'warn',
     '@typescript-eslint/no-dynamic-delete': 'off',

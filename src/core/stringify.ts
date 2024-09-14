@@ -623,7 +623,7 @@ export class DTAStringIO {
         s += `${t()}(album_art ${this.renderToStringValue('boolean', album_art)})`
         s += n()
       }
-      if (album_name !== undefined) {
+      if (album_name !== undefined && album_name) {
         s += `${t()}(album_name "${this.renderToStringValue('string', album_name)}")`
         s += n()
       }
@@ -670,23 +670,23 @@ export class DTAStringIO {
       }
 
       if (this.opts.placeRB3DXAttributes) {
-        if (author !== undefined) {
+        if (author !== undefined && author) {
           s += `${t()}(author "${this.renderToStringValue('string', author)}")`
           s += n()
         }
-        if (strings_author !== undefined) {
+        if (strings_author !== undefined && strings_author) {
           s += `${t()}(strings_author "${this.renderToStringValue('string', strings_author)}")`
           s += n()
         }
-        if (keys_author !== undefined) {
+        if (keys_author !== undefined && keys_author) {
           s += `${t()}(keys_author "${this.renderToStringValue('string', keys_author)}")`
           s += n()
         }
-        if (pack_name !== undefined) {
+        if (pack_name !== undefined && pack_name) {
           s += `${t()}(pack_name "${this.renderToStringValue('string', pack_name)}")`
           s += n()
         }
-        if (loading_phrase !== undefined) {
+        if (loading_phrase !== undefined && loading_phrase) {
           s += `${t()}(loading_phrase "${this.renderToStringValue('string', loading_phrase)}")`
           s += n()
         }
@@ -741,7 +741,7 @@ export const stringifyDTA = (songs: PartialDTAFile | PartialDTAFile[], type: DTA
   const io = new DTAStringIO(type, opts)
   if (Array.isArray(songs)) {
     songs.forEach((song) => {
-      if (opts.ignoreFakeSongs && song.fake === true) return
+      if (!opts.ignoreFakeSongs && song.fake === true) return
       io.open(song.id)
       for (const key of localeObject.sortedKeys) {
         if (song[key] !== undefined) io.add(song.id, key, song[key])

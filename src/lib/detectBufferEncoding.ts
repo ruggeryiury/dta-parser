@@ -20,8 +20,7 @@ export const detectBufferEncoding = (data: string | Buffer): BufferEncoding => {
       bufEnc = 'utf8'
       encodingSure = true
       return
-    }
-    else if (enc.encoding.includes('windows-125') || (enc.encoding.includes('ISO-8859') && enc.confidence >= 0.95)) {
+    } else if (enc.encoding.includes('windows-125') || (enc.encoding.includes('ISO-8859') && enc.confidence >= 0.95)) {
       encodingSure = true
       return
     }
