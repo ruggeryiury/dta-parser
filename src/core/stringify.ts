@@ -741,10 +741,11 @@ export const stringifyDTA = (songs: PartialDTAFile | PartialDTAFile[], type: DTA
   const io = new DTAStringIO(type, opts)
   if (Array.isArray(songs)) {
     songs.forEach((song) => {
-      if (!opts.ignoreFakeSongs && song.fake === true) return
-      io.open(song.id)
-      for (const key of localeObject.sortedKeys) {
-        if (song[key] !== undefined) io.add(song.id, key, song[key])
+      if (opts.ignoreFakeSongs && song.fake !== true) {
+        io.open(song.id)
+        for (const key of localeObject.sortedKeys) {
+          if (song[key] !== undefined) io.add(song.id, key, song[key])
+        }
       }
     })
 
