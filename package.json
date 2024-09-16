@@ -22,7 +22,7 @@
   "scripts": {
     "build": "pnpm run clear && tsc --project ./prod.tsconfig.json",
     "clear": "rimraf dist",
-    "dev": "tsx watch ./tests/exec.ts",
+    "dev": "tsx watch \"./tests/exec.ts\"",
     "format": "prettier --write src",
     "lint": "eslint ."
   },

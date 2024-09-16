@@ -163,7 +163,6 @@ export class SongUpdatesDTA {
         const path = new Path(content)
         const buf = path.readFileSync()
         const enc = detectBufferEncoding(buf)
-        console.log(enc)
         str = buf.toString(enc)
       } else {
         str = content
@@ -221,7 +220,7 @@ export class SongUpdatesDTA {
    * @param {SongStringifyOptions} options `OPTIONAL` An object with values that changes the behavior of the stringify process.
    * @returns {string}
    */
-  stringify(options?: SongStringifyOptions): string {
+  stringify(options?: SongUpdatesStringifyOptions): string {
     const opts = useDefaultOptions<SongUpdatesStringifyOptions, true>(
       {
         allSongsInline: false,
@@ -229,7 +228,7 @@ export class SongUpdatesDTA {
       },
       options
     )
-    return stringifyDTA(this.updates, 'songs_updates', { ...opts, format: 'rb3_dlc', placeRB3DXAttributes: true, ignoreFakeSongs: false })
+    return stringifyDTA(this.updates, 'songs_updates', { format: 'rb3_dlc', placeRB3DXAttributes: true, ignoreFakeSongs: false, ...opts })
   }
 }
 
