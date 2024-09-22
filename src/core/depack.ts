@@ -5,6 +5,7 @@
  * @returns {string[]} An array with each song content separated to be parsed individually.
  */
 export const depackDTA = (dtaFileContents: string): string[] => {
+  // const allLines = dtaFileContents.split('\r\n').map((line) => line.replace(/;.*/g, '').trim()).filter((line) => ???)
   const joinLines = dtaFileContents.replaceAll('\r\n', '').trim()
   const removeSpaces = joinLines.replace(/\s+/g, ' ').trim()
 

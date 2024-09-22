@@ -151,7 +151,6 @@ export class DTAStringIO {
    * @returns {void}
    */
   open(id: string): void {
-    console.log(this.content[id])
     if (!this.content[id]) this.content[id] = this.createDefaultEntry(id)
   }
 
@@ -743,8 +742,6 @@ export const stringifyDTA = (songs: PartialDTAFile | PartialDTAFile[], type: DTA
   const io = new DTAStringIO(type, opts)
   if (Array.isArray(songs)) {
     songs.forEach((song) => {
-      console.log(opts.ignoreFakeSongs)
-      console.log(song.fake)
       if (opts.ignoreFakeSongs && song.fake === true) return
       io.open(song.id)
       for (const key of localeObject.sortedKeys) {
