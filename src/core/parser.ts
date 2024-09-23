@@ -470,7 +470,10 @@ export const parseDTA = (song: string, options?: DTAContentParserOptions): DTAMa
   if (languages.length > 0) newDTA.set('languages', languages)
   if (extraAuthoring.length > 0) newDTA.set('extra_authoring', extraAuthoring)
 
-  if (opts.format === 'complete' && newDTA.has('rank_vocals') && (newDTA.get('rank_vocals') as number) > 0 && newDTA.get('vocal_parts') === 0) newDTA.set('vocal_parts', 1)
+  if (opts.format === 'complete' && newDTA.has('rank_vocals') && (newDTA.get('rank_vocals') as number) > 0 && (newDTA.get('vocal_parts') === 0 || newDTA.get('vocal_parts') === undefined)) newDTA.set('vocal_parts', 1)
+  else if (opts.format === 'complete' && newDTA.has('rank_vocals') && (newDTA.get('rank_vocals') as number) === 0 && newDTA.get('vocal_parts') === undefined) newDTA.set('vocal_parts', 0)
+
+  if (opts.format === 'complete' && !newDTA.has('rating')) newDTA.set('rating', 4)
 
   if (opts.format === 'complete' && !isDTAFile(Object.fromEntries(newDTA) as DTASongObjectTypes)) throw new Error(`SongsDTAError: Tried to parse songs with complete information but all necessary values were not found. Try to use "DTASongUpdatesParser()" function instead.`)
 

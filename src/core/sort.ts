@@ -50,18 +50,18 @@ export const sortDTA = <T extends AnyDTATypeArray>(songs: T, sortBy: SongSorting
     return songs.sort((a, b) => {
       const AID = a.id.toLowerCase()
       const BID = b.id.toLowerCase()
-      const nameA = a.name ? omitLeadingArticle(a.name.toLowerCase()) : undefined
-      const nameB = b.name ? omitLeadingArticle(b.name.toLowerCase()) : undefined
       const artistA = a.artist ? omitLeadingArticle(a.artist.toLowerCase()) : undefined
       const artistB = b.artist ? omitLeadingArticle(b.artist.toLowerCase()) : undefined
+      const nameA = a.name ? omitLeadingArticle(a.name.toLowerCase()) : undefined
+      const nameB = b.name ? omitLeadingArticle(b.name.toLowerCase()) : undefined
 
-      if (nameA !== undefined && nameB !== undefined) return nameA.localeCompare(nameB)
       if (artistA !== undefined && artistB !== undefined) return artistA.localeCompare(artistB)
+      if (nameA !== undefined && nameB !== undefined) return nameA.localeCompare(nameB)
 
-      if (nameA !== undefined) return -1
-      if (nameB !== undefined) return 1
       if (artistA !== undefined) return -1
       if (artistB !== undefined) return 1
+      if (nameA !== undefined) return -1
+      if (nameB !== undefined) return 1
 
       return AID.localeCompare(BID)
     }) as DTASelfReturnType<T>

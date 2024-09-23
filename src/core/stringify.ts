@@ -167,7 +167,7 @@ export class DTAStringIO {
      * @returns {string} The generated string with a new line or space.
      */
     const n = (count = 1): string => {
-      return this.opts.allSongsInline ? ' ' : '\n'.repeat(count)
+      return this.opts.allSongsInline ? ' ' : '\r\n'.repeat(count)
     }
     /**
      * Inserts a tab character, or an empty string if the `allSongsInline` class option is set to `true`.
@@ -711,6 +711,17 @@ export class DTAStringIO {
 
       s += `)\n`
     }
+    if (this.opts.allSongsInline && this.type === 'songs_updates')
+      return s
+        .split('\r\n')
+        .map((val) => {
+          if (val.endsWith(') )')) {
+            return val.replace(/\) \)/, '))')
+          }
+
+          return val
+        })
+        .join('\n')
     return s
   }
 }
