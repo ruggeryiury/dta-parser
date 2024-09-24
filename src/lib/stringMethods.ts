@@ -121,7 +121,6 @@ export const formatStringFromDTA = (song: DTAFile | null, format: string, option
       removeSpaces: false,
       trim: true,
     }
-  else options = {}
 
   const { azNumOnly, forceCase, normalizeNFD, removeSpaces, trim } = useDefaultOptions<StringFormatterOptions, true>(
     {
