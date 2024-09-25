@@ -1,6 +1,6 @@
 import Path from 'path-js'
 import { createDTAFileFromRecipe, depackDTA, genDTARecipe, parseDTA, sortDTA, stringifyDTA, updateDTA, type DTAFile, type DTAFileRecipe, type DTARecord, type DTAStringifyOptions, type DTAUpdateOptions, type DTAUpdateOptionsForExtend, type PartialDTAFile, type PartialDTARecord, type SongSortingTypes } from './core.js'
-import { detectBufferEncoding, isDTAFile, isDTAFileRecipe, useDefaultOptions } from './lib.js'
+import { detectBufferEncoding, genNumericSongID, isDTAFile, isDTAFileRecipe, useDefaultOptions } from './lib.js'
 
 export type SongConstructorContentTypes = string | Buffer | DTAFile | DTAFile[]
 export type SongUpdatesConstructorContentTypes = string | Buffer | DTAUpdateOptions | DTAUpdateOptions[]
@@ -85,18 +85,27 @@ class SongsDTA {
    * @returns {DTAFile | undefined}
    */
   getSongByID(id: string): DTAFile | undefined {
-    return this.songs.find((song) => song.id === id)
+    return this.songs.find((song) => String(song.id) === String(id))
+  }
+
+  /**
+   * Patches non-numerical song IDs to numerical ones, using specific CRC32 hashing method.
+   *
+   * [_See the original C# function on **GitHub Gist**_](https://gist.github.com/InvoxiPlayGames/f0de3ad707b1d42055c53f0fd1428f7f), coded by [Emma (InvoxiPlayGames)](https://gist.github.com/InvoxiPlayGames).
+   */
+  patchSongIDs() {
+    this.songs = this.songs.map((song) => ({ ...song, song_id: genNumericSongID(song.song_id) }))
   }
 
   /**
    * Updates a song contents based on its song ID.
    * - - - -
-   * @param {string} id The song ID of the song you want to update.
+   * @param {string} id The unique shortname ID of the song you want to update.
    * @param {DTAUpdateOptionsForExtend} update An object with updates values to be applied on the `DTAFile` song entry.
    */
   update(id: string, update: DTAUpdateOptionsForExtend): void {
     this.songs = this.songs.map((song) => {
-      if (song.id === id) {
+      if (String(song.id) === String(id)) {
         return updateDTA(song, update) as DTAFile
       }
       return song
@@ -187,7 +196,7 @@ export class SongUpdatesDTA {
    * @returns {PartialDTAFile | undefined}
    */
   getSongByID(id: string): PartialDTAFile | undefined {
-    return this.updates.find((song) => song.id === id)
+    return this.updates.find((song) => String(song.id) === String(id))
   }
 
   /**

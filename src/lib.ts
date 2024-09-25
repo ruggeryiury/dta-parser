@@ -1,4 +1,5 @@
 export * from './lib/audioTrackStructure.js'
+export * from './lib/crc32.js'
 export * from './lib/detectBufferEncoding.js'
 export * from './lib/diffRanking.js'
 export * from './lib/stringMethods.js'
