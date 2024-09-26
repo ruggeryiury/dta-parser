@@ -290,9 +290,6 @@ export interface DTAFile {
 }
 
 export type PartialDTAFile = Partial<DTAFile> & {
-  /**
-   * Unique string ID of the song.
-   */
   id: string
 }
 

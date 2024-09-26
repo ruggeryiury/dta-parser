@@ -1,6 +1,6 @@
 import Path from 'path-js'
 import { createDTAFileFromRecipe, depackDTA, genDTARecipe, parseDTA, sortDTA, stringifyDTA, updateDTA, type DTAFile, type DTAFileRecipe, type DTARecord, type DTAStringifyOptions, type DTAUpdateOptions, type DTAUpdateOptionsForExtend, type PartialDTAFile, type PartialDTARecord, type SongSortingTypes } from './core.js'
-import { detectBufferEncoding, genNumericSongID, isDTAFile, isDTAFileRecipe, useDefaultOptions } from './lib.js'
+import { containsLatin1SpecificChars, detectBufferEncoding, genNumericSongID, isDTAFile, isDTAFileRecipe, useDefaultOptions } from './lib.js'
 
 export type SongConstructorContentTypes = string | Buffer | DTAFile | DTAFile[]
 export type SongUpdatesConstructorContentTypes = string | Buffer | DTAUpdateOptions | DTAUpdateOptions[]
@@ -24,6 +24,7 @@ class SongsDTA {
     if (typeof content === 'string') {
       if (Path.isPath(content)) {
         const path = new Path(content)
+        if (!path.exists()) throw new Error(`SongsDTAError: Provided path "${path.path}" does not exists.`)
         const buf = path.readFileSync()
         const enc = detectBufferEncoding(buf)
         str = buf.toString(enc)
@@ -95,6 +96,26 @@ class SongsDTA {
    */
   patchSongIDs() {
     this.songs = this.songs.map((song) => ({ ...song, song_id: genNumericSongID(song.song_id) }))
+  }
+
+  /**
+   * Patches the encoding values of each song.
+   */
+  patchEncodings() {
+    this.songs = this.songs.map((song) => {
+      const { name, artist, album_name, pack_name, author } = song
+      let proof = false
+
+      if (containsLatin1SpecificChars(name)) proof = true
+      if (containsLatin1SpecificChars(artist)) proof = true
+      if (album_name && containsLatin1SpecificChars(album_name)) proof = true
+      if (pack_name && containsLatin1SpecificChars(pack_name)) proof = true
+      if (author && containsLatin1SpecificChars(author)) proof = true
+      return {
+        ...song,
+        encoding: proof ? 'utf8' : 'latin1',
+      }
+    })
   }
 
   /**

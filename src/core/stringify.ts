@@ -238,7 +238,7 @@ export class DTAStringIO {
       const f = this.opts.format
 
       if (f === 'rbn') s += `(${n()}${t()}'${id}'${n()}`
-      else s += `(${id}${n()}`
+      else s += `(${isNaN(Number(id)) ? id : `'${id}'`}${n()}`
 
       if (name !== undefined) {
         const value = this.renderToStringValue('string', name)
@@ -429,7 +429,7 @@ export class DTAStringIO {
           s += n()
         }
         if (tracks?.crowd) {
-          s += `${t(2)}(crowd_channels (${this.renderToStringValue('array', tracks.crowd)}))`
+          s += `${t(2)}(crowd_channels ${this.renderToStringValue('array', tracks.crowd)})`
           s += n()
         }
         if (vocal_parts !== undefined) {
