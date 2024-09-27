@@ -1,0 +1,6600 @@
+(
+	'7748paintwar'
+	(
+		'name'
+		"Paint War"
+	)
+	(
+		'artist'
+		"Dream Avenue"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748paintwar/7748paintwar"
+		)
+		(
+			'tracks_count'
+			(2 2 2 0 2 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2 3)
+				)
+				(
+					'guitar'
+					(4 5)
+				)
+				(
+					'keys'
+					(6 7)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 119205)
+	('preview' 42914 72914)
+	(
+		'rank'
+		('drum' 151)
+		('guitar' 176)
+		('bass' 1)
+		('keys' 211)
+		('real_keys' 211)
+		('real_guitar' 208)
+		('real_bass' 1)
+		('band' 215)
+	)
+	('genre' 'popdanceelectronic')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2018)
+	('rating' 1)
+	('sub_genre' 'subgenre_chiptune')
+	('song_id' 1774800001)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Our Shared Universes"
+	)
+	('album_track_number' 4)
+	(vocal_tonic_note 9)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	(
+		'loading_phrase'
+		"This song is the favorite song of the \qOur Shared Universes EP\q for Dream Avenue's frontmen, Ruggery Iury."
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Paint War
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748southparktheme'
+	(
+		'name'
+		"South Park Theme"
+	)
+	(
+		'artist'
+		"Primus"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748southparktheme/7748southparktheme"
+		)
+		(
+			'tracks_count'
+			(2 1 1 1 0 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2)
+				)
+				(
+					'guitar'
+					(3)
+				)
+				(
+					'vocals'
+					(4)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 0.00 0.00 0.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 1 -1 -1 -1)
+		)
+		('vocal_parts' 3)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 36318)
+	('preview' 4864 34864)
+	(
+		'rank'
+		('drum' 178)
+		('guitar' 267)
+		('bass' 181)
+		('vocals' 1)
+		('real_guitar' 325)
+		('real_bass' 208)
+		('band' 243)
+	)
+	('genre' 'alternative')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1998)
+	('rating' 3)
+	('sub_genre' 'subgenre_alternative')
+	('song_id' 1774800002)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Chef Aid: The South Park Album"
+	)
+	('album_track_number' 1)
+	(vocal_tonic_note 3)
+	(song_tonality 1)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	(
+		'loading_phrase'
+		"This song can't be gold starred on vocals because it only has 33 seconds and there's no space for the vocalist to activate the Overdrive."
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=South Park Theme
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748hideandseek'
+	(
+		'name'
+		"Hide and Seek"
+	)
+	(
+		'artist'
+		"Imogen Heap"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748hideandseek/7748hideandseek"
+		)
+		(
+			'tracks_count'
+			(0 0 0 1 0 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'vocals'
+					(0)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1)
+		)
+		('vocal_parts' 2)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 272649)
+	('preview' 142990 172990)
+	(
+		'rank'
+		('vocals' 279)
+		('band' 267)
+	)
+	('genre' 'popdanceelectronic')
+	('vocal_gender' 'female')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2005)
+	('rating' 2)
+	('sub_genre' 'subgenre_other')
+	('song_id' 1774800003)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Speak for Yourself"
+	)
+	('album_track_number' 5)
+	(vocal_tonic_note 9)
+	(song_tonality 0)
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Hide and Seek
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748cravoecanela'
+	(
+		'name'
+		"Cravo e Canela"
+	)
+	(
+		'artist'
+		"Clube da Esquina"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748cravoecanela/7748cravoecanela"
+		)
+		(
+			'tracks_count'
+			(2 1 1 1 1 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2)
+				)
+				(
+					'guitar'
+					(3)
+				)
+				(
+					'vocals'
+					(4)
+				)
+				(
+					'keys'
+					(5)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 0.00 0.00 0.00 0.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 2)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 145042)
+	('preview' 32426 62426)
+	(
+		'rank'
+		('drum' 178)
+		('guitar' 267)
+		('bass' 181)
+		('vocals' 218)
+		('keys' 211)
+		('real_keys' 269)
+		('band' 243)
+	)
+	('genre' 'latin')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1972)
+	('rating' 1)
+	('sub_genre' 'subgenre_latin')
+	('song_id' 1774800004)
+	(solo (keys))
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'utf8')
+	(
+		'album_name'
+		"Clube da Esquina"
+	)
+	('album_track_number' 6)
+	(vocal_tonic_note 7)
+	(song_tonality 0)
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Cravo e Canela
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748deadwomb'
+	(
+		'name'
+		"Dead Womb"
+	)
+	(
+		'artist'
+		"Death From Above 1979"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748deadwomb/7748deadwomb"
+		)
+		(
+			'tracks_count'
+			(2 2 0 1 0 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2 3)
+				)
+				(
+					'vocals'
+					(4)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 -1.00 1.00 0.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 2)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 250)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 64)
+	('song_length' 109098)
+	('preview' 21254 51254)
+	(
+		'rank'
+		('drum' 448)
+		('bass' 364)
+		('vocals' 1)
+		('real_bass' 384)
+		('band' 345)
+	)
+	('genre' 'punk')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2002)
+	('rating' 3)
+	('sub_genre' 'subgenre_dancepunk')
+	('song_id' 1774800005)
+	(solo (bass vocal_percussion))
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Heads Up"
+	)
+	('album_track_number' 1)
+	(vocal_tonic_note 0)
+	(song_tonality 1)
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Dead Womb
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748minuet'
+	(
+		'name'
+		"Minuet"
+	)
+	(
+		'artist'
+		"From First to Last"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748minuet/7748minuet"
+		)
+		(
+			'tracks_count'
+			(0 0 2 0 0 1)
+		)
+		(
+			'tracks'
+			(
+				(
+					'guitar'
+					(0 1)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 0.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(1 1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 67301)
+	('preview' 17303 47303)
+	(
+		'rank'
+		('guitar' 176)
+		('real_guitar' 208)
+		('band' 215)
+	)
+	('genre' 'other')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2004)
+	('rating' 1)
+	('sub_genre' 'subgenre_acoustic')
+	('song_id' 1774800006)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Dear Diary, My Teen Angst Has a Body Count"
+	)
+	('album_track_number' 10)
+	(vocal_tonic_note 2)
+	(song_tonality 1)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Minuet
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748flourish'
+	(
+		'name'
+		"Flourish"
+	)
+	(
+		'artist'
+		"Nathan Grigg"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748flourish/7748flourish"
+		)
+		(
+			'tracks_count'
+			(4 2 2 0 2 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1 2 3)
+				)
+				(
+					'bass'
+					(4 5)
+				)
+				(
+					'guitar'
+					(6 7)
+				)
+				(
+					'keys'
+					(8 9)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 0.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1 -1 1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 90)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 94500)
+	('preview' 3500 33500)
+	(
+		'rank'
+		('drum' 448)
+		('guitar' 333)
+		('bass' 364)
+		('keys' 443)
+		('real_keys' 443)
+		('real_guitar' 384)
+		('real_bass' 442)
+		('band' 345)
+	)
+	('genre' 'fusion')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1998)
+	('rating' 1)
+	('sub_genre' 'subgenre_fusion')
+	('song_id' 1774800007)
+	(solo (guitar keys))
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(vocal_tonic_note 10)
+	(song_tonality 0)
+	(real_guitar_tuning (-4 -4 -4 -4 -4 -4))
+	(real_bass_tuning (-4 -4 -4 -4))
+	(pack_name "Windows .MID Pack 01")
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Flourish
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748town'
+	(
+		'name'
+		"Town"
+	)
+	(
+		'artist'
+		"Nathan Grigg"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748town/7748town"
+		)
+		(
+			'tracks_count'
+			(4 2 2 0 2 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1 2 3)
+				)
+				(
+					'bass'
+					(4 5)
+				)
+				(
+					'guitar'
+					(6 7)
+				)
+				(
+					'keys'
+					(8 9)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 0.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1 -1 1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 94500)
+	('preview' 3500 33500)
+	(
+		'rank'
+		('drum' 242)
+		('guitar' 333)
+		('bass' 293)
+		('keys' 443)
+		('real_keys' 443)
+		('real_guitar' 325)
+		('real_bass' 325)
+		('band' 292)
+	)
+	('genre' 'fusion')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1998)
+	('rating' 1)
+	('sub_genre' 'subgenre_fusion')
+	('song_id' 1774800008)
+	(solo (guitar keys))
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(vocal_tonic_note 11)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(pack_name "Windows .MID Pack 01")
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Town
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748onestop'
+	(
+		'name'
+		"Onestop"
+	)
+	(
+		'artist'
+		"David Yackley"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748onestop/7748onestop"
+		)
+		(
+			'tracks_count'
+			(4 2 2 0 2 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1 2 3)
+				)
+				(
+					'bass'
+					(4 5)
+				)
+				(
+					'guitar'
+					(6 7)
+				)
+				(
+					'keys'
+					(8 9)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 0.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1 -1 1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 249767)
+	('preview' 30000 60000)
+	(
+		'rank'
+		('drum' 151)
+		('guitar' 409)
+		('bass' 293)
+		('keys' 443)
+		('real_keys' 443)
+		('real_guitar' 442)
+		('real_bass' 325)
+		('band' 345)
+	)
+	('genre' 'fusion')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1998)
+	('rating' 1)
+	('sub_genre' 'subgenre_fusion')
+	('song_id' 1774800009)
+	(solo (guitar keys))
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (-4 -4 -4 -4))
+	(pack_name "Windows .MID Pack 01")
+	(
+		'author'
+		"Ruggy"
+	)
+	(
+		'loading_phrase'
+		"\qOnestop\q is a series of short songs that change into different genres every few bars, making it perfect for testing out soundcards and soundfonts in the old days."
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Onestop
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748canyon'
+	(
+		'name'
+		"Trip Through the Grand Canyon"
+	)
+	(
+		'artist'
+		"George Stone"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748canyon/7748canyon"
+		)
+		(
+			'tracks_count'
+			(5 2 2 0 2 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1 2 3 4)
+				)
+				(
+					'bass'
+					(5 6)
+				)
+				(
+					'guitar'
+					(7 8)
+				)
+				(
+					'keys'
+					(9 10)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1 -1 -1 1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 128823)
+	('preview' 10000 40000)
+	(
+		'rank'
+		('drum' 151)
+		('guitar' 176)
+		('bass' 135)
+		('keys' 211)
+		('real_keys' 269)
+		('real_guitar' 267)
+		('real_bass' 150)
+		('band' 215)
+	)
+	('genre' 'fusion')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1990)
+	('rating' 1)
+	('sub_genre' 'subgenre_fusion')
+	('song_id' 1774800010)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Microsoft Windows"
+	)
+	('album_track_number' 4)
+	(vocal_tonic_note 0)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(pack_name "Windows .MID Pack 02")
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Trip Through the Grand Canyon
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748passport'
+	(
+		'name'
+		"Passport"
+	)
+	(
+		'artist'
+		"George Stone"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748passport/7748passport"
+		)
+		(
+			'tracks_count'
+			(4 2 2 0 2 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1 2 3)
+				)
+				(
+					'bass'
+					(4 5)
+				)
+				(
+					'guitar'
+					(6 7)
+				)
+				(
+					'keys'
+					(8 9)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 0.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1 -1 1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 64)
+	('song_length' 132705)
+	('preview' 89000 119000)
+	(
+		'rank'
+		('drum' 178)
+		('guitar' 176)
+		('bass' 135)
+		('keys' 327)
+		('real_keys' 327)
+		('real_guitar' 267)
+		('real_bass' 150)
+		('band' 215)
+	)
+	('genre' 'fusion')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1995)
+	('rating' 1)
+	('sub_genre' 'subgenre_fusion')
+	('song_id' 1774800011)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(vocal_tonic_note 0)
+	(song_tonality 1)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(pack_name "Windows .MID Pack 02")
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Passport
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748spacecadet'
+	(
+		'name'
+		"3D Pinball Space Cadet: Level 1"
+	)
+	(
+		'artist'
+		"Matt Ridgeway"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748spacecadet/7748spacecadet"
+		)
+		(
+			'tracks_count'
+			(4 1 2 0 2 1)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1 2 3)
+				)
+				(
+					'bass'
+					(4)
+				)
+				(
+					'guitar'
+					(5 6)
+				)
+				(
+					'keys'
+					(7 8)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 0.00 -1.00 1.00 0.00 -1.00 1.00 -1.00 1.00 0.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1 1 1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 65454)
+	('preview' 25785 55785)
+	(
+		'rank'
+		('drum' 178)
+		('guitar' 409)
+		('bass' 228)
+		('keys' 443)
+		('real_keys' 443)
+		('real_guitar' 442)
+		('real_bass' 325)
+		('band' 345)
+	)
+	('genre' 'fusion')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1995)
+	('rating' 1)
+	('sub_genre' 'subgenre_fusion')
+	('song_id' 1774800012)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(vocal_tonic_note 8)
+	(song_tonality 1)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(pack_name "Windows .MID Pack 02")
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=3D Pinball Space Cadet: Level 1
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748spacecadet2x'
+	(
+		'name'
+		"3D Pinball Space Cadet: Level 1 (2x Bass Pedal)"
+	)
+	(
+		'artist'
+		"Matt Ridgeway"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748spacecadet2x/7748spacecadet2x"
+		)
+		(
+			'tracks_count'
+			(4 1 2 0 2 1)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1 2 3)
+				)
+				(
+					'bass'
+					(4)
+				)
+				(
+					'guitar'
+					(5 6)
+				)
+				(
+					'keys'
+					(7 8)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 0.00 -1.00 1.00 0.00 -1.00 1.00 -1.00 1.00 0.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1 1 1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 65454)
+	('preview' 25785 55785)
+	(
+		'rank'
+		('drum' 242)
+		('guitar' 409)
+		('bass' 228)
+		('keys' 443)
+		('real_keys' 443)
+		('real_guitar' 442)
+		('real_bass' 325)
+		('band' 345)
+	)
+	('genre' 'fusion')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1995)
+	('rating' 1)
+	('sub_genre' 'subgenre_fusion')
+	('song_id' 1774800013)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(vocal_tonic_note 8)
+	(song_tonality 1)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(pack_name "Windows .MID Pack 02")
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=3D Pinball Space Cadet: Level 1 (2x Bass Pedal)
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=1
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748breakingintocars'
+	(
+		'name'
+		"Breaking Into Cars"
+	)
+	(
+		'artist'
+		"The Raveonettes"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748breakingintocars/7748breakingintocars"
+		)
+		(
+			'tracks_count'
+			(2 1 1 1 0 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2)
+				)
+				(
+					'guitar'
+					(3)
+				)
+				(
+					'vocals'
+					(4)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 0.00 0.00 0.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 1 -1 -1 -1)
+		)
+		('vocal_parts' 2)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 194425)
+	('preview' 39500 69500)
+	(
+		'rank'
+		('drum' 1)
+		('guitar' 139)
+		('bass' 135)
+		('vocals' 132)
+		('real_guitar' 150)
+		('real_bass' 150)
+		('band' 163)
+	)
+	('genre' 'indierock')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2009)
+	('rating' 2)
+	('sub_genre' 'subgenre_indierock')
+	('song_id' 1774800014)
+	(solo (guitar vocal_percussion))
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"In and Out of Control"
+	)
+	('album_track_number' 9)
+	(vocal_tonic_note 1)
+	(song_tonality 1)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Breaking Into Cars
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748aracaazul'
+	(
+		'name'
+		"Araçá Azul"
+	)
+	(
+		'artist'
+		"Caetano Veloso"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748aracaazul/7748aracaazul"
+		)
+		(
+			'tracks_count'
+			(0 0 1 1 0 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'guitar'
+					(0)
+				)
+				(
+					'vocals'
+					(1)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 0.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(1 -1 -1 -1)
+		)
+		('vocal_parts' 1)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 89593)
+	('preview' 25000 55000)
+	(
+		'rank'
+		('guitar' 139)
+		('vocals' 175)
+		('real_guitar' 1)
+		('band' 157)
+	)
+	('genre' 'latin')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1973)
+	('rating' 1)
+	('sub_genre' 'subgenre_latin')
+	('song_id' 1774800015)
+	('tuning_offset_cents' 35)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'utf8')
+	(
+		'album_name'
+		"Araçá Azul"
+	)
+	('album_track_number' 10)
+	(vocal_tonic_note 3)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	(
+		'loading_phrase'
+		"The album \qAraçá Azul\q broke the record for returns when it was released due to its highly experimental and controversial material."
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Araçá Azul
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748demon'
+	(
+		'name'
+		"Demon"
+	)
+	(
+		'artist'
+		"Bear In Heaven"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748demon/7748demon"
+		)
+		(
+			'tracks_count'
+			(2 1 0 1 1 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2)
+				)
+				(
+					'vocals'
+					(3)
+				)
+				(
+					'keys'
+					(4)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 0.00 0.00 0.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 3)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 300000)
+	('preview' 31000 61000)
+	(
+		'rank'
+		('drum' 345)
+		('bass' 1)
+		('vocals' 132)
+		('keys' 443)
+		('real_keys' 327)
+		('real_bass' 1)
+		('band' 243)
+	)
+	('genre' 'indierock')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2014)
+	('rating' 3)
+	('sub_genre' 'subgenre_indierock')
+	('song_id' 1774800016)
+	(solo (vocal_percussion))
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Time Is Over One Day Old"
+	)
+	('album_track_number' 7)
+	(vocal_tonic_note 5)
+	(song_tonality 1)
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Demon
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748cutmyfingersoff'
+	(
+		'name'
+		"Cutting My Fingers Off"
+	)
+	(
+		'artist'
+		"Turnover"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748cutmyfingersoff/7748cutmyfingersoff"
+		)
+		(
+			'tracks_count'
+			(2 1 1 1 0 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2)
+				)
+				(
+					'guitar'
+					(3)
+				)
+				(
+					'vocals'
+					(4)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 0.00 0.00 0.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 1 -1 -1 -1)
+		)
+		('vocal_parts' 1)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 184968)
+	('preview' 47917 77917)
+	(
+		'rank'
+		('drum' 124)
+		('guitar' 176)
+		('bass' 1)
+		('vocals' 132)
+		('real_guitar' 208)
+		('real_bass' 1)
+		('band' 163)
+	)
+	('genre' 'indierock')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2015)
+	('rating' 2)
+	('sub_genre' 'subgenre_indierock')
+	('song_id' 1774800017)
+	(solo (guitar vocal_percussion))
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Peripheral Vision"
+	)
+	('album_track_number' 1)
+	(vocal_tonic_note 0)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Cutting My Fingers Off
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748thefightisover'
+	(
+		'name'
+		"The Fight Is Over"
+	)
+	(
+		'artist'
+		"The Blasting Company"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748thefightisover/7748thefightisover"
+		)
+		(
+			'tracks_count'
+			(2 1 1 1 0 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2)
+				)
+				(
+					'guitar'
+					(3)
+				)
+				(
+					'vocals'
+					(4)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 0.00 0.00 0.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 1 -1 -1 -1)
+		)
+		('vocal_parts' 3)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 87583)
+	('preview' 21991 51991)
+	(
+		'rank'
+		('drum' 1)
+		('guitar' 176)
+		('bass' 1)
+		('vocals' 132)
+		('real_guitar' 208)
+		('real_bass' 1)
+		('band' 78)
+	)
+	('genre' 'glam')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2017)
+	('rating' 1)
+	('sub_genre' 'subgenre_glam')
+	('song_id' 1774800018)
+	(solo (guitar))
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Over The Garden Wall"
+	)
+	('album_track_number' 25)
+	(vocal_tonic_note 0)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=The Fight Is Over
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748anysecondnow'
+	(
+		'name'
+		"Any Second Now (Voices)"
+	)
+	(
+		'artist'
+		"Depeche Mode"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748anysecondnow/7748anysecondnow"
+		)
+		(
+			'tracks_count'
+			(0 1 0 1 1 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'bass'
+					(0)
+				)
+				(
+					'vocals'
+					(1)
+				)
+				(
+					'keys'
+					(2)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 0.00 0.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 2)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 163582)
+	('preview' 16628 46628)
+	(
+		'rank'
+		('bass' 1)
+		('vocals' 132)
+		('keys' 327)
+		('real_keys' 269)
+		('real_bass' 1)
+		('band' 163)
+	)
+	('genre' 'new_wave')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1981)
+	('rating' 1)
+	('sub_genre' 'subgenre_synth')
+	('song_id' 1774800019)
+	(solo (keys))
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Speak & Spell"
+	)
+	('album_track_number' 10)
+	(vocal_tonic_note 7)
+	(song_tonality 0)
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Any Second Now (Voices)
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748congratulations'
+	(
+		'name'
+		"Congratulations"
+	)
+	(
+		'artist'
+		"MGMT"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748congratulations/7748congratulations"
+		)
+		(
+			'tracks_count'
+			(2 1 1 1 1 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2)
+				)
+				(
+					'guitar'
+					(3)
+				)
+				(
+					'vocals'
+					(4)
+				)
+				(
+					'keys'
+					(5)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 0.00 0.00 0.00 0.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 1)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 236430)
+	('preview' 79298 109298)
+	(
+		'rank'
+		('drum' 1)
+		('guitar' 176)
+		('bass' 1)
+		('vocals' 132)
+		('keys' 443)
+		('real_keys' 443)
+		('real_guitar' 150)
+		('real_bass' 1)
+		('band' 163)
+	)
+	('genre' 'rock')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2010)
+	('rating' 2)
+	('sub_genre' 'subgenre_psychadelic')
+	('song_id' 1774800020)
+	(solo (vocal_percussion keys))
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Congratulations"
+	)
+	('album_track_number' 9)
+	(vocal_tonic_note 7)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Congratulations
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748lightsinthesky'
+	(
+		'name'
+		"Lights In the Sky"
+	)
+	(
+		'artist'
+		"Nine Inch Nails"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748lightsinthesky/7748lightsinthesky"
+		)
+		(
+			'tracks_count'
+			(0 0 0 2 2 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'vocals'
+					(0 1)
+				)
+				(
+					'keys'
+					(2 3)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 1)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2000)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 16)
+	('song_length' 222647)
+	('preview' 74181 104181)
+	(
+		'rank'
+		('vocals' 1)
+		('keys' 1)
+		('real_keys' 153)
+		('band' 1)
+	)
+	('genre' 'rock')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2008)
+	('rating' 1)
+	('sub_genre' 'subgenre_rock')
+	('song_id' 1774800021)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"The Slip"
+	)
+	('album_track_number' 7)
+	(vocal_tonic_note 5)
+	(song_tonality 1)
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Lights In the Sky
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748mothernature'
+	(
+		'name'
+		"Mother Nature"
+	)
+	(
+		'artist'
+		"Dream Avenue"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748mothernature/7748mothernature"
+		)
+		(
+			'tracks_count'
+			(2 2 2 0 2 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2 3)
+				)
+				(
+					'guitar'
+					(4 5)
+				)
+				(
+					'keys'
+					(6 7)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 85239)
+	('preview' 28413 58413)
+	(
+		'rank'
+		('drum' 151)
+		('guitar' 139)
+		('bass' 1)
+		('keys' 385)
+		('real_keys' 385)
+		('real_guitar' 150)
+		('real_bass' 150)
+		('band' 215)
+	)
+	('genre' 'popdanceelectronic')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2018)
+	('rating' 1)
+	('sub_genre' 'subgenre_chiptune')
+	('song_id' 1774800022)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Our Shared Universes"
+	)
+	('album_track_number' 1)
+	(vocal_tonic_note 4)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Mother Nature
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748mindmischief'
+	(
+		'name'
+		"Mind Mischief"
+	)
+	(
+		'artist'
+		"Tame Impala"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748mindmischief/7748mindmischief"
+		)
+		(
+			'tracks_count'
+			(2 1 1 1 1 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2)
+				)
+				(
+					'guitar'
+					(3)
+				)
+				(
+					'vocals'
+					(4)
+				)
+				(
+					'keys'
+					(5)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 0.00 0.00 0.00 0.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 3)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 276114)
+	('preview' 26929 56929)
+	(
+		'rank'
+		('drum' 151)
+		('guitar' 176)
+		('bass' 181)
+		('vocals' 175)
+		('keys' 1)
+		('real_keys' 153)
+		('real_guitar' 208)
+		('real_bass' 208)
+		('band' 215)
+	)
+	('genre' 'rock')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2012)
+	('rating' 1)
+	('sub_genre' 'subgenre_psychadelic')
+	('song_id' 1774800023)
+	(solo (guitar))
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Lonerism"
+	)
+	('album_track_number' 4)
+	(vocal_tonic_note 6)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Mind Mischief
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748theradiant'
+	(
+		'name'
+		"The Radiant (Chart-A-Thon 2019 Mix)"
+	)
+	(
+		'artist'
+		"Dream Avenue"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748theradiant/7748theradiant"
+		)
+		(
+			'tracks_count'
+			(2 2 2 0 2 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2 3)
+				)
+				(
+					'guitar'
+					(4 5)
+				)
+				(
+					'keys'
+					(6 7)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 64)
+	('song_length' 249333)
+	('preview' 14667 44667)
+	(
+		'rank'
+		('drum' 242)
+		('guitar' 221)
+		('bass' 293)
+		('keys' 385)
+		('real_keys' 385)
+		('real_guitar' 325)
+		('real_bass' 325)
+		('band' 292)
+	)
+	('genre' 'popdanceelectronic')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2014)
+	('year_recorded' 2019)
+	('rating' 1)
+	('sub_genre' 'subgenre_chiptune')
+	('song_id' 1774800024)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Moonstone"
+	)
+	('album_track_number' 3)
+	(vocal_tonic_note 0)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(pack_name "Chart-a-thon 2018")
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=The Radiant (Chart-A-Thon 2019 Mix)
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748whydidntyoustopme'
+	(
+		'name'
+		"Why Didn't You Stop Me?"
+	)
+	(
+		'artist'
+		"Mitski"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748whydidntyoustopme/7748whydidntyoustopme"
+		)
+		(
+			'tracks_count'
+			(2 1 1 1 1 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2)
+				)
+				(
+					'guitar'
+					(3)
+				)
+				(
+					'vocals'
+					(4)
+				)
+				(
+					'keys'
+					(5)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 0.00 0.00 0.00 0.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 1)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 144000)
+	('preview' 22000 52000)
+	(
+		'rank'
+		('drum' 178)
+		('guitar' 176)
+		('bass' 228)
+		('vocals' 132)
+		('keys' 153)
+		('real_keys' 153)
+		('real_guitar' 208)
+		('real_bass' 325)
+		('band' 163)
+	)
+	('genre' 'indierock')
+	('vocal_gender' 'female')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2018)
+	('rating' 1)
+	('sub_genre' 'subgenre_indierock')
+	('song_id' 1774800025)
+	(solo (guitar))
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Be the Cowboy"
+	)
+	('album_track_number' 2)
+	(vocal_tonic_note 4)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(pack_name "Chart-a-thon 2018")
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Why Didn't You Stop Me?
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748thespaceinbetween'
+	(
+		'name'
+		"The Space in Between"
+	)
+	(
+		'artist'
+		"How to Destroy Angels"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748thespaceinbetween/7748thespaceinbetween"
+		)
+		(
+			'tracks_count'
+			(2 2 2 2 0 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2 3)
+				)
+				(
+					'guitar'
+					(4 5)
+				)
+				(
+					'vocals'
+					(6 7)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 3)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 16)
+	('song_length' 223784)
+	('preview' 90811 120811)
+	(
+		'rank'
+		('drum' 151)
+		('guitar' 267)
+		('bass' 1)
+		('vocals' 175)
+		('band' 215)
+	)
+	('genre' 'rock')
+	('vocal_gender' 'female')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2010)
+	('rating' 2)
+	('sub_genre' 'subgenre_rock')
+	('song_id' 1774800026)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"How to Destroy Angels"
+	)
+	('album_track_number' 1)
+	(vocal_tonic_note 7)
+	(song_tonality 1)
+	(pack_name "Chart-a-thon 2018")
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=The Space in Between
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748sanguelatino'
+	(
+		'name'
+		"Sangue Latino"
+	)
+	(
+		'artist'
+		"Secos & Molhados"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748sanguelatino/7748sanguelatino"
+		)
+		(
+			'tracks_count'
+			(2 2 2 2 0 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2 3)
+				)
+				(
+					'guitar'
+					(4 5)
+				)
+				(
+					'vocals'
+					(6 7)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 1)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 135401)
+	('preview' 55604 85604)
+	(
+		'rank'
+		('drum' 1)
+		('guitar' 176)
+		('bass' 135)
+		('vocals' 175)
+		('band' 163)
+	)
+	('genre' 'glam')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1973)
+	('rating' 1)
+	('sub_genre' 'subgenre_glam')
+	('song_id' 1774800027)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Secos & Molhados"
+	)
+	('album_track_number' 1)
+	(vocal_tonic_note 2)
+	(song_tonality 0)
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Sangue Latino
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748robotsinthegarden'
+	(
+		'name'
+		"Robots in the Garden"
+	)
+	(
+		'artist'
+		"Autolux"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748robotsinthegarden/7748robotsinthegarden"
+		)
+		(
+			'tracks_count'
+			(2 1 1 1 0 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2)
+				)
+				(
+					'guitar'
+					(3)
+				)
+				(
+					'vocals'
+					(4)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 0.00 0.00 0.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 1 -1 -1 -1)
+		)
+		('vocal_parts' 1)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 135401)
+	('preview' 55665 85665)
+	(
+		'rank'
+		('drum' 178)
+		('guitar' 176)
+		('bass' 135)
+		('vocals' 132)
+		('band' 215)
+	)
+	('genre' 'rock')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2004)
+	('rating' 1)
+	('sub_genre' 'subgenre_rock')
+	('song_id' 1774800028)
+	(solo (vocal_percussion))
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Future Perfect"
+	)
+	('album_track_number' 7)
+	(vocal_tonic_note 3)
+	(song_tonality 1)
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Robots in the Garden
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748ponytail'
+	(
+		'name'
+		"Ponytail"
+	)
+	(
+		'artist'
+		"Panda Bear"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748ponytail/7748ponytail"
+		)
+		(
+			'tracks_count'
+			(2 1 1 1 0 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2)
+				)
+				(
+					'guitar'
+					(3)
+				)
+				(
+					'vocals'
+					(4)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 0.00 0.00 0.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 1 -1 -1 -1)
+		)
+		('vocal_parts' 2)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 130025)
+	('preview' 14524 44524)
+	(
+		'rank'
+		('drum' 1)
+		('guitar' 139)
+		('bass' 1)
+		('vocals' 132)
+		('real_guitar' 150)
+		('real_bass' 1)
+		('band' 68)
+	)
+	('genre' 'indierock')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2007)
+	('rating' 1)
+	('sub_genre' 'subgenre_indierock')
+	('song_id' 1774800029)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Person Pitch"
+	)
+	('album_track_number' 7)
+	(vocal_tonic_note 9)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Ponytail
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748beinfriends'
+	(
+		'name'
+		"Bein' Friends"
+	)
+	(
+		'artist'
+		"Keiichi Suzuki & Hirokazu Tanaka"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748beinfriends/7748beinfriends"
+		)
+		(
+			'tracks_count'
+			(4 1 1 0 1 1)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1 2 3)
+				)
+				(
+					'bass'
+					(4)
+				)
+				(
+					'guitar'
+					(5)
+				)
+				(
+					'keys'
+					(6)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 0.00 -1.00 1.00 0.00 -0.20 0.20 0.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1 1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 102679)
+	('preview' 3734 33734)
+	(
+		'rank'
+		('drum' 178)
+		('guitar' 221)
+		('bass' 181)
+		('keys' 211)
+		('real_keys' 211)
+		('real_guitar' 325)
+		('real_bass' 267)
+		('band' 243)
+	)
+	('genre' 'popdanceelectronic')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1989)
+	('rating' 1)
+	('sub_genre' 'subgenre_chiptune')
+	('song_id' 1774800030)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"MOTHER (Original Soundtrack)"
+	)
+	('album_track_number' 21)
+	(vocal_tonic_note 5)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(pack_name "MOTHER Pack 01")
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Bein' Friends
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748hippiebattle'
+	(
+		'name'
+		"Battle Theme 2 (Hippie Battle)"
+	)
+	(
+		'artist'
+		"Keiichi Suzuki & Hirokazu Tanaka"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748hippiebattle/7748hippiebattle"
+		)
+		(
+			'tracks_count'
+			(4 1 1 0 0 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1 2 3)
+				)
+				(
+					'bass'
+					(4)
+				)
+				(
+					'guitar'
+					(5)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 0.00 -1.00 1.00 0.00 0.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1 1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit03_bank.milo)
+	('anim_tempo' 64)
+	('song_length' 71333)
+	('preview' 36000 66000)
+	(
+		'rank'
+		('drum' 151)
+		('guitar' 221)
+		('bass' 228)
+		('real_guitar' 267)
+		('real_bass' 267)
+		('band' 215)
+	)
+	('genre' 'popdanceelectronic')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1989)
+	('rating' 1)
+	('sub_genre' 'subgenre_chiptune')
+	('song_id' 1774800031)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"MOTHER (Original Soundtrack)"
+	)
+	('album_track_number' 7)
+	(vocal_tonic_note 9)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(pack_name "MOTHER Pack 01")
+	(
+		'author'
+		"Ruggy"
+	)
+	(
+		'loading_phrase'
+		"Composed by Hirokazu Tanaka, \qHippie Battle\q was heavily inspired on Chuck Barry's \qJohnny B. Goode\q."
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Battle Theme 2 (Hippie Battle)
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748patins'
+	(
+		'name'
+		"Patins"
+	)
+	(
+		'artist'
+		"CSS"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748patins/7748patins"
+		)
+		(
+			'tracks_count'
+			(2 1 1 1 0 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2)
+				)
+				(
+					'guitar'
+					(3)
+				)
+				(
+					'vocals'
+					(4)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 0.00 0.00 0.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 1 -1 -1 -1)
+		)
+		('vocal_parts' 2)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 135401)
+	('preview' 44569 74569)
+	(
+		'rank'
+		('drum' 124)
+		('guitar' 221)
+		('bass' 1)
+		('vocals' 132)
+		('real_guitar' 208)
+		('real_bass' 1)
+		('band' 163)
+	)
+	('genre' 'indierock')
+	('vocal_gender' 'female')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2006)
+	('rating' 1)
+	('sub_genre' 'subgenre_indierock')
+	('song_id' 1774800032)
+	(solo (vocal_percussion))
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Cansei de Ser Sexy (International Release)"
+	)
+	('album_track_number' 2)
+	(vocal_tonic_note 7)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	(
+		'loading_phrase'
+		"The name of the band (Cansei de Ser Sexy) was taken from a reported quote by Beyoncé, who allegedly declared that she was \qtired of being sexy\q."
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Patins
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=0
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748motherearth'
+	(
+		'name'
+		"Mother Earth"
+	)
+	(
+		'artist'
+		"Keiichi Suzuki & Hirokazu Tanaka"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748motherearth/7748motherearth"
+		)
+		(
+			'tracks_count'
+			(2 1 1 0 1 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2)
+				)
+				(
+					'guitar'
+					(3)
+				)
+				(
+					'keys'
+					(4)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 0.00 -0.20 0.20 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 16)
+	('song_length' 119477)
+	('preview' 18668 48668)
+	(
+		'rank'
+		('drum' 1)
+		('guitar' 176)
+		('bass' 135)
+		('keys' 1)
+		('real_keys' 1)
+		('real_guitar' 208)
+		('real_bass' 150)
+		('band' 78)
+	)
+	('genre' 'popdanceelectronic')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1989)
+	('rating' 1)
+	('sub_genre' 'subgenre_chiptune')
+	('song_id' 1774800033)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"MOTHER (Original Soundtrack)"
+	)
+	('album_track_number' 1)
+	(vocal_tonic_note 7)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(pack_name "MOTHER Pack 01")
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Mother Earth
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748pollyanna'
+	(
+		'name'
+		"Pollyanna (I Believe in You)"
+	)
+	(
+		'artist'
+		"Keiichi Suzuki & Hirokazu Tanaka"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748pollyanna/7748pollyanna"
+		)
+		(
+			'tracks_count'
+			(4 1 1 0 1 1)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1 2 3)
+				)
+				(
+					'bass'
+					(4)
+				)
+				(
+					'guitar'
+					(5)
+				)
+				(
+					'keys'
+					(6)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 0.00 -1.00 1.00 0.00 -0.20 0.20 0.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1 1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit03_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 121610)
+	('preview' 4267 34267)
+	(
+		'rank'
+		('drum' 124)
+		('guitar' 221)
+		('bass' 181)
+		('keys' 211)
+		('real_keys' 211)
+		('real_guitar' 267)
+		('real_bass' 150)
+		('band' 215)
+	)
+	('genre' 'popdanceelectronic')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1989)
+	('rating' 1)
+	('sub_genre' 'subgenre_chiptune')
+	('song_id' 1774800034)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"MOTHER (Original Soundtrack)"
+	)
+	('album_track_number' 4)
+	(vocal_tonic_note 2)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (-2 0 0 0))
+	(pack_name "MOTHER Pack 01")
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Pollyanna (I Believe in You)
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748twinkle'
+	(
+		'name'
+		"Twinkle Elementary School"
+	)
+	(
+		'artist'
+		"Keiichi Suzuki & Hirokazu Tanaka"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748twinkle/7748twinkle"
+		)
+		(
+			'tracks_count'
+			(4 1 1 0 1 1)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1 2 3)
+				)
+				(
+					'bass'
+					(4)
+				)
+				(
+					'guitar'
+					(5)
+				)
+				(
+					'keys'
+					(6)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 0.00 -1.00 1.00 0.00 0.20 -0.20 0.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1 1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 126408)
+	('preview' 3200 33200)
+	(
+		'rank'
+		('drum' 124)
+		('guitar' 139)
+		('bass' 181)
+		('keys' 269)
+		('real_keys' 269)
+		('real_guitar' 150)
+		('real_bass' 208)
+		('band' 243)
+	)
+	('genre' 'popdanceelectronic')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1989)
+	('rating' 1)
+	('sub_genre' 'subgenre_chiptune')
+	('song_id' 1774800035)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"MOTHER (Original Soundtrack)"
+	)
+	('album_track_number' 19)
+	(vocal_tonic_note 9)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(pack_name "MOTHER Pack 01")
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Twinkle Elementary School
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748tetodevidro'
+	(
+		'name'
+		"Teto de Vidro"
+	)
+	(
+		'artist'
+		"Pitty"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748tetodevidro/7748tetodevidro"
+		)
+		(
+			'tracks_count'
+			(2 2 2 2 0 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2 3)
+				)
+				(
+					'guitar'
+					(4 5)
+				)
+				(
+					'vocals'
+					(6 7)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 1)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 215036)
+	('preview' 39735 69735)
+	(
+		'rank'
+		('drum' 151)
+		('guitar' 176)
+		('bass' 135)
+		('vocals' 175)
+		('band' 215)
+	)
+	('genre' 'rock')
+	('vocal_gender' 'female')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2005)
+	('rating' 1)
+	('sub_genre' 'subgenre_rock')
+	('song_id' 1774800036)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Admirável Chip Novo"
+	)
+	('album_track_number' 1)
+	(vocal_tonic_note 1)
+	(song_tonality 1)
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Teto de Vidro
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748lennastheme'
+	(
+		'name'
+		"Lenna's Theme"
+	)
+	(
+		'artist'
+		"Nobuo Uematsu"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748lennastheme/7748lennastheme"
+		)
+		(
+			'tracks_count'
+			(0 2 2 0 2 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'bass'
+					(0 1)
+				)
+				(
+					'guitar'
+					(2 3)
+				)
+				(
+					'keys'
+					(4 5)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 16)
+	('song_length' 116955)
+	('preview' 34868 64868)
+	(
+		'rank'
+		('guitar' 139)
+		('bass' 1)
+		('keys' 153)
+		('real_keys' 153)
+		('real_guitar' 150)
+		('real_bass' 1)
+		('band' 163)
+	)
+	('genre' 'classical')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1992)
+	('rating' 1)
+	('sub_genre' 'subgenre_classical')
+	('song_id' 1774800037)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Final Fantasy V (Original Soundtrack)"
+	)
+	('album_track_number' 5)
+	(vocal_tonic_note 0)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Lenna's Theme
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748fateinhaze'
+	(
+		'name'
+		"Fate in Haze"
+	)
+	(
+		'artist'
+		"Nobuo Uematsu"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748fateinhaze/7748fateinhaze"
+		)
+		(
+			'tracks_count'
+			(2 2 2 0 2 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2 3)
+				)
+				(
+					'guitar'
+					(4 5)
+				)
+				(
+					'keys'
+					(6 7)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 90)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 16)
+	('song_length' 147797)
+	('preview' 12664 42664)
+	(
+		'rank'
+		('drum' 1)
+		('guitar' 139)
+		('bass' 1)
+		('keys' 211)
+		('real_keys' 211)
+		('real_guitar' 150)
+		('real_bass' 1)
+		('band' 88)
+	)
+	('genre' 'classical')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1992)
+	('rating' 1)
+	('sub_genre' 'subgenre_classical')
+	('song_id' 1774800038)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Final Fantasy V (Original Soundtrack)"
+	)
+	('album_track_number' 6)
+	(vocal_tonic_note 1)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Fate in Haze
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748royalpalace'
+	(
+		'name'
+		"Royal Palace"
+	)
+	(
+		'artist'
+		"Nobuo Uematsu"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748royalpalace/7748royalpalace"
+		)
+		(
+			'tracks_count'
+			(5 2 0 0 2 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1 2 3 4)
+				)
+				(
+					'bass'
+					(5 6)
+				)
+				(
+					'keys'
+					(7 8)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 95032)
+	('preview' 10536 40536)
+	(
+		'rank'
+		('drum' 124)
+		('bass' 1)
+		('keys' 327)
+		('real_keys' 327)
+		('real_bass' 1)
+		('band' 215)
+	)
+	('genre' 'classical')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1992)
+	('rating' 1)
+	('sub_genre' 'subgenre_classical')
+	('song_id' 1774800039)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Final Fantasy V (Original Soundtrack)"
+	)
+	('album_track_number' 21)
+	(vocal_tonic_note 6)
+	(song_tonality 0)
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Royal Palace
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748magicant'
+	(
+		'name'
+		"Magicant"
+	)
+	(
+		'artist'
+		"Keiichi Suzuki & Hirokazu Tanaka"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748magicant/7748magicant"
+		)
+		(
+			'tracks_count'
+			(4 1 0 0 1 1)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1 2 3)
+				)
+				(
+					'bass'
+					(4)
+				)
+				(
+					'keys'
+					(5)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 0.00 -1.00 1.00 0.00 0.00 0.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 90)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 16)
+	('song_length' 147797)
+	('preview' 12664 42664)
+	(
+		'rank'
+		('drum' 1)
+		('bass' 135)
+		('keys' 1)
+		('real_keys' 1)
+		('real_bass' 325)
+		('band' 46)
+	)
+	('genre' 'popdanceelectronic')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1989)
+	('rating' 1)
+	('sub_genre' 'subgenre_chiptune')
+	('song_id' 1774800040)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"MOTHER (Original Soundtrack)"
+	)
+	('album_track_number' 17)
+	(vocal_tonic_note 0)
+	(song_tonality 0)
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Magicant
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748smb2playersel'
+	(
+		'name'
+		"Super Mario Bros. 2: Player Select"
+	)
+	(
+		'artist'
+		"Koji Kondo"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748smb2playersel/7748smb2playersel"
+		)
+		(
+			'tracks_count'
+			(2 1 1 0 1 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2)
+				)
+				(
+					'guitar'
+					(3)
+				)
+				(
+					'keys'
+					(4)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 0.00 -0.70 0.70 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 147797)
+	('preview' 6400 36400)
+	(
+		'rank'
+		('drum' 151)
+		('guitar' 221)
+		('bass' 135)
+		('keys' 385)
+		('real_keys' 385)
+		('real_guitar' 267)
+		('real_bass' 150)
+		('band' 243)
+	)
+	('genre' 'popdanceelectronic')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1988)
+	('rating' 1)
+	('sub_genre' 'subgenre_chiptune')
+	('song_id' 1774800041)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Super Mario Bros 2 (Original Soundtrack)"
+	)
+	('album_track_number' 2)
+	(vocal_tonic_note 0)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Super Mario Bros. 2: Player Select
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748itstimetojump'
+	(
+		'name'
+		"It's Time To Jump"
+	)
+	(
+		'artist'
+		"Dream Avenue"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748itstimetojump/7748itstimetojump"
+		)
+		(
+			'tracks_count'
+			(2 2 2 0 2 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2 3)
+				)
+				(
+					'guitar'
+					(4 5)
+				)
+				(
+					'keys'
+					(6 7)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 64)
+	('song_length' 286408)
+	('preview' 98900 128900)
+	(
+		'rank'
+		('drum' 448)
+		('guitar' 221)
+		('bass' 135)
+		('keys' 443)
+		('real_keys' 443)
+		('real_guitar' 267)
+		('real_bass' 150)
+		('band' 292)
+	)
+	('genre' 'popdanceelectronic')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2014)
+	('rating' 1)
+	('sub_genre' 'subgenre_chiptune')
+	('song_id' 1774800042)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Moonstone"
+	)
+	('album_track_number' 11)
+	(vocal_tonic_note 3)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	(
+		'loading_phrase'
+		"This song is a bonus track from \qMoonstone\q and it doesn't show on the album's track list on Dream Avenue's BandCamp website."
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=It's Time To Jump
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748wisdomoftheworld'
+	(
+		'name'
+		"Wisdom of the World"
+	)
+	(
+		'artist'
+		"Keiichi Suzuki & Hirokazu Tanaka"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748wisdomoftheworld/7748wisdomoftheworld"
+		)
+		(
+			'tracks_count'
+			(0 1 1 0 1 1)
+		)
+		(
+			'tracks'
+			(
+				(
+					'bass'
+					(0)
+				)
+				(
+					'guitar'
+					(1)
+				)
+				(
+					'keys'
+					(2)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 0.00 0.00 0.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 90)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 16)
+	('song_length' 173105)
+	('preview' 5868 35868)
+	(
+		'rank'
+		('guitar' 139)
+		('bass' 1)
+		('keys' 1)
+		('real_keys' 1)
+		('real_guitar' 150)
+		('real_bass' 1)
+		('band' 47)
+	)
+	('genre' 'popdanceelectronic')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1989)
+	('rating' 1)
+	('sub_genre' 'subgenre_chiptune')
+	('song_id' 1774800043)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"MOTHER (Original Soundtrack)"
+	)
+	('album_track_number' 15)
+	(vocal_tonic_note 0)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Wisdom of the World
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748toweroflahja'
+	(
+		'name'
+		"Tower of Lahja"
+	)
+	(
+		'artist'
+		"Ryuichi Nitta & Mayuko Okamura"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748toweroflahja/7748toweroflahja"
+		)
+		(
+			'tracks_count'
+			(3 1 1 0 1 1)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1 2)
+				)
+				(
+					'bass'
+					(3)
+				)
+				(
+					'guitar'
+					(4)
+				)
+				(
+					'keys'
+					(5)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 -1.00 1.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 250)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit03_bank.milo)
+	('anim_tempo' 64)
+	('song_length' 223784)
+	('preview' 6667 36667)
+	(
+		'rank'
+		('drum' 345)
+		('guitar' 176)
+		('bass' 1)
+		('keys' 269)
+		('real_keys' 269)
+		('real_guitar' 267)
+		('real_bass' 1)
+		('band' 243)
+	)
+	('genre' 'popdanceelectronic')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1990)
+	('rating' 1)
+	('sub_genre' 'subgenre_chiptune')
+	('song_id' 1774800044)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Ninja Gaiden II: The Dark Sword of Chaos (Original Soundtrack)"
+	)
+	('album_track_number' 12)
+	(vocal_tonic_note 9)
+	(song_tonality 1)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Tower of Lahja
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748myhome'
+	(
+		'name'
+		"My Home"
+	)
+	(
+		'artist'
+		"Keiichi Suzuki & Hirokazu Tanaka"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748myhome/7748myhome"
+		)
+		(
+			'tracks_count'
+			(2 1 1 0 1 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2)
+				)
+				(
+					'guitar'
+					(3)
+				)
+				(
+					'keys'
+					(4)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 0.00 0.00 0.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 16)
+	('song_length' 122409)
+	('preview' 3600 33600)
+	(
+		'rank'
+		('drum' 1)
+		('guitar' 1)
+		('bass' 1)
+		('keys' 1)
+		('real_keys' 1)
+		('real_guitar' 1)
+		('real_bass' 1)
+		('band' 1)
+	)
+	('genre' 'popdanceelectronic')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1989)
+	('rating' 1)
+	('sub_genre' 'subgenre_chiptune')
+	('song_id' 1774800045)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"MOTHER (Original Soundtrack)"
+	)
+	('album_track_number' 2)
+	(vocal_tonic_note 8)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=My Home
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748allthatineeded'
+	(
+		'name'
+		"All That I Needed (Was You)"
+	)
+	(
+		'artist'
+		"Keiichi Suzuki & Hirokazu Tanaka"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748allthatineeded/7748allthatineeded"
+		)
+		(
+			'tracks_count'
+			(4 1 1 0 1 1)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1 2 3)
+				)
+				(
+					'bass'
+					(4)
+				)
+				(
+					'guitar'
+					(5)
+				)
+				(
+					'keys'
+					(6)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 0.00 -1.00 1.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1 1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 250)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 97610)
+	('preview' 3200 33200)
+	(
+		'rank'
+		('drum' 151)
+		('guitar' 221)
+		('bass' 135)
+		('keys' 211)
+		('real_keys' 211)
+		('real_guitar' 267)
+		('real_bass' 150)
+		('band' 215)
+	)
+	('genre' 'popdanceelectronic')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1989)
+	('rating' 1)
+	('sub_genre' 'subgenre_chiptune')
+	('song_id' 1774800046)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"MOTHER (Original Soundtrack)"
+	)
+	('album_track_number' 31)
+	(vocal_tonic_note 9)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=All That I Needed (Was You)
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748polyesterjammy'
+	(
+		'name'
+		"Polyester Jammy"
+	)
+	(
+		'artist'
+		"David Rippy & Stephen Rippy"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748polyesterjammy/7748polyesterjammy"
+		)
+		(
+			'tracks_count'
+			(2 0 2 0 2 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'guitar'
+					(2 3)
+				)
+				(
+					'keys'
+					(4 5)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit03_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 149576)
+	('preview' 19200 49200)
+	(
+		'rank'
+		('drum' 124)
+		('guitar' 176)
+		('keys' 211)
+		('real_keys' 211)
+		('real_guitar' 1)
+		('band' 163)
+	)
+	('genre' 'classical')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1998)
+	('rating' 1)
+	('sub_genre' 'subgenre_classical')
+	('song_id' 1774800047)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Age of Empires: The Rise of Rome (Original Soundtrack)"
+	)
+	('album_track_number' 5)
+	(vocal_tonic_note 0)
+	(song_tonality 1)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(pack_name "Age of Empires: The Rise of Rome Pack 01")
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Polyester Jammy
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748mean'
+	(
+		'name'
+		"Mean (Ain't No Hip-Hop in Tha House Mix)"
+	)
+	(
+		'artist'
+		"David Rippy & Stephen Rippy"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748mean/7748mean"
+		)
+		(
+			'tracks_count'
+			(5 2 2 0 2 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1 2 3 4)
+				)
+				(
+					'bass'
+					(5 6)
+				)
+				(
+					'guitar'
+					(7 8)
+				)
+				(
+					'keys'
+					(9 10)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1 -1 -1 1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 0)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 90)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 16)
+	('song_length' 147797)
+	('preview' 12664 42664)
+	(
+		'rank'
+		('drum' 242)
+		('guitar' 176)
+		('bass' 135)
+		('keys' 269)
+		('real_keys' 269)
+		('real_guitar' 208)
+		('real_bass' 150)
+		('band' 215)
+	)
+	('genre' 'classical')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 1998)
+	('rating' 1)
+	('sub_genre' 'subgenre_classical')
+	('song_id' 1774800048)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Age of Empires: The Rise of Rome (Original Soundtrack)"
+	)
+	('album_track_number' 8)
+	(vocal_tonic_note 5)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(pack_name "Age of Empires: The Rise of Rome Pack 01")
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Mean (Ain't No Hip-Hop in Tha House Mix)
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)
+(
+	'7748ruinus'
+	(
+		'name'
+		"Ruin Us"
+	)
+	(
+		'artist'
+		"The Jellybricks"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748ruinus/7748ruinus"
+		)
+		(
+			'tracks_count'
+			(5 2 2 2 2 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1 2 3 4)
+				)
+				(
+					'bass'
+					(5 6)
+				)
+				(
+					'guitar'
+					(7 8)
+				)
+				(
+					'vocals'
+					(9 10)
+				)
+				(
+					'keys'
+					(11 12)
+				)
+			)
+		)
+		(
+			'pans'
+			(0.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 -1 -1 -1 1 1 -1 -1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 3)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 64)
+	('song_length' 286408)
+	('preview' 98900 128900)
+	(
+		'rank'
+		('drum' 151)
+		('guitar' 176)
+		('bass' 135)
+		('vocals' 175)
+		('keys' 153)
+		('real_keys' 153)
+		('band' 163)
+	)
+	('genre' 'poprock')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2008)
+	('rating' 1)
+	('sub_genre' 'subgenre_softrock')
+	('song_id' 1774800048)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"Goodnight to Everyone"
+	)
+	('album_track_number' 3)
+	(vocal_tonic_note 7)
+	(song_tonality 0)
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Ruin Us
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=0
+;ExpertOnly=0
+)
+(
+	'7748burnished'
+	(
+		'name'
+		"Burnished"
+	)
+	(
+		'artist'
+		"White Denim"
+	)
+	('master' 1)
+	(
+		'song'
+		(
+			'name'
+			"songs/7748burnished/7748burnished"
+		)
+		(
+			'tracks_count'
+			(2 2 2 2 0 2)
+		)
+		(
+			'tracks'
+			(
+				(
+					'drum'
+					(0 1)
+				)
+				(
+					'bass'
+					(2 3)
+				)
+				(
+					'guitar'
+					(4 5)
+				)
+				(
+					'vocals'
+					(6 7)
+				)
+			)
+		)
+		(
+			'pans'
+			(-1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00 -1.00 1.00)
+		)
+		(
+			'vols'
+			(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+		)
+		(
+			'cores'
+			(-1 -1 -1 -1 1 1 -1 -1 -1 -1)
+		)
+		('vocal_parts' 2)
+		(
+			'drum_solo'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'tom1.cue' 'tom2.cue' 'crash.cue')
+			)
+		)
+		(
+			'drum_freestyle'
+			(
+				'seqs'
+				('kick.cue' 'snare.cue' 'hat.cue' 'ride.cue' 'crash.cue')
+			)
+		)
+		(mute_volume -96)
+		(mute_volume_vocals -12)
+		(hopo_threshold 170)
+	)
+	('song_scroll_speed' 2300)
+	(
+		'bank'
+		"sfx/tambourine_bank.milo"
+	)
+	(drum_bank sfx/kit01_bank.milo)
+	('anim_tempo' 32)
+	('song_length' 163363)
+	('preview' 43930 73930)
+	(
+		'rank'
+		('drum' 178)
+		('guitar' 221)
+		('bass' 181)
+		('vocals' 132)
+		('real_guitar' 267)
+		('real_bass' 208)
+		('band' 215)
+	)
+	('genre' 'indierock')
+	('vocal_gender' 'male')
+	('version' 30)
+	('format' 10)
+	('album_art' 1)
+	('year_released' 2011)
+	('rating' 1)
+	('sub_genre' 'subgenre_indierock')
+	('song_id' 1774800049)
+	('tuning_offset_cents' 0)
+	('guide_pitch_volume' -3.00)
+	('game_origin' 'ugc_plus')
+	('encoding' 'latin1')
+	(
+		'album_name'
+		"D"
+	)
+	('album_track_number' 2)
+	(vocal_tonic_note 2)
+	(song_tonality 0)
+	(real_guitar_tuning (0 0 0 0 0 0))
+	(real_bass_tuning (0 0 0 0))
+	(
+		'author'
+		"Ruggy"
+	)
+	
+;DO NOT EDIT THE FOLLOWING LINES MANUALLY
+;Created using Magma: C3 Roks Edition v3.3.5
+;Song authored by Ruggy
+;Song=Burnished
+;Language(s)=English,
+;Karaoke=0
+;Multitrack=1
+;Convert=0
+;2xBass=0
+;RhythmKeys=0
+;RhythmBass=0
+;CATemh=1
+;ExpertOnly=0
+)

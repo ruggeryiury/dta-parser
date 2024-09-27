@@ -11,79 +11,125 @@
 <img src='https://img.shields.io/github/last-commit/ruggeryiury/dta-parser?color=%23DDD&style=for-the-badge' /> <img src='https://img.shields.io/github/repo-size/ruggeryiury/dta-parser?style=for-the-badge' /> <img src='https://img.shields.io/github/issues/ruggeryiury/dta-parser?style=for-the-badge' /> <img src='https://img.shields.io/github/package-json/v/ruggeryiury/dta-parser?style=for-the-badge' /> <img src='https://img.shields.io/github/license/ruggeryiury/dta-parser?style=for-the-badge' />
 </div>
 
-- [Features](#features)
-- [Basic Usage](#basic-usage)
-  - [Parsing a `.dta` file](#parsing-a-dta-file)
-  - [Creating a new song entry (using recipe)](#creating-a-new-song-entry-using-recipe)
+- [API](#api)
+  - [`SongsDTA()` class](#songsdta-class)
+    - [Class properties](#class-properties)
+    - [Static methods](#static-methods)
+      - [`fromURL()`](#fromurl)
+      - [`fromRecipes()`](#fromrecipes)
+    - [`genRecipes()`](#genrecipes)
+    - [`getSongByID()`](#getsongbyid)
+    - [`patchSongIDs()`](#patchsongids)
+    - [`patchEncodings()`](#patchencodings)
+    - [`update()`](#update)
+    - [`updateAll()`](#updateall)
+    - [`sort()`](#sort)
+    - [`stringify()`](#stringify)
 - [More Rock Band related projects](#more-rock-band-related-projects)
 
-# Features
+# API
 
-With _DTA Parser_ you can:
+The main exports of this package consists on classes that represents the contents of a `.dta` file to be processed. All secondary methods used on these classes is also available to import from `dta-parser/lib`.
 
-- Parse both individual song `.dta` file or a song pack `.dta` file as an object.
-- Create a `.dta` file directly using JavaScript.
-- "Stringify" any created/parsed song back to `.dta` file contents.
-- Sort a collection of songs based on many sorting methods available on the package.
-- Fetch and even process any value from any song.
-- Fetch album artworks URLs from any song using the _Spotify API_ (coming soon).
+## `SongsDTA()` class
 
-# Basic Usage
+SongsDTA is a class that represents the contents of a `songs.dta` file. It is initalized passing a path as an argument, this argument can be:
 
-## Parsing a `.dta` file
+- A path to a `song.dta` file (as `string` or an instantiated [`Path`](https://github.com/ruggeryiury/path-js) class).
+- The contents of a DTA file (as `string`).
+- A `Buffer` object of a DTA file.
+- A parsed `DTAFile` object.
 
 ```ts
-import DTAParser from 'dta-parser'
-import fs from 'fs'
-
-// Read a .dta file to get its contents.
-const dtaFileContents = fs.readFileSync('/path/to/dta-file.dta')
-
-// Use "DTAParser()", passing the .dta file contents
-// as first argument.
-const mySongs = DTAParser(dtaFileContents)
-...
+import { SongsDTA } from 'dta-parser'
+const dtaPath = 'path/to/songs.dta'
+const songs = new SongsDTA(dtaPath)
 ```
 
-## Creating a new song entry (using recipe)
+### Class properties
 
-```ts
-// Create a recipe.
-const newSongRecipe: DTAFileRecipe = {
-  id: '7748onestop',
-  name: 'Onestop',
-  artist: 'David Yackley',
-  master: true,
-  song_id: 1774800009,
-  songname: '7748onestop',
-  tracks: {
-    drum: { rank: 2, channels: 4 },
-    bass: { rank: 4, real_rank: 4, channels: 2, tuning: [-4, -4, -4, -4] },
-    guitar: { rank: 6, real_rank: 6, channels: 2, hasSolo: true },
-    keys: { rank: 6, real_rank: 6, channels: 2, hasSolo: true },
-    backing: 2,
-  },
-  preview: 30000,
-  song_length: 249767,
-  rank_band: 6,
-  rating: 1,
-  genre: {
-    genre: 'Fusion',
-    sub_genre: 'Fusion',
-  },
-  year_released: 1998,
-  album: {
-    hasArt: true,
-  },
-  author: 'Ruggy',
-  multitrack: true,
-  catEMH: true,
-  pack_name: 'Windows .MID Pack 01',
-}
+- **_songs_** `DTAFile[]` An array with object that represents the contents of a DTA song entry.
 
-// Create a new Song class.
-const song = new Song(newSongRecipe)
-```
+### Static methods
+
+#### `fromURL()`
+
+Asynchronously fetches a `songs.dta` file from an URL.
+
+- Parameters:
+
+  - **_url_** `string` The URL of the `.dta` file.
+
+- Returns: `Promise<SongsDTA>` A new instantiated `SongsDTA` class.
+
+#### `fromRecipes()`
+
+Returns a new `SongsDTA` instance from complete songs' recipes.
+
+- Parameters:
+
+  - **_recipes_** `DTAFileRecipe | DTAFileRecipe[]` A `DTAFileRecipe` object, or an array of `DTAFileRecipe` objects.
+
+- Returns: `Promise<SongsDTA>` A new instantiated `SongsDTA` class.
+
+### `genRecipes()`
+
+Creates an array of `DTAFileRecipe` objects from each songs entry of this class.
+
+- Returns: `DTAFileRecipe[]`
+
+### `getSongByID()`
+
+Returns a specific song contents based on its song ID (shortname). If no song if found, it will returns as `undefined`.
+
+- Parameters:
+
+  - **_id_** `string` A `DTAFileRecipe` object, or an array of `DTAFileRecipe` objects.
+
+- Returns: `DTAFile | undefined`
+
+### `patchSongIDs()`
+
+Patches non-numerical song IDs to numerical ones, using specific CRC32 hashing method.
+
+[_See the original C# function on **GitHub Gist**_](https://gist.github.com/InvoxiPlayGames/f0de3ad707b1d42055c53f0fd1428f7f), coded by [Emma (InvoxiPlayGames)](https://gist.github.com/InvoxiPlayGames).
+
+### `patchEncodings()`
+
+Patches the encoding values of each song.
+
+### `update()`
+
+Updates a song contents based on its song ID (shortname).
+
+- Parameters:
+
+  - **_id_** `string` The unique shortname ID of the song you want to update.
+  - **_update_** `DTAUpdateOptionsForExtend` An object with updates values to be applied on the `DTAFile` song entry.
+
+### `updateAll()`
+
+Updates all songs with provided update values.
+
+- Parameters:
+  - **_update_** `DTAUpdateOptionsForExtend` update An object with updates values to be applied on each `DTAFile` song entry.
+
+### `sort()`
+
+Sorts all songs entries using several sorting methods.
+
+- Parameters:
+  - **_sortBy_** `SongSortingTypes` The sorting method type.
+
+### `stringify()`
+
+Stringifies all songs from this class to `.dta` file contents.
+
+- Parameters:
+
+  - **_options ?_** `SongStringifyOptions` An object with values that changes the behavior of the stringify process.
+
+- Returns: `string`
 
 # More Rock Band related projects
 

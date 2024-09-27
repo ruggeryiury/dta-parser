@@ -1,27 +1,32 @@
 import Path from 'path-js'
 import { createDTAFileFromRecipe, depackDTA, genDTARecipe, parseDTA, sortDTA, stringifyDTA, updateDTA, type DTAFile, type DTAFileRecipe, type DTARecord, type DTAStringifyOptions, type DTAUpdateOptions, type DTAUpdateOptionsForExtend, type PartialDTAFile, type PartialDTARecord, type SongSortingTypes } from './core.js'
-import { containsLatin1SpecificChars, detectBufferEncoding, genNumericSongID, isDTAFile, isDTAFileRecipe, useDefaultOptions } from './lib.js'
+import { containsLatin1SpecificChars, detectBufferEncoding, genNumericSongID, isDTAFile, isDTAFileRecipe, isURL, useDefaultOptions } from './lib.js'
 
-export type SongConstructorContentTypes = string | Buffer | DTAFile | DTAFile[]
-export type SongUpdatesConstructorContentTypes = string | Buffer | DTAUpdateOptions | DTAUpdateOptions[]
+export type SongConstructorContentTypes = string | Buffer | DTAFile | DTAFile[] | Path
+export type SongUpdatesConstructorContentTypes = string | Buffer | DTAUpdateOptions | DTAUpdateOptions[] | Path
 export type SongStringifyOptions = Pick<DTAStringifyOptions, 'format' | 'guitarCores' | 'placeCustomAttributes' | 'placeRB3DXAttributes' | 'sortBy' | 'wiiMode' | 'ignoreFakeSongs'>
 export type SongUpdatesStringifyOptions = Pick<DTAStringifyOptions, 'allSongsInline' | 'sortBy'>
 
 /**
- * A class that represents the contents of a `songs.dta` type file.
+ * A class that represents the contents of a `songs.dta` file.
  * - - - -
  */
-class SongsDTA {
+export class SongsDTA {
   /** An array with object that represents the contents of a DTA song entry. */
   songs: DTAFile[] = []
 
   /**
-   * @param {SongConstructorContentTypes} content A path string to a DTA file, decrypted content string from a DTA file, a `Buffer` from a DTA file, a parsed `DTAFile` object, or an array of `DTAFile` objects.
+   * @param {SongConstructorContentTypes} content A path to a `song.dta` file (as `string` or an instantiated [`Path`](https://github.com/ruggeryiury/path-js) class), the contents of a DTA file (as `string`), a `Buffer` object of a DTA file, or a parsed `DTAFile` object.
    */
   constructor(content: SongConstructorContentTypes) {
     let str = ''
     let isAnyObject = false
-    if (typeof content === 'string') {
+    if (content instanceof Path) {
+      if (!content.exists()) throw new Error(`SongsDTAError: Provided path "${content.path}" does not exists.`)
+      const buf = content.readFileSync()
+      const enc = detectBufferEncoding(buf)
+      str = buf.toString(enc)
+    } else if (typeof content === 'string') {
       if (Path.isPath(content)) {
         const path = new Path(content)
         if (!path.exists()) throw new Error(`SongsDTAError: Provided path "${path.path}" does not exists.`)
@@ -52,7 +57,29 @@ class SongsDTA {
   }
 
   /**
-   * A static method that returns n new `SongsDTA` instance from complete songs' recipes.
+   * Asynchronously fetches a `songs.dta` file from an URL.
+   * - - - -
+   * @param {string} url The URL of the `.dta` file.
+   * @returns {Promise<SongsDTA>} A new instantiated `SongsDTA` class.
+   */
+  static async fromURL(url: string) {
+    if (!isURL(url)) throw new Error(`SongsDTAError: Provided URL "${url}" is not a valid URL.`)
+
+    try {
+      const response = await fetch(url)
+
+      if (!response.ok) throw new Error(`SongsDTAError: Provided URL "${url}" is not a valid URL.`)
+
+      const data = await response.arrayBuffer()
+      return new SongsDTA(Buffer.from(data))
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
+  }
+
+  /**
+   * Returns a new `SongsDTA` instance from complete songs' recipes.
    * - - - -
    * @param {DTAFileRecipe | DTAFileRecipe[]} recipes A `DTAFileRecipe` object, or an array of `DTAFileRecipe` objects.
    * @returns {SongsDTA} A new instantiated `SongsDTA` class.
@@ -80,7 +107,7 @@ class SongsDTA {
   }
 
   /**
-   * Fetches a specific song contents based on its song ID. If no song if found, it will returns as `undefined`.
+   * Returns a specific song contents based on its song ID (shortname). If no song if found, it will returns as `undefined`.
    * - - - -
    * @param {string} id The song ID of the song you want to fetch.
    * @returns {DTAFile | undefined}
@@ -94,14 +121,14 @@ class SongsDTA {
    *
    * [_See the original C# function on **GitHub Gist**_](https://gist.github.com/InvoxiPlayGames/f0de3ad707b1d42055c53f0fd1428f7f), coded by [Emma (InvoxiPlayGames)](https://gist.github.com/InvoxiPlayGames).
    */
-  patchSongIDs() {
+  patchSongIDs(): void {
     this.songs = this.songs.map((song) => ({ ...song, song_id: genNumericSongID(song.song_id) }))
   }
 
   /**
    * Patches the encoding values of each song.
    */
-  patchEncodings() {
+  patchEncodings(): void {
     this.songs = this.songs.map((song) => {
       const { name, artist, album_name, pack_name, author, loading_phrase } = song
       let proof = false
@@ -121,7 +148,7 @@ class SongsDTA {
   }
 
   /**
-   * Updates a song contents based on its song ID.
+   * Updates a song contents based on its song ID (shortname).
    * - - - -
    * @param {string} id The unique shortname ID of the song you want to update.
    * @param {DTAUpdateOptionsForExtend} update An object with updates values to be applied on the `DTAFile` song entry.
@@ -136,7 +163,7 @@ class SongsDTA {
   }
 
   /**
-   * Updates all songs with specific update values.
+   * Updates all songs with provided update values.
    * - - - -
    * @param {DTAUpdateOptionsForExtend} update An object with updates values to be applied on each `DTAFile` song entry.
    */
@@ -177,7 +204,7 @@ class SongsDTA {
 }
 
 /**
- * A class that represents the contents of a `songs_updates.dta` type file.
+ * A class that represents the contents of a `songs_updates.dta` file.
  * - - - -
  */
 export class SongUpdatesDTA {
@@ -190,9 +217,15 @@ export class SongUpdatesDTA {
   constructor(content: SongUpdatesConstructorContentTypes) {
     let str = ''
     let isAnyObject = false
-    if (typeof content === 'string') {
+    if (content instanceof Path) {
+      if (!content.exists()) throw new Error(`SongsDTAError: Provided path "${content.path}" does not exists.`)
+      const buf = content.readFileSync()
+      const enc = detectBufferEncoding(buf)
+      str = buf.toString(enc)
+    } else if (typeof content === 'string') {
       if (Path.isPath(content)) {
         const path = new Path(content)
+        if (!path.exists()) throw new Error(`SongsDTAError: Provided path "${path.path}" does not exists.`)
         const buf = path.readFileSync()
         const enc = detectBufferEncoding(buf)
         str = buf.toString(enc)
@@ -210,6 +243,28 @@ export class SongUpdatesDTA {
 
     const depackedSongs = depackDTA(str)
     this.updates = depackedSongs.map((songContent) => Object.fromEntries(parseDTA(songContent, { format: 'partial', omitUnusedValues: false, registerCores: true })) as PartialDTARecord as PartialDTAFile)
+  }
+
+  /**
+   * Fetches a `songs_updates.dta` file from an URL.
+   * - - - -
+   * @param {string} url The URL of the `.dta` file.
+   * @returns {Promise<SongsDTA>} A new instantiated `SongsDTA` class.
+   */
+  static async fromURL(url: string) {
+    if (!isURL(url)) throw new Error(`SongsDTAError: Provided URL "${url}" is not a valid URL.`)
+
+    try {
+      const response = await fetch(url)
+
+      if (!response.ok) throw new Error(`SongsDTAError: Provided URL "${url}" is not a valid URL.`)
+
+      const data = await response.arrayBuffer()
+      return new SongsDTA(Buffer.from(data))
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
   }
 
   /**
@@ -264,5 +319,4 @@ export class SongUpdatesDTA {
   }
 }
 
-export default SongsDTA
 export type { DTAFile } from './core.js'
