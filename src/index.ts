@@ -103,7 +103,7 @@ class SongsDTA {
    */
   patchEncodings() {
     this.songs = this.songs.map((song) => {
-      const { name, artist, album_name, pack_name, author } = song
+      const { name, artist, album_name, pack_name, author, loading_phrase } = song
       let proof = false
 
       if (containsLatin1SpecificChars(name)) proof = true
@@ -111,6 +111,8 @@ class SongsDTA {
       if (album_name && containsLatin1SpecificChars(album_name)) proof = true
       if (pack_name && containsLatin1SpecificChars(pack_name)) proof = true
       if (author && containsLatin1SpecificChars(author)) proof = true
+      if (loading_phrase && containsLatin1SpecificChars(loading_phrase)) proof = true
+
       return {
         ...song,
         encoding: proof ? 'utf8' : 'latin1',
