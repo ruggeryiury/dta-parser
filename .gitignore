@@ -2,6 +2,5 @@ node_modules/
 dist/
 tests/
 src-old/
-*.tgz
 old_modules/
 pnpm-lock.yaml

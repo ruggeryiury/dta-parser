@@ -48,9 +48,8 @@
     "eslint-plugin-jsdoc": "^48.2.5",
     "eslint-plugin-n": "^17.7.0",
     "globals": "^15.3.0",
-    "path-js": "link:..\\path-js",
+    "path-js": "file:./packages/path-js-1.4.0.tgz",
     "prettier": "^3.2.5",
-    "rbtools-js": "link:..\\rbtools-js",
     "tsx": "^4.10.5",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.9.0"

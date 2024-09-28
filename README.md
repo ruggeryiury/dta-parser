@@ -42,8 +42,11 @@ SongsDTA is a class that represents the contents of a `songs.dta` file. It is in
 
 ```ts
 import { SongsDTA } from 'dta-parser'
+
 const dtaPath = 'path/to/songs.dta'
 const songs = new SongsDTA(dtaPath)
+
+console.log(songs.getSongByID('song_shortname')!.name) // <-- "Song title"
 ```
 
 ### Class properties
@@ -62,6 +65,16 @@ Asynchronously fetches a `songs.dta` file from an URL.
 
 - Returns: `Promise<SongsDTA>` A new instantiated `SongsDTA` class.
 
+```ts
+import { SongsDTA } from 'dta-parser'
+
+// This DTA file is found on "./assets/songs.dta"
+const songsDTAURL = 'https://raw.githubusercontent.com/ruggeryiury/dta-parser/refs/heads/main/assets/songs.dta'
+const songs = await SongsDTA.fromURL(songsDTAURL)
+
+console.log(songs.getSongByID('7748motherearth')!.name) // <-- "Mother Earth"
+```
+
 #### `fromRecipes()`
 
 Returns a new `SongsDTA` instance from complete songs' recipes.
@@ -71,6 +84,48 @@ Returns a new `SongsDTA` instance from complete songs' recipes.
   - **_recipes_** `DTAFileRecipe | DTAFileRecipe[]` A `DTAFileRecipe` object, or an array of `DTAFileRecipe` objects.
 
 - Returns: `Promise<SongsDTA>` A new instantiated `SongsDTA` class.
+
+```ts
+import { SongsDTA, type DTAFile } from 'dta-parser'
+
+// A song recipe is very much like the DTAFile interface,
+// but declaring human-readable values to keys
+const songRecipe = {
+  id: '7748motherearth',
+  name: 'Mother Earth',
+  artist: 'Keiichi Suzuki & Hirokazu Tanaka',
+  master: true,
+  song_id: 1774800033,
+  songname: '7748motherearth',
+  tracks: {
+    drum: { rank: 0, channels: 2 },
+    bass: { rank: 1, real_rank: 1, channels: 1 },
+    guitar: { rank: 2, real_rank: 2, channels: 1, pans: [-0.2] },
+    keys: { rank: 0, real_rank: 0, channels: 1, pans: [0.2] },
+    backing: 2,
+  },
+  anim_tempo: 16,
+  preview: 18668,
+  song_length: 119477,
+  rank_band: 0,
+  rating: 1,
+  genre: { genre: 'Pop/Dance/Electronic', sub_genre: 'Chiptune' },
+  year_released: 1989,
+  album: {
+    hasArt: true,
+    name: 'MOTHER (Original Soundtrack)',
+    track_number: 1,
+  },
+  key: 'G',
+  multitrack: true,
+  author: 'Ruggy',
+  pack_name: 'MOTHER Pack 01',
+} satisfies DTAFile
+
+const songs = SongsDTA.fromRecipes(songRecipe)
+
+console.log(songs.getSongByID('7748motherearth')!.name) // <-- "Mother Earth"
+```
 
 ### `genRecipes()`
 
@@ -88,15 +143,52 @@ Returns a specific song contents based on its song ID (shortname). If no song if
 
 - Returns: `DTAFile | undefined`
 
+```ts
+import { SongsDTA } from 'dta-parser'
+
+const dtaPath = 'path/to/songs.dta'
+const songs = new SongsDTA(dtaPath)
+
+// The following code line might return a DTAFile object
+// or undefined if no song with provided unique song ID
+// (shortname) is found.
+console.log(songs.getSongByID('song_shortname'))
+```
+
 ### `patchSongIDs()`
 
 Patches non-numerical song IDs to numerical ones, using specific CRC32 hashing method.
 
 [_See the original C# function on **GitHub Gist**_](https://gist.github.com/InvoxiPlayGames/f0de3ad707b1d42055c53f0fd1428f7f), coded by [Emma (InvoxiPlayGames)](https://gist.github.com/InvoxiPlayGames).
 
+```ts
+import { SongsDTA } from 'dta-parser'
+
+const dtaPath = 'path/to/songs.dta'
+const songs = new SongsDTA(dtaPath)
+
+// All songs IDs will be patched to numerical IDs, if no
+// numerical ID is found for the song.
+songs.patchSongIDs()
+```
+
 ### `patchEncodings()`
 
 Patches the encoding values of each song.
+
+```ts
+import { SongsDTA } from 'dta-parser'
+
+const dtaPath = 'path/to/songs.dta'
+const songs = new SongsDTA(dtaPath)
+
+// All songs string values will be checked if any non-ASCII characters
+// is found on any string value of the song. If non-ASCII characters
+// is found, the song encoding will be set to UTF-8, simulating the
+// behavior of single song packs and fixing the song's values to be
+// displayed correctly, specially on Rock Band 3 Deluxe.
+songs.patchEncodings()
+```
 
 ### `update()`
 
@@ -106,6 +198,20 @@ Updates a song contents based on its song ID (shortname).
 
   - **_id_** `string` The unique shortname ID of the song you want to update.
   - **_update_** `DTAUpdateOptionsForExtend` An object with updates values to be applied on the `DTAFile` song entry.
+
+```ts
+import { SongsDTA } from 'dta-parser'
+
+const dtaPath = 'path/to/songs.dta'
+const songs = new SongsDTA(dtaPath)
+console.log(songs.getSongByID('7748motherearth')!.name) // <-- "Mother Earth"
+songs.update('7748motherearth', {
+  // Change the name of the custom which the unique string ID
+  // (shortname) is "7748motherearth".
+  name: 'New Name',
+})
+console.log(songs.getSongByID('7748motherearth')!.name) // <-- "New Name"
+```
 
 ### `updateAll()`
 
@@ -121,6 +227,17 @@ Sorts all songs entries using several sorting methods.
 - Parameters:
   - **_sortBy_** `SongSortingTypes` The sorting method type.
 
+```ts
+import { SongsDTA } from 'dta-parser'
+
+const dtaPath = 'path/to/songs.dta'
+// The songs' sorting will be inherit from the songs.dta file.
+const songs = new SongsDTA(dtaPath)
+
+// Now, the whole songs.dta will be sorted by song title.
+songs.sort('Song Title')
+```
+
 ### `stringify()`
 
 Stringifies all songs from this class to `.dta` file contents.
@@ -130,6 +247,14 @@ Stringifies all songs from this class to `.dta` file contents.
   - **_options ?_** `SongStringifyOptions` An object with values that changes the behavior of the stringify process.
 
 - Returns: `string`
+
+```ts
+import { SongsDTA } from 'dta-parser'
+
+const dtaPath = 'path/to/songs.dta'
+const songs = new SongsDTA(dtaPath)
+console.log(songs.stringify({ type: 'rb3_dlc', guitarCores: true }))
+```
 
 # More Rock Band related projects
 
