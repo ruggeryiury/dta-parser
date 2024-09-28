@@ -12,7 +12,7 @@
 </div>
 
 - [API](#api)
-  - [`SongsDTA()` class](#songsdta-class)
+  - [`SongsDTA` class](#songsdta-class)
     - [Class properties](#class-properties)
     - [Static methods](#static-methods)
       - [`fromURL()`](#fromurl)
@@ -26,7 +26,7 @@
     - [`updateAll()`](#updateall)
     - [`sort()`](#sort)
     - [`stringify()`](#stringify)
-  - [`SongUpdatesDTA()` class](#songupdatesdta-class)
+  - [`SongUpdatesDTA` class](#songupdatesdta-class)
     - [Class properties](#class-properties-1)
     - [Static methods](#static-methods-1)
       - [`fromURL()`](#fromurl-1)
@@ -40,7 +40,7 @@
 
 The main exports of this package consists on two classes ([`SongsDTA()`](#songsdta-class) and [`SongUpdatesDTA()`](#songupdatesdta-class)) that represents the contents of a `.dta` file to be processed. All secondary methods used on these classes is also available to import from `dta-parser/core` and `dta-parser/lib`.
 
-## `SongsDTA()` class
+## `SongsDTA` class
 
 `SongsDTA` is a class that represents the contents of a `songs.dta` file. It is initalized passing a path as an argument, this argument can be:
 
@@ -283,7 +283,7 @@ const songs = new SongsDTA(dtaPath)
 console.log(songs.stringify({ type: 'rb3_dlc', guitarCores: true }))
 ```
 
-## `SongUpdatesDTA()` class
+## `SongUpdatesDTA` class
 
 `SongUpdatesDTA` is a class that represents the contents of a `songs_updates.dta` file. It is initalized passing a path as an argument, this argument can be:
 
