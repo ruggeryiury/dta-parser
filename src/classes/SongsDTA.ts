@@ -136,7 +136,7 @@ export class SongsDTA {
    * [_See the original C# function on **GitHub Gist**_](https://gist.github.com/InvoxiPlayGames/f0de3ad707b1d42055c53f0fd1428f7f), coded by [Emma (InvoxiPlayGames)](https://gist.github.com/InvoxiPlayGames).
    */
   patchSongIDs(): void {
-    this.songs = this.songs.map((song) => ({ ...song, song_id: genNumericSongID(song.song_id) }))
+    this.songs = this.songs.map((song) => ({ ...song, song_id: Math.abs(genNumericSongID(song.song_id)) }))
   }
 
   /**
