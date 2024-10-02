@@ -425,7 +425,7 @@ export interface DTAUpdateOptions {
    * The song's release year.
    */
   year_released?: number
-  year_recorded?: number
+  year_recorded?: number | null
   /**
    * An object that contains information about the album of the song (name, track number).
    */
@@ -802,7 +802,10 @@ export const updateDTA = (dta: PartialDTAFile, update: DTAUpdateOptionsForExtend
   if (vocal_gender) newDTA.vocal_gender = localeValueToKey.vocal_gender(vocal_gender)
 
   if (year_released) newDTA.year_released = year_released
-  if (year_recorded) newDTA.year_recorded = year_recorded
+  if (year_recorded !== undefined) {
+    if (year_recorded === null) delete newDTA.year_recorded
+    else newDTA.year_recorded = year_recorded
+  }
 
   if (album) {
     if (typeof album.hasArt === 'boolean') newDTA.album_art = album.hasArt
